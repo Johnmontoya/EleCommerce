@@ -3,19 +3,15 @@ import {
   QueryClient,
   useQueryErrorResetBoundary,
 } from "@tanstack/react-query";
-import { lazy, Suspense } from "react";
-import routerMeta from "./interfaces/routerMeta";
+import { Suspense } from "react";
+import routerMeta from "./router/routerMeta";
 import { Route, Routes } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
-import ErrorFallback from "./components/fallbacks/ErrorFallback";
-import Navbar from "./components/Navigation/Navbar";
+import ErrorFallback from "./shared/ui/ErrorFallback";
+import Navbar from "./shared/ui/Navbar";
 import "./App.css";
-import LoadingFallback from "./components/fallbacks/LoadingFallback";
-
-const pages = import.meta.glob("./pages/**/*.tsx");
-
-const lazyImport = (file: string) =>
-  lazy(pages[`./pages/${file}.tsx`] as () => Promise<any>);
+import LoadingFallback from "./shared/ui/LoadingFallback";
+import { lazyImport } from "./router/lazyImports";
 
 const authRoutes = [routerMeta.LoginPage, routerMeta.RegisterPage];
 
@@ -30,8 +26,7 @@ function App() {
     <>
       <Routes>
         {authRoutes.map((meta) => {
-          const filePath = meta.file ?? meta.name;
-          const Component = lazyImport(filePath!);
+          const Component = lazyImport(meta.feature!, meta.page!);
 
           return (
             <Route
@@ -56,8 +51,7 @@ function App() {
         {/* Rutas con Layour */}
         <Route element={<Navbar />}>
           {layoutRoutes.map((meta) => {
-            const filePath = meta.file ?? meta.name;
-            const Component = lazyImport(filePath!);
+            const Component = lazyImport(meta.feature!, meta.page!)
 
             return (
               <Route

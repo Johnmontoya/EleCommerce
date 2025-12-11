@@ -1,16 +1,4 @@
-export interface IRouterMeta {
-  name?: string;
-  path: string;
-  isShow: boolean;
-  isAuth?: boolean;
-  isCommon?: boolean;
-  file?: string;
-  requiresLayout?: boolean;
-}
-
-export type RouterMetaType = {
-  [key: string]: IRouterMeta;
-};
+import type { RouterMetaType } from "./routes.type";
 
 const routerMeta: RouterMetaType = {
   HomePage: {
@@ -19,14 +7,16 @@ const routerMeta: RouterMetaType = {
     isShow: true,
     isCommon: true,
     requiresLayout: true,
-    file: "HomePage",
+    feature: 'home',
+    page: "HomePage",
   },
   LoginPage: {
     name: "Login",
     path: "/login",
     isShow: true,
     isAuth: false,
-    file: "Auth/LoginPage",
+    feature: 'auth',
+    page: "LoginPage",
     requiresLayout: false,
   },
   RegisterPage: {
@@ -34,7 +24,8 @@ const routerMeta: RouterMetaType = {
     path: "/register",
     isShow: true,
     isAuth: false,
-    file: "Auth/RegisterPage",
+    feature: 'auth',
+    page: "RegisterPage",
     requiresLayout: false,
   },
   DashboardPage: {
@@ -42,23 +33,26 @@ const routerMeta: RouterMetaType = {
     path: "/dashboard",
     isShow: true,
     isAuth: false,
-    file: "Dashboard/DashboardPage",
+    feature: 'dashboard',
+    page: "DashboardPage",
     requiresLayout: true,
   },
-  ListProductsPage: {
+  DetailsPage: {
     name: "Details",
     path: "/product/:id",
     isShow: true,
     isAuth: false,
-    file: "Products/DetailsPage",
+    feature: 'products',
+    page: "DetailsPage",
     requiresLayout: true,
   },
-  DetailsPage: {
+  ListProductsPage: {
     name: "ListProduct",
     path: "/products",
     isShow: true,
     isAuth: false,
-    file: "Products/ListProductPage",
+    feature: 'products',
+    page: "ListProductPage",
     requiresLayout: true,
   },
   ShoppingCartPage: {
@@ -66,7 +60,8 @@ const routerMeta: RouterMetaType = {
     path: "/cart",
     isShow: true,
     isAuth: false,
-    file: "Cart/ShoppingCartPage",
+    feature: 'cart',
+    page: "ShoppingCartPage",
     requiresLayout: true,
   },
   WishlistPage: {
@@ -74,7 +69,8 @@ const routerMeta: RouterMetaType = {
     path: "/wishlist",
     isShow: true,
     isAuth: false,
-    file: "Cart/WishListPage",
+    feature: 'cart',
+    page: "WishListPage",
     requiresLayout: true,
   },
   ContactPage: {
@@ -82,7 +78,8 @@ const routerMeta: RouterMetaType = {
     path: "/contact",
     isShow: true,
     isAuth: false,
-    file: "Contact/ContactPage",
+    feature: "contact",
+    page: "ContactPage",
     requiresLayout: true,
   },
   FAQPage: {
@@ -90,7 +87,8 @@ const routerMeta: RouterMetaType = {
     path: "/faq",
     isShow: true,
     isAuth: false,
-    file: "FaQ/FAQPage",
+    feature: 'faq',
+    page: "FAQPage",
     requiresLayout: true,
   },
   BlogNewsPage: {
@@ -98,7 +96,8 @@ const routerMeta: RouterMetaType = {
     path: "/blog",
     isShow: true,
     isAuth: false,
-    file: "Blog/BlogNewsPage",
+    feature: 'blog',
+    page: "BlogNewsPage",
     requiresLayout: true,
   }
 };

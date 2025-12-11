@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { categories } from "../../assets/assets";
+import { categories } from "../../../assets/assets";
 
 const Category = () => {
   const navigate = useNavigate()

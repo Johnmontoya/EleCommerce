@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { products } from "../../assets/assets";
+import { products } from "../../../assets/assets";
 
 const ProductShowCase = () => {
   const navigate = useNavigate()

@@ -1,7 +1,7 @@
 import { BiHeart, BiSearch } from "react-icons/bi";
 import { CiLocationOn, CiShoppingBasket, CiShoppingCart } from "react-icons/ci";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import Footer from "../Home/Footer";
+import Footer from "../../features/home/components/Footer";
 import { useState } from "react";
 import { MdClose, MdOutlineLightMode } from "react-icons/md";
 

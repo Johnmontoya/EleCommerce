@@ -1,14 +1,14 @@
-import Banner from '../components/Home/Banner'
-import Category from '../components/Home/Category'
-import Features from '../components/Home/Features'
-import ProductShowCase from '../components/Product/ProductShowCase'
-import Trends from '../components/Product/Trends'
 import type { EmblaOptionsType } from 'embla-carousel'
-import Products from '../components/Product/Products'
-import Promotion from '../components/Home/Promotion'
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react'
-import CTA from '../components/Home/CTA'
+import Banner from '../components/Banner';
+import Category from '../components/Category';
+import Promotion from '../components/Promotion';
+import Trends from '../../products/components/Trends';
+import ProductShowCase from '../../products/components/ProductShowCase';
+import Products from '../../products/components/Products';
+import CTA from '../components/CTA';
+import Features from '../components/Features';
 
 const OPTIONS: EmblaOptionsType = { 
   loop: true,

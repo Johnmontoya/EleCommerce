@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Assets, product } from "../../assets/assets";
+import { Assets, product } from "../../../assets/assets";
 
 const Products = () => {
   const navigate = useNavigate()

@@ -1,5 +1,5 @@
-import { Assets } from '../assets/assets';
-import type { BannerSlide } from '../interfaces/banner';
+import { Assets } from '../../../assets/assets';
+import type { BannerSlide } from '../types/home.types';
 
 // Datos locales (mock data)
 export const localBannerSlides: BannerSlide[] = [

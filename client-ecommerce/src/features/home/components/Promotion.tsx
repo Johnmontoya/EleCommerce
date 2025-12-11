@@ -1,5 +1,5 @@
 import { FaArrowRight } from "react-icons/fa";
-import { Assets } from "../../assets/assets";
+import { Assets } from "../../../assets/assets";
 import { useNavigate } from "react-router-dom";
 
 const Promotion = () => {

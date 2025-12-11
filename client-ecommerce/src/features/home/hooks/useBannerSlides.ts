@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { bannerService } from '../services/bannerService';
-import { localBannerSlides } from '../data/bannerData';
-import type { BannerSlide } from '../interfaces/banner';
+import { bannerService } from '../api/bannerService';
+import { localBannerSlides } from '../api/bannerData';
+import type { BannerSlide } from '../types/home.types';
 
 export const useBannerSlides = (useLocalData = true) => {
     const [slides, setSlides] = useState<BannerSlide[]>([]);
