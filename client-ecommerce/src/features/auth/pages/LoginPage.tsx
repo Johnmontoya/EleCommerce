@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
+import ButtonAction from "../../../shared/ui/ButtonAction";
+import { CiLogin } from "react-icons/ci";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -10,7 +12,7 @@ const LoginPage: React.FC = () => {
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async(e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setProgress(0);
     setLoading(true);
@@ -34,19 +36,17 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900">
-      
       {/* Login Form */}
       <div className="flex items-center justify-center px-4 py-16">
         <div className="w-full max-w-md">
           <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-8 my-20 backdrop-blur-sm">
             {/* Title */}
             <div className="text-center mb-8">
-              <Link to={'/'} className="text-3xl font-bold text-slate-100 mb-2">
-                Bienvenido de nuevo a <span className="text-cyan-400">ELECOMMERCE</span>
+              <Link to={"/"} className="text-3xl font-bold text-slate-100 mb-2">
+                Bienvenido de nuevo a{" "}
+                <span className="bg-clip-text text-transparent bg-linear-to-r from-cyan-500 to-blue-500">ELECOMMERCE</span>
               </Link>
-              <p className="text-slate-400 text-sm">
-                Ingresa tus credenciales
-              </p>
+              <p className="text-slate-400 text-sm">Ingresa tus credenciales</p>
             </div>
 
             {/* Form */}
@@ -94,22 +94,25 @@ const LoginPage: React.FC = () => {
                 </a>
               </div>
 
+              {loading && (
+                <div className="w-full h-3 bg-gray-200 mt-4 rounded">
+                  <div
+                    className="h-full bg-green-500 rounded transition-all"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+              )}
+              {progress === 100 && <p className="mt-2">Completado</p>}
+
               {/* Sign In Button */}
-              <button
-                type="submit"
-                className="w-full bg-linear-to-r from-cyan-400 to-cyan-500 hover:from-cyan-500 hover:to-cyan-600 text-slate-100 font-bold py-3 rounded-lg transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-cyan-500/50"
+              <ButtonAction
+                onClick={() => {}}
+                text="Iniciar Sesion"
+                variant="primary"
+                className="w-full flex items-center justify-center"
               >
-                {loading && (
-        <div className="w-full h-3 bg-gray-200 mt-4 rounded">
-          <div
-            className="h-full bg-green-500 rounded transition-all"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      )}
-       {progress === 100 && <p className="mt-2">Completado</p>}
-                Iniciar Sesión
-              </button>
+                <CiLogin size={18} />
+              </ButtonAction>
             </form>
 
             {/* Divider */}
@@ -126,27 +129,29 @@ const LoginPage: React.FC = () => {
 
             {/* Social Login Buttons */}
             <div className="grid grid-cols-2 gap-3">
-              <button
+              <ButtonAction
                 onClick={() => handleSocialLogin("Google")}
-                className="bg-slate-700/50 hover:bg-slate-700 border border-slate-600 text-slate-300 py-3 rounded-lg transition-all flex items-center justify-center gap-2 font-medium group"
+                text={"Google"}
+                variant="secondary"
+                className="flex justify-center items-center border border-slate-600"
               >
-                <span className="text-lg"><FaGoogle /></span>
-                <span className="text-sm">Google</span>
-              </button>
-              <button
+                <FaGoogle size={18} />
+              </ButtonAction>
+              <ButtonAction
                 onClick={() => handleSocialLogin("Facebook")}
-                className="bg-slate-700/50 hover:bg-slate-700 border border-slate-600 text-slate-300 py-3 rounded-lg transition-all flex items-center justify-center gap-2 font-medium group"
+                text={"Facebook"}
+                variant="secondary"
+                className="flex justify-center items-center border border-slate-600"
               >
-                <span className="text-lg"><FaFacebook /></span>
-                <span className="text-sm">Facebook</span>
-              </button>
+                <FaFacebook size={18} />
+              </ButtonAction>
             </div>
 
             {/* Sign Up Link */}
             <p className="text-center text-slate-400 text-sm mt-6">
               Eres miembro?{" "}
               <Link
-                to={'/register'}
+                to={"/register"}
                 className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
               >
                 Crear una cuenta

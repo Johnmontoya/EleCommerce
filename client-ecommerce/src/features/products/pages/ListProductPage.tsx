@@ -8,6 +8,7 @@ import CardFilterBrand from "../components/listProducts/CardFilterBrand";
 import Pagination from "../../../shared/ui/Pagination";
 import { products } from "../const/menuCategory";
 import BreadCrumbs from "../../../shared/ui/BreadCrumbs";
+import ButtonAction from "../../../shared/ui/ButtonAction";
 
 const ListProductsPage: React.FC = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -73,26 +74,25 @@ const ListProductsPage: React.FC = () => {
                 </div>
 
                 <div className="flex gap-2">
-                  <button
+                  <ButtonAction
                     onClick={() => setViewMode("grid")}
                     className={`p-2 rounded-lg transition-all ${
                       viewMode === "grid"
-                        ? "bg-cyan-500 text-white"
+                        ? "bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white"
                         : "bg-slate-700 text-slate-300 hover:bg-slate-600"
                     }`}
+                    text=""
+                    variant="outline"
                   >
                     <BsGrid size={20} />
-                  </button>
-                  <button
-                    onClick={() => setViewMode("list")}
-                    className={`p-2 rounded-lg transition-all ${
+                  </ButtonAction>
+                  <ButtonAction className={`p-2 rounded-lg transition-all ${
                       viewMode === "list"
-                        ? "bg-cyan-500 text-white"
+                        ? "bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white"
                         : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                    }`}
-                  >
+                    }`} onClick={() => setViewMode("list")} text="" variant="outline">
                     <BsList size={20} />
-                  </button>
+                  </ButtonAction>
                 </div>
               </div>
             </div>

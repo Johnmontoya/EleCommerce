@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { BsCartPlus } from "react-icons/bs";
 
 interface CardProductPros {
-    product: ProductProps;
-    viewMode: String;
+  product: ProductProps;
+  viewMode: String;
 }
 
 interface ProductProps {
@@ -17,8 +17,8 @@ interface ProductProps {
   category: string;
   brand: string;
 }
-const CardProductList: React.FC<CardProductPros> = ({product, viewMode}) => {
-    const navigate = useNavigate()
+const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
+  const navigate = useNavigate();
   return (
     <div
       key={product.id}
@@ -54,10 +54,11 @@ const CardProductList: React.FC<CardProductPros> = ({product, viewMode}) => {
         <ButtonAction
           className="w-full flex items-center justify-center"
           onClick={() => navigate("/cart")}
-          children={<BsCartPlus size={18} />}
           text={"Agregar al carrito"}
           variant="primary"
-        />
+        >
+          <BsCartPlus size={18} />
+        </ButtonAction>
       </div>
     </div>
   );

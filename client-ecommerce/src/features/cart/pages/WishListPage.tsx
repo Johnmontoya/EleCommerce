@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { BiHeart, BiPackage, BiStar, BiTrendingUp, BiX } from "react-icons/bi";
-import { CiShare2, CiShoppingCart } from "react-icons/ci";
+import { BiHeart, BiX } from "react-icons/bi";
+import { CiLink, CiSearch, CiShare2 } from "react-icons/ci";
+import BreadCrumbs from "../../../shared/ui/BreadCrumbs";
+import ButtonAction from "../../../shared/ui/ButtonAction";
+import { BsCartPlus } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { MdOutlineEmail, MdWhatsapp } from "react-icons/md";
+import ListWish from "../components/wishlist/ListWish";
+import CardStats from "../components/wishlist/CardStats";
 
 interface WishlistItem {
   id: number;
@@ -16,6 +23,7 @@ interface WishlistItem {
 }
 
 const WishlistPage: React.FC = () => {
+  const navigate = useNavigate();
   const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([
     {
       id: 1,
@@ -115,33 +123,19 @@ const WishlistPage: React.FC = () => {
     },
   ]);
 
-  const [showShareModal, setShowShareModal] = useState<boolean>(false);
-
-  const handleRemoveItem = (id: number) => {
-    setWishlistItems(wishlistItems.filter((item) => item.id !== id));
-  };
-
-  const handleAddToCart = (id: number) => {
-    console.log(`Added item ${id} to cart`);
-  };
+  const [showShareModal, setShowShareModal] = useState<boolean>(false);  
 
   const handleAddAllToCart = () => {
     const inStockItems = wishlistItems.filter((item) => item.inStock);
     console.log(`Added ${inStockItems.length} items to cart`);
   };
 
-  const totalValue = wishlistItems.reduce((sum, item) => sum + item.price, 0);
-  const inStockCount = wishlistItems.filter((item) => item.inStock).length;
-  const totalSavings = wishlistItems.reduce((sum, item) => {
-    if (item.originalPrice) {
-      return sum + (item.originalPrice - item.price);
-    }
-    return sum;
-  }, 0);
-
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 py-8">
-      <div className="max-w-7xl mx-auto px-4">
+    <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Breadcrumb */}
+      <BreadCrumbs />
+
+      <div className="max-w-7xl mx-auto px-4 pb-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
@@ -156,76 +150,26 @@ const WishlistPage: React.FC = () => {
                 guardados
               </p>
             </div>
-            <div className="flex gap-3">
-              <button
+            <div className="flex flex-col lg:flex-row gap-3">
+              <ButtonAction
                 onClick={() => setShowShareModal(true)}
-                className="bg-slate-700 hover:bg-slate-600 text-slate-200 px-6 py-3 rounded-xl font-semibold transition-all flex items-center gap-2"
+                text="Compartir Lista"
+                variant="secondary"
               >
                 <CiShare2 size={18} />
-                Compartir Lista
-              </button>
-              <button
+              </ButtonAction>
+              <ButtonAction
                 onClick={handleAddAllToCart}
-                className="bg-linear-to-r from-cyan-500 to-cyan-500 hover:from-cyan-600 hover:to-cyan-600 text-white px-6 py-3 rounded-xl font-semibold transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-cyan-500/50 flex items-center gap-2 cursor-pointer group/btn"
+                text="Agregar Todo al carrito"
+                variant="primary"
               >
-                <CiShoppingCart
-                  size={18}
-                  className="group-hover/btn:animate-bounce"
-                />
-                Agregar Todo al Carrito
-              </button>
+                <BsCartPlus size={18} />
+              </ButtonAction>
             </div>
           </div>
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-slate-800/50 border-2 border-slate-700 rounded-xl p-4 backdrop-blur-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-slate-400 text-sm mb-1">Valor Total</p>
-                  <p className="text-2xl font-bold text-cyan-400">
-                    ${totalValue.toFixed(2)}
-                  </p>
-                </div>
-                <div className="bg-cyan-500/20 p-3 rounded-lg">
-                  <BiTrendingUp className="text-cyan-400" size={24} />
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-slate-800/50 border-2 border-slate-700 rounded-xl p-4 backdrop-blur-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-slate-400 text-sm mb-1">
-                    Productos Disponibles
-                  </p>
-                  <p className="text-2xl font-bold text-green-400">
-                    {inStockCount}/{wishlistItems.length}
-                  </p>
-                </div>
-                <div className="bg-green-500/20 p-3 rounded-lg">
-                  <BiPackage className="text-green-400" size={24} />
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-slate-800/50 border-2 border-slate-700 rounded-xl p-4 backdrop-blur-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-slate-400 text-sm mb-1">Ahorro Total</p>
-                  <p className="text-2xl font-bold text-orange-400">
-                    ${totalSavings.toFixed(2)}
-                  </p>
-                </div>
-                <div className="bg-orange-500/20 p-3 rounded-lg">
-                  <BiHeart
-                    className="text-orange-400 fill-orange-400"
-                    size={24}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <CardStats wishlistItems={wishlistItems} />
         </div>
 
         {/* Wishlist Items */}
@@ -243,115 +187,31 @@ const WishlistPage: React.FC = () => {
               Agrega productos que te gusten para encontrarlos fácilmente
               después
             </p>
-            <button className="bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-8 py-3 rounded-xl font-semibold transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-cyan-500/50">
-              Explorar Productos
-            </button>
+            <ButtonAction
+              onClick={() => navigate("/products")}
+              text="Explorar Productos"
+              variant="primary"
+              className="flex mx-auto"
+            >
+              <CiSearch size={20} />
+            </ButtonAction>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {wishlistItems.map((item) => (
-              <div
-                key={item.id}
-                className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl overflow-hidden group hover:border-cyan-500/50 transition-all relative"
-              >
-                {/* Discount Badge */}
-                {item.discount && (
-                  <div className="absolute top-3 left-3 bg-linear-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-lg text-xs font-bold z-10 shadow-lg">
-                    -{item.discount}%
-                  </div>
-                )}
-
-                {/* Remove Button */}
-                <button
-                  onClick={() => handleRemoveItem(item.id)}
-                  className="absolute top-3 right-3 bg-slate-900/80 hover:bg-red-500 text-slate-300 hover:text-white p-2 rounded-lg transition-all z-10 backdrop-blur-sm"
-                  title="Eliminar de favoritos"
-                >
-                  <BiX size={18} />
-                </button>
-
-                {/* Image */}
-                <div className="relative h-64 bg-slate-900/50 overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  {!item.inStock && (
-                    <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center">
-                      <span className="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold text-sm">
-                        Agotado
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="p-4">
-                  <p className="text-cyan-400 text-xs font-semibold mb-2 uppercase">
-                    {item.category}
-                  </p>
-                  <h3 className="text-slate-100 font-bold text-lg mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
-                    {item.name}
-                  </h3>
-
-                  {/* Rating */}
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="flex items-center gap-1">
-                      <BiStar
-                        size={14}
-                        className="text-amber-400 fill-amber-400"
-                      />
-                      <span className="text-slate-300 text-sm font-semibold">
-                        {item.rating}
-                      </span>
-                    </div>
-                    <span className="text-slate-500 text-xs">
-                      ({item.reviews} reviews)
-                    </span>
-                  </div>
-
-                  {/* Price */}
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-2xl font-bold text-cyan-400">
-                      ${item.price.toFixed(2)}
-                    </span>
-                    {item.originalPrice && (
-                      <span className="text-slate-500 line-through text-sm">
-                        ${item.originalPrice.toFixed(2)}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Add to Cart Button */}
-                  <button
-                    onClick={() => handleAddToCart(item.id)}
-                    disabled={!item.inStock}
-                    className={`w-full py-3 rounded-lg font-semibold transition-all flex items-center justify-center cursor-pointer group/btn gap-2 ${
-                      item.inStock
-                        ? "bg-linear-to-r from-cyan-500 to-cyan-500 hover:from-cyan-600 hover:to-cyan-600 text-white"
-                        : "bg-slate-700 text-slate-500 cursor-not-allowed"
-                    }`}
-                  >
-                    <CiShoppingCart size={18} className="group-hover/btn:animate-bounce"/>
-                    {item.inStock ? "Agregar al Carrito" : "No Disponible"}
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ListWish wishlistItems={wishlistItems} setWishlistItems={setWishlistItems} />
         )}
 
         {/* Share Modal */}
         {showShareModal && (
           <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div className="bg-slate-800 border-2 border-slate-700 rounded-2xl p-8 max-w-md w-full relative">
-              <button
+              <ButtonAction
                 onClick={() => setShowShareModal(false)}
-                className="absolute top-4 right-4 text-slate-400 hover:text-slate-200 transition-colors"
+                variant="outline"
+                text=""
+                className="absolute top-4 right-4"
               >
                 <BiX size={24} />
-              </button>
+              </ButtonAction>
 
               <div className="text-center mb-6">
                 <div className="bg-cyan-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -366,18 +226,30 @@ const WishlistPage: React.FC = () => {
               </div>
 
               <div className="space-y-3">
-                <button className="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-3">
-                  <span className="text-xl">📧</span>
-                  Compartir por Email
-                </button>
-                <button className="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-3">
-                  <span className="text-xl">💬</span>
-                  Compartir por WhatsApp
-                </button>
-                <button className="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-3">
-                  <span className="text-xl">🔗</span>
-                  Copiar Enlace
-                </button>
+                <ButtonAction
+                  text="Compartir por Email"
+                  variant="secondary"
+                  onClick={() => {}}
+                  className="w-full flex justify-center"
+                >
+                  <MdOutlineEmail size={20} />
+                </ButtonAction>
+                <ButtonAction
+                  text="Compartir por WhatsApp"
+                  variant="secondary"
+                  onClick={() => {}}
+                  className="w-full flex justify-center"
+                >
+                  <MdWhatsapp size={20} />
+                </ButtonAction>
+                <ButtonAction
+                  text="Copiar Enlace"
+                  variant="secondary"
+                  onClick={() => {}}
+                  className="w-full flex justify-center"
+                >
+                  <CiLink size={20} />
+                </ButtonAction>
               </div>
             </div>
           </div>

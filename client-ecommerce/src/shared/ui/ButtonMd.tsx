@@ -31,7 +31,7 @@ const ButtonMd: React.FC<ButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={` ${colorClasses} ${disabledStyle} text-white px-6 py-2 rounded-xl font-semibold transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2`}
+      className={` ${colorClasses} ${disabledStyle} text-white px-6 py-2 rounded-xl font-semibold transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer`}
     >
       {children}{" "}{text}
     </button>
