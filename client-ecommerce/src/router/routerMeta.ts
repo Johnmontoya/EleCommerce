@@ -39,7 +39,7 @@ const routerMeta: RouterMetaType = {
   },
   DetailsPage: {
     name: "Details",
-    path: "/product/:id",
+    path: "/products/:id",
     isShow: true,
     isAuth: false,
     feature: 'products',
@@ -98,6 +98,15 @@ const routerMeta: RouterMetaType = {
     isAuth: false,
     feature: 'blog',
     page: "BlogNewsPage",
+    requiresLayout: true,
+  },
+  CreateProductPage: {
+    name: "CreateProduct",
+    path: "/dashboard/products",
+    isShow: true,
+    isAuth: false,
+    feature: 'products',
+    page: "CreateProductPage",
     requiresLayout: true,
   }
 };

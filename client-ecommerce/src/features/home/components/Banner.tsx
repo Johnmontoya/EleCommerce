@@ -95,7 +95,7 @@ const Banner = (props: PropType) => {
                                                 {slide.description}
                                             </p>
                                             <Link 
-                                                to={`/product/${slide.id}`}
+                                                to={`/products/${slide.id}`}
                                                 className="w-40 flex flex-row items-center gap-2 bg-white text-blue-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition"
                                             >
                                                 {slide.buttonText}

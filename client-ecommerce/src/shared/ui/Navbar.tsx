@@ -1,9 +1,10 @@
 import { BiHeart, BiSearch } from "react-icons/bi";
-import { CiLocationOn, CiShoppingBasket, CiShoppingCart } from "react-icons/ci";
+import { CiLocationOn, CiLogin, CiShoppingBasket, CiShoppingCart } from "react-icons/ci";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import Footer from "../../features/home/components/Footer";
 import { useState } from "react";
-import { MdClose, MdOutlineLightMode } from "react-icons/md";
+import { MdClose, MdDashboard, MdOutlineLightMode } from "react-icons/md";
+import ButtonMd from "./ButtonMd";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -35,18 +36,8 @@ const Navbar = () => {
               <button className="cursor-pointer">
                 <MdOutlineLightMode size={24} />
               </button>
-              <button
-                onClick={() => navigate("/login")}
-                className="w-30 bg-cyan-500 shadow-lg shadow-cyan-500/50 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-110 cursor-pointer"
-              >
-                Sign In
-              </button>
-              <button
-                onClick={() => navigate("/dashboard")}
-                className="w-30 bg-cyan-500 shadow-lg shadow-cyan-500/50 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-110 cursor-pointer"
-              >
-                Dashboard
-              </button>
+              <ButtonMd onClick={()=> navigate('/dashboard')} children={<CiLogin size={18}/>} text={"Login"} variant="primary"/>
+              <ButtonMd onClick={()=> navigate('/dashboard')} children={<MdDashboard size={18}/>} text={"Dashboard"} variant="primary"/>
             </div>
           </div>
         </nav>

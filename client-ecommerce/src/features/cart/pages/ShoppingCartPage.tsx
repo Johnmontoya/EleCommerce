@@ -3,6 +3,7 @@ import { BiCreditCard, BiMapPin } from "react-icons/bi";
 import { BsTrash2 } from "react-icons/bs";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useNavigate } from "react-router-dom";
+import BreadCrumbs from "../../../shared/ui/BreadCrumbs";
 
 interface Product {
   name: string;
@@ -109,21 +110,7 @@ const ShoppingCartPage: React.FC = () => {
     <>
       <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900">
         {/* Breadcrumb */}
-        <div className="max-w-7xl mx-auto flex justify-start items-center px-4 py-4">
-          <p className="text-slate-300 font-light text-sm">
-            <span className="hover:text-cyan-400 cursor-pointer">Home</span>
-            <span className="mx-2">/</span>
-            <span className="hover:text-cyan-400 cursor-pointer">Products</span>
-            <span className="mx-2">/</span>
-            <span className="hover:text-cyan-400 cursor-pointer">
-              {products[0].category}
-            </span>
-            <span className="mx-2">/</span>
-            <span className="text-slate-100 font-medium">
-              {products[0].name}
-            </span>
-          </p>
-        </div>
+        <BreadCrumbs />
 
         <div className="flex flex-col lg:flex-row gap-8 max-w-7xl w-full px-6 my-8 mx-auto">
           {/* Cart Items Section */}

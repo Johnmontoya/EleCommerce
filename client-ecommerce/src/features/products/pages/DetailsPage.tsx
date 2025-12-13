@@ -1,104 +1,22 @@
 import React, { useState } from "react";
-import { CiShoppingCart } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { IoIosAdd } from "react-icons/io";
 import { RiSubtractFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-
-interface Product {
-  name: string;
-  category: string;
-  price: number;
-  offerPrice: number;
-  rating: number;
-  images: string[];
-  description: string[];
-}
-
-interface TabContent {
-  title: string;
-  content: string;
-}
-
-type TabType = "description" | "specs" | "reviews";
+import ButtonAction from "../../../shared/ui/ButtonAction";
+import { BsCartCheck, BsCartPlus } from "react-icons/bs";
+import { product } from "../const/menuCategory";
+import TabsSection from "../components/detailsProduct/TabsSection";
+import BreadCrumbs from "../../../shared/ui/BreadCrumbs";
 
 const DetailsPage: React.FC = () => {
   const navigate = useNavigate();
-
-  const product: Product = {
-    name: "Nike Pegasus 41 shoes",
-    category: "Sports",
-    price: 189,
-    offerPrice: 159,
-    rating: 4,
-    images: [
-      "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage.png",
-      "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage2.png",
-      "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage3.png",
-      "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage4.png",
-    ],
-    description: [
-      "High-quality material",
-      "Comfortable for everyday use",
-      "Available in different sizes",
-    ],
-  };
-
-  const [thumbnail, setThumbnail] = useState<string>(product.images[0]);
-  const [activeTab, setActiveTab] = useState<TabType>("description");
-
-  const tabContent: Record<TabType, TabContent> = {
-    description: {
-      title: "Descripción del Producto",
-      content: `Vestibulum condimentum imperdiet velit nec ornare. Nullam lobortis
-        urna posuere quam porta consequat. Donec commodo diam lectus, sit
-        amet tempor dolor scelerisque eget. Vestibulum at lectus dui.
-        Maecenas consectetur tempor ipsum non porttitor. Cras accumsan
-        mattis aliquam. Fusce eleifend maximus elit facilisis condimentum.
-        Mauris non risus sed ligula convallis fermentum.
-        
-        Quisque eu purus nunc. Ut eget ligula ac lorem laoreet scelerisque
-        in ut nulla. Quisque volutpat elit eget tellus pharetra, vel
-        sollicitudin velit scelerisque. Vivamus ac libero eu nunc congue
-        malesuada eu vitae est.`,
-    },
-    specs: {
-      title: "Especificaciones Técnicas",
-      content: `Material: Mesh sintético de alta calidad con soporte adicional.
-        Suela: Goma duradera con tecnología de amortiguación Nike Air.
-        Peso: 280g (talla 42).
-        Colores disponibles: Negro, Blanco, Gris, Azul.
-        Tallas: 38-46.
-        Uso recomendado: Running, entrenamiento deportivo, uso casual.`,
-    },
-    reviews: {
-      title: "Opiniones de Clientes (150)",
-      content: `⭐⭐⭐⭐⭐ "Excelentes zapatos, muy cómodos para correr largas distancias." - María G.
-        
-        ⭐⭐⭐⭐ "Buena calidad pero un poco ajustados al principio." - Carlos R.
-        
-        ⭐⭐⭐⭐⭐ "Los mejores zapatos deportivos que he tenido. Totalmente recomendados." - Ana L.
-        
-        ⭐⭐⭐⭐ "Relación calidad-precio excelente. Los uso todos los días." - Pedro M.`,
-    },
-  };
+  const [thumbnail, setThumbnail] = useState<string>(product.image);
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Breadcrumb */}
-      <div className="max-w-7xl mx-auto flex justify-start items-center px-4 py-4">
-        <p className="text-slate-300 font-light text-sm">
-          <span className="hover:text-cyan-400 cursor-pointer">Home</span>
-          <span className="mx-2">/</span>
-          <span className="hover:text-cyan-400 cursor-pointer">Products</span>
-          <span className="mx-2">/</span>
-          <span className="hover:text-cyan-400 cursor-pointer">
-            {product.category}
-          </span>
-          <span className="mx-2">/</span>
-          <span className="text-slate-100 font-medium">{product.name}</span>
-        </p>
-      </div>
+      <BreadCrumbs />
 
       {/* Main Product Section */}
       <div className="max-w-7xl mx-auto w-full px-6 py-10">
@@ -107,7 +25,7 @@ const DetailsPage: React.FC = () => {
           <div className="flex gap-4 lg:w-1/2">
             {/* Thumbnails */}
             <div className="flex flex-col gap-3">
-              {product.images.map((image: string, index: number) => (
+              {product.images!.map((image: string, index: number) => (
                 <div
                   key={index}
                   onClick={() => setThumbnail(image)}
@@ -151,7 +69,7 @@ const DetailsPage: React.FC = () => {
                     key={i}
                     size={18}
                     className={
-                      product.rating > i
+                      product.rating! > i
                         ? "fill-amber-400 text-amber-400"
                         : "text-slate-500"
                     }
@@ -174,7 +92,7 @@ const DetailsPage: React.FC = () => {
                 (Incluye todos los impuestos)
               </span>
               <div className="mt-2 inline-block bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-medium">
-                Ahorra ${product.price - product.offerPrice}
+                Ahorra ${product.price - product.offerPrice!}
               </div>
             </div>
 
@@ -184,7 +102,7 @@ const DetailsPage: React.FC = () => {
                 Acerca del Producto
               </p>
               <ul className="space-y-2 text-slate-400">
-                {product.description.map((desc: string, index: number) => (
+                {product.description!.map((desc: string, index: number) => (
                   <li key={index} className="flex items-start">
                     <span className="text-cyan-400 mr-2">✓</span>
                     {desc}
@@ -203,70 +121,15 @@ const DetailsPage: React.FC = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={() => navigate("/cart")}
-                className="flex-1 py-4 px-6 rounded-xl font-semibold bg-slate-700 text-slate-100 hover:bg-slate-600 transition-all duration-200 transform hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center gap-2  group/btn"
-              >
-                <CiShoppingCart
-                  size={18}
-                  className="group-hover/btn:animate-bounce"
-                />
-                Agregar al carrito
-              </button>
-              <button className="flex-1 py-4 px-6 rounded-xl font-semibold bg-linear-to-r from-cyan-500 to-cyan-500 text-white hover:from-cyan-600 hover:to-cyan-600 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg shadow-cyan-500/50 cursor-pointer">
-                Comprar Ahora
-              </button>
+              <ButtonAction onClick={() => navigate('/cart')} children={<BsCartPlus size={18}/>} text={"Agregar al carrito"} variant="secondary"/>
+              <ButtonAction onClick={() => {}} children={<BsCartCheck size={18}/>} text={"Comprar"} variant="primary"/>
             </div>
           </div>
         </div>
       </div>
 
       {/* Tabs Section */}
-      <div className="w-full max-w-7xl mx-auto mt-16 px-6 pb-16">
-        {/* Tab Buttons */}
-        <div className="flex flex-wrap justify-start items-start gap-2 px-3 mb-0">
-          <button
-            onClick={() => setActiveTab("description")}
-            className={`px-6 py-3 font-semibold rounded-t-lg transition-all ${
-              activeTab === "description"
-                ? "bg-cyan-500 text-white shadow-lg"
-                : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-            }`}
-          >
-            Descripción
-          </button>
-          <button
-            onClick={() => setActiveTab("specs")}
-            className={`px-6 py-3 font-semibold rounded-t-lg transition-all ${
-              activeTab === "specs"
-                ? "bg-cyan-500 text-white shadow-lg"
-                : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-            }`}
-          >
-            Especificaciones
-          </button>
-          <button
-            onClick={() => setActiveTab("reviews")}
-            className={`px-6 py-3 font-semibold rounded-t-lg transition-all ${
-              activeTab === "reviews"
-                ? "bg-cyan-500 text-white shadow-lg"
-                : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-            }`}
-          >
-            Reviews (150)
-          </button>
-        </div>
-
-        {/* Tab Content */}
-        <div className="bg-slate-800/50 border border-slate-700 shadow-xl rounded-2xl p-8 backdrop-blur-sm">
-          <h2 className="text-2xl font-bold mb-4 text-slate-100">
-            {tabContent[activeTab].title}
-          </h2>
-          <p className="text-slate-300 leading-relaxed whitespace-pre-line">
-            {tabContent[activeTab].content}
-          </p>
-        </div>
-      </div>
+      <TabsSection />
     </div>
   );
 };
