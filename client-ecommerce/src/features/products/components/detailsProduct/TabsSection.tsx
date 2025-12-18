@@ -1,44 +1,29 @@
 import { useState } from "react";
-import type { TabContent } from "../../types/product.types";
+import type { Product } from "../../types/product.types";
+import SpecsContent from "./SpectContent";
+import ReviewsContent from "./ReviewsContent";
 
 type TabType = "description" | "specs" | "reviews";
 
-const TabsSection = () => {
+interface TabsSectionProps {
+    product: Product;
+}
+
+const TabsSection = ({ product }: TabsSectionProps) => {
   const [activeTab, setActiveTab] = useState<TabType>("description");
 
-  const tabContent: Record<TabType, TabContent> = {
+  const tabContent: Record<TabType, { title: string; content: React.ReactNode }> = {
     description: {
       title: "Descripción del Producto",
-      content: `Vestibulum condimentum imperdiet velit nec ornare. Nullam lobortis
-            urna posuere quam porta consequat. Donec commodo diam lectus, sit
-            amet tempor dolor scelerisque eget. Vestibulum at lectus dui.
-            Maecenas consectetur tempor ipsum non porttitor. Cras accumsan
-            mattis aliquam. Fusce eleifend maximus elit facilisis condimentum.
-            Mauris non risus sed ligula convallis fermentum.
-            
-            Quisque eu purus nunc. Ut eget ligula ac lorem laoreet scelerisque
-            in ut nulla. Quisque volutpat elit eget tellus pharetra, vel
-            sollicitudin velit scelerisque. Vivamus ac libero eu nunc congue
-            malesuada eu vitae est.`,
+      content: `${product.description}`,
     },
     specs: {
       title: "Especificaciones Técnicas",
-      content: `Material: Mesh sintético de alta calidad con soporte adicional.
-            Suela: Goma duradera con tecnología de amortiguación Nike Air.
-            Peso: 280g (talla 42).
-            Colores disponibles: Negro, Blanco, Gris, Azul.
-            Tallas: 38-46.
-            Uso recomendado: Running, entrenamiento deportivo, uso casual.`,
+      content: <SpecsContent product={product} />,
     },
     reviews: {
-      title: "Opiniones de Clientes (150)",
-      content: `⭐⭐⭐⭐⭐ "Excelentes zapatos, muy cómodos para correr largas distancias." - María G.
-            
-            ⭐⭐⭐⭐ "Buena calidad pero un poco ajustados al principio." - Carlos R.
-            
-            ⭐⭐⭐⭐⭐ "Los mejores zapatos deportivos que he tenido. Totalmente recomendados." - Ana L.
-            
-            ⭐⭐⭐⭐ "Relación calidad-precio excelente. Los uso todos los días." - Pedro M.`,
+      title: "Opiniones de Clientes",
+      content: <ReviewsContent product={product} />
     },
   };
 
@@ -74,7 +59,7 @@ const TabsSection = () => {
               : "bg-slate-700 text-slate-300 hover:bg-slate-600"
           }`}
         >
-          Reviews (150)
+          Reviews {product.reviewsCount}
         </button>
       </div>
 
@@ -83,9 +68,9 @@ const TabsSection = () => {
         <h2 className="text-2xl font-bold mb-4 text-slate-100">
           {tabContent[activeTab].title}
         </h2>
-        <p className="text-slate-300 leading-relaxed whitespace-pre-line">
+        <div className="text-slate-300 leading-relaxed whitespace-pre-line">
           {tabContent[activeTab].content}
-        </p>
+        </div>
       </div>
     </div>
   );

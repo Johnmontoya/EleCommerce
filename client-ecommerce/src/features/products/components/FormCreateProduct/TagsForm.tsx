@@ -10,11 +10,13 @@ interface CardTagsProps {
   product: TagsProps;
   onChangeCreateData: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   setCreateData: React.Dispatch<React.SetStateAction<any>>;
+  getFieldsError: (fieldName: string) => string | undefined;
 }
 
 const TagsInformation: React.FC<CardTagsProps> = ({
   product,
   setCreateData,
+  getFieldsError
 }) => {
   const [newTag, setNewTag] = useState<string>("");
   const addTag = () => {
@@ -50,13 +52,16 @@ const TagsInformation: React.FC<CardTagsProps> = ({
             className="flex-1 bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-3 py-2 rounded-lg outline-none focus:border-cyan-400 transition-all text-sm"
             placeholder="Agregar etiqueta"
           />
-          <button
-            type="button"
+          <ButtonAction
+            variant="primary"
+            text=""
             onClick={addTag}
-            className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-lg transition-all"
           >
             <BiPlus size={16} />
-          </button>
+          </ButtonAction>
+        </div>
+        <div className="text-red-500 text-sm mt-0">
+          {getFieldsError?.("tags")}
         </div>
 
         <div className="flex flex-wrap gap-2">
@@ -66,7 +71,7 @@ const TagsInformation: React.FC<CardTagsProps> = ({
               className="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-lg text-sm font-medium flex items-center gap-2"
             >
               {tag}
-              <ButtonAction className={"bg-slate-700 rounded-full w-4 p-0! h-4"} children={<BiX size={14}/>} onClick={() => removeTag(index)} text={""} variant="danger"/>
+              <ButtonAction className={"bg-slate-700 rounded-full w-4 p-0! h-4"} children={<BiX size={14} />} onClick={() => removeTag(index)} text={""} variant="danger" />
             </span>
           ))}
         </div>

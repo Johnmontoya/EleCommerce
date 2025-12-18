@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { BsImage, BsTrash2 } from "react-icons/bs";
+import ButtonAction from "../../../../shared/ui/ButtonAction";
 
 interface ImagesProps {
   images: string[];
@@ -10,9 +11,10 @@ interface CardImagesProps {
   product: ImagesProps;
   onChangeCreateData: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   setCreateData: React.Dispatch<React.SetStateAction<any>>;
+  getFieldsError: (fieldName: string) => string | undefined;
 }
 
-const ImageForm: React.FC<CardImagesProps> = ({ product, setCreateData }) => {
+const ImageForm: React.FC<CardImagesProps> = ({ product, setCreateData, getFieldsError }) => {
   const [newImage, setNewImage] = useState<string>("");
   const addImage = () => {
     if (newImage.trim() && !product.images.includes(newImage.trim())) {
@@ -44,14 +46,16 @@ const ImageForm: React.FC<CardImagesProps> = ({ product, setCreateData }) => {
             className="flex-1 bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="URL de la imagen"
           />
-          <button
-            type="button"
+          <ButtonAction
             onClick={addImage}
-            className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold transition-all flex items-center gap-2"
+            text="Agregar"
+            variant="primary"
           >
             <BiPlus size={18} />
-            Agregar
-          </button>
+          </ButtonAction>
+        </div>
+        <div className="text-red-500 text-sm mt-0">
+          {getFieldsError?.("images")}
         </div>
 
         {product.images.length > 0 && (

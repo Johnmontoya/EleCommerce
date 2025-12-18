@@ -2,37 +2,27 @@ import React from "react";
 import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { useNavigate } from "react-router-dom";
 import { BsCartPlus } from "react-icons/bs";
+import type { Product } from "../../types/product.types";
 
 interface CardProductPros {
-  product: ProductProps;
+  product: Product;
   viewMode: String;
 }
 
-interface ProductProps {
-  id: number;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  category: string;
-  brand: string;
-}
 const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
   const navigate = useNavigate();
   return (
     <div
       key={product.id}
-      className={`bg-slate-800/50 border-2 border-slate-700 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all group ${
-        viewMode === "list" ? "flex gap-6" : ""
-      }`}
+      className={`bg-slate-800/50 border-2 border-slate-700 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all group ${viewMode === "list" ? "flex gap-6" : ""
+        }`}
     >
       <div
-        className={`bg-slate-900/50 flex items-center justify-center overflow-hidden ${
-          viewMode === "list" ? "w-48 shrink-0" : "h-64"
-        }`}
+        className={`bg-slate-900/50 flex items-center justify-center overflow-hidden ${viewMode === "list" ? "w-48 shrink-0" : "h-64"
+          }`}
       >
         <img
-          src={product.image}
+          src={product.images![0]}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
         />
@@ -42,14 +32,16 @@ const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
           {product.name}
         </h3>
         <div className="flex items-center gap-3 mb-4">
-          <span className="text-2xl font-bold text-cyan-400">
-            ${product.price.toFixed(2)}
-          </span>
-          {product.originalPrice && (
-            <span className="text-slate-500 line-through text-sm">
-              ${product.originalPrice.toFixed(2)}
+          {product.priceDiscount && (
+            <span className="text-2xl font-bold text-cyan-400">
+              ${Math.round(
+                product.price - (product.price * product.priceDiscount!) / 100
+              )}
             </span>
           )}
+          <span className="text-slate-500 line-through text-sm">
+            ${product.price}
+          </span>
         </div>
         <ButtonAction
           className="w-full flex items-center justify-center"

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { products } from "../../../assets/assets";
+import { product } from "../../../assets/assets";
 
 const ProductShowCase = () => {
   const navigate = useNavigate()
@@ -9,7 +9,7 @@ const ProductShowCase = () => {
       <section className="w-full mx-auto z-10 bg-slate-800">
         <div className="absolute top-380 right-30 w-28 h-28 bg-cyan-500/30 rounded-full filter blur-3xl animate-float2"></div>
         <div className="flex drop-shadow-lg/50 drop-shadow-black-500/50">
-          {products.slice(0, 1).map((product, idx) => (
+          {product.slice(0, 1).map((item, idx) => (
             <div key={idx} className={`w-full h-fit text-center`}>
               <div className="w-full flex flex-row justify-between relative">
                 <div className="w-full h-full flex flex-col gap-4 z-20 m-auto py-2 justify-center items-center">
@@ -40,7 +40,7 @@ const ProductShowCase = () => {
                   <div className="h-full flex justify-center items-end">
                     <a
                       href="#"
-                      onClick={() => navigate(`/product/${idx}`)}
+                      onClick={() => navigate(`/products/${item.slug}`)}
                       className="flex items-center border border-cyan-400 justify-center w-32 h-12 rounded-2xl text-slate-100 transition-all duration-300 hover:scale-120 cursor-pointer"
                     >
                       <span className="font-semibold">Comprar Ahora</span>
@@ -48,7 +48,7 @@ const ProductShowCase = () => {
                   </div>
                 </div>
                 <div className="w-full absolute md:relative z-10">
-                  <img src={product.image} className="w-full h-[348px] md:h-full mask-alpha mask-l-from-black mask-l-from-50% mask-l-to-transparent" />
+                  <img src={item.images[0]} className="w-full h-[348px] md:h-full mask-alpha mask-l-from-black mask-l-from-50% mask-l-to-transparent" />
                 </div>
               </div>
             </div>

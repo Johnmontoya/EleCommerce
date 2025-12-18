@@ -1,16 +1,18 @@
-import type { CreateProductDto } from "../../application/Dto/product.dto";
-import { Product } from "../entities/Product";
+import { ProductEntity } from "../entities/Product";
 
 export interface IProductrepository {
-  findById(id: string): Promise<Product | null>;
-  findAll(): Promise<Product[] | null>;
-  save(product: Product): Promise<void>;
-  update(id: string, product: CreateProductDto): Promise<Product | null>;
+  create(product: ProductEntity): Promise<ProductEntity>;
+  findById(id: string): Promise<ProductEntity | null>;
+  findAll(filters?: ProductFilters): Promise<ProductEntity[]>;
+  update(id: string, product: Partial<ProductEntity>): Promise<ProductEntity | null>;
   delete(id: string): Promise<boolean>;
+  findBySlug(slug: string): Promise<ProductEntity | null>;
+  findByCategory(category: string): Promise<ProductEntity[]>;
+  findByBrand(brand: string): Promise<ProductEntity[]>;
 }
 
 export interface Variant {
-  name: string | null;
+  name: string;
   options: string[];
 }
 
@@ -29,4 +31,16 @@ export interface Dimensions {
 export interface Shipping {
   free: boolean;
   cost: number;
+}
+
+export interface ProductFilters {
+  category?: string;
+  brands?: string[] | undefined;
+  brand?: string;
+  minPrice?: number | undefined;
+  maxPrice?: number | undefined;
+  isPublished?: boolean;
+  search?: string;
+  limit?: number | undefined;
+  offset?: number | undefined;
 }

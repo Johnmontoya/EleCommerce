@@ -3,6 +3,12 @@ import { categories } from "../../../assets/assets";
 
 const Category = () => {
   const navigate = useNavigate()
+
+  const handleCategoryClick = (categoryId: string) => {
+    // Navegar a la página de productos con la categoría en la URL
+    navigate(`/products?category=${categoryId}`);
+  };
+
   return (
     <div className="w-full flex flex-col justify-start items-center h-fit overflow-auto">
       <h1 className="font-semibold text-xl text-slate-100 my-10 uppercase">
@@ -12,8 +18,8 @@ const Category = () => {
       <section className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 items-center gap-4 overflow-x-auto py-2 px-2">
           {categories.map((cat, idx) => (
-            <div key={idx} onClick={() => navigate('/products')} className="w-48 h-56 flex flex-col items-center">
-              
+            <div key={idx} onClick={() => handleCategoryClick('67b5a3f8c1239c9cb4e4c825')} className="w-48 h-56 flex flex-col items-center">
+
               <div className="-top-10 left-10 flex flex-row gap-2 text-xs items-center">
                 <div className="w-3 h-3 bg-cyan-500 shadow-lg shadow-cyan-500/90 rounded-full"></div>
                 <span className="text-slate-100 font-light">161 articulos</span>
@@ -28,7 +34,7 @@ const Category = () => {
               <div className="relative w-full h-full text-xs text-center">
                 <p className="-top-40 left-10 font-bold uppercase text-slate-100">
                   {cat.name}
-                </p>              
+                </p>
               </div>
 
             </div>

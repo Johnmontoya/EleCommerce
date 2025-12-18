@@ -22,4 +22,4 @@ export const menuItems = [
   { name: "Metodos de pago", icon: BiCreditCard, link: 'payments' },
 ];
 
-export const menuAdmin = [{ name: "Crear Producto", icon: LuPackagePlus, link: "/dashboard/products" }];
+export const menuAdmin = [{ name: "Lista de Productos", icon: LuPackagePlus, link: "/dashboard/products" }];

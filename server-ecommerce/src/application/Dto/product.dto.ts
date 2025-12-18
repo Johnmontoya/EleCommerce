@@ -1,4 +1,16 @@
 import type z from "zod";
-import type { createProductSchema } from "../../infrastructure/validation/Product.schema";
+import type { CreateProductSchema, ProductIdSchema, UpdateProductSchema } from "../../infrastructure/validation/Product.schema";
 
-export type CreateProductDto = z.infer<typeof createProductSchema>;
+export type CreateProductInput = z.infer<typeof CreateProductSchema>;
+export type UpdateProductInput = z.infer<typeof UpdateProductSchema>;
+export type ProductIdInput = z.infer<typeof ProductIdSchema>;
+
+export interface ProductAutocompleteDto {
+  id: string;
+  name: string;
+  slug: string;
+  price: number;
+  priceDiscount?: number | undefined;
+  category: string;
+  image?: string | undefined; // Primera imagen
+}

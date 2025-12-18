@@ -5,6 +5,7 @@ export interface IRouterMeta {
   isAuth?: boolean;
   isCommon?: boolean;
   feature?: string;
+  site?: string;
   page?: string;
   file?: string;
   requiresLayout?: boolean;

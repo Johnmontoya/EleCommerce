@@ -13,7 +13,7 @@ const Trends = () => {
         {product.slice(0, 5).map((item, idx) => (
           <div
             key={idx}
-            onClick={() => navigate(`/product/${idx}`)}
+            onClick={() => navigate(`/products/${item.slug}`)}
             className="relative flex w-60 flex-col object-cover overflow-hidden bg-slate-800/50 border-2 border-slate-700 hover:border-cyan-500/50 rounded-2xl p-0 backdrop-blur-sm shadow-xl space-y-4 cursor-pointer group"
           >
             <div className="mt-4 px-1 pb-5">

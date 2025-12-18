@@ -1,32 +1,58 @@
 import React from "react";
-import type { Brand } from "../../types/product.types";
+import { useProductByBrand } from "../../hook/queries/useProduct";
+import LoadingFallback from "../../../../shared/ui/LoadingFallback";
 
 interface CardProps {
-  brands: Brand[];
-  onClick: (index: number) => void;
+  selectedBrands: string[]
+  onToggleBrand: (brand: string) => void;
 }
 
-const CardFilterBrand: React.FC<CardProps> = ({ brands, onClick }) => {
+const CardFilterBrand: React.FC<CardProps> = ({ selectedBrands, onToggleBrand }) => {
+  const { data: brands, isLoading } = useProductByBrand();
+
+  if (isLoading) return <LoadingFallback />
+
   return (
     <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
-      <h3 className="text-xl font-bold text-slate-100 mb-4">Marcas</h3>
-      <ul className="space-y-3">
-        {brands.map((brand, index) => (
-          <li key={brand.name}>
-            <label className="flex items-center gap-3 cursor-pointer group">
-              <input
-                type="checkbox"
-                checked={brand.checked}
-                onChange={() => onClick(index)}
-                className="w-5 h-5 rounded border-slate-600 bg-slate-700 text-cyan-400 focus:ring-cyan-400 focus:ring-offset-0 cursor-pointer"
-              />
-              <span className="text-slate-300 group-hover:text-cyan-400 transition-colors">
-                {brand.name}
-              </span>
-            </label>
-          </li>
-        ))}
-      </ul>
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-xl font-bold text-slate-100">Marcas</h3>
+        {/* ✨ Contador de marcas seleccionadas */}
+        {selectedBrands.length > 0 && (
+          <span className="px-2 py-1 bg-cyan-500 text-white text-xs font-semibold rounded-full">
+            {selectedBrands.length}
+          </span>
+        )}
+      </div>
+
+      {brands && brands.length > 0 ? (
+        <ul className="space-y-3">
+          {brands.map((brand) => {
+            const isSelected = selectedBrands.includes(brand);
+            return (
+              <li key={brand}>
+                <label className="flex items-center gap-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={isSelected}
+                    onChange={() => onToggleBrand(brand)}
+                    className="w-5 h-5 rounded border-slate-600 bg-slate-700 text-cyan-400 focus:ring-cyan-400 focus:ring-offset-0 cursor-pointer"
+                  />
+                  <span
+                    className={`transition-colors ${isSelected
+                        ? "text-cyan-400 font-semibold"
+                        : "text-slate-300 group-hover:text-cyan-400"
+                      }`}
+                  >
+                    {brand}
+                  </span>
+                </label>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p className="text-slate-400 text-sm">No hay marcas disponibles</p>
+      )}
     </div>
   );
 };

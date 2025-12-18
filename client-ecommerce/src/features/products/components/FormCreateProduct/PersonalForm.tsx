@@ -13,11 +13,13 @@ interface CardPersonalProps {
   product: PersonalProps;
   onChangeCreateData: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   setCreateData: React.Dispatch<React.SetStateAction<any>>;
+  getFieldsError: (fieldName: string) => string | undefined;
 }
 
-const PersonalForm: React.FC<CardPersonalProps> = ({ 
-  product, 
-  onChangeCreateData 
+const PersonalForm: React.FC<CardPersonalProps> = ({
+  product,
+  onChangeCreateData,
+  getFieldsError
 }) => {
   return (
     <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
@@ -39,6 +41,10 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
             className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="Ej: Audífonos Inalámbricos Pro X"
           />
+
+          <div className="text-red-500 text-sm mt-1">
+            {getFieldsError?.("name")}
+          </div>
         </div>
 
         <div>
@@ -54,6 +60,10 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
             className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="audifonos-inalambricos-pro-x"
           />
+
+          <div className="text-red-500 text-sm mt-1">
+            {getFieldsError?.("slug")}
+          </div>
         </div>
 
         <div>
@@ -69,6 +79,9 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
             className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all resize-none"
             placeholder="Describe las características principales del producto..."
           />
+          <div className="text-red-500 text-sm mt-0">
+            {getFieldsError?.("description")}
+          </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
@@ -84,6 +97,9 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
               className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
               placeholder="Ej: SoundMax"
             />
+            <div className="text-red-500 text-sm mt-0">
+              {getFieldsError?.("brand")}
+            </div>
           </div>
 
           <div>
@@ -99,6 +115,9 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
               className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
               placeholder="ID de categoría"
             />
+            <div className="text-red-500 text-sm mt-0">
+              {getFieldsError?.("category")}
+            </div>
           </div>
         </div>
       </div>

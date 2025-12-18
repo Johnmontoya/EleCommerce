@@ -1,16 +1,16 @@
-import React, { useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
 interface PaginationProps {
-    totalPages: number
+  totalPages: number,
+  currentPage: number,
+  onPageChange: React.Dispatch<React.SetStateAction<number>>
 }
-const Pagination: React.FC<PaginationProps> = ({ totalPages }) => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage, onPageChange }) => {
 
   return (
     <div className="flex justify-center items-center gap-2">
       <button
-        onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+        onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
         className="p-2 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
       >
@@ -20,22 +20,21 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages }) => {
       {[1, 2, 3, "...", 8].map((page, index) => (
         <button
           key={index}
-          onClick={() => typeof page === "number" && setCurrentPage(page)}
+          onClick={() => typeof page === "number" && onPageChange(page)}
           disabled={page === "..."}
-          className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-            currentPage === page
-              ? "bg-cyan-500 text-white"
-              : page === "..."
+          className={`px-4 py-2 rounded-lg font-semibold transition-all ${currentPage === page
+            ? "bg-cyan-500 text-white"
+            : page === "..."
               ? "text-slate-500 cursor-default"
               : "bg-slate-700 hover:bg-slate-600 text-slate-300"
-          }`}
+            }`}
         >
           {page}
         </button>
       ))}
 
       <button
-        onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+        onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
         className="p-2 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
       >

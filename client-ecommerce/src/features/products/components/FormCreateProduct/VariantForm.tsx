@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BiPlus, BiTag, BiX } from "react-icons/bi";
 import { BsTrash2 } from "react-icons/bs";
+import ButtonAction from "../../../../shared/ui/ButtonAction";
 
 interface Variant {
   name: string;
@@ -18,10 +19,10 @@ interface CardVariantProps {
 }
 
 const VariantForm: React.FC<CardVariantProps> = ({ product, setCreateData }) => {
-const [newVariantName, setNewVariantName] = useState<string>("");
+  const [newVariantName, setNewVariantName] = useState<string>("");
   const [newVariantOption, setNewVariantOption] = useState<string>("");
 
-    const addVariant = () => {
+  const addVariant = () => {
     if (newVariantName.trim()) {
       setCreateData({
         ...product,
@@ -74,14 +75,13 @@ const [newVariantName, setNewVariantName] = useState<string>("");
             className="flex-1 bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="Nombre de variante (Ej: Color, Talla)"
           />
-          <button
-            type="button"
+          <ButtonAction
             onClick={addVariant}
-            className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold transition-all flex items-center gap-2"
+            variant="primary"
+            text="Agregar"
           >
             <BiPlus size={18} />
-            Agregar
-          </button>
+          </ButtonAction>
         </div>
 
         {product.variants.map((variant, variantIndex) => (

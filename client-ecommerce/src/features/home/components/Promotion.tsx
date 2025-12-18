@@ -19,7 +19,7 @@ const Promotion = () => {
         </p>
         <p className="text-xs font-light mb-2 text-cyan-400">AUDIO GEAR</p>
         <h3 className="text-2xl font-bold mb-4">Power Headphones</h3>
-        <button onClick={() => navigate(`/product/1`)} className="border-2 rounded-2xl border-slate-400/40 p-4 text-white text-sm font-medium flex items-center hover:scale-105 hover:bg-slate-500/20 transition-all cursor-pointer">
+        <button onClick={() => navigate(`/products/1`)} className="border-2 rounded-2xl border-slate-400/40 p-4 text-white text-sm font-medium flex items-center hover:scale-105 hover:bg-slate-500/20 transition-all cursor-pointer">
           <p>Comprar Ahora</p>
           <FaArrowRight size={14} className="ml-1" />
         </button>
@@ -42,7 +42,7 @@ const Promotion = () => {
         </p>
         <p className="text-sm font-light mb-2 text-green-400">AUDIO GEAR</p>
         <h3 className="text-2xl font-bold mb-4">HOMEPOD PRO</h3>
-        <button onClick={() => navigate(`/product/2`)} className="border-2 rounded-2xl border-slate-400/40 p-4 text-white text-sm font-medium flex items-center hover:scale-105 hover:bg-slate-500/20 transition-all cursor-pointer">
+        <button onClick={() => navigate(`/products/2`)} className="border-2 rounded-2xl border-slate-400/40 p-4 text-white text-sm font-medium flex items-center hover:scale-105 hover:bg-slate-500/20 transition-all cursor-pointer">
           <p>Comprar Ahora</p>
           <FaArrowRight size={14} className="ml-1" />
         </button>

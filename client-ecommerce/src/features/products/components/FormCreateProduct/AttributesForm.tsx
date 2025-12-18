@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BiBarChart, BiPlus } from "react-icons/bi";
 import { BsTrash2 } from "react-icons/bs";
+import ButtonAction from "../../../../shared/ui/ButtonAction";
 
 interface Attribute {
   name: string;
@@ -73,14 +74,14 @@ const AttributesData: React.FC<CardAttributesProps> = ({
             placeholder="Valor (Ej: 30 horas)"
           />
         </div>
-        <button
-          type="button"
+        <ButtonAction
+          variant="primary"
           onClick={addAttribute}
-          className="w-full bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
+          text="Agregar Atributo"
+          className="w-full flex justify-center"
         >
           <BiPlus size={18} />
-          Agregar Atributo
-        </button>
+        </ButtonAction>
 
         {product.attributes.length > 0 && (
           <div className="space-y-2">

@@ -4,19 +4,19 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from 'embla-carousel-autoplay'
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useBannerSlides } from "../hooks/useBannerSlides";
+import { useBannerProducts } from "../hooks/useShowcase";
+import LoadingFallback from "../../../shared/ui/LoadingFallback";
 
 type PropType = {
     options?: EmblaOptionsType;
-    useLocalData?: boolean; // Nueva prop para controlar origen de datos
 }
 
 const Banner = (props: PropType) => {
-    const { options, useLocalData = true } = props;
+    const { options } = props;
     const [currentSlide, setCurrentSlide] = useState(0);
     
     // Obtener slides (local o API)
-    const { slides, loading, error } = useBannerSlides(useLocalData);
+    const { data: slides, isLoading, error } = useBannerProducts();
     
     // Configurar Autoplay
     const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -45,13 +45,9 @@ const Banner = (props: PropType) => {
     }, [emblaApi])
 
     // Loading state
-    if (loading) {
+    if (isLoading) {
         return (
-            <section className="w-full mx-auto px-4 py-8">
-                <div className="h-[568px] bg-gray-200 rounded-3xl animate-pulse flex items-center justify-center">
-                    <p className="text-gray-500">Loading...</p>
-                </div>
-            </section>
+            <LoadingFallback />
         );
     }
 
@@ -67,7 +63,7 @@ const Banner = (props: PropType) => {
                 <div className="embla overflow-hidden rounded-xl">
                     <div className="embla__viewport" ref={emblaRef}>
                         <div className="embla__container flex">
-                            {slides.map((slide) => (
+                            {slides?.map((slide) => (
                                 <div
                                     key={slide.id} 
                                     className="embla__slide flex-[0_0_100%] min-w-0 relative"
@@ -75,7 +71,7 @@ const Banner = (props: PropType) => {
                                     <div 
                                         className="w-full h-[568px] p-12 text-white relative overflow-hidden"
                                         style={{
-                                            backgroundImage: `url(${slide.imageUrl})`, 
+                                            backgroundImage: `url(${slide.promotionalData?.bannerImageUrl})`, 
                                             backgroundSize: 'cover',
                                             backgroundPosition: 'center'
                                         }}
@@ -84,21 +80,21 @@ const Banner = (props: PropType) => {
                                         <div className="absolute inset-0 bg-black/30" />
                                         
                                         <div className="relative z-10 max-w-xl">
-                                            <p className="text-amber-400 mb-4">Descuento del {slide.discount}% OFF</p>
+                                            <p className="text-amber-400 mb-4">Descuento del {slide.priceDiscount}% OFF</p>
                                             <p className="text-sm font-medium mb-2 uppercase">
-                                                {slide.subtitle}
+                                                {slide.brand}
                                             </p>
                                             <h2 className="text-5xl font-bold mb-4">
-                                                {slide.title}
+                                                {slide.name}
                                             </h2>
                                             <p className="text-blue-200 mb-6">
                                                 {slide.description}
                                             </p>
                                             <Link 
-                                                to={`/products/${slide.id}`}
-                                                className="w-40 flex flex-row items-center gap-2 bg-white text-blue-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition"
+                                                to={`/products/${slide.slug}`}
+                                                className="w-40 flex flex-row justify-center items-center gap-2 bg-white text-blue-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition"
                                             >
-                                                {slide.buttonText}
+                                                {" Comprar"}
                                                 <FaArrowRight size={14} />
                                             </Link>
                                         </div>

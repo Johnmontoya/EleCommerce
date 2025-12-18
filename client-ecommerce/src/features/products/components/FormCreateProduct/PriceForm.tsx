@@ -13,11 +13,13 @@ interface CardPriceProps {
   product: PriceProps;
   onChangeCreateData: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   setCreateData: React.Dispatch<React.SetStateAction<any>>;
+  getFieldsError: (fieldName: string) => string | undefined;
 }
 
 const PriceForm: React.FC<CardPriceProps> = ({
   product,
   onChangeCreateData,
+  getFieldsError
 }) => {
   const calculateFinalPrice = () => {
     const discount = (product.price * product.priceDiscount) / 100;
@@ -47,6 +49,9 @@ const PriceForm: React.FC<CardPriceProps> = ({
             className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="249900"
           />
+          <div className="text-red-500 text-sm mt-0">
+            {getFieldsError?.("price")}
+          </div>
         </div>
 
         <div>
