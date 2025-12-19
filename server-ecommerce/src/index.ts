@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import productRoutes from "./routes/product.routes"
 import showcaseRoutes from "./routes/home.routes"
-
+import categoryRoutes from "./routes/category.routes"
 const app = express();
 
 const corsOptions = {
@@ -19,6 +19,7 @@ app.use(cors(corsOptions));
 
 app.use('/products', productRoutes)
 app.use('/showcase', showcaseRoutes)
+app.use('/categories', categoryRoutes)
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

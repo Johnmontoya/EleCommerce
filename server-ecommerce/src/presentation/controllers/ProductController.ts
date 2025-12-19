@@ -14,7 +14,6 @@ import {
   CreateProductSchema,
   UpdateProductSchema,
 } from "../../infrastructure/validation/Product.schema";
-import { ZodError } from "zod";
 import { handleError } from "../../infrastructure/middlewares/errorHandler";
 
 export interface IAutoCompleteSearch {
