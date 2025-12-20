@@ -1,5 +1,6 @@
 import React from "react";
 import { BiPackage } from "react-icons/bi";
+import { useCategories } from "../../../categories/hook/queries/useCategory";
 
 interface PersonalProps {
   name: string;
@@ -21,6 +22,10 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
   onChangeCreateData,
   getFieldsError
 }) => {
+  const { data: categories } = useCategories();
+
+  console.log("test", categories);
+
   return (
     <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
       <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
@@ -106,15 +111,22 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
             <label className="block text-slate-300 font-semibold mb-2">
               Categoría *
             </label>
-            <input
-              type="text"
+            <select
               name="category"
               value={product.category}
               onChange={onChangeCreateData}
-              required
               className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-              placeholder="ID de categoría"
-            />
+            >
+              <option value="" disabled>
+                {"Seleccione una categoría"}
+              </option>
+              {categories?.map((option) => (
+                <option key={option.id} value={option.id} className="bg-slate-800">
+                  {option.name}
+                </option>
+              ))}
+            </select>
+
             <div className="text-red-500 text-sm mt-0">
               {getFieldsError?.("category")}
             </div>

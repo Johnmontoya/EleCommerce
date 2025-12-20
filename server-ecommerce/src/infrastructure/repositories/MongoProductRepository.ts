@@ -75,7 +75,7 @@ export class MongoProductRepository implements IProductrepository {
 
       console.log('🔍 MongoDB query:', JSON.stringify(query, null, 2));
 
-      const queryBuilder = ProductModel.find(query);
+      const queryBuilder = ProductModel.find(query).populate('category');
 
       if (filters?.limit) {
         console.log('📊 Applying limit:', filters.limit);
@@ -163,7 +163,7 @@ export class MongoProductRepository implements IProductrepository {
 
   private mapToEntity(doc: any): ProductEntity {
     return new ProductEntity(
-      doc._id,
+      doc._id?.toString() || doc.id,
       doc.name,
       doc.slug,
       doc.description,

@@ -1,4 +1,4 @@
-import { BiCreditCard, BiHeart, BiUser } from "react-icons/bi";
+import { BiCategoryAlt, BiCreditCard, BiHeart, BiUser } from "react-icons/bi";
 import { BsTruck } from "react-icons/bs";
 import { CiLock } from "react-icons/ci";
 import { MdDashboard } from "react-icons/md";
@@ -22,4 +22,7 @@ export const menuItems = [
   { name: "Metodos de pago", icon: BiCreditCard, link: 'payments' },
 ];
 
-export const menuAdmin = [{ name: "Lista de Productos", icon: LuPackagePlus, link: "/dashboard/products" }];
+export const menuAdmin = [
+  { name: "Lista de Productos", icon: LuPackagePlus, link: "/dashboard/products" },
+  { name: "Lista de Categorias", icon: BiCategoryAlt, link: "/dashboard/categories" }
+];

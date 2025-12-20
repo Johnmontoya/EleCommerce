@@ -26,7 +26,6 @@ export class GetAllProductsUseCase {
   constructor(private productRepository: IProductrepository) { }
 
   async execute(filters?: ProductFilters): Promise<ProductEntity[]> {
-    console.log('filters', filters);
     return await this.productRepository.findAll(filters);
   }
 }

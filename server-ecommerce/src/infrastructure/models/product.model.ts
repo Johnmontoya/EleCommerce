@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import mongoose, { model, Schema } from "mongoose";
 
 const variantSchema = new Schema({
   name: { type: String, required: true, default: '' },
@@ -41,7 +41,7 @@ const productSchema = new Schema({
   sku: { type: String, required: false },
   barcode: { type: String, required: false },
   brand: { type: String, required: true },
-  category: { type: String, required: true },
+  category: { type: mongoose.Schema.Types.ObjectId, ref: "Category", required: true },
   images: [{ type: String, required: true }],
   tags: [{ type: String, required: true }],
   rating: { type: Number, required: false },
@@ -60,23 +60,23 @@ const productSchema = new Schema({
     enum: ['banner', 'featured', 'trending', 'promotional', 'new-arrival'],
     required: false
   }],
-  displayPriority: { 
-    type: Number, 
+  displayPriority: {
+    type: Number,
     required: false,
     default: 999 // Números bajos = mayor prioridad
   },
-  isFeatured: { 
-    type: Boolean, 
+  isFeatured: {
+    type: Boolean,
     required: false,
-    default: false 
+    default: false
   },
   promotionalData: {
     type: promotionalDataSchema,
     required: false
   },
-  featuredUntil: { 
-    type: Date, 
-    required: false 
+  featuredUntil: {
+    type: Date,
+    required: false
   },
 }, {
   timestamps: true,

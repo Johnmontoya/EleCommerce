@@ -150,6 +150,7 @@ const DashCreateProductPage: React.FC = () => {
       soldCount: 0,
       isPublished: false,
     });
+    setValidationErrors({});
   };
 
   return (

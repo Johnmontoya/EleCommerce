@@ -241,7 +241,7 @@ const DashViewProductPage: React.FC = () => {
                                     <div className="space-y-3">
                                         <div>
                                             <p className="text-slate-400 text-sm">Categoría</p>
-                                            <p className="text-white font-medium">{product.category}</p>
+                                            <p className="text-white font-medium">{product.category.slug}</p>
                                         </div>
                                         <div>
                                             <p className="text-slate-400 text-sm">Marca</p>

@@ -11,6 +11,7 @@ import { useProducts } from "../../hook/queries/useProduct";
 import LoadingFallback from "../../../../shared/ui/LoadingFallback";
 import { useProductFilters } from "../../hook/queries/useProductFilters";
 import { useSearchParams } from "react-router-dom";
+import { useCategories } from "../../../categories/hook/queries/useCategory";
 
 const ListProductsPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,12 +21,14 @@ const ListProductsPage: React.FC = () => {
   const itemsPerPage = 12;
 
   const isInitializedRef = useRef(false);
+  const { data: allCategories } = useCategories();
 
   // 🎯 Usar el hook de filtros
   const {
     filters,
     selectedBrands,
     priceRange,
+    selectedCategoryObj,
     toggleBrand,
     updatePriceRange,
     setCategory,
@@ -41,8 +44,17 @@ const ListProductsPage: React.FC = () => {
       const maxPriceFromUrl = searchParams.get('maxPrice');
       const pageFromUrl = searchParams.get('page');
 
+      console.log("categoryFromUrl", categoryFromUrl)
       // Inicializar filtros desde URL
-      if (categoryFromUrl) setCategory(categoryFromUrl);
+      //if (categoryFromUrl) setCategory(categoryFromUrl);
+      if (categoryFromUrl && allCategories && allCategories.length > 0) {
+        const categoryObj = allCategories?.find(c => c?.id === categoryFromUrl);
+        console.log("categoryObj", categoryObj)
+        if (categoryObj) {
+          setCategory(categoryObj);
+        }
+      }
+
       if (brandsFromUrl) {
         brandsFromUrl.split(',').forEach(brand => toggleBrand(brand));
       }
@@ -118,6 +130,8 @@ const ListProductsPage: React.FC = () => {
     }
   }, [products, sortBy]);
 
+  console.log("asegurando", products)
+
   if (isLoading) return <LoadingFallback />
 
   if (error) return <div>{error.message}</div>
@@ -163,12 +177,12 @@ const ListProductsPage: React.FC = () => {
                 )}
 
                 {/* Chip de categoría */}
-                {filters.category && (
+                {selectedCategoryObj && (
                   <span
                     onClick={() => setCategory(undefined)}
                     className="inline-flex items-center gap-1 px-3 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-full cursor-pointer hover:bg-blue-500/30 transition-colors"
                   >
-                    {filters.category}
+                    {selectedCategoryObj.name}
                     <button className="hover:text-blue-300">×</button>
                   </span>
                 )}

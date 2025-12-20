@@ -18,7 +18,8 @@ const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
         }`}
     >
       <div
-        className={`bg-slate-900/50 flex items-center justify-center overflow-hidden ${viewMode === "list" ? "w-48 shrink-0" : "h-64"
+        onClick={() => navigate(`/products/${product.slug}`)}
+        className={`bg-slate-900/50 flex items-center justify-center overflow-hidden cursor-pointer ${viewMode === "list" ? "w-48 shrink-0" : "h-64"
           }`}
       >
         <img
@@ -27,11 +28,11 @@ const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
         />
       </div>
-      <div className="p-6 flex-1">
-        <h3 className="text-lg font-semibold text-slate-100 mb-3 group-hover:text-cyan-400 transition-colors">
+      <div className="p-6 flex-1 justify-between">
+        <h3 className="h-10 text-lg font-semibold text-slate-100 mb-3 group-hover:text-cyan-400 transition-colors">
           {product.name}
         </h3>
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex h-10 items-center gap-3 mb-4">
           {product.priceDiscount && (
             <span className="text-2xl font-bold text-cyan-400">
               ${Math.round(
@@ -44,7 +45,7 @@ const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
           </span>
         </div>
         <ButtonAction
-          className="w-full flex items-center justify-center"
+          className="w-full h-12 flex items-center justify-center"
           onClick={() => navigate("/cart")}
           text={"Agregar al carrito"}
           variant="primary"

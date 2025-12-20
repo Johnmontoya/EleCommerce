@@ -1,42 +1,33 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { BiEdit, BiPackage, BiPlus, BiSearch } from "react-icons/bi";
-import { BsEye, BsTrash2 } from "react-icons/bs";
-import { GrUpdate } from "react-icons/gr";
-import type { Product } from "../../types/product.types";
-import { useProducts } from "../../hook/queries/useProduct";
-import { useDeleteProductMutation } from "../../hook/mutation/useProductMutation";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
-import Sidebar from "../../../dashboard/components/Sidebar";
-import NavMobile from "../../../dashboard/components/NavMobile";
 import ButtonMobile from "../../../../shared/ui/ButtonMobile";
+import NavMobile from "../../../dashboard/components/NavMobile";
+import Sidebar from "../../../dashboard/components/Sidebar";
+import { BiEdit, BiPackage, BiPlus } from "react-icons/bi";
 import ButtonAction from "../../../../shared/ui/ButtonAction";
+import { useNavigate } from "react-router-dom";
+import { useCategories } from "../../hook/queries/useCategory";
+import { GrUpdate } from "react-icons/gr";
+import { BsEye, BsTrash2 } from "react-icons/bs";
+import type { Category } from "../../type/category.types";
+import { useDeleteCategoryMutation } from "../../hook/mutation/useCategoryMutation";
 
-const DashListProductPage = () => {
+const DashListCategoryPage = () => {
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState<string>("");
-    const [selectedBrand, setSelectedBrand] = useState<string>("");
+    const [selectedCategory, setSelectedCategory] = useState<string | undefined>("");
     const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
-
-    // Queries y mutations
-    const { data: products, refetch } = useProducts({
-        search: searchTerm,
+    const { data: categories, refetch } = useCategories({
         category: selectedCategory || undefined,
     });
 
-    const deleteProduct = useDeleteProductMutation();
+    const deleteCategory = useDeleteCategoryMutation();
 
-    // Filtros disponibles
-    const categories = [...new Set(products?.map(p => p.category) || [])];
-
-    // Handlers
     const handleSelectAll = () => {
-        if (selectedProducts.length === products?.length) {
+        if (selectedProducts.length === categories?.length) {
             setSelectedProducts([]);
         } else {
-            setSelectedProducts(products?.map(p => p.id) || []);
+            setSelectedProducts(categories?.map(p => p.id) || []);
         }
     };
 
@@ -46,26 +37,21 @@ const DashListProductPage = () => {
         );
     };
 
-    const handleDelete = async (product: Product) => {
-        if (window.confirm(`¿Estás seguro de eliminar "${product.name}"?`)) {
-            await deleteProduct.mutateAsync(product.id);
-            refetch();
-        }
-    };
-
     const handleBulkDelete = async () => {
-        if (window.confirm(`¿Eliminar ${selectedProducts.length} productos?`)) {
+        /*if (window.confirm(`¿Eliminar ${selectedProducts.length} productos?`)) {
             for (const id of selectedProducts) {
                 await deleteProduct.mutateAsync(id);
             }
             setSelectedProducts([]);
             refetch();
-        }
+        }*/
     };
 
-    const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        setSearchTerm(e.currentTarget.value)
+    const handleDelete = async (category: Category) => {
+        if (window.confirm(`¿Estás seguro de eliminar "${category.name}"?`)) {
+            await deleteCategory.mutateAsync(category.id);
+            refetch();
+        }
     };
 
     const handleRefresh = async () => {
@@ -73,11 +59,8 @@ const DashListProductPage = () => {
     };
 
     const clearFilters = () => {
-        setSearchTerm("");
         setSelectedCategory("");
-        setSelectedBrand("");
     };
-
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
@@ -104,22 +87,22 @@ const DashListProductPage = () => {
                             <div>
                                 <h1 className="text-2xl lg:text-4xl font-bold text-slate-100 mb-2 flex items-center gap-3">
                                     <BiPackage className="text-cyan-400" size={36} />
-                                    Gestión de Productos
+                                    Gestión de Categorias
                                 </h1>
                                 <p className="text-slate-400">
-                                    {products?.length || 0} productos en total
+                                    {categories?.length || 0} categorias en total
                                 </p>
                             </div>
                             <ButtonAction
-                                text="Nuevo Producto"
+                                text="Nueva Categoria"
                                 variant="primary"
-                                onClick={() => navigate("/dashboard/products/create")}
+                                onClick={() => navigate("/dashboard/categories/create")}
                             >
                                 <BiPlus size={20} />
                             </ButtonAction>
                         </div>
 
-                        {/* Search and Filters */}
+                        {/* List */}
                         <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-6">
                             <div className="flex flex-col lg:flex-row gap-4">
                                 {/* Actualizar */}
@@ -132,32 +115,9 @@ const DashListProductPage = () => {
                                         <GrUpdate size={20} title="Actualizar lista" />
                                     </ButtonAction>
                                 </div>
-                                {/* Search */}
-                                <div className="flex-1 relative">
-                                    <BiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
-                                    <input
-                                        type="text"
-                                        placeholder="Buscar productos..."
-                                        value={searchTerm}
-                                        onChange={handleSearch}
-                                        className="w-full pl-10 pr-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-lg focus:outline-none focus:border-cyan-400"
-                                    />
-                                </div>
-
-                                {/* Category Filter */}
-                                <select
-                                    value={selectedCategory}
-                                    onChange={(e) => setSelectedCategory(e.target.value)}
-                                    className="px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-lg focus:outline-none focus:border-cyan-400 min-w-[200px]"
-                                >
-                                    <option value="">Todas las categorías</option>
-                                    {categories?.map(cat => (
-                                        <option key={cat?.id} value={cat?.id}>{cat?.slug}</option>
-                                    ))}
-                                </select>
 
                                 {/* Clear Filters */}
-                                {(searchTerm || selectedCategory || selectedBrand) && (
+                                {(selectedCategory) && (
                                     <button
                                         onClick={clearFilters}
                                         className="px-4 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
@@ -189,7 +149,7 @@ const DashListProductPage = () => {
                             )}
                         </div>
 
-                        {/* Products Table */}
+                        {/* Table */}
                         <div className="w-[500px] md:w-[420px] lg:w-[680px] xl:w-full 2xl:w-full bg-slate-800/50  backdrop-blur-sm border border-slate-700 rounded-xl overflow-hidden">
                             <div className="overflow-x-auto">
                                 <table className="w-full">
@@ -198,101 +158,72 @@ const DashListProductPage = () => {
                                             <th className="p-4 text-left">
                                                 <input
                                                     type="checkbox"
-                                                    checked={selectedProducts.length === products?.length}
+                                                    checked={selectedProducts.length === categories?.length}
                                                     onChange={handleSelectAll}
                                                     className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-cyan-400 focus:ring-cyan-400 focus:ring-offset-0"
                                                 />
                                             </th>
-                                            <th className="p-4 text-left text-slate-300 font-semibold">Producto</th>
-                                            <th className="p-4 text-left text-slate-300 font-semibold">Categoría</th>
-                                            <th className="p-4 text-left text-slate-300 font-semibold">Precio y descuento</th>
-                                            <th className="p-4 text-left text-slate-300 font-semibold">Stock</th>
+                                            <th className="p-4 text-left text-slate-300 font-semibold">Categoria</th>
+                                            <th className="p-4 text-left text-slate-300 font-semibold">Descripcion</th>
                                             <th className="p-4 text-left text-slate-300 font-semibold">Estado</th>
                                             <th className="p-4 text-center text-slate-300 font-semibold">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {products && products.length > 0 ? (
-                                            products.map((product) => (
-                                                <tr
-                                                    key={product.id}
+                                        {categories && categories?.length > 0 ? (
+                                            categories?.map((category) => (
+                                                <tr key={category.id}
                                                     className="border-b border-slate-700 hover:bg-slate-700/30 transition-colors"
                                                 >
                                                     <td className="p-4">
                                                         <input
                                                             type="checkbox"
-                                                            checked={selectedProducts.includes(product.id)}
-                                                            onChange={() => handleSelectProduct(product.id)}
+                                                            checked={selectedProducts.includes(category.id)}
+                                                            onChange={() => handleSelectProduct(category.id)}
                                                             className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-cyan-400 focus:ring-cyan-400 focus:ring-offset-0"
                                                         />
                                                     </td>
-                                                    <td className="p-4">
+                                                    <td className="p-4 text-slate-300">
                                                         <div className="flex items-center gap-3">
                                                             <img
-                                                                src={product.images?.[0] || "/placeholder.png"}
-                                                                alt={product.name}
+                                                                src={category.image || "/placeholder.png"}
+                                                                alt={category.name}
                                                                 className="w-12 h-12 object-cover rounded-lg border-2 border-slate-600"
                                                             />
                                                             <div>
-                                                                <p className="text-white font-medium">{product.name}</p>
-                                                                <p className="text-sm text-slate-400">{product.brand}</p>
+                                                                <p className="text-white font-medium">{category.name}</p>
+                                                                <p className="text-sm text-slate-400">{category.slug}</p>
                                                             </div>
                                                         </div>
                                                     </td>
+                                                    <td className="p-4 text-slate-300">{category.description}</td>
                                                     <td className="p-4">
-                                                        <span className="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm">
-                                                            {product?.category?.slug}
-                                                        </span>
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <div className="text-white font-semibold">
-                                                            ${Math.round(
-                                                                product.price - (product.price * product.priceDiscount!) / 100
-                                                            )}
-                                                            {product.priceDiscount && (
-                                                                <span className="ml-2 text-sm text-green-400">
-                                                                    {product.priceDiscount}%
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <span className={`font-semibold ${product.stock > 10
-                                                            ? "text-green-400"
-                                                            : product.stock > 0
-                                                                ? "text-yellow-400"
-                                                                : "text-red-400"
-                                                            }`}>
-                                                            {product.stock}
-                                                        </span>
-                                                    </td>
-                                                    <td className="p-4">
-                                                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${product.isPublished
+                                                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${category.isActive
                                                             ? "bg-green-500/20 text-green-400"
                                                             : "bg-gray-500/20 text-gray-400"
                                                             }`}>
-                                                            {product.isPublished ? "Publicado" : "Borrador"}
+                                                            {category.isActive ? "Activo" : "Inactivo"}
                                                         </span>
                                                     </td>
                                                     <td className="p-4">
                                                         <div className="flex items-center justify-center gap-2">
                                                             <ButtonAction
                                                                 variant="outline"
-                                                                onClick={() => navigate(`/dashboard/products/${product.id}`)}
+                                                                onClick={() => navigate(`/dashboard/categories/${category.id}`)}
                                                                 text=""
                                                             >
                                                                 <BsEye size={18} className="text-cyan-400" />
                                                             </ButtonAction>
                                                             <ButtonAction
                                                                 variant="outline"
-                                                                onClick={() => navigate(`/dashboard/products/${product.id}/edit`)}
+                                                                onClick={() => navigate(`/dashboard/categories/${category.id}/edit`)}
                                                                 text=""
                                                             >
                                                                 <BiEdit size={18} className="text-blue-400" />
                                                             </ButtonAction>
                                                             <ButtonAction
                                                                 variant="outline"
-                                                                onClick={() => handleDelete(product)}
+                                                                onClick={() => handleDelete(category)}
                                                                 text=""
                                                             >
                                                                 <BsTrash2 size={18} className="text-red-400" />
@@ -300,11 +231,10 @@ const DashListProductPage = () => {
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            ))
-                                        ) : (
+                                            ))) : (
                                             <tr>
                                                 <td colSpan={7} className="p-12 text-center">
-                                                    <p className="text-slate-400 text-lg">No se encontraron productos</p>
+                                                    <p className="text-slate-400 text-lg">No hay categorias</p>
                                                 </td>
                                             </tr>
                                         )}
@@ -319,4 +249,4 @@ const DashListProductPage = () => {
     );
 };
 
-export default DashListProductPage;
+export default DashListCategoryPage;

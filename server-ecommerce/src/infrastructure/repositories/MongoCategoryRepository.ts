@@ -7,6 +7,7 @@ export class MongoCategoryRepository implements ICategoryRepository {
         try {
             const newCategory = new CategoryModel(category);
             const saved = await newCategory.save();
+            console.log("newCategory", saved)
             return this.mapToEntity(saved);
         } catch (error) {
             throw error;
@@ -59,9 +60,10 @@ export class MongoCategoryRepository implements ICategoryRepository {
 
     private mapToEntity(doc: any): CategoryEntity {
         return new CategoryEntity(
-            doc._id,
+            doc._id?.toString() || doc.id,
             doc.name,
             doc.slug,
+            doc.image,
             doc.isActive,
             doc.description,
             doc.parentId,

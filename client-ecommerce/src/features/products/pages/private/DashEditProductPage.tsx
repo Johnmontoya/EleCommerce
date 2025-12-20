@@ -30,7 +30,7 @@ const DashEditProductPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const updateProduct = useUpdateProductMutation();
-    const { data: product, isLoading } = useProduct(id!);
+    const { data: product } = useProduct(id!);
 
     const [createData, onChangeCreateData, setCreateData] = useInputs({
         name: "",
@@ -100,7 +100,6 @@ const DashEditProductPage: React.FC = () => {
         e?.preventDefault();
 
         setValidationErrors({});
-        console.log(createData);
 
         try {
             await updateProduct.mutateAsync({ id: id!, data: createData });

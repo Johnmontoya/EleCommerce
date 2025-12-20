@@ -1,3 +1,5 @@
+import type { Category } from "../../categories/type/category.types";
+
 export interface TabContent {
   title: string;
   content: string;
@@ -47,7 +49,7 @@ export interface Product {
   price: number;
   stock: number;
   brand: string;
-  category: string;
+  category: Category;
   images?: string[];
   tags?: string[];
   priceDiscount?: number;

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import type { ProductFilters } from "../../types/product.types";
+import type { Category } from "../../../categories/type/category.types";
 
 export const useProductFilters = () => {
     const [filters, setFilters] = useState<ProductFilters>({
@@ -13,6 +14,7 @@ export const useProductFilters = () => {
 
     const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
     const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000000]);
+    const [selectedCategoryObj, setSelectedCategoryObj] = useState<Category | undefined>();
 
     const toggleBrand = (brand: string) => {
         setSelectedBrands(prev => {
@@ -42,8 +44,9 @@ export const useProductFilters = () => {
     };
 
     // Actualizar categoría
-    const setCategory = (category: string | undefined) => {
-        setFilters(f => ({ ...f, category }));
+    const setCategory = (category: Category | undefined) => {
+        setSelectedCategoryObj(category);
+        setFilters(f => ({ ...f, category: category?.id }));
     };
 
     // Actualizar búsqueda
@@ -63,6 +66,7 @@ export const useProductFilters = () => {
         });
         setSelectedBrands([]);
         setPriceRange([0, 1000]);
+        setSelectedCategoryObj(undefined);
     };
 
     // Contar filtros activos
@@ -79,6 +83,7 @@ export const useProductFilters = () => {
         filters,
         selectedBrands,
         priceRange,
+        selectedCategoryObj,
         toggleBrand,
         updatePriceRange,
         setCategory,

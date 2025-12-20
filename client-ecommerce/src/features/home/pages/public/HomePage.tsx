@@ -2,7 +2,7 @@ import type { EmblaOptionsType } from 'embla-carousel'
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react'
 import Banner from '../../components/Banner';
-import Category from '../../components/Category';
+import Category from '../../../categories/components/Category';
 import Promotion from '../../components/Promotion';
 import Trends from '../../../products/components/Trends';
 import ProductShowCase from '../../../products/components/ProductShowCase';
