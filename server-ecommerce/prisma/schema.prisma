@@ -1,0 +1,192 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRESQL_LOCAL")
+}
+
+model User {
+  id            String  @id @default(uuid())
+  email         String  @unique
+  password      String
+  username      String?
+  firstName     String?
+  lastName      String?
+  phone         String?
+  avatar        String?
+  role          String? @default("USER")
+  isActive      Boolean @default(true)
+  emailVerified Boolean @default(false)
+
+  // Relaciones
+  addresses     Address[]
+  orders        Order[]
+  refreshTokens RefreshToken[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@map("refresh_tokens")
+}
+
+model Address {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName  String?
+  phone     String?
+  street    String?
+  city      String?
+  state     String?
+  country   String?
+  zipCode   String?
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("addresses")
+}
+
+model Order {
+  id              String        @id @default(uuid())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id])
+  // Referencias a productos en MongoDB (solo IDs)
+  items           OrderItem[]
+  subtotal        Float
+  tax             Float
+  shippingCost    Float
+  discount        Float         @default(0)
+  total           Float
+  status          OrderStatus   @default(PENDING)
+  paymentStatus   PaymentStatus @default(PENDING)
+  paymentMethod   String?
+  shippingAddress Json // Dirección en JSON
+  billingAddress  Json?
+  trackingNumber  String?
+  notes           String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id           String   @id @default(uuid())
+  orderId      String
+  order        Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  // Referencia a producto en MongoDB
+  productId    String // ID de MongoDB
+  productName  String // Cache del nombre
+  productImage String // Cache de la imagen
+  quantity     Int
+  price        Float
+  discount     Float    @default(0)
+  total        Float
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("order_items")
+}
+
+/**
+ * cart         Cart?
+ * wishlist     Wishlist?
+ * reviews      Review[]
+ * refreshToken RefreshToken[]
+ * model Cart {
+ * id     String @id @default(uuid())
+ * userId String @unique
+ * user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+ * items CartItem[]
+ * createdAt DateTime @default(now())
+ * updatedAt DateTime @updatedAt
+ * @@map("carts")
+ * }
+ * model CartItem {
+ * id     String @id @default(uuid())
+ * cartId String
+ * cart   Cart   @relation(fields: [cartId], references: [id], onDelete: Cascade)
+ * productId String // ID de MongoDB
+ * quantity  Int
+ * createdAt DateTime @default(now())
+ * updatedAt DateTime @updatedAt
+ * @@unique([cartId, productId])
+ * @@map("cart_items")
+ * }
+ * model Wishlist {
+ * id     String @id @default(uuid())
+ * userId String @unique
+ * user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+ * items WishlistItem[]
+ * createdAt DateTime @default(now())
+ * updatedAt DateTime @updatedAt
+ * @@map("wishlists")
+ * }
+ * model WishlistItem {
+ * id         String   @id @default(uuid())
+ * wishlistId String
+ * wishlist   Wishlist @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
+ * productId String // ID de MongoDB
+ * createdAt DateTime @default(now())
+ * @@unique([wishlistId, productId])
+ * @@map("wishlist_items")
+ * }
+ * model Review {
+ * id     String @id @default(uuid())
+ * userId String
+ * user   User   @relation(fields: [userId], references: [id])
+ * productId String // ID de MongoDB
+ * rating  Int // 1-5
+ * title   String?
+ * comment String?
+ * isVerified Boolean @default(false)
+ * createdAt DateTime @default(now())
+ * updatedAt DateTime @updatedAt
+ * @@unique([userId, productId])
+ * @@map("reviews")
+ * }
+ */
+
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}

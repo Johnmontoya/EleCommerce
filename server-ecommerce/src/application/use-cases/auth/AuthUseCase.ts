@@ -1,0 +1,165 @@
+import { UserEntity } from "../../../domain/entities/User";
+import type { IAuthRepository } from "../../../domain/repositories/IAuthRepository";
+import type { HashService } from "../../../infrastructure/services/HashService";
+import type { JwtService } from "../../../infrastructure/services/JwtService";
+import type { AuthResponse, LoginInput, RefreshTokenInput, RegisterInput, UserResponse } from "../../Dto/auth.dto";
+
+
+export class RegisterUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository,
+        private readonly hashService: HashService,
+        private readonly jwtService: JwtService) { }
+
+    async execute(input: RegisterInput): Promise<AuthResponse> {
+        const existingUser = await this.authRepository.findByUserByEmail(input.email);
+        if (existingUser) {
+            throw new Error('El email ya esta registrado');
+        }
+
+        const hashedPassword = await this.hashService.hash(input.password);
+
+
+        const user = await this.authRepository.createUser({
+            id: crypto.randomUUID(),
+            email: input.email,
+            password: hashedPassword,
+            username: input.username,
+            firstName: input.firstName,
+            lastName: input.lastName,
+            phone: input.phone,
+            avatar: input.avatar,
+            role: input.role,
+            isActive: input.isActive,
+            emailVerified: input.emailVerified,
+        });
+
+        const tokens = this.jwtService.generateTokenPair({ userId: user.id, email: user.email, role: user.role });
+
+        const expiresAt = new Date();
+        expiresAt.setDate(expiresAt.getDate() + 7);
+        await this.authRepository.createRefreshToken(user.id, tokens.refreshToken, expiresAt);
+
+        return {
+            user: {
+                id: user.id,
+                email: user.email,
+                username: user.username,
+                role: user.role,
+            }, tokens
+        };
+    }
+}
+
+export class LoginUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository,
+        private readonly hashService: HashService,
+        private readonly jwtService: JwtService) { }
+
+    async execute(input: LoginInput): Promise<AuthResponse> {
+        const user = await this.authRepository.findByUserByEmail(input.email);
+
+        if (!user) {
+            throw new Error('Credenciales invalidas');
+        }
+
+        if (!user.isActive) {
+            throw new Error('Usuario inactivo. Contacta a soporte');
+        }
+
+        const isPasswordValid = await this.hashService.compare(input.password, user.password);
+        if (!isPasswordValid) {
+            throw new Error('Contraseña invalida');
+        }
+
+        const tokens = this.jwtService.generateTokenPair({ userId: user.id, email: user.email, role: user.role });
+
+        const expiresAt = new Date();
+        expiresAt.setDate(expiresAt.getDate() + 7);
+        await this.authRepository.createRefreshToken(user.id, tokens.refreshToken, expiresAt);
+
+        return {
+            user: {
+                id: user.id,
+                email: user.email,
+                username: user.username,
+                role: user.role,
+            }, tokens
+        };
+    }
+}
+
+export class RefreshTokenUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository,
+        private readonly jwtService: JwtService
+    ) { }
+
+    async execute(input: RefreshTokenInput): Promise<{ accessToken: string, refreshToken: string }> {
+        const payload = this.jwtService.verifyRefreshToken(input.refreshToken);
+
+        const tokenData = await this.authRepository.findRefreshToken(input.refreshToken);
+        if (!tokenData) {
+            throw new Error('Refresh Token invalido o expirado');
+        }
+
+        const user = await this.authRepository.findByUserById(payload.userId);
+        if (!user || !user.isActive) {
+            throw new Error('Usuario no encontrado o inactivo');
+        }
+
+        const tokens = this.jwtService.generateTokenPair({ userId: user.id, email: user.email, role: user.role });
+
+        await this.authRepository.deleteRefreshToken(input.refreshToken);
+
+        const expiresAt = new Date();
+        expiresAt.setDate(expiresAt.getDate() + 7);
+        await this.authRepository.createRefreshToken(user.id, tokens.refreshToken, expiresAt);
+
+        return tokens;
+    }
+}
+
+export class LogoutUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository) { }
+
+    async execute(refreshToken: string): Promise<void> {
+        await this.authRepository.deleteRefreshToken(refreshToken);
+    }
+}
+
+export class LogoutAllDevicesUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository) { }
+
+    async execute(userId: string): Promise<void> {
+        await this.authRepository.deleteAllUserRefreshTokens(userId);
+    }
+}
+
+export class GetCurrentUserUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository) { }
+
+    async execute(userId: string): Promise<UserResponse> {
+        const user = await this.authRepository.findByUserById(userId);
+
+        if (!user) {
+            throw new Error('Usuario no encontrado');
+        }
+        return {
+            id: user.id,
+            email: user.email,
+            username: user.username || null,
+            role: user.role || null,
+            firstName: user.firstName || null,
+            lastName: user.lastName || null,
+            phone: user.phone || null,
+            avatar: user.avatar || null,
+            isActive: user.isActive || null,
+            emailVerified: user.emailVerified || null,
+        };
+    }
+}

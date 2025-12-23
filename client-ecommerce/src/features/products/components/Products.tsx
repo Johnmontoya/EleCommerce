@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useProducts } from "../hook/queries/useProduct";
 import LoadingFallback from "../../../shared/ui/LoadingFallback";
+import { BiStar } from "react-icons/bi";
 
 const Products = () => {
   const navigate = useNavigate()
@@ -29,27 +30,50 @@ const Products = () => {
             onClick={() => navigate(`/products/${item.slug}`)}
             className="relative flex w-60 flex-col object-cover overflow-hidden rounded-2xl bg-slate-800/50 border-2 border-slate-700 hover:border-cyan-500/50 drop-shadow-lg/20 drop-shadow-black-500/20 cursor-pointer group"
           >
-            <div className="pb-5">
-              <div className="w-80 h-64">
-                <img src={`${item.images![0]}`} className="w-full h-full group-hover:scale-110 transition-transform duration-300 object-cover" />
+            {item.priceDiscount ? (
+              <div className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-lg text-xs font-bold z-10 shadow-lg">
+                -{item.priceDiscount}%
+              </div>
+            ) : null}
+            <img
+              src={item.images![0]}
+              alt={item.name}
+              className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+            />
+            <div className="flex flex-col justify-between p-4">
+
+              <p className="h-4 text-cyan-400 text-xs font-semibold mb-2 uppercase">
+                {item.category.slug}
+              </p>
+              <h3 className="h-16 text-slate-100 font-bold text-lg mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
+                {item.name}
+              </h3>
+
+              {/* Rating */}
+              <div className="h-8 flex items-center gap-2 mb-3">
+                <div className="flex items-center gap-1">
+                  <BiStar size={14} className="text-amber-400 fill-amber-400" />
+                  <span className="text-slate-300 text-sm font-semibold">
+                    {item.rating}
+                  </span>
+                </div>
+                <span className="text-slate-500 text-xs">
+                  ({item.reviewsCount} reviews)
+                </span>
               </div>
 
-              <h5 className="pt-4 h-10 text-md text-center tracking-tight text-slate-100 font-bold">
-                {item.name}
-              </h5>
-
-              <div className="mt-3 mb-5 flex flex-col items-center justify-center">
-                <p>
-                  <span className="text-xl font-bold text-cyan-400 mr-1">
-                    $
-                    {Math.round(
-                      item.price - (item.price * item.priceDiscount!) / 100
-                    )}
-                  </span>
-                  <span className="text-sm font-extralight text-slate-100 line-through">
+              {/* Price */}
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-2xl font-bold text-cyan-400">
+                  ${Math.round(
+                    item.price - (item.price * item.priceDiscount!) / 100
+                  )}
+                </span>
+                {item.priceDiscount ? (
+                  <span className="text-slate-500 line-through text-sm">
                     ${item.price}
                   </span>
-                </p>
+                ) : null}
               </div>
             </div>
           </div>

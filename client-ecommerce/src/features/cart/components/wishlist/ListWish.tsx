@@ -17,13 +17,13 @@ interface WishlistItem {
 }
 
 interface WishlistItemProps {
-    wishlistItems: WishlistItem[],
-    setWishlistItems: React.Dispatch<React.SetStateAction<any>>;
+  wishlistItems: WishlistItem[],
+  setWishlistItems: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const ListWish: React.FC<WishlistItemProps> = ({ wishlistItems, setWishlistItems }) => {
 
-    const handleRemoveItem = (id: number) => {
+  const handleRemoveItem = (id: number) => {
     setWishlistItems(wishlistItems.filter((item) => item.id !== id));
   };
 
@@ -109,11 +109,11 @@ const ListWish: React.FC<WishlistItemProps> = ({ wishlistItems, setWishlistItems
             <ButtonAction
               onClick={() => handleAddToCart(item.id)}
               text=""
-              variant={ item.inStock ? "primary" : "secondary"}
+              variant={item.inStock ? "primary" : "secondary"}
               disabled={!item.inStock}
               className="w-full flex justify-center"
             >
-              <CiShoppingCart size={18}/>
+              <CiShoppingCart size={18} />
               {item.inStock ? "Agregar al Carrito" : "No Disponible"}
             </ButtonAction>
           </div>
