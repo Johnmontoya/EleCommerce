@@ -7,7 +7,7 @@ import { JwtService } from "../infrastructure/services/JwtService";
 
 // Repositories
 import { PrismaAuthRepository } from "../infrastructure/repositories/PrismaAuthRepository";
-import { GetCurrentUserUseCase, LoginUseCase, LogoutAllDevicesUseCase, LogoutUseCase, RefreshTokenUseCase, RegisterUseCase } from "../application/use-cases/auth/AuthUseCase";
+import { DeleteUserUseCase, GetAllUsersUseCase, GetCurrentUserUseCase, LoginUseCase, LogoutAllDevicesUseCase, LogoutUseCase, RefreshTokenUseCase, RegisterUseCase } from "../application/use-cases/auth/AuthUseCase";
 import { AuthController } from "../presentation/controllers/AuthController";
 
 const router = Router();
@@ -22,6 +22,8 @@ const refreshTokenUseCase = new RefreshTokenUseCase(authRepository, jwtService);
 const logoutUseCase = new LogoutUseCase(authRepository);
 const logoutAllDevicesUseCase = new LogoutAllDevicesUseCase(authRepository);
 const getCurrentUserUseCase = new GetCurrentUserUseCase(authRepository);
+const getAllUsersUseCase = new GetAllUsersUseCase(authRepository);
+const deleteUserUseCase = new DeleteUserUseCase(authRepository);
 
 const authController = new AuthController(
     registerUseCase,
@@ -30,6 +32,8 @@ const authController = new AuthController(
     refreshTokenUseCase,
     logoutUseCase,
     logoutAllDevicesUseCase,
+    getAllUsersUseCase,
+    deleteUserUseCase
 );
 
 router.post('/register', authController.register);
@@ -38,5 +42,8 @@ router.post('/login', authController.login);
 router.post('/refresh-token', authController.refreshToken);
 router.post('/logout', authenticate, authController.logout);
 router.post('/logout-all-devices', authenticate, authController.logoutAllDevices);
+/** Users */
+router.get('/all', authController.getAllUsers);
+router.delete('/delete/:id', authenticate, authorize('ADMIN'), authController.deleteUser);
 
 export default router;

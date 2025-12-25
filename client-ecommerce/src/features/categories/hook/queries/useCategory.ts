@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query"
 import { categoryService } from "../../services/categoryService"
 import { queryKeys } from "../../../../shared/lib/queryClient"
-import type { CategoryFilters } from "../../type/category.types"
+import type { ProductFilters } from "../../../products/types/product.types"
 
-export const useCategories = (filters?: CategoryFilters) => {
+export const useCategories = (filters?: ProductFilters) => {
     return useQuery({
         queryKey: queryKeys.categories.list(filters),
         queryFn: () => categoryService.getAll(filters),

@@ -1,7 +1,7 @@
 import { apiClient } from "../../../shared/api/client";
-import type { ApiResponse } from "../../products/types/product.types";
+import type { ApiResponse, ProductFilters } from "../../products/types/product.types";
 import { endpoints } from "../api/endpoints";
-import type { Category, CategoryFilters } from "../type/category.types";
+import type { Category } from "../type/category.types";
 
 export const categoryService = {
     create: async (category: Partial<Category>): Promise<ApiResponse<Category>> => {
@@ -16,8 +16,11 @@ export const categoryService = {
         const { data } = await apiClient.delete(endpoints.categories.delete(id));
         return data;
     },
-    getAll: async (filters?: CategoryFilters): Promise<ApiResponse<Category[]>> => {
+    getAll: async (filters?: ProductFilters): Promise<ApiResponse<Category[]>> => {
         const { data } = await apiClient.get(endpoints.categories.list);
+        if (filters) {
+            return data;
+        }
         return data;
     },
     getById: async (id: string): Promise<ApiResponse<Category>> => {

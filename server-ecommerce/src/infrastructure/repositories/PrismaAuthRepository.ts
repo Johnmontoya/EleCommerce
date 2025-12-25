@@ -1,7 +1,9 @@
 import type { UserEntity } from "../../domain/entities/User";
-import type { IAuthRepository } from "../../domain/repositories/IAuthRepository";
+import type { IAuthRepository, UsersFilters } from "../../domain/repositories/IAuthRepository";
 import { prisma } from "../../config/prisma";
 import type { CreateUserData } from "../../application/Dto/auth.dto";
+import type { Prisma } from "../../generated/prisma/client";
+import type { UserUpdateInput } from "../../generated/prisma/models";
 
 export class PrismaAuthRepository implements IAuthRepository {
     async createUser(data: CreateUserData): Promise<UserEntity> {
@@ -26,11 +28,8 @@ export class PrismaAuthRepository implements IAuthRepository {
     async findByUserById(id: string): Promise<UserEntity | null> {
         return await prisma.user.findUnique({ where: { id } });
     }
-    /*async updateUser(id: string, data: Partial<UserEntity>): Promise<UserEntity> {
+    /*async updateUser(id: string, data: UserUpdateInput): Promise<UserEntity> {
         return await prisma.user.update({ where: { id }, data });
-    }
-    async deleteUser(id: string): Promise<void> {
-        await prisma.user.delete({ where: { id } });
     }*/
     async createRefreshToken(userId: string, token: string, expiresAt: Date): Promise<void> {
         await prisma.refreshToken.create({
@@ -53,5 +52,50 @@ export class PrismaAuthRepository implements IAuthRepository {
     }
     async deleteAllUserRefreshTokens(userId: string): Promise<void> {
         await prisma.refreshToken.deleteMany({ where: { userId } });
+    }
+    async findAllUsers(filters?: UsersFilters): Promise<UserEntity[]> {
+        const where: Prisma.UserWhereInput = {};
+
+        let take: number = 10;
+        let skip: number = 0;
+
+        if (filters) {
+            if (filters?.isActive !== undefined) {
+                where.isActive = filters.isActive;
+            }
+
+            if (filters?.role !== undefined) {
+                where.role = filters.role;
+            }
+
+            if (filters?.search) {
+                where.OR = [
+                    { username: { contains: filters.search } },
+                    { email: { contains: filters.search } },
+                ];
+            }
+
+            if (filters?.limit !== undefined) {
+                take = parseInt(filters.limit);
+            }
+
+            if (filters?.offset !== undefined) {
+                skip = parseInt(filters.offset);
+            }
+        }
+
+        const queryBuilder = prisma.user.findMany({ where: where, take: take, skip: skip });
+
+        return queryBuilder;
+    }
+
+    async deleteUser(id: string): Promise<boolean> {
+        try {
+            await prisma.user.delete({ where: { id } });
+            return true;
+        } catch (error) {
+            // Si el usuario no existe o hay otro error
+            return false;
+        }
     }
 }

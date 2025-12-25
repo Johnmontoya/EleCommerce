@@ -1,5 +1,5 @@
 import { UserEntity } from "../../../domain/entities/User";
-import type { IAuthRepository } from "../../../domain/repositories/IAuthRepository";
+import type { IAuthRepository, UsersFilters } from "../../../domain/repositories/IAuthRepository";
 import type { HashService } from "../../../infrastructure/services/HashService";
 import type { JwtService } from "../../../infrastructure/services/JwtService";
 import type { AuthResponse, LoginInput, RefreshTokenInput, RegisterInput, UserResponse } from "../../Dto/auth.dto";
@@ -161,5 +161,57 @@ export class GetCurrentUserUseCase {
             isActive: user.isActive || null,
             emailVerified: user.emailVerified || null,
         };
+    }
+}
+
+export class GetAllUsersUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository) { }
+
+    async execute(filters?: UsersFilters): Promise<UserResponse[]> {
+        const users = await this.authRepository.findAllUsers(filters);
+        return users.map((user) => ({
+            id: user.id,
+            email: user.email,
+            username: user.username || null,
+            role: user.role || null,
+            firstName: user.firstName || null,
+            lastName: user.lastName || null,
+            phone: user.phone || null,
+            avatar: user.avatar || null,
+            isActive: user.isActive || null,
+            emailVerified: user.emailVerified || null,
+        }));
+    }
+}
+
+export class DeleteUserUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository) { }
+
+    async execute(id: string, adminId: string): Promise<void> {
+        // Validar que se proporcione un ID
+        if (!id) {
+            throw new Error('ID de usuario requerido');
+        }
+
+        // No permitir que el admin se elimine a sí mismo
+        if (id === adminId) {
+            throw new Error('No puedes eliminar tu propia cuenta');
+        }
+
+        // Verificar que el usuario existe
+        const user = await this.authRepository.findByUserById(id);
+
+        if (!user) {
+            throw new Error('Usuario no encontrado');
+        }
+
+        // Intentar eliminar
+        const deleted = await this.authRepository.deleteUser(id);
+
+        if (!deleted) {
+            throw new Error('Error al eliminar el usuario');
+        }
     }
 }

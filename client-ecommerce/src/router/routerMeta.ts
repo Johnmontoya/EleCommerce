@@ -191,6 +191,26 @@ const routerMeta: RouterMetaType = {
     page: "DashViewCategoryPage",
     requiresLayout: true,
   },
+  DashListUserPage: {
+    name: "ListUser",
+    path: "/dashboard/users",
+    isShow: true,
+    isAuth: false,
+    feature: 'auth',
+    site: 'private',
+    page: "DashListUserPage",
+    requiresLayout: true,
+  },
+  DashCreateUserPage: {
+    name: "CreateUser",
+    path: "/dashboard/users/create",
+    isShow: true,
+    isAuth: false,
+    feature: 'auth',
+    site: 'private',
+    page: "DashCreateUserPage",
+    requiresLayout: true,
+  },
 };
 
 export default routerMeta;

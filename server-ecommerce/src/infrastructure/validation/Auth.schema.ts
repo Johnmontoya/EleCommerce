@@ -61,3 +61,15 @@ export const RefreshTokenSchema = z.object({
     refreshToken: z.string()
         .min(1, 'Refresh token es requerido'),
 });
+
+export const UsersFiltersSchema = z.object({
+    isActive: z.preprocess((value) => {
+        if (value === 'true') return true;
+        if (value === 'false') return false;
+        return value;
+    }, z.boolean().optional()),
+    role: z.enum(['USER', 'ADMIN', 'SUPER_ADMIN'], 'Role inválido').optional(),
+    search: z.string().optional(),
+    limit: z.string().optional(),
+    offset: z.string().optional(),
+});

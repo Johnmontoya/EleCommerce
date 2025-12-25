@@ -1,17 +1,49 @@
 import { useState } from "react";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { CiLogout } from "react-icons/ci";
+import { useAuthRegisterMutation } from "../../hooks/mutation/useAuthMutation";
+import useInputs from "../../../../shared/hooks/useInputs";
+import { AxiosError } from "axios";
+
+interface ValidationErrors {
+  [key: string]: string[];
+}
 
 const RegisterPage = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [rememberMe, setRememberMe] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const authRegister = useAuthRegisterMutation();
+  const [authData, onChangeAuthData] = useInputs({
+    email: "",
+    password: "",
+    username: "",
+    firstName: "",
+    lastName: "",
+    phone: null,
+    avatar: "",
+    role: "USER",
+    isActive: true,
+    emailVerified: false
+  })
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Login attempt:", { email, password, rememberMe });
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
+
+  const handleSubmit = async (e?: React.MouseEvent<HTMLButtonElement>) => {
+    e?.preventDefault();
+    setValidationErrors({});
+    try {
+      await authRegister.mutateAsync(authData);
+      navigate("/login");
+    } catch (error) {
+      if (error instanceof AxiosError && error.response?.data?.errors) {
+        setValidationErrors(error.response.data.errors);
+      }
+    }
+  };
+
+  const getFieldsError = (fieldName: string): string | undefined => {
+    return validationErrors[fieldName]?.[0];
   };
 
   const handleSocialLogin = (provider: string) => {
@@ -36,43 +68,61 @@ const RegisterPage = () => {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form className="space-y-5">
               {/* Username Input */}
               <div>
                 <input
                   type="text"
+                  name="username"
                   placeholder="Nombre de usuario"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={authData.username}
+                  onChange={onChangeAuthData}
                   className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                 />
+                {getFieldsError("username") && (
+                  <p className="text-red-500 text-sm">
+                    {getFieldsError("username")}
+                  </p>
+                )}
               </div>
 
               {/* Email Input */}
               <div>
                 <input
                   type="text"
+                  name="email"
                   placeholder="Correo electrónico"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={authData.email}
+                  onChange={onChangeAuthData}
                   className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                 />
+                {getFieldsError("email") && (
+                  <p className="text-red-500 text-sm">
+                    {getFieldsError("email")}
+                  </p>
+                )}
               </div>
 
               {/* Password Input */}
               <div>
                 <input
                   type="password"
+                  name="password"
                   placeholder="Contraseña"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={authData.password}
+                  onChange={onChangeAuthData}
                   className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                 />
+                {getFieldsError("password") && (
+                  <p className="text-red-500 text-sm">
+                    {getFieldsError("password")}
+                  </p>
+                )}
               </div>
 
               {/* Sign In Button */}
               <ButtonAction
-                onClick={() => { }}
+                onClick={handleSubmit}
                 text="Registrarse"
                 variant="primary"
                 className="w-full flex items-center justify-center"

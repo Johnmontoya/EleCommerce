@@ -42,4 +42,9 @@ export const queryKeys = {
     detail: (id: string) => [...queryKeys.categories.all, 'detail', id] as const,
     bySlug: (slug: string) => [...queryKeys.categories.all, 'slug', slug] as const,
   },
+  user: {
+    all: ['users'] as const,
+    list: (filters?: Record<string, any>) => [...queryKeys.user.all, 'list', filters] as const,
+    detail: (id: string) => [...queryKeys.user.all, 'detail', id] as const,
+  },
 };
