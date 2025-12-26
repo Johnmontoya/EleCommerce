@@ -6,9 +6,11 @@ import RecentOrders from "../../components/RecentOrders";
 import ShippingAddress from "../../components/ShippingAddress";
 import PersonalProfile from "../../components/PersonalProfile";
 import ButtonMobile from "../../../../shared/ui/ButtonMobile";
+import { useAuthStore } from "../../../../features/auth/store/useAuthStore";
 
 const DashboardPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useAuthStore();
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900">
@@ -32,7 +34,7 @@ const DashboardPage: React.FC = () => {
           {/* Profile and Shipping Address */}
           <div className="grid md:grid-cols-2 gap-6">
             {/* Personal Profile */}
-            <PersonalProfile />
+            <PersonalProfile user={user} />
 
             {/* Shipping Address */}
             <ShippingAddress />

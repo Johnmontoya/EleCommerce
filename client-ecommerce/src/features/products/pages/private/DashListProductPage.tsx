@@ -151,8 +151,8 @@ const DashListProductPage = () => {
                                     className="px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-lg focus:outline-none focus:border-cyan-400 min-w-[200px]"
                                 >
                                     <option value="">Todas las categorías</option>
-                                    {categories?.map(cat => (
-                                        <option key={cat?.id} value={cat?.id}>{cat?.slug}</option>
+                                    {categories?.map((cat, index) => (
+                                        <option key={index} value={cat?.id}>{cat?.slug}</option>
                                     ))}
                                 </select>
 

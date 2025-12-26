@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { CiLogin } from "react-icons/ci";
+import { useAuthStore } from "../../store/useAuthStore";
 
 const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  /*const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setProgress(0);
     setLoading(true);
@@ -29,10 +31,40 @@ const LoginPage: React.FC = () => {
 
     setLoading(false);
   };
+*/
+  const { login, isAuthenticated, clearError } = useAuthStore();
+  const from = (location.state as any)?.from?.pathname || '/dashboard';
+
+  // Redirigir si ya está autenticado
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(from, { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
+
+  // Limpiar error al desmontar
+  useEffect(() => {
+    return () => {
+      clearError();
+    };
+  }, [clearError]);
 
   const handleSocialLogin = (provider: string) => {
     console.log(`Login with ${provider}`);
   };
+
+
+
+  const handleSubmit = async (e?: React.MouseEvent<HTMLButtonElement>) => {
+    e?.preventDefault();
+
+    try {
+      const response = await login({ email, password });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900">
@@ -50,7 +82,7 @@ const LoginPage: React.FC = () => {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form className="space-y-5">
               {/* Email Input */}
               <div>
                 <input
@@ -106,7 +138,7 @@ const LoginPage: React.FC = () => {
 
               {/* Sign In Button */}
               <ButtonAction
-                onClick={() => { }}
+                onClick={handleSubmit}
                 text="Iniciar Sesion"
                 variant="primary"
                 className="w-full flex items-center justify-center"

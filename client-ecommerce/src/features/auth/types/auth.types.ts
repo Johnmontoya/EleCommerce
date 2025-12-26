@@ -41,16 +41,25 @@ export interface LogoutResponse {
 }
 
 export interface AuthResponse {
-    user: {
-        id: string;
-        email: string;
-        username: string | null;
-        role: string | null;
-    };
-    tokens: {
-        accessToken: string;
-        refreshToken: string;
-    };
+    data: {
+        user: {
+            id: string;
+            email: string;
+            password: string;
+            username: string | null;
+            role: string | null;
+            firstName: string | null;
+            lastName: string | null;
+            phone: string | null;
+            avatar: string | null;
+            isActive: boolean | null | undefined;
+            emailVerified: boolean | null | undefined;
+        },
+        tokens: {
+            accessToken: string;
+            refreshToken: string;
+        },
+    }
 }
 
 export interface UsersFilters {

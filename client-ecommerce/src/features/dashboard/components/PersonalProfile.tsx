@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { BiEdit, BiPhone, BiUser } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
+import type { User } from "../../auth/types/auth.types";
 
-const PersonalProfile = () => {
+interface UserProps {
+  user: User | null;
+}
+
+const PersonalProfile: React.FC<UserProps> = ({ user }) => {
   const [isEditingProfile, setIsEditingProfile] = useState<boolean>(false);
   return (
     <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
@@ -22,7 +27,7 @@ const PersonalProfile = () => {
           <BiUser size={18} className="text-slate-500 mt-1" />
           <div>
             <p className="text-slate-500 text-sm">Full Name</p>
-            <p className="text-slate-100 font-medium">John Doe</p>
+            <p className="text-slate-100 font-medium">{user?.firstName} {user?.lastName}</p>
           </div>
         </div>
 
@@ -30,7 +35,7 @@ const PersonalProfile = () => {
           <MdEmail size={18} className="text-slate-500 mt-1" />
           <div>
             <p className="text-slate-500 text-sm">Email Address</p>
-            <p className="text-slate-100 font-medium">john.doe@example.com</p>
+            <p className="text-slate-100 font-medium">{user?.email}</p>
           </div>
         </div>
 
@@ -38,7 +43,7 @@ const PersonalProfile = () => {
           <BiPhone size={18} className="text-slate-500 mt-1" />
           <div>
             <p className="text-slate-500 text-sm">Phone</p>
-            <p className="text-slate-100 font-medium">(04) 123 456 7890</p>
+            <p className="text-slate-100 font-medium">{user?.phone}</p>
           </div>
         </div>
       </div>

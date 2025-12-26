@@ -15,15 +15,15 @@ export const navLinksMobile = [
 
 export const menuItems = [
   { name: "Dashboard", icon: MdDashboard, link: '/dashboard' },
-  { name: "Pedidos", icon: CiLock, link: '/orders' },
-  { name: "Rastrear envio", icon: BsTruck, link: 'send' },
-  { name: "Lista de deseos", icon: BiHeart, link: '/listwish', badge: 8 },
-  { name: "Perfil de usuario", icon: BiUser, link: 'profile' },
-  { name: "Metodos de pago", icon: BiCreditCard, link: 'payments' },
+  { name: "Pedidos", icon: CiLock, link: '/dashboard/orders' }, // Agregado /dashboard
+  { name: "Rastrear envio", icon: BsTruck, link: '/dashboard/send' },
+  { name: "Lista de deseos", icon: BiHeart, link: '/dashboard/listwish', badge: 8 },
+  { name: "Perfil de usuario", icon: BiUser, link: '/dashboard/profile' },
+  { name: "Metodos de pago", icon: BiCreditCard, link: '/dashboard/payments' },
 ];
 
 export const menuAdmin = [
-  { name: "Lista de Productos", icon: LuPackagePlus, link: "/dashboard/products" },
+  { name: "Lista de Productos", icon: LuPackagePlus, link: "/dashboard/products", badge: '' },
   { name: "Lista de Categorias", icon: BiCategoryAlt, link: "/dashboard/categories" },
   { name: "Lista de Usuarios", icon: BiUser, link: "/dashboard/users" },
 ];
