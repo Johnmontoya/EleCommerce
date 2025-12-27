@@ -67,6 +67,11 @@ export const productService = {
         return data;
     },
 
+    deleteMany: async (ids: string[]): Promise<ApiResponse<void>> => {
+        const { data } = await apiClient.delete(endpoints.products.deleteMany, { data: { ids } });
+        return data;
+    },
+
     // GET /products/search?term=X
     search: async (
         term: string,

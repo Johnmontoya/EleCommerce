@@ -24,8 +24,6 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
 }) => {
   const { data: categories } = useCategories();
 
-  console.log("test", categories);
-
   return (
     <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
       <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">

@@ -1,5 +1,5 @@
 import { type Request, type Response } from "express";
-import type { CreateCategoryUseCase, DeleteCategoryUseCase, GetAllCategoriesUseCase, GetCategoryByIdUseCase, GetCategoryBySlugUseCase, UpdateCategoryUseCase } from "../../application/use-cases/category/CategoryUseCase";
+import type { CreateCategoryUseCase, DeleteCategoryUseCase, DeleteManyCategoriesUseCase, GetAllCategoriesUseCase, GetCategoryByIdUseCase, GetCategoryBySlugUseCase, UpdateCategoryUseCase } from "../../application/use-cases/category/CategoryUseCase";
 import { CreateCategorySchema, UpdateCategorySchema } from "../../infrastructure/validation/Category.schema";
 import { handleError } from "../../infrastructure/middlewares/errorHandler";
 
@@ -10,7 +10,8 @@ export class CategoryController {
         private deleteCategoryUseCase: DeleteCategoryUseCase,
         private findCategoryUseCase: GetCategoryByIdUseCase,
         private findAllCategoriesUseCase: GetAllCategoriesUseCase,
-        private findBySlugCategoryUseCase: GetCategoryBySlugUseCase
+        private findBySlugCategoryUseCase: GetCategoryBySlugUseCase,
+        private deleteManyCategoriesUseCase: DeleteManyCategoriesUseCase
     ) { }
 
     createCategory = async (req: Request, res: Response): Promise<void> => {
@@ -125,6 +126,30 @@ export class CategoryController {
                 success: true,
                 data: category,
                 message: "Categoria eliminada correctamente"
+            });
+        } catch (error) {
+            handleError(error, res);
+        }
+    }
+
+    deleteManyCategories = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { ids } = req.body;
+            console.log(ids);
+            const categories = await this.deleteManyCategoriesUseCase.execute(ids);
+
+            if (!categories) {
+                res.status(404).json({
+                    success: false,
+                    message: "Categorias no encontradas"
+                });
+                return;
+            }
+
+            res.status(200).json({
+                success: true,
+                data: categories,
+                message: "Categorias eliminadas correctamente"
             });
         } catch (error) {
             handleError(error, res);

@@ -5,20 +5,17 @@ import { CiEraser } from "react-icons/ci";
 
 interface HeaderActionProps {
     isSubmitting: boolean;
-    setUserData: React.Dispatch<React.SetStateAction<any>>;
     handleSubmit: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+    handleReset?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+    title?: string;
 }
-const HeaderAction: React.FC<HeaderActionProps> = ({ isSubmitting, setUserData, handleSubmit }) => {
-    const handleReset = (e?: React.MouseEvent<HTMLButtonElement>) => {
-        e?.preventDefault();
-        setUserData({});
-    };
+const HeaderAction: React.FC<HeaderActionProps> = ({ isSubmitting, handleSubmit, handleReset, title }) => {
 
     return (
         <div className="flex items-center justify-between my-5 lg:-mt-5">
             <div>
                 <p className="text-slate-400">
-                    Completa la información del usuario
+                    Completa la información del {title}
                 </p>
             </div>
             <div className="flex gap-3">

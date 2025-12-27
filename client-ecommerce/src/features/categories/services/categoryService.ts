@@ -16,6 +16,10 @@ export const categoryService = {
         const { data } = await apiClient.delete(endpoints.categories.delete(id));
         return data;
     },
+    deleteMany: async (ids: string[]): Promise<ApiResponse<void>> => {
+        const { data } = await apiClient.delete(endpoints.categories.deleteMany, { data: { ids } });
+        return data;
+    },
     getAll: async (filters?: ProductFilters): Promise<ApiResponse<Category[]>> => {
         const { data } = await apiClient.get(endpoints.categories.list);
         if (filters) {

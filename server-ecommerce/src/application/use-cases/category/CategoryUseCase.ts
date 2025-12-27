@@ -56,6 +56,14 @@ export class DeleteCategoryUseCase {
     }
 }
 
+export class DeleteManyCategoriesUseCase {
+    constructor(private readonly categoryRepository: ICategoryRepository) { }
+
+    async execute(ids: string[]): Promise<boolean> {
+        return await this.categoryRepository.deleteMany(ids);
+    }
+}
+
 export class GetCategoryBySlugUseCase {
     constructor(private readonly categoryRepository: ICategoryRepository) { }
 

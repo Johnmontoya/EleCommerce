@@ -4,7 +4,7 @@ interface ButtonProps {
   className?: string;
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   children: ReactNode;
-  variant: "primary" | "secondary" | "danger" | "outline" | "edit" | "delete";
+  variant: "primary" | "secondary" | "danger" | "outline" | "edit" | "delete" | "view";
   text: string;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
@@ -27,8 +27,9 @@ const ButtonAction: React.FC<ButtonProps> = ({
     danger:
       "bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 shadow-red-500/50 shadow-lg",
     outline: "shadow-lg",
-    edit: "bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 p-1 rounded-lg transition-all",
-    delete: "bg-red-500/20 hover:bg-red-500/30 text-red-400 p-1 rounded-lg transition-all"
+    edit: "bg-cyan-600 hover:bg-cyan-500/30 text-cyan-400 p-1 rounded-lg transition-all",
+    delete: "bg-red-500/80 hover:bg-red-500/30 text-red-400 p-1 rounded-lg transition-all",
+    view: "bg-slate-700/50 text-slate-400 border-slate-500/30 p-1 rounded-lg transition-all"
   };
 
   const colorClasses = variantClasses[variant] || variantClasses.primary;

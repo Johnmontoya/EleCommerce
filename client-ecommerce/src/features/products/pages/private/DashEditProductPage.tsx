@@ -3,12 +3,11 @@ import { useParams } from "react-router-dom";
 import { useUpdateProductMutation } from "../../hook/mutation/useProductMutation";
 import useInputs from "../../../../shared/hooks/useInputs";
 import PersonalForm from "../../components/FormCreateProduct/PersonalForm";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
 import ButtonMobile from "../../../../shared/ui/ButtonMobile";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
 import Sidebar from "../../../dashboard/components/Sidebar";
 import NavMobile from "../../../dashboard/components/NavMobile";
-import { BiPackage, BiSave } from "react-icons/bi";
+import { BiPackage } from "react-icons/bi";
 import { useProduct } from "../../hook/queries/useProduct";
 import { AxiosError } from "axios";
 import PriceForm from "../../components/FormCreateProduct/PriceForm";
@@ -21,6 +20,8 @@ import DigitalForm from "../../components/FormCreateProduct/DigitalForm";
 import ShippingForm from "../../components/FormCreateProduct/ShippingForm";
 import StatisticsForm from "../../components/FormCreateProduct/StatisticsForm";
 import PublishForm from "../../components/FormCreateProduct/PublishForm";
+import DashHeader from "../../../../shared/ui/DashHeader";
+import HeaderAction from "../../../auth/components/UserCreate/HeaderAction";
 
 interface ValidationErrors {
     [key: string]: string[];
@@ -29,6 +30,7 @@ interface ValidationErrors {
 const DashEditProductPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const updateProduct = useUpdateProductMutation();
     const { data: product } = useProduct(id!);
 
@@ -98,7 +100,7 @@ const DashEditProductPage: React.FC = () => {
 
     const handleSubmit = async (e?: React.MouseEvent<HTMLButtonElement>) => {
         e?.preventDefault();
-
+        setIsSubmitting(true);
         setValidationErrors({});
 
         try {
@@ -107,6 +109,8 @@ const DashEditProductPage: React.FC = () => {
             if (error instanceof AxiosError && error.response?.data?.errors) {
                 setValidationErrors(error.response.data.errors);
             }
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -138,26 +142,8 @@ const DashEditProductPage: React.FC = () => {
                         />
 
                         {/* Header */}
-                        <div className="flex items-center justify-between mb-4">
-                            <div>
-                                <h1 className="text-2xl lg:text-4xl font-bold text-slate-100 mb-2 flex items-center gap-3">
-                                    <BiPackage className="text-cyan-400" size={36} />
-                                    Actualizar Producto
-                                </h1>
-                                <p className="text-slate-400">
-                                    Edita la información del producto
-                                </p>
-                            </div>
-                            <div className="flex flex-col lg:flex-row gap-3">
-                                <ButtonAction
-                                    onClick={handleSubmit}
-                                    text={"Actualizar"}
-                                    variant="primary"
-                                >
-                                    <BiSave size={18} />
-                                </ButtonAction>
-                            </div>
-                        </div>
+                        <DashHeader data={[]} title="Editar Producto" titleData="Productos" path="products" titleIcon={<BiPackage className="text-cyan-400" size={36} />} list={false} />
+                        <HeaderAction isSubmitting={isSubmitting} handleSubmit={handleSubmit} title="producto" />
 
                         <form>
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

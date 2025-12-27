@@ -64,18 +64,20 @@ const UserRow: React.FC<UserRowProps> = ({ user, selectedData, handleSelectData 
                 </label>
             </td>
             <td className="px-6 py-4">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center justify-start gap-3">
                     <img
                         src={user?.avatar || "https://via.placeholder.com/40"}
                         alt={user?.username || "User"}
                         className="w-10 h-10 rounded-full object-cover border-2 border-slate-600"
                     />
-                    <div>
+                    <div className="text-left">
                         <p className="text-slate-100 font-semibold">
                             {user?.firstName} {user?.lastName}
                         </p>
                         <p className="text-slate-400 text-xs">
-                            @{user?.username}
+                            @{user?.username && user.username.length > 20
+                                ? `${user.username.substring(0, 20)}...`
+                                : user.username}
                         </p>
                     </div>
                 </div>

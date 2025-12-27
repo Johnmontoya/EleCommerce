@@ -6,6 +6,7 @@ export interface IProductrepository {
   findAll(filters?: ProductFilters): Promise<ProductEntity[]>;
   update(id: string, product: Partial<ProductEntity>): Promise<ProductEntity | null>;
   delete(id: string): Promise<boolean>;
+  deleteMany(ids: string[]): Promise<boolean>;
   findBySlug(slug: string): Promise<ProductEntity | null>;
   findByCategory(category: string): Promise<ProductEntity[]>;
   findByBrand(brand: string): Promise<ProductEntity[]>;

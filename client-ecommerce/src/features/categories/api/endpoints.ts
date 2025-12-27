@@ -5,6 +5,7 @@ export const endpoints = {
         create: '/categories/categories',
         update: (id: string) => `/categories/categories/${id}`,
         delete: (id: string) => `/categories/categories/${id}`,
+        deleteMany: '/categories/categories',
         bySlug: (slug: string) => `/categories/categories/slug/${slug}`,
     }
 }

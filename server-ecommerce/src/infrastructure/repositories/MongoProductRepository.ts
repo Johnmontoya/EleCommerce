@@ -129,6 +129,18 @@ export class MongoProductRepository implements IProductrepository {
     }
   }
 
+  async deleteMany(ids: string[]): Promise<boolean> {
+    try {
+      console.log('Deleting products:', ids);
+      const result = await ProductModel.deleteMany({ _id: { $in: ids } });
+      console.log('Products deleted:', result);
+      return result.deletedCount > 0;
+    } catch (error) {
+      console.error('Error deleting products:', error);
+      throw error;
+    }
+  }
+
   async findBySlug(slug: string): Promise<ProductEntity | null> {
     try {
       console.log('Finding product by slug:', slug);

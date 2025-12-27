@@ -8,9 +8,10 @@ import Sidebar from "../../../dashboard/components/Sidebar";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
 import NavMobile from "../../../dashboard/components/NavMobile";
 import ButtonMobile from "../../../../shared/ui/ButtonMobile";
-import { BiCategory, BiSave } from "react-icons/bi";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
+import { BiCategory } from "react-icons/bi";
 import FormCategory from "../../components/FormCreateCategory/FormCategory";
+import DashHeader from "../../../../shared/ui/DashHeader";
+import HeaderAction from "../../../auth/components/UserCreate/HeaderAction";
 
 interface ValidationErrors {
     [key: string]: string[];
@@ -19,6 +20,7 @@ interface ValidationErrors {
 const DashEditCategoryPage = () => {
     const { id } = useParams<{ id: string }>();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const updateProduct = useUpdateCategoryMutation();
     const { data: category } = useCategory(id!);
 
@@ -44,7 +46,7 @@ const DashEditCategoryPage = () => {
 
     const handleSubmit = async (e?: React.MouseEvent<HTMLButtonElement>) => {
         e?.preventDefault();
-
+        setIsSubmitting(true);
         setValidationErrors({});
 
         try {
@@ -53,6 +55,8 @@ const DashEditCategoryPage = () => {
             if (error instanceof AxiosError && error.response?.data?.errors) {
                 setValidationErrors(error.response.data.errors);
             }
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -84,26 +88,15 @@ const DashEditCategoryPage = () => {
                         />
 
                         {/* Header */}
-                        <div className="flex items-center justify-between mb-4">
-                            <div>
-                                <h1 className="text-2xl lg:text-4xl font-bold text-slate-100 mb-2 flex items-center gap-3">
-                                    <BiCategory className="text-cyan-400" size={36} />
-                                    Actualizar Categoría
-                                </h1>
-                                <p className="text-slate-400">
-                                    Edita la información de la categoría
-                                </p>
-                            </div>
-                            <div className="flex flex-col lg:flex-row gap-3">
-                                <ButtonAction
-                                    onClick={handleSubmit}
-                                    text={"Actualizar"}
-                                    variant="primary"
-                                >
-                                    <BiSave size={18} />
-                                </ButtonAction>
-                            </div>
-                        </div>
+                        <DashHeader
+                            data={[]}
+                            title="Editar Categoría"
+                            titleData="Categorías"
+                            path="categories"
+                            titleIcon={<BiCategory className="text-cyan-400" size={36} />}
+                            list={false}
+                        />
+                        <HeaderAction isSubmitting={isSubmitting} handleSubmit={handleSubmit} title="categoria" />
 
                         <form>
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

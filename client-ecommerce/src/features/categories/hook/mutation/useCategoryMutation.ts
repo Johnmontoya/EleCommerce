@@ -10,7 +10,7 @@ export const useCreateCategoryMutation = () => {
     return useMutation({
         mutationFn: (category: Category) => categoryService.create(category),
         onSuccess: (response: any) => {
-            queryClient.invalidateQueries({ queryKey: queryKeys.categories.list() });
+            queryClient.invalidateQueries({ queryKey: ['categories'] });
 
             toast.success(response.message || "Categoria creada exitosamente");
         },
@@ -26,11 +26,11 @@ export const useUpdateCategoryMutation = () => {
     return useMutation({
         mutationFn: ({ id, data }: { id: string, data: Partial<Category> }) => categoryService.update(id, data),
         onSuccess: (response, variables) => {
-            queryClient.invalidateQueries({ queryKey: queryKeys.categories.list() });
+            queryClient.invalidateQueries({ queryKey: ['categories'] });
 
             //Invalidar el detalle del producto
             queryClient.invalidateQueries({
-                queryKey: queryKeys.categories.detail(variables.id)
+                queryKey: ['categories', variables.id]
             })
 
             queryClient.setQueryData(
@@ -51,16 +51,29 @@ export const useDeleteCategoryMutation = () => {
 
     return useMutation({
         mutationFn: (id: string) => categoryService.delete(id),
-        onSuccess: (response, deleteId) => {
-            queryClient.invalidateQueries({ queryKey: queryKeys.categories.list() });
-
-            //Remover el cache de un producto individual
-            queryClient.removeQueries({ queryKey: queryKeys.categories.detail(deleteId) });
+        onSuccess: (response) => {
+            queryClient.invalidateQueries({ queryKey: ['categories'] });
 
             toast.success(response.message || "Producto eliminado exitosamente");
         },
         onError: (error: any) => {
             toast.error(error.response?.data.message || "Error al eliminar el producto");
+        }
+    })
+}
+
+export const useDeleteManyCategoryMutation = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (ids: string[]) => categoryService.deleteMany(ids),
+        onSuccess: (response) => {
+            queryClient.invalidateQueries({ queryKey: ['categories'] });
+
+            toast.success(response.message || "Productos eliminados exitosamente");
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data.message || "Error al eliminar los productos");
         }
     })
 }

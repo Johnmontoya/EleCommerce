@@ -9,5 +9,6 @@ export const endpoints = {
         create: '/products/products',
         update: (id: string) => `/products/products/${id}`,
         delete: (id: string) => `/products/products/${id}`,
+        deleteMany: '/products/products',
     }
 }

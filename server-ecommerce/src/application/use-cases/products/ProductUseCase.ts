@@ -72,6 +72,14 @@ export class DeleteProductUseCase {
   }
 }
 
+export class DeleteManyProductsUseCase {
+  constructor(private productRepository: IProductrepository) { }
+
+  async execute(ids: string[]): Promise<boolean> {
+    return await this.productRepository.deleteMany(ids);
+  }
+}
+
 export class GetProductBySlugUseCase {
   constructor(private productRepository: IProductrepository) { }
 

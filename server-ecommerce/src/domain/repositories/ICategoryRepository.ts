@@ -6,5 +6,6 @@ export interface ICategoryRepository {
     findAll(): Promise<CategoryEntity[]>;
     update(id: string, category: Partial<CategoryEntity>): Promise<CategoryEntity | null>;
     delete(id: string): Promise<boolean>;
+    deleteMany(ids: string[]): Promise<boolean>;
     findBySlug(slug: string): Promise<CategoryEntity | null>;
 }

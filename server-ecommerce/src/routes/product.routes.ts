@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ProductController } from "../presentation/controllers/ProductController";
-import { CreateProductUseCase, GetProductByIdUseCase, GetAllProductsUseCase, UpdateProductUseCase, GetProductBySlugUseCase, SearchProductsAutoCompleteUseCase, GetProductsByCategoryUseCase, GetProductsByBrandUseCase, DeleteProductUseCase } from "../application/use-cases/products/ProductUseCase";
+import { CreateProductUseCase, GetProductByIdUseCase, GetAllProductsUseCase, UpdateProductUseCase, GetProductBySlugUseCase, SearchProductsAutoCompleteUseCase, GetProductsByCategoryUseCase, GetProductsByBrandUseCase, DeleteProductUseCase, DeleteManyProductsUseCase } from "../application/use-cases/products/ProductUseCase";
 import { MongoProductRepository } from "../infrastructure/repositories/MongoProductRepository";
 
 const router = Router();
@@ -16,6 +16,7 @@ const searchProductsAutoCompleteUseCase = new SearchProductsAutoCompleteUseCase(
 const getProductByCategoryUseCase = new GetProductsByCategoryUseCase(productRepository);
 const getProductByBrandUseCase = new GetProductsByBrandUseCase(productRepository);
 const deleteProductUseCase = new DeleteProductUseCase(productRepository);
+const deleteManyProductsUseCase = new DeleteManyProductsUseCase(productRepository);
 
 const productController = new ProductController(
     createProductUseCase,
@@ -26,6 +27,7 @@ const productController = new ProductController(
     getProductByCategoryUseCase,
     getProductByBrandUseCase,
     deleteProductUseCase,
+    deleteManyProductsUseCase,
     searchProductsAutoCompleteUseCase,
 )
 
@@ -38,5 +40,6 @@ router.get('/products/brand/:brand', productController.getByBrand);
 router.get('/products/:id', productController.getIdProduct);
 router.put('/products/:id', productController.updateProduct);
 router.delete('/products/:id', productController.delete);
+router.delete('/products', productController.deleteMany);
 
 export default router;

@@ -9,6 +9,7 @@ import type {
   GetProductsByCategoryUseCase,
   GetProductsByBrandUseCase,
   DeleteProductUseCase,
+  DeleteManyProductsUseCase,
 } from "../../application/use-cases/products/ProductUseCase";
 import {
   CreateProductSchema,
@@ -31,6 +32,7 @@ export class ProductController {
     private getProductByCategoryUseCase: GetProductsByCategoryUseCase,
     private getProductByBrandUseCase: GetProductsByBrandUseCase,
     private deleteProductUseCase: DeleteProductUseCase,
+    private deleteManyProductsUseCase: DeleteManyProductsUseCase,
     private searchProductsAutoCompleteUseCase: SearchProductsAutoCompleteUseCase
   ) { }
 
@@ -279,6 +281,36 @@ export class ProductController {
       }
 
       const product = await this.deleteProductUseCase.execute(id!);
+
+      if (!product) {
+        res.status(404).json({
+          success: false,
+          message: "Producto no encontrado",
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        data: product,
+      });
+    } catch (error) {
+      handleError(error, res);
+    }
+  };
+
+  deleteMany = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { ids } = req.body;
+
+      if (!ids) {
+        res.status(400).json({
+          success: false,
+          message: "IDs son requeridos",
+        });
+      }
+
+      const product = await this.deleteManyProductsUseCase.execute(ids);
 
       if (!product) {
         res.status(404).json({

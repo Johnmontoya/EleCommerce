@@ -71,6 +71,11 @@ const DashCreateUserPage = () => {
         }
     };
 
+    const handleReset = () => {
+        setUserData({});
+        setValidationErrors({});
+    };
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
             <div className="flex">
@@ -95,7 +100,7 @@ const DashCreateUserPage = () => {
 
                         {/* Header */}
                         <DashHeader data={[]} title="Crear Nuevo Usuario" titleData="Usuarios" path="users" titleIcon={<BiUser className="text-cyan-400" size={36} />} list={false} />
-                        <HeaderAction isSubmitting={isSubmitting} setUserData={setUserData} handleSubmit={handleSubmit} />
+                        <HeaderAction isSubmitting={isSubmitting} setUserData={setUserData} handleSubmit={handleSubmit} handleReset={handleReset} />
 
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                             <div className="lg:col-span-2 space-y-6">

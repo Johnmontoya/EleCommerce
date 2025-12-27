@@ -11,10 +11,12 @@ import { useState } from "react";
 import { MdDashboard, MdOutlineLightMode } from "react-icons/md";
 import ButtonAction from "./ButtonAction";
 import { SearchModal } from "../../features/search/components/SearchModal";
+import { useAuthStore } from "../../features/auth/store/useAuthStore";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const { user } = useAuthStore();
 
   return (
     <>
@@ -42,24 +44,27 @@ const Navbar = () => {
               <button className="cursor-pointer">
                 <MdOutlineLightMode size={24} />
               </button>
-              <ButtonAction
-                onClick={() => navigate("/login")}
-                text="Login"
-                variant="primary"
-                className="py-2"
-                type="button"
-              >
-                <CiLogin size={18} />
-              </ButtonAction>
-              <ButtonAction
-                onClick={() => navigate("/dashboard")}
-                text="Dashboard"
-                variant="primary"
-                className="py-2"
-                type="button"
-              >
-                <MdDashboard size={18} />
-              </ButtonAction>
+              {user ? (
+                <ButtonAction
+                  onClick={() => navigate("/dashboard")}
+                  text="Dashboard"
+                  variant="primary"
+                  className="py-2"
+                  type="button"
+                >
+                  <MdDashboard size={18} />
+                </ButtonAction>
+              ) : (
+                <ButtonAction
+                  onClick={() => navigate("/login")}
+                  text="Login"
+                  variant="primary"
+                  className="py-2"
+                  type="button"
+                >
+                  <CiLogin size={18} />
+                </ButtonAction>
+              )}
             </div>
           </div>
         </nav>

@@ -52,16 +52,29 @@ export const useDeleteProductMutation = () => {
 
     return useMutation({
         mutationFn: (id: string) => productService.delete(id),
-        onSuccess: (response, deleteId) => {
-            queryClient.invalidateQueries({ queryKey: queryKeys.products.list() });
-
-            //Remover el cache de un producto individual
-            queryClient.removeQueries({ queryKey: queryKeys.products.detail(deleteId) });
+        onSuccess: (response) => {
+            queryClient.invalidateQueries({ queryKey: ['products'] });
 
             toast.success(response.message || "Producto eliminado exitosamente");
         },
         onError: (error: any) => {
             toast.error(error.response?.data.message || "Error al eliminar el producto");
+        }
+    })
+}
+
+export const useDeleteManyProductsMutation = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (ids: string[]) => productService.deleteMany(ids),
+        onSuccess: (response) => {
+            queryClient.invalidateQueries({ queryKey: ['products'] });
+
+            toast.success(response.message || "Productos eliminados exitosamente");
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data.message || "Error al eliminar los productos");
         }
     })
 }

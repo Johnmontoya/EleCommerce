@@ -49,6 +49,15 @@ export class MongoCategoryRepository implements ICategoryRepository {
         }
     }
 
+    async deleteMany(ids: string[]): Promise<boolean> {
+        try {
+            const deleted = await CategoryModel.deleteMany({ _id: { $in: ids } });
+            return deleted.deletedCount > 0;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     async findBySlug(slug: string): Promise<CategoryEntity | null> {
         try {
             const category = await CategoryModel.findOne({ slug });
