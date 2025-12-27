@@ -8,7 +8,7 @@ import NavMobile from "../../../dashboard/components/NavMobile";
 import ButtonMobile from "../../../../shared/ui/ButtonMobile";
 import DashHeader from "../../../../shared/ui/DashHeader";
 import BulkAction from "../../../../shared/ui/BulkAction";
-import { useDataActions } from "../../../../shared/hooks/useDataActions";
+import { useDataActions } from "../../hooks/useDataActions";
 import UserFilters from "../../components/ListUser/UserFilters";
 import { BiUser } from "react-icons/bi";
 

@@ -11,7 +11,7 @@ export const useCreateProductMutation = () => {
     return useMutation({
         mutationFn: (product: Partial<Product>) => productService.create(product),
         onSuccess: (response: any) => {
-            queryClient.invalidateQueries({ queryKey: queryKeys.products.list() });
+            queryClient.invalidateQueries({ queryKey: ['products'] });
 
             toast.success(response.message || "Producto creado exitosamente");
         },
@@ -27,11 +27,11 @@ export const useUpdateProductMutation = () => {
     return useMutation({
         mutationFn: ({ id, data }: { id: string, data: Partial<Product> }) => productService.update(id, data),
         onSuccess: (response, variables) => {
-            queryClient.invalidateQueries({ queryKey: queryKeys.products.list() });
+            queryClient.invalidateQueries({ queryKey: ['products'] });
 
             //Invalidar el detalle del producto
             queryClient.invalidateQueries({
-                queryKey: queryKeys.products.detail(variables.id)
+                queryKey: ['products', variables.id]
             })
 
             queryClient.setQueryData(

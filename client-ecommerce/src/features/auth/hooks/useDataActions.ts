@@ -1,4 +1,10 @@
+import { useDeleteUsersMutation } from "./mutation/useAuthMutation";
+import { useAuthStore } from "../store/useAuthStore";
+
 export const useDataActions = (Data: any[] | undefined, selectedData: string[], setSelectedData: React.Dispatch<React.SetStateAction<string[]>>) => {
+    const deleteSelectMutation = useDeleteUsersMutation();
+    const { accessToken } = useAuthStore();
+
     const handleSelectAll = () => {
         if (!Data) return;
         if (selectedData.length === Data.length) {
@@ -17,11 +23,8 @@ export const useDataActions = (Data: any[] | undefined, selectedData: string[], 
     };
 
     const handleBulkDelete = () => {
-        if (
-            confirm(
-                `¿Estás seguro de eliminar ${selectedData.length} usuario(s)?`
-            )
-        ) {
+        if (confirm(`¿Estás seguro de eliminar ${selectedData.length} usuario(s)?`)) {
+            deleteSelectMutation.mutateAsync({ ids: selectedData, adminToken: accessToken! });
             setSelectedData([]);
         }
     };

@@ -11,3 +11,12 @@ export const useUsers = (filters?: UsersFilters) => {
         staleTime: 2 * 60 * 1000,
     })
 }
+
+export const useUser = (id: string) => {
+    return useQuery({
+        queryKey: queryKeys.user.detail(id),
+        queryFn: () => authService.getUser(id),
+        select: (response) => response.data,
+        staleTime: 2 * 60 * 1000,
+    })
+}

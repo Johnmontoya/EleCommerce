@@ -5,8 +5,10 @@ export interface IAuthRepository {
     createUser(data: UserEntity): Promise<UserEntity>;
     findByUserByEmail: (email: string) => Promise<UserEntity | null>;
     findByUserById: (id: string) => Promise<UserEntity | null>;
-    //updateUser: (id: string, data: UserUpdateInput) => Promise<UserEntity>;
+    updateUser: (id: string, data: UserUpdateInput) => Promise<UserEntity>;
+    toogleActiveUser: (id: string) => Promise<boolean>;
     deleteUser: (id: string) => Promise<boolean>;
+    deleteUsers: (ids: string[]) => Promise<boolean>;
 
     //Refresh tokens
     createRefreshToken: (userId: string, token: string, expiresAt: Date) => Promise<void>;

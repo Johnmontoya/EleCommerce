@@ -26,7 +26,7 @@ const TableData: React.FC<TableDataProps> = ({ theader, children, selectedData, 
                         </label>
                     </th>
                     {theader.map((header) => (
-                        <th key={header} className="px-6 py-4 text-left text-slate-300 font-semibold text-sm">
+                        <th key={header} className="px-6 py-4 text-center text-slate-300 font-semibold text-sm">
                             {header}
                         </th>
                     ))}

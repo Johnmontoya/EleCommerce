@@ -15,21 +15,10 @@ export const endpoints = {
         list: '/auth/all',
         detail: (id: string) => `/auth/${id}`,
         create: '/auth',
-        update: (id: string) => `/auth/${id}`,
-        delete: (id: string) => `/auth/${id}`,
-    },
-    role: {
-        list: '/roles',
-        detail: (id: string) => `/roles/${id}`,
-        create: '/roles',
-        update: (id: string) => `/roles/${id}`,
-        delete: (id: string) => `/roles/${id}`,
-    },
-    permission: {
-        list: '/permissions',
-        detail: (id: string) => `/permissions/${id}`,
-        create: '/permissions',
-        update: (id: string) => `/permissions/${id}`,
-        delete: (id: string) => `/permissions/${id}`,
+        update: (id: string) => `/auth/update/${id}`,
+        delete: (id: string) => `/auth/delete/${id}`,
+        deleteUsers: '/auth/delete-users',
+        toggleActive: (id: string) => `/auth/toggle-active/${id}`,
+        getUserById: (id: string) => `/auth/get-user/${id}`,
     }
 }

@@ -1,9 +1,9 @@
 import { UserEntity } from "../../../domain/entities/User";
 import type { IAuthRepository, UsersFilters } from "../../../domain/repositories/IAuthRepository";
+import type { UserUpdateInput } from "../../../generated/prisma/models";
 import type { HashService } from "../../../infrastructure/services/HashService";
 import type { JwtService } from "../../../infrastructure/services/JwtService";
 import type { AuthResponse, LoginInput, RefreshTokenInput, RegisterInput, UserResponse } from "../../Dto/auth.dto";
-
 
 export class RegisterUseCase {
     constructor(
@@ -212,6 +212,90 @@ export class DeleteUserUseCase {
 
         if (!deleted) {
             throw new Error('Error al eliminar el usuario');
+        }
+    }
+}
+
+export class DeleteUsersUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository) { }
+
+    async execute(ids: string[], adminId: string): Promise<void> {
+        if (!ids) {
+            throw new Error('IDs de usuarios requeridos');
+        }
+
+        if (ids.includes(adminId)) {
+            throw new Error('No puedes eliminar tu propia cuenta');
+        }
+
+        const user = await this.authRepository.findByUserById(ids[0]!);
+
+        if (!user) {
+            throw new Error('Usuario no encontrado');
+        }
+
+        const deleted = await this.authRepository.deleteUsers(ids);
+
+        if (!deleted) {
+            throw new Error('Error al eliminar el usuario');
+        }
+    }
+}
+
+export class ToggleActiveUserUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository) { }
+
+    async execute(id: string, adminId: string): Promise<void> {
+        if (!id) {
+            throw new Error('ID de usuario requerido');
+        }
+
+        if (id === adminId) {
+            throw new Error('No puedes desactivar tu propia cuenta');
+        }
+        const user = await this.authRepository.findByUserById(id);
+
+        if (!user) {
+            throw new Error('Usuario no encontrado');
+        }
+
+        const deleted = await this.authRepository.toogleActiveUser(id);
+
+        if (!deleted) {
+            throw new Error('Error al eliminar el usuario');
+        }
+    }
+}
+
+export class GetUserByIdUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository) { }
+
+    async execute(id: string): Promise<UserEntity | null> {
+        return await this.authRepository.findByUserById(id);
+    }
+}
+
+export class UpdateUserUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository) { }
+
+    async execute(id: string, data: UserUpdateInput): Promise<void> {
+        if (!id) {
+            throw new Error('ID de usuario requerido');
+        }
+        const user = await this.authRepository.findByUserById(id);
+
+        if (!user) {
+            throw new Error('Usuario no encontrado');
+        }
+
+        const updated = await this.authRepository.updateUser(id, data);
+
+        if (!updated) {
+            throw new Error('Error al actualizar el usuario');
         }
     }
 }

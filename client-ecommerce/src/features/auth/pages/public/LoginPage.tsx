@@ -11,27 +11,7 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [rememberMe, setRememberMe] = useState<boolean>(false);
-  const [progress, setProgress] = useState(0);
-  const [loading, setLoading] = useState(false);
 
-  /*const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setProgress(0);
-    setLoading(true);
-
-    await axios.get("https://api.example.com/file", {
-      responseType: "blob",
-      onDownloadProgress: (event: any) => {
-        if (event.total) {
-          const percent = Math.round((event.loaded * 100) / event.total);
-          setProgress(percent);
-        }
-      },
-    });
-
-    setLoading(false);
-  };
-*/
   const { login, isAuthenticated, clearError } = useAuthStore();
   const from = (location.state as any)?.from?.pathname || '/dashboard';
 
@@ -52,8 +32,6 @@ const LoginPage: React.FC = () => {
   const handleSocialLogin = (provider: string) => {
     console.log(`Login with ${provider}`);
   };
-
-
 
   const handleSubmit = async (e?: React.MouseEvent<HTMLButtonElement>) => {
     e?.preventDefault();
@@ -125,16 +103,6 @@ const LoginPage: React.FC = () => {
                   Olvidaste tu contraseña?
                 </a>
               </div>
-
-              {loading && (
-                <div className="w-full h-3 bg-gray-200 mt-4 rounded">
-                  <div
-                    className="h-full bg-green-500 rounded transition-all"
-                    style={{ width: `${progress}%` }}
-                  />
-                </div>
-              )}
-              {progress === 100 && <p className="mt-2">Completado</p>}
 
               {/* Sign In Button */}
               <ButtonAction

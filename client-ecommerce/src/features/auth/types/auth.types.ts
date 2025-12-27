@@ -10,6 +10,8 @@ export interface User {
     role: string | null;
     isActive: boolean | null | undefined;
     emailVerified: boolean | null | undefined;
+    createdAt: string | null | undefined;
+    updatedAt: string | null | undefined;
 }
 
 export interface LoginRequest {
@@ -54,6 +56,8 @@ export interface AuthResponse {
             avatar: string | null;
             isActive: boolean | null | undefined;
             emailVerified: boolean | null | undefined;
+            createdAt: string | null | undefined;
+            updatedAt: string | null | undefined;
         },
         tokens: {
             accessToken: string;
@@ -68,4 +72,15 @@ export interface UsersFilters {
     search?: string | undefined;
     limit?: number | undefined;
     offset?: number | undefined;
+}
+
+export interface DeleteUserProps {
+    id?: string;
+    ids?: string[];
+    adminToken: string;
+}
+
+export interface UpdateUserProps {
+    id: string;
+    userData: User
 }

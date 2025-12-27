@@ -28,9 +28,21 @@ export class PrismaAuthRepository implements IAuthRepository {
     async findByUserById(id: string): Promise<UserEntity | null> {
         return await prisma.user.findUnique({ where: { id } });
     }
-    /*async updateUser(id: string, data: UserUpdateInput): Promise<UserEntity> {
+    async updateUser(id: string, data: UserUpdateInput): Promise<UserEntity> {
         return await prisma.user.update({ where: { id }, data });
-    }*/
+    }
+    async toogleActiveUser(id: string): Promise<boolean> {
+        try {
+            const user = await prisma.user.findUnique({ where: { id } });
+            if (!user) {
+                return false;
+            }
+            await prisma.user.update({ where: { id }, data: { isActive: !user.isActive } });
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
     async createRefreshToken(userId: string, token: string, expiresAt: Date): Promise<void> {
         await prisma.refreshToken.create({
             data: {
@@ -92,6 +104,16 @@ export class PrismaAuthRepository implements IAuthRepository {
     async deleteUser(id: string): Promise<boolean> {
         try {
             await prisma.user.delete({ where: { id } });
+            return true;
+        } catch (error) {
+            // Si el usuario no existe o hay otro error
+            return false;
+        }
+    }
+
+    async deleteUsers(ids: string[]): Promise<boolean> {
+        try {
+            await prisma.user.deleteMany({ where: { id: { in: ids } } });
             return true;
         } catch (error) {
             // Si el usuario no existe o hay otro error

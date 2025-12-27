@@ -11,10 +11,10 @@ import Navbar from "./shared/ui/Navbar";
 import LoadingFallback from "./shared/ui/LoadingFallback";
 import { lazyImport } from "./router/lazyImports";
 import { axiosInterceptor } from "./config/axiosInterceptor";
-import "./App.css";
 import { useAuthStore } from "./features/auth/store/useAuthStore";
 import { queryClient } from "./shared/lib/queryClient";
 import ProtectedRoute from "./router/ProtectedRoute";
+import "./App.css";
 
 axiosInterceptor();
 
@@ -83,6 +83,7 @@ function App() {
 
               // Verificar si la ruta requiere autenticación
               const isPrivateRoute = meta.site === 'private';
+              const isAdminRoute = meta.isAdmin;
 
               return (
                 <Route
@@ -90,7 +91,7 @@ function App() {
                   path={meta.path}
                   element={
                     isPrivateRoute ? (
-                      <ProtectedRoute path={meta.path}>
+                      <ProtectedRoute path={meta.path} isAdmin={isAdminRoute}>
                         {element}
                       </ProtectedRoute>
                     ) : (

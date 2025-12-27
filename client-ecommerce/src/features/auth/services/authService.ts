@@ -1,7 +1,7 @@
 import { apiClient } from "../../../shared/api/client";
 import type { ApiResponse } from "../../products/types/product.types";
 import { endpoints } from "../api/endpoints";
-import type { AuthResponse, LoginRequest, LogoutResponse, RefreshResponse, RegisterRequest, User, UsersFilters } from "../types/auth.types";
+import type { AuthResponse, LoginRequest, LogoutResponse, RefreshResponse, RegisterRequest, User, UsersFilters, DeleteUserProps, UpdateUserProps } from "../types/auth.types";
 
 export const authService = {
     login: async (login: LoginRequest): Promise<AuthResponse> => {
@@ -40,5 +40,38 @@ export const authService = {
         }
         const { data } = await apiClient.get(endpoints.user.list + '?' + params.toString());
         return data;
-    }
+    },
+    getUser: async (id: string): Promise<ApiResponse<User>> => {
+        const { data } = await apiClient.get(endpoints.user.getUserById(id));
+        return data;
+    },
+    deleteUser: async ({ id, adminToken }: DeleteUserProps): Promise<ApiResponse<null>> => {
+        const { data } = await apiClient.delete(endpoints.user.delete(id!), {
+            headers: {
+                'X-Admin-Token': adminToken
+            }
+        });
+        return data;
+    },
+    deleteUsers: async ({ ids, adminToken }: DeleteUserProps): Promise<ApiResponse<null>> => {
+        const { data } = await apiClient.delete(endpoints.user.deleteUsers, {
+            headers: {
+                'X-Admin-Token': adminToken
+            },
+            data: { ids }
+        });
+        return data;
+    },
+    toggleActiveUser: async ({ id, adminToken }: DeleteUserProps): Promise<ApiResponse<null>> => {
+        const { data } = await apiClient.put(endpoints.user.toggleActive(id!), {
+            headers: {
+                'X-Admin-Token': adminToken
+            }
+        });
+        return data;
+    },
+    updateUser: async ({ id, userData }: UpdateUserProps): Promise<ApiResponse<null>> => {
+        const { data } = await apiClient.put(endpoints.user.update(id!), userData);
+        return data;
+    },
 }

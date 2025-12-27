@@ -1,5 +1,18 @@
 import type { Request, Response } from 'express';
-import type { RegisterUseCase, GetCurrentUserUseCase, LoginUseCase, RefreshTokenUseCase, LogoutUseCase, LogoutAllDevicesUseCase, GetAllUsersUseCase, DeleteUserUseCase } from "../../application/use-cases/auth/AuthUseCase";
+import type {
+    RegisterUseCase,
+    GetCurrentUserUseCase,
+    LoginUseCase,
+    RefreshTokenUseCase,
+    LogoutUseCase,
+    LogoutAllDevicesUseCase,
+    GetAllUsersUseCase,
+    DeleteUserUseCase,
+    DeleteUsersUseCase,
+    ToggleActiveUserUseCase,
+    GetUserByIdUseCase,
+    UpdateUserUseCase
+} from "../../application/use-cases/auth/AuthUseCase";
 import { AuthRegisterSchema, LoginSchema, RefreshTokenSchema, UsersFiltersSchema } from "../../infrastructure/validation/Auth.schema";
 import { handleError } from "../../infrastructure/middlewares/errorHandler";
 
@@ -12,7 +25,11 @@ export class AuthController {
         private logoutUseCase: LogoutUseCase,
         private logoutAllDevicesUseCase: LogoutAllDevicesUseCase,
         private getAllUsersUseCase: GetAllUsersUseCase,
-        private deleteUserUseCase: DeleteUserUseCase) { }
+        private deleteUserUseCase: DeleteUserUseCase,
+        private deleteUsersUseCase: DeleteUsersUseCase,
+        private toggleActiveUserUseCase: ToggleActiveUserUseCase,
+        private getUserByIdUseCase: GetUserByIdUseCase,
+        private updateUserUseCase: UpdateUserUseCase) { }
 
     register = async (req: Request, res: Response): Promise<void> => {
         try {
@@ -165,6 +182,103 @@ export class AuthController {
             res.status(200).json({
                 success: true,
                 message: 'Usuario eliminado exitosamente'
+            });
+        } catch (error) {
+            handleError(error, res);
+        }
+    }
+
+    deleteUsers = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { ids } = req.body;
+            const adminId = req.user?.userId;
+
+            if (!adminId) {
+                res.status(401).json({
+                    success: false,
+                    message: 'No autorizado'
+                });
+                return;
+            }
+
+            if (!ids || ids.length === 0) {
+                res.status(400).json({
+                    success: false,
+                    message: 'No se proporcionaron IDs'
+                });
+                return;
+            }
+
+            await this.deleteUsersUseCase.execute(ids, adminId);
+
+            res.status(200).json({
+                success: true,
+                message: 'Usuarios eliminados exitosamente'
+            });
+        } catch (error) {
+            handleError(error, res);
+        }
+    }
+
+    toggleActiveUser = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { id } = req.params;
+            const adminId = req.user?.userId;
+
+            if (!adminId) {
+                res.status(401).json({
+                    success: false,
+                    message: 'No autorizado'
+                });
+                return;
+            }
+
+            await this.toggleActiveUserUseCase.execute(id!, adminId);
+
+            res.status(200).json({
+                success: true,
+                message: 'Usuario actualizado exitosamente'
+            });
+        } catch (error) {
+            handleError(error, res);
+        }
+    }
+
+    getUserById = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { id } = req.params;
+            const adminId = req.user?.userId;
+
+            if (!adminId) {
+                res.status(401).json({
+                    success: false,
+                    message: 'No autorizado'
+                });
+                return;
+            }
+
+            const user = await this.getUserByIdUseCase.execute(id!);
+
+            res.status(200).json({
+                success: true,
+                message: 'Usuario obtenido exitosamente',
+                data: user
+            });
+        } catch (error) {
+            handleError(error, res);
+        }
+    }
+
+    updateUser = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { id } = req.params;
+            const data = req.body;
+
+            await this.updateUserUseCase.execute(id!, data);
+
+            res.status(200).json({
+                success: true,
+                message: 'Usuario actualizado exitosamente'
             });
         } catch (error) {
             handleError(error, res);
