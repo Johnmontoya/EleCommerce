@@ -75,6 +75,9 @@ export const useUpdateUserMutation = () => {
             queryClient.invalidateQueries({
                 queryKey: ['users']
             });
+            queryClient.invalidateQueries({
+                queryKey: ['profile']
+            });
             toast.success(response.message || "Usuario actualizado exitosamente");
         },
         onError: (error: any) => {

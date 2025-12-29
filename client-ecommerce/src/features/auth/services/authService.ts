@@ -1,5 +1,6 @@
 import { apiClient } from "../../../shared/api/client";
 import type { ApiResponse } from "../../products/types/product.types";
+import type { ChangePasswordInput } from "../../profile/types/profile.types";
 import { endpoints } from "../api/endpoints";
 import type { AuthResponse, LoginRequest, LogoutResponse, RefreshResponse, RegisterRequest, User, UsersFilters, DeleteUserProps, UpdateUserProps } from "../types/auth.types";
 
@@ -72,6 +73,10 @@ export const authService = {
     },
     updateUser: async ({ id, userData }: UpdateUserProps): Promise<ApiResponse<null>> => {
         const { data } = await apiClient.put(endpoints.user.update(id!), userData);
+        return data;
+    },
+    changePassword: async ({ email, otp, password, newPassword }: ChangePasswordInput): Promise<ApiResponse<null>> => {
+        const { data } = await apiClient.put(endpoints.auth.changePassword, { email, otp, password, newPassword });
         return data;
     },
 }

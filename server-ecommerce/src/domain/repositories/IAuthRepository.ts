@@ -1,10 +1,11 @@
+import type { ChangePasswordInput, UserResponse } from "../../application/Dto/auth.dto";
 import type { UserUpdateInput } from "../../generated/prisma/models";
 import type { UserEntity } from "../entities/User";
 
 export interface IAuthRepository {
     createUser(data: UserEntity): Promise<UserEntity>;
     findByUserByEmail: (email: string) => Promise<UserEntity | null>;
-    findByUserById: (id: string) => Promise<UserEntity | null>;
+    findByUserById: (id: string) => Promise<UserResponse | null>;
     updateUser: (id: string, data: UserUpdateInput) => Promise<UserEntity>;
     toogleActiveUser: (id: string) => Promise<boolean>;
     deleteUser: (id: string) => Promise<boolean>;
@@ -15,7 +16,9 @@ export interface IAuthRepository {
     findRefreshToken: (token: string) => Promise<{ userId: string } | null>;
     deleteRefreshToken: (userId: string) => Promise<void>;
     deleteAllUserRefreshTokens: (userId: string) => Promise<void>;
-    findAllUsers: (filters?: UsersFilters) => Promise<UserEntity[]>;
+    findAllUsers: (filters?: UsersFilters) => Promise<UserResponse[]>;
+    changePassword: (email: string, data: ChangePasswordInput) => Promise<UserEntity>;
+    sendMail: (mailOptions: any) => Promise<void>;
 }
 
 export interface UsersFilters {

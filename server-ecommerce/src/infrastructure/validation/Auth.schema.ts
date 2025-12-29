@@ -21,6 +21,7 @@ export const AuthRegisterSchema = z.object({
     role: z.string().nullable(),
     avatar: z.string().nullable(),
     emailVerified: z.boolean().optional(),
+    otp: z.string().optional(),
     isActive: z.boolean().optional(),
 });
 
@@ -45,6 +46,7 @@ export const registerSchema = z.object({
     role: z.enum(['USER', 'ADMIN', 'SUPER_ADMIN'], 'Role inválido'),
     avatar: z.string().optional(),
     emailVerified: z.boolean(),
+    otp: z.string().optional(),
     isActive: z.boolean()
 });
 
@@ -72,4 +74,23 @@ export const UsersFiltersSchema = z.object({
     search: z.string().optional(),
     limit: z.string().optional(),
     offset: z.string().optional(),
+});
+
+export const ChangePasswordSchema = z.object({
+    email: z.string()
+        .email('Email inválido')
+        .toLowerCase()
+        .trim(),
+    otp: z.string()
+        .min(1, 'Código de verificación es requerido'),
+    password: z.string()
+        .min(8, 'La contraseña debe tener al menos 8 caracteres')
+        .regex(/[A-Z]/, 'Debe contener al menos una mayúscula')
+        .regex(/[a-z]/, 'Debe contener al menos una minúscula')
+        .regex(/[0-9]/, 'Debe contener al menos un número'),
+    newPassword: z.string()
+        .min(8, 'La contraseña debe tener al menos 8 caracteres')
+        .regex(/[A-Z]/, 'Debe contener al menos una mayúscula')
+        .regex(/[a-z]/, 'Debe contener al menos una minúscula')
+        .regex(/[0-9]/, 'Debe contener al menos un número')
 });

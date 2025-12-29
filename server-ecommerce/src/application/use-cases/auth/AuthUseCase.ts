@@ -3,7 +3,9 @@ import type { IAuthRepository, UsersFilters } from "../../../domain/repositories
 import type { UserUpdateInput } from "../../../generated/prisma/models";
 import type { HashService } from "../../../infrastructure/services/HashService";
 import type { JwtService } from "../../../infrastructure/services/JwtService";
-import type { AuthResponse, LoginInput, RefreshTokenInput, RegisterInput, UserResponse } from "../../Dto/auth.dto";
+import type { AuthResponse, ChangePasswordInput, LoginInput, RefreshTokenInput, RegisterInput, UserResponse } from "../../Dto/auth.dto";
+
+import otpGenerator from 'otp-generator';
 
 export class RegisterUseCase {
     constructor(
@@ -19,6 +21,7 @@ export class RegisterUseCase {
 
         const hashedPassword = await this.hashService.hash(input.password);
 
+        const otpNumber = otpGenerator.generate(6, { upperCaseAlphabets: false, lowerCaseAlphabets: false, specialChars: false });
 
         const user = await this.authRepository.createUser({
             id: crypto.randomUUID(),
@@ -32,6 +35,7 @@ export class RegisterUseCase {
             role: input.role,
             isActive: input.isActive,
             emailVerified: input.emailVerified,
+            otp: otpNumber,
         });
 
         const tokens = this.jwtService.generateTokenPair({ userId: user.id, email: user.email, role: user.role });
@@ -160,6 +164,9 @@ export class GetCurrentUserUseCase {
             avatar: user.avatar || null,
             isActive: user.isActive || null,
             emailVerified: user.emailVerified || null,
+            otp: user.otp || null,
+            createdAt: user.createdAt || null,
+            addresses: user.addresses || null,
         };
     }
 }
@@ -181,6 +188,9 @@ export class GetAllUsersUseCase {
             avatar: user.avatar || null,
             isActive: user.isActive || null,
             emailVerified: user.emailVerified || null,
+            otp: user.otp || null,
+            createdAt: user.createdAt || null,
+            addresses: user.addresses || null,
         }));
     }
 }
@@ -273,7 +283,7 @@ export class GetUserByIdUseCase {
     constructor(
         private readonly authRepository: IAuthRepository) { }
 
-    async execute(id: string): Promise<UserEntity | null> {
+    async execute(id: string): Promise<UserResponse | null> {
         return await this.authRepository.findByUserById(id);
     }
 }
@@ -293,6 +303,72 @@ export class UpdateUserUseCase {
         }
 
         const updated = await this.authRepository.updateUser(id, data);
+
+        if (!updated) {
+            throw new Error('Error al actualizar el usuario');
+        }
+    }
+}
+
+export class ForgotPasswordUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository) { }
+
+    async execute(email: string): Promise<void> {
+        if (!email) {
+            throw new Error('Email requerido');
+        }
+        const user = await this.authRepository.findByUserByEmail(email);
+
+        if (!user) {
+            throw new Error('Usuario no encontrado');
+        }
+
+        const otpNumber = otpGenerator.generate(6, { upperCaseAlphabets: false, lowerCaseAlphabets: false, specialChars: false });
+
+        await this.authRepository.updateUser(user.id, { otp: otpNumber });
+
+        const mailOptions = {
+            from: 'elecommerce@elecommerce.com',
+            to: user.email,
+            subject: 'Código de verificación',
+            text: `Tu código de verificación es: ${otpNumber}`
+        };
+
+        await this.authRepository.sendMail(mailOptions);
+    }
+}
+
+export class ChangePasswordUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository,
+        private readonly hashService: HashService) { }
+
+    async execute(email: string, otp: string, data: ChangePasswordInput): Promise<void> {
+        if (!email) {
+            throw new Error('Email requerido');
+        }
+        const user = await this.authRepository.findByUserByEmail(email);
+
+        if (!user) {
+            throw new Error('Usuario no encontrado');
+        }
+
+        if (user.otp !== otp) {
+            throw new Error('Código de verificación incorrecto');
+        }
+
+        const comparePass = await this.hashService.compare(data.password!, user?.password);
+
+        if (!comparePass) {
+            throw new Error('Contraseña incorrecta');
+        }
+
+        const hashedPassword = await this.hashService.hash(data.newPassword!);
+
+        data.password = hashedPassword;
+
+        const updated = await this.authRepository.changePassword(email, data);
 
         if (!updated) {
             throw new Error('Error al actualizar el usuario');

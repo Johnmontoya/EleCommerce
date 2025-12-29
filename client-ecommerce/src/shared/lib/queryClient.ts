@@ -47,4 +47,10 @@ export const queryKeys = {
     list: (filters?: Record<string, any>) => [...queryKeys.user.all, 'list', filters] as const,
     detail: (id: string) => [...queryKeys.user.all, 'detail', id] as const,
   },
+  profile: {
+    all: ['profile'] as const,
+    get: () => [...queryKeys.profile.all, 'get'] as const,
+    update: () => [...queryKeys.profile.all, 'update'] as const,
+    changePassword: () => [...queryKeys.profile.all, 'change-password'] as const,
+  },
 };

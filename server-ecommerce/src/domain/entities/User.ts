@@ -9,6 +9,7 @@ export interface User {
     role: string | null;
     isActive: boolean | null | undefined;
     emailVerified: boolean | null | undefined;
+    otp: string | null;
 }
 
 export class UserEntity implements User {
@@ -24,6 +25,7 @@ export class UserEntity implements User {
         public role: string | null,
         public isActive: boolean | null | undefined,
         public emailVerified: boolean | null | undefined,
+        public otp: string | null,
     ) { }
 
     static create(props: Omit<User, 'id'>): UserEntity {
@@ -40,6 +42,7 @@ export class UserEntity implements User {
             props.role,
             props.isActive,
             props.emailVerified,
+            props.otp,
         );
     }
 }

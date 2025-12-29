@@ -1,9 +1,10 @@
 import type { UserEntity } from "../../domain/entities/User";
 import type { IAuthRepository, UsersFilters } from "../../domain/repositories/IAuthRepository";
 import { prisma } from "../../config/prisma";
-import type { CreateUserData } from "../../application/Dto/auth.dto";
+import type { ChangePasswordInput, CreateUserData, UserResponse } from "../../application/Dto/auth.dto";
 import type { Prisma } from "../../generated/prisma/client";
 import type { UserUpdateInput } from "../../generated/prisma/models";
+import { any } from "zod";
 
 export class PrismaAuthRepository implements IAuthRepository {
     async createUser(data: CreateUserData): Promise<UserEntity> {
@@ -18,15 +19,16 @@ export class PrismaAuthRepository implements IAuthRepository {
                 avatar: data.avatar,
                 role: data.role,
                 isActive: data.isActive || true,
-                emailVerified: data.emailVerified || false
+                emailVerified: data.emailVerified || false,
+                otp: data.otp || null
             }
         });
     }
     async findByUserByEmail(email: string): Promise<UserEntity | null> {
         return await prisma.user.findUnique({ where: { email } });
     }
-    async findByUserById(id: string): Promise<UserEntity | null> {
-        return await prisma.user.findUnique({ where: { id } });
+    async findByUserById(id: string): Promise<UserResponse | null> {
+        return await prisma.user.findUnique({ where: { id }, include: { addresses: true } });
     }
     async updateUser(id: string, data: UserUpdateInput): Promise<UserEntity> {
         return await prisma.user.update({ where: { id }, data });
@@ -65,7 +67,7 @@ export class PrismaAuthRepository implements IAuthRepository {
     async deleteAllUserRefreshTokens(userId: string): Promise<void> {
         await prisma.refreshToken.deleteMany({ where: { userId } });
     }
-    async findAllUsers(filters?: UsersFilters): Promise<UserEntity[]> {
+    async findAllUsers(filters?: UsersFilters): Promise<UserResponse[]> {
         const where: Prisma.UserWhereInput = {};
 
         let take: number = 10;
@@ -96,7 +98,7 @@ export class PrismaAuthRepository implements IAuthRepository {
             }
         }
 
-        const queryBuilder = prisma.user.findMany({ where: where, take: take, skip: skip });
+        const queryBuilder = prisma.user.findMany({ where: where, take: take, skip: skip, include: { addresses: true } });
 
         return queryBuilder;
     }
@@ -119,5 +121,19 @@ export class PrismaAuthRepository implements IAuthRepository {
             // Si el usuario no existe o hay otro error
             return false;
         }
+    }
+
+    async changePassword(userId: string, data: ChangePasswordInput): Promise<UserEntity> {
+        let update: any;
+        update = {
+            password: data.password,
+            otp: null
+        }
+
+        return await prisma.user.update({ where: { email: userId }, data: update });
+    }
+
+    async sendMail(mailOptions: any): Promise<void> {
+
     }
 }

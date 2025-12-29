@@ -1,9 +1,10 @@
 import type z from "zod";
-import type { LoginSchema, RefreshTokenSchema, AuthRegisterSchema } from "../../infrastructure/validation/Auth.schema";
+import type { ChangePasswordSchema, LoginSchema, RefreshTokenSchema, AuthRegisterSchema } from "../../infrastructure/validation/Auth.schema";
 
 export type RegisterInput = z.infer<typeof AuthRegisterSchema>;
 export type LoginInput = z.infer<typeof LoginSchema>;
 export type RefreshTokenInput = z.infer<typeof RefreshTokenSchema>;
+export type ChangePasswordInput = z.infer<typeof ChangePasswordSchema>;
 
 export interface CreateUserData {
     email: string;
@@ -16,6 +17,7 @@ export interface CreateUserData {
     role: string | null;
     isActive: boolean | null | undefined;
     emailVerified: boolean | null | undefined;
+    otp: string | null;
 }
 
 export interface AuthResponse {
@@ -42,4 +44,13 @@ export interface UserResponse {
     avatar: string | null;
     isActive: boolean | null | undefined;
     emailVerified: boolean | null | undefined;
+    otp: string | null;
+    createdAt: Date | null | undefined;
+    addresses: {
+        street: string | null;
+        city: string | null;
+        state: string | null;
+        zipCode: string | null;
+        country: string | null;
+    }[] | null;
 }

@@ -10,8 +10,16 @@ export interface User {
     role: string | null;
     isActive: boolean | null | undefined;
     emailVerified: boolean | null | undefined;
+    otp: string | null | undefined;
     createdAt: string | null | undefined;
     updatedAt: string | null | undefined;
+    addresses: {
+        street: string | null;
+        city: string | null;
+        state: string | null;
+        zipCode: string | null;
+        country: string | null;
+    }[] | null;
 }
 
 export interface LoginRequest {
@@ -56,8 +64,16 @@ export interface AuthResponse {
             avatar: string | null;
             isActive: boolean | null | undefined;
             emailVerified: boolean | null | undefined;
+            otp: string | null | undefined;
             createdAt: string | null | undefined;
             updatedAt: string | null | undefined;
+            addresses: {
+                street: string | null;
+                city: string | null;
+                state: string | null;
+                zipCode: string | null;
+                country: string | null;
+            }[] | null;
         },
         tokens: {
             accessToken: string;

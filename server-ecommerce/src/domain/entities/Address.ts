@@ -7,7 +7,7 @@ export interface Address {
     state: string | null;
     country: string | null;
     zipCode: string | null;
-    isDefault: boolean;
+    isDefault: boolean | null | undefined;
 }
 
 export class AddressEntity implements Address {
@@ -21,7 +21,7 @@ export class AddressEntity implements Address {
         public state: string | null,
         public country: string | null,
         public zipCode: string | null,
-        public isDefault: boolean,
+        public isDefault: boolean | null | undefined,
     ) { }
 
     static create(props: Omit<Address, 'id'>): AddressEntity {

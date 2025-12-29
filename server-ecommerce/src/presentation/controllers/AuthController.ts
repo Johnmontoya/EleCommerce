@@ -11,7 +11,9 @@ import type {
     DeleteUsersUseCase,
     ToggleActiveUserUseCase,
     GetUserByIdUseCase,
-    UpdateUserUseCase
+    UpdateUserUseCase,
+    ChangePasswordUseCase,
+    ForgotPasswordUseCase
 } from "../../application/use-cases/auth/AuthUseCase";
 import { AuthRegisterSchema, LoginSchema, RefreshTokenSchema, UsersFiltersSchema } from "../../infrastructure/validation/Auth.schema";
 import { handleError } from "../../infrastructure/middlewares/errorHandler";
@@ -29,7 +31,9 @@ export class AuthController {
         private deleteUsersUseCase: DeleteUsersUseCase,
         private toggleActiveUserUseCase: ToggleActiveUserUseCase,
         private getUserByIdUseCase: GetUserByIdUseCase,
-        private updateUserUseCase: UpdateUserUseCase) { }
+        private updateUserUseCase: UpdateUserUseCase,
+        private forgotPasswordUseCase: ForgotPasswordUseCase,
+        private changePasswordUseCase: ChangePasswordUseCase) { }
 
     register = async (req: Request, res: Response): Promise<void> => {
         try {
@@ -279,6 +283,40 @@ export class AuthController {
             res.status(200).json({
                 success: true,
                 message: 'Usuario actualizado exitosamente'
+            });
+        } catch (error) {
+            handleError(error, res);
+        }
+    }
+
+    forgotPassword = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { email } = req.body;
+
+            await this.forgotPasswordUseCase.execute(email!);
+
+            res.status(200).json({
+                success: true,
+                message: 'Hemos enviado un correo electrónico con un código de verificación'
+            });
+        } catch (error) {
+            handleError(error, res);
+        }
+    }
+
+    changePassword = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const email = req.body.email;
+            const otp = req.body.otp;
+            const data = req.body;
+
+            console.log(req.body);
+
+            await this.changePasswordUseCase.execute(email!, otp, data);
+
+            res.status(200).json({
+                success: true,
+                message: 'Contraseña actualizada exitosamente'
             });
         } catch (error) {
             handleError(error, res);

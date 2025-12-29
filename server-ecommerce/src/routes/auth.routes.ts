@@ -7,7 +7,22 @@ import { JwtService } from "../infrastructure/services/JwtService";
 
 // Repositories
 import { PrismaAuthRepository } from "../infrastructure/repositories/PrismaAuthRepository";
-import { DeleteUsersUseCase, DeleteUserUseCase, GetAllUsersUseCase, GetCurrentUserUseCase, GetUserByIdUseCase, LoginUseCase, LogoutAllDevicesUseCase, LogoutUseCase, RefreshTokenUseCase, RegisterUseCase, ToggleActiveUserUseCase, UpdateUserUseCase } from "../application/use-cases/auth/AuthUseCase";
+import {
+    ChangePasswordUseCase,
+    DeleteUsersUseCase,
+    DeleteUserUseCase,
+    ForgotPasswordUseCase,
+    GetAllUsersUseCase,
+    GetCurrentUserUseCase,
+    GetUserByIdUseCase,
+    LoginUseCase,
+    LogoutAllDevicesUseCase,
+    LogoutUseCase,
+    RefreshTokenUseCase,
+    RegisterUseCase,
+    ToggleActiveUserUseCase,
+    UpdateUserUseCase
+} from "../application/use-cases/auth/AuthUseCase";
 import { AuthController } from "../presentation/controllers/AuthController";
 
 const router = Router();
@@ -28,6 +43,8 @@ const deleteUsersUseCase = new DeleteUsersUseCase(authRepository);
 const toggleActiveUserUseCase = new ToggleActiveUserUseCase(authRepository);
 const getUserByIdUseCase = new GetUserByIdUseCase(authRepository);
 const updateUserUseCase = new UpdateUserUseCase(authRepository);
+const forgotPasswordUseCase = new ForgotPasswordUseCase(authRepository);
+const changePasswordUseCase = new ChangePasswordUseCase(authRepository, hashService);
 
 const authController = new AuthController(
     registerUseCase,
@@ -41,7 +58,9 @@ const authController = new AuthController(
     deleteUsersUseCase,
     toggleActiveUserUseCase,
     getUserByIdUseCase,
-    updateUserUseCase
+    updateUserUseCase,
+    forgotPasswordUseCase,
+    changePasswordUseCase
 );
 
 router.post('/register', authController.register);
@@ -57,5 +76,8 @@ router.delete('/delete-users', authenticate, authorize('ADMIN'), authController.
 router.put('/toggle-active/:id', authenticate, authorize('ADMIN'), authController.toggleActiveUser);
 router.get('/get-user/:id', authenticate, authorize('ADMIN'), authController.getUserById);
 router.put('/update/:id', authenticate, authorize('ADMIN'), authController.updateUser);
+/** Password */
+router.post('/forgot-password', authController.forgotPassword);
+router.put('/change-password', authController.changePassword);
 
 export default router;
