@@ -1,6 +1,4 @@
 import { BiSearch } from "react-icons/bi";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
-import { GrUpdate } from "react-icons/gr";
 import type { Category } from "../../../categories/type/category.types";
 import type React from "react";
 
@@ -9,9 +7,7 @@ interface ProductFiltersProps {
     setSearchTerm: (term: string) => void;
     selectedCategory: string;
     setSelectedCategory: (category: string) => void;
-    categories: Category[];
-    selectedBrand: string;
-    setSelectedBrand: (brand: string) => void;
+    categories: Category[] | undefined;
 }
 
 const ProductFilter: React.FC<ProductFiltersProps> = ({
@@ -19,9 +15,7 @@ const ProductFilter: React.FC<ProductFiltersProps> = ({
     setSearchTerm,
     selectedCategory,
     setSelectedCategory,
-    categories,
-    selectedBrand,
-    setSelectedBrand,
+    categories
 }) => {
 
     const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
@@ -29,10 +23,9 @@ const ProductFilter: React.FC<ProductFiltersProps> = ({
         setSearchTerm(e.currentTarget.value)
     };
 
-    const clearFilters = () => {
-        setSearchTerm("");
-        setSelectedCategory("");
-        setSelectedBrand("");
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        e.preventDefault();
+        setSelectedCategory(e.target.value)
     };
 
     return (
@@ -53,7 +46,7 @@ const ProductFilter: React.FC<ProductFiltersProps> = ({
                 {/* Category Filter */}
                 <select
                     value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    onChange={handleCategoryChange}
                     className="px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-lg focus:outline-none focus:border-cyan-400 min-w-[200px]"
                 >
                     <option value="">Todas las categorías</option>
@@ -61,16 +54,6 @@ const ProductFilter: React.FC<ProductFiltersProps> = ({
                         <option key={index} value={cat?.id}>{cat?.slug}</option>
                     ))}
                 </select>
-
-                {/* Clear Filters */}
-                {(searchTerm || selectedCategory || selectedBrand) && (
-                    <button
-                        onClick={clearFilters}
-                        className="px-4 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
-                    >
-                        Limpiar
-                    </button>
-                )}
             </div>
         </div>
     );

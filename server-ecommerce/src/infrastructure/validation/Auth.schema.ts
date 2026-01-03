@@ -73,7 +73,7 @@ export const UsersFiltersSchema = z.object({
     role: z.enum(['USER', 'ADMIN', 'SUPER_ADMIN'], 'Role inválido').optional(),
     search: z.string().optional(),
     limit: z.string().optional(),
-    offset: z.string().optional(),
+    offset: z.string().optional()
 });
 
 export const ChangePasswordSchema = z.object({

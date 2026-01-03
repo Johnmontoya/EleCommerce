@@ -17,6 +17,20 @@ const OrdersFilter: React.FC<OrdersProps> = ({
     filterStatus,
     setFilterStatus,
 }) => {
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        setSearchTerm(e.currentTarget.value);
+    };
+
+    const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.currentTarget.value;
+        if (value === "all") {
+            setFilterStatus("all"); // O el valor que uses para "Todos" (ej. "")
+        } else {
+            // Convertimos el string "true" o "false" a booleano real
+            setFilterStatus(value);
+        }
+    };
     return (
         <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-4 backdrop-blur-sm mb-6">
             <div className="flex flex-col md:flex-row gap-4">
@@ -29,8 +43,8 @@ const OrdersFilter: React.FC<OrdersProps> = ({
                     <input
                         type="text"
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        placeholder="Buscar por número de orden, cliente o email..."
+                        onChange={handleSearchChange}
+                        placeholder="Buscar por número de orden"
                         className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 pl-10 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                     />
                 </div>
@@ -61,16 +75,18 @@ const OrdersFilter: React.FC<OrdersProps> = ({
                         Filtrar por Estado
                     </label>
                     <select
-                        value={filterStatus}
-                        onChange={(e) => setFilterStatus(e.target.value)}
+                        value={filterStatus === null ? "all" : String(filterStatus)}
+                        onChange={handleStatusChange}
                         className="w-full md:w-64 bg-slate-700/50 border border-slate-600 text-slate-100 px-4 py-2 rounded-lg outline-none focus:border-cyan-400 cursor-pointer"
                     >
                         <option value="all">Todos los estados</option>
-                        <option value="pending">Pendiente</option>
-                        <option value="processing">Procesando</option>
-                        <option value="shipped">Enviado</option>
-                        <option value="delivered">Entregado</option>
-                        <option value="cancelled">Cancelado</option>
+                        <option value="PENDING">Pendiente</option>
+                        <option value="CONFIRMED">Confirmado</option>
+                        <option value="PROCESSING">Procesando</option>
+                        <option value="SHIPPED">Enviado</option>
+                        <option value="DELIVERED">Entregado</option>
+                        <option value="CANCELLED">Cancelado</option>
+                        <option value="REFUNDED">Reembolsado</option>
                     </select>
                 </div>
             )}

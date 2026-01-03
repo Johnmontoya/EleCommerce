@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import type { CancelOrderUseCase, CreateOrderUseCase, GetAllOrdersByUserUseCase, GetOrdersUseCase } from "../../application/use-cases/orders/OrderUseCase";
-import { CreateOrderSchema } from "../../infrastructure/validation/Order.schema";
+import { CreateOrderSchema, OrderFiltersSchema } from "../../infrastructure/validation/Order.schema";
 import { handleError } from '../../infrastructure/middlewares/errorHandler';
 
 export class OrderController {
@@ -28,7 +28,8 @@ export class OrderController {
 
     getAllOrders = async (req: Request, res: Response) => {
         try {
-            const orders = await this.getAllOrdersUseCase.execute();
+            const filters = OrderFiltersSchema.parse(req.query)
+            const orders = await this.getAllOrdersUseCase.execute(filters);
             res.status(200).json({
                 success: true,
                 message: 'Ordenes obtenidas exitosamente',
@@ -41,6 +42,7 @@ export class OrderController {
 
     getAllOrdersByUser = async (req: Request, res: Response) => {
         try {
+            const filters = OrderFiltersSchema.parse(req.query)
             const userId = req.user?.userId;
 
             if (!userId) {
@@ -51,7 +53,7 @@ export class OrderController {
                 return;
             }
 
-            const orders = await this.getAllOrdersByUserUseCase.execute(userId);
+            const orders = await this.getAllOrdersByUserUseCase.execute(userId, filters);
             res.status(200).json({
                 success: true,
                 message: 'Ordenes obtenidas exitosamente',

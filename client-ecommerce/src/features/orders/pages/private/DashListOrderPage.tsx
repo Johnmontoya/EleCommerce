@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiPackage } from "react-icons/bi";
 import Sidebar from "../../../dashboard/components/Sidebar";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
@@ -14,8 +14,6 @@ import OrderAdmin from "../../components/OrderAdmin";
 
 const DashListOrderPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { data: orders, isLoading } = useOrderAll();
-
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [filterStatus, setFilterStatus] = useState<string>("all");
     const [showFilters, setShowFilters] = useState<boolean>(false);
@@ -23,6 +21,15 @@ const DashListOrderPage = () => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12;
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm, filterStatus]);
+
+    const { data: orders, isLoading } = useOrderAll({
+        search: searchTerm,
+        status: filterStatus === "all" ? undefined : filterStatus
+    });
 
     // Calcular índices para "cortar" la lista
     const indexOfLastItem = currentPage * itemsPerPage;

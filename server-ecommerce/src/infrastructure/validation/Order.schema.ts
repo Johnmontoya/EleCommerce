@@ -28,6 +28,13 @@ export const OrderItemSchema = z.object({
     total: z.number().min(0, 'Total debe ser positivo'),
 });
 
+export const OrderFiltersSchema = z.object({
+    search: z.string().optional(),
+    limit: z.string().optional(),
+    offset: z.string().optional(),
+    status: DisplaySectionEnum.optional()
+})
+
 export const CreateOrderSchema = z.object({
     userId: z.string().min(1, 'ID de usuario es requerido'),
     subtotal: z.number().min(0, 'Subtotal debe ser positivo'),

@@ -31,14 +31,11 @@ export class MongoProductRepository implements IProductrepository {
 
   async findAll(filters?: ProductFilters): Promise<ProductEntity[]> {
     try {
-      console.log('📦 findAll called with filters:', JSON.stringify(filters, null, 2));
-
       const query: any = {};
 
       if (filters) {
         if (filters.category) query.category = filters.category;
 
-        // ✅ MEJORADO: Manejar brands de múltiples formas
         let brandsToFilter: string[] = [];
 
         if (filters.brands && Array.isArray(filters.brands) && filters.brands.length > 0) {
@@ -48,7 +45,6 @@ export class MongoProductRepository implements IProductrepository {
         }
 
         if (brandsToFilter.length > 0) {
-          console.log('🏷️  Filtering by brands:', brandsToFilter);
           if (brandsToFilter.length === 1) {
             query.brand = brandsToFilter[0];
           } else {
@@ -73,24 +69,18 @@ export class MongoProductRepository implements IProductrepository {
         }
       }
 
-      console.log('🔍 MongoDB query:', JSON.stringify(query, null, 2));
-
       const queryBuilder = ProductModel.find(query).populate('category');
 
       if (filters?.limit) {
-        console.log('📊 Applying limit:', filters.limit);
         queryBuilder.limit(filters.limit);
       }
       if (filters?.offset) {
-        console.log('📊 Applying offset:', filters.offset);
         queryBuilder.skip(filters.offset);
       }
 
       const products = await queryBuilder.exec();
-      console.log('✅ Products found in DB:', products.length);
 
       const mappedProducts = products.map(p => this.mapToEntity(p));
-      console.log('🎯 Mapped products:', mappedProducts.length);
 
       return mappedProducts;
     } catch (error) {

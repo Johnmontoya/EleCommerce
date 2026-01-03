@@ -1,7 +1,9 @@
 import type { CreateOrderInput, CreateOrderItem } from "../../application/Dto/order.dto";
 import { prisma } from "../../config/prisma";
 import type { OrderEntity } from "../../domain/entities/Orders";
-import type { IOrderRepository } from "../../domain/repositories/IOrderRepository";
+import type { UsersFilters } from "../../domain/repositories/IAuthRepository";
+import type { IOrderRepository, OrderFilters } from "../../domain/repositories/IOrderRepository";
+import type { Prisma } from "../../generated/prisma/client";
 import { ProductModel } from "../models/product.model";
 
 export class PrismaOrderRepository implements IOrderRepository {
@@ -99,13 +101,30 @@ export class PrismaOrderRepository implements IOrderRepository {
             return false;
         }
     }
-    async getAllOrders(): Promise<OrderEntity[]> {
-        return await prisma.order.findMany({
+    async getAllOrders(filters?: OrderFilters): Promise<OrderEntity[]> {
+        const where: Prisma.OrderWhereInput = {};
+
+        if (filters) {
+            if (filters?.search) {
+                where.OR = [
+                    { trackingNumber: { contains: filters.search } },
+                ];
+            }
+
+            if (filters?.status !== undefined) {
+                where.status = filters.status;
+            }
+        }
+
+        const queryBuilder = prisma.order.findMany({
+            where,
             include: {
                 items: true,
                 address: true,
             }
         })
+
+        return queryBuilder;
     }
     async cancelOrder(orderId: string): Promise<boolean> {
         try {

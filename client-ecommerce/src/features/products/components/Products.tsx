@@ -1,17 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { useProducts } from "../hook/queries/useProduct";
 import LoadingFallback from "../../../shared/ui/LoadingFallback";
 import { BiStar } from "react-icons/bi";
 
 const Products = () => {
   const navigate = useNavigate()
-  const [filters, setFilters] = useState({
+  const filters = {
     category: "",
     minPrice: undefined,
     maxPrice: undefined,
-    search: ""
-  });
+    search: "",
+    isPublished: true
+  }
 
   const { data: products, isLoading, error } = useProducts(filters);
 
@@ -36,7 +36,7 @@ const Products = () => {
               </div>
             ) : null}
             <img
-              src={item.images![0]}
+              src={item.images?.[0]}
               alt={item.name}
               className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
             />

@@ -11,15 +11,17 @@ import ProductFilter from "../../components/listProducts/ProductFilter";
 import TableProduct from "../../components/listProducts/TableProduct";
 import { useDataActions } from "../../hook/useDataActions";
 import Pagination from "../../../../shared/ui/Pagination";
+import { useCategories } from "../../../categories/hook/queries/useCategory";
 
 const DashListProductPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory, setSelectedCategory] = useState<string>("");
-    const [selectedBrand, setSelectedBrand] = useState<string>("");
     const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     let itemsPerPage = 10;
+
+    const { data: categories } = useCategories()
 
     useEffect(() => {
         setCurrentPage(1);
@@ -30,9 +32,6 @@ const DashListProductPage = () => {
         search: searchTerm,
         category: selectedCategory || undefined,
     });
-
-    // Filtros disponibles
-    const categories = [...new Set(products?.map(p => p.category) || [])];
 
     // Calcular índices para "cortar" la lista
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -81,8 +80,6 @@ const DashListProductPage = () => {
                             selectedCategory={selectedCategory}
                             setSelectedCategory={setSelectedCategory}
                             categories={categories}
-                            selectedBrand={selectedBrand}
-                            setSelectedBrand={setSelectedBrand}
                         />
 
                         {/* Bulk Actions */}

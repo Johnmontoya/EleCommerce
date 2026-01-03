@@ -32,3 +32,8 @@ export interface OrderItem {
     createdAt: string,
     updatedAt: string
 }
+
+export interface OrderFilters {
+    search?: string;
+    status?: string;
+}

@@ -50,7 +50,7 @@ export interface Product {
   stock: number;
   brand: string;
   category: Category;
-  image?: string;
+  images?: string[];
   tags?: string[];
   priceDiscount?: number;
   sku?: string;
