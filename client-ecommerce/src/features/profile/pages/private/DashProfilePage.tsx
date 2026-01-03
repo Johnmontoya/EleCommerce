@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiCamera, BiPackage, BiUser } from "react-icons/bi";
 import { MdNotifications, MdSecurity, MdVerifiedUser } from "react-icons/md";
 import { useProfile } from "../../hook/queries/useProfile";
@@ -12,6 +12,7 @@ import OrderInfo from "../../components/OrderInfo";
 import SecurityInfo from "../../components/SecurityInfo";
 import PreferenceInfo from "../../components/PreferenceInfo";
 import SideProfile from "../../components/SideProfile";
+import { useOrderUser } from "../../../orders/hook/queries/useOrder";
 
 interface Stats {
     totalOrders: number;
@@ -27,31 +28,26 @@ const DashProfilePage = () => {
     >("overview");
 
     const { data: profile } = useProfile();
+    const { data: orders } = useOrderUser();
 
-    const [stats] = useState<Stats>({
-        totalOrders: 24,
-        totalSpent: 3250.5,
-        wishlistItems: 8,
-        reviewsWritten: 12,
-    });
+    const [totalOrders, setTotalOrders] = useState(0);
+    const [totalSpent, setTotalSpent] = useState(0);
+    useEffect(() => {
+        if (orders) {
+            setTotalOrders(orders.length);
+            setTotalSpent(orders.reduce((total, order) => total + order.total, 0));
+        }
+    }, [orders]);
 
-    /*const handleInputChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
-        const { name, value } = e.target;
-        setEditedUser({ ...editedUser, [name]: value });
+    const wishlistItems = 12;
+    const reviewsWritten = 12;
+
+    const stats: Stats = {
+        totalOrders,
+        totalSpent,
+        wishlistItems,
+        reviewsWritten,
     };
-
-    const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setEditedUser({
-            ...editedUser,
-            address: {
-                ...editedUser.address!,
-                [name]: value,
-            },
-        });
-    };*/
 
     const getRoleBadge = (role: string) => {
         const styles = {
@@ -101,7 +97,7 @@ const DashProfilePage = () => {
                             <div className="absolute -bottom-16 left-8">
                                 <div className="relative">
                                     <img
-                                        src={profile?.avatar || "https://via.placeholder.com/150"}
+                                        src={profile?.avatar || "https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"}
                                         alt={`${profile?.firstName}`}
                                         className="w-32 h-32 rounded-full border-4 border-slate-900 object-cover"
                                     />
@@ -116,7 +112,7 @@ const DashProfilePage = () => {
                                 <div className="flex items-end justify-between">
                                     <div>
                                         <h1 className="text-3xl font-bold text-white mb-1">
-                                            {profile?.firstName} {profile?.lastName}
+                                            {profile?.firstName || ""} {profile?.lastName || ""}
                                         </h1>
                                         <p className="text-white/80">@{profile?.username}</p>
                                     </div>
@@ -186,7 +182,7 @@ const DashProfilePage = () => {
                                 {/* Overview Tab */}
                                 <PersonalInfo activeTab={activeTab} profile={profile} />
                                 {/* Orders Tab */}
-                                <OrderInfo activeTab={activeTab} />
+                                <OrderInfo activeTab={activeTab} orders={orders} />
                                 {/* Security Tab */}
                                 <SecurityInfo activeTab={activeTab} />
                                 {/* Preferences Tab */}

@@ -8,6 +8,7 @@ interface Stats {
 }
 
 const StatsInfo: React.FC<{ stats: Stats }> = ({ stats }) => {
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <div className="bg-slate-800/50 border-2 border-slate-700 rounded-xl p-4 backdrop-blur-sm">

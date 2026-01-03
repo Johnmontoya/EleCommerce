@@ -4,7 +4,9 @@ import LoadingFallback from "../../../shared/ui/LoadingFallback";
 
 const Category = () => {
   const navigate = useNavigate()
-  const { data: categories, isLoading } = useCategories()
+  const { data: categories, isLoading } = useCategories({
+    isPublished: true
+  })
 
   const handleCategoryClick = (id: string) => {
     // Navegar a la página de productos con la categoría en la URL

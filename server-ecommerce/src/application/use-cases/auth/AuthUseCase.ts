@@ -4,7 +4,6 @@ import type { UserUpdateInput } from "../../../generated/prisma/models";
 import type { HashService } from "../../../infrastructure/services/HashService";
 import type { JwtService } from "../../../infrastructure/services/JwtService";
 import type { AuthResponse, ChangePasswordInput, LoginInput, RefreshTokenInput, RegisterInput, UserResponse } from "../../Dto/auth.dto";
-
 import otpGenerator from 'otp-generator';
 
 export class RegisterUseCase {

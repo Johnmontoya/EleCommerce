@@ -2,24 +2,30 @@ import type { StatCard } from "../types/dashboard.types";
 import { BiPackage, BiShoppingBag } from "react-icons/bi";
 import { CiDollar } from "react-icons/ci";
 
-const Stats = () => {
+interface Props {
+  totalOrders: number;
+  pendingOrders: number;
+  rewardPoints: number;
+}
+
+const Stats: React.FC<Props> = ({ totalOrders, pendingOrders, rewardPoints }) => {
   /* Borrar mas adelante cuando se obtenga los datos */
   const stats: StatCard[] = [
     {
       label: "Total Orders",
-      value: 24,
+      value: totalOrders,
       icon: <BiShoppingBag size={24} />,
       color: "from-blue-500 to-blue-600",
     },
     {
-      label: "Pending Delivery",
-      value: 2,
+      label: "Pedidos pendientes",
+      value: pendingOrders,
       icon: <BiPackage size={24} />,
       color: "from-orange-500 to-orange-600",
     },
     {
-      label: "Reward Points",
-      value: "1,250",
+      label: "Ganancias",
+      value: rewardPoints,
       icon: <CiDollar size={24} />,
       color: "from-green-500 to-green-600",
     },

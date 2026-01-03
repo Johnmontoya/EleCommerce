@@ -3,8 +3,10 @@ import { menuAdmin, menuItems } from "../const/menu.types";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../auth/store/useAuthStore";
 import { CiLogout, CiSettings, CiUser } from "react-icons/ci";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Sidebar = () => {
+  const queryClient = useQueryClient();
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +26,8 @@ const Sidebar = () => {
       icon: CiLogout,
       onClick: () => {
         logout();
-        navigate('/login');
+        queryClient.clear();
+        navigate('/login', { replace: true });
       }
     }
   }]

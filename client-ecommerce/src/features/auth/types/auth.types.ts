@@ -14,12 +14,13 @@ export interface User {
     createdAt: string | null | undefined;
     updatedAt: string | null | undefined;
     addresses: {
-        street: string | null;
-        city: string | null;
-        state: string | null;
-        zipCode: string | null;
-        country: string | null;
-    }[] | null;
+        id: string,
+        street: string | null | undefined;
+        city: string | null | undefined;
+        state: string | null | undefined;
+        zipCode: string | null | undefined;
+        country: string | null | undefined;
+    }[] | null | undefined;
 }
 
 export interface LoginRequest {
@@ -68,6 +69,7 @@ export interface AuthResponse {
             createdAt: string | null | undefined;
             updatedAt: string | null | undefined;
             addresses: {
+                id: string,
                 street: string | null;
                 city: string | null;
                 state: string | null;

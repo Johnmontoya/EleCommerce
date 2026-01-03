@@ -82,23 +82,15 @@ export class ProductController {
 
   getAll = async (req: Request, res: Response): Promise<void> => {
     try {
-      console.log('📥 Raw query params:', req.query);
-
       const filters: any = {};
 
       if (req.query.category) {
         filters.category = req.query.category as string;
       }
 
-      // ✅ CRÍTICO: Parsear brands correctamente
       if (req.query.brands) {
         const brandsParam = req.query.brands as string;
-        console.log('🔍 Raw brands param:', brandsParam);
-
-        // Convertir "SmartFit,MasterCourses" a ['SmartFit', 'MasterCourses']
         filters.brands = brandsParam.split(',').map(b => b.trim());
-
-        console.log('✅ Parsed brands array:', filters.brands);
       }
 
       if (req.query.minPrice) {
@@ -126,13 +118,9 @@ export class ProductController {
         filters.isPublished = req.query.isPublished === 'true';
       }
 
-      console.log('🎯 Final filters sent to use case:', JSON.stringify(filters, null, 2));
-
       const products = await this.getAllProductsUseCase.execute(
         Object.keys(filters).length > 0 ? filters : undefined
       );
-
-      console.log('📊 Products returned:', products.length);
 
       res.status(200).json({
         success: true,

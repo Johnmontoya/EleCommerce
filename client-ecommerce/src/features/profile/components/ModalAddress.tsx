@@ -3,36 +3,64 @@ import { PiCityFill } from "react-icons/pi";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { MdLocationCity } from "react-icons/md";
 import useInputs from "../../../shared/hooks/useInputs";
-import { BiMap } from "react-icons/bi";
+import { BiMap, BiSave } from "react-icons/bi";
 import type { User } from "../../auth/types/auth.types";
 import MiModal from "../../../shared/ui/Modal";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ButtonAction from "../../../shared/ui/ButtonAction";
+import { AxiosError } from "axios";
+import { toast } from "sonner";
+import { useUpdateAddressMutation } from "../hook/mutation/useProfileMutation";
 
 interface ModalAddressProps {
     isOpen: boolean;
     onClose: () => void;
     title: string;
-    data: User;
+    data: User | undefined;
 }
 
 const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, title, data }) => {
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    const updateAddressMutation = useUpdateAddressMutation();
     const [editAddress, onChangeEditAddress, setEditAddress] = useInputs({
-        address: "",
+        id: data?.addresses![0].id,
         city: "",
         state: "",
+        street: "",
         country: "",
-        zipCode: ""
+        zipCode: "",
+        fullName: null,
+        phone: null,
+        isDefault: true
     })
 
     useEffect(() => {
         setEditAddress({
-            address: data?.addresses![0].street,
+            id: data?.addresses![0].id,
             city: data?.addresses![0].city,
             state: data?.addresses![0].state,
+            street: data?.addresses![0].street,
             country: data?.addresses![0].country,
-            zipCode: data?.addresses![0].zipCode
+            zipCode: data?.addresses![0].zipCode,
+            fullName: null,
+            phone: null,
+            isDefault: true
         })
     }, [data])
+
+    const handleSubmit = async (e?: React.FormEvent<HTMLButtonElement>) => {
+        e?.preventDefault();
+        setIsSubmitting(true);
+        try {
+            await updateAddressMutation.mutateAsync({ id: editAddress.id, addressData: editAddress });
+        } catch (error) {
+            if (error instanceof AxiosError && error.response?.data?.errors) {
+                toast.error(error.response.data.errors);
+            }
+        } finally {
+            setIsSubmitting(false);
+        }
+    }
 
     return (
         <MiModal
@@ -52,9 +80,9 @@ const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, title, dat
                         </label>
                         <div className="flex items-center w-full bg-gray-800 border border-gray-700 h-12 rounded-lg overflow-hidden pl-6 gap-2 ">
                             <BiMap size={20} className="text-slate-100" />
-                            <input type="text" name="address" placeholder="Direccion"
+                            <input type="text" name="street" placeholder="Direccion"
                                 className="w-full bg-transparent text-white placeholder-gray-400 border-none outline-none "
-                                value={editAddress.address} onChange={onChangeEditAddress} required />
+                                value={editAddress.street} onChange={onChangeEditAddress} required />
                         </div>
                     </div>
                     <div>
@@ -106,6 +134,18 @@ const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, title, dat
                             value={editAddress.zipCode} onChange={onChangeEditAddress} required />
                     </div>
                 </div>
+
+                <ButtonAction variant="primary" onClick={handleSubmit} text="Guardar" className="w-full flex mt-6 justify-center items-center">
+                    {isSubmitting ? (
+                        <>
+                            <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full" />
+                        </>
+                    ) : (
+                        <>
+                            <BiSave size={18} />
+                        </>
+                    )}
+                </ButtonAction>
             </div>
         </MiModal>
     )

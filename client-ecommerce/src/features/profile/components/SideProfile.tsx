@@ -1,12 +1,15 @@
 import { BiCalendar, BiHeart, BiMap, BiPackage, BiShield } from "react-icons/bi"
 import { MdLanguage, MdVerifiedUser } from "react-icons/md"
 import type { User } from "../../auth/types/auth.types";
+import ButtonAction from "../../../shared/ui/ButtonAction";
+import { useNavigate } from "react-router-dom";
 
 interface SideProfileProps {
     profile: User | undefined;
 }
 
 const SideProfile = ({ profile }: SideProfileProps) => {
+    const navigate = useNavigate();
     return (
         <div className="lg:col-span-1 space-y-6">
             {/* Account Info */}
@@ -60,10 +63,9 @@ const SideProfile = ({ profile }: SideProfileProps) => {
                     Acciones Rápidas
                 </h3>
                 <div className="space-y-2">
-                    <button className="w-full text-left px-4 py-3 bg-slate-700/50 hover:bg-slate-700 text-slate-200 rounded-lg transition-all flex items-center gap-3">
+                    <ButtonAction onClick={() => navigate("/dashboard/orders")} text="Ver mis pedidos" variant="outline" className="w-full text-left px-4 py-3 bg-slate-700/50 hover:bg-slate-700 text-slate-200 rounded-lg transition-all flex items-center gap-3">
                         <BiPackage size={18} className="text-cyan-400" />
-                        Ver mis pedidos
-                    </button>
+                    </ButtonAction>
                     <button className="w-full text-left px-4 py-3 bg-slate-700/50 hover:bg-slate-700 text-slate-200 rounded-lg transition-all flex items-center gap-3">
                         <BiHeart size={18} className="text-cyan-400" />
                         Lista de deseos

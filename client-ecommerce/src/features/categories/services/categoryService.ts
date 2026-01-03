@@ -21,10 +21,9 @@ export const categoryService = {
         return data;
     },
     getAll: async (filters?: ProductFilters): Promise<ApiResponse<Category[]>> => {
-        const { data } = await apiClient.get(endpoints.categories.list);
-        if (filters) {
-            return data;
-        }
+
+        const { data } = await apiClient.get(endpoints.categories.list, { params: filters });
+
         return data;
     },
     getById: async (id: string): Promise<ApiResponse<Category>> => {

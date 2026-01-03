@@ -53,4 +53,17 @@ export const queryKeys = {
     update: () => [...queryKeys.profile.all, 'update'] as const,
     changePassword: () => [...queryKeys.profile.all, 'change-password'] as const,
   },
+  cart: {
+    all: ['cart'] as const,
+    get: () => [...queryKeys.cart.all, 'get'] as const,
+  },
+  address: {
+    all: ['address'] as const,
+    get: () => [...queryKeys.address.all, 'get'] as const,
+  },
+  orders: {
+    all: ['orders'] as const,
+    getAll: () => [...queryKeys.orders.all, 'get-all'] as const,
+    getUser: () => [...queryKeys.orders.all, 'get-user'] as const,
+  },
 };

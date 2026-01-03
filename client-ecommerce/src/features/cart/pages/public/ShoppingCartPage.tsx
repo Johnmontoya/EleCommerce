@@ -1,68 +1,26 @@
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
 import ShopList from "../../components/shopping/ShopList";
 import ResumeOrder from "../../components/shopping/ResumeOrder";
-
-interface Product {
-  name: string;
-  description: string[];
-  offerPrice: number;
-  price: number;
-  quantity: number;
-  size: number;
-  image: string;
-  category: string;
-}
+import { useCartUser } from "../../hook/queries/useCart";
+import LoadingFallback from "../../../../shared/ui/LoadingFallback";
 
 const ShoppingCartPage: React.FC = () => {
+  const { data: cart, isLoading, error } = useCartUser();
 
-  const [products, setProducts] = useState<Product[]>([
-    {
-      name: "Running Shoes",
-      description: [
-        "Lightweight and comfortable",
-        "Breathable mesh upper",
-        "Ideal for jogging and casual wear",
-      ],
-      offerPrice: 250,
-      price: 200,
-      quantity: 1,
-      size: 42,
-      image:
-        "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage.png",
-      category: "Footwear",
-    },
-    {
-      name: "Running Shoes",
-      description: [
-        "Lightweight and comfortable",
-        "Breathable mesh upper",
-        "Ideal for jogging and casual wear",
-      ],
-      offerPrice: 250,
-      price: 200,
-      quantity: 1,
-      size: 42,
-      image:
-        "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage2.png",
-      category: "Footwear",
-    },
-    {
-      name: "Running Shoes",
-      description: [
-        "Lightweight and comfortable",
-        "Breathable mesh upper",
-        "Ideal for jogging and casual wear",
-      ],
-      offerPrice: 250,
-      price: 200,
-      quantity: 1,
-      size: 42,
-      image:
-        "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage3.png",
-      category: "Footwear",
-    },
-  ]);
+  const sortedCart = useMemo(() => {
+    if (!cart) return [];
+    // Ordena por ID para mantener consistencia
+    return [...cart].sort((a, b) => a.id.localeCompare(b.id));
+  }, [cart]);
+
+  if (isLoading) {
+    return <LoadingFallback />;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <>
@@ -78,7 +36,7 @@ const ShoppingCartPage: React.FC = () => {
                 Carrito de Compras
               </h1>
               <span className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-full text-sm font-semibold">
-                {products.length} {products.length === 1 ? "Item" : "Items"}
+                Items
               </span>
             </div>
 
@@ -90,11 +48,21 @@ const ShoppingCartPage: React.FC = () => {
             </div>
 
             {/* Products List */}
-            <ShopList products={products} setProducts={setProducts} />
+            {sortedCart && sortedCart.length > 0 ? (
+              sortedCart.map((item) => (
+                <ShopList key={item.id} products={item} />
+              ))
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-slate-400 text-lg">
+                  Tu carrito está vacío
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Order Summary Section */}
-          <ResumeOrder products={products} />
+          <ResumeOrder products={cart} />
         </div>
       </div>
     </>

@@ -44,12 +44,9 @@ const ListProductsPage: React.FC = () => {
       const maxPriceFromUrl = searchParams.get('maxPrice');
       const pageFromUrl = searchParams.get('page');
 
-      console.log("categoryFromUrl", categoryFromUrl)
       // Inicializar filtros desde URL
-      //if (categoryFromUrl) setCategory(categoryFromUrl);
       if (categoryFromUrl && allCategories && allCategories.length > 0) {
         const categoryObj = allCategories?.find(c => c?.id === categoryFromUrl);
-        console.log("categoryObj", categoryObj)
         if (categoryObj) {
           setCategory(categoryObj);
         }
@@ -100,14 +97,16 @@ const ListProductsPage: React.FC = () => {
     offset: (currentPage - 1) * itemsPerPage,
   });
 
+  // Calcular índices para "cortar" la lista
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  // Estos son los usuarios que vas a mostrar en la tabla (IMPORTANTE)
+  const currentProducts = products?.slice(indexOfFirstItem, indexOfLastItem) || [];
+
   // 🐛 DEBUG: Ver qué filtros se están enviando
   React.useEffect(() => {
-    console.log('🔍 Filtros actuales:', filters);
-    console.log('🔍 Marcas seleccionadas:', selectedBrands);
   }, [filters, selectedBrands]);
-
-  // Calcular total de páginas
-  const totalPages = products ? Math.ceil(products.length / itemsPerPage) : 1;
 
   // Ordenar productos según sortBy
   const sortedProducts = React.useMemo(() => {
@@ -129,8 +128,6 @@ const ListProductsPage: React.FC = () => {
         return sorted.sort((a, b) => (b.price || 0) - (a.price || 0));
     }
   }, [products, sortBy]);
-
-  console.log("asegurando", products)
 
   if (isLoading) return <LoadingFallback />
 
@@ -303,7 +300,7 @@ const ListProductsPage: React.FC = () => {
             {/* Pagination */}
             {
               sortedProducts.length > 0 && (
-                <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={setCurrentPage} />
+                <Pagination title="productos" data={currentProducts} currentPage={currentPage} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage} indexOfFirstItem={indexOfFirstItem} indexOfLastItem={indexOfLastItem} />
               )
             }
 

@@ -81,9 +81,7 @@ export class AddressController {
                 return;
             }
 
-            const validateData = CreateAddressSchema.parse(req.body);
-
-            const result = await this.updateAddressUseCase.execute(id!, validateData, userId);
+            const result = await this.updateAddressUseCase.execute(id!, req.body, userId);
 
             res.status(200).json({
                 success: true,

@@ -1,5 +1,6 @@
 import { CategoryEntity } from "../../../domain/entities/Category";
 import type { ICategoryRepository } from "../../../domain/repositories/ICategoryRepository";
+import type { ProductFilters } from "../../../domain/repositories/IProductRepository";
 import type { CreateCategoryInput, UpdateCategoryInput } from "../../Dto/category.dto";
 
 export class CreateCategoryUseCase {
@@ -39,8 +40,8 @@ export class GetCategoryByIdUseCase {
 export class GetAllCategoriesUseCase {
     constructor(private readonly categoryRepository: ICategoryRepository) { }
 
-    async execute(): Promise<CategoryEntity[]> {
-        return await this.categoryRepository.findAll();
+    async execute(filters?: ProductFilters): Promise<CategoryEntity[]> {
+        return await this.categoryRepository.findAll(filters);
     }
 }
 

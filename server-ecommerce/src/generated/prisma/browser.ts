@@ -33,6 +33,16 @@ export type RefreshToken = Prisma.RefreshTokenModel
  */
 export type Address = Prisma.AddressModel
 /**
+ * Model Cart
+ * 
+ */
+export type Cart = Prisma.CartModel
+/**
+ * Model CartItem
+ * 
+ */
+export type CartItem = Prisma.CartItemModel
+/**
  * Model Order
  * 
  */

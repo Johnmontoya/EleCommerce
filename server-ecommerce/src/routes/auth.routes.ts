@@ -75,7 +75,7 @@ router.delete('/delete/:id', authenticate, authorize('ADMIN'), authController.de
 router.delete('/delete-users', authenticate, authorize('ADMIN'), authController.deleteUsers);
 router.put('/toggle-active/:id', authenticate, authorize('ADMIN'), authController.toggleActiveUser);
 router.get('/get-user/:id', authenticate, authorize('ADMIN'), authController.getUserById);
-router.put('/update/:id', authenticate, authorize('ADMIN'), authController.updateUser);
+router.put('/update/:id', authenticate, authController.updateUser);
 /** Password */
 router.post('/forgot-password', authController.forgotPassword);
 router.put('/change-password', authController.changePassword);

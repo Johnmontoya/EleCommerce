@@ -11,4 +11,13 @@ export const CreateAddressSchema = z.object({
     isDefault: z.boolean(),
 });
 
-export const UpdateAddressSchema = CreateAddressSchema.partial().strict();
+export const UpdateAddressSchema = z.object({
+    fullName: z.string(),
+    phone: z.string(),
+    street: z.string(),
+    city: z.string(),
+    state: z.string(),
+    country: z.string(),
+    zipCode: z.string(),
+    isDefault: z.boolean(),
+});

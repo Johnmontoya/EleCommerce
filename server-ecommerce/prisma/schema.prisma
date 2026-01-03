@@ -32,6 +32,7 @@ model User {
   addresses     Address[]
   orders        Order[]
   refreshTokens RefreshToken[]
+  cart          Cart?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -64,30 +65,60 @@ model Address {
   isDefault Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  orders    Order[]
 
   @@map("addresses")
 }
 
+model Cart {
+  id        String     @id @default(uuid())
+  userId    String     @unique
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@map("carts")
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+  cartId    String
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  name      String?
+  image     String?
+  productId String // ID de MongoDB
+  quantity  Int      @default(1)
+  price     Float    @default(0)
+  discount  Float    @default(0)
+  stock     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([cartId, productId])
+  @@map("cart_items")
+}
+
 model Order {
-  id              String        @id @default(uuid())
-  userId          String
-  user            User          @relation(fields: [userId], references: [id])
+  id             String        @id @default(uuid())
+  userId         String
+  user           User          @relation(fields: [userId], references: [id])
   // Referencias a productos en MongoDB (solo IDs)
-  items           OrderItem[]
-  subtotal        Float
-  tax             Float
-  shippingCost    Float
-  discount        Float         @default(0)
-  total           Float
-  status          OrderStatus   @default(PENDING)
-  paymentStatus   PaymentStatus @default(PENDING)
-  paymentMethod   String?
-  shippingAddress Json // Dirección en JSON
-  billingAddress  Json?
-  trackingNumber  String?
-  notes           String?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  items          OrderItem[]
+  subtotal       Float
+  tax            Float
+  shippingCost   Float
+  discount       Float         @default(0)
+  total          Float
+  status         OrderStatus   @default(PENDING)
+  paymentStatus  PaymentStatus @default(PENDING)
+  paymentMethod  String?
+  addressId      String
+  address        Address       @relation(fields: [addressId], references: [id], onDelete: Cascade)
+  trackingNumber String?
+  notes          String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 
   @@map("orders")
 }
@@ -111,30 +142,8 @@ model OrderItem {
 }
 
 /**
- * cart         Cart?
- * wishlist     Wishlist?
  * reviews      Review[]
  * refreshToken RefreshToken[]
- * model Cart {
- * id     String @id @default(uuid())
- * userId String @unique
- * user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
- * items CartItem[]
- * createdAt DateTime @default(now())
- * updatedAt DateTime @updatedAt
- * @@map("carts")
- * }
- * model CartItem {
- * id     String @id @default(uuid())
- * cartId String
- * cart   Cart   @relation(fields: [cartId], references: [id], onDelete: Cascade)
- * productId String // ID de MongoDB
- * quantity  Int
- * createdAt DateTime @default(now())
- * updatedAt DateTime @updatedAt
- * @@unique([cartId, productId])
- * @@map("cart_items")
- * }
  * model Wishlist {
  * id     String @id @default(uuid())
  * userId String @unique

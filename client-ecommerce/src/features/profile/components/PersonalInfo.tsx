@@ -3,10 +3,11 @@ import { MdVerifiedUser } from "react-icons/md";
 import { useState } from "react";
 import ModalInfo from "./ModalInfo";
 import ModalAddress from "./ModalAddress";
+import type { User } from "../../auth/types/auth.types";
 
 interface Props {
     activeTab: string;
-    profile: any;
+    profile: User | undefined;
 }
 
 const PersonalInfo = ({ activeTab, profile }: Props) => {
@@ -110,7 +111,7 @@ const PersonalInfo = ({ activeTab, profile }: Props) => {
                                     Dirección
                                 </label>
                                 <p className="text-slate-100 font-semibold">
-                                    {profile?.addresses[0].street}
+                                    {profile?.addresses![0].street || "No especificado"}
                                 </p>
                             </div>
 
@@ -119,7 +120,7 @@ const PersonalInfo = ({ activeTab, profile }: Props) => {
                                     Ciudad
                                 </label>
                                 <p className="text-slate-100 font-semibold">
-                                    {profile?.addresses[0].city}
+                                    {profile?.addresses![0].city || "No especificado"}
                                 </p>
                             </div>
 
@@ -128,7 +129,7 @@ const PersonalInfo = ({ activeTab, profile }: Props) => {
                                     Código Postal
                                 </label>
                                 <p className="text-slate-100 font-semibold">
-                                    {profile?.addresses[0].zipCode}
+                                    {profile?.addresses![0].zipCode || "No especificado"}
                                 </p>
                             </div>
 
@@ -137,7 +138,7 @@ const PersonalInfo = ({ activeTab, profile }: Props) => {
                                     Estado/Región
                                 </label>
                                 <p className="text-slate-100 font-semibold">
-                                    {profile?.addresses[0].state}
+                                    {profile?.addresses![0].state || "No especificado"}
                                 </p>
                             </div>
 
@@ -146,7 +147,7 @@ const PersonalInfo = ({ activeTab, profile }: Props) => {
                                     País
                                 </label>
                                 <p className="text-slate-100 font-semibold">
-                                    {profile?.addresses[0].country}
+                                    {profile?.addresses![0].country || "No especificado"}
                                 </p>
                             </div>
                         </div>

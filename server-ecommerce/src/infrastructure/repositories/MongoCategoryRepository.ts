@@ -1,5 +1,6 @@
 import { CategoryEntity } from "../../domain/entities/Category";
 import type { ICategoryRepository } from "../../domain/repositories/ICategoryRepository";
+import type { ProductFilters } from "../../domain/repositories/IProductRepository";
 import { CategoryModel } from "../models/category.model";
 
 export class MongoCategoryRepository implements ICategoryRepository {
@@ -22,9 +23,14 @@ export class MongoCategoryRepository implements ICategoryRepository {
         }
     }
 
-    async findAll(): Promise<CategoryEntity[]> {
+    async findAll(filters?: ProductFilters): Promise<CategoryEntity[]> {
         try {
-            const categories = await CategoryModel.find();
+            const query: any = {}
+
+            if (filters?.isPublished !== undefined) {
+                query.isActive = filters.isPublished;
+            }
+            const categories = await CategoryModel.find(query);
             return categories.map(c => this.mapToEntity(c));
         } catch (error) {
             throw error;

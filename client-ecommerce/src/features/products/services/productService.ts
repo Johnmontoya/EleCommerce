@@ -26,8 +26,6 @@ export const productService = {
             }
         }
 
-        console.log('📡 Sending request to:', endpoints.products.list + '?' + params.toString());
-
         const { data } = await apiClient.get(endpoints.products.list + '?' + params.toString());
         return data;
     },

@@ -1,7 +1,8 @@
 import type { IAddressRepository } from "../../domain/repositories/IAddressRepository";
 import { AddressEntity } from "../../domain/entities/Address";
 import { prisma } from "../../config/prisma";
-import type { CreateAddressData } from "../../application/Dto/address.dto";
+import type { CreateAddressData, UpdateAddressInput } from "../../application/Dto/address.dto";
+import type { AddressUpdateInput } from "../../generated/prisma/models";
 
 export class PrismaAddressRepository implements IAddressRepository {
     constructor() { }
@@ -23,7 +24,7 @@ export class PrismaAddressRepository implements IAddressRepository {
         });
     }
     async findById(id: string): Promise<AddressEntity | null> {
-        const address = await prisma.address.findUnique({ where: { id } });
+        const address = await prisma.address.findUnique({ where: { id: id } });
         if (!address) {
             throw new Error("Direccion no encontrada");
         }
@@ -79,11 +80,11 @@ export class PrismaAddressRepository implements IAddressRepository {
             address.isDefault
         );
     }
-    async update(id: string, address: Partial<AddressEntity>): Promise<AddressEntity | null> {
+    async update(id: string, data: UpdateAddressInput): Promise<AddressEntity | null> {
         try {
             const updated = await prisma.address.update({
                 where: { id },
-                data: address
+                data: data
             })
 
             if (!updated) {

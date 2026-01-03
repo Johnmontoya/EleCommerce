@@ -1,5 +1,6 @@
 import { AddressEntity } from "../../../domain/entities/Address";
 import type { IAddressRepository } from "../../../domain/repositories/IAddressRepository";
+import type { AddressUpdateInput } from "../../../generated/prisma/models";
 import type { CreateAddressInput, UpdateAddressInput } from "../../Dto/address.dto";
 
 export class CreateAddressUseCase {
@@ -63,7 +64,7 @@ export class UpdateAddressUseCase {
     constructor(
         private readonly addressRepository: IAddressRepository) { }
 
-    async execute(id: string, input: CreateAddressInput, userId: string): Promise<AddressEntity> {
+    async execute(id: string, input: UpdateAddressInput, userId: string): Promise<AddressEntity> {
         const existingAddress = await this.addressRepository.findById(id);
         if (!existingAddress) {
             throw new Error("Direccion no encontrada");
@@ -72,13 +73,12 @@ export class UpdateAddressUseCase {
             throw new Error("No tienes permiso para acceder a esta direccion");
         }
 
-        if (input.isDefault === true) {
+        /*if (input.isDefault === true) {
             const defaultAddress = await this.addressRepository.findDefaultByUserId(userId);
             if (defaultAddress && defaultAddress.id !== id) {
                 await this.addressRepository.update(defaultAddress.id, { isDefault: false });
             }
-        }
-
+        }*/
         const updatedAddress = await this.addressRepository.update(id, input);
 
         if (!updatedAddress) {

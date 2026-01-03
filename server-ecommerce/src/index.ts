@@ -6,6 +6,8 @@ import showcaseRoutes from "./routes/home.routes"
 import categoryRoutes from "./routes/category.routes"
 import authRoutes from "./routes/auth.routes"
 import addressRoutes from "./routes/address.routes"
+import orderRoutes from "./routes/order.routes"
+import cartRoutes from "./routes/cart.routes"
 
 const app = express();
 
@@ -25,6 +27,8 @@ app.use('/showcase', showcaseRoutes)
 app.use('/categories', categoryRoutes)
 app.use('/auth', authRoutes)
 app.use('/address', addressRoutes)
+app.use('/orders', orderRoutes)
+app.use('/cart', cartRoutes)
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

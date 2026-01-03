@@ -12,7 +12,7 @@ interface ModalInfoProps {
     isOpen: boolean;
     onClose: () => void;
     title: string;
-    data: User;
+    data: User | undefined;
 }
 const ModalInfo: React.FC<ModalInfoProps> = ({ isOpen, onClose, title, data }) => {
     const updateUserMutation = useUpdateUserMutation();
@@ -36,7 +36,7 @@ const ModalInfo: React.FC<ModalInfoProps> = ({ isOpen, onClose, title, data }) =
         e?.preventDefault();
         setIsSubmitting(true);
         try {
-            await updateUserMutation.mutateAsync({ id: data.id!, userData: editProfile });
+            await updateUserMutation.mutateAsync({ id: data?.id!, userData: editProfile });
 
         } catch (error) {
             if (error instanceof AxiosError && error.response?.data?.errors) {

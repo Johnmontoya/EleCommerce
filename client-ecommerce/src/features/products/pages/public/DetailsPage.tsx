@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { IoIosAdd } from "react-icons/io";
 import { RiSubtractFill } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
 import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { BsCartCheck, BsCartPlus } from "react-icons/bs";
 import TabsSection from "../../components/detailsProduct/TabsSection";
@@ -10,12 +9,27 @@ import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
 import { useProductBySlug } from "../../hook/queries/useProduct";
 import { useParams } from "react-router-dom";
 import LoadingFallback from "../../../../shared/ui/LoadingFallback";
+import { useCartAddMutation } from "../../../cart/hook/mutation/useCartMutation";
 
 const DetailsPage: React.FC = () => {
-  const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
+  const useCartMutation = useCartAddMutation();
   const { data: product, isLoading, error } = useProductBySlug(slug!);
   const [thumbnail, setThumbnail] = useState<string>();
+  const [quantity, setQuantity] = useState(1);
+
+  const handleIncrement = () => {
+    product?.stock!
+    if (quantity < product?.stock!) {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
 
   useEffect(() => {
     // Solo actualiza si el producto está cargado y tiene imágenes
@@ -23,6 +37,18 @@ const DetailsPage: React.FC = () => {
       setThumbnail(product.images[0]);
     }
   }, [product]);
+
+  const handleAddToCart = async () => {
+    await useCartMutation.mutateAsync({
+      productId: product?.id!,
+      quantity: quantity,
+      name: product?.name!,
+      image: product?.images![0]!,
+      price: product?.price!,
+      discount: product?.priceDiscount!,
+      stock: product?.stock!,
+    });
+  };
 
   if (isLoading) {
     return <LoadingFallback />;
@@ -51,8 +77,8 @@ const DetailsPage: React.FC = () => {
                   key={index}
                   onClick={() => setThumbnail(image)}
                   className={`border-2 w-20 h-20 rounded-lg overflow-hidden cursor-pointer transition-all ${thumbnail === image
-                      ? "border-cyan-400 shadow-lg shadow-cyan-400/50"
-                      : "border-slate-600 hover:border-slate-400"
+                    ? "border-cyan-400 shadow-lg shadow-cyan-400/50"
+                    : "border-slate-600 hover:border-slate-400"
                     }`}
                 >
                   <img
@@ -128,17 +154,17 @@ const DetailsPage: React.FC = () => {
               </ul>
             </div>
 
-            <div className="w-44 p-2 my-9 bg-white rounded-[170px] border border-[#a0a0a0] justify-around items-center flex">
-              <RiSubtractFill size={20} className="cursor-pointer" />
-              <span className="w-10 text-center text-[#191919] text-base font-normal leading-normal">
-                5
+            <div className="w-44 p-2 my-9 rounded-[170px] border border-cyan-500 justify-around items-center flex">
+              <RiSubtractFill size={20} className="cursor-pointer text-cyan-500" onClick={handleDecrement} />
+              <span className="w-10 text-center text-cyan-500 text-base font-normal leading-normal">
+                {quantity}
               </span>
-              <IoIosAdd size={20} className="cursor-pointer" />
+              <IoIosAdd size={20} className="cursor-pointer text-cyan-500" onClick={handleIncrement} />
             </div>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <ButtonAction onClick={() => navigate('/cart')} children={<BsCartPlus size={18} />} text={"Agregar al carrito"} variant="secondary" />
+              <ButtonAction onClick={handleAddToCart} children={<BsCartPlus size={18} />} text={"Agregar al carrito"} variant="secondary" />
               <ButtonAction onClick={() => { }} children={<BsCartCheck size={18} />} text={"Comprar"} variant="primary" />
             </div>
           </div>

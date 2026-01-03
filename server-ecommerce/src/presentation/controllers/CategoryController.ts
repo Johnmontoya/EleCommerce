@@ -45,7 +45,11 @@ export class CategoryController {
 
     getAllCategories = async (req: Request, res: Response): Promise<void> => {
         try {
-            const categories = await this.findAllCategoriesUseCase.execute();
+            const filters: any = {};
+            if (req.query.isPublished) {
+                filters.isPublished = req.query.isPublished === 'true';
+            }
+            const categories = await this.findAllCategoriesUseCase.execute(filters);
 
             if (categories.length === 0) {
                 res.status(404).json({

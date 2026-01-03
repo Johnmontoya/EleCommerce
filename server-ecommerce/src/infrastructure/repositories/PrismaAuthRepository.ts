@@ -4,25 +4,55 @@ import { prisma } from "../../config/prisma";
 import type { ChangePasswordInput, CreateUserData, UserResponse } from "../../application/Dto/auth.dto";
 import type { Prisma } from "../../generated/prisma/client";
 import type { UserUpdateInput } from "../../generated/prisma/models";
-import { any } from "zod";
 
 export class PrismaAuthRepository implements IAuthRepository {
     async createUser(data: CreateUserData): Promise<UserEntity> {
-        return await prisma.user.create({
-            data: {
-                email: data.email,
-                password: data.password,
-                username: data.username,
-                firstName: data.firstName,
-                lastName: data.lastName,
-                phone: data.phone,
-                avatar: data.avatar,
-                role: data.role,
-                isActive: data.isActive || true,
-                emailVerified: data.emailVerified || false,
-                otp: data.otp || null
-            }
-        });
+        try {
+            const createdUser = await prisma.$transaction(async (tx) => {
+                // 1. Crear el usuario
+                const user = await tx.user.create({
+                    data: {
+                        email: data.email,
+                        password: data.password,
+                        username: data.username,
+                        firstName: data.firstName,
+                        lastName: data.lastName,
+                        phone: data.phone,
+                        avatar: data.avatar,
+                        role: data.role || "USER", // valor por defecto recomendado
+                        isActive: data.isActive ?? true,
+                        emailVerified: data.emailVerified ?? false,
+                        otp: data.otp ?? null,
+                    },
+                });
+
+                // 2. Crear una dirección vacía (opcional, pero útil para usuarios)
+                await tx.address.create({
+                    data: {
+                        userId: user.id,
+                        fullName: null,
+                        phone: null,
+                        street: null,
+                        city: null,
+                        state: null,
+                        country: null,
+                        zipCode: null,
+                        isDefault: false, // o true si quieres que sea predeterminada por defecto
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                    },
+                });
+
+                // 3. Devolver el usuario creado (¡importante!)
+                return user;
+            });
+
+            // Aquí sí puedes usar el usuario porque la transacción lo devuelve
+            return createdUser;
+
+        } catch (error) {
+            throw error;
+        }
     }
     async findByUserByEmail(email: string): Promise<UserEntity | null> {
         return await prisma.user.findUnique({ where: { email } });

@@ -26,7 +26,7 @@ const addressController = new AddressController(
 
 router.post('/create', authenticate, addressController.createAddress);
 router.get('/get/:id', authenticate, addressController.getAddressById);
-router.get('/get-user/:userId', authenticate, addressController.getAddressByUserId);
+router.get('/get-user', authenticate, addressController.getAddressByUserId);
 router.put('/update/:id', authenticate, addressController.updateAddress);
 router.delete('/delete/:id', authenticate, addressController.deleteAddress);
 router.put('/set-default/:id', authenticate, addressController.setDefaultAddress);

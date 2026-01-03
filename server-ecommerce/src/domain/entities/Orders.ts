@@ -9,8 +9,7 @@ export interface Order {
     status: string;
     paymentStatus: string;
     paymentMethod: string | null;
-    shippingAddress: any;
-    billingAddress: any | null;
+    addressId: string;
     trackingNumber: string | null;
     notes: string | null;
 }
@@ -27,8 +26,7 @@ export class OrderEntity implements Order {
         public status: string,
         public paymentStatus: string,
         public paymentMethod: string | null,
-        public shippingAddress: any,
-        public billingAddress: any | null,
+        public addressId: string,
         public trackingNumber: string | null,
         public notes: string | null,
     ) { }
@@ -46,8 +44,7 @@ export class OrderEntity implements Order {
             props.status,
             props.paymentStatus,
             props.paymentMethod,
-            props.shippingAddress,
-            props.billingAddress,
+            props.addressId,
             props.trackingNumber,
             props.notes,
         );

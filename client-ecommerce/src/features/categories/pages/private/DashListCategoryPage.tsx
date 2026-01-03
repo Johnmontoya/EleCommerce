@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
 import ButtonMobile from "../../../../shared/ui/ButtonMobile";
 import NavMobile from "../../../dashboard/components/NavMobile";
@@ -10,14 +10,23 @@ import DashHeader from "../../../../shared/ui/DashHeader";
 import TableCategory from "../../components/listCategory/TableCategory";
 import Pagination from "../../../../shared/ui/Pagination";
 import { useDataActions } from "../../hook/useDataActions";
+import CategoryFilter from "../../components/listCategory/CategoryFilter";
 
 const DashListCategoryPage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [showFilters, setShowFilters] = useState(false);
+    const [isActive, setIsActive] = useState<boolean | null>(null);
     const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     let itemsPerPage = 10;
 
-    const { data: categories } = useCategories();
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [isActive]);
+
+    const { data: categories } = useCategories({
+        isPublished: isActive === null ? undefined : isActive,
+    });
 
     // Calcular índices para "cortar" la lista
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -56,6 +65,13 @@ const DashListCategoryPage = () => {
                             path="categories"
                             titleIcon={<BiCategory className="text-cyan-400" size={36} />}
                             list={true} />
+
+                        <CategoryFilter
+                            showFilters={showFilters}
+                            setShowFilters={setShowFilters}
+                            isActive={isActive}
+                            setIsActive={setIsActive}
+                        />
 
                         {/* Bulk Actions */}
                         {selectedProducts.length > 0 && (

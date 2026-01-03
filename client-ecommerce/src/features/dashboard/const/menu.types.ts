@@ -1,6 +1,6 @@
 import { BiCategoryAlt, BiCreditCard, BiHeart, BiUser } from "react-icons/bi";
 import { BsTruck } from "react-icons/bs";
-import { CiLock } from "react-icons/ci";
+import { CiLock, CiViewList } from "react-icons/ci";
 import { MdDashboard } from "react-icons/md";
 import { LuPackagePlus } from "react-icons/lu";
 
@@ -26,4 +26,5 @@ export const menuAdmin = [
   { name: "Lista de Productos", icon: LuPackagePlus, link: "/dashboard/products", badge: '' },
   { name: "Lista de Categorias", icon: BiCategoryAlt, link: "/dashboard/categories" },
   { name: "Lista de Usuarios", icon: BiUser, link: "/dashboard/users" },
+  { name: "Lista de Pedidos", icon: CiViewList, link: "/dashboard/allorders" },
 ];

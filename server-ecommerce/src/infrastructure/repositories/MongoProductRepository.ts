@@ -101,15 +101,11 @@ export class MongoProductRepository implements IProductrepository {
 
   async update(id: string, productData: Partial<ProductEntity>): Promise<ProductEntity | null> {
     try {
-      console.log('Updating product:', id, productData);
-
       const updated = await ProductModel.findByIdAndUpdate(
         id,
         productData,
         { new: true, runValidators: true }
       );
-
-      console.log('Product updated:', updated);
       return updated ? this.mapToEntity(updated) : null;
     } catch (error) {
       console.error('Error updating product:', error);

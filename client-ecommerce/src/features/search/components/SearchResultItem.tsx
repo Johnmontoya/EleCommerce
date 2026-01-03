@@ -23,6 +23,7 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({
     ? data.price - (data.price * data.priceDiscount) / 100
     : data.price;
 
+  console.log(data);
   return (
     <div
       onClick={handleClick}
@@ -37,7 +38,7 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({
         <h3 className="text-slate-100 font-semibold group-hover:text-cyan-400 transition-colors line-clamp-1">
           {data.name}
         </h3>
-        <p className="text-slate-500 text-xs">{data.category}</p>
+        <p className="text-slate-500 text-xs">{data.category.name}</p>
         <div className="flex items-center gap-2 mt-1">
           <span className="text-cyan-400 font-bold">${finalPrice}</span>
           {data.priceDiscount && (
