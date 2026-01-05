@@ -11,6 +11,7 @@ import CardMethod from "../../components/CardMethod";
 import CardDelivery from "../../components/CardDelivery";
 import CardOnline from "../../components/CardOnline";
 import CardFacturation from "../../components/CardFacturation";
+import { usePayment } from "../../hook/queries/usePayment";
 
 type PaymentMethod = "card" | "cash" | "online";
 
@@ -18,6 +19,8 @@ const DashPaymentPage: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>("card");
     const { user } = useAuthStore();
+    const { data: payment } = usePayment(user?.id!);
+
     const [paymentData, onChangePaymentData, setPaymentData] = useInputs({
         fullName: "",
         email: "",
@@ -29,11 +32,15 @@ const DashPaymentPage: React.FC = () => {
     })
 
     const [cardData, onChangeCardData, setCardData] = useInputs({
+        id: "",
+        userId: user?.id,
         cardNumber: "",
         cardHolder: "",
-        expiryDate: "",
-        cvv: "",
-    });
+        cardExpiration: "",
+        cardCvv: "",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    })
 
     useEffect(() => {
         if (user) {
@@ -47,10 +54,14 @@ const DashPaymentPage: React.FC = () => {
                 country: user.addresses?.[0].country,
             })
             setCardData({
-                cardNumber: "",
-                cardHolder: "",
-                expiryDate: "",
-                cvv: "",
+                id: payment?.id,
+                userId: user?.id,
+                cardNumber: payment?.cardNumber,
+                cardHolder: payment?.cardHolder,
+                cardExpiration: payment?.cardExpiration,
+                cardCvv: payment?.cardCvv,
+                createdAt: new Date(),
+                updatedAt: new Date(),
             })
         }
     }, [user])
@@ -76,7 +87,7 @@ const DashPaymentPage: React.FC = () => {
 
     const handleCvvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let value = e.target.value.replace(/\D/g, '');
-        value = value.substring(0, 4);
+        value = value.substring(0, 3);
         e.target.value = value;
         onChangeCardData(e);
     };

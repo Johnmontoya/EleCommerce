@@ -66,4 +66,8 @@ export const queryKeys = {
     getAll: (filters?: Record<string, any>) => [...queryKeys.orders.all, 'get-all', filters] as const,
     getUser: () => [...queryKeys.orders.all, 'get-user'] as const,
   },
+  payment: {
+    all: ['payment'] as const,
+    get: () => [...queryKeys.payment.all, 'get'] as const,
+  },
 };

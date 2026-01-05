@@ -1,8 +1,7 @@
-import type { CartResponse, CreateCartInput } from "../../application/Dto/cart.dto";
+import type { CreateCartInput } from "../../application/Dto/cart.dto";
 import { prisma } from "../../config/prisma";
 import type { CartEntity } from "../../domain/entities/Cart";
-import type { CartItemEntity } from "../../domain/entities/CartItem";
-import type { ICartItemRepository, ICartRepository } from "../../domain/repositories/ICartRepository";
+import type { ICartRepository } from "../../domain/repositories/ICartRepository";
 
 export class PrismaCartItemRepository implements ICartRepository {
     async createCartAndAddFirstItem(userId: string, cartItemData: CreateCartInput): Promise<boolean> {
