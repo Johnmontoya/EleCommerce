@@ -14,13 +14,15 @@ type PropType = {
 const Banner = (props: PropType) => {
     const { options } = props;
     const [currentSlide, setCurrentSlide] = useState(0);
-    
+
     // Obtener slides (local o API)
     const { data: slides, isLoading, error } = useBannerProducts();
-    
+
+    console.log(slides);
+
     // Configurar Autoplay
     const [emblaRef, emblaApi] = useEmblaCarousel(
-        options, 
+        options,
         [Autoplay({ delay: 3000, stopOnInteraction: false })]
     )
 
@@ -65,20 +67,20 @@ const Banner = (props: PropType) => {
                         <div className="embla__container flex">
                             {slides?.map((slide) => (
                                 <div
-                                    key={slide.id} 
+                                    key={slide.id}
                                     className="embla__slide flex-[0_0_100%] min-w-0 relative"
                                 >
-                                    <div 
+                                    <div
                                         className="w-full h-[568px] p-12 text-white relative overflow-hidden"
                                         style={{
-                                            backgroundImage: `url(${slide.promotionalData?.bannerImageUrl})`, 
+                                            backgroundImage: `url(${slide.promotionalData?.bannerImageUrl})`,
                                             backgroundSize: 'cover',
                                             backgroundPosition: 'center'
                                         }}
                                     >
                                         {/* Overlay oscuro para mejor legibilidad */}
                                         <div className="absolute inset-0 bg-black/30" />
-                                        
+
                                         <div className="relative z-10 max-w-xl">
                                             <p className="text-amber-400 mb-4">Descuento del {slide.priceDiscount}% OFF</p>
                                             <p className="text-sm font-medium mb-2 uppercase">
@@ -90,7 +92,7 @@ const Banner = (props: PropType) => {
                                             <p className="text-blue-200 mb-6">
                                                 {slide.description}
                                             </p>
-                                            <Link 
+                                            <Link
                                                 to={`/products/${slide.slug}`}
                                                 className="w-40 flex flex-row justify-center items-center gap-2 bg-white text-blue-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition"
                                             >
@@ -98,17 +100,16 @@ const Banner = (props: PropType) => {
                                                 <FaArrowRight size={14} />
                                             </Link>
                                         </div>
-                                        
+
                                         {/* Indicadores dentro del slide */}
                                         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
                                             {slides.map((_, idx) => (
                                                 <button
                                                     key={idx}
-                                                    className={`h-2 rounded-full transition-all ${
-                                                        idx === currentSlide 
-                                                            ? "bg-white w-8" 
+                                                    className={`h-2 rounded-full transition-all ${idx === currentSlide
+                                                            ? "bg-white w-8"
                                                             : "bg-white/50 w-2"
-                                                    }`}
+                                                        }`}
                                                     onClick={() => scrollTo(idx)}
                                                     aria-label={`Go to slide ${idx + 1}`}
                                                 />
@@ -122,7 +123,7 @@ const Banner = (props: PropType) => {
                 </div>
             </div>
 
-            
+
         </section>
     );
 };

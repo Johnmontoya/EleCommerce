@@ -33,6 +33,7 @@ model User {
   orders        Order[]
   refreshTokens RefreshToken[]
   cart          Cart?
+  payments      Payment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -139,6 +140,20 @@ model OrderItem {
   updatedAt    DateTime @updatedAt
 
   @@map("order_items")
+}
+
+model Payment {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cardNumber     String
+  cardHolder     String
+  cardExpiration String
+  cardCvv        String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("payments")
 }
 
 /**

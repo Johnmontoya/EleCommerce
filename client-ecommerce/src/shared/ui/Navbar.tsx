@@ -12,6 +12,7 @@ import { MdDashboard, MdOutlineLightMode } from "react-icons/md";
 import ButtonAction from "./ButtonAction";
 import { SearchModal } from "../../features/search/components/SearchModal";
 import { useAuthStore } from "../../features/auth/store/useAuthStore";
+import { BsTruck } from "react-icons/bs";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -148,6 +149,15 @@ const Navbar = () => {
                 <span className="absolute top-1 right-4 bg-cyan-500 shadow-lg shadow-cyan-500/90 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   2
                 </span>
+              </ButtonAction>
+              <ButtonAction
+                className="relative"
+                onClick={() => navigate("/tracking")}
+                variant="outline"
+                text=""
+                type="button"
+              >
+                <BsTruck size={24} />
               </ButtonAction>
             </div>
           </div>
