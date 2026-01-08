@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import type { CancelOrderUseCase, CreateOrderUseCase, GetAllOrdersByUserUseCase, GetOrdersUseCase } from "../../application/use-cases/orders/OrderUseCase";
+import type { CancelOrderUseCase, CreateOrderUseCase, GetAllOrdersByUserUseCase, GetOrdersUseCase, UpdateOrderStatusUseCase } from "../../application/use-cases/orders/OrderUseCase";
 import { CreateOrderSchema, OrderFiltersSchema } from "../../infrastructure/validation/Order.schema";
 import { handleError } from '../../infrastructure/middlewares/errorHandler';
 
@@ -8,7 +8,8 @@ export class OrderController {
         private createOrderUseCase: CreateOrderUseCase,
         private getAllOrdersUseCase: GetOrdersUseCase,
         private cancelOrderUseCase: CancelOrderUseCase,
-        private getAllOrdersByUserUseCase: GetAllOrdersByUserUseCase
+        private getAllOrdersByUserUseCase: GetAllOrdersByUserUseCase,
+        private updateOrderStatusUseCase: UpdateOrderStatusUseCase
     ) { }
 
     createOrder = async (req: Request, res: Response) => {
@@ -81,6 +82,22 @@ export class OrderController {
             res.status(200).json({
                 success: true,
                 message: 'Orden cancelada exitosamente',
+                data: order
+            });
+        } catch (error) {
+            handleError(error, res);
+        }
+    }
+
+    updateOrderStatus = async (req: Request, res: Response) => {
+        try {
+            const orderId = req.params.id;
+            const status = req.body.status;
+
+            const order = await this.updateOrderStatusUseCase.execute(orderId!, status);
+            res.status(200).json({
+                success: true,
+                message: 'Estado de la orden actualizado exitosamente',
                 data: order
             });
         } catch (error) {

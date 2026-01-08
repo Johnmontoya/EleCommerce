@@ -34,9 +34,11 @@ model User {
   refreshTokens RefreshToken[]
   cart          Cart?
   payments      Payment[]
+  reviews       Review[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  wishlist  Wishlist?
 
   @@map("users")
 }
@@ -156,42 +158,43 @@ model Payment {
   @@map("payments")
 }
 
-/**
- * reviews      Review[]
- * refreshToken RefreshToken[]
- * model Wishlist {
- * id     String @id @default(uuid())
- * userId String @unique
- * user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
- * items WishlistItem[]
- * createdAt DateTime @default(now())
- * updatedAt DateTime @updatedAt
- * @@map("wishlists")
- * }
- * model WishlistItem {
- * id         String   @id @default(uuid())
- * wishlistId String
- * wishlist   Wishlist @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
- * productId String // ID de MongoDB
- * createdAt DateTime @default(now())
- * @@unique([wishlistId, productId])
- * @@map("wishlist_items")
- * }
- * model Review {
- * id     String @id @default(uuid())
- * userId String
- * user   User   @relation(fields: [userId], references: [id])
- * productId String // ID de MongoDB
- * rating  Int // 1-5
- * title   String?
- * comment String?
- * isVerified Boolean @default(false)
- * createdAt DateTime @default(now())
- * updatedAt DateTime @updatedAt
- * @@unique([userId, productId])
- * @@map("reviews")
- * }
- */
+model Wishlist {
+  id        String         @id @default(uuid())
+  userId    String         @unique
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     WishlistItem[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@map("wishlists")
+}
+
+model WishlistItem {
+  id         String   @id @default(uuid())
+  wishlistId String
+  wishlist   Wishlist @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
+  productId  String // ID de MongoDB
+  createdAt  DateTime @default(now())
+
+  @@unique([wishlistId, productId])
+  @@map("wishlist_items")
+}
+
+model Review {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  productId  String // ID de MongoDB
+  rating     Int // 1-5
+  title      String?
+  comment    String?
+  isVerified Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([userId, productId])
+  @@map("reviews")
+}
 
 enum Role {
   USER

@@ -57,3 +57,18 @@ export type OrderItem = Prisma.OrderItemModel
  * 
  */
 export type Payment = Prisma.PaymentModel
+/**
+ * Model Wishlist
+ * 
+ */
+export type Wishlist = Prisma.WishlistModel
+/**
+ * Model WishlistItem
+ * 
+ */
+export type WishlistItem = Prisma.WishlistItemModel
+/**
+ * Model Review
+ * 
+ */
+export type Review = Prisma.ReviewModel

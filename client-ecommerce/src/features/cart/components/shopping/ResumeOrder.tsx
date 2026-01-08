@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { useAddressUser } from "../../hook/queries/useCart";
 import type { Address } from "../../../profile/types/profile.types";
 import ModalAddress from "../../../profile/components/ModalAddress";
+import { usePayment } from "../../../payment/hook/queries/usePayment";
 
 interface ProductProps {
   products: CartResponseItems[] | undefined;
@@ -28,6 +29,7 @@ const ResumeOrder: React.FC<ProductProps> = ({ products }) => {
   const { user } = useAuthStore();
   const createOrderMutation = useCartCreateOrderMutation();
   const { data: addressUser } = useAddressUser();
+  const { data: payment } = usePayment(user?.id || "");
   const playerRef = useRef<any>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isModalOpenAddress, setIsModalOpenAddress] = useState(false);
@@ -237,7 +239,7 @@ const ResumeOrder: React.FC<ProductProps> = ({ products }) => {
               >
                 <option value="COD">Pago Contra Entrega</option>
                 <option value="Online">Pago en Línea</option>
-                <option value="Card">Tarjeta de Crédito</option>
+                <option value="Card">Tarjeta de Crédito {payment?.cardNumber.slice(0, 4) + "..."}</option>
               </select>
             </div>
 

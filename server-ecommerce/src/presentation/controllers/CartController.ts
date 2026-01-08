@@ -107,17 +107,9 @@ export class CartController {
 
     getCartCount = async (req: Request, res: Response): Promise<void> => {
         try {
-            const userId = req.user?.userId;
+            const userId = req.params.userId;
 
-            if (!userId) {
-                res.status(401).json({
-                    success: false,
-                    message: 'Inicie sesión para ver su carrito'
-                });
-                return;
-            }
-
-            const cartCount = await this.getCartCountUseCase.execute(userId);
+            const cartCount = await this.getCartCountUseCase.execute(userId!);
 
             res.status(200).json({ count: cartCount });
         } catch (error) {

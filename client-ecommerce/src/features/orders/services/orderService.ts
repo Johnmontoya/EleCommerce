@@ -10,5 +10,13 @@ export const orderService = {
     getOrderUser: async (): Promise<OrderResponse[]> => {
         const { data } = await apiClient.get(endpoints.ordersUser);
         return data.data;
+    },
+    updateOrderStatus: async (orderId: string, status: string): Promise<OrderResponse> => {
+        const { data } = await apiClient.put(endpoints.updateOrderStatus(orderId), { status });
+        return data.data;
+    },
+    deleteOrder: async (orderId: string): Promise<OrderResponse> => {
+        const { data } = await apiClient.delete(endpoints.deleteOrder(orderId));
+        return data.data;
     }
 }

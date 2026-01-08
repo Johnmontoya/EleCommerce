@@ -24,7 +24,7 @@ const Stats: React.FC<Props> = ({ totalOrders, pendingOrders, rewardPoints }) =>
       color: "from-orange-500 to-orange-600",
     },
     {
-      label: "Ganancias",
+      label: "Gastos",
       value: rewardPoints,
       icon: <CiDollar size={24} />,
       color: "from-green-500 to-green-600",

@@ -3,6 +3,7 @@ import { BiCalendar, BiChevronDown, BiChevronUp, BiDollarCircle, BiMap, BiPackag
 import type { OrderResponse } from "../types/order.types";
 import { BadgeStatus } from "../../../shared/ui/BadgeStatus";
 import ButtonAction from "../../../shared/ui/ButtonAction";
+import { useUpdateOrderStatus } from "../hook/mutation/useOrderMutation";
 
 interface OrderAdminProps {
     orders: OrderResponse[] | undefined;
@@ -14,6 +15,16 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
     expandedOrder,
     handleToggleExpand,
 }) => {
+    const orderMutation = useUpdateOrderStatus();
+
+    const handleUpdateOrderStatus = async (orderId: string, status: string) => {
+        try {
+            await orderMutation.mutateAsync({ orderId, status });
+        } catch (error) {
+            console.error('Error al actualizar el estado de la orden:', error);
+        }
+    };
+
     return (
         <div className="space-y-4">
             {orders && orders.length > 0 ? (
@@ -153,14 +164,16 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                             </h4>
                                             <select
                                                 value={order?.status}
-                                                onChange={() => { }}
+                                                onChange={(e) => handleUpdateOrderStatus(order.id, e.target.value)}
                                                 className="w-full bg-slate-700 border border-slate-600 text-slate-100 px-4 py-2 rounded-lg outline-none focus:border-cyan-400 cursor-pointer"
                                             >
-                                                <option value="pending">Pendiente</option>
-                                                <option value="processing">Procesando</option>
-                                                <option value="shipped">Enviado</option>
-                                                <option value="delivered">Entregado</option>
-                                                <option value="cancelled">Cancelado</option>
+                                                <option value="PENDING">Pendiente</option>
+                                                <option value="CONFIRMED">Confirmado</option>
+                                                <option value="PROCESSING">Procesando</option>
+                                                <option value="SHIPPED">Enviado</option>
+                                                <option value="DELIVERED">Entregado</option>
+                                                <option value="CANCELLED">Cancelado</option>
+                                                <option value="REFUNDED">Reembolsado</option>
                                             </select>
                                         </div>
                                     </div>

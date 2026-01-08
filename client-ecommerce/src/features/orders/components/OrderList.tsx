@@ -1,8 +1,9 @@
 import type React from "react";
-import { BiCalendar, BiChevronDown, BiChevronUp, BiDollarCircle, BiMap, BiPackage } from "react-icons/bi";
+import { BiCalendar, BiChevronDown, BiChevronUp, BiDollarCircle, BiMap, BiPackage, BiTrash } from "react-icons/bi";
 import type { OrderResponse } from "../types/order.types";
 import { BadgeStatus } from "../../../shared/ui/BadgeStatus";
 import ButtonAction from "../../../shared/ui/ButtonAction";
+import { useDeleteOrderMutation } from "../hook/mutation/useOrderMutation";
 
 interface OrderListProps {
     orders: OrderResponse[] | undefined;
@@ -14,6 +15,11 @@ const OrderList: React.FC<OrderListProps> = ({
     expandedOrder,
     handleToggleExpand,
 }) => {
+    const deleteOrderMutation = useDeleteOrderMutation();
+
+    const handleDeleteOrder = (orderId: string) => {
+        deleteOrderMutation.mutate(orderId);
+    }
     return (
         <div className="space-y-4">
             {orders && orders.length > 0 ? (
@@ -48,7 +54,7 @@ const OrderList: React.FC<OrderListProps> = ({
                                     </div>
                                 </div>
 
-                                <div className="flex gap-2">
+                                <div className="flex flex-col gap-2">
                                     <ButtonAction
                                         text=""
                                         variant="edit"
@@ -65,6 +71,13 @@ const OrderList: React.FC<OrderListProps> = ({
                                                 Ver Detalles
                                             </>
                                         )}
+                                    </ButtonAction>
+                                    <ButtonAction
+                                        text="Borrar"
+                                        variant="delete"
+                                        onClick={() => handleDeleteOrder(order.id)}
+                                    >
+                                        <BiTrash size={18} />
                                     </ButtonAction>
                                 </div>
                             </div>

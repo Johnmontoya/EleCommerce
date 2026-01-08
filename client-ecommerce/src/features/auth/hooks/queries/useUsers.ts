@@ -21,10 +21,10 @@ export const useUser = (id: string) => {
     })
 }
 
-export const useCartCount = () => {
+export const useCartCount = (userId: string) => {
     return useQuery({
         queryKey: ['cart'],
-        queryFn: () => authService.getCartUser(),
+        queryFn: () => authService.getCartUser(userId),
         select: (response) => response,
         staleTime: 2 * 60 * 1000,
     })

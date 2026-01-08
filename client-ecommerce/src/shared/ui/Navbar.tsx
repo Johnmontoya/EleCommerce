@@ -19,7 +19,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const { user } = useAuthStore();
-  const { data: cartCount } = useCartCount();
+  const { data: cartCount } = useCartCount(user?.id!);
+  const street = user?.addresses![0].state + ", " + user?.addresses![0].street;
 
   return (
     <>
@@ -27,18 +28,20 @@ const Navbar = () => {
         {/* Navigation */}
         <nav className="navbar bg-slate-800">
           <div className="flex justify-between font-light items-center max-w-7xl mx-auto py-2 px-4 text-slate-100">
-            <div className="flex flex-row gap-2">
-              <div className="flex items-center text-sm">
-                <p>(04)1234567890</p>
-              </div>
-              <div className="flex flex-row items-center gap-2">
-                <CiLocationOn size={28} />
-                <div className="text-xs">
-                  <p>Enviar a John</p>
-                  <span>Carrera 13A #9-40</span>
+            {user && (
+              <div className="flex flex-row gap-2">
+                <div className="flex items-center text-sm">
+                  <p>{user?.phone}</p>
+                </div>
+                <div className="flex flex-row items-center gap-2">
+                  <CiLocationOn size={28} />
+                  <div className="text-xs">
+                    <p>Enviar a {user?.firstName}</p>
+                    <span>{street}</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
             <div className="hidden md:flex text-sm">
               <p>Tell a friend about our and get 20% off</p>
             </div>

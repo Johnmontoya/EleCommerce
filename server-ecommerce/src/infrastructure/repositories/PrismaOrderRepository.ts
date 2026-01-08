@@ -2,7 +2,7 @@ import type { CreateOrderInput, CreateOrderItem } from "../../application/Dto/or
 import { prisma } from "../../config/prisma";
 import type { OrderEntity } from "../../domain/entities/Orders";
 import type { UsersFilters } from "../../domain/repositories/IAuthRepository";
-import type { IOrderRepository, OrderFilters } from "../../domain/repositories/IOrderRepository";
+import type { IOrderRepository, OrderFilters, OrderStatus } from "../../domain/repositories/IOrderRepository";
 import type { Prisma } from "../../generated/prisma/client";
 import { ProductModel } from "../models/product.model";
 
@@ -132,6 +132,19 @@ export class PrismaOrderRepository implements IOrderRepository {
             return true;
         } catch (error) {
             console.error('Error deleting order:', error);
+            return false;
+        }
+    }
+
+    async updateOrderStatus(orderId: string, status: OrderStatus): Promise<boolean> {
+        try {
+            await prisma.order.update({
+                where: { id: orderId },
+                data: { status }
+            });
+            return true;
+        } catch (error) {
+            console.error('Error updating order status:', error);
             return false;
         }
     }

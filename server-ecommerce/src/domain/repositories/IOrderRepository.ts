@@ -6,6 +6,7 @@ export interface IOrderRepository {
     getAllOrders(filters?: OrderFilters): Promise<OrderEntity[]>;
     cancelOrder(orderId: string): Promise<boolean>;
     getAllOrdersByUser(userId: string, filters?: OrderFilters): Promise<OrderEntity[]>;
+    updateOrderStatus(orderId: string, status: OrderStatus): Promise<boolean>;
 }
 
 export interface OrderFilters {

@@ -31,6 +31,6 @@ router.post('/cart/add', authenticate, cartController.createCart);
 router.get('/cart/me', authenticate, cartController.getCart);
 router.delete('/cart/:id', authenticate, cartController.deleteCart);
 router.put('/cart', authenticate, cartController.updateCart);
-router.get('/cart/count', authenticate, cartController.getCartCount);
+router.get('/cart/count/:userId', cartController.getCartCount);
 
 export default router;
