@@ -1,5 +1,6 @@
 import type z from "zod";
 import type { ChangePasswordSchema, LoginSchema, RefreshTokenSchema, AuthRegisterSchema } from "../../infrastructure/validation/Auth.schema";
+import type { CartItem } from "./cart.dto";
 
 export type RegisterInput = z.infer<typeof AuthRegisterSchema>;
 export type LoginInput = z.infer<typeof LoginSchema>;

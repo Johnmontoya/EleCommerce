@@ -23,7 +23,7 @@ export class JwtService {
 
     generateAccessToken(payload: JwtPayload): string {
         return jwt.sign(payload, this.accessSecret, {
-            expiresIn: '1h',
+            expiresIn: '3h',
         });
     }
 

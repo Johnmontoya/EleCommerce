@@ -62,6 +62,12 @@
     text-shadow: 0 0 14px rgba(59, 130, 246, 0.9);
 }
 
+@media (min-width: 378px) {
+  .embla__container {
+    width: 378px;
+  }
+}
+
 @media (min-width: 576px) {
   .embla__container {
     width: 546px;
@@ -76,7 +82,7 @@
 
 @media (min-width: 1280px) {
   .embla__container {
-    width: 100%;
+    width: 1280px;
   }
 }
 

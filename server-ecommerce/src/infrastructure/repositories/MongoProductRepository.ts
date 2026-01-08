@@ -1,30 +1,24 @@
+import type { BannerResponse, CreateBannerInput } from "../../application/Dto/product.dto";
 import { ProductEntity } from "../../domain/entities/Product";
 import type { IProductrepository, ProductFilters } from "../../domain/repositories/IProductRepository";
 import { ProductModel } from "../models/product.model";
 
 export class MongoProductRepository implements IProductrepository {
-
   async create(product: ProductEntity): Promise<ProductEntity> {
     try {
-      console.log('Creating product:', product);
       const newProduct = new ProductModel(product);
       const saved = await newProduct.save();
-      console.log('Product saved:', saved);
       return this.mapToEntity(saved);
     } catch (error) {
-      console.error('Error creating product:', error);
       throw error;
     }
   }
 
   async findById(id: string): Promise<ProductEntity | null> {
     try {
-      console.log('Finding product by id:', id);
       const product = await ProductModel.findById(id);
-      console.log('Product found:', product);
       return product ? this.mapToEntity(product) : null;
     } catch (error) {
-      console.error('Error finding product:', error);
       throw error;
     }
   }
@@ -84,7 +78,6 @@ export class MongoProductRepository implements IProductrepository {
 
       return mappedProducts;
     } catch (error) {
-      console.error('❌ Error finding all products:', error);
       throw error;
     }
   }
@@ -98,43 +91,33 @@ export class MongoProductRepository implements IProductrepository {
       );
       return updated ? this.mapToEntity(updated) : null;
     } catch (error) {
-      console.error('Error updating product:', error);
       throw error;
     }
   }
 
   async delete(id: string): Promise<boolean> {
     try {
-      console.log('Deleting product:', id);
       const result = await ProductModel.findByIdAndDelete(id);
-      console.log('Product deleted:', result);
       return result !== null;
     } catch (error) {
-      console.error('Error deleting product:', error);
       throw error;
     }
   }
 
   async deleteMany(ids: string[]): Promise<boolean> {
     try {
-      console.log('Deleting products:', ids);
       const result = await ProductModel.deleteMany({ _id: { $in: ids } });
-      console.log('Products deleted:', result);
       return result.deletedCount > 0;
     } catch (error) {
-      console.error('Error deleting products:', error);
       throw error;
     }
   }
 
   async findBySlug(slug: string): Promise<ProductEntity | null> {
     try {
-      console.log('Finding product by slug:', slug);
       const product = await ProductModel.findOne({ slug });
-      console.log('Product found:', product);
       return product ? this.mapToEntity(product) : null;
     } catch (error) {
-      console.error('Error finding product by slug:', error);
       throw error;
     }
   }
@@ -144,7 +127,6 @@ export class MongoProductRepository implements IProductrepository {
       const products = await ProductModel.find({ category });
       return products.map(p => this.mapToEntity(p));
     } catch (error) {
-      console.error('Error finding products by category:', error);
       throw error;
     }
   }
@@ -154,7 +136,63 @@ export class MongoProductRepository implements IProductrepository {
       const products = await ProductModel.find({ brand });
       return products.map(p => this.mapToEntity(p));
     } catch (error) {
-      console.error('Error finding products by brand:', error);
+      throw error;
+    }
+  }
+
+  async getAllBanners(): Promise<ProductEntity[]> {
+    try {
+      const products = await ProductModel.find();
+      return products.map(p => this.mapToEntity(p));
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateBanner(id: string, banner: Partial<ProductEntity>): Promise<ProductEntity | null> {
+    try {
+      const updated = await ProductModel.findByIdAndUpdate(
+        id,
+        banner,
+        { new: true, runValidators: true }
+      );
+      return updated ? this.mapToEntity(updated) : null;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteBanner(id: string): Promise<boolean> {
+    try {
+      const result = await ProductModel.findByIdAndDelete(id);
+      return result !== null;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getPromotional(): Promise<ProductEntity[]> {
+    try {
+      const products = await ProductModel.find({
+        displaySections: {
+          $in: ['promotional']
+        }
+      });
+      return products.map(p => this.mapToEntity(p));
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getShowcase(): Promise<ProductEntity[]> {
+    try {
+      const products = await ProductModel.find({
+        displaySections: {
+          $in: ['featured']
+        }
+      });
+      return products.map(p => this.mapToEntity(p));
+    } catch (error) {
       throw error;
     }
   }

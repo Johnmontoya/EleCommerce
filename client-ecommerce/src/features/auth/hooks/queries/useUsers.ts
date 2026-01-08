@@ -20,3 +20,12 @@ export const useUser = (id: string) => {
         staleTime: 2 * 60 * 1000,
     })
 }
+
+export const useCartCount = () => {
+    return useQuery({
+        queryKey: ['cart'],
+        queryFn: () => authService.getCartUser(),
+        select: (response) => response,
+        staleTime: 2 * 60 * 1000,
+    })
+}

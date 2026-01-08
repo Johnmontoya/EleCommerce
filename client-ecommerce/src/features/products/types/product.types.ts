@@ -51,6 +51,7 @@ export interface Product {
   brand: string;
   category: Category;
   images?: string[];
+  image?: string;
   tags?: string[];
   priceDiscount?: number;
   sku?: string;

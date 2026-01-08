@@ -130,3 +130,14 @@ export const ProductQuerySchema = z.object({
 export const ProductIdSchema = z.object({
   id: z.string().uuid('Id invalido para un producto'),
 });
+
+export const CreateBannerSchema = z.object({
+  productId: z.string().uuid('Id invalido para un producto'),
+  productName: z.string().min(1, 'El nombre es requerido'),
+  productImage: z.string().url('Formato de URL inválido'),
+  displaySections: z.array(DisplaySectionEnum).optional(),
+  displayPriority: z.number().int().min(1).max(999).optional(),
+  isFeatured: z.boolean(),
+  promotionalData: PromotionalDataSchema.nullable(),
+  featuredUntil: z.coerce.date().nullable(),
+});

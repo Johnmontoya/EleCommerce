@@ -55,10 +55,10 @@ export class PrismaAuthRepository implements IAuthRepository {
         }
     }
     async findByUserByEmail(email: string): Promise<UserEntity | null> {
-        return await prisma.user.findUnique({ where: { email } });
+        return await prisma.user.findUnique({ where: { email }, include: { addresses: true, cart: true } });
     }
     async findByUserById(id: string): Promise<UserResponse | null> {
-        return await prisma.user.findUnique({ where: { id }, include: { addresses: true } });
+        return await prisma.user.findUnique({ where: { id }, include: { addresses: true, cart: true } });
     }
     async updateUser(id: string, data: UserUpdateInput): Promise<UserEntity> {
         return await prisma.user.update({ where: { id }, data });

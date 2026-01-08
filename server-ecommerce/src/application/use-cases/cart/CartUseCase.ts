@@ -36,3 +36,12 @@ export class UpdateCartUseCase {
         return data;
     }
 }
+
+export class GetCartCountUseCase {
+    constructor(private cartRepository: ICartRepository) { }
+
+    async execute(userId: string) {
+        const data = await this.cartRepository.getCartCount(userId);
+        return data;
+    }
+}

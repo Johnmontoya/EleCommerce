@@ -1,12 +1,13 @@
 import type { Request, Response } from "express";
-import type { CreateCartUseCase, GetCartUseCase, DeleteCartUseCase, UpdateCartUseCase } from "../../application/use-cases/cart/CartUseCase";
+import type { CreateCartUseCase, GetCartUseCase, DeleteCartUseCase, UpdateCartUseCase, GetCartCountUseCase } from "../../application/use-cases/cart/CartUseCase";
 import { handleError } from "../../infrastructure/middlewares/errorHandler";
 
 export class CartController {
     constructor(private createCartUseCase: CreateCartUseCase,
         private getCartUseCase: GetCartUseCase,
         private deleteCartUseCase: DeleteCartUseCase,
-        private updateCartUseCase: UpdateCartUseCase) { }
+        private updateCartUseCase: UpdateCartUseCase,
+        private getCartCountUseCase: GetCartCountUseCase) { }
 
     createCart = async (req: Request, res: Response): Promise<void> => {
         try {
@@ -99,6 +100,26 @@ export class CartController {
                 success: true,
                 message: 'Producto actualizado'
             });
+        } catch (error) {
+            handleError(error, res);
+        }
+    }
+
+    getCartCount = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const userId = req.user?.userId;
+
+            if (!userId) {
+                res.status(401).json({
+                    success: false,
+                    message: 'Inicie sesión para ver su carrito'
+                });
+                return;
+            }
+
+            const cartCount = await this.getCartCountUseCase.execute(userId);
+
+            res.status(200).json({ count: cartCount });
         } catch (error) {
             handleError(error, res);
         }

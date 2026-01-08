@@ -29,6 +29,7 @@ export const useAuthStore = create<AuthStore>()(
     persist(
         (set, get) => ({
             user: null,
+            cart: null,
             accessToken: null,
             refreshToken: null,
             isAuthenticated: false,

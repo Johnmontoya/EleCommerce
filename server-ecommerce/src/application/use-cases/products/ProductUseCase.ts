@@ -104,6 +104,38 @@ export class GetProductsByBrandUseCase {
   }
 }
 
+export class GetBannersUseCase {
+  constructor(private productRepository: IProductrepository) { }
+
+  async execute(): Promise<ProductEntity[]> {
+    return await this.productRepository.getAllBanners();
+  }
+}
+
+export class UpdateBannerUseCase {
+  constructor(private productRepository: IProductrepository) { }
+
+  async execute(id: string, banner: Partial<ProductEntity>): Promise<ProductEntity | null> {
+    return await this.productRepository.updateBanner(id, banner);
+  }
+}
+
+export class DeleteBannerUseCase {
+  constructor(private productRepository: IProductrepository) { }
+
+  async execute(id: string): Promise<boolean> {
+    return await this.productRepository.deleteBanner(id);
+  }
+}
+
+export class GetShowcaseUseCase {
+  constructor(private productRepository: IProductrepository) { }
+
+  async execute(): Promise<ProductEntity[]> {
+    return await this.productRepository.getShowcase();
+  }
+}
+
 export class SearchProductsAutoCompleteUseCase {
   constructor(private productRepository: IProductrepository) { }
 

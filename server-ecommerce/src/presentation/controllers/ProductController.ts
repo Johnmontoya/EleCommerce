@@ -10,6 +10,10 @@ import type {
   GetProductsByBrandUseCase,
   DeleteProductUseCase,
   DeleteManyProductsUseCase,
+  GetBannersUseCase,
+  UpdateBannerUseCase,
+  DeleteBannerUseCase,
+  GetShowcaseUseCase,
 } from "../../application/use-cases/products/ProductUseCase";
 import {
   CreateProductSchema,
@@ -33,7 +37,11 @@ export class ProductController {
     private getProductByBrandUseCase: GetProductsByBrandUseCase,
     private deleteProductUseCase: DeleteProductUseCase,
     private deleteManyProductsUseCase: DeleteManyProductsUseCase,
-    private searchProductsAutoCompleteUseCase: SearchProductsAutoCompleteUseCase
+    private searchProductsAutoCompleteUseCase: SearchProductsAutoCompleteUseCase,
+    private getBannersUseCase: GetBannersUseCase,
+    private updateBannerUseCase: UpdateBannerUseCase,
+    private deleteBannerUseCase: DeleteBannerUseCase,
+    private getShowcaseUseCase: GetShowcaseUseCase
   ) { }
 
   createProduct = async (req: Request, res: Response): Promise<void> => {
@@ -299,6 +307,63 @@ export class ProductController {
       }
 
       const product = await this.deleteManyProductsUseCase.execute(ids);
+
+      if (!product) {
+        res.status(404).json({
+          success: false,
+          message: "Producto no encontrado",
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        data: product,
+      });
+    } catch (error) {
+      handleError(error, res);
+    }
+  };
+
+  getAllBanners = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const product = await this.getBannersUseCase.execute();
+
+      if (!product) {
+        res.status(404).json({
+          success: false,
+          message: "Producto no encontrado",
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        data: product,
+      });
+    } catch (error) {
+      handleError(error, res);
+    }
+  };
+
+  updateBanner = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params;
+      const product = await this.updateBannerUseCase.execute(id!, req.body);
+
+      res.status(201).json({
+        success: true,
+        data: product,
+        message: "Banner actualizado correctamente",
+      });
+    } catch (error: any) {
+      handleError(error, res);
+    }
+  };
+
+  getShowcase = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const product = await this.getShowcaseUseCase.execute();
 
       if (!product) {
         res.status(404).json({

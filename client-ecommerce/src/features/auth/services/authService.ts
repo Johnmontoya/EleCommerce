@@ -29,6 +29,10 @@ export const authService = {
         const { data } = await apiClient.get(endpoints.auth.me);
         return data;
     },
+    getCartUser: async (): Promise<ApiResponse<User>> => {
+        const { data } = await apiClient.get(endpoints.auth.cartCount);
+        return data;
+    },
     getAllUsers: async (filters?: UsersFilters): Promise<ApiResponse<User[]>> => {
         const params = new URLSearchParams();
 

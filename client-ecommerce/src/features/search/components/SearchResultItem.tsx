@@ -23,14 +23,13 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({
     ? data.price - (data.price * data.priceDiscount) / 100
     : data.price;
 
-  console.log(data);
   return (
     <div
       onClick={handleClick}
       className="flex items-center gap-4 p-3 hover:bg-slate-700/50 cursor-pointer transition-all rounded-lg group"
     >
       <img
-        src={data.image}
+        src={data?.image}
         alt={data.name}
         className="w-16 h-16 object-cover rounded-lg group-hover:scale-110 transition-transform"
       />

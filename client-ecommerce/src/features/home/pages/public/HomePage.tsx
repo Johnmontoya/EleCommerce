@@ -4,8 +4,8 @@ import { useRef } from 'react'
 import Banner from '../../components/Banner';
 import Category from '../../../categories/components/Category';
 import Promotion from '../../components/Promotion';
-import Trends from '../../../products/components/Trends';
-import ProductShowCase from '../../../products/components/ProductShowCase';
+import Trends from '../../components/Trends';
+import ProductShowCase from '../../components/ProductShowCase';
 import Products from '../../../products/components/Products';
 import CTA from '../../components/CTA';
 import Features from '../../components/Features';
@@ -37,7 +37,7 @@ const HomePage = () => {
       {/* useLocalData={false} para usar API */}
       <Banner options={OPTIONS} />
       <Category />
-      <motion.div ref={ref} variants={variants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
+      <motion.div ref={ref} variants={variants} initial="hidden" animate={isInView ? "visible" : "hidden"} className='max-w-7xl mx-auto flex flex-row justify-center items-center gap-6'>
         <Promotion />
       </motion.div>
       <Trends />

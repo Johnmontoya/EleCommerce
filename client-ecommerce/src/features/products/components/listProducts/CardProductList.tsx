@@ -3,6 +3,8 @@ import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { useNavigate } from "react-router-dom";
 import { BsCartPlus } from "react-icons/bs";
 import type { Product } from "../../types/product.types";
+import { BiStar } from "react-icons/bi";
+import { useCartAddMutation } from "../../../cart/hook/mutation/useCartMutation";
 
 interface CardProductPros {
   product: Product;
@@ -11,6 +13,20 @@ interface CardProductPros {
 
 const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
   const navigate = useNavigate();
+  const useCartMutation = useCartAddMutation();
+
+  const handleAddToCart = async () => {
+    await useCartMutation.mutateAsync({
+      productId: product?.id!,
+      quantity: 1,
+      name: product?.name!,
+      image: product?.images![0]!,
+      price: product?.price!,
+      discount: product?.priceDiscount!,
+      stock: product?.stock!,
+    });
+  };
+
   return (
     <div
       key={product.id}
@@ -22,6 +38,11 @@ const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
         className={`bg-slate-900/50 flex items-center justify-center overflow-hidden cursor-pointer ${viewMode === "list" ? "w-48 shrink-0" : "h-64"
           }`}
       >
+        {product.priceDiscount ? (
+          <div className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-lg text-xs font-bold z-10 shadow-lg">
+            -{product.priceDiscount}%
+          </div>
+        ) : null}
         <img
           src={product.images![0]}
           alt={product.name}
@@ -29,24 +50,42 @@ const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
         />
       </div>
       <div className="p-6 flex-1 justify-between">
-        <h3 className="h-10 text-lg font-semibold text-slate-100 mb-3 group-hover:text-cyan-400 transition-colors">
+        <p className="h-4 text-cyan-400 text-xs font-semibold mb-2 uppercase">
+          {product.category.slug}
+        </p>
+        <h3 className="h-16 text-slate-100 font-bold text-lg mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
           {product.name}
         </h3>
-        <div className="flex h-10 items-center gap-3 mb-4">
-          {product.priceDiscount && (
-            <span className="text-2xl font-bold text-cyan-400">
-              ${Math.round(
-                product.price - (product.price * product.priceDiscount!) / 100
-              )}
+
+        {/* Rating */}
+        <div className="h-8 flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-1">
+            <BiStar size={14} className="text-amber-400 fill-amber-400" />
+            <span className="text-slate-300 text-sm font-semibold">
+              {product.rating}
             </span>
-          )}
-          <span className="text-slate-500 line-through text-sm">
-            ${product.price}
+          </div>
+          <span className="text-slate-500 text-xs">
+            ({product.reviewsCount} reviews)
           </span>
+        </div>
+
+        {/* Price */}
+        <div className="flex items-center gap-2 mb-4">
+          <span className="text-2xl font-bold text-cyan-400">
+            ${Math.round(
+              product.price - (product.price * product.priceDiscount!) / 100
+            )}
+          </span>
+          {product.priceDiscount ? (
+            <span className="text-slate-500 line-through text-sm">
+              ${product.price}
+            </span>
+          ) : null}
         </div>
         <ButtonAction
           className="w-full h-12 flex items-center justify-center"
-          onClick={() => navigate("/cart")}
+          onClick={handleAddToCart}
           text={"Agregar al carrito"}
           variant="primary"
         >

@@ -13,11 +13,13 @@ import ButtonAction from "./ButtonAction";
 import { SearchModal } from "../../features/search/components/SearchModal";
 import { useAuthStore } from "../../features/auth/store/useAuthStore";
 import { BsTruck } from "react-icons/bs";
+import { useCartCount } from "../../features/auth/hooks/queries/useUsers";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const { user } = useAuthStore();
+  const { data: cartCount } = useCartCount();
 
   return (
     <>
@@ -79,7 +81,7 @@ const Navbar = () => {
         {/* Menu */}
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
-            <div className="w-full flex justify-between items-center space-x-8">
+            <div className="w-full flex justify-between items-center md:space-x-8 space-x-0">
               <div
                 onClick={() => navigate("/")}
                 className="flex items-center space-x-2 cursor-pointer"
@@ -146,9 +148,13 @@ const Navbar = () => {
                 type="button"
               >
                 <CiShoppingCart size={24} />
-                <span className="absolute top-1 right-4 bg-cyan-500 shadow-lg shadow-cyan-500/90 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  2
-                </span>
+
+                {cartCount?.count! > 0 && (
+                  <span className="absolute top-1 right-4 bg-cyan-500 shadow-lg shadow-cyan-500/90 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartCount?.count || 0}
+                  </span>
+                )}
+
               </ButtonAction>
               <ButtonAction
                 className="relative"

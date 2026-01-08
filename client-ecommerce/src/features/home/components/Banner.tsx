@@ -18,8 +18,6 @@ const Banner = (props: PropType) => {
     // Obtener slides (local o API)
     const { data: slides, isLoading, error } = useBannerProducts();
 
-    console.log(slides);
-
     // Configurar Autoplay
     const [emblaRef, emblaApi] = useEmblaCarousel(
         options,
@@ -61,7 +59,7 @@ const Banner = (props: PropType) => {
     return (
         <section className="w-full mx-auto px-4 py-8 grid justify-center items-center gap-6">
             {/* Main Banner */}
-            <div className="max-w-7xl lg:col-span-2 drop-shadow-xl/50 drop-shadow-black-500/50">
+            <div className="max-w-7xl lg:col-span-3 drop-shadow-xl/50 drop-shadow-black-500/50">
                 <div className="embla overflow-hidden rounded-xl">
                     <div className="embla__viewport" ref={emblaRef}>
                         <div className="embla__container flex">
@@ -107,8 +105,8 @@ const Banner = (props: PropType) => {
                                                 <button
                                                     key={idx}
                                                     className={`h-2 rounded-full transition-all ${idx === currentSlide
-                                                            ? "bg-white w-8"
-                                                            : "bg-white/50 w-2"
+                                                        ? "bg-white w-8"
+                                                        : "bg-white/50 w-2"
                                                         }`}
                                                     onClick={() => scrollTo(idx)}
                                                     aria-label={`Go to slide ${idx + 1}`}

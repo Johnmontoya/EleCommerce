@@ -10,6 +10,7 @@ export const endpoints = {
         resetPassword: '/auth/reset-password',
         verifyEmail: '/auth/verify-email',
         changePassword: '/auth/change-password',
+        cartCount: '/cart/cart/count'
     },
     user: {
         list: '/auth/all',

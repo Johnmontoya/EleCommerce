@@ -8,5 +8,20 @@ export const homeService = {
             params: { limit }
         });
         return data;
-    }
+    },
+
+    getPromotions: async (): Promise<ApiResponse<Product[]>> => {
+        const { data } = await apiClient.get(endpoints.showcase.promotional);
+        return data;
+    },
+
+    getTrends: async (): Promise<ApiResponse<Product[]>> => {
+        const { data } = await apiClient.get(endpoints.showcase.trends);
+        return data;
+    },
+
+    getShowcase: async (): Promise<ApiResponse<Product[]>> => {
+        const { data } = await apiClient.get(endpoints.showcase.showcase);
+        return data;
+    },
 }

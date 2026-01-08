@@ -1,3 +1,4 @@
+import type { BannerResponse, CreateBannerInput } from "../../application/Dto/product.dto";
 import { ProductEntity } from "../entities/Product";
 
 export interface IProductrepository {
@@ -10,6 +11,10 @@ export interface IProductrepository {
   findBySlug(slug: string): Promise<ProductEntity | null>;
   findByCategory(category: string): Promise<ProductEntity[]>;
   findByBrand(brand: string): Promise<ProductEntity[]>;
+  getAllBanners(): Promise<ProductEntity[]>;
+  updateBanner(id: string, banner: Partial<ProductEntity>): Promise<ProductEntity | null>;
+  deleteBanner(id: string): Promise<boolean>;
+  getShowcase(): Promise<ProductEntity[]>;
 }
 
 export interface Variant {

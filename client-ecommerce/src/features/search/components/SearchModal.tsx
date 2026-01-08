@@ -18,16 +18,16 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   const isFirstRender = useRef(true);
 
-useEffect(() => {
-  if (isFirstRender.current) {
-    isFirstRender.current = false;
-    return;
-  }
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
 
-  if (!isOpen) {
-    clearResults();
-  }
-}, [isOpen]);
+    if (!isOpen) {
+      clearResults();
+    }
+  }, [isOpen]);
 
   // Cerrar con ESC
   useEffect(() => {
@@ -104,7 +104,7 @@ useEffect(() => {
                 {results.length} resultado{results.length !== 1 ? "s" : ""}{" "}
                 encontrado{results.length !== 1 ? "s" : ""}
               </p>
-              {results.map((product) => (
+              {results?.map((product) => (
                 <SearchResultItem
                   key={product.id}
                   data={product}

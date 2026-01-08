@@ -83,4 +83,14 @@ export class PrismaCartItemRepository implements ICartRepository {
             return false;
         }
     }
+
+    async getCartCount(userId: string): Promise<number> {
+        return await prisma.cartItem.count({
+            where: {
+                cart: {
+                    userId
+                }
+            }
+        });
+    }
 }

@@ -4,42 +4,24 @@ import { toast } from "sonner";
 import { AiFillStar } from "react-icons/ai";
 import { BiEdit, BiPlus, BiTrash } from "react-icons/bi";
 import type React from "react";
+import type { Banner } from "../types/banner.types";
+import { useAddBannerMutation } from "../hook/mutation/useBannerMutation";
 
 type DisplaySection = 'banner' | 'featured' | 'trending' | 'promotional' | 'new-arrival';
 
-interface PromotionalData {
-    startDate?: string;
-    endDate?: string;
-    discount?: number;
-    badgeText?: string;
-    bannerImageUrl?: string;
-}
-
-interface ProductDisplayConfig {
-    id: string;
-    productId: string;
-    productName: string;
-    productImage: string;
-    displaySections: DisplaySection[];
-    displayPriority: number;
-    isFeatured: boolean;
-    promotionalData?: PromotionalData;
-    featuredUntil?: string;
-}
-
 interface ProductConfigProps {
-    configurations: ProductDisplayConfig[];
-    setConfigurations: React.Dispatch<React.SetStateAction<ProductDisplayConfig[]>>;
-    handleOpenModal: (config?: ProductDisplayConfig) => void;
+    configurations: Banner[] | null | undefined;
     sectionOptions: { value: DisplaySection; label: string; icon: React.ReactNode; color: string }[];
+    onEdit: (banner: Banner) => void;
 }
 
 const ProductConfig: React.FC<ProductConfigProps> = ({
     configurations,
-    setConfigurations,
-    handleOpenModal,
-    sectionOptions
+    sectionOptions,
+    onEdit
 }) => {
+    //const deleteBannerMutation = useDeleteBannerMutation();
+
     const getSectionIcon = (section: DisplaySection) => {
         return sectionOptions.find(opt => opt.value === section)?.icon;
     };
@@ -48,15 +30,16 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
         return sectionOptions.find(opt => opt.value === section)?.color;
     };
 
-    const handleDeleteConfiguration = (id: string) => {
-        setConfigurations(configurations.filter(c => c.id !== id));
-        toast.success("Configuración eliminada");
-    };
+    const handleDeleteConfiguration = async (id: string) => {
+        if (!confirm('¿Estás seguro de eliminar esta configuración?')) return;
 
-    const handlePriorityChange = (id: string, newPriority: number) => {
-        setConfigurations(configurations.map(c =>
-            c.id === id ? { ...c, displayPriority: newPriority } : c
-        ));
+        try {
+            //await deleteBannerMutation.mutateAsync(id);
+            toast.success("Configuración eliminada");
+        } catch (error) {
+            console.error("Error al eliminar:", error);
+            toast.error("Error al eliminar la configuración");
+        }
     };
 
     return (
@@ -65,12 +48,12 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                 Productos Configurados
             </h2>
 
-            {configurations.length === 0 ? (
+            {!configurations || configurations.length === 0 ? (
                 <div className="text-center py-12">
                     <MdOutlineFeaturedPlayList size={64} className="text-slate-600 mx-auto mb-4" />
                     <p className="text-slate-400">No hay productos configurados</p>
                     <ButtonAction
-                        onClick={() => handleOpenModal()}
+                        onClick={() => onEdit({} as Banner)}
                         variant="secondary"
                         className="mt-4"
                         text="Agregar el primero"
@@ -81,7 +64,7 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
             ) : (
                 <div className="space-y-4">
                     {configurations
-                        .sort((a, b) => a.displayPriority - b.displayPriority)
+                        .sort((a, b) => (a.displayPriority || 0) - (b.displayPriority || 0))
                         .map((config) => (
                             <div
                                 key={config.id}
@@ -91,7 +74,7 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                                     {/* Product Image */}
                                     <div className="w-20 h-20 bg-slate-600 rounded-lg overflow-hidden shrink-0">
                                         <img
-                                            src={config.productImage}
+                                            src={config.promotionalData?.bannerImageUrl || config.productImage}
                                             alt={config.productName}
                                             className="w-full h-full object-cover"
                                         />
@@ -106,15 +89,8 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                                                 </h3>
                                                 <div className="flex items-center gap-2">
                                                     <span className="text-xs text-slate-400">
-                                                        Prioridad:
+                                                        Prioridad: {config.displayPriority}
                                                     </span>
-                                                    <input
-                                                        type="number"
-                                                        value={config.displayPriority}
-                                                        onChange={(e) => handlePriorityChange(config.id, parseInt(e.target.value) || 1)}
-                                                        className="w-16 bg-slate-800 border border-slate-600 text-slate-100 px-2 py-1 rounded text-sm"
-                                                        min="1"
-                                                    />
                                                     {config.isFeatured && (
                                                         <span className="flex items-center gap-1 text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">
                                                             <AiFillStar size={12} />
@@ -127,13 +103,13 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                                             {/* Actions */}
                                             <div className="flex gap-2">
                                                 <button
-                                                    onClick={() => handleOpenModal(config)}
+                                                    onClick={() => onEdit(config)}
                                                     className="p-2 bg-cyan-500/20 text-cyan-400 rounded-lg hover:bg-cyan-500/30 transition-all"
                                                 >
                                                     <BiEdit size={18} />
                                                 </button>
                                                 <button
-                                                    onClick={() => handleDeleteConfiguration(config.id)}
+                                                    onClick={() => handleDeleteConfiguration(config.id!)}
                                                     className="p-2 bg-red-500/20 text-red-400 rounded-lg hover:bg-red-500/30 transition-all"
                                                 >
                                                     <BiTrash size={18} />
@@ -143,7 +119,7 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
 
                                         {/* Sections Badges */}
                                         <div className="flex flex-wrap gap-2 mb-3">
-                                            {config.displaySections.map((section) => (
+                                            {config.displaySections?.map((section) => (
                                                 <span
                                                     key={section}
                                                     className={`flex items-center gap-1 text-xs px-3 py-1 rounded-full border ${getSectionColor(section)}`}

@@ -35,6 +35,7 @@ export const queryKeys = {
     promotional: (limit?: number) => [...queryKeys.showcase.all, 'promotional', limit] as const,
     section: (section: string, limit?: number) =>
       [...queryKeys.showcase.all, section, limit] as const,
+    trends: (limit?: number) => [...queryKeys.showcase.all, 'trends', limit] as const,
   },
   categories: {
     all: ['categories'] as const,
@@ -69,5 +70,9 @@ export const queryKeys = {
   payment: {
     all: ['payment'] as const,
     get: () => [...queryKeys.payment.all, 'get'] as const,
+  },
+  banner: {
+    all: ['banner'] as const,
+    get: () => [...queryKeys.banner.all, 'get'] as const,
   },
 };
