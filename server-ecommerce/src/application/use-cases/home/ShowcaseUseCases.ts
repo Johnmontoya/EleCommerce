@@ -47,3 +47,11 @@ export class GetTrendsProductUseCase {
             .slice(0, 5);
     }
 }
+
+export class DeleteProductUseCase {
+    constructor(private productRepository: IProductrepository) { }
+
+    async execute(id: string): Promise<void> {
+        await this.productRepository.delete(id);
+    }
+}

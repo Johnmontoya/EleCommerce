@@ -6,6 +6,7 @@ import { useDeletePaymentMutation, usePaymentMutation, useUpdatePaymentMutation 
 import type { PaymentInput } from "../types/payment.types";
 import { useState } from "react";
 import { AxiosError } from "axios";
+import SweetAlertas from "../../../shared/ui/SweetAlertas";
 
 interface CardMethodProps {
     cardData: PaymentInput;
@@ -84,16 +85,18 @@ const CardMethod = ({
         setIsEditing(true);
     };
 
-    const handleDelete = async () => {
-        if (!cardData.id) return;
+    const Cancel = () => { };
 
-        if (confirm("¿Estás seguro de que deseas eliminar esta tarjeta?")) {
-            try {
-                await deletePaymentMutation.mutateAsync(cardData.id);
-            } catch (error) {
-                console.error("Error al eliminar la tarjeta:", error);
-            }
-        }
+    const ConfirmDeleteBlog = async (id: string) => {
+        await deletePaymentMutation.mutateAsync(id);
+    };
+
+    const handleDelete = () => {
+        SweetAlertas.OnDialogChoose({
+            message: `Estas seguro de eliminar la tarjeta ${cardData.cardHolder}`,
+            onConfirm: () => ConfirmDeleteBlog(cardData.id!),
+            onCancel: Cancel,
+        });
     };
 
     const handleCancel = () => {

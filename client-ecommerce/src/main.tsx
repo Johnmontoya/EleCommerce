@@ -4,6 +4,7 @@ import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import ScrollToTop from './shared/utils/ScrollTop.tsx'
 import { Toaster } from 'sonner'
+import 'sweetalert2/src/sweetalert2.scss'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>

@@ -11,5 +11,9 @@ export const showcaseService = {
     updateBanner: async (id: string, banner: Banner): Promise<ApiResponse<Banner | null>> => {
         const { data } = await apiClient.put(endpoints.banner.update(id), banner);
         return data;
+    },
+    deleteBanner: async (id: string): Promise<ApiResponse<Banner | null>> => {
+        const { data } = await apiClient.delete(endpoints.banner.delete(id));
+        return data;
     }
 }

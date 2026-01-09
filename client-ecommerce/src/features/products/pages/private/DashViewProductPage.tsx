@@ -11,6 +11,7 @@ import ButtonMobile from "../../../../shared/ui/ButtonMobile";
 import DashViewHeader from "../../components/viewsProduct/DashViewHeader";
 import CardPriceCard from "../../components/viewsProduct/CardPriceCard";
 import CardMainInfo from "../../components/viewsProduct/CardMainInfo";
+import SweetAlertas from "../../../../shared/ui/SweetAlertas";
 
 const DashViewProductPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -21,11 +22,19 @@ const DashViewProductPage: React.FC = () => {
     const deleteProduct = useDeleteProductMutation();
     const updateProduct = useUpdateProductMutation();
 
-    const handleDelete = async () => {
-        if (window.confirm(`¿Eliminar "${product?.name}"?`)) {
-            await deleteProduct.mutateAsync(id!);
-            navigate("/dashboard/products");
-        }
+    const Cancel = () => { };
+
+    const ConfirmDeleteBlog = async (id: string) => {
+        await deleteProduct.mutateAsync(id);
+        navigate("/dashboard/products");
+    };
+
+    const handleDelete = () => {
+        SweetAlertas.OnDialogChoose({
+            message: `Estas seguro de eliminar el producto ${product?.name}`,
+            onConfirm: () => ConfirmDeleteBlog(id!),
+            onCancel: Cancel,
+        });
     };
 
     const handleTogglePublish = async () => {

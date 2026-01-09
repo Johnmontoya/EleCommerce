@@ -5,6 +5,7 @@ import { BiEdit } from "react-icons/bi";
 import { BsTrash2 } from "react-icons/bs";
 import { FaCheck } from "react-icons/fa";
 import { MdBlock, MdCheckCircle } from "react-icons/md";
+import SweetAlertas from "../../../../shared/ui/SweetAlertas";
 
 interface CategoryRowProps {
     category: any;
@@ -16,10 +17,18 @@ const CategoryRow: React.FC<CategoryRowProps> = ({ category, selectData, handleS
     const navigate = useNavigate();
     const deletecategory = useDeleteCategoryMutation();
 
-    const handleDelete = (category: any) => {
-        if (window.confirm(`¿Estás seguro de eliminar la categoria ${category.name}?`)) {
-            deletecategory.mutate(category.id);
-        }
+    const Cancel = () => { };
+
+    const ConfirmDeleteBlog = (id: string) => {
+        deletecategory.mutateAsync(id);
+    };
+
+    const handleDelete = (categoria: any) => {
+        SweetAlertas.OnDialogChoose({
+            message: `Estas seguro de eliminar la categoria ${categoria.name}`,
+            onConfirm: () => ConfirmDeleteBlog(categoria.id),
+            onCancel: Cancel,
+        });
     };
 
     return (

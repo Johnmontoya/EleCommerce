@@ -1,11 +1,11 @@
 import { MdOutlineFeaturedPlayList } from "react-icons/md";
 import ButtonAction from "../../../shared/ui/ButtonAction";
-import { toast } from "sonner";
 import { AiFillStar } from "react-icons/ai";
 import { BiEdit, BiPlus, BiTrash } from "react-icons/bi";
 import type React from "react";
 import type { Banner } from "../types/banner.types";
-import { useAddBannerMutation } from "../hook/mutation/useBannerMutation";
+import SweetAlertas from "../../../shared/ui/SweetAlertas";
+import { useDeleteBannerMutation } from "../hook/mutation/useBannerMutation";
 
 type DisplaySection = 'banner' | 'featured' | 'trending' | 'promotional' | 'new-arrival';
 
@@ -20,7 +20,7 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
     sectionOptions,
     onEdit
 }) => {
-    //const deleteBannerMutation = useDeleteBannerMutation();
+    const deleteBannerMutation = useDeleteBannerMutation();
 
     const getSectionIcon = (section: DisplaySection) => {
         return sectionOptions.find(opt => opt.value === section)?.icon;
@@ -30,16 +30,18 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
         return sectionOptions.find(opt => opt.value === section)?.color;
     };
 
-    const handleDeleteConfiguration = async (id: string) => {
-        if (!confirm('¿Estás seguro de eliminar esta configuración?')) return;
+    const Cancel = () => { };
 
-        try {
-            //await deleteBannerMutation.mutateAsync(id);
-            toast.success("Configuración eliminada");
-        } catch (error) {
-            console.error("Error al eliminar:", error);
-            toast.error("Error al eliminar la configuración");
-        }
+    const ConfirmDeleteBlog = async (id: string) => {
+        await deleteBannerMutation.mutateAsync(id);
+    };
+
+    const handleDelete = (id: string) => {
+        SweetAlertas.OnDialogChoose({
+            message: `Estas seguro de eliminar esta configuración`,
+            onConfirm: () => ConfirmDeleteBlog(id),
+            onCancel: Cancel,
+        });
     };
 
     return (
@@ -109,7 +111,7 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                                                     <BiEdit size={18} />
                                                 </button>
                                                 <button
-                                                    onClick={() => handleDeleteConfiguration(config.id!)}
+                                                    onClick={() => handleDelete(config.id!)}
                                                     className="p-2 bg-red-500/20 text-red-400 rounded-lg hover:bg-red-500/30 transition-all"
                                                 >
                                                     <BiTrash size={18} />

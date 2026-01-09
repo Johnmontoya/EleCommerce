@@ -19,3 +19,20 @@ export const useAddBannerMutation = () => {
         }
     })
 }
+
+export const useDeleteBannerMutation = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (id: string) => showcaseService.deleteBanner(id),
+        onSuccess: (response: any) => {
+            queryClient.invalidateQueries({ queryKey: ['banner'] });
+            queryClient.invalidateQueries({ queryKey: ['showcase'] });
+
+            toast.success(response.message || "Banner eliminado exitosamente");
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data.message || "Error al eliminar el banner");
+        }
+    })
+}

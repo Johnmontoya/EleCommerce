@@ -7,6 +7,7 @@ import moment from "moment";
 import { useAuthStore } from "../../store/useAuthStore";
 import { useDeleteMutation, useToggleActiveMutation } from "../../hooks/mutation/useAuthMutation";
 import { BiEdit, BiTrash } from "react-icons/bi";
+import SweetAlertas from "../../../../shared/ui/SweetAlertas";
 
 interface UserRowProps {
     user: User;
@@ -19,10 +20,18 @@ const UserRow: React.FC<UserRowProps> = ({ user, selectedData, handleSelectData 
     const deleteMutation = useDeleteMutation();
     const toggleActiveMutation = useToggleActiveMutation();
 
+    const Cancel = () => { };
+
+    const ConfirmDeleteBlog = (id: string) => {
+        deleteMutation.mutateAsync({ id: id, adminToken: accessToken! });
+    };
+
     const handleDelete = (id: string) => {
-        if (confirm("¿Estás seguro de eliminar este usuario?")) {
-            deleteMutation.mutateAsync({ id: id, adminToken: accessToken! });
-        }
+        SweetAlertas.OnDialogChoose({
+            message: `Estas seguro de eliminar el usuario ${user?.username}`,
+            onConfirm: () => ConfirmDeleteBlog(id),
+            onCancel: Cancel,
+        });
     };
 
     const handleToggleActive = (userId: string) => {

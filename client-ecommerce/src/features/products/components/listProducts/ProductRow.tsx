@@ -5,6 +5,7 @@ import { BsEye, BsTrash2 } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
 import { MdBlock, MdCheckCircle } from "react-icons/md";
 import { useDeleteProductMutation } from "../../hook/mutation/useProductMutation";
+import SweetAlertas from "../../../../shared/ui/SweetAlertas";
 
 interface ProductRowProps {
     product: any;
@@ -15,11 +16,18 @@ interface ProductRowProps {
 const ProductRow: React.FC<ProductRowProps> = ({ product, selectedData, handleSelectData }) => {
     const navigate = useNavigate();
     const deleteProduct = useDeleteProductMutation();
+    const Cancel = () => { };
+
+    const ConfirmDeleteBlog = async (id: string) => {
+        await deleteProduct.mutateAsync(id);
+    };
 
     const handleDelete = (product: any) => {
-        if (window.confirm(`¿Estás seguro de eliminar el producto ${product.name}?`)) {
-            deleteProduct.mutate(product.id);
-        }
+        SweetAlertas.OnDialogChoose({
+            message: `Estas seguro de eliminar el producto ${product.name}`,
+            onConfirm: () => ConfirmDeleteBlog(product.id),
+            onCancel: Cancel,
+        });
     };
 
     return (
