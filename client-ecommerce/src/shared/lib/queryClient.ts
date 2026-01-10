@@ -75,4 +75,8 @@ export const queryKeys = {
     all: ['banner'] as const,
     get: () => [...queryKeys.banner.all, 'get'] as const,
   },
+  wishlist: {
+    all: ['wishlist'] as const,
+    get: () => [...queryKeys.wishlist.all, 'get'] as const,
+  },
 };

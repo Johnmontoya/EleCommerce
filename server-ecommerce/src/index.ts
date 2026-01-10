@@ -9,6 +9,7 @@ import addressRoutes from "./routes/address.routes"
 import orderRoutes from "./routes/order.routes"
 import cartRoutes from "./routes/cart.routes"
 import paymentRoutes from "./routes/payment.routes"
+import wishlistRoutes from "./routes/wishlist.route"
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use('/address', addressRoutes)
 app.use('/orders', orderRoutes)
 app.use('/cart', cartRoutes)
 app.use('/payments', paymentRoutes)
+app.use('/wishlist', wishlistRoutes)
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

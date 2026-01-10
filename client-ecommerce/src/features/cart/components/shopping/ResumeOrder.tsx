@@ -237,9 +237,10 @@ const ResumeOrder: React.FC<ProductProps> = ({ products }) => {
                 onChange={onChangeCreateData}
                 className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-500 transition-colors cursor-pointer"
               >
+                <option value="">Selecciona un método de pago</option>
                 <option value="COD">Pago Contra Entrega</option>
                 <option value="Online">Pago en Línea</option>
-                <option value="Card">Tarjeta de Crédito {payment?.cardNumber.slice(0, 4) + "..."}</option>
+                {payment?.cardNumber && <option value="Card">Tarjeta de Crédito {payment?.cardNumber.slice(0, 4) + "..."}</option>}
               </select>
             </div>
 

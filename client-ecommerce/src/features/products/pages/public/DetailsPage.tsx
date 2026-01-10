@@ -10,10 +10,14 @@ import { useProductBySlug } from "../../hook/queries/useProduct";
 import { useParams } from "react-router-dom";
 import LoadingFallback from "../../../../shared/ui/LoadingFallback";
 import { useCartAddMutation } from "../../../cart/hook/mutation/useCartMutation";
+import { BiHeart } from "react-icons/bi";
+import { useWishlistAddMutation } from "../../../wishlist/hook/mutation/useWishlistMutation";
+import type { Product } from "../../types/product.types";
 
 const DetailsPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const useCartMutation = useCartAddMutation();
+  const addWishlistItem = useWishlistAddMutation();
   const { data: product, isLoading, error } = useProductBySlug(slug!);
   const [thumbnail, setThumbnail] = useState<string>();
   const [quantity, setQuantity] = useState(1);
@@ -50,6 +54,21 @@ const DetailsPage: React.FC = () => {
     });
   };
 
+  const handleAddToWishlist = async (item: Product) => {
+    await addWishlistItem.mutateAsync({
+      productId: item.id,
+      productName: item.name,
+      productImage: item.images![0],
+      price: item.price,
+      discount: item.priceDiscount!,
+      category: item.slug,
+      stock: item.stock,
+      reviews: item?.reviewsCount!,
+      rating: item?.rating!,
+      total: item.price - (item.price * item.priceDiscount!) / 100
+    });
+  };
+
   if (isLoading) {
     return <LoadingFallback />;
   }
@@ -67,7 +86,10 @@ const DetailsPage: React.FC = () => {
 
       {/* Main Product Section */}
       <div className="max-w-7xl mx-auto w-full px-6 py-10">
-        <div className="flex flex-col lg:flex-row gap-12">
+        <div className="flex flex-col lg:flex-row gap-12 relative">
+          <BiHeart size={36}
+            onClick={() => handleAddToWishlist(product)}
+            className="absolute top-3 right-3 z-50 text-slate-300 hover:text-cyan-500 hover:bg-slate-700 rounded-full p-1 cursor-pointer" />
           {/* Image Gallery */}
           <div className="flex gap-4 lg:w-1/2">
             {/* Thumbnails */}

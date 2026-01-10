@@ -18,7 +18,6 @@ const showcaseController = new ShowcaseController(
     getPromotionalProductsUseCase,
     getTrendsProductUseCase,
     deleteProductUseCase
-
 )
 
 router.get('/showcase/banner', showcaseController.getBanner);

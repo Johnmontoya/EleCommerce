@@ -115,6 +115,7 @@ model Order {
   total          Float
   status         OrderStatus   @default(PENDING)
   paymentStatus  PaymentStatus @default(PENDING)
+  trackings      Tracking[]
   paymentMethod  String?
   addressId      String
   address        Address       @relation(fields: [addressId], references: [id], onDelete: Cascade)
@@ -170,11 +171,20 @@ model Wishlist {
 }
 
 model WishlistItem {
-  id         String   @id @default(uuid())
-  wishlistId String
-  wishlist   Wishlist @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
-  productId  String // ID de MongoDB
-  createdAt  DateTime @default(now())
+  id           String   @id @default(uuid())
+  wishlistId   String
+  wishlist     Wishlist @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
+  productId    String // ID de MongoDB
+  productName  String // Cache del nombre
+  productImage String // Cache de la imagen
+  category     String
+  rating       Int
+  reviews      Int
+  price        Float
+  discount     Float    @default(0)
+  total        Float
+  stock        Int
+  createdAt    DateTime @default(now())
 
   @@unique([wishlistId, productId])
   @@map("wishlist_items")
@@ -194,6 +204,55 @@ model Review {
 
   @@unique([userId, productId])
   @@map("reviews")
+}
+
+model Tracking {
+  id                String      @id @default(cuid())
+  trackingNumber    String      @unique
+  orderNumber       String      @unique
+  status            OrderStatus @default(CONFIRMED)
+  estimatedDelivery DateTime
+  origin            String
+  destination       String
+  weight            String?
+  dimensions        String?
+  carrier           String
+  currentLocation   String
+
+  // Relación con Order
+  orderId String @unique
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  // Relación con eventos de tracking
+  events TrackingEvent[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([trackingNumber])
+  @@index([orderNumber])
+  @@index([status])
+}
+
+model TrackingEvent {
+  id          String  @id @default(cuid())
+  status      String
+  description String
+  location    String
+  date        String // Formato: "03 Ene 2026"
+  time        String // Formato: "09:30 AM" o "Estimado"
+  completed   Boolean @default(false)
+  order       Int     @default(0) // Para ordenar los eventos
+
+  // Relación con Tracking
+  trackingId String
+  tracking   Tracking @relation(fields: [trackingId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([trackingId])
+  @@index([order])
 }
 
 enum Role {

@@ -1,34 +1,22 @@
 import React from "react";
 import { BiHeart, BiPackage, BiTrendingUp } from "react-icons/bi";
-
-interface WishlistItem {
-  id: number;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  category: string;
-  rating: number;
-  reviews: number;
-  inStock: boolean;
-  discount?: number;
-}
+import type { WishlistItem } from "../../types/wish.types";
 
 interface WishlistItemProps {
-    wishlistItems: WishlistItem[]
+  wishlistItems: WishlistItem[] | undefined | null
 }
 
 const CardStats: React.FC<WishlistItemProps> = ({ wishlistItems }) => {
 
-    const totalValue = wishlistItems.reduce((sum, item) => sum + item.price, 0);
-  const inStockCount = wishlistItems.filter((item) => item.inStock).length;
-  const totalSavings = wishlistItems.reduce((sum, item) => {
-    if (item.originalPrice) {
-      return sum + (item.originalPrice - item.price);
+  const totalValue = wishlistItems?.reduce((sum, item) => sum + item.price, 0);
+  const inStockCount = wishlistItems?.filter((item) => item.stock).length;
+  const totalSavings = wishlistItems?.reduce((sum, item) => {
+    if (item.price) {
+      return sum + (item.price - item.total);
     }
     return sum;
   }, 0);
-   
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div className="bg-slate-800/50 border-2 border-slate-700 rounded-xl p-4 backdrop-blur-sm">
@@ -36,7 +24,7 @@ const CardStats: React.FC<WishlistItemProps> = ({ wishlistItems }) => {
           <div>
             <p className="text-slate-400 text-sm mb-1">Valor Total</p>
             <p className="text-2xl font-bold text-cyan-400">
-              ${totalValue.toFixed(2)}
+              ${totalValue}
             </p>
           </div>
           <div className="bg-cyan-500/20 p-3 rounded-lg">
@@ -50,7 +38,7 @@ const CardStats: React.FC<WishlistItemProps> = ({ wishlistItems }) => {
           <div>
             <p className="text-slate-400 text-sm mb-1">Productos Disponibles</p>
             <p className="text-2xl font-bold text-green-400">
-              {inStockCount}/{wishlistItems.length}
+              {inStockCount}/{wishlistItems?.length}
             </p>
           </div>
           <div className="bg-green-500/20 p-3 rounded-lg">
@@ -64,7 +52,7 @@ const CardStats: React.FC<WishlistItemProps> = ({ wishlistItems }) => {
           <div>
             <p className="text-slate-400 text-sm mb-1">Ahorro Total</p>
             <p className="text-2xl font-bold text-orange-400">
-              ${totalSavings.toFixed(2)}
+              ${totalSavings}
             </p>
           </div>
           <div className="bg-orange-500/20 p-3 rounded-lg">

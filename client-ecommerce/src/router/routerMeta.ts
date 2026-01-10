@@ -67,7 +67,7 @@ const routerMeta: RouterMetaType = {
   WishlistPage: {
     name: "WishList",
     path: "/wishlist",
-    feature: 'cart',
+    feature: 'wishlist',
     site: 'public',
     page: "WishListPage",
     requiresLayout: true,

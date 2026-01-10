@@ -99,3 +99,13 @@ export type WishlistItem = Prisma.WishlistItemModel
  * 
  */
 export type Review = Prisma.ReviewModel
+/**
+ * Model Tracking
+ * 
+ */
+export type Tracking = Prisma.TrackingModel
+/**
+ * Model TrackingEvent
+ * 
+ */
+export type TrackingEvent = Prisma.TrackingEventModel

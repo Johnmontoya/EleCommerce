@@ -87,7 +87,7 @@ const OrderList: React.FC<OrderListProps> = ({
                                             )}
                                         </ButtonAction>
                                         <ButtonAction
-                                            text="Borrar"
+                                            text="Cancelar"
                                             variant="delete"
                                             onClick={() => handleDelete(order.id)}
                                         >

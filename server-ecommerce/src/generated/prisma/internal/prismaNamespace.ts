@@ -400,7 +400,9 @@ export const ModelName = {
   Payment: 'Payment',
   Wishlist: 'Wishlist',
   WishlistItem: 'WishlistItem',
-  Review: 'Review'
+  Review: 'Review',
+  Tracking: 'Tracking',
+  TrackingEvent: 'TrackingEvent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -416,7 +418,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "refreshToken" | "address" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "wishlist" | "wishlistItem" | "review"
+    modelProps: "user" | "refreshToken" | "address" | "cart" | "cartItem" | "order" | "orderItem" | "payment" | "wishlist" | "wishlistItem" | "review" | "tracking" | "trackingEvent"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1234,6 +1236,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Tracking: {
+      payload: Prisma.$TrackingPayload<ExtArgs>
+      fields: Prisma.TrackingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TrackingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TrackingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingPayload>
+        }
+        findFirst: {
+          args: Prisma.TrackingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TrackingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingPayload>
+        }
+        findMany: {
+          args: Prisma.TrackingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingPayload>[]
+        }
+        create: {
+          args: Prisma.TrackingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingPayload>
+        }
+        createMany: {
+          args: Prisma.TrackingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TrackingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingPayload>[]
+        }
+        delete: {
+          args: Prisma.TrackingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingPayload>
+        }
+        update: {
+          args: Prisma.TrackingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingPayload>
+        }
+        deleteMany: {
+          args: Prisma.TrackingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TrackingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TrackingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingPayload>[]
+        }
+        upsert: {
+          args: Prisma.TrackingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingPayload>
+        }
+        aggregate: {
+          args: Prisma.TrackingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTracking>
+        }
+        groupBy: {
+          args: Prisma.TrackingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TrackingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TrackingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TrackingCountAggregateOutputType> | number
+        }
+      }
+    }
+    TrackingEvent: {
+      payload: Prisma.$TrackingEventPayload<ExtArgs>
+      fields: Prisma.TrackingEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TrackingEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TrackingEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingEventPayload>
+        }
+        findFirst: {
+          args: Prisma.TrackingEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TrackingEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingEventPayload>
+        }
+        findMany: {
+          args: Prisma.TrackingEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingEventPayload>[]
+        }
+        create: {
+          args: Prisma.TrackingEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingEventPayload>
+        }
+        createMany: {
+          args: Prisma.TrackingEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TrackingEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingEventPayload>[]
+        }
+        delete: {
+          args: Prisma.TrackingEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingEventPayload>
+        }
+        update: {
+          args: Prisma.TrackingEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.TrackingEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TrackingEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TrackingEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.TrackingEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackingEventPayload>
+        }
+        aggregate: {
+          args: Prisma.TrackingEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTrackingEvent>
+        }
+        groupBy: {
+          args: Prisma.TrackingEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TrackingEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TrackingEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TrackingEventCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1415,6 +1565,15 @@ export const WishlistItemScalarFieldEnum = {
   id: 'id',
   wishlistId: 'wishlistId',
   productId: 'productId',
+  productName: 'productName',
+  productImage: 'productImage',
+  category: 'category',
+  rating: 'rating',
+  reviews: 'reviews',
+  price: 'price',
+  discount: 'discount',
+  total: 'total',
+  stock: 'stock',
   createdAt: 'createdAt'
 } as const
 
@@ -1434,6 +1593,43 @@ export const ReviewScalarFieldEnum = {
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
+export const TrackingScalarFieldEnum = {
+  id: 'id',
+  trackingNumber: 'trackingNumber',
+  orderNumber: 'orderNumber',
+  status: 'status',
+  estimatedDelivery: 'estimatedDelivery',
+  origin: 'origin',
+  destination: 'destination',
+  weight: 'weight',
+  dimensions: 'dimensions',
+  carrier: 'carrier',
+  currentLocation: 'currentLocation',
+  orderId: 'orderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TrackingScalarFieldEnum = (typeof TrackingScalarFieldEnum)[keyof typeof TrackingScalarFieldEnum]
+
+
+export const TrackingEventScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  description: 'description',
+  location: 'location',
+  date: 'date',
+  time: 'time',
+  completed: 'completed',
+  order: 'order',
+  trackingId: 'trackingId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TrackingEventScalarFieldEnum = (typeof TrackingEventScalarFieldEnum)[keyof typeof TrackingEventScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1654,6 +1850,8 @@ export type GlobalOmitConfig = {
   wishlist?: Prisma.WishlistOmit
   wishlistItem?: Prisma.WishlistItemOmit
   review?: Prisma.ReviewOmit
+  tracking?: Prisma.TrackingOmit
+  trackingEvent?: Prisma.TrackingEventOmit
 }
 
 /* Types for Logging */

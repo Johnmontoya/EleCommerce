@@ -59,7 +59,9 @@ export const ModelName = {
   Payment: 'Payment',
   Wishlist: 'Wishlist',
   WishlistItem: 'WishlistItem',
-  Review: 'Review'
+  Review: 'Review',
+  Tracking: 'Tracking',
+  TrackingEvent: 'TrackingEvent'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -220,6 +222,15 @@ export const WishlistItemScalarFieldEnum = {
   id: 'id',
   wishlistId: 'wishlistId',
   productId: 'productId',
+  productName: 'productName',
+  productImage: 'productImage',
+  category: 'category',
+  rating: 'rating',
+  reviews: 'reviews',
+  price: 'price',
+  discount: 'discount',
+  total: 'total',
+  stock: 'stock',
   createdAt: 'createdAt'
 } as const
 
@@ -239,6 +250,43 @@ export const ReviewScalarFieldEnum = {
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
+export const TrackingScalarFieldEnum = {
+  id: 'id',
+  trackingNumber: 'trackingNumber',
+  orderNumber: 'orderNumber',
+  status: 'status',
+  estimatedDelivery: 'estimatedDelivery',
+  origin: 'origin',
+  destination: 'destination',
+  weight: 'weight',
+  dimensions: 'dimensions',
+  carrier: 'carrier',
+  currentLocation: 'currentLocation',
+  orderId: 'orderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TrackingScalarFieldEnum = (typeof TrackingScalarFieldEnum)[keyof typeof TrackingScalarFieldEnum]
+
+
+export const TrackingEventScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  description: 'description',
+  location: 'location',
+  date: 'date',
+  time: 'time',
+  completed: 'completed',
+  order: 'order',
+  trackingId: 'trackingId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TrackingEventScalarFieldEnum = (typeof TrackingEventScalarFieldEnum)[keyof typeof TrackingEventScalarFieldEnum]
 
 
 export const SortOrder = {

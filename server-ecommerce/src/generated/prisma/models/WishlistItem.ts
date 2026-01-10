@@ -20,14 +20,43 @@ export type WishlistItemModel = runtime.Types.Result.DefaultSelection<Prisma.$Wi
 
 export type AggregateWishlistItem = {
   _count: WishlistItemCountAggregateOutputType | null
+  _avg: WishlistItemAvgAggregateOutputType | null
+  _sum: WishlistItemSumAggregateOutputType | null
   _min: WishlistItemMinAggregateOutputType | null
   _max: WishlistItemMaxAggregateOutputType | null
+}
+
+export type WishlistItemAvgAggregateOutputType = {
+  rating: number | null
+  reviews: number | null
+  price: number | null
+  discount: number | null
+  total: number | null
+  stock: number | null
+}
+
+export type WishlistItemSumAggregateOutputType = {
+  rating: number | null
+  reviews: number | null
+  price: number | null
+  discount: number | null
+  total: number | null
+  stock: number | null
 }
 
 export type WishlistItemMinAggregateOutputType = {
   id: string | null
   wishlistId: string | null
   productId: string | null
+  productName: string | null
+  productImage: string | null
+  category: string | null
+  rating: number | null
+  reviews: number | null
+  price: number | null
+  discount: number | null
+  total: number | null
+  stock: number | null
   createdAt: Date | null
 }
 
@@ -35,6 +64,15 @@ export type WishlistItemMaxAggregateOutputType = {
   id: string | null
   wishlistId: string | null
   productId: string | null
+  productName: string | null
+  productImage: string | null
+  category: string | null
+  rating: number | null
+  reviews: number | null
+  price: number | null
+  discount: number | null
+  total: number | null
+  stock: number | null
   createdAt: Date | null
 }
 
@@ -42,15 +80,51 @@ export type WishlistItemCountAggregateOutputType = {
   id: number
   wishlistId: number
   productId: number
+  productName: number
+  productImage: number
+  category: number
+  rating: number
+  reviews: number
+  price: number
+  discount: number
+  total: number
+  stock: number
   createdAt: number
   _all: number
 }
 
 
+export type WishlistItemAvgAggregateInputType = {
+  rating?: true
+  reviews?: true
+  price?: true
+  discount?: true
+  total?: true
+  stock?: true
+}
+
+export type WishlistItemSumAggregateInputType = {
+  rating?: true
+  reviews?: true
+  price?: true
+  discount?: true
+  total?: true
+  stock?: true
+}
+
 export type WishlistItemMinAggregateInputType = {
   id?: true
   wishlistId?: true
   productId?: true
+  productName?: true
+  productImage?: true
+  category?: true
+  rating?: true
+  reviews?: true
+  price?: true
+  discount?: true
+  total?: true
+  stock?: true
   createdAt?: true
 }
 
@@ -58,6 +132,15 @@ export type WishlistItemMaxAggregateInputType = {
   id?: true
   wishlistId?: true
   productId?: true
+  productName?: true
+  productImage?: true
+  category?: true
+  rating?: true
+  reviews?: true
+  price?: true
+  discount?: true
+  total?: true
+  stock?: true
   createdAt?: true
 }
 
@@ -65,6 +148,15 @@ export type WishlistItemCountAggregateInputType = {
   id?: true
   wishlistId?: true
   productId?: true
+  productName?: true
+  productImage?: true
+  category?: true
+  rating?: true
+  reviews?: true
+  price?: true
+  discount?: true
+  total?: true
+  stock?: true
   createdAt?: true
   _all?: true
 }
@@ -107,6 +199,18 @@ export type WishlistItemAggregateArgs<ExtArgs extends runtime.Types.Extensions.I
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: WishlistItemAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: WishlistItemSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: WishlistItemMinAggregateInputType
@@ -137,6 +241,8 @@ export type WishlistItemGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   _count?: WishlistItemCountAggregateInputType | true
+  _avg?: WishlistItemAvgAggregateInputType
+  _sum?: WishlistItemSumAggregateInputType
   _min?: WishlistItemMinAggregateInputType
   _max?: WishlistItemMaxAggregateInputType
 }
@@ -145,8 +251,19 @@ export type WishlistItemGroupByOutputType = {
   id: string
   wishlistId: string
   productId: string
+  productName: string
+  productImage: string
+  category: string
+  rating: number
+  reviews: number
+  price: number
+  discount: number
+  total: number
+  stock: number
   createdAt: Date
   _count: WishlistItemCountAggregateOutputType | null
+  _avg: WishlistItemAvgAggregateOutputType | null
+  _sum: WishlistItemSumAggregateOutputType | null
   _min: WishlistItemMinAggregateOutputType | null
   _max: WishlistItemMaxAggregateOutputType | null
 }
@@ -173,6 +290,15 @@ export type WishlistItemWhereInput = {
   id?: Prisma.StringFilter<"WishlistItem"> | string
   wishlistId?: Prisma.StringFilter<"WishlistItem"> | string
   productId?: Prisma.StringFilter<"WishlistItem"> | string
+  productName?: Prisma.StringFilter<"WishlistItem"> | string
+  productImage?: Prisma.StringFilter<"WishlistItem"> | string
+  category?: Prisma.StringFilter<"WishlistItem"> | string
+  rating?: Prisma.IntFilter<"WishlistItem"> | number
+  reviews?: Prisma.IntFilter<"WishlistItem"> | number
+  price?: Prisma.FloatFilter<"WishlistItem"> | number
+  discount?: Prisma.FloatFilter<"WishlistItem"> | number
+  total?: Prisma.FloatFilter<"WishlistItem"> | number
+  stock?: Prisma.IntFilter<"WishlistItem"> | number
   createdAt?: Prisma.DateTimeFilter<"WishlistItem"> | Date | string
   wishlist?: Prisma.XOR<Prisma.WishlistScalarRelationFilter, Prisma.WishlistWhereInput>
 }
@@ -181,6 +307,15 @@ export type WishlistItemOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   wishlistId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
+  productName?: Prisma.SortOrder
+  productImage?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  reviews?: Prisma.SortOrder
+  price?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
+  total?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   wishlist?: Prisma.WishlistOrderByWithRelationInput
 }
@@ -193,6 +328,15 @@ export type WishlistItemWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.WishlistItemWhereInput | Prisma.WishlistItemWhereInput[]
   wishlistId?: Prisma.StringFilter<"WishlistItem"> | string
   productId?: Prisma.StringFilter<"WishlistItem"> | string
+  productName?: Prisma.StringFilter<"WishlistItem"> | string
+  productImage?: Prisma.StringFilter<"WishlistItem"> | string
+  category?: Prisma.StringFilter<"WishlistItem"> | string
+  rating?: Prisma.IntFilter<"WishlistItem"> | number
+  reviews?: Prisma.IntFilter<"WishlistItem"> | number
+  price?: Prisma.FloatFilter<"WishlistItem"> | number
+  discount?: Prisma.FloatFilter<"WishlistItem"> | number
+  total?: Prisma.FloatFilter<"WishlistItem"> | number
+  stock?: Prisma.IntFilter<"WishlistItem"> | number
   createdAt?: Prisma.DateTimeFilter<"WishlistItem"> | Date | string
   wishlist?: Prisma.XOR<Prisma.WishlistScalarRelationFilter, Prisma.WishlistWhereInput>
 }, "id" | "wishlistId_productId">
@@ -201,10 +345,21 @@ export type WishlistItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   wishlistId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
+  productName?: Prisma.SortOrder
+  productImage?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  reviews?: Prisma.SortOrder
+  price?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
+  total?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.WishlistItemCountOrderByAggregateInput
+  _avg?: Prisma.WishlistItemAvgOrderByAggregateInput
   _max?: Prisma.WishlistItemMaxOrderByAggregateInput
   _min?: Prisma.WishlistItemMinOrderByAggregateInput
+  _sum?: Prisma.WishlistItemSumOrderByAggregateInput
 }
 
 export type WishlistItemScalarWhereWithAggregatesInput = {
@@ -214,12 +369,30 @@ export type WishlistItemScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"WishlistItem"> | string
   wishlistId?: Prisma.StringWithAggregatesFilter<"WishlistItem"> | string
   productId?: Prisma.StringWithAggregatesFilter<"WishlistItem"> | string
+  productName?: Prisma.StringWithAggregatesFilter<"WishlistItem"> | string
+  productImage?: Prisma.StringWithAggregatesFilter<"WishlistItem"> | string
+  category?: Prisma.StringWithAggregatesFilter<"WishlistItem"> | string
+  rating?: Prisma.IntWithAggregatesFilter<"WishlistItem"> | number
+  reviews?: Prisma.IntWithAggregatesFilter<"WishlistItem"> | number
+  price?: Prisma.FloatWithAggregatesFilter<"WishlistItem"> | number
+  discount?: Prisma.FloatWithAggregatesFilter<"WishlistItem"> | number
+  total?: Prisma.FloatWithAggregatesFilter<"WishlistItem"> | number
+  stock?: Prisma.IntWithAggregatesFilter<"WishlistItem"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"WishlistItem"> | Date | string
 }
 
 export type WishlistItemCreateInput = {
   id?: string
   productId: string
+  productName: string
+  productImage: string
+  category: string
+  rating: number
+  reviews: number
+  price: number
+  discount?: number
+  total: number
+  stock: number
   createdAt?: Date | string
   wishlist: Prisma.WishlistCreateNestedOneWithoutItemsInput
 }
@@ -228,12 +401,30 @@ export type WishlistItemUncheckedCreateInput = {
   id?: string
   wishlistId: string
   productId: string
+  productName: string
+  productImage: string
+  category: string
+  rating: number
+  reviews: number
+  price: number
+  discount?: number
+  total: number
+  stock: number
   createdAt?: Date | string
 }
 
 export type WishlistItemUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
+  productName?: Prisma.StringFieldUpdateOperationsInput | string
+  productImage?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  reviews?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  total?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   wishlist?: Prisma.WishlistUpdateOneRequiredWithoutItemsNestedInput
 }
@@ -242,6 +433,15 @@ export type WishlistItemUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   wishlistId?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
+  productName?: Prisma.StringFieldUpdateOperationsInput | string
+  productImage?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  reviews?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  total?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -249,12 +449,30 @@ export type WishlistItemCreateManyInput = {
   id?: string
   wishlistId: string
   productId: string
+  productName: string
+  productImage: string
+  category: string
+  rating: number
+  reviews: number
+  price: number
+  discount?: number
+  total: number
+  stock: number
   createdAt?: Date | string
 }
 
 export type WishlistItemUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
+  productName?: Prisma.StringFieldUpdateOperationsInput | string
+  productImage?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  reviews?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  total?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -262,6 +480,15 @@ export type WishlistItemUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   wishlistId?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
+  productName?: Prisma.StringFieldUpdateOperationsInput | string
+  productImage?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  reviews?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  total?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -284,13 +511,40 @@ export type WishlistItemCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   wishlistId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
+  productName?: Prisma.SortOrder
+  productImage?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  reviews?: Prisma.SortOrder
+  price?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
+  total?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type WishlistItemAvgOrderByAggregateInput = {
+  rating?: Prisma.SortOrder
+  reviews?: Prisma.SortOrder
+  price?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
+  total?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
 }
 
 export type WishlistItemMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   wishlistId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
+  productName?: Prisma.SortOrder
+  productImage?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  reviews?: Prisma.SortOrder
+  price?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
+  total?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -298,7 +552,25 @@ export type WishlistItemMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   wishlistId?: Prisma.SortOrder
   productId?: Prisma.SortOrder
+  productName?: Prisma.SortOrder
+  productImage?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  reviews?: Prisma.SortOrder
+  price?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
+  total?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type WishlistItemSumOrderByAggregateInput = {
+  rating?: Prisma.SortOrder
+  reviews?: Prisma.SortOrder
+  price?: Prisma.SortOrder
+  discount?: Prisma.SortOrder
+  total?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
 }
 
 export type WishlistItemCreateNestedManyWithoutWishlistInput = {
@@ -346,12 +618,30 @@ export type WishlistItemUncheckedUpdateManyWithoutWishlistNestedInput = {
 export type WishlistItemCreateWithoutWishlistInput = {
   id?: string
   productId: string
+  productName: string
+  productImage: string
+  category: string
+  rating: number
+  reviews: number
+  price: number
+  discount?: number
+  total: number
+  stock: number
   createdAt?: Date | string
 }
 
 export type WishlistItemUncheckedCreateWithoutWishlistInput = {
   id?: string
   productId: string
+  productName: string
+  productImage: string
+  category: string
+  rating: number
+  reviews: number
+  price: number
+  discount?: number
+  total: number
+  stock: number
   createdAt?: Date | string
 }
 
@@ -388,30 +678,75 @@ export type WishlistItemScalarWhereInput = {
   id?: Prisma.StringFilter<"WishlistItem"> | string
   wishlistId?: Prisma.StringFilter<"WishlistItem"> | string
   productId?: Prisma.StringFilter<"WishlistItem"> | string
+  productName?: Prisma.StringFilter<"WishlistItem"> | string
+  productImage?: Prisma.StringFilter<"WishlistItem"> | string
+  category?: Prisma.StringFilter<"WishlistItem"> | string
+  rating?: Prisma.IntFilter<"WishlistItem"> | number
+  reviews?: Prisma.IntFilter<"WishlistItem"> | number
+  price?: Prisma.FloatFilter<"WishlistItem"> | number
+  discount?: Prisma.FloatFilter<"WishlistItem"> | number
+  total?: Prisma.FloatFilter<"WishlistItem"> | number
+  stock?: Prisma.IntFilter<"WishlistItem"> | number
   createdAt?: Prisma.DateTimeFilter<"WishlistItem"> | Date | string
 }
 
 export type WishlistItemCreateManyWishlistInput = {
   id?: string
   productId: string
+  productName: string
+  productImage: string
+  category: string
+  rating: number
+  reviews: number
+  price: number
+  discount?: number
+  total: number
+  stock: number
   createdAt?: Date | string
 }
 
 export type WishlistItemUpdateWithoutWishlistInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
+  productName?: Prisma.StringFieldUpdateOperationsInput | string
+  productImage?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  reviews?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  total?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type WishlistItemUncheckedUpdateWithoutWishlistInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
+  productName?: Prisma.StringFieldUpdateOperationsInput | string
+  productImage?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  reviews?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  total?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type WishlistItemUncheckedUpdateManyWithoutWishlistInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   productId?: Prisma.StringFieldUpdateOperationsInput | string
+  productName?: Prisma.StringFieldUpdateOperationsInput | string
+  productImage?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  reviews?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  discount?: Prisma.FloatFieldUpdateOperationsInput | number
+  total?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -421,6 +756,15 @@ export type WishlistItemSelect<ExtArgs extends runtime.Types.Extensions.Internal
   id?: boolean
   wishlistId?: boolean
   productId?: boolean
+  productName?: boolean
+  productImage?: boolean
+  category?: boolean
+  rating?: boolean
+  reviews?: boolean
+  price?: boolean
+  discount?: boolean
+  total?: boolean
+  stock?: boolean
   createdAt?: boolean
   wishlist?: boolean | Prisma.WishlistDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["wishlistItem"]>
@@ -429,6 +773,15 @@ export type WishlistItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   wishlistId?: boolean
   productId?: boolean
+  productName?: boolean
+  productImage?: boolean
+  category?: boolean
+  rating?: boolean
+  reviews?: boolean
+  price?: boolean
+  discount?: boolean
+  total?: boolean
+  stock?: boolean
   createdAt?: boolean
   wishlist?: boolean | Prisma.WishlistDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["wishlistItem"]>
@@ -437,6 +790,15 @@ export type WishlistItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   wishlistId?: boolean
   productId?: boolean
+  productName?: boolean
+  productImage?: boolean
+  category?: boolean
+  rating?: boolean
+  reviews?: boolean
+  price?: boolean
+  discount?: boolean
+  total?: boolean
+  stock?: boolean
   createdAt?: boolean
   wishlist?: boolean | Prisma.WishlistDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["wishlistItem"]>
@@ -445,10 +807,19 @@ export type WishlistItemSelectScalar = {
   id?: boolean
   wishlistId?: boolean
   productId?: boolean
+  productName?: boolean
+  productImage?: boolean
+  category?: boolean
+  rating?: boolean
+  reviews?: boolean
+  price?: boolean
+  discount?: boolean
+  total?: boolean
+  stock?: boolean
   createdAt?: boolean
 }
 
-export type WishlistItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "wishlistId" | "productId" | "createdAt", ExtArgs["result"]["wishlistItem"]>
+export type WishlistItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "wishlistId" | "productId" | "productName" | "productImage" | "category" | "rating" | "reviews" | "price" | "discount" | "total" | "stock" | "createdAt", ExtArgs["result"]["wishlistItem"]>
 export type WishlistItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   wishlist?: boolean | Prisma.WishlistDefaultArgs<ExtArgs>
 }
@@ -468,6 +839,15 @@ export type $WishlistItemPayload<ExtArgs extends runtime.Types.Extensions.Intern
     id: string
     wishlistId: string
     productId: string
+    productName: string
+    productImage: string
+    category: string
+    rating: number
+    reviews: number
+    price: number
+    discount: number
+    total: number
+    stock: number
     createdAt: Date
   }, ExtArgs["result"]["wishlistItem"]>
   composites: {}
@@ -896,6 +1276,15 @@ export interface WishlistItemFieldRefs {
   readonly id: Prisma.FieldRef<"WishlistItem", 'String'>
   readonly wishlistId: Prisma.FieldRef<"WishlistItem", 'String'>
   readonly productId: Prisma.FieldRef<"WishlistItem", 'String'>
+  readonly productName: Prisma.FieldRef<"WishlistItem", 'String'>
+  readonly productImage: Prisma.FieldRef<"WishlistItem", 'String'>
+  readonly category: Prisma.FieldRef<"WishlistItem", 'String'>
+  readonly rating: Prisma.FieldRef<"WishlistItem", 'Int'>
+  readonly reviews: Prisma.FieldRef<"WishlistItem", 'Int'>
+  readonly price: Prisma.FieldRef<"WishlistItem", 'Float'>
+  readonly discount: Prisma.FieldRef<"WishlistItem", 'Float'>
+  readonly total: Prisma.FieldRef<"WishlistItem", 'Float'>
+  readonly stock: Prisma.FieldRef<"WishlistItem", 'Int'>
   readonly createdAt: Prisma.FieldRef<"WishlistItem", 'DateTime'>
 }
     

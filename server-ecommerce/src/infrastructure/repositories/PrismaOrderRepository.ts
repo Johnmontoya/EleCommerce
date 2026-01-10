@@ -23,6 +23,9 @@ export class PrismaOrderRepository implements IOrderRepository {
         items: CreateOrderItem[]
     ): Promise<boolean> {
 
+        console.log("items", items)
+        console.log("order", order)
+
         if (items.length === 0) {
             console.error("No se pueden crear pedidos sin ítems");
             return false;

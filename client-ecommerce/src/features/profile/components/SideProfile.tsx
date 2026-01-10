@@ -66,10 +66,9 @@ const SideProfile = ({ profile }: SideProfileProps) => {
                     <ButtonAction onClick={() => navigate("/dashboard/orders")} text="Ver mis pedidos" variant="outline" className="w-full text-left px-4 py-3 bg-slate-700/50 hover:bg-slate-700 text-slate-200 rounded-lg transition-all flex items-center gap-3">
                         <BiPackage size={18} className="text-cyan-400" />
                     </ButtonAction>
-                    <button className="w-full text-left px-4 py-3 bg-slate-700/50 hover:bg-slate-700 text-slate-200 rounded-lg transition-all flex items-center gap-3">
+                    <ButtonAction onClick={() => navigate("/wishlist")} text="Lista de deseos" variant="outline" className="w-full text-left px-4 py-3 bg-slate-700/50 hover:bg-slate-700 text-slate-200 rounded-lg transition-all flex items-center gap-3">
                         <BiHeart size={18} className="text-cyan-400" />
-                        Lista de deseos
-                    </button>
+                    </ButtonAction>
                     <button className="w-full text-left px-4 py-3 bg-slate-700/50 hover:bg-slate-700 text-slate-200 rounded-lg transition-all flex items-center gap-3">
                         <BiMap size={18} className="text-cyan-400" />
                         Direcciones guardadas

@@ -14,12 +14,14 @@ import { SearchModal } from "../../features/search/components/SearchModal";
 import { useAuthStore } from "../../features/auth/store/useAuthStore";
 import { BsTruck } from "react-icons/bs";
 import { useCartCount } from "../../features/auth/hooks/queries/useUsers";
+import { useWishCount } from "../../features/wishlist/hook/queries/useWishList";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const { user } = useAuthStore();
   const { data: cartCount } = useCartCount(user?.id!);
+  const { data: wishCount } = useWishCount(user?.id!)
   const street = user?.addresses![0].state + ", " + user?.addresses![0].street;
 
   return (
@@ -140,7 +142,7 @@ const Navbar = () => {
               >
                 <BiHeart size={24} />
                 <span className="absolute top-1 right-4 bg-cyan-500 shadow-lg shadow-cyan-500/90 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  3
+                  {wishCount?.count || 0}
                 </span>
               </ButtonAction>
               <ButtonAction
