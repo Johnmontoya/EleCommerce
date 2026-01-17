@@ -1,5 +1,4 @@
 import { BiSearch } from "react-icons/bi";
-import ButtonAction from "../../../shared/ui/ButtonAction";
 
 interface TrackingInput {
     trackingNumber: string;
@@ -13,7 +12,6 @@ interface TrackingSearchProps {
 }
 
 const TrackingSearch: React.FC<TrackingSearchProps> = ({
-    trackingLoading,
     setTrackingLoading,
     onChangeTracking,
     isTracking,
@@ -51,19 +49,6 @@ const TrackingSearch: React.FC<TrackingSearchProps> = ({
                         className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 pl-12 pr-4 py-4 rounded-lg outline-none focus:border-cyan-500 transition-colors"
                     />
                 </div>
-                <ButtonAction
-                    onClick={handleTrackPackage}
-                    variant="primary"
-                    className="px-8 flex items-center gap-2"
-                    text={trackingLoading ? "Buscando..." : "Rastrear"}
-                    disabled={trackingLoading}
-                >
-                    {trackingLoading ? (
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    ) : (
-                        <BiSearch size={20} />
-                    )}
-                </ButtonAction>
             </div>
             <p className="text-slate-400 text-sm mt-3">
                 Puedes encontrar tu número de rastreo en el email de confirmación

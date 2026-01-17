@@ -217,11 +217,11 @@ export type TrackingEventGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 
 export type TrackingEventGroupByOutputType = {
   id: string
-  status: string
-  description: string
-  location: string
-  date: string
-  time: string
+  status: string | null
+  description: string | null
+  location: string | null
+  date: string | null
+  time: string | null
   completed: boolean
   order: number
   trackingId: string
@@ -254,11 +254,11 @@ export type TrackingEventWhereInput = {
   OR?: Prisma.TrackingEventWhereInput[]
   NOT?: Prisma.TrackingEventWhereInput | Prisma.TrackingEventWhereInput[]
   id?: Prisma.StringFilter<"TrackingEvent"> | string
-  status?: Prisma.StringFilter<"TrackingEvent"> | string
-  description?: Prisma.StringFilter<"TrackingEvent"> | string
-  location?: Prisma.StringFilter<"TrackingEvent"> | string
-  date?: Prisma.StringFilter<"TrackingEvent"> | string
-  time?: Prisma.StringFilter<"TrackingEvent"> | string
+  status?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
+  description?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
+  location?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
+  date?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
+  time?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
   completed?: Prisma.BoolFilter<"TrackingEvent"> | boolean
   order?: Prisma.IntFilter<"TrackingEvent"> | number
   trackingId?: Prisma.StringFilter<"TrackingEvent"> | string
@@ -269,11 +269,11 @@ export type TrackingEventWhereInput = {
 
 export type TrackingEventOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  location?: Prisma.SortOrder
-  date?: Prisma.SortOrder
-  time?: Prisma.SortOrder
+  status?: Prisma.SortOrderInput | Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
+  date?: Prisma.SortOrderInput | Prisma.SortOrder
+  time?: Prisma.SortOrderInput | Prisma.SortOrder
   completed?: Prisma.SortOrder
   order?: Prisma.SortOrder
   trackingId?: Prisma.SortOrder
@@ -287,11 +287,11 @@ export type TrackingEventWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TrackingEventWhereInput | Prisma.TrackingEventWhereInput[]
   OR?: Prisma.TrackingEventWhereInput[]
   NOT?: Prisma.TrackingEventWhereInput | Prisma.TrackingEventWhereInput[]
-  status?: Prisma.StringFilter<"TrackingEvent"> | string
-  description?: Prisma.StringFilter<"TrackingEvent"> | string
-  location?: Prisma.StringFilter<"TrackingEvent"> | string
-  date?: Prisma.StringFilter<"TrackingEvent"> | string
-  time?: Prisma.StringFilter<"TrackingEvent"> | string
+  status?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
+  description?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
+  location?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
+  date?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
+  time?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
   completed?: Prisma.BoolFilter<"TrackingEvent"> | boolean
   order?: Prisma.IntFilter<"TrackingEvent"> | number
   trackingId?: Prisma.StringFilter<"TrackingEvent"> | string
@@ -302,11 +302,11 @@ export type TrackingEventWhereUniqueInput = Prisma.AtLeast<{
 
 export type TrackingEventOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  status?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  location?: Prisma.SortOrder
-  date?: Prisma.SortOrder
-  time?: Prisma.SortOrder
+  status?: Prisma.SortOrderInput | Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
+  date?: Prisma.SortOrderInput | Prisma.SortOrder
+  time?: Prisma.SortOrderInput | Prisma.SortOrder
   completed?: Prisma.SortOrder
   order?: Prisma.SortOrder
   trackingId?: Prisma.SortOrder
@@ -324,11 +324,11 @@ export type TrackingEventScalarWhereWithAggregatesInput = {
   OR?: Prisma.TrackingEventScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TrackingEventScalarWhereWithAggregatesInput | Prisma.TrackingEventScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"TrackingEvent"> | string
-  status?: Prisma.StringWithAggregatesFilter<"TrackingEvent"> | string
-  description?: Prisma.StringWithAggregatesFilter<"TrackingEvent"> | string
-  location?: Prisma.StringWithAggregatesFilter<"TrackingEvent"> | string
-  date?: Prisma.StringWithAggregatesFilter<"TrackingEvent"> | string
-  time?: Prisma.StringWithAggregatesFilter<"TrackingEvent"> | string
+  status?: Prisma.StringNullableWithAggregatesFilter<"TrackingEvent"> | string | null
+  description?: Prisma.StringNullableWithAggregatesFilter<"TrackingEvent"> | string | null
+  location?: Prisma.StringNullableWithAggregatesFilter<"TrackingEvent"> | string | null
+  date?: Prisma.StringNullableWithAggregatesFilter<"TrackingEvent"> | string | null
+  time?: Prisma.StringNullableWithAggregatesFilter<"TrackingEvent"> | string | null
   completed?: Prisma.BoolWithAggregatesFilter<"TrackingEvent"> | boolean
   order?: Prisma.IntWithAggregatesFilter<"TrackingEvent"> | number
   trackingId?: Prisma.StringWithAggregatesFilter<"TrackingEvent"> | string
@@ -338,11 +338,11 @@ export type TrackingEventScalarWhereWithAggregatesInput = {
 
 export type TrackingEventCreateInput = {
   id?: string
-  status: string
-  description: string
-  location: string
-  date: string
-  time: string
+  status?: string | null
+  description?: string | null
+  location?: string | null
+  date?: string | null
+  time?: string | null
   completed?: boolean
   order?: number
   createdAt?: Date | string
@@ -352,11 +352,11 @@ export type TrackingEventCreateInput = {
 
 export type TrackingEventUncheckedCreateInput = {
   id?: string
-  status: string
-  description: string
-  location: string
-  date: string
-  time: string
+  status?: string | null
+  description?: string | null
+  location?: string | null
+  date?: string | null
+  time?: string | null
   completed?: boolean
   order?: number
   trackingId: string
@@ -366,11 +366,11 @@ export type TrackingEventUncheckedCreateInput = {
 
 export type TrackingEventUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.StringFieldUpdateOperationsInput | string
-  time?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -380,11 +380,11 @@ export type TrackingEventUpdateInput = {
 
 export type TrackingEventUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.StringFieldUpdateOperationsInput | string
-  time?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
   trackingId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -394,11 +394,11 @@ export type TrackingEventUncheckedUpdateInput = {
 
 export type TrackingEventCreateManyInput = {
   id?: string
-  status: string
-  description: string
-  location: string
-  date: string
-  time: string
+  status?: string | null
+  description?: string | null
+  location?: string | null
+  date?: string | null
+  time?: string | null
   completed?: boolean
   order?: number
   trackingId: string
@@ -408,11 +408,11 @@ export type TrackingEventCreateManyInput = {
 
 export type TrackingEventUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.StringFieldUpdateOperationsInput | string
-  time?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -421,11 +421,11 @@ export type TrackingEventUpdateManyMutationInput = {
 
 export type TrackingEventUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.StringFieldUpdateOperationsInput | string
-  time?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
   trackingId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -537,11 +537,11 @@ export type TrackingEventUncheckedUpdateManyWithoutTrackingNestedInput = {
 
 export type TrackingEventCreateWithoutTrackingInput = {
   id?: string
-  status: string
-  description: string
-  location: string
-  date: string
-  time: string
+  status?: string | null
+  description?: string | null
+  location?: string | null
+  date?: string | null
+  time?: string | null
   completed?: boolean
   order?: number
   createdAt?: Date | string
@@ -550,11 +550,11 @@ export type TrackingEventCreateWithoutTrackingInput = {
 
 export type TrackingEventUncheckedCreateWithoutTrackingInput = {
   id?: string
-  status: string
-  description: string
-  location: string
-  date: string
-  time: string
+  status?: string | null
+  description?: string | null
+  location?: string | null
+  date?: string | null
+  time?: string | null
   completed?: boolean
   order?: number
   createdAt?: Date | string
@@ -592,11 +592,11 @@ export type TrackingEventScalarWhereInput = {
   OR?: Prisma.TrackingEventScalarWhereInput[]
   NOT?: Prisma.TrackingEventScalarWhereInput | Prisma.TrackingEventScalarWhereInput[]
   id?: Prisma.StringFilter<"TrackingEvent"> | string
-  status?: Prisma.StringFilter<"TrackingEvent"> | string
-  description?: Prisma.StringFilter<"TrackingEvent"> | string
-  location?: Prisma.StringFilter<"TrackingEvent"> | string
-  date?: Prisma.StringFilter<"TrackingEvent"> | string
-  time?: Prisma.StringFilter<"TrackingEvent"> | string
+  status?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
+  description?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
+  location?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
+  date?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
+  time?: Prisma.StringNullableFilter<"TrackingEvent"> | string | null
   completed?: Prisma.BoolFilter<"TrackingEvent"> | boolean
   order?: Prisma.IntFilter<"TrackingEvent"> | number
   trackingId?: Prisma.StringFilter<"TrackingEvent"> | string
@@ -606,11 +606,11 @@ export type TrackingEventScalarWhereInput = {
 
 export type TrackingEventCreateManyTrackingInput = {
   id?: string
-  status: string
-  description: string
-  location: string
-  date: string
-  time: string
+  status?: string | null
+  description?: string | null
+  location?: string | null
+  date?: string | null
+  time?: string | null
   completed?: boolean
   order?: number
   createdAt?: Date | string
@@ -619,11 +619,11 @@ export type TrackingEventCreateManyTrackingInput = {
 
 export type TrackingEventUpdateWithoutTrackingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.StringFieldUpdateOperationsInput | string
-  time?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -632,11 +632,11 @@ export type TrackingEventUpdateWithoutTrackingInput = {
 
 export type TrackingEventUncheckedUpdateWithoutTrackingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.StringFieldUpdateOperationsInput | string
-  time?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -645,11 +645,11 @@ export type TrackingEventUncheckedUpdateWithoutTrackingInput = {
 
 export type TrackingEventUncheckedUpdateManyWithoutTrackingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.StringFieldUpdateOperationsInput | string
-  time?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -735,11 +735,11 @@ export type $TrackingEventPayload<ExtArgs extends runtime.Types.Extensions.Inter
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    status: string
-    description: string
-    location: string
-    date: string
-    time: string
+    status: string | null
+    description: string | null
+    location: string | null
+    date: string | null
+    time: string | null
     completed: boolean
     order: number
     trackingId: string

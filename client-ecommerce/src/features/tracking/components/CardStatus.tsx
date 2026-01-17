@@ -3,16 +3,19 @@ import { IoLocationSharp } from "react-icons/io5";
 import { MdLocalShipping } from "react-icons/md";
 
 interface PackageData {
-    trackingNumber: string;
-    orderNumber: string;
-    carrier: string;
-    estimatedDelivery: string;
-    currentLocation: string;
-    destination: string;
+    data: {
+        origin: string;
+        trackingNumber: string;
+        orderNumber: string;
+        carrier: string;
+        estimatedDelivery: string;
+        currentLocation: string;
+        destination: string;
+    }
 }
 
 interface CardStatusProps {
-    packageData: PackageData;
+    packageData: PackageData | null;
 }
 
 const CardStatus: React.FC<CardStatusProps> = ({ packageData }) => {
@@ -26,26 +29,26 @@ const CardStatus: React.FC<CardStatusProps> = ({ packageData }) => {
                     </div>
                     <div>
                         <p className="text-sm text-slate-400">Estado Actual</p>
-                        <p className="text-xl font-bold text-cyan-400">En Tránsito</p>
+                        <p className="text-xl font-bold text-cyan-400">{packageData?.data?.origin}</p>
                     </div>
                 </div>
                 <div className="space-y-3">
                     <div className="flex justify-between">
                         <span className="text-slate-400">Número de Rastreo</span>
                         <span className="text-slate-100 font-semibold">
-                            {packageData.trackingNumber}
+                            {packageData?.data?.trackingNumber}
                         </span>
                     </div>
                     <div className="flex justify-between">
                         <span className="text-slate-400">Número de Pedido</span>
                         <span className="text-slate-100 font-semibold">
-                            {packageData.orderNumber}
+                            {packageData?.data?.orderNumber}
                         </span>
                     </div>
                     <div className="flex justify-between">
                         <span className="text-slate-400">Transportadora</span>
                         <span className="text-slate-100 font-semibold">
-                            {packageData.carrier}
+                            {packageData?.data?.carrier}
                         </span>
                     </div>
                 </div>
@@ -60,23 +63,23 @@ const CardStatus: React.FC<CardStatusProps> = ({ packageData }) => {
                     <div>
                         <p className="text-sm text-slate-400">Entrega Estimada</p>
                         <p className="text-xl font-bold text-green-400">
-                            {packageData.estimatedDelivery}
+                            {packageData?.data?.estimatedDelivery}
                         </p>
                     </div>
                 </div>
                 <div className="space-y-3">
                     <div>
-                        <p className="text-slate-400 text-sm mb-1">Ubicación Actual</p>
+                        <p className="text-slate-400 text-sm mb-1">Ubicación Inicial</p>
                         <p className="text-slate-100 font-semibold flex items-center gap-2">
                             <BiMapPin size={16} className="text-cyan-400" />
-                            {packageData.currentLocation}
+                            {packageData?.data?.origin}
                         </p>
                     </div>
                     <div>
                         <p className="text-slate-400 text-sm mb-1">Destino</p>
                         <p className="text-slate-100 font-semibold flex items-center gap-2">
                             <IoLocationSharp size={16} className="text-green-400" />
-                            {packageData.destination}
+                            {packageData?.data?.destination}
                         </p>
                     </div>
                 </div>

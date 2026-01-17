@@ -211,13 +211,13 @@ model Tracking {
   trackingNumber    String      @unique
   orderNumber       String      @unique
   status            OrderStatus @default(CONFIRMED)
-  estimatedDelivery DateTime
+  estimatedDelivery String
   origin            String
   destination       String
   weight            String?
   dimensions        String?
   carrier           String
-  currentLocation   String
+  priority          String
 
   // Relación con Order
   orderId String @unique
@@ -236,11 +236,11 @@ model Tracking {
 
 model TrackingEvent {
   id          String  @id @default(cuid())
-  status      String
-  description String
-  location    String
-  date        String // Formato: "03 Ene 2026"
-  time        String // Formato: "09:30 AM" o "Estimado"
+  status      String?
+  description String?
+  location    String?
+  date        String? // Formato: "03 Ene 2026"
+  time        String? // Formato: "09:30 AM" o "Estimado"
   completed   Boolean @default(false)
   order       Int     @default(0) // Para ordenar los eventos
 

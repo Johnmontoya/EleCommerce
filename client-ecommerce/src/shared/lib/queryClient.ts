@@ -79,4 +79,12 @@ export const queryKeys = {
     all: ['wishlist'] as const,
     get: () => [...queryKeys.wishlist.all, 'get'] as const,
   },
+  tracking: {
+    all: ['tracking'] as const,
+    get: () => [...queryKeys.tracking.all, 'get'] as const,
+  },
+  trackingEvents: {
+    all: ['tracking-events'] as const,
+    get: () => [...queryKeys.trackingEvents.all, 'get'] as const,
+  },
 };

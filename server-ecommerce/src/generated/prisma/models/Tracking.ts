@@ -29,13 +29,13 @@ export type TrackingMinAggregateOutputType = {
   trackingNumber: string | null
   orderNumber: string | null
   status: $Enums.OrderStatus | null
-  estimatedDelivery: Date | null
+  estimatedDelivery: string | null
   origin: string | null
   destination: string | null
   weight: string | null
   dimensions: string | null
   carrier: string | null
-  currentLocation: string | null
+  priority: string | null
   orderId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -46,13 +46,13 @@ export type TrackingMaxAggregateOutputType = {
   trackingNumber: string | null
   orderNumber: string | null
   status: $Enums.OrderStatus | null
-  estimatedDelivery: Date | null
+  estimatedDelivery: string | null
   origin: string | null
   destination: string | null
   weight: string | null
   dimensions: string | null
   carrier: string | null
-  currentLocation: string | null
+  priority: string | null
   orderId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -69,7 +69,7 @@ export type TrackingCountAggregateOutputType = {
   weight: number
   dimensions: number
   carrier: number
-  currentLocation: number
+  priority: number
   orderId: number
   createdAt: number
   updatedAt: number
@@ -88,7 +88,7 @@ export type TrackingMinAggregateInputType = {
   weight?: true
   dimensions?: true
   carrier?: true
-  currentLocation?: true
+  priority?: true
   orderId?: true
   createdAt?: true
   updatedAt?: true
@@ -105,7 +105,7 @@ export type TrackingMaxAggregateInputType = {
   weight?: true
   dimensions?: true
   carrier?: true
-  currentLocation?: true
+  priority?: true
   orderId?: true
   createdAt?: true
   updatedAt?: true
@@ -122,7 +122,7 @@ export type TrackingCountAggregateInputType = {
   weight?: true
   dimensions?: true
   carrier?: true
-  currentLocation?: true
+  priority?: true
   orderId?: true
   createdAt?: true
   updatedAt?: true
@@ -206,13 +206,13 @@ export type TrackingGroupByOutputType = {
   trackingNumber: string
   orderNumber: string
   status: $Enums.OrderStatus
-  estimatedDelivery: Date
+  estimatedDelivery: string
   origin: string
   destination: string
   weight: string | null
   dimensions: string | null
   carrier: string
-  currentLocation: string
+  priority: string
   orderId: string
   createdAt: Date
   updatedAt: Date
@@ -244,13 +244,13 @@ export type TrackingWhereInput = {
   trackingNumber?: Prisma.StringFilter<"Tracking"> | string
   orderNumber?: Prisma.StringFilter<"Tracking"> | string
   status?: Prisma.EnumOrderStatusFilter<"Tracking"> | $Enums.OrderStatus
-  estimatedDelivery?: Prisma.DateTimeFilter<"Tracking"> | Date | string
+  estimatedDelivery?: Prisma.StringFilter<"Tracking"> | string
   origin?: Prisma.StringFilter<"Tracking"> | string
   destination?: Prisma.StringFilter<"Tracking"> | string
   weight?: Prisma.StringNullableFilter<"Tracking"> | string | null
   dimensions?: Prisma.StringNullableFilter<"Tracking"> | string | null
   carrier?: Prisma.StringFilter<"Tracking"> | string
-  currentLocation?: Prisma.StringFilter<"Tracking"> | string
+  priority?: Prisma.StringFilter<"Tracking"> | string
   orderId?: Prisma.StringFilter<"Tracking"> | string
   createdAt?: Prisma.DateTimeFilter<"Tracking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tracking"> | Date | string
@@ -269,7 +269,7 @@ export type TrackingOrderByWithRelationInput = {
   weight?: Prisma.SortOrderInput | Prisma.SortOrder
   dimensions?: Prisma.SortOrderInput | Prisma.SortOrder
   carrier?: Prisma.SortOrder
-  currentLocation?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   orderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -286,13 +286,13 @@ export type TrackingWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.TrackingWhereInput[]
   NOT?: Prisma.TrackingWhereInput | Prisma.TrackingWhereInput[]
   status?: Prisma.EnumOrderStatusFilter<"Tracking"> | $Enums.OrderStatus
-  estimatedDelivery?: Prisma.DateTimeFilter<"Tracking"> | Date | string
+  estimatedDelivery?: Prisma.StringFilter<"Tracking"> | string
   origin?: Prisma.StringFilter<"Tracking"> | string
   destination?: Prisma.StringFilter<"Tracking"> | string
   weight?: Prisma.StringNullableFilter<"Tracking"> | string | null
   dimensions?: Prisma.StringNullableFilter<"Tracking"> | string | null
   carrier?: Prisma.StringFilter<"Tracking"> | string
-  currentLocation?: Prisma.StringFilter<"Tracking"> | string
+  priority?: Prisma.StringFilter<"Tracking"> | string
   createdAt?: Prisma.DateTimeFilter<"Tracking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tracking"> | Date | string
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>
@@ -310,7 +310,7 @@ export type TrackingOrderByWithAggregationInput = {
   weight?: Prisma.SortOrderInput | Prisma.SortOrder
   dimensions?: Prisma.SortOrderInput | Prisma.SortOrder
   carrier?: Prisma.SortOrder
-  currentLocation?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   orderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -327,13 +327,13 @@ export type TrackingScalarWhereWithAggregatesInput = {
   trackingNumber?: Prisma.StringWithAggregatesFilter<"Tracking"> | string
   orderNumber?: Prisma.StringWithAggregatesFilter<"Tracking"> | string
   status?: Prisma.EnumOrderStatusWithAggregatesFilter<"Tracking"> | $Enums.OrderStatus
-  estimatedDelivery?: Prisma.DateTimeWithAggregatesFilter<"Tracking"> | Date | string
+  estimatedDelivery?: Prisma.StringWithAggregatesFilter<"Tracking"> | string
   origin?: Prisma.StringWithAggregatesFilter<"Tracking"> | string
   destination?: Prisma.StringWithAggregatesFilter<"Tracking"> | string
   weight?: Prisma.StringNullableWithAggregatesFilter<"Tracking"> | string | null
   dimensions?: Prisma.StringNullableWithAggregatesFilter<"Tracking"> | string | null
   carrier?: Prisma.StringWithAggregatesFilter<"Tracking"> | string
-  currentLocation?: Prisma.StringWithAggregatesFilter<"Tracking"> | string
+  priority?: Prisma.StringWithAggregatesFilter<"Tracking"> | string
   orderId?: Prisma.StringWithAggregatesFilter<"Tracking"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Tracking"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Tracking"> | Date | string
@@ -344,13 +344,13 @@ export type TrackingCreateInput = {
   trackingNumber: string
   orderNumber: string
   status?: $Enums.OrderStatus
-  estimatedDelivery: Date | string
+  estimatedDelivery: string
   origin: string
   destination: string
   weight?: string | null
   dimensions?: string | null
   carrier: string
-  currentLocation: string
+  priority: string
   createdAt?: Date | string
   updatedAt?: Date | string
   order: Prisma.OrderCreateNestedOneWithoutTrackingsInput
@@ -362,13 +362,13 @@ export type TrackingUncheckedCreateInput = {
   trackingNumber: string
   orderNumber: string
   status?: $Enums.OrderStatus
-  estimatedDelivery: Date | string
+  estimatedDelivery: string
   origin: string
   destination: string
   weight?: string | null
   dimensions?: string | null
   carrier: string
-  currentLocation: string
+  priority: string
   orderId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -380,13 +380,13 @@ export type TrackingUpdateInput = {
   trackingNumber?: Prisma.StringFieldUpdateOperationsInput | string
   orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  estimatedDelivery?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimatedDelivery?: Prisma.StringFieldUpdateOperationsInput | string
   origin?: Prisma.StringFieldUpdateOperationsInput | string
   destination?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dimensions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carrier?: Prisma.StringFieldUpdateOperationsInput | string
-  currentLocation?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   order?: Prisma.OrderUpdateOneRequiredWithoutTrackingsNestedInput
@@ -398,13 +398,13 @@ export type TrackingUncheckedUpdateInput = {
   trackingNumber?: Prisma.StringFieldUpdateOperationsInput | string
   orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  estimatedDelivery?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimatedDelivery?: Prisma.StringFieldUpdateOperationsInput | string
   origin?: Prisma.StringFieldUpdateOperationsInput | string
   destination?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dimensions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carrier?: Prisma.StringFieldUpdateOperationsInput | string
-  currentLocation?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.StringFieldUpdateOperationsInput | string
   orderId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -416,13 +416,13 @@ export type TrackingCreateManyInput = {
   trackingNumber: string
   orderNumber: string
   status?: $Enums.OrderStatus
-  estimatedDelivery: Date | string
+  estimatedDelivery: string
   origin: string
   destination: string
   weight?: string | null
   dimensions?: string | null
   carrier: string
-  currentLocation: string
+  priority: string
   orderId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -433,13 +433,13 @@ export type TrackingUpdateManyMutationInput = {
   trackingNumber?: Prisma.StringFieldUpdateOperationsInput | string
   orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  estimatedDelivery?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimatedDelivery?: Prisma.StringFieldUpdateOperationsInput | string
   origin?: Prisma.StringFieldUpdateOperationsInput | string
   destination?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dimensions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carrier?: Prisma.StringFieldUpdateOperationsInput | string
-  currentLocation?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -449,13 +449,13 @@ export type TrackingUncheckedUpdateManyInput = {
   trackingNumber?: Prisma.StringFieldUpdateOperationsInput | string
   orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  estimatedDelivery?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimatedDelivery?: Prisma.StringFieldUpdateOperationsInput | string
   origin?: Prisma.StringFieldUpdateOperationsInput | string
   destination?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dimensions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carrier?: Prisma.StringFieldUpdateOperationsInput | string
-  currentLocation?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.StringFieldUpdateOperationsInput | string
   orderId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -482,7 +482,7 @@ export type TrackingCountOrderByAggregateInput = {
   weight?: Prisma.SortOrder
   dimensions?: Prisma.SortOrder
   carrier?: Prisma.SortOrder
-  currentLocation?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   orderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -499,7 +499,7 @@ export type TrackingMaxOrderByAggregateInput = {
   weight?: Prisma.SortOrder
   dimensions?: Prisma.SortOrder
   carrier?: Prisma.SortOrder
-  currentLocation?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   orderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -516,7 +516,7 @@ export type TrackingMinOrderByAggregateInput = {
   weight?: Prisma.SortOrder
   dimensions?: Prisma.SortOrder
   carrier?: Prisma.SortOrder
-  currentLocation?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   orderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -588,13 +588,13 @@ export type TrackingCreateWithoutOrderInput = {
   trackingNumber: string
   orderNumber: string
   status?: $Enums.OrderStatus
-  estimatedDelivery: Date | string
+  estimatedDelivery: string
   origin: string
   destination: string
   weight?: string | null
   dimensions?: string | null
   carrier: string
-  currentLocation: string
+  priority: string
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.TrackingEventCreateNestedManyWithoutTrackingInput
@@ -605,13 +605,13 @@ export type TrackingUncheckedCreateWithoutOrderInput = {
   trackingNumber: string
   orderNumber: string
   status?: $Enums.OrderStatus
-  estimatedDelivery: Date | string
+  estimatedDelivery: string
   origin: string
   destination: string
   weight?: string | null
   dimensions?: string | null
   carrier: string
-  currentLocation: string
+  priority: string
   createdAt?: Date | string
   updatedAt?: Date | string
   events?: Prisma.TrackingEventUncheckedCreateNestedManyWithoutTrackingInput
@@ -651,13 +651,13 @@ export type TrackingScalarWhereInput = {
   trackingNumber?: Prisma.StringFilter<"Tracking"> | string
   orderNumber?: Prisma.StringFilter<"Tracking"> | string
   status?: Prisma.EnumOrderStatusFilter<"Tracking"> | $Enums.OrderStatus
-  estimatedDelivery?: Prisma.DateTimeFilter<"Tracking"> | Date | string
+  estimatedDelivery?: Prisma.StringFilter<"Tracking"> | string
   origin?: Prisma.StringFilter<"Tracking"> | string
   destination?: Prisma.StringFilter<"Tracking"> | string
   weight?: Prisma.StringNullableFilter<"Tracking"> | string | null
   dimensions?: Prisma.StringNullableFilter<"Tracking"> | string | null
   carrier?: Prisma.StringFilter<"Tracking"> | string
-  currentLocation?: Prisma.StringFilter<"Tracking"> | string
+  priority?: Prisma.StringFilter<"Tracking"> | string
   orderId?: Prisma.StringFilter<"Tracking"> | string
   createdAt?: Prisma.DateTimeFilter<"Tracking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tracking"> | Date | string
@@ -668,13 +668,13 @@ export type TrackingCreateWithoutEventsInput = {
   trackingNumber: string
   orderNumber: string
   status?: $Enums.OrderStatus
-  estimatedDelivery: Date | string
+  estimatedDelivery: string
   origin: string
   destination: string
   weight?: string | null
   dimensions?: string | null
   carrier: string
-  currentLocation: string
+  priority: string
   createdAt?: Date | string
   updatedAt?: Date | string
   order: Prisma.OrderCreateNestedOneWithoutTrackingsInput
@@ -685,13 +685,13 @@ export type TrackingUncheckedCreateWithoutEventsInput = {
   trackingNumber: string
   orderNumber: string
   status?: $Enums.OrderStatus
-  estimatedDelivery: Date | string
+  estimatedDelivery: string
   origin: string
   destination: string
   weight?: string | null
   dimensions?: string | null
   carrier: string
-  currentLocation: string
+  priority: string
   orderId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -718,13 +718,13 @@ export type TrackingUpdateWithoutEventsInput = {
   trackingNumber?: Prisma.StringFieldUpdateOperationsInput | string
   orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  estimatedDelivery?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimatedDelivery?: Prisma.StringFieldUpdateOperationsInput | string
   origin?: Prisma.StringFieldUpdateOperationsInput | string
   destination?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dimensions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carrier?: Prisma.StringFieldUpdateOperationsInput | string
-  currentLocation?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   order?: Prisma.OrderUpdateOneRequiredWithoutTrackingsNestedInput
@@ -735,13 +735,13 @@ export type TrackingUncheckedUpdateWithoutEventsInput = {
   trackingNumber?: Prisma.StringFieldUpdateOperationsInput | string
   orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  estimatedDelivery?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimatedDelivery?: Prisma.StringFieldUpdateOperationsInput | string
   origin?: Prisma.StringFieldUpdateOperationsInput | string
   destination?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dimensions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carrier?: Prisma.StringFieldUpdateOperationsInput | string
-  currentLocation?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.StringFieldUpdateOperationsInput | string
   orderId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -752,13 +752,13 @@ export type TrackingCreateManyOrderInput = {
   trackingNumber: string
   orderNumber: string
   status?: $Enums.OrderStatus
-  estimatedDelivery: Date | string
+  estimatedDelivery: string
   origin: string
   destination: string
   weight?: string | null
   dimensions?: string | null
   carrier: string
-  currentLocation: string
+  priority: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -768,13 +768,13 @@ export type TrackingUpdateWithoutOrderInput = {
   trackingNumber?: Prisma.StringFieldUpdateOperationsInput | string
   orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  estimatedDelivery?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimatedDelivery?: Prisma.StringFieldUpdateOperationsInput | string
   origin?: Prisma.StringFieldUpdateOperationsInput | string
   destination?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dimensions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carrier?: Prisma.StringFieldUpdateOperationsInput | string
-  currentLocation?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.TrackingEventUpdateManyWithoutTrackingNestedInput
@@ -785,13 +785,13 @@ export type TrackingUncheckedUpdateWithoutOrderInput = {
   trackingNumber?: Prisma.StringFieldUpdateOperationsInput | string
   orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  estimatedDelivery?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimatedDelivery?: Prisma.StringFieldUpdateOperationsInput | string
   origin?: Prisma.StringFieldUpdateOperationsInput | string
   destination?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dimensions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carrier?: Prisma.StringFieldUpdateOperationsInput | string
-  currentLocation?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   events?: Prisma.TrackingEventUncheckedUpdateManyWithoutTrackingNestedInput
@@ -802,13 +802,13 @@ export type TrackingUncheckedUpdateManyWithoutOrderInput = {
   trackingNumber?: Prisma.StringFieldUpdateOperationsInput | string
   orderNumber?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-  estimatedDelivery?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  estimatedDelivery?: Prisma.StringFieldUpdateOperationsInput | string
   origin?: Prisma.StringFieldUpdateOperationsInput | string
   destination?: Prisma.StringFieldUpdateOperationsInput | string
   weight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dimensions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carrier?: Prisma.StringFieldUpdateOperationsInput | string
-  currentLocation?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -855,7 +855,7 @@ export type TrackingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   weight?: boolean
   dimensions?: boolean
   carrier?: boolean
-  currentLocation?: boolean
+  priority?: boolean
   orderId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -875,7 +875,7 @@ export type TrackingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   weight?: boolean
   dimensions?: boolean
   carrier?: boolean
-  currentLocation?: boolean
+  priority?: boolean
   orderId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -893,7 +893,7 @@ export type TrackingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   weight?: boolean
   dimensions?: boolean
   carrier?: boolean
-  currentLocation?: boolean
+  priority?: boolean
   orderId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -911,13 +911,13 @@ export type TrackingSelectScalar = {
   weight?: boolean
   dimensions?: boolean
   carrier?: boolean
-  currentLocation?: boolean
+  priority?: boolean
   orderId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type TrackingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "trackingNumber" | "orderNumber" | "status" | "estimatedDelivery" | "origin" | "destination" | "weight" | "dimensions" | "carrier" | "currentLocation" | "orderId" | "createdAt" | "updatedAt", ExtArgs["result"]["tracking"]>
+export type TrackingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "trackingNumber" | "orderNumber" | "status" | "estimatedDelivery" | "origin" | "destination" | "weight" | "dimensions" | "carrier" | "priority" | "orderId" | "createdAt" | "updatedAt", ExtArgs["result"]["tracking"]>
 export type TrackingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
   events?: boolean | Prisma.Tracking$eventsArgs<ExtArgs>
@@ -941,13 +941,13 @@ export type $TrackingPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     trackingNumber: string
     orderNumber: string
     status: $Enums.OrderStatus
-    estimatedDelivery: Date
+    estimatedDelivery: string
     origin: string
     destination: string
     weight: string | null
     dimensions: string | null
     carrier: string
-    currentLocation: string
+    priority: string
     orderId: string
     createdAt: Date
     updatedAt: Date
@@ -1380,13 +1380,13 @@ export interface TrackingFieldRefs {
   readonly trackingNumber: Prisma.FieldRef<"Tracking", 'String'>
   readonly orderNumber: Prisma.FieldRef<"Tracking", 'String'>
   readonly status: Prisma.FieldRef<"Tracking", 'OrderStatus'>
-  readonly estimatedDelivery: Prisma.FieldRef<"Tracking", 'DateTime'>
+  readonly estimatedDelivery: Prisma.FieldRef<"Tracking", 'String'>
   readonly origin: Prisma.FieldRef<"Tracking", 'String'>
   readonly destination: Prisma.FieldRef<"Tracking", 'String'>
   readonly weight: Prisma.FieldRef<"Tracking", 'String'>
   readonly dimensions: Prisma.FieldRef<"Tracking", 'String'>
   readonly carrier: Prisma.FieldRef<"Tracking", 'String'>
-  readonly currentLocation: Prisma.FieldRef<"Tracking", 'String'>
+  readonly priority: Prisma.FieldRef<"Tracking", 'String'>
   readonly orderId: Prisma.FieldRef<"Tracking", 'String'>
   readonly createdAt: Prisma.FieldRef<"Tracking", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Tracking", 'DateTime'>

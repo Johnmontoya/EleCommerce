@@ -1606,7 +1606,7 @@ export const TrackingScalarFieldEnum = {
   weight: 'weight',
   dimensions: 'dimensions',
   carrier: 'carrier',
-  currentLocation: 'currentLocation',
+  priority: 'priority',
   orderId: 'orderId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

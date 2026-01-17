@@ -24,5 +24,5 @@ export const menuAdmin = [
   { name: "Lista de Productos", icon: LuPackagePlus, link: "/dashboard/products", badge: '' },
   { name: "Lista de Categorias", icon: BiCategoryAlt, link: "/dashboard/categories" },
   { name: "Lista de Usuarios", icon: BiUser, link: "/dashboard/users" },
-  { name: "Lista de Pedidos", icon: CiViewList, link: "/dashboard/allorders" },
+  { name: "Lista de Pedidos", icon: CiViewList, link: "/dashboard/allorders" }
 ];

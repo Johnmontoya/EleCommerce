@@ -158,7 +158,7 @@ const DashCreateProductPage: React.FC = () => {
               titleIcon={<BiPackage className="text-cyan-400" size={36} />}
               list={false}
             />
-            <HeaderAction isSubmitting={isSubmitting} setUserData={setCreateData} handleSubmit={handleSubmit} handleReset={handleReset} />
+            <HeaderAction isSubmitting={isSubmitting} handleSubmit={handleSubmit} handleReset={handleReset} />
 
             <form>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

@@ -1,12 +1,20 @@
 import { BiPhone } from "react-icons/bi";
 import ButtonAction from "../../../shared/ui/ButtonAction";
 
-interface PackageDetailsProps {
-    packageData: {
+interface PackageData {
+    data: {
+        origin: string;
+        trackingNumber: string;
+        orderNumber: string;
+        carrier: string;
+        estimatedDelivery: string;
         weight: string;
         dimensions: string;
-        origin: string;
-    };
+    }
+}
+
+interface PackageDetailsProps {
+    packageData: PackageData | null;
 }
 
 const PackageDetails: React.FC<PackageDetailsProps> = ({ packageData }) => {
@@ -20,17 +28,17 @@ const PackageDetails: React.FC<PackageDetailsProps> = ({ packageData }) => {
                 <div className="space-y-3">
                     <div>
                         <p className="text-slate-400 text-sm mb-1">Peso</p>
-                        <p className="text-slate-100 font-semibold">{packageData.weight}</p>
+                        <p className="text-slate-100 font-semibold">{packageData?.data?.weight}</p>
                     </div>
                     <div>
                         <p className="text-slate-400 text-sm mb-1">Dimensiones</p>
                         <p className="text-slate-100 font-semibold">
-                            {packageData.dimensions}
+                            {packageData?.data?.dimensions}
                         </p>
                     </div>
                     <div>
                         <p className="text-slate-400 text-sm mb-1">Origen</p>
-                        <p className="text-slate-100 font-semibold">{packageData.origin}</p>
+                        <p className="text-slate-100 font-semibold">{packageData?.data?.origin}</p>
                     </div>
                 </div>
             </div>
@@ -47,7 +55,7 @@ const PackageDetails: React.FC<PackageDetailsProps> = ({ packageData }) => {
                         </div>
                         <div>
                             <p className="text-slate-400 text-sm">Servicio al Cliente</p>
-                            <p className="text-slate-100 font-semibold">+57 300 123 4567</p>
+                            <p className="text-slate-100 font-semibold">+57 941 540 352</p>
                         </div>
                     </div>
                     <ButtonAction

@@ -55,7 +55,6 @@ export const productService = {
         id: string,
         product: Partial<Product>
     ): Promise<ApiResponse<Product>> => {
-        console.log(id);
         const { data } = await apiClient.put(endpoints.products.update(id), product);
         return data;
     },

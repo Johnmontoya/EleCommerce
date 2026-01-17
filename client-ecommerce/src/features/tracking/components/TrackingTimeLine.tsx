@@ -3,18 +3,8 @@ import { FaBoxOpen, FaShippingFast } from "react-icons/fa";
 import { IoLocationSharp } from "react-icons/io5";
 import { MdLocalShipping, MdOutlineWarehouse } from "react-icons/md";
 
-interface TrackingEvent {
-    id: string;
-    status: string;
-    description: string;
-    location: string;
-    date: string;
-    time: string;
-    completed: boolean;
-}
-
 interface TrackingTimeLineProps {
-    trackingHistory: TrackingEvent[];
+    trackingHistory: any;
 }
 
 const TrackingTimeLine: React.FC<TrackingTimeLineProps> = ({ trackingHistory }) => {
@@ -31,6 +21,14 @@ const TrackingTimeLine: React.FC<TrackingTimeLineProps> = ({ trackingHistory }) 
         return icons[index] || <BiPackage size={24} />;
     };
 
+    const events = trackingHistory?.data?.events ?? [];
+
+    const orderedEvents = [...events].sort(
+        (a, b) =>
+            new Date(b.createdAt).getTime() -
+            new Date(a.createdAt).getTime()
+    );
+
     return (
         <div className="lg:col-span-2">
             <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6">
@@ -39,7 +37,7 @@ const TrackingTimeLine: React.FC<TrackingTimeLineProps> = ({ trackingHistory }) 
                 </h2>
 
                 <div className="space-y-4">
-                    {trackingHistory.map((event, index) => (
+                    {orderedEvents.map((event: any, index: number) => (
                         <div key={event.id} className="flex gap-4">
                             {/* Timeline Icon */}
                             <div className="flex flex-col items-center">
@@ -51,14 +49,13 @@ const TrackingTimeLine: React.FC<TrackingTimeLineProps> = ({ trackingHistory }) 
                                 >
                                     {getStatusIcon(index)}
                                 </div>
-                                {index < trackingHistory.length - 1 && (
+                                {index < trackingHistory.data.events.length - 1 && (
                                     <div
                                         className={`w-0.5 h-16 ${event.completed ? "bg-cyan-500/50" : "bg-slate-700"
                                             }`}
                                     ></div>
                                 )}
                             </div>
-
                             {/* Event Details */}
                             <div className="flex-1 pb-8">
                                 <div className="bg-slate-700/30 rounded-lg p-4 hover:bg-slate-700/50 transition-colors">

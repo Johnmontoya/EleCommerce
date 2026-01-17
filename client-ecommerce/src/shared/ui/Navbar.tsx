@@ -141,9 +141,12 @@ const Navbar = () => {
                 type="button"
               >
                 <BiHeart size={24} />
-                <span className="absolute top-1 right-4 bg-cyan-500 shadow-lg shadow-cyan-500/90 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  {wishCount?.count || 0}
-                </span>
+
+                {wishCount?.count! > 0 && (
+                  <span className="absolute top-1 right-4 bg-cyan-500 shadow-lg shadow-cyan-500/90 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {wishCount?.count || 0}
+                  </span>
+                )}
               </ButtonAction>
               <ButtonAction
                 className="relative"
