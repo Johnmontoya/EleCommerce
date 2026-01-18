@@ -32,7 +32,7 @@ const Stats: React.FC<Props> = ({ totalOrders, pendingOrders, rewardPoints }) =>
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
       {stats.map((stat, index) => (
         <div
           key={index}

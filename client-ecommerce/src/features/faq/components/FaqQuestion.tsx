@@ -4,7 +4,7 @@ const FaqQuestion = () => {
       {/* Active Question */}
       <details
         open
-        className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-8 backdrop-blur-sm shadow-xl h-fit text-slate-100"
+        className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-8 backdrop-blur-sm shadow-xl h-fit text-slate-100"
       >
         <summary className="cursor-pointer text-lg font-semibold">
           ¿Cómo puedo rastrear mi pedido?

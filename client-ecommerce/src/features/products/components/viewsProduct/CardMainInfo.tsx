@@ -7,7 +7,7 @@ const CardMainInfo: React.FC<CardMainInfoProps> = ({ product }) => {
     return (
         <div className="lg:col-span-2 space-y-6">
             {/* Images */}
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
+            <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
                 <h2 className="text-xl font-bold text-white mb-4">Imágenes</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {product.images?.map((img, idx) => (
@@ -22,14 +22,14 @@ const CardMainInfo: React.FC<CardMainInfoProps> = ({ product }) => {
             </div>
 
             {/* Description */}
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
+            <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
                 <h2 className="text-xl font-bold text-white mb-4">Descripción</h2>
                 <p className="text-slate-300 leading-relaxed">{product.description}</p>
             </div>
 
             {/* Variants */}
             {product.variants && product.variants.length > 0 && (
-                <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
+                <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
                     <h2 className="text-xl font-bold text-white mb-4">Variantes</h2>
                     <div className="space-y-3">
                         {product.variants.map((variant, idx) => (
@@ -53,7 +53,7 @@ const CardMainInfo: React.FC<CardMainInfoProps> = ({ product }) => {
 
             {/* Attributes */}
             {product.attributes && product.attributes.length > 0 && (
-                <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
+                <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
                     <h2 className="text-xl font-bold text-white mb-4">Atributos</h2>
                     <div className="grid grid-cols-2 gap-4">
                         {product.attributes.map((attr, idx) => (

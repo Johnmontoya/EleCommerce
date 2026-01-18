@@ -75,18 +75,18 @@ const DashProfilePage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        <div className="min-h-screen background-light dark:background-light">
             <div className="flex">
                 <Sidebar />
 
-                <div className="flex-1 flex-col">
+                <div className="w-full flex-1 flex-col">
                     <div className="max-w-7xl px-0 md:px-9">
                         <BreadCrumbs />
                     </div>
 
                     <NavMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
-                    <div className="w-full mx-auto flex-1 px-12 pb-8">
+                    <div className="w-full mx-auto flex-1 px-8 md:px-12 pb-8">
                         <ButtonMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
                         {/* Header with Cover */}
@@ -132,13 +132,13 @@ const DashProfilePage = () => {
                         <StatsInfo stats={stats} />
 
                         {/* Tabs */}
-                        <div className="bg-slate-800/50 border-2 border-slate-700 rounded-xl mb-6 overflow-hidden backdrop-blur-sm">
+                        <div className="dash-search dark:dash-search border border-slate-600 rounded-xl mb-6 overflow-hidden backdrop-blur-sm">
                             <div className="flex overflow-x-auto">
                                 <button
                                     onClick={() => setActiveTab("overview")}
                                     className={`flex items-center gap-2 px-6 py-4 font-semibold transition-all border-b-2 ${activeTab === "overview"
                                         ? "border-cyan-400 text-cyan-400 bg-slate-700/50"
-                                        : "border-transparent text-slate-400 hover:text-slate-200"
+                                        : "border-transparent text-slate-300 hover:text-slate-200"
                                         }`}
                                 >
                                     <BiUser size={20} />
@@ -148,7 +148,7 @@ const DashProfilePage = () => {
                                     onClick={() => setActiveTab("orders")}
                                     className={`flex items-center gap-2 px-6 py-4 font-semibold transition-all border-b-2 ${activeTab === "orders"
                                         ? "border-cyan-400 text-cyan-400 bg-slate-700/50"
-                                        : "border-transparent text-slate-400 hover:text-slate-200"
+                                        : "border-transparent text-slate-300 hover:text-slate-200"
                                         }`}
                                 >
                                     <BiPackage size={20} />
@@ -158,7 +158,7 @@ const DashProfilePage = () => {
                                     onClick={() => setActiveTab("security")}
                                     className={`flex items-center gap-2 px-6 py-4 font-semibold transition-all border-b-2 ${activeTab === "security"
                                         ? "border-cyan-400 text-cyan-400 bg-slate-700/50"
-                                        : "border-transparent text-slate-400 hover:text-slate-200"
+                                        : "border-transparent text-slate-300 hover:text-slate-200"
                                         }`}
                                 >
                                     <MdSecurity size={20} />
@@ -168,7 +168,7 @@ const DashProfilePage = () => {
                                     onClick={() => setActiveTab("preferences")}
                                     className={`flex items-center gap-2 px-6 py-4 font-semibold transition-all border-b-2 ${activeTab === "preferences"
                                         ? "border-cyan-400 text-cyan-400 bg-slate-700/50"
-                                        : "border-transparent text-slate-400 hover:text-slate-200"
+                                        : "border-transparent text-slate-300 hover:text-slate-200"
                                         }`}
                                 >
                                     <MdNotifications size={20} />
@@ -176,9 +176,9 @@ const DashProfilePage = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
                             {/* Main Content */}
-                            <div className="lg:col-span-2 space-y-6">
+                            <div className="w-full lg:col-span-2 space-y-6">
                                 {/* Overview Tab */}
                                 <PersonalInfo activeTab={activeTab} profile={profile} />
                                 {/* Orders Tab */}

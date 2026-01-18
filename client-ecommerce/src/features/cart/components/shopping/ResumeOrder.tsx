@@ -1,7 +1,6 @@
 import { BiCreditCard, BiMapPin } from "react-icons/bi";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { MdOutlinePayment } from "react-icons/md";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { useAuthStore } from "../../../auth/store/useAuthStore";
@@ -30,8 +29,6 @@ const ResumeOrder: React.FC<ProductProps> = ({ products }) => {
   const createOrderMutation = useCartCreateOrderMutation();
   const { data: addressUser } = useAddressUser();
   const { data: payment } = usePayment(user?.id || "");
-  const playerRef = useRef<any>(null);
-  const [isVisible, setIsVisible] = useState(false);
   const [isModalOpenAddress, setIsModalOpenAddress] = useState(false);
   const [showAddress, setShowAddress] = useState<boolean>(false);
   const [selectedAddress, setSelectedAddress] =
@@ -125,7 +122,7 @@ const ResumeOrder: React.FC<ProductProps> = ({ products }) => {
         return;
       }
       await createOrderMutation.mutateAsync(orderData);
-      handlePlay()
+      navigate("/dashboard/orders/confirmation");
     } catch (error) {
       if (error instanceof AxiosError && error.response?.data?.errors) {
         setValidationErrors(error.response.data.errors);
@@ -155,15 +152,6 @@ const ResumeOrder: React.FC<ProductProps> = ({ products }) => {
     setShowAddress(false);
   };
 
-  const handlePlay = () => {
-    setIsVisible(true);
-
-    playerRef.current?.play();
-    setTimeout(() => {
-      navigate("/");
-    }, 6000);
-  };
-
   return (
     <>
       <ModalAddress
@@ -174,7 +162,7 @@ const ResumeOrder: React.FC<ProductProps> = ({ products }) => {
       />
 
       <div className="lg:w-96 w-full">
-        <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 sticky top-6">
+        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 sticky top-6">
           <h2 className="text-2xl font-bold text-slate-100 mb-6">
             Resumen del Pedido
           </h2>
@@ -286,21 +274,6 @@ const ResumeOrder: React.FC<ProductProps> = ({ products }) => {
             </div>
           </div>
 
-          <div
-            className={`fixed ${isVisible ? "flex" : "hidden"
-              } z-50 inset-0 bg-gray-900/50 bg-opacity-60 overflow-y-auto h-full w-full px-4`}
-          >
-            <DotLottieReact
-              src="https://lottie.host/23df5b74-f4c6-47c9-b928-261e7155eb8d/ONtANo09KW.lottie"
-              autoplay={false}
-              loop={false}
-              className="w-96 h-64 m-auto"
-              dotLottieRefCallback={(doLottie) => {
-                playerRef.current = doLottie;
-              }}
-            />
-          </div>
-
           {/* Place Order Button */}
           <ButtonAction
             onClick={handleSubmit}
@@ -311,7 +284,7 @@ const ResumeOrder: React.FC<ProductProps> = ({ products }) => {
             <MdOutlinePayment size={18} />
           </ButtonAction>
 
-          <p className="text-center text-slate-500 text-xs mt-4">
+          <p className="text-center text-slate-400 text-xs mt-4">
             Compra segura y protegida 🔒
           </p>
         </div>

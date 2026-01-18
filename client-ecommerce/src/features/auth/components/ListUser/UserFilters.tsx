@@ -38,7 +38,7 @@ const UserFilters: React.FC<UserFiltersProps> = ({
     };
 
     return (
-        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 my-6">
+        <div className="dash-search-border dark:dash-search-border border border-slate-700 rounded-2xl p-4 backdrop-blur-sm my-6">
             <div className="flex flex-col lg:flex-row gap-4">
                 {/* Search */}
                 <div className="flex-1 relative py-1">
@@ -51,7 +51,7 @@ const UserFilters: React.FC<UserFiltersProps> = ({
                         value={searchTerm}
                         onChange={handleSearchChange}
                         placeholder="Buscar por nombre, email o username..."
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 pl-10 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                        className="w-full dash-search dark:dash-search border border-slate-700 text-slate-100 placeholder-slate-400 px-4 py-3 pl-10 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                     />
                 </div>
 
@@ -61,8 +61,8 @@ const UserFilters: React.FC<UserFiltersProps> = ({
                     onClick={() => setShowFilters(!showFilters)}
                     text="Filtros"
                     className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all ${showFilters
-                        ? "bg-cyan-500 text-white"
-                        : "bg-slate-700 text-slate-200 hover:bg-slate-600"
+                        ? "bg-slate-700/30 border border-slate-500 text-slate-200 hover:bg-slate-800/70"
+                        : "bg-slate-900/30 border border-slate-500 text-slate-200 hover:bg-slate-800/70"
                         }`}
                 >
                     <BiFilter size={20} />
@@ -73,7 +73,7 @@ const UserFilters: React.FC<UserFiltersProps> = ({
                     variant="outline"
                     text="Exportar"
                     onClick={() => { }}
-                    className="flex items-center gap-2 bg-slate-700 hover:bg-slate-600 text-slate-200 px-6 py-3 rounded-lg font-semibold transition-all">
+                    className="flex items-center gap-2 bg-slate-900/30 border border-slate-500 text-slate-200 hover:bg-slate-800/70 px-6 py-3 rounded-lg font-semibold transition-all">
                     <BiExport size={20} />
                 </ButtonAction>
             </div>
@@ -88,7 +88,7 @@ const UserFilters: React.FC<UserFiltersProps> = ({
                         <select
                             value={filterRole}
                             onChange={(e) => setFilterRole(e.target.value)}
-                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 px-4 py-2 rounded-lg outline-none focus:border-cyan-400 cursor-pointer"
+                            className="w-full bg-slate-700 border border-slate-600 text-slate-100 px-4 py-2 rounded-lg outline-none focus:border-cyan-400 cursor-pointer"
                         >
                             <option value="all">Todos los roles</option>
                             <option value="SUPER_ADMIN">Super Admin</option>
@@ -104,7 +104,7 @@ const UserFilters: React.FC<UserFiltersProps> = ({
                         <select
                             value={isActive === null ? "all" : String(isActive)}
                             onChange={handleActiveUserChange}
-                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 px-4 py-2 rounded-lg outline-none focus:border-cyan-400 cursor-pointer"
+                            className="w-full bg-slate-700 border border-slate-600 text-slate-100 px-4 py-2 rounded-lg outline-none focus:border-cyan-400 cursor-pointer"
                         >
                             <option value="all">Todos los estados</option>
                             <option value="true">Activos</option>

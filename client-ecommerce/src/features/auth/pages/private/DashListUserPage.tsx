@@ -43,7 +43,7 @@ const DashListUserPage = () => {
     const { handleSelectAll, handleSelectData, handleBulkDelete } = useDataActions(users, selectedUsers, setSelectedUsers);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        <div className="min-h-screen background-light dark:background-light">
             <div className="flex">
                 {/** Sidebar */}
                 <Sidebar />
@@ -56,7 +56,7 @@ const DashListUserPage = () => {
                     {/* Mobile Menu */}
                     <NavMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
-                    <div className="w-full mx-auto flex-1 px-12 pb-8">
+                    <div className="w-full mx-auto flex-1 px-8 md:px-12 pb-8">
                         <ButtonMobile
                             isMenuOpen={isMenuOpen}
                             setIsMenuOpen={setIsMenuOpen}

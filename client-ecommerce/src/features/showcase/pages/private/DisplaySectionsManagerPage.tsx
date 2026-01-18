@@ -25,11 +25,11 @@ const DisplaySectionsManagerPage: React.FC = () => {
     const { data: banners } = useBannerAll();
 
     const sectionOptions: { value: DisplaySection; label: string; icon: React.ReactNode; color: string }[] = [
-        { value: "banner", label: "Banner Principal", icon: <BiImage size={20} />, color: "bg-purple-500/20 text-purple-400 border-purple-500" },
-        { value: "featured", label: "Destacados", icon: <AiFillStar size={20} />, color: "bg-yellow-500/20 text-yellow-400 border-yellow-500" },
-        { value: "trending", label: "Tendencias", icon: <BiTrendingUp size={20} />, color: "bg-cyan-500/20 text-cyan-400 border-cyan-500" },
-        { value: "promotional", label: "Promocional", icon: <FaBullhorn size={20} />, color: "bg-red-500/20 text-red-400 border-red-500" },
-        { value: "new-arrival", label: "Nuevo Ingreso", icon: <MdNewReleases size={20} />, color: "bg-green-500/20 text-green-400 border-green-500" },
+        { value: "banner", label: "Banner Principal", icon: <BiImage size={20} />, color: "card-shipped text-slate-300" },
+        { value: "featured", label: "Destacados", icon: <AiFillStar size={20} />, color: "card-pending text-slate-300" },
+        { value: "trending", label: "Tendencias", icon: <BiTrendingUp size={20} />, color: "card-completed text-slate-300" },
+        { value: "promotional", label: "Promocional", icon: <FaBullhorn size={20} />, color: "card-cancelled text-slate-300" },
+        { value: "new-arrival", label: "Nuevo Ingreso", icon: <MdNewReleases size={20} />, color: "card-refunded text-slate-300" },
     ];
 
     const handleOpenModal = (banner?: Banner) => {
@@ -47,7 +47,7 @@ const DisplaySectionsManagerPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        <div className="min-h-screen background-light dark:background-dark">
             <div className="flex">
                 <Sidebar />
 
@@ -58,7 +58,7 @@ const DisplaySectionsManagerPage: React.FC = () => {
 
                     <NavMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
-                    <div className="w-full mx-auto flex-1 px-12 pb-8">
+                    <div className="w-full mx-auto flex-1 px-8 md:px-12 pb-8">
                         <ButtonMobile
                             isMenuOpen={isMenuOpen}
                             setIsMenuOpen={setIsMenuOpen}

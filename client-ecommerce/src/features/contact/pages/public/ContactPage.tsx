@@ -5,7 +5,7 @@ import MapLocation from "../../components/MapLocation";
 
 const ContactPage = () => {
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 pb-6">
+    <div className="min-h-screen background-light dark:background-light pb-6">
       {/* Breadcrumb */}
       <BreadCrumbs />
 
@@ -28,7 +28,7 @@ const ContactPage = () => {
         <ContactInformation />
 
         {/* FAQ */}
-        <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-8 backdrop-blur-sm shadow-xl space-y-4">
+        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-8 backdrop-blur-sm shadow-xl space-y-4">
           <h2 className="text-lg font-semibold">Preguntas Frecuentes</h2>
 
           <details className="bg-slate-900 p-3 rounded-md">

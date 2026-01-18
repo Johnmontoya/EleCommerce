@@ -7,7 +7,7 @@ const PreferenceInfo = ({ activeTab }: PreferenceInfoProps) => {
     return (
         <>
             {activeTab === "preferences" && (
-                <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+                <div className="dash-search dark:dash-search border border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
                     <h2 className="text-xl font-bold text-slate-100 mb-6">
                         Preferencias de Notificaciones
                     </h2>

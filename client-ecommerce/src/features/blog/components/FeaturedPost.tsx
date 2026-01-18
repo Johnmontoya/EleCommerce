@@ -13,12 +13,12 @@ interface BlogPost {
 }
 
 interface FeaturesProps {
-    featuredPost: BlogPost
+  featuredPost: BlogPost
 }
 
 const FeaturedPost: React.FC<FeaturesProps> = ({ featuredPost }) => {
   return (
-    <div className="mb-8 bg-slate-800/50 border-2 border-slate-700 rounded-2xl overflow-hidden group hover:border-cyan-500/50 transition-all">
+    <div className="mb-8 dash-search dark:dash-search border-2 border-slate-600 rounded-2xl overflow-hidden group hover:border-cyan-500/50 transition-all">
       <div className="relative h-96 overflow-hidden">
         <img
           src={featuredPost.image}

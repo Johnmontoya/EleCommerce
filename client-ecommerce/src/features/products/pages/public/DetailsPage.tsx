@@ -80,7 +80,7 @@ const DetailsPage: React.FC = () => {
   if (!product) return <div>Producto no encontrado</div>;
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen background-light dark:background-light">
       {/* Breadcrumb */}
       <BreadCrumbs />
 

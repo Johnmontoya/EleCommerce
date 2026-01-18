@@ -1,3 +1,7 @@
+:root {
+  --background: linear-gradient(135deg, #3a4a66 0%, #455a7a 50%, #3a4a66 100%);
+}
+
 * {
   scrollbar-width: thin;
   scrollbar-color: #334155 #1e293b;

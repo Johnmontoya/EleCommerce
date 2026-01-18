@@ -280,15 +280,6 @@ const routerMeta: RouterMetaType = {
     requiresLayout: true,
     isAdmin: true,
   },
-  DashTrackTestPage: {
-    name: "DashTrackTest",
-    path: "/dashboard/tracking/test",
-    feature: 'tracking',
-    site: 'private',
-    page: "DashTackTestPage",
-    requiresLayout: true,
-    isAdmin: false,
-  },
   NotFoundPage: {
     name: "NotFound",
     path: "*",

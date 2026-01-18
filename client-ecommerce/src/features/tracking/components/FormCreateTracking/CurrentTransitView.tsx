@@ -2,7 +2,7 @@ import { BiMapPin } from "react-icons/bi";
 
 const CurrentTransitView: React.FC = () => {
     return (
-        <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
             <div className="p-4 border-b border-gray-800 flex items-center gap-2">
                 <div className="w-5 h-5 rounded flex items-center justify-center text-xs">
                     <BiMapPin className="w-4 h-4 text-orange-500" />

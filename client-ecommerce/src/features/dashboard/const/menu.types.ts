@@ -4,12 +4,12 @@ import { MdDashboard, MdOutlinePreview } from "react-icons/md";
 import { LuPackagePlus } from "react-icons/lu";
 
 export const navLinksMobile = [
-  { name: "Dashboard", link: "/" },
-  { name: "Pedidos", link: "/" },
-  { name: "Rastrear envios", link: "/" },
-  { name: "Liste de deseos", link: "/" },
-  { name: "Perfil de usuario", link: "/" },
-  { name: "Metodos de pago", link: "/" },
+  { name: "Dashboard", link: "/dashboard" },
+  { name: "Pedidos", link: "/dashboard/orders" },
+  { name: "Rastrear envios", link: "tracking" },
+  { name: "Liste de deseos", link: "/wishlist" },
+  { name: "Perfil de usuario", link: "/dashboard/profile" },
+  { name: "Metodos de pago", link: "/dashboard/payments" },
 ];
 
 export const menuItems = [

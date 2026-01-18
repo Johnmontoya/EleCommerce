@@ -13,7 +13,7 @@ const SideProfile = ({ profile }: SideProfileProps) => {
     return (
         <div className="lg:col-span-1 space-y-6">
             {/* Account Info */}
-            <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+            <div className="dash-search dark:dash-search border border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
                 <h3 className="text-lg font-bold text-slate-100 mb-4">
                     Información de la Cuenta
                 </h3>
@@ -58,7 +58,7 @@ const SideProfile = ({ profile }: SideProfileProps) => {
             </div>
 
             {/* Quick Actions */}
-            <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+            <div className="dash-search dark:dash-search border border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
                 <h3 className="text-lg font-bold text-slate-100 mb-4">
                     Acciones Rápidas
                 </h3>

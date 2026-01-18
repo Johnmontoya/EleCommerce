@@ -3,7 +3,7 @@ import FaqQuestion from "../../components/FaqQuestion";
 
 const FAQPage = () => {
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen background-light dark:background-light">
       {/* Breadcrumb */}
       <BreadCrumbs />
 
@@ -28,13 +28,13 @@ const FAQPage = () => {
           <input
             type="text"
             placeholder="Buscar una pregunta..."
-            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-2 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
           />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* Sidebar */}
-          <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-8 backdrop-blur-sm shadow-xl h-fit text-slate-100">
+          <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-8 backdrop-blur-sm shadow-xl h-fit text-slate-100">
             <h3 className="text-lg font-semibold mb-3">Categorias</h3>
 
             <ul className="space-y-2 text-sm">

@@ -29,7 +29,7 @@ const TrackingSearch: React.FC<TrackingSearchProps> = ({
     };
 
     return (
-        <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 mb-8">
+        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 mb-8">
             <h2 className="text-xl font-bold text-slate-100 mb-4">
                 Ingresa tu número de rastreo
             </h2>
@@ -46,7 +46,7 @@ const TrackingSearch: React.FC<TrackingSearchProps> = ({
                         onChange={onChangeTracking}
                         onKeyPress={(e) => e.key === "Enter" && handleTrackPackage()}
                         placeholder="Ej: TK-2026001234567"
-                        className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 pl-12 pr-4 py-4 rounded-lg outline-none focus:border-cyan-500 transition-colors"
+                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-10 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                     />
                 </div>
             </div>

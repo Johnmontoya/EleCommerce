@@ -4,7 +4,7 @@ import { MdEmail } from "react-icons/md";
 
 const ContactInformation = () => {
   return (
-    <div className="bg-linear-to-br from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500/30 rounded-2xl p-6 backdrop-blur-sm">
+    <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
       <h2 className="text-lg font-semibold">Información de Contacto</h2>
 
       <div className="space-y-3 text-white/80 text-sm">

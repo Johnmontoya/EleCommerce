@@ -33,7 +33,7 @@ const ProductRow: React.FC<ProductRowProps> = ({ product, selectedData, handleSe
     return (
         <tr
             key={product?.id}
-            className="text-center border-t border-slate-700 hover:bg-slate-700/30 transition-colors"
+            className="text-center border-t border-slate-600 hover:bg-slate-700/60 transition-colors"
         >
             <td className="px-6 py-4">
                 <label className="flex gap-3 items-center cursor-pointer relative">

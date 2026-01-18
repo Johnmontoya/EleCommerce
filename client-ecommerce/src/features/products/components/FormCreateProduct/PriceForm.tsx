@@ -27,7 +27,7 @@ const PriceForm: React.FC<CardPriceProps> = ({
   };
 
   return (
-    <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+    <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
       <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
         <FaDollarSign size={20} className="text-cyan-400" />
         Precio e Inventario
@@ -46,7 +46,7 @@ const PriceForm: React.FC<CardPriceProps> = ({
             required
             min="0"
             step="0.01"
-            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="249900"
           />
           <div className="text-red-500 text-sm mt-0">
@@ -65,7 +65,7 @@ const PriceForm: React.FC<CardPriceProps> = ({
             onChange={onChangeCreateData}
             min="0"
             max="100"
-            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="19"
           />
         </div>
@@ -90,7 +90,7 @@ const PriceForm: React.FC<CardPriceProps> = ({
             onChange={onChangeCreateData}
             required
             min="0"
-            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="65"
           />
         </div>
@@ -105,7 +105,7 @@ const PriceForm: React.FC<CardPriceProps> = ({
             value={product.sku}
             onChange={onChangeCreateData}
             required
-            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="AUD-PROX-2024"
           />
         </div>
@@ -119,7 +119,7 @@ const PriceForm: React.FC<CardPriceProps> = ({
             name="barcode"
             value={product.barcode}
             onChange={onChangeCreateData}
-            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="8909876543211"
           />
         </div>

@@ -39,7 +39,7 @@ const TrackingEventForm: React.FC<TrackingEventFormProps> = ({
     const isFormValid = currentEvent.location && currentEvent.description;
 
     return (
-        <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
             <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2">
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center bg-blue-600`}>

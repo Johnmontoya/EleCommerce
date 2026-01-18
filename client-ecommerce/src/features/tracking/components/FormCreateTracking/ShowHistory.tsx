@@ -35,7 +35,7 @@ const ShowHistory = ({ showHistory, trackingId, handleDeleteEvent }: ShowHistory
         <div>
             {/* Tracking History */}
             {showHistory && (
-                <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+                <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
                     <div className="flex items-center justify-between mb-6">
                         <h2 className="block text-slate-300 font-semibold">Historial de seguimiento</h2>
                         <span className="text-sm text-gray-400">{trackingEvents?.data?.length} eventos</span>

@@ -25,7 +25,7 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
   const { data: categories } = useCategories();
 
   return (
-    <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+    <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
       <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
         <BiPackage size={20} className="text-cyan-400" />
         Información Básica
@@ -41,7 +41,7 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
             value={product.name}
             onChange={onChangeCreateData}
             required
-            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="Ej: Audífonos Inalámbricos Pro X"
           />
 
@@ -60,7 +60,7 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
             value={product.slug}
             onChange={onChangeCreateData}
             required
-            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="audifonos-inalambricos-pro-x"
           />
 
@@ -79,7 +79,7 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
             onChange={onChangeCreateData}
             required
             rows={4}
-            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all resize-none"
+            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all resize-none"
             placeholder="Describe las características principales del producto..."
           />
           <div className="text-red-500 text-sm mt-0">
@@ -97,7 +97,7 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
               name="brand"
               value={product.brand}
               onChange={onChangeCreateData}
-              className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+              className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
               placeholder="Ej: SoundMax"
             />
             <div className="text-red-500 text-sm mt-0">
@@ -113,7 +113,7 @@ const PersonalForm: React.FC<CardPersonalProps> = ({
               name="category"
               value={product.category}
               onChange={onChangeCreateData}
-              className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+              className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             >
               <option value="" disabled>
                 {"Seleccione una categoría"}

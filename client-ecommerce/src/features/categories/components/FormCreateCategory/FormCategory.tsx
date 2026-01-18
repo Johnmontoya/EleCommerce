@@ -59,7 +59,7 @@ const FormCategory: React.FC<CardCategoryProps> = ({
     };
 
     return (
-        <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
             <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
                 <BiCategory size={20} className="text-cyan-400" />
                 Información para registro de Categoria
@@ -76,7 +76,7 @@ const FormCategory: React.FC<CardCategoryProps> = ({
                         value={category.name}
                         required
                         onChange={onChangeCreateData}
-                        className="border-2 border-slate-700 rounded-lg p-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                         placeholder="Ej: Electronica"
                     />
                     {getFieldsError("name") && (
@@ -96,7 +96,7 @@ const FormCategory: React.FC<CardCategoryProps> = ({
                         value={category.slug}
                         required
                         onChange={onChangeCreateData}
-                        className="border-2 border-slate-700 rounded-lg p-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                         placeholder="Ej: electronica"
                     />
                     {getFieldsError("slug") && (
@@ -116,7 +116,7 @@ const FormCategory: React.FC<CardCategoryProps> = ({
                             name="image"
                             value={newImage}
                             onChange={(e) => setNewImage(e.target.value)}
-                            className="w-full border-2 border-slate-700 rounded-lg p-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                             placeholder="URL de la imagen"
                         />
                         <ButtonAction
@@ -165,7 +165,7 @@ const FormCategory: React.FC<CardCategoryProps> = ({
                         name="description"
                         value={category.description}
                         onChange={onChangeCreateData}
-                        className="border-2 border-slate-700 rounded-lg p-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                         placeholder="Describe las características principales de la categoria..."
                     />
                     {getFieldsError("description") && (

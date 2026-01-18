@@ -42,7 +42,7 @@ const Sidebar = () => {
     : menuItems;
 
   return (
-    <aside className="hidden md:flex flex-col w-64 min-h-screen bg-slate-900/50 border-r border-slate-700 p-6 shrink-0">
+    <aside className="hidden md:flex flex-col w-64 min-h-screen p-6 shrink-0">
       {/* User Profile Card */}
       <div className="mb-8 pb-6 border-b border-slate-700">
         <div className="flex items-center gap-3 mb-2">
@@ -51,19 +51,19 @@ const Sidebar = () => {
           </div>
           <div>
             <h3 className="text-slate-100 font-semibold">Hola, {user?.username}</h3>
-            <p className="text-slate-500 text-xs">{user?.email}</p>
+            <p className="text-slate-300 text-xs">{user?.email}</p>
           </div>
           <button type="button" onClick={() => setIsOpen(!isOpen)}
             className="cursor-pointer hover:transform hover:rotate-90 transition-all"
           >
-            <CiSettings size={20} className={`text-gray-100`} />
+            <CiSettings size={20} className={`text-slate-100`} />
           </button>
         </div>
         <div className="flex flex-col w-full text-sm relative">
           {isOpen && (
-            <ul className="w-full border border-gray-800 rounded shadow-md mt-1 py-2">
+            <ul className="w-full rounded shadow-md mt-1 py-2">
               {options.map((option, index) => (
-                <li key={index} className="flex flex-row  gap-2 text-slate-100 px-4 py-2 hover:bg-cyan-500 hover:text-white cursor-pointer" onClick={() => {
+                <li key={index} className="flex flex-row gap-2 text-slate-100 px-4 py-2 hover:bg-sidebar-link hover:text-white cursor-pointer" onClick={() => {
                   option.name.onClick();
                   setIsOpen(false);
                 }} >
@@ -89,8 +89,8 @@ const Sidebar = () => {
               key={item.name}
               to={item.link}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all ${isActive
-                ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/50"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+                ? "bg-sidebar-link text-slate-100 border border-sidebar-link-border"
+                : "text-slate-300 hover:text-slate-200 hover:bg-dash-search"
                 }`}
             >
               <div className="flex items-center gap-3">

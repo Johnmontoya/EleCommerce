@@ -22,7 +22,7 @@ const CardStatus: React.FC<CardStatusProps> = ({ packageData }) => {
     return (
         <div className="grid md:grid-cols-2 gap-6 mb-8">
             {/* Current Status Card */}
-            <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6">
+            <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6">
                 <div className="flex items-center gap-3 mb-4">
                     <div className="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center">
                         <MdLocalShipping size={24} className="text-cyan-400" />
@@ -55,7 +55,7 @@ const CardStatus: React.FC<CardStatusProps> = ({ packageData }) => {
             </div>
 
             {/* Delivery Info Card */}
-            <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6">
+            <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6">
                 <div className="flex items-center gap-3 mb-4">
                     <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center">
                         <BiTime size={24} className="text-green-400" />

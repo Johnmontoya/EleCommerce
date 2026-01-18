@@ -31,7 +31,7 @@ const ImageForm: React.FC<CardImagesProps> = ({ product, setCreateData, getField
   };
 
   return (
-    <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+    <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
       <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
         <BsImage size={20} className="text-cyan-400" />
         Imágenes del Producto
@@ -43,7 +43,7 @@ const ImageForm: React.FC<CardImagesProps> = ({ product, setCreateData, getField
             type="url"
             value={newImage}
             onChange={(e) => setNewImage(e.target.value)}
-            className="flex-1 bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className="flex-1 bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="URL de la imagen"
           />
           <ButtonAction

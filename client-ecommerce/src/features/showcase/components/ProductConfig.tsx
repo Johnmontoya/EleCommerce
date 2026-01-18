@@ -45,7 +45,7 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
     };
 
     return (
-        <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6">
+        <div className="dash-search dark:dash-search border border-slate-600 rounded-2xl p-6">
             <h2 className="text-xl font-bold text-slate-100 mb-6">
                 Productos Configurados
             </h2>

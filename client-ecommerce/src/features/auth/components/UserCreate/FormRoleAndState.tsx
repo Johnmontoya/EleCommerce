@@ -14,7 +14,7 @@ const FormRoleAndState: React.FC<FormRoleAndStateProps> = ({
     return (
         <div className="lg:col-span-1 space-y-6">
             {/* Rol y Permisos */}
-            <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+            <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
                 <h2 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
                     <MdAdminPanelSettings size={20} className="text-cyan-400" />
                     Rol y Permisos
@@ -29,7 +29,7 @@ const FormRoleAndState: React.FC<FormRoleAndStateProps> = ({
                             name="role"
                             value={userData.role || ""}
                             onChange={onChangeCreateData}
-                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 cursor-pointer"
+                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                         >
                             <option value="">Seleccione un Rol</option>
                             <option value="USER">User</option>
@@ -53,7 +53,7 @@ const FormRoleAndState: React.FC<FormRoleAndStateProps> = ({
             </div>
 
             {/* Estado de la Cuenta */}
-            <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+            <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
                 <h2 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
                     <MdVerifiedUser size={20} className="text-cyan-400" />
                     Estado de la Cuenta

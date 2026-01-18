@@ -30,12 +30,12 @@ const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
   return (
     <div
       key={product.id}
-      className={`bg-slate-800/50 border-2 border-slate-700 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all group ${viewMode === "list" ? "flex gap-6" : ""
+      className={`dash-search dark:dash-search border-2 border-slate-600 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all group ${viewMode === "list" ? "flex gap-6" : ""
         }`}
     >
       <div
         onClick={() => navigate(`/products/${product.slug}`)}
-        className={`bg-slate-900/50 flex items-center justify-center overflow-hidden cursor-pointer ${viewMode === "list" ? "w-48 shrink-0" : "h-64"
+        className={`dash-search dark:dash-search flex items-center justify-center overflow-hidden cursor-pointer ${viewMode === "list" ? "w-48 shrink-0" : "h-64"
           }`}
       >
         {product.priceDiscount ? (

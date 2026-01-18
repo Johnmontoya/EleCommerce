@@ -8,27 +8,37 @@ import {
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import Footer from "../../features/home/components/Footer";
 import { useState } from "react";
-import { MdDashboard, MdOutlineLightMode } from "react-icons/md";
+import { MdDashboard } from "react-icons/md";
 import ButtonAction from "./ButtonAction";
 import { SearchModal } from "../../features/search/components/SearchModal";
 import { useAuthStore } from "../../features/auth/store/useAuthStore";
 import { BsTruck } from "react-icons/bs";
 import { useCartCount } from "../../features/auth/hooks/queries/useUsers";
 import { useWishCount } from "../../features/wishlist/hook/queries/useWishList";
+import { useTheme } from "./ThemeContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const { user } = useAuthStore();
   const { data: cartCount } = useCartCount(user?.id!);
   const { data: wishCount } = useWishCount(user?.id!)
   const street = user?.addresses![0].state + ", " + user?.addresses![0].street;
 
+  const toggle = () => {
+    if (theme === 'system') {
+      setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
+    } else {
+      setTheme(theme === 'dark' ? 'light' : 'dark');
+    }
+  };
+
   return (
     <>
-      <header className="bg-slate-900 shadow-sm sticky top-0 z-50">
+      <header className={`navbar-light dark:navbar-dark shadow-sm sticky top-0 z-50`}>
         {/* Navigation */}
-        <nav className="navbar bg-slate-800">
+        <nav className="navbar topbar-light dark:topbar-dark">
           <div className="flex justify-between font-light items-center max-w-7xl mx-auto py-2 px-4 text-slate-100">
             {user && (
               <div className="flex flex-row gap-2">
@@ -45,12 +55,16 @@ const Navbar = () => {
               </div>
             )}
             <div className="hidden md:flex text-sm">
-              <p>Tell a friend about our and get 20% off</p>
+              <p>Cuentale a un amigo sobre nuestra tienda y obtén 20% de descuento</p>
             </div>
             <div className="flex flex-row text-sm gap-4 items-center">
               <div>USD</div>
-              <button className="cursor-pointer">
-                <MdOutlineLightMode size={24} />
+              <button
+                onClick={toggle}
+                className="p-2 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-700"
+                aria-label="Cambiar tema"
+              >
+                {resolvedTheme === 'dark' ? '☀️ Modo claro' : '🌙 Modo oscuro'}
               </button>
               {user ? (
                 <ButtonAction
@@ -103,19 +117,19 @@ const Navbar = () => {
               <div className="w-full flex justify-center items-center text-slate-100 font-light px-10">
                 <div className="relative hidden lg:block">
                   <ul className="flex flex-row gap-4">
-                    <li>
+                    <li className="hover:text-cyan-400 transition-all">
                       <Link to="/">HOME</Link>
                     </li>
-                    <li>
+                    <li className="hover:text-cyan-400 transition-all">
                       <Link to="/products">PRODUCTOS</Link>
                     </li>
-                    <li>
+                    <li className="hover:text-cyan-400 transition-all">
                       <Link to="/blog">BLOG</Link>
                     </li>
-                    <li>
+                    <li className="hover:text-cyan-400 transition-all">
                       <Link to="/faq">AYUDAS</Link>
                     </li>
-                    <li>
+                    <li className="hover:text-cyan-400 transition-all">
                       <Link to="/contact">CONTACTO</Link>
                     </li>
                   </ul>

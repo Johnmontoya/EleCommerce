@@ -18,7 +18,7 @@ const FormCredential: React.FC<FormCredentialProps> = ({
     setConfirmPassword,
 }) => {
     return (
-        <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
             <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
                 <BiLock size={20} className="text-cyan-400" />
                 Credenciales de Acceso
@@ -40,7 +40,7 @@ const FormCredential: React.FC<FormCredentialProps> = ({
                             value={userData.email || ""}
                             onChange={onChangeCreateData}
                             required
-                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 pl-10 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-10 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                             placeholder="john.doe@example.com"
                         />
                     </div>
@@ -60,7 +60,7 @@ const FormCredential: React.FC<FormCredentialProps> = ({
                             value={userData.password || ""}
                             onChange={onChangeCreateData}
                             required
-                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                             placeholder="••••••••"
                         />
                         <div className="text-red-500 text-sm mt-1">
@@ -77,7 +77,7 @@ const FormCredential: React.FC<FormCredentialProps> = ({
                             value={confirmPassword || ""}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
-                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                             placeholder="••••••••"
                         />
                         <div className="text-red-500 text-sm mt-1">

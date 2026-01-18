@@ -32,7 +32,7 @@ const HomePage = () => {
   }
 
   return (
-    <div className='bg-linear-to-br from-slate-900 via-slate-800 to-slate-900'>
+    <div className='background-light dark:background-light'>
       {/* useLocalData={true} para usar datos locales */}
       {/* useLocalData={false} para usar API */}
       <Banner options={OPTIONS} />

@@ -40,7 +40,7 @@ const DashViewCategoryPage = () => {
     if (isLoading) return <LoadingFallback />;
     if (!category) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+            <div className="min-h-screen background-light dark:background-light flex items-center justify-center">
                 <div className="text-center">
                     <p className="text-white text-xl mb-4">Categoría no encontrada</p>
                     <button
@@ -67,7 +67,7 @@ const DashViewCategoryPage = () => {
                     {/* Mobile Menu */}
                     <NavMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
-                    <div className="w-full mx-auto flex-1 px-12 pb-8">
+                    <div className="w-full mx-auto flex-1 px-8 md:px-12 pb-8">
                         <ButtonMobile
                             isMenuOpen={isMenuOpen}
                             setIsMenuOpen={setIsMenuOpen}

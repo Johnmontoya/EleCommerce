@@ -1,1 +1,97 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --color-sidebar-link: #06a1f9;
+    --color-sidebar-link-border: #6ae7fe;
+}
+
+@layer utilities {
+    .background-light {
+        background: linear-gradient(135deg, #293e67 0%, #49659d 50%, #2e487a 100%);
+        border-color: #d97706;
+    }
+
+    .navbar-light {
+        background: linear-gradient(135deg, #2d446e 0%, #39517e 50%, #486391 100%);
+    }
+
+    .topbar-light {
+        background: linear-gradient(135deg, #364a71 0%, #3d537e 50%, #4d648f 100%);
+    }
+
+    /* Versión dark*/
+    .dark .background-light {
+        background: linear-gradient(135deg, #181c2d 0%, #1e2338 50%, #1c2235 100%);
+    }
+
+    .dark .navbar-light {
+        background: linear-gradient(135deg, #181c2d 0%, #1e2338 50%, #1c2235 100%);
+    }
+
+    .dark .topbar-light {
+        background: linear-gradient(135deg, #1a1d2e 0%, #1f2337 50%, #1f2337 100%);
+    }
+
+    .dash-search {
+        background: #2c426c;
+    }
+
+    .dark .dash-search {
+        background: #1b2135;
+    }
+
+    .dash-search-border {
+        background: #3c5484;
+    }
+
+    .dark .dash-search-border {
+        background: #1b2135;
+    }
+
+    .card-total {
+        background: linear-gradient(135deg, #23549d 0%, #1f60b7 50%, #246fd2 100%);
+        border: 1px solid #35a2f8;
+    }
+
+    .card-pending {
+        background: linear-gradient(135deg, #a87a30 0%, #c19238 50%, #deab33 100%);
+        border: 1px solid #fdf467;
+    }
+
+    .card-confirmed {
+        background: linear-gradient(135deg, #208e8e 0%, #1f9e9e 50%, #1cada6 100%);
+        border: 1px solid #45e5ec;
+    }
+
+    .card-processing {
+        background: linear-gradient(135deg, #af5221 0%, #c86a23 50%, #e17723 100%);
+        border: 1px solid #f49e23;
+    }
+
+    .card-shipped {
+        background: linear-gradient(135deg, #4a3081 0%, #5e3494 50%, #6a3aa2 100%);
+        border: 1px solid #a05ac4;
+    }
+
+    .card-delivered {
+        background: linear-gradient(135deg, #1c6658 0%, #1a696f 50%, #13737b 100%);
+        border: 1px solid #28b3ac;
+    }
+
+    .card-cancelled {
+        background: linear-gradient(135deg, #813030 0%, #943434 50%, #a23a3a 100%);
+        border: 1px solid #c45a5a;
+    }
+
+    .card-refunded {
+        background: #111827;
+        border: 1px solid #1f2937;
+    }
+
+    .card-gastos {
+        background: linear-gradient(135deg, #135d82 0%, #16658f 50%, #1176a6 100%);
+        border: 1px solid #29a3cd;
+    }
+}

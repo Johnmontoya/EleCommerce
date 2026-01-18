@@ -32,10 +32,10 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
         <>
             <div className="space-y-4">
                 {orders && orders.length > 0 ? (
-                    orders.map((order) => (
+                    orders.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((order) => (
                         <div
                             key={order.id}
-                            className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-cyan-500/50 transition-all"
+                            className="dash-search dark:dash-search border border-slate-600 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-cyan-500/50 transition-all"
                         >
                             {/* Order Header */}
                             <div className="p-6">

@@ -61,7 +61,7 @@ const DashboardPage: React.FC = () => {
     return <LoadingFallback />;
   }
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className={`min-h-screen background-light dark:background-light`}>
       <div className="flex">
         {/* Sidebar */}
         <Sidebar />
@@ -70,7 +70,7 @@ const DashboardPage: React.FC = () => {
         <NavMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
         {/* Main Content */}
-        <main className="flex-1 p-8">
+        <main className="w-full flex-1 p-8">
           <ButtonMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
           {/* Stats Cards */}

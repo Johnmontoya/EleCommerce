@@ -9,7 +9,7 @@ interface LogisticDimensionsProps {
 
 const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTracking, getFieldsError }) => {
     return (
-        <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
             <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
                 <BiPackage size={20} className="text-cyan-400" />
                 Dimensiones y Logística
@@ -45,7 +45,7 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
                         name="estimatedDelivery"
                         value={tracking.tracking.estimatedDelivery}
                         onChange={(e) => setTracking({ ...tracking, tracking: { ...tracking.tracking, estimatedDelivery: e.target.value } })}
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                     />
                     <div className="text-red-500 text-sm mt-1">
                         {getFieldsError("estimatedDelivery")}
@@ -61,7 +61,7 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
                         value={tracking.tracking.origin}
                         onChange={(e) => setTracking({ ...tracking, tracking: { ...tracking.tracking, origin: e.target.value } })}
                         required
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                         placeholder="Seattle, WA, USA"
                     />
 
@@ -79,7 +79,7 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
                         value={tracking.tracking.destination}
                         onChange={(e) => setTracking({ ...tracking, tracking: { ...tracking.tracking, destination: e.target.value } })}
                         required
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                         placeholder="Austin, TX, USA"
                     />
 
@@ -98,7 +98,7 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
                             value={tracking.tracking.weight}
                             onChange={(e) => setTracking({ ...tracking, tracking: { ...tracking.tracking, weight: e.target.value } })}
                             required
-                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                             placeholder="12.5"
                         />
 
@@ -116,7 +116,7 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
                                 name="dimensions"
                                 value={tracking.tracking.dimensions}
                                 onChange={(e) => setTracking({ ...tracking, tracking: { ...tracking.tracking, dimensions: e.target.value } })}
-                                className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                                className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                                 placeholder="45"
                             />
                             <div className="text-red-500 text-sm mt-1">

@@ -51,7 +51,7 @@ const AttributesData: React.FC<CardAttributesProps> = ({
   };
 
   return (
-    <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+    <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
       <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
         <BiBarChart size={20} className="text-cyan-400" />
         Atributos
@@ -63,14 +63,14 @@ const AttributesData: React.FC<CardAttributesProps> = ({
             type="text"
             value={newAttributeName}
             onChange={(e) => setNewAttributeName(e.target.value)}
-            className="bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className="bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="Nombre (Ej: Duración de Batería)"
           />
           <input
             type="text"
             value={newAttributeValue}
             onChange={(e) => setNewAttributeValue(e.target.value)}
-            className="bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className="bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
             placeholder="Valor (Ej: 30 horas)"
           />
         </div>

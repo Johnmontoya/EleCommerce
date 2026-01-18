@@ -13,14 +13,14 @@ interface BlogPost {
 }
 
 interface RegularProps {
-    post: BlogPost
+  post: BlogPost
 }
 
 const RegularPost: React.FC<RegularProps> = ({ post }) => {
   return (
     <div
       key={post.id}
-      className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl overflow-hidden group hover:border-cyan-500/50 transition-all"
+      className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl overflow-hidden group hover:border-cyan-500/50 transition-all"
     >
       <div className="relative h-48 overflow-hidden">
         <img

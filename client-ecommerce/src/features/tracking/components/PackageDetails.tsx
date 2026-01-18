@@ -21,7 +21,7 @@ const PackageDetails: React.FC<PackageDetailsProps> = ({ packageData }) => {
     return (
         <div className="space-y-6">
             {/* Package Info */}
-            <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6">
+            <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6">
                 <h2 className="text-xl font-bold text-slate-100 mb-4">
                     Detalles del Paquete
                 </h2>
@@ -44,7 +44,7 @@ const PackageDetails: React.FC<PackageDetailsProps> = ({ packageData }) => {
             </div>
 
             {/* Delivery Contact */}
-            <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6">
+            <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6">
                 <h2 className="text-xl font-bold text-slate-100 mb-4">
                     Información de Contacto
                 </h2>
@@ -70,7 +70,7 @@ const PackageDetails: React.FC<PackageDetailsProps> = ({ packageData }) => {
             </div>
 
             {/* Quick Actions */}
-            <div className="bg-cyan-500/10 border border-cyan-500/50 rounded-xl p-4">
+            <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6">
                 <h3 className="text-sm font-semibold text-cyan-400 mb-2">
                     ¿Problema con tu envío?
                 </h3>

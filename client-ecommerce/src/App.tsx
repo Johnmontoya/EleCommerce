@@ -16,6 +16,7 @@ import { queryClient } from "./shared/lib/queryClient";
 import ProtectedRoute from "./router/ProtectedRoute";
 import "./App.css";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ThemeProvider } from "./shared/ui/ThemeContext";
 
 axiosInterceptor();
 
@@ -39,15 +40,38 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <Routes>
-          {authRoutes.map((meta) => {
-            const Component = lazyImport(meta.feature!, meta.site!, meta.page!);
+        <ThemeProvider>
+          <Routes>
+            {authRoutes.map((meta) => {
+              const Component = lazyImport(meta.feature!, meta.site!, meta.page!);
 
-            return (
-              <Route
-                key={meta.path}
-                path={meta.path}
-                element={
+              return (
+                <Route
+                  key={meta.path}
+                  path={meta.path}
+                  element={
+                    <Suspense fallback={<LoadingFallback />}>
+                      <ErrorBoundary
+                        onReset={reset}
+                        fallbackRender={({ resetErrorBoundary }) => (
+                          <ErrorFallback resetErrorBoundary={resetErrorBoundary} />
+                        )}
+                      >
+                        <Component />
+                      </ErrorBoundary>
+                    </Suspense>
+                  }
+                />
+              );
+            })}
+
+            {/* Rutas con Layout */}
+            <Route element={<Navbar />}>
+              {layoutRoutes.map((meta) => {
+                const Component = lazyImport(meta.feature!, meta.site!, meta.page!);
+
+                // Si la ruta es privada (site === 'private'), protegerla
+                const element = (
                   <Suspense fallback={<LoadingFallback />}>
                     <ErrorBoundary
                       onReset={reset}
@@ -58,52 +82,31 @@ function App() {
                       <Component />
                     </ErrorBoundary>
                   </Suspense>
-                }
-              />
-            );
-          })}
+                );
 
-          {/* Rutas con Layout */}
-          <Route element={<Navbar />}>
-            {layoutRoutes.map((meta) => {
-              const Component = lazyImport(meta.feature!, meta.site!, meta.page!);
+                // Verificar si la ruta requiere autenticación
+                const isPrivateRoute = meta.site === 'private';
+                const isAdminRoute = meta.isAdmin;
 
-              // Si la ruta es privada (site === 'private'), protegerla
-              const element = (
-                <Suspense fallback={<LoadingFallback />}>
-                  <ErrorBoundary
-                    onReset={reset}
-                    fallbackRender={({ resetErrorBoundary }) => (
-                      <ErrorFallback resetErrorBoundary={resetErrorBoundary} />
-                    )}
-                  >
-                    <Component />
-                  </ErrorBoundary>
-                </Suspense>
-              );
-
-              // Verificar si la ruta requiere autenticación
-              const isPrivateRoute = meta.site === 'private';
-              const isAdminRoute = meta.isAdmin;
-
-              return (
-                <Route
-                  key={meta.path}
-                  path={meta.path}
-                  element={
-                    isPrivateRoute ? (
-                      <ProtectedRoute path={meta.path} isAdmin={isAdminRoute}>
-                        {element}
-                      </ProtectedRoute>
-                    ) : (
-                      element
-                    )
-                  }
-                />
-              );
-            })}
-          </Route>
-        </Routes>
+                return (
+                  <Route
+                    key={meta.path}
+                    path={meta.path}
+                    element={
+                      isPrivateRoute ? (
+                        <ProtectedRoute path={meta.path} isAdmin={isAdminRoute}>
+                          {element}
+                        </ProtectedRoute>
+                      ) : (
+                        element
+                      )
+                    }
+                  />
+                );
+              })}
+            </Route>
+          </Routes>
+        </ThemeProvider>
         <ReactQueryDevtools initialIsOpen={true} />
       </QueryClientProvider>
     </>

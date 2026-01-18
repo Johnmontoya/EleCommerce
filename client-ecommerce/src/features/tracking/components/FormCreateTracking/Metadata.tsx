@@ -6,7 +6,7 @@ interface MetadataProps {
 
 const Metadata: React.FC<MetadataProps> = ({ metadata }) => {
     return (
-        <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
             <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">METADATA</h3>
 
             <div className="space-y-3 text-sm">

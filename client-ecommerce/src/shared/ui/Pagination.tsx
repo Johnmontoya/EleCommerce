@@ -14,7 +14,7 @@ const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, currentPage, setC
   return (
     <>
       {totalPages > 0 && (
-        <div className="border-t border-slate-700 px-6 py-4 flex items-center justify-between">
+        <div className="px-6 py-4 flex items-center justify-between">
           <p className="text-slate-400 text-sm">
             Mostrando <span className="font-bold text-slate-200">{indexOfFirstItem + 1}</span> -{" "}
             <span className="font-bold text-slate-200">

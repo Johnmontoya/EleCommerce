@@ -23,7 +23,7 @@ const FormInfoPersonal: React.FC<FormInfoPersonalProps> = ({
     };
 
     return (
-        <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
             <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
                 <BiUser size={20} className="text-cyan-400" />
                 Información Personal
@@ -39,7 +39,7 @@ const FormInfoPersonal: React.FC<FormInfoPersonalProps> = ({
                         name="firstName"
                         value={userData.firstName || ""}
                         onChange={onChangeCreateData}
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                         placeholder="John"
                     />
                     <div className="text-red-500 text-sm mt-1">
@@ -56,7 +56,7 @@ const FormInfoPersonal: React.FC<FormInfoPersonalProps> = ({
                         name="lastName"
                         value={userData.lastName || ""}
                         onChange={onChangeCreateData}
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                         placeholder="Doe"
                     />
                     <div className="text-red-500 text-sm mt-1">

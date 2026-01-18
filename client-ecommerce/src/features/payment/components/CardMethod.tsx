@@ -107,7 +107,7 @@ const CardMethod = ({
 
     return (
         selectedMethod === "card" && (
-            <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6">
+            <div className="dash-search dark:dash-search border border-slate-600 rounded-2xl p-6">
                 <div className="flex flex-row justify-between items-center mb-4">
                     <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
                         <BiCreditCard size={24} className="text-cyan-400" />

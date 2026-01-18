@@ -39,7 +39,7 @@ const SecurityInfo = ({ activeTab }: SecurityInfoProps) => {
     return (
         <>
             {activeTab === "security" && (
-                <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+                <div className="dash-search dark:dash-search border border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
                     <div className="flex items-center justify-between mb-6">
                         <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
                             <BiLock size={20} className="text-cyan-400" />

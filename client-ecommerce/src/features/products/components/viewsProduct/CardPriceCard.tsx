@@ -11,9 +11,9 @@ const CardPriceCard: React.FC<CardPriceCardProps> = ({ product }) => {
     return (
         <div className="space-y-6">
             {/* Price Card */}
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
+            <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
                 <div className="flex items-center gap-3 mb-4">
-                    <FaDollarSign className="text-green-400" size={24} />
+                    <FaDollarSign className="text-cyan-400" size={24} />
                     <h2 className="text-xl font-bold text-white">Precio</h2>
                 </div>
                 <div className="space-y-3">
@@ -35,7 +35,7 @@ const CardPriceCard: React.FC<CardPriceCardProps> = ({ product }) => {
             </div>
 
             {/* Stock Card */}
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
+            <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
                 <div className="flex items-center gap-3 mb-4">
                     <BiPackage className="text-cyan-400" size={24} />
                     <h2 className="text-xl font-bold text-white">Inventario</h2>
@@ -43,7 +43,7 @@ const CardPriceCard: React.FC<CardPriceCardProps> = ({ product }) => {
                 <div className="space-y-3">
                     <div>
                         <p className="text-slate-400 text-sm">Stock Disponible</p>
-                        <p className={`text-3xl font-bold ${product.stock > 10 ? "text-green-400" :
+                        <p className={`text-3xl font-bold ${product.stock > 10 ? "text-cyan-400" :
                             product.stock > 0 ? "text-yellow-400" : "text-red-400"
                             }`}>
                             {product.stock}
@@ -59,7 +59,7 @@ const CardPriceCard: React.FC<CardPriceCardProps> = ({ product }) => {
             </div>
 
             {/* Category & Brand */}
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
+            <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
                 <div className="flex items-center gap-3 mb-4">
                     <BiTag className="text-purple-400" size={24} />
                     <h2 className="text-xl font-bold text-white">Categorización</h2>
@@ -84,7 +84,7 @@ const CardPriceCard: React.FC<CardPriceCardProps> = ({ product }) => {
 
             {/* Shipping */}
             {product.shipping && (
-                <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
+                <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
                     <div className="flex items-center gap-3 mb-4">
                         <BsTruck className="text-blue-400" size={24} />
                         <h2 className="text-xl font-bold text-white">Envío</h2>

@@ -31,7 +31,7 @@ const TrackingTimeLine: React.FC<TrackingTimeLineProps> = ({ trackingHistory }) 
 
     return (
         <div className="lg:col-span-2">
-            <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6">
+            <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6">
                 <h2 className="text-xl font-bold text-slate-100 mb-6">
                     Historial de Seguimiento
                 </h2>
@@ -58,7 +58,7 @@ const TrackingTimeLine: React.FC<TrackingTimeLineProps> = ({ trackingHistory }) 
                             </div>
                             {/* Event Details */}
                             <div className="flex-1 pb-8">
-                                <div className="bg-slate-700/30 rounded-lg p-4 hover:bg-slate-700/50 transition-colors">
+                                <div className="dash-search-border dark:dash-search-border rounded-lg p-4 hover:bg-slate-700/50 transition-colors">
                                     <div className="flex justify-between items-start mb-2">
                                         <h3
                                             className={`font-bold ${event.completed ? "text-slate-100" : "text-slate-500"

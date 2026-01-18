@@ -11,7 +11,7 @@ const ButtonMobile: React.FC<NavMobileProps> = ({ isMenuOpen, setIsMenuOpen }) =
     <div className="flex items-center gap-3 md:hidden h-20 ">
       <MdMenu
         size={32}
-        className="text-slate-100"
+        className="text-slate-100 cursor-pointer"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       />
     </div>

@@ -5,7 +5,7 @@ interface PrioritySettingsProps {
 }
 const PrioritySettings = ({ priority, setPriority, priorityOptions }: PrioritySettingsProps) => {
     return (
-        <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
             <div className="flex items-center gap-2 mb-6">
                 <div className="w-1 h-5 bg-blue-600 rounded-full"></div>
                 <h2 className="block text-slate-300 font-semibold">Prioridad de configuracion</h2>
@@ -19,7 +19,7 @@ const PrioritySettings = ({ priority, setPriority, priorityOptions }: PrioritySe
                             key={option.value}
                             className={`flex items-center justify-between p-3 rounded-lg border-2 cursor-pointer transition-all ${priority === option.value
                                 ? 'border-blue-600 bg-blue-600/10'
-                                : 'border-gray-700 hover:border-gray-600'
+                                : 'border-slate-600 hover:border-gray-600'
                                 }`}
                         >
                             <div className="flex items-center gap-3">

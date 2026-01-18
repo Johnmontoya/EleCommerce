@@ -19,7 +19,7 @@ const WishlistPage: React.FC = () => {
   if (isLoading) return <LoadingFallback />;
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen background-light dark:background-light">
       {/* Breadcrumb */}
       <BreadCrumbs />
 
@@ -55,7 +55,7 @@ const WishlistPage: React.FC = () => {
 
         {/* Wishlist Items */}
         {wishlistItems?.length === undefined ? (
-          <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-16 text-center backdrop-blur-sm">
+          <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-16 text-center backdrop-blur-sm">
             <BiHeart
               className="mx-auto mb-4 text-slate-600"
               size={64}

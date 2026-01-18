@@ -26,7 +26,7 @@ const ButtonAction: React.FC<ButtonProps> = ({
     secondary: "bg-slate-700 hover:bg-slate-600",
     danger:
       "bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 shadow-red-500/50 shadow-lg",
-    outline: "shadow-lg",
+    outline: "bg-transparent",
     edit: "bg-cyan-600 hover:bg-cyan-500/30 text-cyan-400 p-1 rounded-lg transition-all",
     delete: "bg-red-500/80 hover:bg-red-500/30 text-red-400 p-1 rounded-lg transition-all",
     view: "bg-slate-700/50 text-slate-400 border-slate-500/30 p-1 rounded-lg transition-all"

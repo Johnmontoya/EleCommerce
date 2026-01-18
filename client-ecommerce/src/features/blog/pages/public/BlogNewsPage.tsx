@@ -6,7 +6,6 @@ import SearchPost from "../../components/SearchPost";
 import BlogCategories from "../../components/BlogCategories";
 import PopularTags from "../../components/PopularTags";
 import Subscribe from "../../components/Subscribe";
-import Pagination from "../../../../shared/ui/Pagination";
 
 interface BlogPost {
   id: number;
@@ -25,7 +24,6 @@ interface Category {
 }
 
 const BlogNewsPage: React.FC = () => {
-  const totalPage = 8;
   const popularTags = [
     "Running",
     "Sneakers",
@@ -105,7 +103,7 @@ const BlogNewsPage: React.FC = () => {
   const regularPosts = blogPosts.filter((post) => !post.featured);
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen background-light dark:background-light">
       {/* Breadcrumb */}
       <BreadCrumbs />
 

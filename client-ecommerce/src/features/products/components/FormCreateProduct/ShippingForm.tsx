@@ -31,7 +31,7 @@ const ShippingData: React.FC<CardShippingProps> = ({ product, setCreateData }) =
   };
 
   return (
-    <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+    <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
       <h2 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
         <BsTruck size={20} className="text-cyan-400" />
         Envío

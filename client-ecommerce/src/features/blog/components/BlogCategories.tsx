@@ -6,13 +6,13 @@ interface Category {
 }
 
 interface CategoryProps {
-    categories: Category[]
+  categories: Category[]
 }
 
-const BlogCategories: React.FC<CategoryProps> = ({ categories }) => {    
+const BlogCategories: React.FC<CategoryProps> = ({ categories }) => {
 
   return (
-    <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
+    <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
       <h3 className="text-xl font-bold text-slate-100 mb-4">Categories</h3>
       <ul className="space-y-3">
         {categories.map((category) => (
@@ -23,7 +23,7 @@ const BlogCategories: React.FC<CategoryProps> = ({ categories }) => {
             <span className="group-hover:translate-x-1 transition-transform">
               {category.name}
             </span>
-            <span className="bg-slate-700 group-hover:bg-cyan-500/20 text-slate-400 group-hover:text-cyan-400 px-2 py-1 rounded-full text-xs font-semibold transition-all">
+            <span className="bg-slate-600 group-hover:bg-cyan-500/20 text-slate-300 group-hover:text-cyan-400 px-2 py-1 rounded-full text-xs font-semibold transition-all">
               {category.count}
             </span>
           </li>

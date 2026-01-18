@@ -29,7 +29,7 @@ const ProductFilter: React.FC<ProductFiltersProps> = ({
     };
 
     return (
-        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 my-6">
+        <div className="dash-search-border dark:dash-search-border border border-slate-700 rounded-2xl p-4 backdrop-blur-sm my-6">
             <div className="flex flex-col lg:flex-row gap-4">
                 {/* Search */}
                 <div className="flex-1 relative">
@@ -39,7 +39,7 @@ const ProductFilter: React.FC<ProductFiltersProps> = ({
                         placeholder="Buscar productos..."
                         value={searchTerm}
                         onChange={handleSearch}
-                        className="w-full pl-10 pr-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-lg focus:outline-none focus:border-cyan-400"
+                        className="w-full dash-search dark:dash-search border border-slate-700 text-slate-100 placeholder-slate-400 px-4 py-3 pl-10 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
                     />
                 </div>
 
@@ -47,7 +47,7 @@ const ProductFilter: React.FC<ProductFiltersProps> = ({
                 <select
                     value={selectedCategory}
                     onChange={handleCategoryChange}
-                    className="px-4 py-3 bg-slate-700 border border-slate-600 text-white rounded-lg focus:outline-none focus:border-cyan-400 min-w-[200px]"
+                    className="px-4 py-3 bg-slate-900/30 border border-slate-500 text-slate-200 hover:bg-slate-800 text-white rounded-lg focus:outline-none focus:border-cyan-400 min-w-[200px]"
                 >
                     <option value="">Todas las categorías</option>
                     {categories?.map((cat, index) => (
