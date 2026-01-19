@@ -122,7 +122,7 @@ const ResumeOrder: React.FC<ProductProps> = ({ products }) => {
         return;
       }
       await createOrderMutation.mutateAsync(orderData);
-      navigate("/dashboard/orders/confirmation");
+      navigate("/dashboard/orders/confirmation?trackingNumber=" + orderData.trackingNumber);
     } catch (error) {
       if (error instanceof AxiosError && error.response?.data?.errors) {
         setValidationErrors(error.response.data.errors);

@@ -148,4 +148,16 @@ export class PrismaOrderRepository implements IOrderRepository {
             return false;
         }
     }
+
+    getTrackingNumber(trackingNumber: string): Promise<OrderEntity[]> {
+        return prisma.order.findMany({
+            where: {
+                trackingNumber
+            },
+            include: {
+                items: true,
+                address: true,
+            }
+        })
+    }
 }

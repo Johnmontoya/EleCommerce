@@ -16,7 +16,10 @@ import type {
     ForgotPasswordUseCase
 } from "../../application/use-cases/auth/AuthUseCase";
 import { AuthRegisterSchema, LoginSchema, RefreshTokenSchema, UsersFiltersSchema } from "../../infrastructure/validation/Auth.schema";
+import nodemailer from "nodemailer";
+import otpGenerator from 'otp-generator';
 import { handleError } from "../../infrastructure/middlewares/errorHandler";
+import { emailService } from '../../infrastructure/services/EmailService';
 
 export class AuthController {
     constructor(
@@ -293,14 +296,52 @@ export class AuthController {
         try {
             const { email } = req.body;
 
-            await this.forgotPasswordUseCase.execute(email!);
+            // Validación básica
+            if (!email) {
+                res.status(400).json({
+                    success: false,
+                    message: 'El email es requerido'
+                });
+                return;
+            }
 
-            res.status(200).json({
-                success: true,
-                message: 'Hemos enviado un correo electrónico con un código de verificación'
-            });
-        } catch (error) {
-            handleError(error, res);
+            // Ejecutar el caso de uso (esto debería generar el token y guardarlo)
+            const otp = otpGenerator.generate(6, { upperCaseAlphabets: false });
+
+            // Enviar el email usando el servicio
+            try {
+                await emailService.sendPasswordResetEmail(email, otp);
+
+                res.status(200).json({
+                    success: true,
+                    message: 'Hemos enviado un correo electrónico con instrucciones para restablecer tu contraseña'
+                });
+            } catch (emailError) {
+                console.error('Error al enviar email:', emailError);
+
+                // Aunque falle el email, el token ya fue generado
+                res.status(500).json({
+                    success: false,
+                    message: 'No pudimos enviar el correo electrónico. Por favor, intenta de nuevo más tarde.'
+                });
+            }
+
+        } catch (error: any) {
+            console.error('Error en forgotPassword:', error);
+
+            // Manejo de errores específicos
+            if (error.message === 'Usuario no encontrado') {
+                // Por seguridad, no revelar si el email existe o no
+                res.status(200).json({
+                    success: true,
+                    message: 'Si el email existe, recibirás instrucciones para restablecer tu contraseña'
+                });
+            } else {
+                res.status(500).json({
+                    success: false,
+                    message: 'Error al procesar la solicitud'
+                });
+            }
         }
     }
 

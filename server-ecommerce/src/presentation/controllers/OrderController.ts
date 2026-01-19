@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import type { CancelOrderUseCase, CreateOrderUseCase, GetAllOrdersByUserUseCase, GetOrdersUseCase, UpdateOrderStatusUseCase } from "../../application/use-cases/orders/OrderUseCase";
+import type { CancelOrderUseCase, CreateOrderUseCase, GetAllOrdersByUserUseCase, GetOrdersUseCase, GetTrackingNumberUseCase, UpdateOrderStatusUseCase } from "../../application/use-cases/orders/OrderUseCase";
 import { CreateOrderSchema, OrderFiltersSchema } from "../../infrastructure/validation/Order.schema";
 import { handleError } from '../../infrastructure/middlewares/errorHandler';
 
@@ -9,7 +9,8 @@ export class OrderController {
         private getAllOrdersUseCase: GetOrdersUseCase,
         private cancelOrderUseCase: CancelOrderUseCase,
         private getAllOrdersByUserUseCase: GetAllOrdersByUserUseCase,
-        private updateOrderStatusUseCase: UpdateOrderStatusUseCase
+        private updateOrderStatusUseCase: UpdateOrderStatusUseCase,
+        private getTrackingNumberUseCase: GetTrackingNumberUseCase
     ) { }
 
     createOrder = async (req: Request, res: Response) => {
@@ -98,6 +99,20 @@ export class OrderController {
             res.status(200).json({
                 success: true,
                 message: 'Estado de la orden actualizado exitosamente',
+                data: order
+            });
+        } catch (error) {
+            handleError(error, res);
+        }
+    }
+
+    getTrackingNumber = async (req: Request, res: Response) => {
+        try {
+            const trackingNumber = req.params.trackingNumber;
+            const order = await this.getTrackingNumberUseCase.execute(trackingNumber!);
+            res.status(200).json({
+                success: true,
+                message: 'Orden obtenida exitosamente',
                 data: order
             });
         } catch (error) {

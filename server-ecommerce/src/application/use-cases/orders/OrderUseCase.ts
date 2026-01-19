@@ -46,3 +46,12 @@ export class UpdateOrderStatusUseCase {
         return data;
     }
 }
+
+export class GetTrackingNumberUseCase {
+    constructor(private orderRepository: IOrderRepository) { }
+
+    async execute(trackingNumber: string) {
+        const data = await this.orderRepository.getTrackingNumber(trackingNumber);
+        return data;
+    }
+}

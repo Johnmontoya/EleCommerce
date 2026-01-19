@@ -20,3 +20,12 @@ export const useOrderUser = () => {
         staleTime: 2 * 60 * 1000
     })
 }
+
+export const useOrderTrackingNumber = (trackingNumber: string) => {
+    return useQuery({
+        queryKey: queryKeys.orders.getTrackingNumber(trackingNumber),
+        queryFn: () => orderService.getTrackingNumber(trackingNumber),
+        select: (response) => response,
+        staleTime: 2 * 60 * 1000
+    })
+}

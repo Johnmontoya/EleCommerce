@@ -18,5 +18,9 @@ export const orderService = {
     deleteOrder: async (orderId: string): Promise<OrderResponse> => {
         const { data } = await apiClient.delete(endpoints.deleteOrder(orderId));
         return data.data;
+    },
+    getTrackingNumber: async (trackingNumber: string): Promise<OrderResponse> => {
+        const { data } = await apiClient.get(endpoints.getTrackingNumber(trackingNumber));
+        return data.data[0];
     }
 }
