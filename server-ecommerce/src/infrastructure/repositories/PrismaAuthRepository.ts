@@ -162,8 +162,4 @@ export class PrismaAuthRepository implements IAuthRepository {
 
         return await prisma.user.update({ where: { email: userId }, data: update });
     }
-
-    async sendMail(mailOptions: any): Promise<void> {
-
-    }
 }

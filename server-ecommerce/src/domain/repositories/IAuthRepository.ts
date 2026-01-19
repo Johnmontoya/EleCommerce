@@ -18,7 +18,6 @@ export interface IAuthRepository {
     deleteAllUserRefreshTokens: (userId: string) => Promise<void>;
     findAllUsers: (filters?: UsersFilters) => Promise<UserResponse[]>;
     changePassword: (email: string, data: ChangePasswordInput) => Promise<UserEntity>;
-    sendMail: (mailOptions: any) => Promise<void>;
 }
 
 export interface UsersFilters {

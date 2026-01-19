@@ -1,6 +1,7 @@
 import { UserEntity } from "../../../domain/entities/User";
 import type { IAuthRepository, UsersFilters } from "../../../domain/repositories/IAuthRepository";
 import type { UserUpdateInput } from "../../../generated/prisma/models";
+import { emailService } from "../../../infrastructure/services/EmailService";
 import type { HashService } from "../../../infrastructure/services/HashService";
 import type { JwtService } from "../../../infrastructure/services/JwtService";
 import type { AuthResponse, ChangePasswordInput, LoginInput, RefreshTokenInput, RegisterInput, UserResponse } from "../../Dto/auth.dto";
@@ -325,16 +326,13 @@ export class ForgotPasswordUseCase {
 
         const otpNumber = otpGenerator.generate(6, { upperCaseAlphabets: false, lowerCaseAlphabets: false, specialChars: false });
 
-        await this.authRepository.updateUser(user.id, { otp: otpNumber });
+        const updated = await this.authRepository.updateUser(user.id, { otp: otpNumber });
 
-        const mailOptions = {
-            from: 'elecommerce@elecommerce.com',
-            to: user.email,
-            subject: 'Código de verificación',
-            text: `Tu código de verificación es: ${otpNumber}`
-        };
+        if (!updated) {
+            throw new Error('Error al actualizar el usuario');
+        }
 
-        await this.authRepository.sendMail(mailOptions);
+        await emailService.sendPasswordResetEmail(email, otpNumber);
     }
 }
 
@@ -364,6 +362,37 @@ export class ChangePasswordUseCase {
         }
 
         const hashedPassword = await this.hashService.hash(data.newPassword!);
+
+        data.password = hashedPassword;
+
+        const updated = await this.authRepository.changePassword(email, data);
+
+        if (!updated) {
+            throw new Error('Error al actualizar el usuario');
+        }
+    }
+}
+
+export class ChangePasswordClientUseCase {
+    constructor(
+        private readonly authRepository: IAuthRepository,
+        private readonly hashService: HashService) { }
+
+    async execute(email: string, otp: string, data: ChangePasswordInput): Promise<void> {
+        if (!email) {
+            throw new Error('Email requerido');
+        }
+        const user = await this.authRepository.findByUserByEmail(email);
+
+        if (!user) {
+            throw new Error('Usuario no encontrado');
+        }
+
+        if (user.otp !== otp) {
+            throw new Error('Código de verificación incorrecto');
+        }
+
+        const hashedPassword = await this.hashService.hash(data.password!);
 
         data.password = hashedPassword;
 

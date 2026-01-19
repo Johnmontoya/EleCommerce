@@ -24,7 +24,7 @@ transporter.verify((error, success) => {
 
 export const emailService = {
     sendPasswordResetEmail: async (email: string, otp: string): Promise<void> => {
-        const resetUrl = `${process.env.FRONTEND_URL}/reset-password`;
+        const resetUrl = `${process.env.FRONTEND_URL}/reset-password?email=${email}`;
 
         const mailOptions = {
             from: `"ELECOMMERCE" <${process.env.EMAIL_USER}>`,
@@ -73,8 +73,11 @@ export const emailService = {
                                     </td>
                                 </tr>
                             </table>
+                            <h1 style="margin: 15px 0 0 0; color: #ffffff; font-size: 18px; font-weight: 100;">
+                                RECUPERACION DE <span style="color: #00c2e0;">CUENTA</span>
+                            </h1>
                             <h1 style="margin: 15px 0 0 0; color: #ffffff; font-size: 18px; font-weight: bold;">
-                                RECUPERACION DE <span style="color: #00c2e0;">CONTRASEÑA</span>
+                                <span style="color: #00c2e0;">${email}</span>
                             </h1>
                         </td>
                     </tr>
@@ -160,87 +163,9 @@ export const emailService = {
         };
 
         try {
-            const info = await transporter.sendMail(mailOptions);
-            console.log('✅ Email enviado:', info.messageId);
+            await transporter.sendMail(mailOptions);
         } catch (error) {
-            console.error('❌ Error al enviar email:', error);
             throw new Error('No se pudo enviar el email de recuperación');
         }
-    },
-
-    sendPasswordChangedConfirmation: async (email: string, userName?: string): Promise<void> => {
-        const mailOptions = {
-            from: `"ELECOMMERCE" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: '✅ Tu contraseña ha sido actualizada - ELECOMMERCE',
-            html: `
-        <!DOCTYPE html>
-        <html lang="es">
-          <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #0f172a;">
-            <table role="presentation" style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <td align="center" style="padding: 40px 20px;">
-                  <table role="presentation" style="max-width: 600px; width: 100%; background-color: #1e293b; border-radius: 16px;">
-                    
-                    <tr>
-                      <td style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 50px 40px; text-align: center;">
-                        <div style="font-size: 64px;">✅</div>
-                        <h1 style="margin: 10px 0 0 0; color: #ffffff; font-size: 28px;">
-                          Contraseña actualizada
-                        </h1>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td style="padding: 50px 40px; color: #cbd5e1;">
-                        <p style="margin: 0 0 20px 0; font-size: 16px;">
-                          Hola${userName ? ` ${userName}` : ''},
-                        </p>
-                        
-                        <p style="margin: 0 0 20px 0; font-size: 16px;">
-                          Tu contraseña ha sido <strong style="color: #10b981;">cambiada correctamente</strong>.
-                        </p>
-                        
-                        <table role="presentation" style="width: 100%; margin: 20px 0;">
-                          <tr>
-                            <td style="background-color: #450a0a; border-left: 4px solid #ef4444; padding: 16px 20px; border-radius: 4px;">
-                              <p style="margin: 0; color: #fca5a5; font-size: 14px;">
-                                <strong>🔒 ¿No realizaste este cambio?</strong><br>
-                                Contacta inmediatamente con soporte.
-                              </p>
-                            </td>
-                          </tr>
-                        </table>
-                        
-                        <p style="margin: 0; font-size: 14px; color: #94a3b8;">
-                          Fecha: ${new Date().toLocaleString('es-ES')}
-                        </p>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td style="background-color: #0f172a; padding: 30px; text-align: center;">
-                        <p style="margin: 0; color: #64748b; font-size: 13px;">
-                          © ${new Date().getFullYear()} ELECOMMERCE
-                        </p>
-                      </td>
-                    </tr>
-
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </body>
-        </html>
-      `,
-        };
-
-        try {
-            await transporter.sendMail(mailOptions);
-            console.log('✅ Email de confirmación enviado');
-        } catch (error) {
-            console.error('❌ Error al enviar confirmación:', error);
-            // No lanzar error aquí, solo loguearlo
-        }
-    },
+    }
 };

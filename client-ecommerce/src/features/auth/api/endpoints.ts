@@ -10,6 +10,7 @@ export const endpoints = {
         resetPassword: '/auth/reset-password',
         verifyEmail: '/auth/verify-email',
         changePassword: '/auth/change-password',
+        changePasswordClient: '/auth/change-password-client',
         cartCount: (userId: string) => `/cart/cart/count/${userId}`
     },
     user: {

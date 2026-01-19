@@ -8,6 +8,7 @@ import { JwtService } from "../infrastructure/services/JwtService";
 // Repositories
 import { PrismaAuthRepository } from "../infrastructure/repositories/PrismaAuthRepository";
 import {
+    ChangePasswordClientUseCase,
     ChangePasswordUseCase,
     DeleteUsersUseCase,
     DeleteUserUseCase,
@@ -45,6 +46,7 @@ const getUserByIdUseCase = new GetUserByIdUseCase(authRepository);
 const updateUserUseCase = new UpdateUserUseCase(authRepository);
 const forgotPasswordUseCase = new ForgotPasswordUseCase(authRepository);
 const changePasswordUseCase = new ChangePasswordUseCase(authRepository, hashService);
+const changePasswordUseCaseClient = new ChangePasswordClientUseCase(authRepository, hashService);
 
 const authController = new AuthController(
     registerUseCase,
@@ -60,7 +62,8 @@ const authController = new AuthController(
     getUserByIdUseCase,
     updateUserUseCase,
     forgotPasswordUseCase,
-    changePasswordUseCase
+    changePasswordUseCase,
+    changePasswordUseCaseClient
 );
 
 router.post('/register', authController.register);
@@ -79,5 +82,6 @@ router.put('/update/:id', authenticate, authController.updateUser);
 /** Password */
 router.post('/forgot-password', authController.forgotPassword);
 router.put('/change-password', authController.changePassword);
+router.put('/change-password-client', authController.changePasswordClient);
 
 export default router;

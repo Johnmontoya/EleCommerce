@@ -96,12 +96,11 @@ const LoginPage: React.FC = () => {
                     Recordarme
                   </span>
                 </label>
-                <a
-                  href="#"
+                <Link to={"/forgot-password"}
                   className="text-cyan-400 hover:text-cyan-300 transition-colors font-medium"
                 >
                   Olvidaste tu contraseña?
-                </a>
+                </Link>
               </div>
 
               {/* Sign In Button */}

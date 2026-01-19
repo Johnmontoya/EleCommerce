@@ -83,4 +83,12 @@ export const authService = {
         const { data } = await apiClient.put(endpoints.auth.changePassword, { email, otp, password, newPassword });
         return data;
     },
+    forgotPassword: async (email: string): Promise<ApiResponse<null>> => {
+        const { data } = await apiClient.post(endpoints.auth.forgotPassword, { email });
+        return data;
+    },
+    changePasswordClient: async ({ email, otp, password }: ChangePasswordInput): Promise<ApiResponse<null>> => {
+        const { data } = await apiClient.put(endpoints.auth.changePasswordClient, { email, otp, password });
+        return data;
+    },
 }

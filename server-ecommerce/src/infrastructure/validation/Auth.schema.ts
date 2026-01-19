@@ -93,4 +93,5 @@ export const ChangePasswordSchema = z.object({
         .regex(/[A-Z]/, 'Debe contener al menos una mayúscula')
         .regex(/[a-z]/, 'Debe contener al menos una minúscula')
         .regex(/[0-9]/, 'Debe contener al menos un número')
+        .optional()
 });

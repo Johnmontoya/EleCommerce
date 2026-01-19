@@ -13,13 +13,11 @@ import type {
     GetUserByIdUseCase,
     UpdateUserUseCase,
     ChangePasswordUseCase,
-    ForgotPasswordUseCase
+    ForgotPasswordUseCase,
+    ChangePasswordClientUseCase
 } from "../../application/use-cases/auth/AuthUseCase";
 import { AuthRegisterSchema, LoginSchema, RefreshTokenSchema, UsersFiltersSchema } from "../../infrastructure/validation/Auth.schema";
-import nodemailer from "nodemailer";
-import otpGenerator from 'otp-generator';
 import { handleError } from "../../infrastructure/middlewares/errorHandler";
-import { emailService } from '../../infrastructure/services/EmailService';
 
 export class AuthController {
     constructor(
@@ -36,7 +34,8 @@ export class AuthController {
         private getUserByIdUseCase: GetUserByIdUseCase,
         private updateUserUseCase: UpdateUserUseCase,
         private forgotPasswordUseCase: ForgotPasswordUseCase,
-        private changePasswordUseCase: ChangePasswordUseCase) { }
+        private changePasswordUseCase: ChangePasswordUseCase,
+        private changePasswordUseCaseClient: ChangePasswordClientUseCase) { }
 
     register = async (req: Request, res: Response): Promise<void> => {
         try {
@@ -296,52 +295,15 @@ export class AuthController {
         try {
             const { email } = req.body;
 
-            // Validación básica
-            if (!email) {
-                res.status(400).json({
-                    success: false,
-                    message: 'El email es requerido'
-                });
-                return;
-            }
+            const user = await this.forgotPasswordUseCase.execute(email);
 
-            // Ejecutar el caso de uso (esto debería generar el token y guardarlo)
-            const otp = otpGenerator.generate(6, { upperCaseAlphabets: false });
+            res.status(200).json({
+                success: true,
+                message: 'Hemos enviado un correo electrónico con instrucciones para restablecer tu contraseña'
+            });
 
-            // Enviar el email usando el servicio
-            try {
-                await emailService.sendPasswordResetEmail(email, otp);
-
-                res.status(200).json({
-                    success: true,
-                    message: 'Hemos enviado un correo electrónico con instrucciones para restablecer tu contraseña'
-                });
-            } catch (emailError) {
-                console.error('Error al enviar email:', emailError);
-
-                // Aunque falle el email, el token ya fue generado
-                res.status(500).json({
-                    success: false,
-                    message: 'No pudimos enviar el correo electrónico. Por favor, intenta de nuevo más tarde.'
-                });
-            }
-
-        } catch (error: any) {
-            console.error('Error en forgotPassword:', error);
-
-            // Manejo de errores específicos
-            if (error.message === 'Usuario no encontrado') {
-                // Por seguridad, no revelar si el email existe o no
-                res.status(200).json({
-                    success: true,
-                    message: 'Si el email existe, recibirás instrucciones para restablecer tu contraseña'
-                });
-            } else {
-                res.status(500).json({
-                    success: false,
-                    message: 'Error al procesar la solicitud'
-                });
-            }
+        } catch (error) {
+            handleError(error, res);
         }
     }
 
@@ -351,9 +313,24 @@ export class AuthController {
             const otp = req.body.otp;
             const data = req.body;
 
-            console.log(req.body);
-
             await this.changePasswordUseCase.execute(email!, otp, data);
+
+            res.status(200).json({
+                success: true,
+                message: 'Contraseña actualizada exitosamente'
+            });
+        } catch (error) {
+            handleError(error, res);
+        }
+    }
+
+    changePasswordClient = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const email = req.body.email;
+            const otp = req.body.otp;
+            const data = req.body;
+
+            await this.changePasswordUseCaseClient.execute(email!, otp, data);
 
             res.status(200).json({
                 success: true,
