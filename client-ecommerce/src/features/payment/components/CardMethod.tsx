@@ -132,27 +132,63 @@ const CardMethod = ({
                     )}
                 </div>
 
-                {/* Vista previa de la tarjeta */}
-                <div className="w-96 mx-auto bg-gradient-to-br from-cyan-600 to-blue-700 rounded-xl p-6 mb-6 shadow-xl">
-                    <div className="flex justify-between items-start mb-8">
-                        <div className="text-white text-sm font-semibold">BANK CARD</div>
-                        {getCardIcon()}
-                    </div>
-                    <div className="text-white text-xl tracking-wider mb-4 font-mono">
-                        {cardData.cardNumber || "•••• •••• •••• ••••"}
-                    </div>
-                    <div className="flex justify-between items-end">
-                        <div>
-                            <p className="text-cyan-100 text-xs mb-1">TITULAR</p>
-                            <p className="text-white font-semibold uppercase">
-                                {cardData.cardHolder || "NOMBRE APELLIDO"}
-                            </p>
+                <div className="w-96 mx-auto flip-card">
+                    <div className="flip-card-inner relative">
+                        <div className="flip-card-front">
+                            <div className="card-gradient-blue rounded-2xl p-8 text-white card-shadow relative overflow-hidden h-56 w-96">
+                                <div className="absolute inset-0 opacity-10">
+                                    <div className="absolute top-4 right-4 w-32 h-32 border-2 border-white rounded-full"></div>
+                                    <div className="absolute bottom-4 left-4 w-24 h-24 border border-white rounded-full"></div>
+                                </div>
+
+                                <div className="flex justify-between items-start mb-8">
+                                    <div className="chip w-12 h-10 rounded-lg" />
+                                    <div className="contactless">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div className="card-number text-2xl font-medium mb-6 tracking-wider">
+                                    {cardData.cardNumber || "•••• •••• •••• ••••"}
+                                </div>
+
+                                <div className="flex justify-between items-end">
+                                    <div>
+                                        <div className="text-xs opacity-80 mb-1">CARD HOLDER</div>
+                                        <div className="font-medium"> {cardData.cardHolder || "NOMBRE APELLIDO"}</div>
+                                    </div>
+                                    <div>
+                                        <div className="text-xs opacity-80 mb-1">EXPIRES</div>
+                                        <div className="font-medium">{cardData.cardExpiration || "MM/AA"}</div>
+                                    </div>
+                                    <div className="text-right">
+                                        {getCardIcon()}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <p className="text-cyan-100 text-xs mb-1">EXPIRA</p>
-                            <p className="text-white font-semibold">
-                                {cardData.cardExpiration || "MM/AA"}
-                            </p>
+
+                        <div className="flip-card-back absolute inset-0">
+                            <div className="card-gradient-blue rounded-2xl text-white card-shadow h-56 w-96 relative">
+                                <div className="magnetic-strip h-12 w-full mt-6"></div>
+
+                                <div className="bg-white mx-6 mt-8 h-10 rounded flex items-center px-4">
+                                    <div className="text-gray-600 text-sm italic">{cardData.cardHolder || "NOMBRE APELLIDO"}</div>
+                                    <div className="ml-auto bg-gray-100 px-3 py-1 rounded text-xs text-gray-700 font-mono">
+                                        {cardData.cardCvv || "123"}
+                                    </div>
+                                </div>
+
+                                <div className="px-6 mt-4 text-xs">
+                                    <p className="mb-2">For customer service call 1-800-VISA-911</p>
+                                    <p>See reverse for important information</p>
+                                </div>
+                                <div className="absolute bottom-4 right-6 text-xs opacity-80">
+                                    Valid only when signed
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

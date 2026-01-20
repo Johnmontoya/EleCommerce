@@ -4,10 +4,9 @@ import CardProductList from "../../components/listProducts/CardProductList";
 import CardCategoryList from "../../components/listProducts/CardCategoryList";
 import CardFilterPrice from "../../components/listProducts/CardFilterPrice";
 import CardFilterBrand from "../../components/listProducts/CardFilterBrand";
-import Pagination from "../../../../shared/ui/Pagination";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
 import ButtonAction from "../../../../shared/ui/ButtonAction";
-import { useProducts } from "../../hook/queries/useProduct";
+import { useProductsInfiniteQuery } from "../../hook/queries/useProduct";
 import LoadingFallback from "../../../../shared/ui/LoadingFallback";
 import { useProductFilters } from "../../hook/queries/useProductFilters";
 import { useSearchParams } from "react-router-dom";
@@ -17,10 +16,10 @@ const ListProductsPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [sortBy, setSortBy] = useState<string>("popularity");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
+  const itemsPerPage = 4;
 
   const isInitializedRef = useRef(false);
+  const observerTarget = useRef<HTMLDivElement>(null);
   const { data: allCategories } = useCategories();
 
   // 🎯 Usar el hook de filtros
@@ -42,7 +41,6 @@ const ListProductsPage: React.FC = () => {
       const brandsFromUrl = searchParams.get('brands');
       const minPriceFromUrl = searchParams.get('minPrice');
       const maxPriceFromUrl = searchParams.get('maxPrice');
-      const pageFromUrl = searchParams.get('page');
 
       // Inicializar filtros desde URL
       if (categoryFromUrl && allCategories && allCategories.length > 0) {
@@ -61,15 +59,14 @@ const ListProductsPage: React.FC = () => {
           maxPriceFromUrl ? Number(maxPriceFromUrl) : 1000
         );
       }
-      if (pageFromUrl) setCurrentPage(Number(pageFromUrl));
 
       isInitializedRef.current = true;
     }
-  }, []); // ✅ Array vacío = solo se ejecuta al montar
+  }, []);
 
-  // ✨ PASO 2: Actualizar URL cuando cambian los filtros (después de inicializar)
+  // ✨ Actualizar URL cuando cambian los filtros
   useEffect(() => {
-    if (!isInitializedRef.current) return; // No actualizar hasta que se inicialice
+    if (!isInitializedRef.current) return;
 
     const params = new URLSearchParams();
 
@@ -80,39 +77,62 @@ const ListProductsPage: React.FC = () => {
     if (filters.minPrice) params.set('minPrice', filters.minPrice.toString());
     if (filters.maxPrice) params.set('maxPrice', filters.maxPrice.toString());
     if (filters.search) params.set('search', filters.search);
-    if (currentPage > 1) params.set('page', currentPage.toString());
 
     setSearchParams(params, { replace: true });
-  }, [filters, currentPage]);
+  }, [filters]);
 
-  // 🎯 Usar React Query con los filtros
+  // 🚀 Usar React Query Infinite con los filtros
   const {
-    data: products,
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
     isLoading,
     error,
     isFetching
-  } = useProducts({
+  } = useProductsInfiniteQuery({
     ...filters,
     limit: itemsPerPage,
-    offset: (currentPage - 1) * itemsPerPage,
   });
 
-  // Calcular índices para "cortar" la lista
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // 🔍 Intersection Observer para scroll infinito
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 0.5 }
+    );
 
-  // Estos son los usuarios que vas a mostrar en la tabla (IMPORTANTE)
-  const currentProducts = products?.slice(indexOfFirstItem, indexOfLastItem) || [];
+    const currentTarget = observerTarget.current;
+    if (currentTarget) {
+      observer.observe(currentTarget);
+    }
 
-  // 🐛 DEBUG: Ver qué filtros se están enviando
-  React.useEffect(() => {
-  }, [filters, selectedBrands]);
+    return () => {
+      if (currentTarget) {
+        observer.unobserve(currentTarget);
+      }
+    };
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
-  // Ordenar productos según sortBy
+  // 📦 Combinar todos los productos de todas las páginas
+  const allProducts = React.useMemo(() => {
+    return data?.pages.flatMap(page => page.data || []) || [];
+  }, [data]);
+
+  // 🔢 Calcular total de productos
+  const totalProducts = React.useMemo(() => {
+    return data?.pages[0]?.total || allProducts.length;
+  }, [data, allProducts]);
+
+  // 📊 Ordenar productos según sortBy
   const sortedProducts = React.useMemo(() => {
-    if (!products) return [];
+    if (!allProducts.length) return [];
 
-    const sorted = [...products];
+    const sorted = [...allProducts];
 
     switch (sortBy) {
       case 'price-low':
@@ -127,11 +147,11 @@ const ListProductsPage: React.FC = () => {
       default:
         return sorted.sort((a, b) => (b.price || 0) - (a.price || 0));
     }
-  }, [products, sortBy]);
+  }, [allProducts, sortBy]);
 
   if (isLoading) return <LoadingFallback />
 
-  if (error) return <div>{error.message}</div>
+  if (error) return <div className="text-red-500 text-center py-8">{error.message}</div>
 
   return (
     <div className="min-h-screen background-light dark:background-light">
@@ -221,9 +241,9 @@ const ListProductsPage: React.FC = () => {
             {/* Header */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
               <p className="text-slate-400">
-                Mostrando {products?.length || 0} de{" "}
+                Mostrando {sortedProducts.length} de{" "}
                 <span className="text-cyan-400 font-semibold">
-                  {products?.length || 0} resultados
+                  {totalProducts} resultados
                 </span>
                 {isFetching && (
                   <span className="ml-2 text-xs text-cyan-400">
@@ -259,10 +279,15 @@ const ListProductsPage: React.FC = () => {
                   >
                     <BsGrid size={20} />
                   </ButtonAction>
-                  <ButtonAction className={`p-2 rounded-lg transition-all ${viewMode === "list"
-                    ? "bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white"
-                    : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                    }`} onClick={() => setViewMode("list")} text="" variant="outline">
+                  <ButtonAction
+                    className={`p-2 rounded-lg transition-all ${viewMode === "list"
+                      ? "bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white"
+                      : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                      }`}
+                    onClick={() => setViewMode("list")}
+                    text=""
+                    variant="outline"
+                  >
                     <BsList size={20} />
                   </ButtonAction>
                 </div>
@@ -270,8 +295,8 @@ const ListProductsPage: React.FC = () => {
             </div>
 
             {/* Products Grid */}
-            {
-              sortedProducts.length > 0 ? (
+            {sortedProducts.length > 0 ? (
+              <>
                 <div
                   className={`grid gap-6 mb-8 ${viewMode === "grid"
                     ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
@@ -279,31 +304,49 @@ const ListProductsPage: React.FC = () => {
                     }`}
                 >
                   {sortedProducts.map((product) => (
-                    <CardProductList key={product.id} product={product} viewMode={viewMode} />
+                    <CardProductList
+                      key={product.id}
+                      product={product}
+                      viewMode={viewMode}
+                    />
                   ))}
                 </div>
-              ) : (
-                <div className="text-center py-16">
-                  <p className="text-slate-400 text-lg mb-4">
-                    No se encontraron productos con estos filtros
-                  </p>
-                  <button
-                    onClick={clearFilters}
-                    className="px-6 py-3 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600"
-                  >
-                    Limpiar filtros
-                  </button>
+
+                {/* 🎯 Elemento observer para scroll infinito */}
+                <div
+                  ref={observerTarget}
+                  className="h-20 flex justify-center items-center my-4"
+                >
+                  {isFetchingNextPage && (
+                    <div className="flex items-center gap-3 text-cyan-400">
+                      <div className="w-6 h-6 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+                      <span>Cargando más productos...</span>
+                    </div>
+                  )}
                 </div>
-              )
-            }
 
-            {/* Pagination */}
-            {
-              sortedProducts.length > 0 && (
-                <Pagination title="productos" data={currentProducts} currentPage={currentPage} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage} indexOfFirstItem={indexOfFirstItem} indexOfLastItem={indexOfLastItem} />
-              )
-            }
-
+                {/* Mensaje de fin */}
+                {!hasNextPage && sortedProducts.length > 0 && (
+                  <div className="text-center text-slate-400 py-8 border-t border-slate-700">
+                    <p className="text-sm">
+                      Has visto todos los {sortedProducts.length} productos disponibles
+                    </p>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="text-center py-16">
+                <p className="text-slate-400 text-lg mb-4">
+                  No se encontraron productos con estos filtros
+                </p>
+                <button
+                  onClick={clearFilters}
+                  className="px-6 py-3 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600"
+                >
+                  Limpiar filtros
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

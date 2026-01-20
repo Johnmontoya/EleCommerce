@@ -35,7 +35,7 @@ const Trends = () => {
           <div key={idx} className="relative">
             <BiHeart size={36}
               onClick={() => handleAddToWishlist(item)}
-              className="absolute top-3 right-3 z-50 text-slate-300 hover:text-cyan-500 hover:bg-slate-700 rounded-full p-1 cursor-pointer" />
+              className="absolute top-3 right-3 z-40 text-slate-300 hover:text-cyan-500 hover:bg-slate-700 rounded-full p-1 cursor-pointer" />
             <div
               onClick={() => navigate(`/products/${item.slug}`)}
               className="relative flex w-60 flex-col object-cover overflow-hidden rounded-2xl bg-slate-800/50 border-2 border-slate-700 hover:border-cyan-500/50 drop-shadow-lg/20 drop-shadow-black-500/20 cursor-pointer group"

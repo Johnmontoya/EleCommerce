@@ -104,6 +104,7 @@ export interface ApiResponse<T> {
   data: T;
   message?: string;
   count?: number;
+  total?: number;
 }
 
 export interface ApiError {

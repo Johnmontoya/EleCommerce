@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import type { ProductFilters } from "../../types/product.types";
 import { productService } from "../../services/productService";
 import { queryKeys } from "../../../../shared/lib/queryClient";
@@ -53,4 +53,18 @@ export const useCategories = () => {
         staleTime: 10 * 60 * 1000,
     });
 };
+
+export const useProductsInfiniteQuery = (filters?: any) => {
+    return useInfiniteQuery({
+        queryKey: queryKeys.products.list(filters),
+        queryFn: ({ pageParam = 0 }) => productService.getAll({ ...filters, limit: 10, offset: pageParam }),
+        getNextPageParam: (lastPage, allPages) => {
+            if (lastPage.data && lastPage.data.length === 10) {
+                return allPages.length * 10;
+            }
+            return undefined;
+        },
+        initialPageParam: 0,
+    })
+}
 

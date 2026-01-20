@@ -32,38 +32,90 @@
 .embla {
   overflow: hidden;
 }
+
 .embla__container {
   display: flex;
   width: 100%;
 }
+
 .embla__slide {
   flex: 0 0 100%;
   min-width: 0;
 }
 
 .menu-category {
-  background: #43cea2; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #185a9d,
-    #43cea2
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #185a9d,
-    #43cea2
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #43cea2;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right,
+      #185a9d,
+      #43cea2);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right,
+      #185a9d,
+      #43cea2);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .neon-border-glow {
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.7), /* Un brillo sutil */
-              0 0 25px rgba(59, 130, 246, 0.5), /* Un brillo más amplio */
-              0 0 30px rgba(59, 130, 246, 0.3); /* El brillo exterior */
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.7),
+    /* Un brillo sutil */
+    0 0 25px rgba(59, 130, 246, 0.5),
+    /* Un brillo más amplio */
+    0 0 30px rgba(59, 130, 246, 0.3);
+  /* El brillo exterior */
 }
 
 /* Opcional: para el texto */
 .neon-text-glow {
-    text-shadow: 0 0 14px rgba(59, 130, 246, 0.9);
+  text-shadow: 0 0 14px rgba(59, 130, 246, 0.9);
+}
+
+.card-number {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+}
+
+.card-gradient-blue {
+  background: linear-gradient(135deg, #54aeb9 0%, #4b51a2 100%);
+}
+
+.chip {
+  background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+  border: 1px solid #e6c200;
+}
+
+.contactless {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.card-shadow {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.magnetic-strip {
+  background: linear-gradient(90deg, #1a1a1a 0%, #333 50%, #1a1a1a 100%);
 }
 
 @media (min-width: 378px) {
@@ -89,4 +141,3 @@
     width: 1280px;
   }
 }
-

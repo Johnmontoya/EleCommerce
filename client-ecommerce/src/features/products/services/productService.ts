@@ -8,7 +8,7 @@ export const productService = {
         return data;
     },
 
-    getAll: async (filters?: ProductFilters): Promise<ApiResponse<Product[]>> => {
+    getAll: async (filters?: ProductFilters & { limit?: number; offset?: number }): Promise<ApiResponse<Product[]>> => {
         const params = new URLSearchParams();
 
         if (filters) {
