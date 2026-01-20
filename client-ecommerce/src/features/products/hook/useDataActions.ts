@@ -1,9 +1,7 @@
-import { useAuthStore } from "../../auth/store/useAuthStore";
 import { useDeleteManyProductsMutation } from "./mutation/useProductMutation";
 
 export const useDataActions = (Data: any[] | undefined, selectedData: string[], setSelectedData: React.Dispatch<React.SetStateAction<string[]>>) => {
     const deleteSelectMutation = useDeleteManyProductsMutation();
-    const { accessToken } = useAuthStore();
 
     const handleSelectAll = () => {
         if (!Data) return;
