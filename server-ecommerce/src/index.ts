@@ -1,16 +1,16 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import productRoutes from "./routes/product.routes"
-import showcaseRoutes from "./routes/home.routes"
-import categoryRoutes from "./routes/category.routes"
-import authRoutes from "./routes/auth.routes"
-import addressRoutes from "./routes/address.routes"
-import orderRoutes from "./routes/order.routes"
-import cartRoutes from "./routes/cart.routes"
-import paymentRoutes from "./routes/payment.routes"
-import wishlistRoutes from "./routes/wishlist.route"
-import trackingRoutes from "./routes/tracking.routes"
+import productRoutes from "./routes/product.routes.js"
+import showcaseRoutes from "./routes/home.routes.js"
+import categoryRoutes from "./routes/category.routes.js"
+import authRoutes from "./routes/auth.routes.js"
+import addressRoutes from "./routes/address.routes.js"
+import orderRoutes from "./routes/order.routes.js"
+import cartRoutes from "./routes/cart.routes.js"
+import paymentRoutes from "./routes/payment.routes.js"
+import wishlistRoutes from "./routes/wishlist.route.js"
+import trackingRoutes from "./routes/tracking.routes.js"
 
 const app = express();
 

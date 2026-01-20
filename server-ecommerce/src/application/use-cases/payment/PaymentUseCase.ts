@@ -1,5 +1,5 @@
-import type { IPaymentRepository } from "../../../domain/repositories/IPaymentRepository";
-import type { CreatePaymentInput } from "../../Dto/payment.dto";
+import type { IPaymentRepository } from "../../../domain/repositories/IPaymentRepository.js";
+import type { CreatePaymentInput } from "../../Dto/payment.dto.js";
 
 export class CreatePaymentUseCase {
     constructor(private paymentRepository: IPaymentRepository) { }

@@ -1,4 +1,4 @@
-import type { OrderStatus } from "../repositories/IOrderRepository";
+import type { OrderStatus } from "../repositories/IOrderRepository.js";
 
 export interface Tracking {
     id: string;

@@ -1,7 +1,7 @@
-import type { CreatePaymentInput } from "../../application/Dto/payment.dto";
-import { prisma } from "../../config/prisma";
-import type { PaymentEntity } from "../../domain/entities/Payment";
-import type { IPaymentRepository } from "../../domain/repositories/IPaymentRepository";
+import type { CreatePaymentInput } from "../../application/Dto/payment.dto.js";
+import { prisma } from "../../config/prisma.js";
+import type { PaymentEntity } from "../../domain/entities/Payment.js";
+import type { IPaymentRepository } from "../../domain/repositories/IPaymentRepository.js";
 
 export class PrismaPaymentRepository implements IPaymentRepository {
     async createPayment(payment: CreatePaymentInput): Promise<PaymentEntity> {

@@ -1,5 +1,5 @@
-import type { ProductEntity } from "../../../domain/entities/Product";
-import type { IProductrepository } from "../../../domain/repositories/IProductRepository";
+import type { ProductEntity } from "../../../domain/entities/Product.js";
+import type { IProductrepository } from "../../../domain/repositories/IProductRepository.js";
 
 export class GetBannerProductsUseCase {
     constructor(private productRepository: IProductrepository) { }

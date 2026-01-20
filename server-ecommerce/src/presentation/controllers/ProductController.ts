@@ -14,12 +14,12 @@ import type {
   UpdateBannerUseCase,
   DeleteBannerUseCase,
   GetShowcaseUseCase,
-} from "../../application/use-cases/products/ProductUseCase";
+} from "../../application/use-cases/products/ProductUseCase.js";
 import {
   CreateProductSchema,
   UpdateProductSchema,
-} from "../../infrastructure/validation/Product.schema";
-import { handleError } from "../../infrastructure/middlewares/errorHandler";
+} from "../../infrastructure/validation/Product.schema.js";
+import { handleError } from "../../infrastructure/middlewares/errorHandler.js";
 
 export interface IAutoCompleteSearch {
   terms?: string;

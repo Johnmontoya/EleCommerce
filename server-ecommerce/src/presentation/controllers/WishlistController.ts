@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import type { CreateWishListUseCase, DeleteWishListUseCase, GetWishCountUseCase, GetWishListUseCase } from "../../application/use-cases/wishlist/WishListUseCase";
-import { handleError } from "../../infrastructure/middlewares/errorHandler";
+import type { CreateWishListUseCase, DeleteWishListUseCase, GetWishCountUseCase, GetWishListUseCase } from "../../application/use-cases/wishlist/WishListUseCase.js";
+import { handleError } from "../../infrastructure/middlewares/errorHandler.js";
 
 export class WishlistController {
     constructor(

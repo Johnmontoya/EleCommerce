@@ -1,10 +1,10 @@
-import { UserEntity } from "../../../domain/entities/User";
-import type { IAuthRepository, UsersFilters } from "../../../domain/repositories/IAuthRepository";
-import type { UserUpdateInput } from "../../../generated/prisma/models";
-import { emailService } from "../../../infrastructure/services/EmailService";
-import type { HashService } from "../../../infrastructure/services/HashService";
-import type { JwtService } from "../../../infrastructure/services/JwtService";
-import type { AuthResponse, ChangePasswordInput, LoginInput, RefreshTokenInput, RegisterInput, UserResponse } from "../../Dto/auth.dto";
+import { UserEntity } from "../../../domain/entities/User.js";
+import type { IAuthRepository, UsersFilters } from "../../../domain/repositories/IAuthRepository.js";
+import type { UserUpdateInput } from "../../../generated/prisma/models.js";
+import { emailService } from "../../../infrastructure/services/EmailService.js";
+import type { HashService } from "../../../infrastructure/services/HashService.js";
+import type { JwtService } from "../../../infrastructure/services/JwtService.js";
+import type { AuthResponse, ChangePasswordInput, LoginInput, RefreshTokenInput, RegisterInput, UpdateUserData, UserResponse } from "../../Dto/auth.dto.js";
 import otpGenerator from 'otp-generator';
 
 export class RegisterUseCase {
@@ -292,7 +292,7 @@ export class UpdateUserUseCase {
     constructor(
         private readonly authRepository: IAuthRepository) { }
 
-    async execute(id: string, data: UserUpdateInput): Promise<void> {
+    async execute(id: string, data: UpdateUserData): Promise<void> {
         if (!id) {
             throw new Error('ID de usuario requerido');
         }

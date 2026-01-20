@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { ProductController } from "../presentation/controllers/ProductController";
-import { CreateProductUseCase, GetProductByIdUseCase, GetAllProductsUseCase, UpdateProductUseCase, GetProductBySlugUseCase, SearchProductsAutoCompleteUseCase, GetProductsByCategoryUseCase, GetProductsByBrandUseCase, DeleteProductUseCase, DeleteManyProductsUseCase, GetBannersUseCase, UpdateBannerUseCase, DeleteBannerUseCase, GetShowcaseUseCase } from "../application/use-cases/products/ProductUseCase";
-import { MongoProductRepository } from "../infrastructure/repositories/MongoProductRepository";
+import { ProductController } from "../presentation/controllers/ProductController.js";
+import { CreateProductUseCase, GetProductByIdUseCase, GetAllProductsUseCase, UpdateProductUseCase, GetProductBySlugUseCase, SearchProductsAutoCompleteUseCase, GetProductsByCategoryUseCase, GetProductsByBrandUseCase, DeleteProductUseCase, DeleteManyProductsUseCase, GetBannersUseCase, UpdateBannerUseCase, DeleteBannerUseCase, GetShowcaseUseCase } from "../application/use-cases/products/ProductUseCase.js";
+import { MongoProductRepository } from "../infrastructure/repositories/MongoProductRepository.js";
 
 const router = Router();
 

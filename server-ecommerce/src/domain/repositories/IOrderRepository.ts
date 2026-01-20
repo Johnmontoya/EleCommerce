@@ -1,5 +1,5 @@
-import type { CreateOrderInput, CreateOrderItem } from "../../application/Dto/order.dto";
-import type { OrderEntity } from "../entities/Orders";
+import type { CreateOrderInput, CreateOrderItem } from "../../application/Dto/order.dto.js";
+import type { OrderEntity } from "../entities/Orders.js";
 
 export interface IOrderRepository {
     createOrder(order: CreateOrderInput, items: CreateOrderItem[]): Promise<boolean>;

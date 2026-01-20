@@ -1,7 +1,7 @@
 import { type Request, type Response } from "express";
-import type { CreateCategoryUseCase, DeleteCategoryUseCase, DeleteManyCategoriesUseCase, GetAllCategoriesUseCase, GetCategoryByIdUseCase, GetCategoryBySlugUseCase, UpdateCategoryUseCase } from "../../application/use-cases/category/CategoryUseCase";
-import { CreateCategorySchema, UpdateCategorySchema } from "../../infrastructure/validation/Category.schema";
-import { handleError } from "../../infrastructure/middlewares/errorHandler";
+import type { CreateCategoryUseCase, DeleteCategoryUseCase, DeleteManyCategoriesUseCase, GetAllCategoriesUseCase, GetCategoryByIdUseCase, GetCategoryBySlugUseCase, UpdateCategoryUseCase } from "../../application/use-cases/category/CategoryUseCase.js";
+import { CreateCategorySchema, UpdateCategorySchema } from "../../infrastructure/validation/Category.schema.js";
+import { handleError } from "../../infrastructure/middlewares/errorHandler.js";
 
 export class CategoryController {
     constructor(

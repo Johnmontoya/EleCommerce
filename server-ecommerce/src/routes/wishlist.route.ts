@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { PrismaWishListRepository } from "../infrastructure/repositories/PrismaWishListRepository";
-import { WishlistController } from "../presentation/controllers/WishlistController";
-import { CreateWishListUseCase, GetWishCountUseCase } from "../application/use-cases/wishlist/WishListUseCase";
-import { DeleteWishListUseCase } from "../application/use-cases/wishlist/WishListUseCase";
-import { GetWishListUseCase } from "../application/use-cases/wishlist/WishListUseCase";
-import { authenticate } from "../infrastructure/middlewares/authMiddleware";
+import { PrismaWishListRepository } from "../infrastructure/repositories/PrismaWishListRepository.js";
+import { WishlistController } from "../presentation/controllers/WishlistController.js";
+import { CreateWishListUseCase, GetWishCountUseCase } from "../application/use-cases/wishlist/WishListUseCase.js";
+import { DeleteWishListUseCase } from "../application/use-cases/wishlist/WishListUseCase.js";
+import { GetWishListUseCase } from "../application/use-cases/wishlist/WishListUseCase.js";
+import { authenticate } from "../infrastructure/middlewares/authMiddleware.js";
 
 const router = Router();
 const wishRepository = new PrismaWishListRepository();

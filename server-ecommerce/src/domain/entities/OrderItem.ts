@@ -1,4 +1,4 @@
-import type { Order } from "./Orders"
+import type { Order } from "./Orders.js"
 
 export interface OrderItem {
     id: string;

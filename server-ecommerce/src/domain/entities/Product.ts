@@ -1,4 +1,4 @@
-import type { Attribute, Dimensions, Shipping, Variant } from "../repositories/IProductRepository";
+import type { Attribute, Dimensions, Shipping, Variant } from "../repositories/IProductRepository.js";
 
 // Tipos para visualización
 export type DisplaySection = 'banner' | 'featured' | 'trending' | 'promotional' | 'new-arrival';

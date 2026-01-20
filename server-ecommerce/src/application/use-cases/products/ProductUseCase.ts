@@ -1,9 +1,9 @@
-import { ProductEntity } from "../../../domain/entities/Product";
+import { ProductEntity } from "../../../domain/entities/Product.js";
 import type {
   IProductrepository,
   ProductFilters,
-} from "../../../domain/repositories/IProductRepository";
-import type { CreateProductInput, ProductAutocompleteDto, UpdateProductInput } from "../../Dto/product.dto";
+} from "../../../domain/repositories/IProductRepository.js";
+import type { CreateProductInput, ProductAutocompleteDto, UpdateProductInput } from "../../Dto/product.dto.js";
 
 export class CreateProductUseCase {
   constructor(private productRepository: IProductrepository) { }

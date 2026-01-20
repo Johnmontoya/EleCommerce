@@ -1,14 +1,14 @@
 import { Router } from "express";
-import { PrismaCartItemRepository } from "../infrastructure/repositories/PrismaCartItemRepository";
-import { CartController } from "../presentation/controllers/CartController";
+import { PrismaCartItemRepository } from "../infrastructure/repositories/PrismaCartItemRepository.js";
+import { CartController } from "../presentation/controllers/CartController.js";
 import {
     CreateCartUseCase,
     DeleteCartUseCase,
     GetCartCountUseCase,
     GetCartUseCase,
     UpdateCartUseCase
-} from "../application/use-cases/cart/CartUseCase";
-import { authenticate } from "../infrastructure/middlewares/authMiddleware";
+} from "../application/use-cases/cart/CartUseCase.js";
+import { authenticate } from "../infrastructure/middlewares/authMiddleware.js";
 
 const router = Router();
 const cartRepository = new PrismaCartItemRepository();

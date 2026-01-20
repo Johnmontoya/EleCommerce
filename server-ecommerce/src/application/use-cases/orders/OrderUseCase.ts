@@ -1,6 +1,6 @@
-import type { UsersFilters } from "../../../domain/repositories/IAuthRepository";
-import type { IOrderRepository, OrderStatus } from "../../../domain/repositories/IOrderRepository";
-import type { CreateOrderInput, CreateOrderItem } from "../../Dto/order.dto";
+import type { UsersFilters } from "../../../domain/repositories/IAuthRepository.js";
+import type { IOrderRepository, OrderStatus } from "../../../domain/repositories/IOrderRepository.js";
+import type { CreateOrderInput, CreateOrderItem } from "../../Dto/order.dto.js";
 
 export class CreateOrderUseCase {
     constructor(private orderRepository: IOrderRepository) { }

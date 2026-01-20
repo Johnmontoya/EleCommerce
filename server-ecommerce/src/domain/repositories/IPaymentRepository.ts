@@ -1,5 +1,5 @@
-import type { CreatePaymentInput } from "../../application/Dto/payment.dto";
-import type { PaymentEntity } from "../entities/Payment";
+import type { CreatePaymentInput } from "../../application/Dto/payment.dto.js";
+import type { PaymentEntity } from "../entities/Payment.js";
 
 export interface IPaymentRepository {
     createPayment(payment: CreatePaymentInput): Promise<PaymentEntity>;

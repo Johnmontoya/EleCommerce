@@ -1,6 +1,5 @@
 import type z from "zod";
-import type { ChangePasswordSchema, LoginSchema, RefreshTokenSchema, AuthRegisterSchema } from "../../infrastructure/validation/Auth.schema";
-import type { CartItem } from "./cart.dto";
+import type { ChangePasswordSchema, LoginSchema, RefreshTokenSchema, AuthRegisterSchema } from "../../infrastructure/validation/Auth.schema.js";
 
 export type RegisterInput = z.infer<typeof AuthRegisterSchema>;
 export type LoginInput = z.infer<typeof LoginSchema>;
@@ -54,4 +53,19 @@ export interface UserResponse {
         zipCode: string | null;
         country: string | null;
     }[] | null;
+}
+
+export interface UpdateUserData {
+    id?: string;
+    email?: string;
+    password?: string;
+    username?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
+    phone?: string | null;
+    avatar?: string | null;
+    role?: string | null;
+    isActive?: boolean;
+    emailVerified?: boolean;
+    otp?: string | null;
 }

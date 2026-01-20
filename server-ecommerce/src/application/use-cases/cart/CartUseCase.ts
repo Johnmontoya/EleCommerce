@@ -1,5 +1,5 @@
-import type { ICartRepository } from "../../../domain/repositories/ICartRepository";
-import type { CreateCartInput } from "../../Dto/cart.dto";
+import type { ICartRepository } from "../../../domain/repositories/ICartRepository.js";
+import type { CreateCartInput } from "../../Dto/cart.dto.js";
 
 export class CreateCartUseCase {
     constructor(private cartRepository: ICartRepository) { }

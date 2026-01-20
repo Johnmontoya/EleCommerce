@@ -1,5 +1,5 @@
-import type { BannerResponse, CreateBannerInput } from "../../application/Dto/product.dto";
-import { ProductEntity } from "../entities/Product";
+import type { BannerResponse, CreateBannerInput } from "../../application/Dto/product.dto.js";
+import { ProductEntity } from "../entities/Product.js";
 
 export interface IProductrepository {
   create(product: ProductEntity): Promise<ProductEntity>;

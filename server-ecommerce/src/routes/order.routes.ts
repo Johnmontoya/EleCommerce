@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { authenticate, authorize } from "../infrastructure/middlewares/authMiddleware";
-import { PrismaOrderRepository } from "../infrastructure/repositories/PrismaOrderRepository";
-import { CancelOrderUseCase, CreateOrderUseCase, GetOrdersUseCase, GetAllOrdersByUserUseCase, UpdateOrderStatusUseCase, GetTrackingNumberUseCase } from "../application/use-cases/orders/OrderUseCase";
-import { OrderController } from "../presentation/controllers/OrderController";
+import { authenticate, authorize } from "../infrastructure/middlewares/authMiddleware.js";
+import { PrismaOrderRepository } from "../infrastructure/repositories/PrismaOrderRepository.js";
+import { CancelOrderUseCase, CreateOrderUseCase, GetOrdersUseCase, GetAllOrdersByUserUseCase, UpdateOrderStatusUseCase, GetTrackingNumberUseCase } from "../application/use-cases/orders/OrderUseCase.js";
+import { OrderController } from "../presentation/controllers/OrderController.js";
 
 const router = Router();
 const orderRepository = new PrismaOrderRepository();

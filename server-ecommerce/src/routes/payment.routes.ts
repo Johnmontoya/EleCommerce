@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { PrismaPaymentRepository } from "../infrastructure/repositories/PrismaPaymentRepository";
-import { CreatePaymentUseCase, DeletePaymentUseCase, GetPaymentByIdUseCase, UpdatePaymentUseCase } from "../application/use-cases/payment/PaymentUseCase";
-import { PaymentController } from "../presentation/controllers/PaymentController";
+import { PrismaPaymentRepository } from "../infrastructure/repositories/PrismaPaymentRepository.js";
+import { CreatePaymentUseCase, DeletePaymentUseCase, GetPaymentByIdUseCase, UpdatePaymentUseCase } from "../application/use-cases/payment/PaymentUseCase.js";
+import { PaymentController } from "../presentation/controllers/PaymentController.js";
 
 const router = Router();
 const paymentRepository = new PrismaPaymentRepository();

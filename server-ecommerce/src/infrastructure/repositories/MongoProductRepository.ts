@@ -1,7 +1,7 @@
-import type { BannerResponse, CreateBannerInput } from "../../application/Dto/product.dto";
-import { ProductEntity } from "../../domain/entities/Product";
-import type { IProductrepository, ProductFilters } from "../../domain/repositories/IProductRepository";
-import { ProductModel } from "../models/product.model";
+import type { BannerResponse, CreateBannerInput } from "../../application/Dto/product.dto.js";
+import { ProductEntity } from "../../domain/entities/Product.js";
+import type { IProductrepository, ProductFilters } from "../../domain/repositories/IProductRepository.js";
+import { ProductModel } from "../models/product.model.js";
 
 export class MongoProductRepository implements IProductrepository {
   async create(product: ProductEntity): Promise<ProductEntity> {

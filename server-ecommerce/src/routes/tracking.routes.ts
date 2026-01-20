@@ -1,19 +1,19 @@
 import { Router } from 'express';
-import { TrackingController } from '../presentation/controllers/TrackingController';
-import { PrismaTrackingRepository } from '../infrastructure/repositories/PrismaTrackingRepository';
+import { TrackingController } from '../presentation/controllers/TrackingController.js';
+import { PrismaTrackingRepository } from '../infrastructure/repositories/PrismaTrackingRepository.js';
 import {
     CreateTrackingUseCase,
     DeleteTrackingUseCase,
     GetTrackingUseCase,
     UpdateTrackingUseCase
-} from '../application/use-cases/tracking/TrackingUseCase';
+} from '../application/use-cases/tracking/TrackingUseCase.js';
 import {
     CreateTrackingEventUseCase,
     UpdateTrackingEventUseCase,
     DeleteTrackingEventUseCase,
     GetTrackingEventsUseCase
-} from '../application/use-cases/tracking/TrackingEventUseCase';
-import { authenticate, authorize } from '../infrastructure/middlewares/authMiddleware';
+} from '../application/use-cases/tracking/TrackingEventUseCase.js';
+import { authenticate, authorize } from '../infrastructure/middlewares/authMiddleware.js';
 
 const router = Router();
 

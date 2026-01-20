@@ -1,6 +1,6 @@
-import type { CartResponse, CreateCartInput } from "../../application/Dto/cart.dto";
-import type { CartEntity } from "../entities/Cart";
-import type { CartItemEntity } from "../entities/CartItem";
+import type { CartResponse, CreateCartInput } from "../../application/Dto/cart.dto.js";
+import type { CartEntity } from "../entities/Cart.js";
+import type { CartItemEntity } from "../entities/CartItem.js";
 
 export interface ICartRepository {
     createCartAndAddFirstItem(userId: string, cartItemData: CreateCartInput): Promise<boolean>;

@@ -1,6 +1,6 @@
 import { type Request, type Response } from "express";
-import type { DeleteProductUseCase, GetBannerProductsUseCase, GetPromotionalProductsUseCase, GetTrendsProductUseCase } from "../../application/use-cases/home/ShowcaseUseCases";
-import { handleError } from "../../infrastructure/middlewares/errorHandler";
+import type { DeleteProductUseCase, GetBannerProductsUseCase, GetPromotionalProductsUseCase, GetTrendsProductUseCase } from "../../application/use-cases/home/ShowcaseUseCases.js";
+import { handleError } from "../../infrastructure/middlewares/errorHandler.js";
 
 export class ShowcaseController {
     constructor(

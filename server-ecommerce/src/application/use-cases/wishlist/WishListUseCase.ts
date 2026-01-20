@@ -1,5 +1,5 @@
-import type { IWishListRepository } from "../../../domain/repositories/IWishListRepository";
-import type { CreateWishListInput } from "../../Dto/wishlist.dto";
+import type { IWishListRepository } from "../../../domain/repositories/IWishListRepository.js";
+import type { CreateWishListInput } from "../../Dto/wishlist.dto.js";
 
 export class CreateWishListUseCase {
     constructor(private wishListRepository: IWishListRepository) { }

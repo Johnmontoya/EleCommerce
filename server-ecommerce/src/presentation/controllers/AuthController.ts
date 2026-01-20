@@ -15,9 +15,9 @@ import type {
     ChangePasswordUseCase,
     ForgotPasswordUseCase,
     ChangePasswordClientUseCase
-} from "../../application/use-cases/auth/AuthUseCase";
-import { AuthRegisterSchema, LoginSchema, RefreshTokenSchema, UsersFiltersSchema } from "../../infrastructure/validation/Auth.schema";
-import { handleError } from "../../infrastructure/middlewares/errorHandler";
+} from "../../application/use-cases/auth/AuthUseCase.js";
+import { AuthRegisterSchema, LoginSchema, RefreshTokenSchema, UsersFiltersSchema } from "../../infrastructure/validation/Auth.schema.js";
+import { handleError } from "../../infrastructure/middlewares/errorHandler.js";
 
 export class AuthController {
     constructor(

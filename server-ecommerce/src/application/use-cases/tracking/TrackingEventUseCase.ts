@@ -1,5 +1,5 @@
-import type { CreateTrackingEventInput } from "../../Dto/tracking.dto";
-import type { ITrackingRepository } from "../../../domain/repositories/ITrackingRepository";
+import type { CreateTrackingEventInput } from "../../Dto/tracking.dto.js";
+import type { ITrackingRepository } from "../../../domain/repositories/ITrackingRepository.js";
 
 // ============================================
 // USE CASE: Crear Evento de Tracking

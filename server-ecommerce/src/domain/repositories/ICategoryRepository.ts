@@ -1,5 +1,5 @@
-import type { CategoryEntity } from "../entities/Category";
-import type { ProductFilters } from "./IProductRepository";
+import type { CategoryEntity } from "../entities/Category.js";
+import type { ProductFilters } from "./IProductRepository.js";
 
 export interface ICategoryRepository {
     create(category: CategoryEntity): Promise<CategoryEntity>;

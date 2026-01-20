@@ -1,6 +1,6 @@
-import type { CreateWishListInput, WishListItemResponse } from "../../application/Dto/wishlist.dto";
-import { prisma } from "../../config/prisma";
-import type { IWishListRepository } from "../../domain/repositories/IWishListRepository";
+import type { CreateWishListInput, WishListItemResponse } from "../../application/Dto/wishlist.dto.js";
+import { prisma } from "../../config/prisma.js";
+import type { IWishListRepository } from "../../domain/repositories/IWishListRepository.js";
 
 export class PrismaWishListRepository implements IWishListRepository {
     async createAndAddItem(userId: string, itemData: CreateWishListInput): Promise<boolean> {

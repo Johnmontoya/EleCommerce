@@ -1,4 +1,4 @@
-import type { CreateTrackingEventInput, CreateTrackingInput, TrackingResponse } from "../../application/Dto/tracking.dto";
+import type { CreateTrackingEventInput, CreateTrackingInput, TrackingResponse } from "../../application/Dto/tracking.dto.js";
 
 export interface ITrackingRepository {
     // Métodos de Tracking

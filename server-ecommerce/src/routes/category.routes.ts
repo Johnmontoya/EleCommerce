@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { CategoryController } from "../presentation/controllers/CategoryController";
-import { CreateCategoryUseCase, UpdateCategoryUseCase, DeleteCategoryUseCase, GetAllCategoriesUseCase, GetCategoryByIdUseCase, GetCategoryBySlugUseCase, DeleteManyCategoriesUseCase } from "../application/use-cases/category/CategoryUseCase";
-import { MongoCategoryRepository } from "../infrastructure/repositories/MongoCategoryRepository";
+import { CategoryController } from "../presentation/controllers/CategoryController.js";
+import { CreateCategoryUseCase, UpdateCategoryUseCase, DeleteCategoryUseCase, GetAllCategoriesUseCase, GetCategoryByIdUseCase, GetCategoryBySlugUseCase, DeleteManyCategoriesUseCase } from "../application/use-cases/category/CategoryUseCase.js";
+import { MongoCategoryRepository } from "../infrastructure/repositories/MongoCategoryRepository.js";
 
 const router = Router();
 

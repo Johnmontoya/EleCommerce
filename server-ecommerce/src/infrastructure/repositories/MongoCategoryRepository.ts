@@ -1,7 +1,7 @@
-import { CategoryEntity } from "../../domain/entities/Category";
-import type { ICategoryRepository } from "../../domain/repositories/ICategoryRepository";
-import type { ProductFilters } from "../../domain/repositories/IProductRepository";
-import { CategoryModel } from "../models/category.model";
+import { CategoryEntity } from "../../domain/entities/Category.js";
+import type { ICategoryRepository } from "../../domain/repositories/ICategoryRepository.js";
+import type { ProductFilters } from "../../domain/repositories/IProductRepository.js";
+import { CategoryModel } from "../models/category.model.js";
 
 export class MongoCategoryRepository implements ICategoryRepository {
     async create(category: CategoryEntity): Promise<CategoryEntity> {

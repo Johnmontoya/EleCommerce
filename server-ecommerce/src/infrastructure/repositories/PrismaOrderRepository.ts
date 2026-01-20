@@ -1,10 +1,9 @@
-import type { CreateOrderInput, CreateOrderItem } from "../../application/Dto/order.dto";
-import { prisma } from "../../config/prisma";
-import type { OrderEntity } from "../../domain/entities/Orders";
-import type { UsersFilters } from "../../domain/repositories/IAuthRepository";
-import type { IOrderRepository, OrderFilters, OrderStatus } from "../../domain/repositories/IOrderRepository";
-import type { Prisma } from "../../generated/prisma/client";
-import { ProductModel } from "../models/product.model";
+import type { CreateOrderInput, CreateOrderItem } from "../../application/Dto/order.dto.js";
+import { prisma } from "../../config/prisma.js";
+import type { OrderEntity } from "../../domain/entities/Orders.js";
+import type { IOrderRepository, OrderFilters, OrderStatus } from "../../domain/repositories/IOrderRepository.js";
+import type { Prisma } from "@prisma/client";
+import { ProductModel } from "../models/product.model.js";
 
 export class PrismaOrderRepository implements IOrderRepository {
     async getAllOrdersByUser(userId: string): Promise<OrderEntity[]> {

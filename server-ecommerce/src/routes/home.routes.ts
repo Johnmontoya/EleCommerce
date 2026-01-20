@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { MongoProductRepository } from "../infrastructure/repositories/MongoProductRepository";
-import { DeleteProductUseCase, GetBannerProductsUseCase, GetPromotionalProductsUseCase, GetTrendsProductUseCase } from "../application/use-cases/home/ShowcaseUseCases";
-import { ShowcaseController } from "../presentation/controllers/HomeController";
-import { authenticate, authorize } from "../infrastructure/middlewares/authMiddleware";
+import { MongoProductRepository } from "../infrastructure/repositories/MongoProductRepository.js";
+import { DeleteProductUseCase, GetBannerProductsUseCase, GetPromotionalProductsUseCase, GetTrendsProductUseCase } from "../application/use-cases/home/ShowcaseUseCases.js";
+import { ShowcaseController } from "../presentation/controllers/HomeController.js";
+import { authenticate, authorize } from "../infrastructure/middlewares/authMiddleware.js";
 
 const router = Router();
 

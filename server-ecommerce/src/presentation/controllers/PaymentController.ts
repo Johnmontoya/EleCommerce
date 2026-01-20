@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-import type { CreatePaymentUseCase, DeletePaymentUseCase, GetPaymentByIdUseCase, UpdatePaymentUseCase } from "../../application/use-cases/payment/PaymentUseCase";
-import { handleError } from "../../infrastructure/middlewares/errorHandler";
-import { PaymentSchema } from "../../infrastructure/validation/Payment.schema";
+import type { CreatePaymentUseCase, DeletePaymentUseCase, GetPaymentByIdUseCase, UpdatePaymentUseCase } from "../../application/use-cases/payment/PaymentUseCase.js";
+import { handleError } from "../../infrastructure/middlewares/errorHandler.js";
+import { PaymentSchema } from "../../infrastructure/validation/Payment.schema.js";
 
 export class PaymentController {
     constructor(private createPaymentUseCase: CreatePaymentUseCase,

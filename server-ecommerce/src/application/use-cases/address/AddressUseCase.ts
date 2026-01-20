@@ -1,7 +1,6 @@
-import { AddressEntity } from "../../../domain/entities/Address";
-import type { IAddressRepository } from "../../../domain/repositories/IAddressRepository";
-import type { AddressUpdateInput } from "../../../generated/prisma/models";
-import type { CreateAddressInput, UpdateAddressInput } from "../../Dto/address.dto";
+import { AddressEntity } from "../../../domain/entities/Address.js";
+import type { IAddressRepository } from "../../../domain/repositories/IAddressRepository.js";
+import type { CreateAddressInput, UpdateAddressInput } from "../../Dto/address.dto.js";
 
 export class CreateAddressUseCase {
     constructor(

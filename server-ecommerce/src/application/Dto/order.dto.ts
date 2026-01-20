@@ -1,5 +1,5 @@
-import type { CreateOrderSchema, OrderItemSchema } from "../../infrastructure/validation/Order.schema";
-import type { CreateUserData } from "./auth.dto";
+import type { CreateOrderSchema, OrderItemSchema } from "../../infrastructure/validation/Order.schema.js";
+import type { CreateUserData } from "./auth.dto.js";
 import type { z } from "zod";
 
 export type CreateOrderInput = z.infer<typeof CreateOrderSchema>;

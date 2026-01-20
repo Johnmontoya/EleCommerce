@@ -1,5 +1,5 @@
-import type { ITrackingRepository } from "../../../domain/repositories/ITrackingRepository";
-import type { CreateTrackingEventInput, CreateTrackingInput } from "../../Dto/tracking.dto";
+import type { ITrackingRepository } from "../../../domain/repositories/ITrackingRepository.js";
+import type { CreateTrackingEventInput, CreateTrackingInput } from "../../Dto/tracking.dto.js";
 
 export class GetTrackingUseCase {
     constructor(private trackingRepository: ITrackingRepository) { }

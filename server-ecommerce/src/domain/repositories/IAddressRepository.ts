@@ -1,6 +1,6 @@
-import type { UpdateAddressInput } from "../../application/Dto/address.dto";
-import type { AddressUpdateInput } from "../../generated/prisma/models";
-import type { AddressEntity } from "../entities/Address";
+import type { UpdateAddressInput } from "../../application/Dto/address.dto.js";
+import type { AddressUpdateInput } from "../../generated/prisma/models.js";
+import type { AddressEntity } from "../entities/Address.js";
 
 export interface IAddressRepository {
     create(address: AddressEntity): Promise<AddressEntity>;

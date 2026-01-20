@@ -1,9 +1,8 @@
-import type { UserEntity } from "../../domain/entities/User";
-import type { IAuthRepository, UsersFilters } from "../../domain/repositories/IAuthRepository";
-import { prisma } from "../../config/prisma";
-import type { ChangePasswordInput, CreateUserData, UserResponse } from "../../application/Dto/auth.dto";
-import type { Prisma } from "../../generated/prisma/client";
-import type { UserUpdateInput } from "../../generated/prisma/models";
+import type { UserEntity } from "../../domain/entities/User.js";
+import type { IAuthRepository, UsersFilters } from "../../domain/repositories/IAuthRepository.js";
+import { prisma } from "../../config/prisma.js";
+import type { ChangePasswordInput, CreateUserData, UpdateUserData, UserResponse } from "../../application/Dto/auth.dto.js";
+import type { Prisma } from "@prisma/client";
 
 export class PrismaAuthRepository implements IAuthRepository {
     async createUser(data: CreateUserData): Promise<UserEntity> {
@@ -60,7 +59,7 @@ export class PrismaAuthRepository implements IAuthRepository {
     async findByUserById(id: string): Promise<UserResponse | null> {
         return await prisma.user.findUnique({ where: { id }, include: { addresses: true, cart: true } });
     }
-    async updateUser(id: string, data: UserUpdateInput): Promise<UserEntity> {
+    async updateUser(id: string, data: UpdateUserData): Promise<UserEntity> {
         return await prisma.user.update({ where: { id }, data });
     }
     async toogleActiveUser(id: string): Promise<boolean> {

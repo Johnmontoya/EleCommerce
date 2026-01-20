@@ -4,10 +4,10 @@ import type {
     DeleteTrackingUseCase,
     GetTrackingUseCase,
     UpdateTrackingUseCase
-} from "../../application/use-cases/tracking/TrackingUseCase";
-import { handleError } from "../../infrastructure/middlewares/errorHandler";
-import { trackingEventSchema, trackingEventSchemaPartial, trackingSchema } from "../../infrastructure/validation/Tracking.schema";
-import type { CreateTrackingEventUseCase, DeleteTrackingEventUseCase, GetTrackingEventsUseCase, UpdateTrackingEventUseCase } from "../../application/use-cases/tracking/TrackingEventUseCase";
+} from "../../application/use-cases/tracking/TrackingUseCase.js";
+import { handleError } from "../../infrastructure/middlewares/errorHandler.js";
+import { trackingEventSchema, trackingEventSchemaPartial, trackingSchema } from "../../infrastructure/validation/Tracking.schema.js";
+import type { CreateTrackingEventUseCase, DeleteTrackingEventUseCase, GetTrackingEventsUseCase, UpdateTrackingEventUseCase } from "../../application/use-cases/tracking/TrackingEventUseCase.js";
 
 export class TrackingController {
     constructor(

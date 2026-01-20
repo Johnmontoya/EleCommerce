@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
-import { JwtService } from '../services/JwtService';
+import { JwtService } from '../services/JwtService.js';
 
 const jwtService = new JwtService();
 

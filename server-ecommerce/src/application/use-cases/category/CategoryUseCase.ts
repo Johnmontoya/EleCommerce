@@ -1,7 +1,7 @@
-import { CategoryEntity } from "../../../domain/entities/Category";
-import type { ICategoryRepository } from "../../../domain/repositories/ICategoryRepository";
-import type { ProductFilters } from "../../../domain/repositories/IProductRepository";
-import type { CreateCategoryInput, UpdateCategoryInput } from "../../Dto/category.dto";
+import { CategoryEntity } from "../../../domain/entities/Category.js";
+import type { ICategoryRepository } from "../../../domain/repositories/ICategoryRepository.js";
+import type { ProductFilters } from "../../../domain/repositories/IProductRepository.js";
+import type { CreateCategoryInput, UpdateCategoryInput } from "../../Dto/category.dto.js";
 
 export class CreateCategoryUseCase {
     constructor(private readonly categoryRepository: ICategoryRepository) { }

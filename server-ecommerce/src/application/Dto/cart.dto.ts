@@ -1,5 +1,5 @@
 import type z from "zod";
-import type { cartItemSchema } from "../../infrastructure/validation/Cart.schema";
+import type { cartItemSchema } from "../../infrastructure/validation/Cart.schema.js";
 
 export type CreateCartInput = z.infer<typeof cartItemSchema>;
 

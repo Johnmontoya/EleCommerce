@@ -1,5 +1,5 @@
 import type z from "zod";
-import type { CategoryIdSchema, CreateCategorySchema, UpdateCategorySchema } from "../../infrastructure/validation/Category.schema";
+import type { CategoryIdSchema, CreateCategorySchema, UpdateCategorySchema } from "../../infrastructure/validation/Category.schema.js";
 
 export type CreateCategoryInput = z.infer<typeof CreateCategorySchema>;
 export type UpdateCategoryInput = z.infer<typeof UpdateCategorySchema>;

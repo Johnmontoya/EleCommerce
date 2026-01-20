@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { authenticate, authorize } from "../infrastructure/middlewares/authMiddleware";
+import { authenticate, authorize } from "../infrastructure/middlewares/authMiddleware.js";
 
 // Services
-import { HashService } from "../infrastructure/services/HashService";
-import { JwtService } from "../infrastructure/services/JwtService";
+import { HashService } from "../infrastructure/services/HashService.js";
+import { JwtService } from "../infrastructure/services/JwtService.js";
 
 // Repositories
-import { PrismaAuthRepository } from "../infrastructure/repositories/PrismaAuthRepository";
+import { PrismaAuthRepository } from "../infrastructure/repositories/PrismaAuthRepository.js";
 import {
     ChangePasswordClientUseCase,
     ChangePasswordUseCase,
@@ -23,8 +23,8 @@ import {
     RegisterUseCase,
     ToggleActiveUserUseCase,
     UpdateUserUseCase
-} from "../application/use-cases/auth/AuthUseCase";
-import { AuthController } from "../presentation/controllers/AuthController";
+} from "../application/use-cases/auth/AuthUseCase.js";
+import { AuthController } from "../presentation/controllers/AuthController.js";
 
 const router = Router();
 

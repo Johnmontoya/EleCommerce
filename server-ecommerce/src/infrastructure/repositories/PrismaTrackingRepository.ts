@@ -1,6 +1,6 @@
-import type { CreateTrackingEventInput, CreateTrackingInput, TrackingResponse } from "../../application/Dto/tracking.dto";
-import { prisma } from "../../config/prisma";
-import type { ITrackingRepository } from "../../domain/repositories/ITrackingRepository";
+import type { CreateTrackingEventInput, CreateTrackingInput, TrackingResponse } from "../../application/Dto/tracking.dto.js";
+import { prisma } from "../../config/prisma.js";
+import type { ITrackingRepository } from "../../domain/repositories/ITrackingRepository.js";
 
 export class PrismaTrackingRepository implements ITrackingRepository {
     // ============================================

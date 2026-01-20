@@ -1,8 +1,8 @@
 import express from 'express';
-import { CreateAddressUseCase, DeleteAddressUseCase, GetAddressByIdUseCase, GetAddressByUserIdUseCase, SetDefaultAddressUseCase, UpdateAddressUseCase } from "../application/use-cases/address/AddressUseCase";
-import { authenticate } from "../infrastructure/middlewares/authMiddleware";
-import { PrismaAddressRepository } from "../infrastructure/repositories/PrismaAddressRepository";
-import { AddressController } from "../presentation/controllers/AddressController";
+import { CreateAddressUseCase, DeleteAddressUseCase, GetAddressByIdUseCase, GetAddressByUserIdUseCase, SetDefaultAddressUseCase, UpdateAddressUseCase } from "../application/use-cases/address/AddressUseCase.js";
+import { authenticate } from "../infrastructure/middlewares/authMiddleware.js";
+import { PrismaAddressRepository } from "../infrastructure/repositories/PrismaAddressRepository.js";
+import { AddressController } from "../presentation/controllers/AddressController.js";
 
 const router = express.Router();
 

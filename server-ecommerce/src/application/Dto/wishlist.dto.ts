@@ -1,5 +1,5 @@
 import type z from "zod";
-import type { wishlistItemSchema } from "../../infrastructure/validation/Wishlist.schema";
+import type { wishlistItemSchema } from "../../infrastructure/validation/Wishlist.schema.js";
 
 export type CreateWishListInput = z.infer<typeof wishlistItemSchema>;
 

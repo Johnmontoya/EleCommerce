@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
-import type { CreateAddressUseCase, DeleteAddressUseCase, GetAddressByIdUseCase, GetAddressByUserIdUseCase, SetDefaultAddressUseCase, UpdateAddressUseCase } from "../../application/use-cases/address/AddressUseCase";
-import { CreateAddressSchema, UpdateAddressSchema } from "../../infrastructure/validation/Address.schema";
-import { handleError } from '../../infrastructure/middlewares/errorHandler';
+import type { CreateAddressUseCase, DeleteAddressUseCase, GetAddressByIdUseCase, GetAddressByUserIdUseCase, SetDefaultAddressUseCase, UpdateAddressUseCase } from "../../application/use-cases/address/AddressUseCase.js";
+import { CreateAddressSchema, UpdateAddressSchema } from "../../infrastructure/validation/Address.schema.js";
+import { handleError } from '../../infrastructure/middlewares/errorHandler.js';
 
 export class AddressController {
     constructor(

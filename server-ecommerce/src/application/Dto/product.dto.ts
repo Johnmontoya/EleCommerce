@@ -1,5 +1,5 @@
 import type z from "zod";
-import type { CreateBannerSchema, CreateProductSchema, ProductIdSchema, UpdateProductSchema } from "../../infrastructure/validation/Product.schema";
+import type { CreateBannerSchema, CreateProductSchema, ProductIdSchema, UpdateProductSchema } from "../../infrastructure/validation/Product.schema.js";
 
 export type CreateProductInput = z.infer<typeof CreateProductSchema>;
 export type UpdateProductInput = z.infer<typeof UpdateProductSchema>;

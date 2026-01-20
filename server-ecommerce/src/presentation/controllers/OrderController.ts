@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
-import type { CancelOrderUseCase, CreateOrderUseCase, GetAllOrdersByUserUseCase, GetOrdersUseCase, GetTrackingNumberUseCase, UpdateOrderStatusUseCase } from "../../application/use-cases/orders/OrderUseCase";
-import { CreateOrderSchema, OrderFiltersSchema } from "../../infrastructure/validation/Order.schema";
-import { handleError } from '../../infrastructure/middlewares/errorHandler';
+import type { CancelOrderUseCase, CreateOrderUseCase, GetAllOrdersByUserUseCase, GetOrdersUseCase, GetTrackingNumberUseCase, UpdateOrderStatusUseCase } from "../../application/use-cases/orders/OrderUseCase.js";
+import { CreateOrderSchema, OrderFiltersSchema } from "../../infrastructure/validation/Order.schema.js";
+import { handleError } from '../../infrastructure/middlewares/errorHandler.js';
 
 export class OrderController {
     constructor(

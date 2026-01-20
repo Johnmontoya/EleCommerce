@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import type { CreateCartUseCase, GetCartUseCase, DeleteCartUseCase, UpdateCartUseCase, GetCartCountUseCase } from "../../application/use-cases/cart/CartUseCase";
-import { handleError } from "../../infrastructure/middlewares/errorHandler";
+import type { CreateCartUseCase, GetCartUseCase, DeleteCartUseCase, UpdateCartUseCase, GetCartCountUseCase } from "../../application/use-cases/cart/CartUseCase.js";
+import { handleError } from "../../infrastructure/middlewares/errorHandler.js";
 
 export class CartController {
     constructor(private createCartUseCase: CreateCartUseCase,
