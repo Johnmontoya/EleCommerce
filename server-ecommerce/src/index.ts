@@ -15,7 +15,7 @@ import trackingRoutes from "./routes/tracking.routes"
 const app = express();
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: 'https://ele-commerce.vercel.app/',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Si necesitas manejar cookies o cabeceras de autorización
   optionsSuccessStatus: 204 // Código de estado para respuestas OPTIONS exitosas
