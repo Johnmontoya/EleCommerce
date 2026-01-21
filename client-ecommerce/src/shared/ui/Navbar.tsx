@@ -49,7 +49,7 @@ const Navbar = () => {
                   <CiLocationOn size={28} />
                   <div className="text-xs">
                     <p>Enviar a {user?.firstName}</p>
-                    <span>{street}</span>
+                    <span>{street ? street : ""}</span>
                   </div>
                 </div>
               </div>
