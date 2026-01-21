@@ -24,7 +24,11 @@ const Navbar = () => {
   const { user } = useAuthStore();
   const { data: cartCount } = useCartCount(user?.id!);
   const { data: wishCount } = useWishCount(user?.id!)
-  const street = user?.addresses![0].state + ", " + user?.addresses![0].street;
+
+  let street = "";
+  if (user?.addresses) {
+    street = user?.addresses[0]?.state + ", " + user?.addresses[0]?.street;
+  }
 
   const toggle = () => {
     if (theme === 'system') {
