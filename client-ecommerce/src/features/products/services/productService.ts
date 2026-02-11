@@ -79,4 +79,9 @@ export const productService = {
         });
         return data;
     },
+
+    analyzeTitle: async (title: string): Promise<ApiResponse<Product>> => {
+        const { data } = await apiClient.post(endpoints.products.analyzeTitle, { title });
+        return data;
+    },
 }

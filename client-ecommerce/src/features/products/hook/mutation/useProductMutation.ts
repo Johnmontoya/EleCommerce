@@ -78,3 +78,19 @@ export const useDeleteManyProductsMutation = () => {
         }
     })
 }
+
+export const useAnalyzeTitleMutation = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (title: string) => productService.analyzeTitle(title),
+        onSuccess: (response) => {
+            queryClient.invalidateQueries({ queryKey: ['products'] });
+
+            toast.success(response.message || "Título analizado exitosamente");
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data.message || "Error al analizar el título");
+        }
+    })
+}

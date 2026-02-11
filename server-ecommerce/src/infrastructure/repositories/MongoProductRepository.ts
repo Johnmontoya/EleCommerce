@@ -1,6 +1,7 @@
 import type { BannerResponse, CreateBannerInput } from "../../application/Dto/product.dto.js";
+import main from "../../config/gemini.js";
 import { ProductEntity } from "../../domain/entities/Product.js";
-import type { IProductrepository, ProductFilters } from "../../domain/repositories/IProductRepository.js";
+import type { AnalyzeTitle, AnalyzeTitleResponse, IProductrepository, ProductFilters } from "../../domain/repositories/IProductRepository.js";
 import { ProductModel } from "../models/product.model.js";
 
 export class MongoProductRepository implements IProductrepository {
@@ -192,6 +193,87 @@ export class MongoProductRepository implements IProductrepository {
         }
       });
       return products.map(p => this.mapToEntity(p));
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async analyzeTitle(title: string): Promise<AnalyzeTitleResponse> {
+    try {
+      const prompt = `Analiza el siguiente titulo del producto: ${title}. 
+      Devuelve un SOLO objeto JSON válido (sin markdown, sin explicaciones) con la siguiente estructura exacta:
+      {
+        "name": "nombre del producto",
+        "slug": "slug del producto en minusculas y guiones medios en vez de espacios",
+        "description": "descripcion detallada del producto",
+        "price": precio del producto en $COP,
+        "priceDiscount": precio con descuento del producto en porcentaje,
+        "stock": stock del producto,
+        "category": "categoria del producto debe ser una de estas dependiendo del producto: Consolas, Celulares, Tablets, Smartwatch, Computadoras, Audio",
+        "brand": "marca del producto",
+        "tags": Una o dos etiquetas relacionadas con el producto, presentadas en un array de strings, por ejemplo: ["tag1", "tag2"],
+        "dimensions": {
+          "weight": peso del producto en kg,
+          "width": ancho del producto en cm,
+          "height": altura del producto en cm,
+          "depth": profundidad del producto en cm
+        },
+        "shipping": {
+          "free": true,
+          "cost": costo del envio en $COP
+        },
+        "reviewsCount": 100,
+        "rating": 4.5,
+        "sku": "codigo unico de 12 digitos formado por letras y numeros",
+        "barcode": "codigo de barras puede ser inventado",
+        "variants": [
+          {
+            "name": "Puede ser Color, Tamaño, etc",
+            "options": Las opciones de la variante en un array de strings, por ejemplo: ["option1", "option2", "option3"]
+          }
+        ],
+        "attributes": [
+          {
+            "name": "Atributo del producto",
+            "value": "valor del atributo"
+          }
+        ],
+        "soldCount": 1,
+        "isPublished": true
+      }
+      Importante: Debes devolver un JSON válido, sin markdown, sin explicaciones, sin saltos de línea, sin comillas simples, sin comillas dobles, sin nada más que el JSON.
+      `;
+      const response = await main(prompt);
+      let jsonString = response!.trim();
+
+      // Remover bloques de código markdown si existen
+      jsonString = jsonString.replace(/```json\s*/g, '');
+      jsonString = jsonString.replace(/```\s*/g, '');
+
+      // Intentar parsear el JSON
+      const productData = JSON.parse(jsonString);
+
+      return {
+        name: productData.name || title,
+        slug: productData.slug,
+        description: productData.description,
+        price: productData.price,
+        priceDiscount: productData.priceDiscount,
+        stock: productData.stock,
+        brand: productData.brand,
+        category: productData.category,
+        tags: productData.tags,
+        dimensions: productData.dimensions,
+        shipping: productData.shipping,
+        reviewsCount: productData.reviewsCount,
+        rating: productData.rating,
+        sku: productData.sku,
+        barcode: productData.barcode,
+        variants: productData.variants,
+        attributes: productData.attributes,
+        soldCount: productData.soldCount,
+        isPublished: productData.isPublished
+      }
     } catch (error) {
       throw error;
     }

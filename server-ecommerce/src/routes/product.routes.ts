@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ProductController } from "../presentation/controllers/ProductController.js";
-import { CreateProductUseCase, GetProductByIdUseCase, GetAllProductsUseCase, UpdateProductUseCase, GetProductBySlugUseCase, SearchProductsAutoCompleteUseCase, GetProductsByCategoryUseCase, GetProductsByBrandUseCase, DeleteProductUseCase, DeleteManyProductsUseCase, GetBannersUseCase, UpdateBannerUseCase, DeleteBannerUseCase, GetShowcaseUseCase } from "../application/use-cases/products/ProductUseCase.js";
+import { CreateProductUseCase, GetProductByIdUseCase, GetAllProductsUseCase, UpdateProductUseCase, GetProductBySlugUseCase, SearchProductsAutoCompleteUseCase, GetProductsByCategoryUseCase, GetProductsByBrandUseCase, DeleteProductUseCase, DeleteManyProductsUseCase, GetBannersUseCase, UpdateBannerUseCase, DeleteBannerUseCase, GetShowcaseUseCase, AnalyzeTitleUseCase } from "../application/use-cases/products/ProductUseCase.js";
 import { MongoProductRepository } from "../infrastructure/repositories/MongoProductRepository.js";
 
 const router = Router();
@@ -21,6 +21,7 @@ const getBannersUseCase = new GetBannersUseCase(productRepository);
 const updateBannerUseCase = new UpdateBannerUseCase(productRepository);
 const deleteBannerUseCase = new DeleteBannerUseCase(productRepository);
 const getShowcaseUseCase = new GetShowcaseUseCase(productRepository);
+const analyzeTitleUseCase = new AnalyzeTitleUseCase(productRepository);
 
 const productController = new ProductController(
     createProductUseCase,
@@ -36,7 +37,8 @@ const productController = new ProductController(
     getBannersUseCase,
     updateBannerUseCase,
     deleteBannerUseCase,
-    getShowcaseUseCase
+    getShowcaseUseCase,
+    analyzeTitleUseCase
 )
 
 router.post('/products', productController.createProduct);
@@ -54,5 +56,6 @@ router.put('/banners/:id', productController.updateBanner);
 /*router.put('/banners/:id', productController.updateBanner);
 router.delete('/banners/:id', productController.deleteBanner);*/
 router.get('/showcase', productController.getShowcase);
+router.post('/products/analyze-title', productController.analyzeTitle);
 
 export default router;

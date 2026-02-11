@@ -1,5 +1,7 @@
 import { ProductEntity } from "../../../domain/entities/Product.js";
 import type {
+  AnalyzeTitle,
+  AnalyzeTitleResponse,
   IProductrepository,
   ProductFilters,
 } from "../../../domain/repositories/IProductRepository.js";
@@ -155,5 +157,13 @@ export class SearchProductsAutoCompleteUseCase {
       category: product.category,
       image: product.images[0]
     }));
+  }
+}
+
+export class AnalyzeTitleUseCase {
+  constructor(private productRepository: IProductrepository) { }
+
+  async execute(title: string): Promise<AnalyzeTitleResponse> {
+    return await this.productRepository.analyzeTitle(title);
   }
 }

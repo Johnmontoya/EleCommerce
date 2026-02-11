@@ -15,6 +15,7 @@ export interface IProductrepository {
   updateBanner(id: string, banner: Partial<ProductEntity>): Promise<ProductEntity | null>;
   deleteBanner(id: string): Promise<boolean>;
   getShowcase(): Promise<ProductEntity[]>;
+  analyzeTitle(title: string): Promise<AnalyzeTitleResponse>;
 }
 
 export interface Variant {
@@ -49,4 +50,44 @@ export interface ProductFilters {
   search?: string;
   limit?: number | undefined;
   offset?: number | undefined;
+}
+
+export interface AnalyzeTitle {
+  name: string;
+}
+
+export interface AnalyzeTitleResponse {
+  name: string;
+  slug: string;
+  description: string;
+  price: number;
+  priceDiscount: number;
+  stock: number;
+  category: string;
+  brand: string;
+  tags: string[];
+  dimensions: {
+    weight: number;
+    width: number;
+    height: number;
+    depth: number;
+  };
+  shipping: {
+    free: boolean;
+    cost: number;
+  };
+  reviewsCount: number;
+  rating: number;
+  sku: string;
+  barcode: string;
+  variants: {
+    name: string;
+    options: string[];
+  }[];
+  attributes: {
+    name: string;
+    value: string;
+  }[];
+  soldCount: number;
+  isPublished: boolean;
 }

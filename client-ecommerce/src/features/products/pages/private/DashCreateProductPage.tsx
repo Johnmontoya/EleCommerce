@@ -16,7 +16,7 @@ import StatisticsForm from "../../components/FormCreateProduct/StatisticsForm";
 import PublishForm from "../../components/FormCreateProduct/PublishForm";
 import PersonalForm from "../../components/FormCreateProduct/PersonalForm";
 import PriceForm from "../../components/FormCreateProduct/PriceForm";
-import { useCreateProductMutation } from "../../hook/mutation/useProductMutation";
+import { useAnalyzeTitleMutation, useCreateProductMutation } from "../../hook/mutation/useProductMutation";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import DashHeader from "../../../../shared/ui/DashHeader";
@@ -30,6 +30,7 @@ const DashCreateProductPage: React.FC = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const createProduct = useCreateProductMutation();
+  const analyzeTitle = useAnalyzeTitleMutation();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const [createData, onChangeCreateData, setCreateData] = useInputs({
@@ -124,6 +125,43 @@ const DashCreateProductPage: React.FC = () => {
     setValidationErrors({});
   };
 
+  const handleAnalyzeTitle = async () => {
+    setIsSubmitting(true);
+    setValidationErrors({});
+
+    try {
+      const response = await analyzeTitle.mutateAsync(createData.name);
+      setCreateData({
+        ...createData,
+        name: response.data.name || createData.name,
+        slug: response.data.slug,
+        description: response.data.description,
+        price: response.data.price,
+        priceDiscount: response.data.priceDiscount,
+        stock: response.data.stock,
+        brand: response.data.brand,
+        category: response.data.category,
+        tags: response.data.tags,
+        dimensions: response.data.dimensions,
+        shipping: response.data.shipping,
+        reviewsCount: response.data.reviewsCount,
+        rating: response.data.rating,
+        sku: response.data.sku,
+        barcode: response.data.barcode,
+        variants: response.data.variants,
+        attributes: response.data.attributes,
+        soldCount: response.data.soldCount,
+        isPublished: response.data.isPublished
+      });
+    } catch (error) {
+      if (error instanceof AxiosError && error.response?.data?.errors) {
+        setValidationErrors(error.response.data.errors);
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const getFieldsError = (fieldName: string): string | undefined => {
     return validationErrors[fieldName]?.[0];
   }
@@ -167,6 +205,9 @@ const DashCreateProductPage: React.FC = () => {
                   {/* Basic Information */}
                   <PersonalForm
                     product={createData}
+                    handleAnalyzeTitle={handleAnalyzeTitle}
+                    isSubmitting={isSubmitting}
+                    createProduct={createProduct}
                     onChangeCreateData={onChangeCreateData}
                     setCreateData={setCreateData}
                     getFieldsError={getFieldsError}

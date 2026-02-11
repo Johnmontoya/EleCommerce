@@ -14,6 +14,7 @@ import type {
   UpdateBannerUseCase,
   DeleteBannerUseCase,
   GetShowcaseUseCase,
+  AnalyzeTitleUseCase,
 } from "../../application/use-cases/products/ProductUseCase.js";
 import {
   CreateProductSchema,
@@ -41,7 +42,8 @@ export class ProductController {
     private getBannersUseCase: GetBannersUseCase,
     private updateBannerUseCase: UpdateBannerUseCase,
     private deleteBannerUseCase: DeleteBannerUseCase,
-    private getShowcaseUseCase: GetShowcaseUseCase
+    private getShowcaseUseCase: GetShowcaseUseCase,
+    private analyzeTitleUseCase: AnalyzeTitleUseCase
   ) { }
 
   createProduct = async (req: Request, res: Response): Promise<void> => {
@@ -386,6 +388,28 @@ export class ProductController {
     try {
       const { search } = req.query;
       const product = await this.searchProductsAutoCompleteUseCase.execute(search as string)
+
+      if (!product) {
+        res.status(404).json({
+          success: false,
+          message: "Producto no encontrado",
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        data: product,
+      });
+    } catch (error) {
+      handleError(error, res);
+    }
+  };
+
+  analyzeTitle = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { title } = req.body;
+      const product = await this.analyzeTitleUseCase.execute(title);
 
       if (!product) {
         res.status(404).json({

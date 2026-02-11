@@ -10,5 +10,6 @@ export const endpoints = {
         update: (id: string) => `/products/products/${id}`,
         delete: (id: string) => `/products/products/${id}`,
         deleteMany: '/products/products',
+        analyzeTitle: '/products/products/analyze-title',
     }
 }
