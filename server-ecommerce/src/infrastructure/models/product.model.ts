@@ -41,8 +41,11 @@ const productSchema = new Schema({
   sku: { type: String, required: false },
   barcode: { type: String, required: false },
   brand: { type: String, required: true },
+  images: [{
+    url: { type: String, required: true },
+    fileId: { type: String, required: false }
+  }],
   category: { type: mongoose.Schema.Types.ObjectId, ref: "Category", required: true },
-  images: [{ type: String, required: true }],
   tags: [{ type: String, required: true }],
   rating: { type: Number, required: false },
   reviewsCount: { type: Number, required: false },
@@ -50,11 +53,12 @@ const productSchema = new Schema({
   attributes: [attributesSchema],
   dimensions: dimensionSchema,
   shipping: shippingSchema,
-  isDigital: { type: Boolean, required: false },
+  isDigital: { type: Boolean, required: false, default: false },
   digitalFile: { type: String, required: false },
   relatedProducts: [{ type: String, required: false }],
   soldCount: { type: Number, required: false },
   isPublished: { type: Boolean, required: false },
+
   displaySections: [{
     type: String,
     enum: ['banner', 'featured', 'trending', 'promotional', 'new-arrival'],

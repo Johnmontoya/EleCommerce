@@ -11,6 +11,11 @@ export interface PromotionalData {
   bannerImageUrl?: string | undefined;   // Imagen específica para banner
 }
 
+export interface Images {
+  url: string;
+  fileId: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -19,18 +24,18 @@ export interface Product {
   price: number;
   priceDiscount: number;
   stock: number;
+  brand: string;
   sku?: string | undefined;
   barcode?: string | undefined;
-  brand: string;
+  images: Images[];
   category: string;
-  images: string[];
   tags: string[];
   rating?: number | undefined;
   reviewsCount?: number | undefined;
   variants?: Variant[] | undefined;
   attributes?: Attribute[] | undefined;
-  dimensions: Dimensions;
-  shipping: Shipping;
+  dimensions?: Dimensions | undefined;
+  shipping?: Shipping | undefined;
   isDigital?: boolean | undefined;
   digitalFile?: string | undefined;
   relatedProducts?: string[] | undefined;
@@ -45,7 +50,7 @@ export interface Product {
 
 export class ProductEntity implements Product {
   constructor(
-    public readonly id: string,
+    public id: string,
     public name: string,
     public slug: string,
     public description: string,
@@ -53,17 +58,17 @@ export class ProductEntity implements Product {
     public priceDiscount: number,
     public stock: number,
     public brand: string,
+    public images: Images[],
     public category: string,
-    public images: string[],
     public tags: string[],
-    public dimensions: Dimensions,
-    public shipping: Shipping,
-    public reviewsCount?: number,
-    public rating?: number,
-    public sku?: string,
     public barcode?: string,
+    public sku?: string,
+    public rating?: number,
+    public reviewsCount?: number,
     public variants?: Variant[],
     public attributes?: Attribute[],
+    public dimensions?: Dimensions,
+    public shipping?: Shipping,
     public isDigital?: boolean,
     public digitalFile?: string,
     public relatedProducts?: string[],
@@ -73,7 +78,7 @@ export class ProductEntity implements Product {
     public displayPriority?: number,
     public isFeatured?: boolean,
     public promotionalData?: PromotionalData,
-    public featuredUntil?: Date,
+    public featuredUntil?: Date
   ) { }
 
   static create(props: Omit<Product, 'id'>): ProductEntity {
@@ -87,17 +92,17 @@ export class ProductEntity implements Product {
       props.priceDiscount,
       props.stock,
       props.brand,
-      props.category,
       props.images,
+      props.category,
       props.tags,
-      props.dimensions,
-      props.shipping,
-      props.reviewsCount,
-      props.rating,
-      props.sku,
       props.barcode,
+      props.sku,
+      props.rating,
+      props.reviewsCount,
       props.variants,
       props.attributes,
+      props.dimensions,
+      props.shipping,
       props.isDigital,
       props.digitalFile,
       props.relatedProducts,
@@ -107,24 +112,8 @@ export class ProductEntity implements Product {
       props.displayPriority,
       props.isFeatured,
       props.promotionalData,
-      props.featuredUntil,
+      props.featuredUntil
     );
-  }
-
-  isActiveInSection(section: DisplaySection): boolean {
-    if (!this.displaySections?.includes(section)) {
-      return false;
-    }
-
-    if (section === 'featured' && this.featuredUntil) {
-      return new Date() <= this.featuredUntil;
-    }
-
-    if (section === 'promotional' && this.promotionalData?.endDate) {
-      return new Date() <= this.promotionalData.endDate;
-    }
-
-    return true;
   }
 
   /*

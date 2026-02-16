@@ -4,7 +4,6 @@ import Sidebar from "../../../dashboard/components/Sidebar";
 import NavMobile from "../../../dashboard/components/NavMobile";
 import ButtonMobile from "../../../../shared/ui/ButtonMobile";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
-import useInputs from "../../../../shared/hooks/useInputs";
 import ImageForm from "../../components/FormCreateProduct/ImageForm";
 import VariantForm from "../../components/FormCreateProduct/VariantForm";
 import AttributesForm from "../../components/FormCreateProduct/AttributesForm";
@@ -21,75 +20,30 @@ import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import DashHeader from "../../../../shared/ui/DashHeader";
 import HeaderAction from "../../../auth/components/UserCreate/HeaderAction";
-
-interface ValidationErrors {
-  [key: string]: string[];
-}
+import { toast } from "sonner";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ProductSchema, type ProductSchemaType } from "../../types/product.schema";
 
 const DashCreateProductPage: React.FC = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const createProduct = useCreateProductMutation();
   const analyzeTitle = useAnalyzeTitleMutation();
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [coverFile, setCoverFile] = useState<File | null>(null);
+  const [coverPreview, setCoverPreview] = useState<string | null>(null);
+  const [allImageFiles, setAllImageFiles] = useState<File[]>([]);
 
-  const [createData, onChangeCreateData, setCreateData] = useInputs({
-    name: "",
-    slug: "",
-    description: "",
-    price: 0,
-    priceDiscount: 0,
-    stock: 0,
-    sku: "",
-    barcode: "",
-    brand: "",
-    category: "",
-    images: [],
-    tags: [],
-    rating: 0,
-    reviewsCount: 0,
-    variants: [],
-    attributes: [],
-    dimensions: {
-      weight: 0,
-      width: 0,
-      height: 0,
-      depth: 0,
-    },
-    shipping: {
-      free: false,
-      cost: 0,
-    },
-    isDigital: false,
-    digitalFile: "",
-    relatedProducts: [],
-    soldCount: 0,
-    isPublished: false,
-  });
-
-  const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
-
-  const handleSubmit = async (e?: React.MouseEvent<HTMLButtonElement>) => {
-    e?.preventDefault();
-    setIsSubmitting(true);
-    setValidationErrors({});
-
-    try {
-      await createProduct.mutateAsync(createData);
-      setIsSubmitting(false);
-      navigate("/dashboard/products");
-      handleReset();
-    } catch (error) {
-      if (error instanceof AxiosError && error.response?.data?.errors) {
-        setValidationErrors(error.response.data.errors);
-      }
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleReset = () => {
-    setCreateData({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+    setValue,
+    watch,
+  } = useForm<ProductSchemaType>({
+    resolver: zodResolver(ProductSchema),
+    defaultValues: {
       name: "",
       slug: "",
       description: "",
@@ -120,65 +74,166 @@ const DashCreateProductPage: React.FC = () => {
       digitalFile: "",
       relatedProducts: [],
       soldCount: 0,
-      isPublished: false,
-    });
-    setValidationErrors({});
+      isPublished: false
+    },
+    mode: 'onChange',
+  });
+
+  const handleFileChange = (file: File | null) => {
+    setCoverFile(file);
   };
 
-  const handleAnalyzeTitle = async () => {
-    setIsSubmitting(true);
-    setValidationErrors({});
+  const onSubmit: SubmitHandler<ProductSchemaType> = async (data) => {
+    if (!coverFile && allImageFiles.length === 0) {
+      toast.error('Por favor selecciona al menos una imagen');
+      return;
+    }
 
     try {
-      const response = await analyzeTitle.mutateAsync(createData.name);
-      setCreateData({
-        ...createData,
-        name: response.data.name || createData.name,
-        slug: response.data.slug,
-        description: response.data.description,
-        price: response.data.price,
-        priceDiscount: response.data.priceDiscount,
-        stock: response.data.stock,
-        brand: response.data.brand,
-        category: response.data.category,
-        tags: response.data.tags,
-        dimensions: response.data.dimensions,
-        shipping: response.data.shipping,
-        reviewsCount: response.data.reviewsCount,
-        rating: response.data.rating,
-        sku: response.data.sku,
-        barcode: response.data.barcode,
-        variants: response.data.variants,
-        attributes: response.data.attributes,
-        soldCount: response.data.soldCount,
-        isPublished: response.data.isPublished
-      });
-    } catch (error) {
-      if (error instanceof AxiosError && error.response?.data?.errors) {
-        setValidationErrors(error.response.data.errors);
+      const formData = new FormData();
+
+      formData.append('name', data.name);
+      formData.append('slug', data.slug);
+      formData.append('description', data.description);
+      formData.append('price', data.price.toString());
+      formData.append('priceDiscount', data.priceDiscount.toString());
+      formData.append('stock', data.stock.toString());
+      formData.append('sku', data.sku);
+      formData.append('category', data.category);
+      formData.append('rating', data.rating.toString());
+      formData.append('reviewsCount', data.reviewsCount.toString());
+      formData.append('soldCount', data.soldCount.toString());
+      formData.append('isDigital', data.isDigital.toString());
+      formData.append('isPublished', data.isPublished.toString());
+
+      if (data.barcode) {
+        formData.append('barcode', data.barcode);
       }
-    } finally {
-      setIsSubmitting(false);
+      if (data.brand) {
+        formData.append('brand', data.brand);
+      }
+      if (data.digitalFile) {
+        formData.append('digitalFile', data.digitalFile);
+      }
+
+      if (data.variants && data.variants.length > 0) {
+        formData.append('variants', JSON.stringify(data.variants));
+      }
+
+      if (data.attributes && data.attributes.length > 0) {
+        formData.append('attributes', JSON.stringify(data.attributes));
+      }
+
+      if (data.tags && data.tags.length > 0) {
+        formData.append('tags', JSON.stringify(data.tags));
+      }
+
+      if (data.relatedProducts && data.relatedProducts.length > 0) {
+        formData.append('relatedProducts', JSON.stringify(data.relatedProducts));
+      }
+
+      formData.append('dimensions', JSON.stringify(data.dimensions));
+      formData.append('shipping', JSON.stringify(data.shipping));
+
+      allImageFiles.forEach((file) => {
+        formData.append('images', file);
+      });
+
+      await createProduct.mutateAsync(formData);
+
+      toast.success('Producto creado exitosamente');
+      navigate("/dashboard/products");
+      handleReset();
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        const errorMessage = error.response?.data?.message || 'Error al crear el producto';
+        toast.error(errorMessage);
+
+        // Mostrar errores de validación específicos
+        if (error.response?.data?.errors) {
+          Object.entries(error.response.data.errors).forEach(([field, messages]) => {
+            console.error(`Campo ${field}:`, messages);
+          });
+        }
+      } else {
+        toast.error('Error inesperado al crear el producto');
+      }
     }
   };
 
-  const getFieldsError = (fieldName: string): string | undefined => {
-    return validationErrors[fieldName]?.[0];
-  }
+  const handleReset = () => {
+    reset();
+    setCoverFile(null);
+    setCoverPreview(null);
+    setAllImageFiles([]);
+  };
+
+  const handleAnalyzeTitle = async () => {
+    const name = watch('name');
+
+    if (!name || name.trim().length === 0) {
+      toast.error('Por favor ingresa un nombre de producto primero');
+      return;
+    }
+
+    try {
+      const response = await analyzeTitle.mutateAsync(name);
+
+      if (response.success && response.data) {
+        setValue('name', response.data.name || name);
+        setValue('slug', response.data.slug);
+        setValue('description', response.data.description);
+        setValue('price', response.data.price ?? 0);
+        setValue('priceDiscount', response.data.priceDiscount ?? 0);
+        setValue('stock', response.data.stock ?? 0);
+        setValue('brand', response.data.brand ?? '');
+
+        // Manejar categoría (objeto o string)
+        if (response.data.category) {
+          const categoryId = typeof response.data.category === 'object'
+            ? response.data.category.id
+            : response.data.category;
+          setValue('category', categoryId);
+        }
+
+        setValue('tags', response.data.tags ?? []);
+        setValue('dimensions', response.data.dimensions ?? { weight: 0, width: 0, height: 0, depth: 0 });
+        setValue('shipping', response.data.shipping ?? { free: false, cost: 0 });
+        setValue('reviewsCount', response.data.reviewsCount ?? 0);
+        setValue('rating', response.data.rating ?? 0);
+        setValue('sku', response.data.sku ?? '');
+        setValue('barcode', response.data.barcode ?? '');
+        setValue('variants', response.data.variants ?? []);
+
+        const validAttributes = response.data.attributes
+          ?.filter((attr: any) => attr.name && attr.value)
+          .map((attr: any) => ({
+            name: attr.name as string,
+            value: attr.value as string,
+          })) ?? [];
+        setValue('attributes', validAttributes);
+
+        setValue('soldCount', response.data.soldCount ?? 0);
+        setValue('isPublished', response.data.isPublished ?? false);
+
+        toast.success('Título analizado con éxito');
+      }
+    } catch (error) {
+      console.error('Error analyzing title:', error);
+      toast.error('Error al analizar el título');
+    }
+  };
 
   return (
     <div className="min-h-screen background-light dark:background-light">
       <div className="flex">
-        {/* Sidebar */}
         <Sidebar />
 
         <div className="flex flex-col flex-1">
-          {/* Breadcrumb */}
           <div className="max-w-7xl px-0 md:px-9">
             <BreadCrumbs />
           </div>
 
-          {/* Mobile Menu */}
           <NavMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
           <div className="w-full mx-auto flex-1 px-8 md:px-12 pb-8">
@@ -187,7 +242,6 @@ const DashCreateProductPage: React.FC = () => {
               setIsMenuOpen={setIsMenuOpen}
             />
 
-            {/* Header */}
             <DashHeader
               data={[]}
               title="Crear Nuevo Producto"
@@ -196,97 +250,84 @@ const DashCreateProductPage: React.FC = () => {
               titleIcon={<BiPackage className="text-cyan-400" size={36} />}
               list={false}
             />
-            <HeaderAction isSubmitting={isSubmitting} handleSubmit={handleSubmit} handleReset={handleReset} />
+            <HeaderAction
+              isSubmitting={isSubmitting}
+              handleSubmit={handleSubmit(onSubmit)}
+              handleReset={handleReset}
+            />
 
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* Main Content - Left Column */}
                 <div className="lg:col-span-2 space-y-6">
-                  {/* Basic Information */}
                   <PersonalForm
-                    product={createData}
+                    register={register}
+                    errors={errors}
+                    watch={watch}
                     handleAnalyzeTitle={handleAnalyzeTitle}
-                    isSubmitting={isSubmitting}
-                    createProduct={createProduct}
-                    onChangeCreateData={onChangeCreateData}
-                    setCreateData={setCreateData}
-                    getFieldsError={getFieldsError}
+                    isSubmitting={isSubmitting || analyzeTitle.isPending}
                   />
 
-                  {/* Pricing & Inventory */}
                   <PriceForm
-                    product={createData}
-                    onChangeCreateData={onChangeCreateData}
-                    setCreateData={setCreateData}
-                    getFieldsError={getFieldsError}
+                    register={register}
+                    errors={errors}
+                    watch={watch}
                   />
 
-                  {/* Images */}
                   <ImageForm
-                    product={createData}
-                    onChangeCreateData={onChangeCreateData}
-                    setCreateData={setCreateData}
-                    getFieldsError={getFieldsError}
+                    coverPreview={coverPreview}
+                    setCoverPreview={setCoverPreview}
+                    onFileChange={handleFileChange}
+                    allImageFiles={allImageFiles}
+                    setAllImageFiles={setAllImageFiles}
+                    error={errors.images?.message}
                   />
 
-                  {/* Variants */}
                   <VariantForm
-                    product={createData}
-                    onChangeCreateData={onChangeCreateData}
-                    setCreateData={setCreateData}
+                    watch={watch}
+                    setValue={setValue}
+                    errors={errors}
                   />
 
-                  {/* Attributes */}
                   <AttributesForm
-                    product={createData}
-                    onChangeCreateData={onChangeCreateData}
-                    setCreateData={setCreateData}
+                    watch={watch}
+                    setValue={setValue}
+                    errors={errors}
                   />
 
-                  {/* Dimensions */}
                   <DimensionForm
-                    product={createData}
-                    onChangeCreateData={onChangeCreateData}
-                    setCreateData={setCreateData}
+                    register={register}
+                    errors={errors}
                   />
                 </div>
 
-                {/* Right Sidebar */}
                 <div className="lg:col-span-1 space-y-6">
-                  {/* Tags */}
                   <TagsForm
-                    product={createData}
-                    onChangeCreateData={onChangeCreateData}
-                    setCreateData={setCreateData}
-                    getFieldsError={getFieldsError}
+                    watch={watch}
+                    setValue={setValue}
+                    errors={errors}
                   />
 
-                  {/* Shipping */}
                   <ShippingForm
-                    product={createData}
-                    onChangeCreateData={onChangeCreateData}
-                    setCreateData={setCreateData}
+                    register={register}
+                    watch={watch}
+                    setValue={setValue}
+                    errors={errors}
                   />
 
-                  {/* Digital Product */}
                   <DigitalForm
-                    product={createData}
-                    onChangeCreateData={onChangeCreateData}
-                    setCreateData={setCreateData}
+                    register={register}
+                    watch={watch}
+                    errors={errors}
                   />
 
-                  {/* Statistics */}
                   <StatisticsForm
-                    product={createData}
-                    onChangeCreateData={onChangeCreateData}
-                    setCreateData={setCreateData}
+                    register={register}
+                    errors={errors}
                   />
 
-                  {/* Publish Status */}
                   <PublishForm
-                    product={createData}
-                    onChangeCreateData={onChangeCreateData}
-                    setCreateData={setCreateData}
+                    register={register}
+                    watch={watch}
                   />
                 </div>
               </div>

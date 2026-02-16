@@ -38,7 +38,7 @@ const DetailsPage: React.FC = () => {
   useEffect(() => {
     // Solo actualiza si el producto está cargado y tiene imágenes
     if (product && product.images && product.images.length > 0) {
-      setThumbnail(product.images[0]);
+      setThumbnail(product.images[0].url);
     }
   }, [product]);
 
@@ -47,7 +47,7 @@ const DetailsPage: React.FC = () => {
       productId: product?.id!,
       quantity: quantity,
       name: product?.name!,
-      image: product?.images![0]!,
+      image: product?.images![0].url!,
       price: product?.price!,
       discount: product?.priceDiscount!,
       stock: product?.stock!,
@@ -58,7 +58,7 @@ const DetailsPage: React.FC = () => {
     await addWishlistItem.mutateAsync({
       productId: item.id,
       productName: item.name,
-      productImage: item.images![0],
+      productImage: item.images![0].url!,
       price: item.price,
       discount: item.priceDiscount!,
       category: item.slug,
@@ -94,17 +94,17 @@ const DetailsPage: React.FC = () => {
           <div className="flex gap-4 lg:w-1/2">
             {/* Thumbnails */}
             <div className="flex flex-col gap-3">
-              {product?.images!.map((image: string, index: number) => (
+              {product?.images!.map((image: { url: string }, index: number) => (
                 <div
                   key={index}
-                  onClick={() => setThumbnail(image)}
-                  className={`border-2 w-20 h-20 rounded-lg overflow-hidden cursor-pointer transition-all ${thumbnail === image
+                  onClick={() => setThumbnail(image.url)}
+                  className={`border-2 w-20 h-20 rounded-lg overflow-hidden cursor-pointer transition-all ${thumbnail === image.url
                     ? "border-cyan-400 shadow-lg shadow-cyan-400/50"
                     : "border-slate-600 hover:border-slate-400"
                     }`}
                 >
                   <img
-                    src={image}
+                    src={image.url}
                     alt={`Thumbnail ${index + 1}`}
                     className="w-full h-full object-cover"
                   />

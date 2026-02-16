@@ -1,19 +1,12 @@
 import React from "react";
 import { BiBarChart } from "react-icons/bi";
 
-interface RatingProps {
-  rating: number;
-  reviewsCount: number;
-  soldCount: number;
+interface StatisticsFormProps {
+  register: any;
+  errors: any;
 }
 
-interface CardRatingProps {
-  product: RatingProps;
-  onChangeCreateData: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
-  setCreateData: React.Dispatch<React.SetStateAction<any>>;
-}
-
-const StatisticsForm: React.FC<CardRatingProps> = ({ product, onChangeCreateData }) => {
+const StatisticsForm: React.FC<StatisticsFormProps> = ({ register, errors }) => {
   return (
     <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
       <h2 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
@@ -28,15 +21,17 @@ const StatisticsForm: React.FC<CardRatingProps> = ({ product, onChangeCreateData
           </label>
           <input
             type="number"
-            name="rating"
-            value={product.rating}
-            onChange={onChangeCreateData}
+            {...register('rating', { valueAsNumber: true })}
             min="0"
             max="5"
             step="0.1"
-            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className={`w-full bg-slate-700/50 border ${errors.rating ? 'border-red-500' : 'border-slate-600'
+              } text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all`}
             placeholder="4.8"
           />
+          {errors.rating && (
+            <p className="text-red-500 text-xs mt-1">{errors.rating.message}</p>
+          )}
         </div>
 
         <div>
@@ -45,13 +40,15 @@ const StatisticsForm: React.FC<CardRatingProps> = ({ product, onChangeCreateData
           </label>
           <input
             type="number"
-            name="reviewsCount"
-            value={product.reviewsCount}
-            onChange={onChangeCreateData}
+            {...register('reviewsCount', { valueAsNumber: true })}
             min="0"
-            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className={`w-full bg-slate-700/50 border ${errors.reviewsCount ? 'border-red-500' : 'border-slate-600'
+              } text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all`}
             placeholder="112"
           />
+          {errors.reviewsCount && (
+            <p className="text-red-500 text-xs mt-1">{errors.reviewsCount.message}</p>
+          )}
         </div>
 
         <div>
@@ -60,13 +57,15 @@ const StatisticsForm: React.FC<CardRatingProps> = ({ product, onChangeCreateData
           </label>
           <input
             type="number"
-            name="soldCount"
-            value={product.soldCount}
-            onChange={onChangeCreateData}
+            {...register('soldCount', { valueAsNumber: true })}
             min="0"
-            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className={`w-full bg-slate-700/50 border ${errors.soldCount ? 'border-red-500' : 'border-slate-600'
+              } text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all`}
             placeholder="890"
           />
+          {errors.soldCount && (
+            <p className="text-red-500 text-xs mt-1">{errors.soldCount.message}</p>
+          )}
         </div>
       </div>
     </div>

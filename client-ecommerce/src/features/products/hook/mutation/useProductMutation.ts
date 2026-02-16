@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { Product } from "../../types/product.types";
 import { productService } from "../../services/productService";
 import { queryKeys } from "../../../../shared/lib/queryClient";
 import { toast } from "sonner";
@@ -9,7 +8,7 @@ export const useCreateProductMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: (product: Partial<Product>) => productService.create(product),
+        mutationFn: (product: FormData) => productService.create(product),
         onSuccess: (response: any) => {
             queryClient.invalidateQueries({ queryKey: ['products'] });
 
@@ -25,19 +24,47 @@ export const useUpdateProductMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: ({ id, data }: { id: string, data: Partial<Product> }) => productService.update(id, data),
+        mutationFn: ({ id, data }: { id: string, data: FormData }) => productService.update(id, data),
         onSuccess: (response, variables) => {
             queryClient.invalidateQueries({ queryKey: ['products'] });
 
-            //Invalidar el detalle del producto
             queryClient.invalidateQueries({
                 queryKey: ['products', variables.id]
-            })
+            });
 
-            queryClient.setQueryData(
-                queryKeys.products.detail(variables.id),
-                response
-            )
+            if (queryKeys?.products?.detail) {
+                queryClient.setQueryData(
+                    queryKeys.products.detail(variables.id),
+                    response.data || response
+                );
+            }
+
+            toast.success(response.message || "Producto actualizado exitosamente");
+        },
+        onError: (error: any) => {
+            toast.error(error.response?.data.message || "Error al actualizar el producto");
+        }
+    })
+}
+
+export const useUpdatePublishProductMutation = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: ({ id, isPublished }: { id: string, isPublished: boolean }) => productService.updatePublish(id, isPublished),
+        onSuccess: (response, variables) => {
+            queryClient.invalidateQueries({ queryKey: ['products'] });
+
+            queryClient.invalidateQueries({
+                queryKey: ['products', variables.id]
+            });
+
+            if (queryKeys?.products?.detail) {
+                queryClient.setQueryData(
+                    queryKeys.products.detail(variables.id),
+                    response.data || response
+                );
+            }
 
             toast.success(response.message || "Producto actualizado exitosamente");
         },

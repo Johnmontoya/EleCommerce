@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useProduct } from "../../hook/queries/useProduct";
-import { useDeleteProductMutation, useUpdateProductMutation } from "../../hook/mutation/useProductMutation";
+import { useDeleteProductMutation, useUpdateProductMutation, useUpdatePublishProductMutation } from "../../hook/mutation/useProductMutation";
 import LoadingFallback from "../../../../shared/ui/LoadingFallback";
 import Sidebar from "../../../dashboard/components/Sidebar";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
@@ -20,7 +20,7 @@ const DashViewProductPage: React.FC = () => {
 
     const { data: product, isLoading } = useProduct(id!);
     const deleteProduct = useDeleteProductMutation();
-    const updateProduct = useUpdateProductMutation();
+    const updateProduct = useUpdatePublishProductMutation();
 
     const Cancel = () => { };
 
@@ -41,7 +41,7 @@ const DashViewProductPage: React.FC = () => {
         if (product) {
             await updateProduct.mutateAsync({
                 id: product.id,
-                data: { isPublished: !product.isPublished }
+                isPublished: !product.isPublished
             });
         }
     };

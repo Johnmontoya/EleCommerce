@@ -15,6 +15,14 @@ export const handleError = (error: unknown, res: Response): void => {
         return;
     }
 
+    if (error instanceof Error && error.message?.includes('ImageKit')) {
+        res.status(500).json({
+            success: false,
+            message: "Error al subir imágenes"
+        });
+        return;
+    }
+
     if (error instanceof Error) {
         if (error.message.includes('El email ya esta registrado')) {
             res.status(400).json({

@@ -8,6 +8,7 @@ export const endpoints = {
         search: '/products/products/search',
         create: '/products/products',
         update: (id: string) => `/products/products/${id}`,
+        updatePublish: (id: string) => `/products/products/${id}/publish`,
         delete: (id: string) => `/products/products/${id}`,
         deleteMany: '/products/products',
         analyzeTitle: '/products/products/analyze-title',

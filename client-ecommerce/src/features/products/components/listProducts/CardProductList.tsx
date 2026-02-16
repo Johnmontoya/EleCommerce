@@ -20,7 +20,7 @@ const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
       productId: product?.id!,
       quantity: 1,
       name: product?.name!,
-      image: product?.images![0]!,
+      image: product?.images![0].url!,
       price: product?.price!,
       discount: product?.priceDiscount!,
       stock: product?.stock!,
@@ -44,7 +44,7 @@ const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
           </div>
         ) : null}
         <img
-          src={product.images![0]}
+          src={product.images![0].url}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
         />

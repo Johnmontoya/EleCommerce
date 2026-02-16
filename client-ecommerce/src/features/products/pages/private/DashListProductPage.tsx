@@ -33,6 +33,8 @@ const DashListProductPage = () => {
         category: selectedCategory || undefined,
     });
 
+    console.log(products);
+
     // Calcular índices para "cortar" la lista
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -90,7 +92,6 @@ const DashListProductPage = () => {
                                 handleBulkDelete={handleBulkDelete}
                             />
                         )}
-
 
                         {/* Products Table */}
                         <div className="w-[500px] md:w-[420px] lg:w-[680px] xl:w-full 2xl:w-full bg-slate-800/50 border-2 border-slate-700 rounded-2xl overflow-hidden backdrop-blur-sm">

@@ -3,8 +3,12 @@ import { endpoints } from "../api/endpoints";
 import type { ApiResponse, Product, ProductAutocomplete, ProductFilters } from "../types/product.types";
 
 export const productService = {
-    create: async (product: Partial<Product>): Promise<ApiResponse<Product>> => {
-        const { data } = await apiClient.post(endpoints.products.create, product);
+    create: async (product: FormData): Promise<ApiResponse<Product>> => {
+        const { data } = await apiClient.post(endpoints.products.create, product, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
         return data;
     },
 
@@ -53,9 +57,21 @@ export const productService = {
 
     update: async (
         id: string,
-        product: Partial<Product>
+        product: FormData
     ): Promise<ApiResponse<Product>> => {
-        const { data } = await apiClient.put(endpoints.products.update(id), product);
+        const { data } = await apiClient.put(endpoints.products.update(id), product, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return data;
+    },
+
+    updatePublish: async (
+        id: string,
+        isPublished: boolean
+    ): Promise<ApiResponse<Product>> => {
+        const { data } = await apiClient.put(endpoints.products.updatePublish(id), { isPublished });
         return data;
     },
 

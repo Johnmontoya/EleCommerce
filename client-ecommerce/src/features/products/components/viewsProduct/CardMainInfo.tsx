@@ -13,7 +13,7 @@ const CardMainInfo: React.FC<CardMainInfoProps> = ({ product }) => {
                     {product.images?.map((img, idx) => (
                         <img
                             key={idx}
-                            src={img}
+                            src={img.url}
                             alt={`${product.name} ${idx + 1}`}
                             className="w-full h-48 object-cover rounded-lg"
                         />

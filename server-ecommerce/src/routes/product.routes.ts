@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ProductController } from "../presentation/controllers/ProductController.js";
 import { CreateProductUseCase, GetProductByIdUseCase, GetAllProductsUseCase, UpdateProductUseCase, GetProductBySlugUseCase, SearchProductsAutoCompleteUseCase, GetProductsByCategoryUseCase, GetProductsByBrandUseCase, DeleteProductUseCase, DeleteManyProductsUseCase, GetBannersUseCase, UpdateBannerUseCase, DeleteBannerUseCase, GetShowcaseUseCase, AnalyzeTitleUseCase } from "../application/use-cases/products/ProductUseCase.js";
 import { MongoProductRepository } from "../infrastructure/repositories/MongoProductRepository.js";
+import { upload } from "../infrastructure/middlewares/multerMiddleware.js";
 
 const router = Router();
 
@@ -41,15 +42,16 @@ const productController = new ProductController(
     analyzeTitleUseCase
 )
 
-router.post('/products', productController.createProduct);
+router.post('/products', upload.array('images', 5), productController.createProduct);
 router.get('/products', productController.getAll);
 router.get('/products/search', productController.searchAutoComplete); // ⚠️ Debe ir ANTES de /:id
 router.get('/products/slug/:slug', productController.getBySlug);
 router.get('/products/category/:category', productController.getByCategory);
 router.get('/products/brand/:brand', productController.getByBrand);
 router.get('/products/:id', productController.getIdProduct);
-router.put('/products/:id', productController.updateProduct);
-router.delete('/products/:id', productController.delete);
+router.put('/products/:id', upload.array('images', 5), productController.updateProduct);
+router.put('/products/:id/publish', productController.updatePublish);
+router.delete('/products/:id', productController.deleteProduct);
 router.delete('/products', productController.deleteMany);
 router.get('/banners', productController.getAllBanners);
 router.put('/banners/:id', productController.updateBanner);

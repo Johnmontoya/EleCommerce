@@ -21,8 +21,8 @@ export interface Variant {
 }
 
 export interface Attribute {
-  name: string | null;
-  value: string | null;
+  name: string;
+  value: string;
 }
 
 export interface Brand {
@@ -31,6 +31,7 @@ export interface Brand {
 }
 
 export interface Dimensions {
+  weight: number;
   height: number;
   width: number;
   depth: number;
@@ -50,7 +51,7 @@ export interface Product {
   stock: number;
   brand: string;
   category: Category;
-  images?: string[];
+  images?: { url: string; fileId: string }[];
   image?: string;
   tags?: string[];
   priceDiscount?: number;
@@ -58,8 +59,8 @@ export interface Product {
   barcode?: string;
   variants?: Variant[];
   attributes?: Attribute[];
-  dimensions: Dimensions;
-  shipping: Shipping;
+  dimensions?: Dimensions;
+  shipping?: Shipping;
   rating?: number;
   reviewsCount?: number;
   isPublished?: boolean;

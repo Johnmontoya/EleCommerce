@@ -1,4 +1,5 @@
 import { type Request, type Response } from "express";
+import fs from "fs";
 import type {
   CreateProductUseCase,
   GetProductByIdUseCase,
@@ -21,6 +22,7 @@ import {
   UpdateProductSchema,
 } from "../../infrastructure/validation/Product.schema.js";
 import { handleError } from "../../infrastructure/middlewares/errorHandler.js";
+import clientImageKit from "../../config/imageKit.js";
 
 export interface IAutoCompleteSearch {
   terms?: string;
@@ -48,13 +50,113 @@ export class ProductController {
 
   createProduct = async (req: Request, res: Response): Promise<void> => {
     try {
-      const validatedData = CreateProductSchema.parse(req.body);
-      const product = await this.createProductUseCase.execute(validatedData);
+      const data = req.body;
+
+      const name = data.name;
+      const slug = data.slug;
+      const description = data.description;
+      const sku = data.sku;
+      const category = data.category;
+
+      // 2️⃣ Strings opcionales
+      const barcode = data.barcode || "";
+      const brand = data.brand || "";
+      const digitalFile = data.digitalFile || "";
+
+      // 3️⃣ Números (vienen como strings desde FormData)
+      const price = Number(data.price);
+      const priceDiscount = Number(data.priceDiscount);
+      const stock = Number(data.stock);
+      const rating = Number(data.rating);
+      const reviewsCount = Number(data.reviewsCount);
+      const soldCount = Number(data.soldCount);
+
+      // 4️⃣ Booleanos (vienen como strings "true"/"false")
+      const isDigital = data.isDigital === 'true';
+      const isPublished = data.isPublished === 'true';
+
+      // 5️⃣ Arrays (vienen como JSON strings)
+      const tags = data.tags ? JSON.parse(data.tags) : [];
+      const variants = data.variants ? JSON.parse(data.variants) : [];
+      const attributes = data.attributes ? JSON.parse(data.attributes) : [];
+      const relatedProducts = data.relatedProducts ? JSON.parse(data.relatedProducts) : [];
+
+      // 6️⃣ Objetos (vienen como JSON strings)
+      const dimensions = data.dimensions ? JSON.parse(data.dimensions) : {
+        weight: 0,
+        width: 0,
+        height: 0,
+        depth: 0
+      };
+
+      const shipping = data.shipping ? JSON.parse(data.shipping) : {
+        free: false,
+        cost: 0
+      };
+
+      const validatedData = CreateProductSchema.parse({
+        name,
+        slug,
+        description,
+        price,
+        priceDiscount,
+        stock,
+        sku,
+        barcode,
+        brand,
+        category,
+        tags,
+        rating,
+        reviewsCount,
+        variants,
+        attributes,
+        dimensions,
+        shipping,
+        isDigital,
+        digitalFile,
+        relatedProducts,
+        soldCount,
+        isPublished
+      });
+
+      const files = req.files as Express.Multer.File[];
+
+      if (!files || files.length === 0) {
+        res.status(400).json({
+          success: false,
+          message: "Debe subir al menos una imagen"
+        });
+        return;
+      }
+
+      const uploadPromises = files.map((file, index) => {
+        return clientImageKit.upload({
+          file: file.buffer,
+          fileName: `${Date.now()}-${file.originalname}`,
+          folder: "/EleCommerce/products"
+        });
+      });
+
+      const uploadedImages = await Promise.all(uploadPromises);
+
+      const imagesData = uploadedImages.map((img, index) => {
+        return {
+          url: img.url,
+          fileId: img.fileId
+        };
+      });
+
+      const productData = {
+        ...validatedData,
+        images: imagesData,
+      };
+
+      const product = await this.createProductUseCase.execute(productData);
 
       res.status(201).json({
         success: true,
-        data: product,
-        message: "Producto creado correctamente",
+        message: "Producto creado exitosamente",
+        data: product
       });
     } catch (error: any) {
       handleError(error, res);
@@ -64,29 +166,192 @@ export class ProductController {
   updateProduct = async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
-      const validatedData = UpdateProductSchema.parse(req.body);
+      const data = req.body;
+
+      const name = data.name;
+      const slug = data.slug;
+      const description = data.description;
+      const sku = data.sku;
+      const category = data.category;
+
+      const barcode = data.barcode || "";
+      const brand = data.brand || "";
+      const digitalFile = data.digitalFile || "";
+
+      const price = Number(data.price);
+      const priceDiscount = Number(data.priceDiscount);
+      const stock = Number(data.stock);
+      const rating = Number(data.rating);
+      const reviewsCount = Number(data.reviewsCount);
+      const soldCount = Number(data.soldCount);
+
+      const isDigital = Boolean(data.isDigital);
+      const isPublished = Boolean(data.isPublished);
+
+      const tags = data.tags ? JSON.parse(data.tags) : [];
+      const variants = data.variants ? JSON.parse(data.variants) : [];
+      const attributes = data.attributes ? JSON.parse(data.attributes) : [];
+      const relatedProducts = data.relatedProducts ? JSON.parse(data.relatedProducts) : [];
+
+      const dimensions = data.dimensions ? JSON.parse(data.dimensions) : {
+        weight: 0,
+        width: 0,
+        height: 0,
+        depth: 0
+      };
+
+      const shipping = data.shipping ? JSON.parse(data.shipping) : {
+        free: false,
+        cost: 0
+      };
+
+      const currentProduct = await this.getProductByIdUseCase.execute(id!);
+
+      if (!currentProduct) {
+        res.status(404).json({
+          success: false,
+          message: "Producto no encontrado"
+        });
+        return;
+      }
+
+      let currentImages = currentProduct.images || [];
+
+      // ============================================
+      if (data.imagesToDelete) {
+        const imagesToDelete = JSON.parse(data.imagesToDelete) as string[];
+
+        if (imagesToDelete.length > 0) {
+          try {
+            await clientImageKit.bulkDeleteFiles(imagesToDelete);
+
+            currentImages = currentImages.filter(
+              img => !imagesToDelete.includes(img.fileId)
+            );
+          } catch (error) {
+            console.error("Error al eliminar imágenes de ImageKit:", error);
+          }
+        }
+      }
+
+      const files = req.files as Express.Multer.File[];
+      let newImagesData: Array<{ url: string; fileId: string; }> = [];
+
+      if (files && files.length > 0) {
+        const uploadPromises = files.map(file =>
+          clientImageKit.upload({
+            file: file.buffer,
+            fileName: `${Date.now()}-${file.originalname}`,
+            folder: "/EleCommerce/products"
+          })
+        );
+
+        const uploadedImages = await Promise.all(uploadPromises);
+
+        newImagesData = uploadedImages.map(img => ({
+          url: img.url,
+          fileId: img.fileId
+        }));
+      }
+
+      const allImages = [...currentImages, ...newImagesData];
+
+      if (allImages.length === 0) {
+        res.status(400).json({
+          success: false,
+          message: "El producto debe tener al menos una imagen"
+        });
+        return;
+      }
+
+      const updatedProductData = {
+        name,
+        slug,
+        description,
+        price,
+        priceDiscount,
+        stock,
+        sku,
+        barcode,
+        brand,
+        category,
+        tags,
+        rating,
+        reviewsCount,
+        variants,
+        attributes,
+        dimensions,
+        shipping,
+        isDigital,
+        digitalFile,
+        relatedProducts,
+        soldCount,
+        isPublished,
+        images: allImages
+      };
 
       const product = await this.updateProductUseCase.execute(
         id!,
-        validatedData
+        updatedProductData
       );
 
       if (!product) {
         res.status(404).json({
           success: false,
-          message: "Producto no encontrado",
+          message: "Error al actualizar el producto"
         });
         return;
       }
 
       res.status(200).json({
         success: true,
-        data: product,
-        message: "Producto actualizado correctamente",
+        message: "Producto actualizado exitosamente",
+        data: product
       });
-    } catch (error) {
-      console.log(error);
+
+    } catch (error: any) {
       handleError(error, res);
+    }
+  };
+
+  updatePublish = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params;
+      const data = req.body;
+
+      const isPublished = data.isPublished;
+
+      const product = await this.updateProductUseCase.execute(
+        id!,
+        { isPublished }
+      );
+
+      if (!product) {
+        res.status(404).json({
+          success: false,
+          message: "Error al actualizar el producto"
+        });
+        return;
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Producto actualizado exitosamente",
+        data: product
+      });
+
+    } catch (error: any) {
+      handleError(error, res);
+    }
+  };
+
+  deleteProductImages = async (imageIds: string[]): Promise<void> => {
+    for (const imageId of imageIds) {
+      try {
+        await clientImageKit.deleteFile(imageId);
+      } catch (error) {
+        console.error(`Error al eliminar imagen ${imageId} de ImageKit:`, error);
+      }
     }
   };
 
@@ -123,7 +388,6 @@ export class ProductController {
         filters.offset = Number(req.query.offset);
       }
 
-      // Solo agregar isPublished si está presente
       if (req.query.isPublished !== undefined && req.query.isPublished !== null) {
         filters.isPublished = req.query.isPublished === 'true';
       }
@@ -267,35 +531,47 @@ export class ProductController {
     }
   };
 
-  delete = async (req: Request, res: Response): Promise<void> => {
+  deleteProduct = async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
 
-      if (!id) {
-        res.status(400).json({
-          success: false,
-          message: "ID es requerido",
-        });
+      console.log("=== ELIMINANDO PRODUCTO ===");
+      console.log("ID:", id);
+
+      const product = await this.getProductByIdUseCase.execute(id!);
+
+      const fileIds = product?.images.map(img => img.fileId);
+
+      if (fileIds!.length > 0) {
+        console.log(`Eliminando ${fileIds!.length} imágenes de ImageKit...`);
+        try {
+          await clientImageKit.bulkDeleteFiles(fileIds!);
+          console.log("✓ Imágenes eliminadas de ImageKit");
+        } catch (error) {
+          console.error("Error al eliminar imágenes de ImageKit:", error);
+        }
       }
 
-      const product = await this.deleteProductUseCase.execute(id!);
+      const deletedProduct = await this.deleteProductUseCase.execute(id!);
 
-      if (!product) {
-        res.status(404).json({
-          success: false,
-          message: "Producto no encontrado",
-        });
-        return;
-      }
+      console.log("=== PRODUCTO ELIMINADO EXITOSAMENTE ===");
 
       res.status(200).json({
         success: true,
-        data: product,
+        message: "Producto eliminado exitosamente",
+        data: deletedProduct
       });
-    } catch (error) {
-      handleError(error, res);
+    } catch (error: any) {
+      console.error("=== ERROR AL ELIMINAR PRODUCTO ===");
+      console.error("Error:", error);
+
+      res.status(400).json({
+        success: false,
+        message: error.message || "Error al eliminar el producto"
+      });
     }
   };
+
 
   deleteMany = async (req: Request, res: Response): Promise<void> => {
     try {

@@ -1,16 +1,15 @@
 import { ProductEntity } from "../../../domain/entities/Product.js";
 import type {
-  AnalyzeTitle,
   AnalyzeTitleResponse,
   IProductrepository,
   ProductFilters,
 } from "../../../domain/repositories/IProductRepository.js";
-import type { CreateProductInput, ProductAutocompleteDto, UpdateProductInput } from "../../Dto/product.dto.js";
+import type { CreateProduct, ProductAutocompleteDto, UpdateProductInput } from "../../Dto/product.dto.js";
 
 export class CreateProductUseCase {
   constructor(private productRepository: IProductrepository) { }
 
-  async execute(input: CreateProductInput): Promise<ProductEntity> {
+  async execute(input: CreateProduct): Promise<ProductEntity> {
     const product = ProductEntity.create(input);
     return await this.productRepository.create(product);
   }
@@ -52,11 +51,22 @@ export class UpdateProductUseCase {
       }
     }
 
-    const updateData = Object.fromEntries(
-      Object.entries(input).filter(([_, value]) => value !== undefined)
-    ) as Partial<ProductEntity>;
+    const updateData: Partial<ProductEntity> = {};
 
-    return await this.productRepository.update(id, updateData);
+    for (const [key, value] of Object.entries(input)) {
+      if (value !== undefined) {
+        (updateData as any)[key] = value;
+      }
+    }
+
+    if ((updateData as any).images !== undefined) {
+      if (!Array.isArray((updateData as any).images) || (updateData as any).images.length === 0) {
+        throw new Error('El producto debe tener al menos una imagen');
+      }
+    }
+
+    const updatedProduct = await this.productRepository.update(id, updateData);
+    return updatedProduct;
   }
 }
 
@@ -153,9 +163,10 @@ export class SearchProductsAutoCompleteUseCase {
       name: product.name,
       slug: product.slug,
       price: product.price,
+      images: product.images,
       priceDiscount: product.priceDiscount,
       category: product.category,
-      image: product.images[0]
+      image: product.images[0]!.url
     }));
   }
 }

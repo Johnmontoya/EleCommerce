@@ -1,7 +1,6 @@
-import type { BannerResponse, CreateBannerInput } from "../../application/Dto/product.dto.js";
 import main from "../../config/gemini.js";
 import { ProductEntity } from "../../domain/entities/Product.js";
-import type { AnalyzeTitle, AnalyzeTitleResponse, IProductrepository, ProductFilters } from "../../domain/repositories/IProductRepository.js";
+import type { AnalyzeTitleResponse, IProductrepository, ProductFilters } from "../../domain/repositories/IProductRepository.js";
 import { ProductModel } from "../models/product.model.js";
 
 export class MongoProductRepository implements IProductrepository {
@@ -87,10 +86,15 @@ export class MongoProductRepository implements IProductrepository {
     try {
       const updated = await ProductModel.findByIdAndUpdate(
         id,
-        productData,
+        { $set: productData },
         { new: true, runValidators: true }
       );
-      return updated ? this.mapToEntity(updated) : null;
+
+      if (!updated) {
+        return null;
+      }
+
+      return this.mapToEntity(updated);
     } catch (error) {
       throw error;
     }
@@ -200,48 +204,66 @@ export class MongoProductRepository implements IProductrepository {
 
   async analyzeTitle(title: string): Promise<AnalyzeTitleResponse> {
     try {
-      const prompt = `Analiza el siguiente titulo del producto: ${title}. 
-      Devuelve un SOLO objeto JSON válido (sin markdown, sin explicaciones) con la siguiente estructura exacta:
+      const prompt = `
+      Analiza el siguiente titulo del producto: ${title}.
+
+      Devuelve únicamente un objeto JSON válido.
+      No agregues texto adicional.
+      No agregues explicaciones.
+      No uses markdown.
+      No agregues comentarios.
+
+      IMPORTANTE:
+      - Los números deben ser number (sin comillas).
+      - Los booleanos deben ser true o false (sin comillas).
+      - Los arrays deben ser arrays reales.
+      - Los objetos deben ser objetos reales.
+      - No serialices objetos como string.
+      - El resultado debe poder parsearse con JSON.parse() sin errores.
+      - El price debe ser con pesos Colombianos.
+      - El priceDiscount debe ser en porcentaje (%).
+
+      Estructura exacta requerida:
+
       {
-        "name": "nombre del producto",
-        "slug": "slug del producto en minusculas y guiones medios en vez de espacios",
-        "description": "descripcion detallada del producto",
-        "price": precio del producto en $COP,
-        "priceDiscount": precio con descuento del producto en porcentaje,
-        "stock": stock del producto,
-        "category": "categoria del producto debe ser una de estas dependiendo del producto: Consolas, Celulares, Tablets, Smartwatch, Computadoras, Audio",
-        "brand": "marca del producto",
-        "tags": Una o dos etiquetas relacionadas con el producto, presentadas en un array de strings, por ejemplo: ["tag1", "tag2"],
+        "name": string,
+        "slug": string,
+        "description": string,
+        "price": number,
+        "priceDiscount": number,
+        "stock": number,
+        "category": "Consolas" | "Celulares" | "Tablets" | "Smartwatch" | "Computadoras" | "Audio",
+        "brand": string,
+        "tags": string[],
         "dimensions": {
-          "weight": peso del producto en kg,
-          "width": ancho del producto en cm,
-          "height": altura del producto en cm,
-          "depth": profundidad del producto en cm
+          "weight": number,
+          "width": number,
+          "height": number,
+          "depth": number
         },
         "shipping": {
-          "free": true,
-          "cost": costo del envio en $COP
+          "free": boolean,
+          "cost": number
         },
-        "reviewsCount": 100,
-        "rating": 4.5,
-        "sku": "codigo unico de 12 digitos formado por letras y numeros",
-        "barcode": "codigo de barras puede ser inventado",
+        "reviewsCount": number,
+        "rating": number,
+        "sku": string,
+        "barcode": string,
         "variants": [
           {
-            "name": "Puede ser Color, Tamaño, etc",
-            "options": Las opciones de la variante en un array de strings, por ejemplo: ["option1", "option2", "option3"]
+            "name": string,
+            "options": string[]
           }
         ],
         "attributes": [
           {
-            "name": "Atributo del producto",
-            "value": "valor del atributo"
+            "name": string,
+            "value": string
           }
         ],
-        "soldCount": 1,
-        "isPublished": true
+        "soldCount": number,
+        "isPublished": boolean
       }
-      Importante: Debes devolver un JSON válido, sin markdown, sin explicaciones, sin saltos de línea, sin comillas simples, sin comillas dobles, sin nada más que el JSON.
       `;
       const response = await main(prompt);
       let jsonString = response!.trim();
@@ -257,12 +279,12 @@ export class MongoProductRepository implements IProductrepository {
         name: productData.name || title,
         slug: productData.slug,
         description: productData.description,
-        price: productData.price,
-        priceDiscount: productData.priceDiscount,
-        stock: productData.stock,
+        price: parseInt(productData.price),
+        priceDiscount: parseInt(productData.priceDiscount),
+        stock: parseInt(productData.stock),
         brand: productData.brand,
         category: productData.category,
-        tags: productData.tags,
+        tags: Array.from(productData.tags),
         dimensions: productData.dimensions,
         shipping: productData.shipping,
         reviewsCount: productData.reviewsCount,
@@ -289,17 +311,17 @@ export class MongoProductRepository implements IProductrepository {
       doc.priceDiscount,
       doc.stock,
       doc.brand,
-      doc.category,
       doc.images,
+      doc.category,
       doc.tags,
-      doc.dimensions,
-      doc.shipping,
-      doc.reviewsCount,
-      doc.rating,
-      doc.sku,
       doc.barcode,
+      doc.sku,
+      doc.rating,
+      doc.reviewsCount,
       doc.variants,
       doc.attributes,
+      doc.dimensions,
+      doc.shipping,
       doc.isDigital,
       doc.digitalFile,
       doc.relatedProducts,
