@@ -1,8 +1,6 @@
 import React from "react";
 import { BiPackage, BiSearch } from "react-icons/bi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import type { UseFormRegister, FieldErrors, UseFormWatch } from "react-hook-form";
-import type { ProductSchemaType } from "../../types/product.schema";
 import { useCategories } from "../../../categories/hook/queries/useCategory";
 import ButtonAction from "../../../../shared/ui/ButtonAction";
 

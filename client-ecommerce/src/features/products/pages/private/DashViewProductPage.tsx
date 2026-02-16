@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useProduct } from "../../hook/queries/useProduct";
-import { useDeleteProductMutation, useUpdateProductMutation, useUpdatePublishProductMutation } from "../../hook/mutation/useProductMutation";
+import { useDeleteProductMutation, useUpdatePublishProductMutation } from "../../hook/mutation/useProductMutation";
 import LoadingFallback from "../../../../shared/ui/LoadingFallback";
 import Sidebar from "../../../dashboard/components/Sidebar";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";

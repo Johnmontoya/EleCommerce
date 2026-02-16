@@ -39,7 +39,7 @@ const DashEditProductPage: React.FC = () => {
     const analyzeTitle = useAnalyzeTitleMutation();
 
     // Estado para imágenes
-    const [coverFile, setCoverFile] = useState<File | null>(null);
+    const [, setCoverFile] = useState<File | null>(null);
     const [coverPreview, setCoverPreview] = useState<string | null>(null);
     const [allImageFiles, setAllImageFiles] = useState<File[]>([]);
     const [existingImages, setExistingImages] = useState<ExistingImage[]>([]);

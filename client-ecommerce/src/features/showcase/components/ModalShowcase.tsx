@@ -94,7 +94,7 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
                 id: selectedProduct?.id || undefined,
                 productId: selectedProduct?.id || '',
                 productName: selectedProduct?.name || '',
-                productImage: selectedProduct?.images?.[0] || '',
+                productImage: selectedProduct?.images?.[0].url || '',
                 displaySections: formData.displaySections,
                 displayPriority: Number(formData.displayPriority) || 1,
                 isFeatured: formData.isFeatured,

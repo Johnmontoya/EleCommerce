@@ -1,7 +1,5 @@
 import React from "react";
 import { FaDollarSign } from "react-icons/fa";
-import type { UseFormRegister, FieldErrors, UseFormWatch } from "react-hook-form";
-import type { ProductSchemaType } from "../../types/product.schema";
 
 interface PriceFormProps {
   register: any;

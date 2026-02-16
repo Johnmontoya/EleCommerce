@@ -14,7 +14,7 @@ const Trends = () => {
     await addWishlistItem.mutateAsync({
       productId: item.id,
       productName: item.name,
-      productImage: item.images![0],
+      productImage: item.images![0].url,
       price: item.price,
       discount: item.priceDiscount!,
       category: item.category.slug,
@@ -46,7 +46,7 @@ const Trends = () => {
                 </div>
               ) : null}
               <img
-                src={item.images?.[0]}
+                src={item.images?.[0].url}
                 alt={item.name}
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
               />
