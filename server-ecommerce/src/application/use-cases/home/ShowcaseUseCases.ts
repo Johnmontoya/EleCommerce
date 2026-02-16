@@ -11,7 +11,6 @@ export class GetBannerProductsUseCase {
 
         return products
             .filter(p => p.displaySections?.includes('banner'))
-            .filter(p => p.isActiveInSection("banner"))
             .sort((a, b) => (a.displayPriority || 999) - (b.displayPriority || 999));
     }
 }
@@ -26,7 +25,6 @@ export class GetPromotionalProductsUseCase {
 
         return products
             .filter(p => p.displaySections?.includes('promotional'))
-            .filter(p => p.isActiveInSection("promotional"))
             .sort((a, b) => (a.displayPriority || 999) - (b.displayPriority || 999))
             .slice(0, 5);
     }
@@ -42,7 +40,6 @@ export class GetTrendsProductUseCase {
 
         return products
             .filter(p => p.displaySections?.includes('trending'))
-            .filter(p => p.isActiveInSection("trending"))
             .sort((a, b) => (a.displayPriority || 999) - (b.displayPriority || 999))
             .slice(0, 5);
     }
