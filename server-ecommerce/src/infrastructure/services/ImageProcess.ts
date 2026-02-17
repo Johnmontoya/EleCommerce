@@ -47,22 +47,17 @@ export class ImageProcessor {
      * @param buffer - Buffer de la imagen original
      * @returns Objeto con diferentes tamaños
      */
-    static async generateResponsiveSizes(buffer: Buffer): Promise<{
-        thumbnail: Buffer;
-        small: Buffer;
-        medium: Buffer;
-        large: Buffer;
-    }> {
+    static async generateResponsiveSizes(buffer: Buffer): Promise<any> {
         try {
 
-            const [thumbnail, small, medium, large] = await Promise.all([
+            const cover = await Promise.all([
                 sharp(buffer)
                     .resize(600, 600, { fit: 'cover' })
                     .webp({ quality: 85 })
                     .toBuffer(),
             ]);
 
-            return { thumbnail, small, medium, large };
+            return cover;
         } catch (error) {
             console.error('❌ Error al generar tamaños:', error);
             throw new Error('Error al generar tamaños responsivos');
