@@ -1,5 +1,5 @@
 import { type Request, type Response } from "express";
-import fs from "fs";
+import { ImageProcessor } from "../../infrastructure/services/ImageProcess.js";
 import type {
   CreateProductUseCase,
   GetProductByIdUseCase,
@@ -19,7 +19,6 @@ import type {
 } from "../../application/use-cases/products/ProductUseCase.js";
 import {
   CreateProductSchema,
-  UpdateProductSchema,
 } from "../../infrastructure/validation/Product.schema.js";
 import { handleError } from "../../infrastructure/middlewares/errorHandler.js";
 import clientImageKit from "../../config/imageKit.js";
@@ -129,10 +128,19 @@ export class ProductController {
         return;
       }
 
-      const uploadPromises = files.map((file, index) => {
+      const uploadPromises = files.map(async (file, index) => {
+        const processedBuffer = await ImageProcessor.processImage(file.buffer, {
+          width: 600,
+          height: 600,
+          quality: 85,
+          fit: 'cover'
+        });
+
+        const webpFileName = `${Date.now()}-${index}-${file.originalname.replace(/\.[^/.]+$/, '')}.webp`;
+
         return clientImageKit.upload({
-          file: file.buffer,
-          fileName: `${Date.now()}-${file.originalname}`,
+          file: processedBuffer,
+          fileName: webpFileName,
           folder: "/EleCommerce/products"
         });
       });
@@ -238,13 +246,22 @@ export class ProductController {
       let newImagesData: Array<{ url: string; fileId: string; }> = [];
 
       if (files && files.length > 0) {
-        const uploadPromises = files.map(file =>
-          clientImageKit.upload({
-            file: file.buffer,
-            fileName: `${Date.now()}-${file.originalname}`,
+        const uploadPromises = files.map(async (file, index) => {
+          const processedBuffer = await ImageProcessor.processImage(file.buffer, {
+            width: 600,
+            height: 600,
+            quality: 85,
+            fit: 'cover'
+          });
+
+          const webpFileName = `${Date.now()}-${index}-${file.originalname.replace(/\.[^/.]+$/, '')}.webp`;
+
+          return clientImageKit.upload({
+            file: processedBuffer,
+            fileName: webpFileName,
             folder: "/EleCommerce/products"
-          })
-        );
+          });
+        });
 
         const uploadedImages = await Promise.all(uploadPromises);
 
