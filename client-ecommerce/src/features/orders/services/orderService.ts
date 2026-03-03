@@ -2,7 +2,34 @@ import { apiClient } from "../../../shared/api/client";
 import { endpoints } from "../api/endpoints";
 import type { OrderFilters, OrderResponse } from "../types/order.types";
 
+export interface CreateOrderPayload {
+    userId: string;
+    subtotal: number;
+    tax: number;
+    shippingCost: number;
+    discount: number;
+    total: number;
+    paymentMethod: string;
+    addressId: string;
+    trackingNumber: string;
+    notes: string | null;
+    items: {
+        cartId: string;
+        name: string;
+        image: string;
+        productId: string;
+        quantity: number;
+        price: number;
+        discount: number;
+        total: number;
+    }[];
+}
+
 export const orderService = {
+    createOrder: async (payload: CreateOrderPayload): Promise<{ orderId: string; total: number }> => {
+        const { data } = await apiClient.post(endpoints.createOrder, payload);
+        return data.data;
+    },
     getOrderAll: async (filters?: OrderFilters): Promise<OrderResponse[]> => {
         const { data } = await apiClient.get(endpoints.orders, { params: filters });
         return data.data;

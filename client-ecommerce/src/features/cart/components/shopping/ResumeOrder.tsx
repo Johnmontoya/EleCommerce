@@ -121,7 +121,8 @@ const ResumeOrder: React.FC<ProductProps> = ({ products }) => {
         toast.error("Por favor ingresa a la cuenta para realizar el pedido");
         return;
       }
-      await createOrderMutation.mutateAsync(orderData);
+      console.log(orderData)
+      //await createOrderMutation.mutateAsync(orderData);
       navigate("/dashboard/orders/confirmation?trackingNumber=" + orderData.trackingNumber);
     } catch (error) {
       if (error instanceof AxiosError && error.response?.data?.errors) {

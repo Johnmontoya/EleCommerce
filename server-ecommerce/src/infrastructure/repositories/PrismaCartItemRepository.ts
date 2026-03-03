@@ -76,6 +76,7 @@ export class PrismaCartItemRepository implements ICartRepository {
     }
     async updateCart(id: string, quantity: number): Promise<boolean> {
         try {
+            console.log(id, quantity)
             await prisma.cartItem.update({ where: { id }, data: { quantity } });
             return true;
         } catch (error) {

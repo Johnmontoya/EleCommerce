@@ -2,7 +2,7 @@ import type { CreateOrderInput, CreateOrderItem } from "../../application/Dto/or
 import type { OrderEntity } from "../entities/Orders.js";
 
 export interface IOrderRepository {
-    createOrder(order: CreateOrderInput, items: CreateOrderItem[]): Promise<boolean>;
+    createOrder(order: CreateOrderInput, items: CreateOrderItem[]): Promise<OrderEntity | null>;
     getAllOrders(filters?: OrderFilters): Promise<OrderEntity[]>;
     cancelOrder(orderId: string): Promise<boolean>;
     getAllOrdersByUser(userId: string, filters?: OrderFilters): Promise<OrderEntity[]>;

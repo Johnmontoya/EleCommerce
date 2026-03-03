@@ -55,12 +55,12 @@ const routerMeta: RouterMetaType = {
     requiresLayout: true,
     isAdmin: false,
   },
-  ShoppingCartPage: {
-    name: "Cart",
+  StripePaymentPage: {
+    name: "StripePayment",
     path: "/cart",
     feature: 'cart',
     site: 'public',
-    page: "ShoppingCartPage",
+    page: "StripePaymentPage",
     requiresLayout: true,
     isAdmin: false,
   },
@@ -306,7 +306,7 @@ const routerMeta: RouterMetaType = {
     page: "NotFoundPage",
     requiresLayout: false,
     isAdmin: false,
-  },
+  }
 };
 
 export default routerMeta;

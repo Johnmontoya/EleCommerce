@@ -20,14 +20,16 @@ export class PrismaOrderRepository implements IOrderRepository {
     async createOrder(
         order: CreateOrderInput,
         items: CreateOrderItem[]
-    ): Promise<boolean> {
+    ): Promise<OrderEntity | null> {
 
         if (items.length === 0) {
             console.error("No se pueden crear pedidos sin ítems");
-            return false;
+            return null;
         }
 
         try {
+            let createdOrderResult: OrderEntity | null = null;
+
             await prisma.$transaction(async (tx) => {
                 // 1. Crear la orden principal
                 const createdOrder = await tx.order.create({
@@ -40,9 +42,9 @@ export class PrismaOrderRepository implements IOrderRepository {
                         total: order.total,
                         paymentMethod: order.paymentMethod,
                         addressId: order.addressId,
-                        trackingNumber: order.trackingNumber || null, // opcional
-                        notes: order.notes || null, // opcional
-                        status: "PENDING", // recomendado: agregar un status por defecto
+                        trackingNumber: order.trackingNumber || null,
+                        notes: order.notes || null,
+                        status: "PENDING",
                     },
                 });
 
@@ -50,7 +52,9 @@ export class PrismaOrderRepository implements IOrderRepository {
                     throw new Error("Error al crear la orden principal");
                 }
 
-                // 2. Crear TODOS los ítems del pedido de una vez (más eficiente y seguro)
+                createdOrderResult = createdOrder as unknown as OrderEntity;
+
+                // 2. Crear TODOS los ítems del pedido de una vez
                 const orderItemsData = items.map((item) => ({
                     orderId: createdOrder.id,
                     productId: item.productId,
@@ -76,13 +80,13 @@ export class PrismaOrderRepository implements IOrderRepository {
                     const updatedProduct = await ProductModel.findOneAndUpdate(
                         {
                             _id: item.productId,
-                            stock: { $gte: item.quantity } // Verifica que haya suficiente stock
+                            stock: { $gte: item.quantity }
                         },
                         {
-                            $inc: { stock: -item.quantity } // Resta la cantidad
+                            $inc: { stock: -item.quantity }
                         },
                         {
-                            new: true      // Importante: dentro de la transacción
+                            new: true
                         }
                     );
 
@@ -94,10 +98,10 @@ export class PrismaOrderRepository implements IOrderRepository {
                 await tx.cart.delete({ where: { id: items[0]!.cartId } });
             });
 
-            return true;
+            return createdOrderResult;
         } catch (error) {
             console.error("Error creando el pedido:", error);
-            return false;
+            return null;
         }
     }
     async getAllOrders(filters?: OrderFilters): Promise<OrderEntity[]> {
@@ -151,7 +155,7 @@ export class PrismaOrderRepository implements IOrderRepository {
     getTrackingNumber(trackingNumber: string): Promise<OrderEntity[]> {
         return prisma.order.findMany({
             where: {
-                trackingNumber
+                id: trackingNumber
             },
             include: {
                 items: true,

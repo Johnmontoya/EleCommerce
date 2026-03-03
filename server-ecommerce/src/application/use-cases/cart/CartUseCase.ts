@@ -31,8 +31,8 @@ export class DeleteCartUseCase {
 export class UpdateCartUseCase {
     constructor(private cartRepository: ICartRepository) { }
 
-    async execute(cartId: string, cartItemData: CreateCartInput) {
-        const data = await this.cartRepository.updateCart(cartId, cartItemData.quantity);
+    async execute(cartId: string, quantity: number) {
+        const data = await this.cartRepository.updateCart(cartId, quantity);
         return data;
     }
 }

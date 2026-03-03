@@ -119,8 +119,9 @@ model Order {
   paymentMethod  String?
   addressId      String
   address        Address       @relation(fields: [addressId], references: [id], onDelete: Cascade)
-  trackingNumber String?
-  notes          String?
+  trackingNumber    String?
+  paymentIntentId   String?  // Stripe PaymentIntent ID
+  notes             String?
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
 

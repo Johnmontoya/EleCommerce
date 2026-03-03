@@ -18,10 +18,22 @@ export class OrderController {
             const validateData = CreateOrderSchema.parse(req.body);
 
             const order = await this.createOrderUseCase.execute(validateData, req.body.items);
+
+            if (!order) {
+                res.status(500).json({
+                    success: false,
+                    message: 'Error al crear la orden. Verifica el stock de los productos.',
+                });
+                return;
+            }
+
             res.status(201).json({
                 success: true,
                 message: 'Orden creada exitosamente',
-                data: order
+                data: {
+                    orderId: (order as any).id,
+                    total: (order as any).total,
+                },
             });
         } catch (error) {
             handleError(error, res);
