@@ -67,7 +67,7 @@ const DashEditCategoryPage = () => {
     }
 
     return (
-        <div className="min-h-screen background-light dark:background-light">
+        <div className="min-h-screen bg-[#020202] text-white font-mono selection:bg-[#00f0ff] selection:text-black">
             <div className="flex">
                 {/* Sidebar */}
                 <Sidebar />

@@ -7,7 +7,6 @@ import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
 import NavMobile from "../../../dashboard/components/NavMobile";
 import ButtonMobile from "../../../../shared/ui/ButtonMobile";
 import { BsEye, BsTrash2 } from "react-icons/bs";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { BiEdit } from "react-icons/bi";
 import { FiEyeOff } from "react-icons/fi";
 import { useDeleteCategoryMutation, useUpdateCategoryMutation } from "../../hook/mutation/useCategoryMutation";
@@ -40,21 +39,21 @@ const DashViewCategoryPage = () => {
     if (isLoading) return <LoadingFallback />;
     if (!category) {
         return (
-            <div className="min-h-screen background-light dark:background-light flex items-center justify-center">
-                <div className="text-center">
-                    <p className="text-white text-xl mb-4">Categoría no encontrada</p>
+            <div className="min-h-screen bg-[#020202] text-white font-mono flex items-center justify-center">
+                <div className="text-center border border-[#ff0055]/30 bg-[#ff0055]/5 p-12">
+                    <p className="text-[#ff0055] text-lg font-bold uppercase tracking-widest mb-6">[ERROR: CATEGORY_NOT_FOUND]</p>
                     <button
                         onClick={() => navigate("/dashboard/categories")}
-                        className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg"
+                        className="px-6 py-3 border border-zinc-800 bg-black text-zinc-500 hover:text-[#00f0ff] hover:border-[#00f0ff] transition-all font-bold tracking-widest text-xs uppercase"
                     >
-                        Volver a la lista
+                        [RETURN_TO_DIRECTORY]
                     </button>
                 </div>
             </div>
         );
     }
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        <div className="min-h-screen bg-[#020202] text-white font-mono selection:bg-[#00f0ff] selection:text-black">
             <div className="flex">
                 {/* Sidebar */}
                 <Sidebar />
@@ -74,73 +73,88 @@ const DashViewCategoryPage = () => {
                         />
 
                         {/* Header */}
-                        <div className="flex items-center justify-between mb-8">
+                        <div className="flex items-center justify-between mb-8 border-b border-zinc-800 pb-4">
                             <div className="flex items-center gap-4">
                                 <div>
-                                    <h1 className="text-2xl lg:text-4xl font-bold text-slate-100 mb-2 flex items-center gap-3">
-                                        <BsEye className="text-cyan-400" size={36} />
+                                    <h1 className="text-2xl lg:text-4xl font-black text-white mb-2 flex items-center gap-3 uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                                        <BsEye className="text-[#00f0ff]" size={36} />
                                         {category.name}
                                     </h1>
-                                    <p className="text-slate-400 mt-1">ID: {category.id}</p>
+                                    <p className="text-zinc-500 text-[10px] font-mono tracking-widest uppercase mt-1">// TARGET_ID: {category.id} //</p>
                                 </div>
                             </div>
-                            <div className="flex lg:flex-row flex-col gap-3">
-                                <ButtonAction
-                                    variant="outline"
-                                    text=""
+                            <div className="flex lg:flex-row flex-col gap-4">
+                                <button
                                     onClick={handleTogglePublish}
-                                    className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors ${category.isActive
-                                        ? "bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/30"
-                                        : "bg-green-500/20 text-green-400 hover:bg-green-500/30"
+                                    className={`flex items-center gap-2 px-6 py-3 border transition-all font-bold uppercase tracking-widest text-xs ${category.isActive
+                                        ? "border-[#ff0055] bg-[#ff0055]/10 text-[#ff0055] hover:bg-[#ff0055] hover:text-white"
+                                        : "border-[#e4ff00] bg-[#e4ff00]/10 text-[#e4ff00] hover:bg-[#e4ff00] hover:text-black"
                                         }`}
                                 >
                                     {category.isActive ? <FiEyeOff size={18} /> : <BsEye size={18} />}
-                                    {category.isActive ? "Desactivar" : "Activar"}
-                                </ButtonAction>
-                                <ButtonAction
+                                    {category.isActive ? "[DEACTIVATE]" : "[ACTIVATE]"}
+                                </button>
+                                <button
                                     onClick={() => navigate(`/dashboard/categories/${category.id}/edit`)}
-                                    variant="primary"
-                                    text="Editar"
+                                    className="flex items-center gap-2 px-6 py-3 border border-zinc-800 bg-black text-zinc-500 hover:text-[#00f0ff] hover:border-[#00f0ff] hover:bg-[#00f0ff]/10 transition-all font-bold uppercase tracking-widest text-xs"
                                 >
                                     <BiEdit size={18} />
-                                </ButtonAction>
-                                <ButtonAction
+                                    [EDIT_RECORD]
+                                </button>
+                                <button
                                     onClick={handleDelete}
-                                    variant="danger"
-                                    text="Eliminar"
+                                    className="flex items-center gap-2 px-6 py-3 border border-zinc-800 bg-black text-zinc-500 hover:text-[#ff0055] hover:border-[#ff0055] hover:bg-[#ff0055]/10 transition-all font-bold uppercase tracking-widest text-xs"
                                 >
                                     <BsTrash2 size={18} />
-                                </ButtonAction>
+                                    [DELETE_NODE]
+                                </button>
                             </div>
                         </div>
 
-                        <div className="flex gap-6">
-                            {/* Main Info */}
-                            <div className="space-y-6">
-                                {/* Images */}
-                                <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
-                                    <h2 className="text-xl font-bold text-white mb-4">Imagen</h2>
-                                    <div className="w-44">
+                        <div className="flex flex-col lg:flex-row gap-6">
+                            {/* Images */}
+                            <div className="w-full lg:w-1/3">
+                                <div className="border border-zinc-800 bg-[#050505] p-6 relative group overflow-hidden">
+                                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff]" />
+                                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
+                                    <h2 className="text-[#00f0ff] text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-[#00f0ff] mb-4">
+                                        [CATEGORY_IMAGE_DATA]
+                                    </h2>
+                                    <div className="w-full h-64 border border-zinc-800 bg-black relative p-1 overflow-hidden flex items-center justify-center">
+                                        <div className="absolute inset-0 bg-[#00f0ff]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                                         <img
                                             src={category.image}
                                             alt={`${category.name}`}
-                                            className="w-full h-48 object-cover rounded-lg"
+                                            className="w-full h-full object-contain grayscale mix-blend-screen opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500"
                                         />
                                     </div>
                                 </div>
+                            </div>
 
+                            {/* Main Info */}
+                            <div className="w-full lg:w-2/3 space-y-6 flex flex-col">
                                 {/* Descripcion */}
-                                <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
-                                    <h2 className="text-xl font-bold text-white mb-4">Descripción</h2>
-                                    <p className="text-slate-200">{category.description}</p>
+                                <div className="border border-zinc-800 bg-[#050505] p-6 relative flex-1">
+                                    <h2 className="text-[#00f0ff] text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-[#00f0ff] mb-4">
+                                        [DESCRIPTION_MANIFEST]
+                                    </h2>
+                                    <p className="text-zinc-300 font-mono text-sm leading-relaxed border-l border-zinc-900 pl-4 py-2">
+                                        {category.description}
+                                    </p>
                                 </div>
 
                                 {/* Status */}
-                                <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
-                                    <h2 className="text-xl font-bold text-white mb-4">Estado</h2>
-                                    <p className="text-slate-200">{category.isActive ? 'Activo' : 'Inactivo'}</p>
+                                <div className="border border-zinc-800 bg-[#050505] p-6 relative flex flex-row items-center justify-between">
+                                    <h2 className="text-[#00f0ff] text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-[#00f0ff] m-0">
+                                        [SYSTEM_STATUS]
+                                    </h2>
+                                    <span className={`inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-widest border transition-all ${category.isActive
+                                        ? "border-[#e4ff00]/30 bg-[#e4ff00]/5 text-[#e4ff00]"
+                                        : "border-[#ff0055]/30 bg-[#ff0055]/5 text-[#ff0055]"
+                                        }`}>
+                                        {category.isActive ? '[ACTIVE]' : '[INACTIVE]'}
+                                    </span>
                                 </div>
-
                             </div>
                         </div>
                     </div>

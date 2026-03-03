@@ -2,7 +2,6 @@ import { useState } from "react";
 import { BiEdit, BiPhone, BiUser } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
 import type { User } from "../../auth/types/auth.types";
-import ButtonAction from "../../../shared/ui/ButtonAction";
 import ModalInfo from "../../profile/components/ModalInfo";
 
 interface UserProps {
@@ -19,40 +18,52 @@ const PersonalProfile: React.FC<UserProps> = ({ user }) => {
         title="Cambiar Información Personal"
         data={user!}
       />
-      <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-slate-100">Perfil Personal</h2>
-          <ButtonAction
-            variant="edit"
-            text="Editar"
+      <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono">
+        <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#e4ff00]" />
+
+        <div className="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800">
+          <div>
+            <h2 className="text-xl font-black text-white uppercase tracking-widest">
+              [USER_PROFILE]
+            </h2>
+          </div>
+          <button
             onClick={() => setIsEditingProfile(!isEditingProfile)}
+            className="text-[#e4ff00] hover:text-white hover:bg-[#e4ff00]/10 border border-transparent hover:border-[#e4ff00] px-3 py-1.5 text-xs font-bold transition-all flex items-center gap-2 uppercase tracking-widest"
           >
-            <BiEdit size={16} />
-          </ButtonAction>
+            <span>[EDIT]</span>
+            <BiEdit size={14} />
+          </button>
         </div>
 
-        <div className="space-y-4">
-          <div className="flex items-start gap-3">
-            <BiUser size={18} className="text-slate-500 mt-1" />
+        <div className="space-y-6">
+          <div className="flex items-start gap-4">
+            <div className="w-8 h-8 bg-black border border-zinc-800 flex items-center justify-center shrink-0">
+              <BiUser size={16} className="text-[#e4ff00]" />
+            </div>
             <div>
-              <p className="text-slate-500 text-sm">Nombre</p>
-              <p className="text-slate-100 font-medium">{user?.firstName} {user?.lastName}</p>
+              <p className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">[FULL_NAME]</p>
+              <p className="text-white font-bold tracking-wider text-sm">{user?.firstName} {user?.lastName}</p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3">
-            <MdEmail size={18} className="text-slate-500 mt-1" />
+          <div className="flex items-start gap-4">
+            <div className="w-8 h-8 bg-black border border-zinc-800 flex items-center justify-center shrink-0">
+              <MdEmail size={16} className="text-[#e4ff00]" />
+            </div>
             <div>
-              <p className="text-slate-500 text-sm">Correo Electronico</p>
-              <p className="text-slate-100 font-medium">{user?.email}</p>
+              <p className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">[EMAIL_LINK]</p>
+              <p className="text-white font-bold tracking-wider text-sm">{user?.email}</p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3">
-            <BiPhone size={18} className="text-slate-500 mt-1" />
+          <div className="flex items-start gap-4">
+            <div className="w-8 h-8 bg-black border border-zinc-800 flex items-center justify-center shrink-0">
+              <BiPhone size={16} className="text-[#e4ff00]" />
+            </div>
             <div>
-              <p className="text-slate-500 text-sm">Telefono</p>
-              <p className="text-slate-100 font-medium">{user?.phone}</p>
+              <p className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">[VOICE_COMMS]</p>
+              <p className="text-white font-bold tracking-wider text-sm">{user?.phone || 'UNREGISTERED'}</p>
             </div>
           </div>
         </div>

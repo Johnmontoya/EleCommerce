@@ -1,6 +1,5 @@
 import { AiFillStar } from "react-icons/ai";
 import { BiSave, BiTag, BiX } from "react-icons/bi";
-import ButtonAction from "../../../shared/ui/ButtonAction";
 import { useEffect, useState } from "react";
 import type { Banner } from "../types/banner.types";
 import { useProducts } from "../../products/hook/queries/useProduct";
@@ -13,7 +12,7 @@ interface ModalShowcaseProps {
         value: DisplaySection;
         label: string;
         icon: React.ReactNode;
-        color: string;
+        borderCode?: string;
     }[];
     onClose: () => void;
     editingBanner?: Banner | null;
@@ -141,37 +140,43 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
     };
 
     return (
-        <div className="w-[520px] fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4">
-            <div className="bg-slate-800 border-2 border-slate-700 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+        <div className="w-[520px] fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 font-mono">
+            <div className="bg-[#050505] border border-zinc-800 w-full max-w-4xl max-h-[90vh] overflow-y-auto relative shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                {/* Decorative border corners */}
+                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-zinc-500" />
+                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-[#00f0ff]" />
+                <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-[#00f0ff]" />
+                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-[#e4ff00]" />
+
                 {/* Modal Header */}
-                <div className="sticky top-0 bg-slate-800 border-b border-slate-700 p-6 flex items-center justify-between z-10">
-                    <h2 className="text-2xl font-bold text-slate-100">
-                        {editingBanner ? "Editar Configuración" : "Nueva Configuración"}
+                <div className="sticky top-0 bg-[#050505] border-b border-zinc-800 p-6 flex items-center justify-between z-10">
+                    <h2 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2">
+                        <span className="text-[#00f0ff]">{'>'}</span> {editingBanner ? "[EDIT_CONFIG]" : "[NEW_CONFIG]"}
                     </h2>
                     <button
                         onClick={onClose}
                         disabled={isSubmitting}
-                        className="p-2 text-slate-400 hover:text-slate-100 hover:bg-slate-700 rounded-lg transition-all disabled:opacity-50"
+                        className="p-2 text-zinc-500 hover:text-[#ff0055] transition-colors disabled:opacity-50"
                     >
                         <BiX size={24} />
                     </button>
                 </div>
 
                 {/* Modal Body */}
-                <div className="p-6 space-y-6">
+                <div className="p-6 space-y-8">
                     {/* Selección de Producto */}
                     <div>
-                        <label className="block text-sm font-semibold text-slate-200 mb-3">
-                            Producto <span className="text-red-400">*</span>
+                        <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-2 mt-4">
+                            [PRODUCT_ID] <span className="text-[#ff0055]">*</span>
                         </label>
                         <select
                             name="productId"
                             value={formData.productId}
                             onChange={onChangeFormData}
                             disabled={!!editingBanner || isSubmitting}
-                            className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-500 transition-colors disabled:opacity-50"
+                            className="w-full bg-black border border-zinc-800 text-white uppercase tracking-widest text-xs px-4 py-3 outline-none focus:border-[#00f0ff] transition-colors disabled:opacity-50 appearance-none"
                         >
-                            <option value="">Seleccionar producto</option>
+                            <option value="">[AWAITING_SELECTION]</option>
                             {products?.map((product) => (
                                 <option key={product.id} value={product.id}>
                                     {product.name}
@@ -182,35 +187,36 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
 
                     {/* Secciones */}
                     <div>
-                        <label className="block text-sm font-semibold text-slate-200 mb-3">
-                            Secciones de Visualización <span className="text-red-400">*</span>
+                        <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-4 mt-6">
+                            [DISPLAY_ZONES] <span className="text-[#ff0055]">*</span>
                         </label>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {sectionOptions.map((section) => (
                                 <button
                                     key={section.value}
                                     type="button"
                                     onClick={() => handleToggleSection(section.value)}
                                     disabled={isSubmitting}
-                                    className={`flex items-center gap-3 p-4 rounded-xl border-2 transition-all disabled:opacity-50 ${(formData.displaySections as DisplaySection[]).includes(section.value)
-                                        ? `${section.color} border-2`
-                                        : "bg-slate-700/30 border-slate-600 text-slate-400 hover:border-slate-500"
+                                    className={`flex items-center gap-4 p-4 border transition-all disabled:opacity-50 relative group ${(formData.displaySections as DisplaySection[]).includes(section.value)
+                                        ? `${section.borderCode?.split(' ')[0] || 'border-[#00f0ff]'} bg-[#050505]`
+                                        : "bg-black border-zinc-800 text-zinc-500 hover:border-zinc-500"
                                         }`}
                                 >
-                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${(formData.displaySections as DisplaySection[]).includes(section.value)
-                                        ? "bg-current/20"
-                                        : "bg-slate-600"
+                                    <div className={`w-10 h-10 flex items-center justify-center border ${(formData.displaySections as DisplaySection[]).includes(section.value)
+                                        ? `${section.borderCode?.split(' ')[0] || 'border-[#00f0ff]'} text-[#00f0ff]`
+                                        : "border-zinc-800 text-zinc-500 group-hover:text-zinc-400"
                                         }`}>
                                         {section.icon}
                                     </div>
                                     <div className="text-left">
-                                        <p className="font-semibold">{section.label}</p>
-                                        <p className="text-xs opacity-70">
-                                            {section.value === "banner" && "Banner principal del sitio"}
-                                            {section.value === "featured" && "Productos destacados"}
-                                            {section.value === "trending" && "En tendencia"}
-                                            {section.value === "promotional" && "Sección de promociones"}
-                                            {section.value === "new-arrival" && "Nuevos ingresos"}
+                                        <p className={`text-xs font-bold tracking-widest uppercase mb-1 ${(formData.displaySections as DisplaySection[]).includes(section.value) ? "text-[#00f0ff]" : "text-zinc-500"
+                                            }`}>{section.label}</p>
+                                        <p className="text-[10px] uppercase tracking-widest text-zinc-500">
+                                            {section.value === "banner" && "MAIN_SITE_BANNER"}
+                                            {section.value === "featured" && "FEATURED_HIGHLIGHTS"}
+                                            {section.value === "trending" && "CURRENT_TRENDS"}
+                                            {section.value === "promotional" && "PROMO_CAMPAIGN"}
+                                            {section.value === "new-arrival" && "LATEST_INVENTORY"}
                                         </p>
                                     </div>
                                 </button>
@@ -219,10 +225,10 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
                     </div>
 
                     {/* Configuración General */}
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <div className="grid md:grid-cols-2 gap-6 mt-6 border-t border-zinc-800 pt-6 border-dashed">
                         <div>
-                            <label className="block text-sm font-semibold text-slate-200 mb-2">
-                                Prioridad de Visualización
+                            <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-2">
+                                [DISPLAY_PRIORITY]
                             </label>
                             <input
                                 type="number"
@@ -231,15 +237,15 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
                                 onChange={onChangeFormData}
                                 disabled={isSubmitting}
                                 min="1"
-                                className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-500 transition-colors disabled:opacity-50"
+                                className="w-full bg-black border border-zinc-800 text-white uppercase tracking-widest text-xs px-4 py-3 outline-none focus:border-[#00f0ff] transition-colors disabled:opacity-50"
                                 placeholder="1"
                             />
-                            <p className="text-xs text-slate-400 mt-1">1 = Primera posición</p>
+                            <p className="text-[10px] text-zinc-600 uppercase tracking-widest mt-2">1 = PRIME_POSITION</p>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold text-slate-200 mb-2">
-                                Destacar hasta
+                            <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-2">
+                                [FEAT_DURATION]
                             </label>
                             <input
                                 type="date"
@@ -247,44 +253,39 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
                                 value={formData.featuredUntil}
                                 onChange={onChangeFormData}
                                 disabled={isSubmitting}
-                                className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-500 transition-colors disabled:opacity-50"
+                                className="w-full bg-black border border-zinc-800 text-zinc-500 uppercase tracking-widest text-xs px-4 py-3 outline-none focus:border-[#00f0ff] focus:text-[#00f0ff] transition-colors disabled:opacity-50 custom-date-input"
                             />
                         </div>
                     </div>
 
                     {/* Destacado Toggle */}
-                    <div className="flex items-center gap-3 p-4 bg-yellow-500/10 border border-yellow-500/50 rounded-xl">
-                        <input
-                            type="checkbox"
-                            name="isFeatured"
-                            checked={formData.isFeatured}
-                            onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
-                            disabled={isSubmitting}
-                            className="w-5 h-5 rounded border-2 border-yellow-500 bg-slate-700 checked:bg-yellow-500 disabled:opacity-50"
-                        />
+                    <div className="flex items-center gap-4 p-4 bg-[#e4ff00]/5 border border-[#e4ff00]/30 mt-6 relative group cursor-pointer" onClick={() => !isSubmitting && setFormData({ ...formData, isFeatured: !formData.isFeatured })}>
+                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#e4ff00] opacity-50 shadow-[0_0_10px_#e4ff00]" />
+                        <div className={`w-5 h-5 flex items-center justify-center border ${formData.isFeatured ? 'bg-[#e4ff00] border-[#e4ff00]' : 'border-zinc-500'} transition-colors`}>
+                            {formData.isFeatured && <AiFillStar size={14} className="text-black" />}
+                        </div>
                         <div>
-                            <p className="font-semibold text-yellow-400 flex items-center gap-2">
-                                <AiFillStar size={18} />
-                                Marcar como Producto Destacado
+                            <p className="font-bold text-[#e4ff00] flex items-center gap-2 text-xs uppercase tracking-widest mb-1">
+                                [MARK_AS_FEATURED]
                             </p>
-                            <p className="text-xs text-slate-300">
-                                Aparecerá con un badge especial en todas las secciones
+                            <p className="text-[10px] text-zinc-400 uppercase tracking-widest">
+                                DISPLAYS_SPECIAL_BADGE_GLOBALLY
                             </p>
                         </div>
                     </div>
 
                     {/* Datos Promocionales */}
-                    <div className="border-2 border-slate-700 rounded-xl p-4">
-                        <h3 className="text-lg font-bold text-slate-100 mb-4 flex items-center gap-2">
-                            <BiTag size={20} className="text-cyan-400" />
-                            Datos Promocionales (Opcional)
+                    <div className="border border-zinc-800 bg-[#020202] p-6 relative mt-8">
+                        <h3 className="text-xs font-black text-white uppercase tracking-widest mb-6 flex items-center gap-2">
+                            <BiTag size={16} className="text-[#00f0ff]" />
+                            [PROMOTIONAL_DATA] // OPTIONAL
                         </h3>
 
-                        <div className="space-y-4">
-                            <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-6">
+                            <div className="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <label className="block text-sm font-semibold text-slate-200 mb-2">
-                                        Fecha de Inicio
+                                    <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-2">
+                                        [T-START_CAMPAIGN]
                                     </label>
                                     <input
                                         type="date"
@@ -292,13 +293,13 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
                                         value={formData.startDate}
                                         onChange={onChangeFormData}
                                         disabled={isSubmitting}
-                                        className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-500 transition-colors disabled:opacity-50"
+                                        className="w-full bg-black border border-zinc-800 text-zinc-500 uppercase tracking-widest text-xs px-4 py-3 outline-none focus:border-[#00f0ff] focus:text-[#00f0ff] transition-colors disabled:opacity-50 custom-date-input"
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-semibold text-slate-200 mb-2">
-                                        Fecha de Fin
+                                    <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-2">
+                                        [T-END_CAMPAIGN]
                                     </label>
                                     <input
                                         type="date"
@@ -306,15 +307,15 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
                                         value={formData.endDate}
                                         onChange={onChangeFormData}
                                         disabled={isSubmitting}
-                                        className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-500 transition-colors disabled:opacity-50"
+                                        className="w-full bg-black border border-zinc-800 text-zinc-500 uppercase tracking-widest text-xs px-4 py-3 outline-none focus:border-[#00f0ff] focus:text-[#00f0ff] transition-colors disabled:opacity-50 custom-date-input"
                                     />
                                 </div>
                             </div>
 
-                            <div className="grid md:grid-cols-2 gap-4">
+                            <div className="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <label className="block text-sm font-semibold text-slate-200 mb-2">
-                                        Descuento (%)
+                                    <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-2">
+                                        [DISCOUNT_RATE_PCT]
                                     </label>
                                     <input
                                         type="number"
@@ -324,14 +325,14 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
                                         disabled={isSubmitting}
                                         min="0"
                                         max="100"
-                                        className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-500 transition-colors disabled:opacity-50"
+                                        className="w-full bg-black border border-zinc-800 text-white uppercase tracking-widest text-xs px-4 py-3 outline-none focus:border-[#e4ff00] transition-colors disabled:opacity-50"
                                         placeholder="20"
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-semibold text-slate-200 mb-2">
-                                        Texto del Badge
+                                    <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-2">
+                                        [BADGE_STRING]
                                     </label>
                                     <input
                                         type="text"
@@ -339,15 +340,15 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
                                         value={formData.badgeText}
                                         onChange={onChangeFormData}
                                         disabled={isSubmitting}
-                                        className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-500 transition-colors disabled:opacity-50"
-                                        placeholder="50% OFF, NUEVO, etc."
+                                        className="w-full bg-black border border-zinc-800 text-white uppercase tracking-widest text-xs px-4 py-3 outline-none focus:border-[#00f0ff] transition-colors disabled:opacity-50"
+                                        placeholder="[50%_OFF]"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-sm font-semibold text-slate-200 mb-2">
-                                    URL de Imagen para Banner
+                                <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-2">
+                                    [BANNER_IMG_URL]
                                 </label>
                                 <input
                                     type="url"
@@ -355,11 +356,11 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
                                     value={formData.bannerImageUrl}
                                     onChange={onChangeFormData}
                                     disabled={isSubmitting}
-                                    className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-500 transition-colors disabled:opacity-50"
-                                    placeholder="https://ejemplo.com/banner.jpg"
+                                    className="w-full bg-black border border-zinc-800 text-white tracking-widest text-xs px-4 py-3 outline-none focus:border-[#00f0ff] transition-colors disabled:opacity-50"
+                                    placeholder="https://..."
                                 />
-                                <p className="text-xs text-slate-400 mt-1">
-                                    Imagen específica para mostrar en el banner (recomendado 1200x400px)
+                                <p className="text-[10px] text-zinc-600 uppercase tracking-widest mt-2">
+                                    OPTIMAL_RES: 1200x400PX
                                 </p>
                             </div>
                         </div>
@@ -367,29 +368,31 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
                 </div>
 
                 {/* Modal Footer */}
-                <div className="sticky bottom-0 bg-slate-800 border-t border-slate-700 p-6 flex gap-4 z-10">
-                    <ButtonAction
+                <div className="sticky bottom-0 bg-[#050505] border-t border-zinc-800 p-6 flex gap-4 z-10">
+                    <button
                         onClick={onClose}
-                        variant="secondary"
-                        className="flex-1"
-                        text="Cancelar"
+                        type="button"
                         disabled={isSubmitting}
+                        className="flex-1 bg-black border border-zinc-800 hover:border-zinc-500 text-zinc-400 hover:text-white h-12 font-black uppercase tracking-widest text-xs transition-colors flex items-center justify-center gap-2"
                     >
-                        <BiX size={20} />
-                    </ButtonAction>
-                    <ButtonAction
+                        <BiX size={18} />
+                        [CANCEL]
+                    </button>
+                    <button
                         onClick={handleSubmit}
-                        variant="primary"
-                        className="flex-1 flex items-center justify-center gap-2"
-                        text={editingBanner ? "Actualizar" : "Guardar"}
+                        type="button"
                         disabled={isSubmitting}
+                        className="flex-1 bg-[#050505] border border-[#00f0ff] hover:bg-[#00f0ff] text-[#00f0ff] hover:text-black h-12 font-black uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {isSubmitting ? (
-                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full" />
                         ) : (
-                            <BiSave size={20} />
+                            <>
+                                <BiSave size={16} />
+                                {editingBanner ? "[UPDATE_DATA]" : "[SAVE_CONFIG]"}
+                            </>
                         )}
-                    </ButtonAction>
+                    </button>
                 </div>
             </div>
         </div>

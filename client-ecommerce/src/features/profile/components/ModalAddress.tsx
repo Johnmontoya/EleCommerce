@@ -7,7 +7,6 @@ import { BiMap, BiSave } from "react-icons/bi";
 import type { User } from "../../auth/types/auth.types";
 import MiModal from "../../../shared/ui/Modal";
 import { useEffect, useState } from "react";
-import ButtonAction from "../../../shared/ui/ButtonAction";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 import { useUpdateAddressMutation } from "../hook/mutation/useProfileMutation";
@@ -19,7 +18,7 @@ interface ModalAddressProps {
     data: User | undefined;
 }
 
-const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, title, data }) => {
+const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, data }) => {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const updateAddressMutation = useUpdateAddressMutation();
     const [editAddress, onChangeEditAddress, setEditAddress] = useInputs({
@@ -66,87 +65,104 @@ const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, title, dat
         <MiModal
             isOpen={isOpen}
             onClose={onClose}
-            title={title}
+            title={`> [EDIT_COORDINATES]`}
         >
-            <div className="my-2">
-                <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-                    <BiMap size={20} className="text-cyan-400" />
-                    Información de envio
-                </h2>
-                <div className="flex flex-row items-center justify-center mt-6 gap-2">
-                    <div>
-                        <label className="block text-xs float-left text-slate-300 font-semibold">
-                            Direccion
-                        </label>
-                        <div className="flex items-center w-full bg-gray-800 border border-gray-700 h-12 rounded-lg overflow-hidden pl-6 gap-2 ">
-                            <BiMap size={20} className="text-slate-100" />
-                            <input type="text" name="street" placeholder="Direccion"
-                                className="w-full bg-transparent text-white placeholder-gray-400 border-none outline-none "
-                                value={editAddress.street} onChange={onChangeEditAddress} required />
+            <form className="w-full text-left font-mono">
+                <div className="mb-8">
+                    <h2 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2 mb-6">
+                        <span className="text-[#00f0ff]">{'>'}</span> [LOCATION_DATA]
+                    </h2>
+
+                    <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                        <div className="w-full">
+                            <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-1">
+                                [STREET_ADDRESS]
+                            </label>
+                            <div className="flex items-center w-full bg-black border border-zinc-800 h-12 overflow-hidden px-4 gap-3 focus-within:border-[#00f0ff] transition-colors">
+                                <BiMap size={18} className="text-zinc-600" />
+                                <input type="text" name="street" placeholder="[ENTER_ADDRESS]"
+                                    className="w-full bg-transparent text-white placeholder-zinc-700 border-none outline-none text-xs tracking-widest uppercase font-bold"
+                                    value={editAddress.street} onChange={onChangeEditAddress} required />
+                            </div>
+                        </div>
+
+                        <div className="w-full">
+                            <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-1">
+                                [CITY_SECTOR]
+                            </label>
+                            <div className="flex items-center w-full bg-black border border-zinc-800 h-12 overflow-hidden px-4 gap-3 focus-within:border-[#00f0ff] transition-colors">
+                                <MdLocationCity size={18} className="text-zinc-600" />
+                                <input type="text" name="city" placeholder="[ENTER_CITY]"
+                                    className="w-full bg-transparent text-white placeholder-zinc-700 border-none outline-none text-xs tracking-widest uppercase font-bold"
+                                    value={editAddress.city} onChange={onChangeEditAddress} required />
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <label className="block text-xs float-left text-slate-300 font-semibold">
-                            Ciudad
+
+                    <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                        <div className="w-full">
+                            <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-1">
+                                [STATE_REGION]
+                            </label>
+                            <div className="flex items-center w-full bg-black border border-zinc-800 h-12 overflow-hidden px-4 gap-3 focus-within:border-[#00f0ff] transition-colors">
+                                <PiCityFill size={18} className="text-zinc-600" />
+                                <input type="text" name="state" placeholder="[ENTER_STATE]"
+                                    className="w-full bg-transparent text-white placeholder-zinc-700 border-none outline-none text-xs tracking-widest uppercase font-bold"
+                                    value={editAddress.state} onChange={onChangeEditAddress} required />
+                            </div>
+                        </div>
+
+                        <div className="w-full">
+                            <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-1">
+                                [TERRITORY]
+                            </label>
+                            <div className="flex items-center w-full bg-black border border-zinc-800 h-12 overflow-hidden px-4 gap-3 focus-within:border-[#00f0ff] transition-colors">
+                                <FaCity size={18} className="text-zinc-600" />
+                                <input type="text" name="country" placeholder="[ENTER_COUNTRY]"
+                                    className="w-full bg-transparent text-white placeholder-zinc-700 border-none outline-none text-xs tracking-widest uppercase font-bold"
+                                    value={editAddress.country} onChange={onChangeEditAddress} required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="w-full">
+                        <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-1">
+                            [POSTAL_CODE]
                         </label>
-                        <div className="flex items-center w-full bg-gray-800 border border-gray-700 h-12 rounded-lg overflow-hidden pl-6 gap-2 ">
-                            <MdLocationCity size={20} className="text-slate-100" />
-                            <input type="text" name="city" placeholder="Ciudad"
-                                className="w-full bg-transparent text-white placeholder-gray-400 border-none outline-none "
-                                value={editAddress.city} onChange={onChangeEditAddress} required />
+                        <div className="flex items-center w-full bg-black border border-zinc-800 h-12 overflow-hidden px-4 gap-3 focus-within:border-[#00f0ff] transition-colors">
+                            <FaMapLocationDot size={18} className="text-zinc-600" />
+                            <input type="text" name="zipCode" placeholder="[ENTER_ZIPCODE]"
+                                className="w-full bg-transparent text-white placeholder-zinc-700 border-none outline-none text-xs tracking-widest uppercase font-bold"
+                                value={editAddress.zipCode} onChange={onChangeEditAddress} required />
                         </div>
                     </div>
                 </div>
 
-                <div className="flex flex-row items-center justify-center mt-2 gap-2">
-                    <div>
-                        <label className="block text-xs float-left text-slate-300 font-semibold">
-                            Estado
-                        </label>
-                        <div className="flex items-center mt-2 w-full bg-gray-800 border border-gray-700 h-12 rounded-lg overflow-hidden pl-6 gap-2 ">
-                            <PiCityFill size={20} className="text-slate-100" />
-                            <input type="text" name="state" placeholder="Estado"
-                                className="w-full bg-transparent text-white placeholder-gray-400 border-none outline-none "
-                                value={editAddress.state} onChange={onChangeEditAddress} required />
-                        </div>
-                    </div>
-                    <div>
-                        <label className="block text-xs float-left text-slate-300 font-semibold">
-                            Pais
-                        </label>
-                        <div className="flex items-center mt-2 w-full bg-gray-800 border border-gray-700 h-12 rounded-lg overflow-hidden pl-6 gap-2 ">
-                            <FaCity size={20} className="text-slate-100" />
-                            <input type="text" name="country" placeholder="Pais"
-                                className="w-full bg-transparent text-white placeholder-gray-400 border-none outline-none "
-                                value={editAddress.country} onChange={onChangeEditAddress} required />
-                        </div>
-                    </div>
+                <div className="flex gap-2 w-full mt-8">
+                    <button
+                        type="button"
+                        onClick={onClose}
+                        className="flex-1 bg-black border border-zinc-800 hover:border-zinc-500 text-zinc-400 hover:text-white h-12 font-black uppercase tracking-widest text-xs transition-colors"
+                    >
+                        [CANCEL]
+                    </button>
+                    <button
+                        onClick={handleSubmit}
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="flex-1 bg-[#050505] border border-[#00f0ff] hover:bg-[#00f0ff] text-[#00f0ff] hover:text-black h-12 font-black uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {isSubmitting ? (
+                            <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full" />
+                        ) : (
+                            <>
+                                <BiSave size={16} />
+                                [SAVE_DATA]
+                            </>
+                        )}
+                    </button>
                 </div>
-
-                <div className="mt-2">
-                    <label className="block text-xs float-left text-slate-300 font-semibold">
-                        Codigo Postal
-                    </label>
-                    <div className="flex items-center mt-2 w-full bg-gray-800 border border-gray-700 h-12 rounded-lg overflow-hidden pl-6 gap-2 ">
-                        <FaMapLocationDot size={20} className="text-slate-100" />
-                        <input type="text" name="zipCode" placeholder="Codigo Postal"
-                            className="w-full bg-transparent text-white placeholder-gray-400 border-none outline-none "
-                            value={editAddress.zipCode} onChange={onChangeEditAddress} required />
-                    </div>
-                </div>
-
-                <ButtonAction variant="primary" onClick={handleSubmit} text="Guardar" className="w-full flex mt-6 justify-center items-center">
-                    {isSubmitting ? (
-                        <>
-                            <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full" />
-                        </>
-                    ) : (
-                        <>
-                            <BiSave size={18} />
-                        </>
-                    )}
-                </ButtonAction>
-            </div>
+            </form>
         </MiModal>
     )
 }

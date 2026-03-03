@@ -1,5 +1,4 @@
 import { BiFilter } from "react-icons/bi";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
 
 interface CategoryFilterProps {
     showFilters: boolean;
@@ -24,37 +23,36 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
         }
     };
     return (
-        <div className="dash-search-border dark:dash-search-border border border-slate-700 rounded-2xl p-4 backdrop-blur-sm my-6">
+        <div className="border border-zinc-800 bg-[#050505] p-6 my-6 font-mono">
             <div className="flex flex-col lg:flex-row gap-4">
                 {/* Filter Button */}
-                <ButtonAction
-                    variant="outline"
+                <button
                     onClick={() => setShowFilters(!showFilters)}
-                    text="Filtros"
-                    className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all ${showFilters
-                        ? "bg-slate-700/30 border border-slate-500 text-slate-200 hover:bg-slate-800 text-white"
-                        : "bg-slate-900/30 border border-slate-500 text-slate-200 hover:bg-slate-800 text-white"
+                    className={`flex items-center gap-2 px-6 py-3 font-bold tracking-widest text-xs uppercase border transition-all ${showFilters
+                        ? "bg-[#00f0ff]/10 border-[#00f0ff] text-[#00f0ff]"
+                        : "bg-black border-zinc-800 text-zinc-500 hover:border-zinc-500"
                         }`}
                 >
-                    <BiFilter size={20} />
-                </ButtonAction>
+                    <BiFilter size={18} />
+                    [FILTERS]
+                </button>
             </div>
 
             {/* Filters Panel */}
             {showFilters && (
-                <div className="mt-4 pt-4 border-t border-slate-700 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="mt-6 pt-6 border-t border-zinc-800 border-dashed grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label className="block text-slate-300 text-sm font-semibold mb-2">
-                            Filtrar por Estado
+                        <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-2">
+                            [FILTER_STATUS]
                         </label>
                         <select
                             value={isActive === null ? "all" : String(isActive)}
                             onChange={handleActiveUserChange}
-                            className="w-full bg-slate-700 border border-slate-600 text-slate-100 px-4 py-2 rounded-lg outline-none focus:border-cyan-400 cursor-pointer"
+                            className="w-full bg-black border border-zinc-800 text-white uppercase tracking-widest text-xs px-4 py-3 outline-none focus:border-[#00f0ff] appearance-none"
                         >
-                            <option value="all">Todos los estados</option>
-                            <option value="true">Activos</option>
-                            <option value="false">Inactivos</option>
+                            <option value="all">[ALL_STATUSES]</option>
+                            <option value="true">[ACTIVE_ONLY]</option>
+                            <option value="false">[INACTIVE_ONLY]</option>
                         </select>
                     </div>
                 </div>

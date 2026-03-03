@@ -1,53 +1,136 @@
 import { useNavigate } from "react-router-dom";
 import { useGetShowcase } from "../hooks/useShowcase";
-import Countdown from "../../../shared/ui/Countdown";
+import { useState, useEffect } from "react";
+import { FaArrowRight } from "react-icons/fa";
+
+const calculateTimeLeft = (targetDate: string) => {
+  const difference = +new Date(targetDate) - +new Date();
+  let timeLeft = {
+    Days: 0,
+    Hrs: 0,
+    Min: 0,
+    Sec: 0,
+  };
+
+  if (difference > 0) {
+    timeLeft = {
+      Days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      Hrs: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      Min: Math.floor((difference / 1000 / 60) % 60),
+      Sec: Math.floor((difference / 1000) % 60),
+    };
+  }
+
+  return timeLeft;
+};
 
 const ProductShowCase = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { data: showcase } = useGetShowcase();
 
-  return (
-    <>
-      <section className="w-full mx-auto z-10 bg-slate-800">
-        <div className="absolute top-380 right-30 w-28 h-28 bg-cyan-500/30 rounded-full filter blur-3xl animate-float2"></div>
-        <div className="flex drop-shadow-lg/50 drop-shadow-black-500/50">
-          {showcase?.slice(0, 1).map((item, idx) => (
-            <div key={idx} className={`w-full h-fit text-center`}>
-              <div className="w-full flex flex-row justify-between relative">
-                <div className="w-full h-full flex flex-col gap-4 z-20 m-auto py-2 justify-center items-center">
-                  <div className="relative">
-                    <div className="flex items-center w-32 md:w-40 h-10 md:h-14 p-4 text-sm md:text-xl rounded-lg font-bold bg-linear-to-b from-amber-400 from-10% via-amber-400 via-30% to-yellow-400 to-90% text-slate-100 uppercase">
-                      Apresurate!
-                    </div>
-                  </div>
-                  <h1 className="text-2xl md:text-4xl text-slate-100 font-bold">Por hoy {item.priceDiscount}% Descuento</h1>
-                  <section className="w-full">
-                    <div className="w-full flex justify-center mx-auto">
-                      <div className="flex flex-row px-2 py-0 md:py-4 gap-2 dark:text-white">
+  const product = showcase?.[0];
 
-                        <Countdown targetDate="2026-12-31T23:59:59" />
-                      </div>
-                    </div>
-                  </section>
-                  <div className="h-full flex justify-center items-end">
-                    <a
-                      href="#"
-                      onClick={() => navigate(`/products/${item.slug}`)}
-                      className="flex items-center border border-cyan-400 justify-center w-32 h-12 rounded-2xl text-slate-100 transition-all duration-300 hover:scale-120 cursor-pointer"
-                    >
-                      <span className="font-semibold">Comprar Ahora</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="w-full absolute md:relative z-10">
-                  <img src={item?.promotionalData?.bannerImageUrl} className="w-full h-[348px] md:h-full mask-alpha mask-l-from-black mask-l-from-50% mask-l-to-transparent" />
+  const [timeLeft, setTimeLeft] = useState(
+    calculateTimeLeft(product?.promotionalData?.endDate || "2026-12-31T23:59:59")
+  );
+
+  useEffect(() => {
+    if (!product) return;
+    const timer = setTimeout(() => {
+      setTimeLeft(calculateTimeLeft(product?.promotionalData?.endDate || "2026-12-31T23:59:59"));
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [product, timeLeft]);
+
+  if (!product) return null;
+
+  return (
+    <div className="w-full mx-auto my-16 bg-[#050505] border border-zinc-800 relative overflow-hidden group">
+      {/* Decorative Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.4)_50%)] bg-[length:100%_4px] z-0 pointer-events-none" />
+
+      {/* Technical Background Accents */}
+      <div className="absolute -left-20 top-0 w-64 h-full bg-[#e4ff00]/5 -skew-x-12 z-0" />
+      <div className="absolute right-0 bottom-0 w-32 h-32 border-t border-l border-[#e4ff00]/20 z-0" />
+
+      <div className="flex flex-col md:flex-row items-center relative z-10 w-full">
+        {/* Text Section */}
+        <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center">
+          <div className="inline-block border border-[#e4ff00] bg-[#e4ff00]/10 px-3 py-1 text-[#e4ff00] font-mono text-xs tracking-widest uppercase mb-6 w-fit">
+            FLASH_SALE // LIMITED TIME
+          </div>
+
+          <h1 className="text-4xl md:text-5xl font-black text-white uppercase mb-6" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+            {product.name}
+          </h1>
+
+          <p className="text-sm text-zinc-400 font-mono mb-8 border-l-2 border-zinc-800 pl-4 h-[60px] overflow-hidden">
+            {product.description && product.description.length > 150
+              ? `${product.description.slice(0, 150)}...`
+              : product.description}
+          </p>
+
+          {/* Countdown Clock (Technical) */}
+          <div className="flex gap-4 mb-8">
+            <div className="hidden sm:flex flex-col justify-center">
+              <span className="text-[#00f0ff] font-mono font-bold text-xs tracking-widest uppercase border-b border-zinc-800 pb-1 mb-2">T-MINUS</span>
+            </div>
+            {Object.entries(timeLeft).map(([unit, value]) => (
+              <div key={unit} className="flex flex-col items-center border border-zinc-800 bg-black min-w-[60px] p-2 hover:border-[#00f0ff] transition-colors">
+                <span className="text-2xl font-mono font-bold text-white">
+                  {value.toString().padStart(2, "0")}
+                </span>
+                <span className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest">{unit}</span>
+              </div>
+            ))}
+          </div>
+
+          <button onClick={() => navigate(`/products/${product.slug}`)} className="bg-[#e4ff00] text-black px-8 py-4 font-bold tracking-[0.2em] font-mono text-xs uppercase hover:bg-white transition-colors w-fit flex items-center gap-3 group/btn">
+            <span>PROCURE LOGISTICALLY</span>
+            <FaArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+          </button>
+        </div>
+
+        {/* Image Section */}
+        <div className="w-full md:w-1/2 relative min-h-[400px] flex items-center justify-center p-8 bg-[#0a0a0a]">
+          {/* Tech Target Border */}
+          <div className="absolute inset-8 border border-zinc-800 z-0 flex items-center justify-center overflow-hidden">
+            <div className="w-full h-[1px] bg-zinc-800 absolute" />
+            <div className="w-[1px] h-full bg-zinc-800 absolute" />
+          </div>
+
+          {product.images?.[0]?.url && (
+            <img
+              src={product.images[0].url}
+              alt={product.name}
+              className="max-w-[80%] max-h-[350px] object-contain relative z-10 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700 filter drop-shadow-[0_0_15px_rgba(228,255,0,0.1)] hover:drop-shadow-[0_0_20px_rgba(228,255,0,0.3)] mix-blend-screen"
+            />
+          )}
+
+          {/* Technical Price Tag */}
+          <div className="absolute bottom-8 right-8 bg-[#050505] border border-zinc-800 p-4 font-mono z-20 shadow-[0_0_30px_rgba(0,0,0,0.8)] flex flex-col items-end group-hover:border-[#00f0ff] transition-colors">
+            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-zinc-500" />
+            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-zinc-500" />
+            <div className="text-[10px] text-[#00f0ff] tracking-widest uppercase mb-1">FLASH_PRICE //</div>
+            {product.priceDiscount ? (
+              <div className="flex flex-col items-end">
+                <span className="line-through text-zinc-600 text-[10px] tracking-widest">${product.price}</span>
+                <div className="flex items-end gap-1">
+                  <span className="text-3xl font-black text-[#e4ff00]">${Math.round(product.price - (product.price * product.priceDiscount) / 100)}</span>
+                  <span className="text-[10px] text-zinc-500 uppercase tracking-widest mb-1 pb-1">COP</span>
                 </div>
               </div>
-            </div>
-          ))}
+            ) : (
+              <div className="flex items-end gap-1">
+                <span className="text-3xl font-black text-white">${product.price}</span>
+                <span className="text-[10px] text-zinc-500 uppercase tracking-widest mb-1 pb-1">COP</span>
+              </div>
+            )}
+          </div>
         </div>
-      </section>
-    </>
+      </div>
+    </div>
   );
 };
 

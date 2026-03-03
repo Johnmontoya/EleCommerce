@@ -2,46 +2,59 @@ import { Assets } from "../../../assets/assets";
 
 const Features = () => {
   return (
-    <div className="bg-slate-800/30 py-1">
-      <section className="max-w-7xl mx-auto px-4 my-10">
-        <div className="absolute top-210 left-1/2 w-32 h-32 bg-blue-500/30 rounded-full filter blur-3xl animate-float1"></div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="text-center">
-            <div className="w-44 h-44 flex items-center justify-center mx-auto mb-4">
-              <img src={Assets.Features1} className="w-44" />
+    <div className="bg-[#020202] py-1 border-t border-zinc-900 border-dashed">
+      <section className="max-w-7xl mx-auto px-4 my-16">
+        <div className="flex items-center justify-center gap-4 mb-16 w-full">
+          <div className="h-[1px] bg-zinc-800 flex-1 hidden md:block max-w-xs" />
+          <h1 className="font-bold text-2xl text-white uppercase tracking-[0.2em]" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+            SYSTEM_CAPABILITIES //
+          </h1>
+          <div className="h-[1px] bg-zinc-800 flex-1 hidden md:block max-w-xs" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="text-center group border border-zinc-800 bg-[#050505] p-6 hover:border-[#00f0ff] transition-all relative">
+            <div className="absolute top-0 left-0 w-2 h-2 bg-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute bottom-0 right-0 w-2 h-2 bg-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6 bg-black border border-zinc-800 grayscale group-hover:grayscale-0 transition-all p-4">
+              <img src={Assets.Features1} className="w-16" />
             </div>
-            <h4 className="font-bold text-slate-100 mb-2">ENVIO GRATIS</h4>
-            <p className="text-sm text-slate-400">
-              Para clientes de EE.UU o pedidos por encima de 15000.
+            <h4 className="font-bold text-[#e4ff00] mb-3 text-sm tracking-widest font-mono">FREE_SHIPPING</h4>
+            <p className="text-xs text-zinc-500 font-mono tracking-wide">
+              AUTHORIZED TO US CLUSTERS & ORDERS OVER 15K CREDITS.
             </p>
           </div>
-          <div className="text-center">
-            <div className="w-44 h-44 flex items-center justify-center mx-auto mb-4">
-              <img src={Assets.Features2} className="w-44" />
+          <div className="text-center group border border-zinc-800 bg-[#050505] p-6 hover:border-[#00f0ff] transition-all relative">
+            <div className="absolute top-0 left-0 w-2 h-2 bg-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute bottom-0 right-0 w-2 h-2 bg-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6 bg-black border border-zinc-800 grayscale group-hover:grayscale-0 transition-all p-4">
+              <img src={Assets.Features2} className="w-16" />
             </div>
-            <h4 className="font-bold text-slate-100 mb-2">PAGO SEGURO</h4>
-            <p className="text-sm text-slate-400">
-              Aceptamos Visa, American Express, Paypal, Payment Mastercard y
-              Discover
+            <h4 className="font-bold text-[#e4ff00] mb-3 text-sm tracking-widest font-mono">SECURE_PAYMENT</h4>
+            <p className="text-xs text-zinc-500 font-mono tracking-wide">
+              ENCRYPTED TRANSACTIONS: VISA, AMEX, PAYPAL, MASTERCARD.
             </p>
           </div>
-          <div className="text-center">
-            <div className="w-44 h-44 flex items-center justify-center mx-auto mb-4">
-              <img src={Assets.Features3} className="w-44" />
+          <div className="text-center group border border-zinc-800 bg-[#050505] p-6 hover:border-[#00f0ff] transition-all relative">
+            <div className="absolute top-0 left-0 w-2 h-2 bg-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute bottom-0 right-0 w-2 h-2 bg-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6 bg-black border border-zinc-800 grayscale group-hover:grayscale-0 transition-all p-4">
+              <img src={Assets.Features3} className="w-16" />
             </div>
-            <h4 className="font-bold text-slate-100 mb-2">Garantía 1 año</h4>
-            <p className="text-sm text-slate-400">
-              Todos nuestros productos son fabricados con cuidado y cubiertos por un año
-              contra defectos de fabricación
+            <h4 className="font-bold text-[#e4ff00] mb-3 text-sm tracking-widest font-mono">1_YEAR_WARRANTY</h4>
+            <p className="text-xs text-zinc-500 font-mono tracking-wide">
+              HARDWARE PROTECTED AGAINST MANUFACTURING DEFECTS.
             </p>
           </div>
-          <div className="text-center">
-            <div className="w-44 h-44 flex items-center justify-center mx-auto mb-4">
-              <img src={Assets.Features4} className="w-44" />
+          <div className="text-center group border border-zinc-800 bg-[#050505] p-6 hover:border-[#00f0ff] transition-all relative">
+            <div className="absolute top-0 left-0 w-2 h-2 bg-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute bottom-0 right-0 w-2 h-2 bg-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6 bg-black border border-zinc-800 grayscale group-hover:grayscale-0 transition-all p-4">
+              <img src={Assets.Features4} className="w-16" />
             </div>
-            <h4 className="font-bold text-slate-100 mb-2">SOPORTE 24/7</h4>
-            <p className="text-sm text-slate-400">
-              Contactanos 24 horas al dia, 7 dias a la semana. Llama a: 0123-456-789
+            <h4 className="font-bold text-[#e4ff00] mb-3 text-sm tracking-widest font-mono">SUPPORT_24/7</h4>
+            <p className="text-xs text-zinc-500 font-mono tracking-wide">
+              COMM-LINK ALWAYS ACTIVE. CONNECT: 0123-456-789.
             </p>
           </div>
         </div>

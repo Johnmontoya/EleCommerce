@@ -1,7 +1,6 @@
 import { MdOutlineFeaturedPlayList } from "react-icons/md";
-import ButtonAction from "../../../shared/ui/ButtonAction";
 import { AiFillStar } from "react-icons/ai";
-import { BiEdit, BiPlus, BiTrash } from "react-icons/bi";
+import { BiEdit, BiTrash } from "react-icons/bi";
 import type React from "react";
 import type { Banner } from "../types/banner.types";
 import SweetAlertas from "../../../shared/ui/SweetAlertas";
@@ -11,7 +10,7 @@ type DisplaySection = 'banner' | 'featured' | 'trending' | 'promotional' | 'new-
 
 interface ProductConfigProps {
     configurations: Banner[] | null | undefined;
-    sectionOptions: { value: DisplaySection; label: string; icon: React.ReactNode; color: string }[];
+    sectionOptions: { value: DisplaySection; label: string; icon: React.ReactNode; color: string; borderCode: string }[];
     onEdit: (banner: Banner) => void;
 }
 
@@ -26,9 +25,6 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
         return sectionOptions.find(opt => opt.value === section)?.icon;
     };
 
-    const getSectionColor = (section: DisplaySection) => {
-        return sectionOptions.find(opt => opt.value === section)?.color;
-    };
 
     const Cancel = () => { };
 
@@ -45,23 +41,21 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
     };
 
     return (
-        <div className="dash-search dark:dash-search border border-slate-600 rounded-2xl p-6">
-            <h2 className="text-xl font-bold text-slate-100 mb-6">
-                Productos Configurados
+        <div className="border border-zinc-800 bg-[#050505] font-mono p-6">
+            <h2 className="text-sm font-black text-white uppercase tracking-widest mb-6 flex items-center gap-2">
+                <span className="text-[#00f0ff]">{'>'}</span> [CONFIGURED_PRODUCTS]
             </h2>
 
             {!configurations || configurations.length === 0 ? (
-                <div className="text-center py-12">
-                    <MdOutlineFeaturedPlayList size={64} className="text-slate-600 mx-auto mb-4" />
-                    <p className="text-slate-400">No hay productos configurados</p>
-                    <ButtonAction
+                <div className="text-center py-16 border border-zinc-800 bg-black">
+                    <MdOutlineFeaturedPlayList size={48} className="text-zinc-700 mx-auto mb-4" />
+                    <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">NO_PRODUCTS_CONFIGURED</p>
+                    <button
                         onClick={() => onEdit({} as Banner)}
-                        variant="secondary"
-                        className="mt-4"
-                        text="Agregar el primero"
+                        className="border border-[#00f0ff] text-[#00f0ff] px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-[#00f0ff] hover:text-black transition-colors"
                     >
-                        <BiPlus size={20} />
-                    </ButtonAction>
+                        [INITIALIZE_FIRST_ITEM]
+                    </button>
                 </div>
             ) : (
                 <div className="space-y-4">
@@ -70,33 +64,36 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                         .map((config) => (
                             <div
                                 key={config.id}
-                                className="bg-slate-700/30 border-2 border-slate-600 rounded-xl p-4 hover:border-cyan-500/50 transition-all"
+                                className="bg-black border border-zinc-800 p-4 hover:border-[#00f0ff] transition-all relative group"
                             >
-                                <div className="flex items-start gap-4">
+                                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-zinc-500" />
+                                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-zinc-500" />
+                                <div className="flex items-start gap-6">
                                     {/* Product Image */}
-                                    <div className="w-20 h-20 bg-slate-600 rounded-lg overflow-hidden shrink-0">
+                                    <div className="w-24 h-24 bg-[#050505] border border-zinc-800 overflow-hidden shrink-0 relative flex items-center justify-center p-2">
+                                        <div className="absolute inset-0 bg-[#00f0ff]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                                         <img
                                             src={config.promotionalData?.bannerImageUrl || config.productImage}
                                             alt={config.productName}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all opacity-80 group-hover:opacity-100 mix-blend-screen"
                                         />
                                     </div>
 
                                     {/* Product Info */}
                                     <div className="flex-1">
-                                        <div className="flex items-start justify-between mb-3">
+                                        <div className="flex items-start justify-between mb-4 border-b border-zinc-800 pb-3">
                                             <div>
-                                                <h3 className="text-lg font-bold text-slate-100 mb-1">
+                                                <h3 className="text-base font-black text-white uppercase tracking-wider mb-2" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
                                                     {config.productName}
                                                 </h3>
-                                                <div className="flex items-center gap-2">
-                                                    <span className="text-xs text-slate-400">
-                                                        Prioridad: {config.displayPriority}
+                                                <div className="flex items-center gap-4">
+                                                    <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest flex items-center gap-2">
+                                                        <span className="text-zinc-700">|</span> <span className="text-[#00f0ff]">PRIORITY:</span> {config.displayPriority}
                                                     </span>
                                                     {config.isFeatured && (
-                                                        <span className="flex items-center gap-1 text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded">
-                                                            <AiFillStar size={12} />
-                                                            Destacado
+                                                        <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-[#e4ff00] border border-[#e4ff00]/30 px-2 py-0.5 bg-[#e4ff00]/5">
+                                                            <AiFillStar size={10} />
+                                                            FEATURED
                                                         </span>
                                                     )}
                                                 </div>
@@ -106,64 +103,67 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                                             <div className="flex gap-2">
                                                 <button
                                                     onClick={() => onEdit(config)}
-                                                    className="p-2 bg-cyan-500/20 text-cyan-400 rounded-lg hover:bg-cyan-500/30 transition-all"
+                                                    className="p-2 border border-zinc-800 text-zinc-500 hover:text-[#00f0ff] hover:border-[#00f0ff] bg-black transition-all"
                                                 >
-                                                    <BiEdit size={18} />
+                                                    <BiEdit size={16} />
                                                 </button>
                                                 <button
                                                     onClick={() => handleDelete(config.id!)}
-                                                    className="p-2 bg-red-500/20 text-red-400 rounded-lg hover:bg-red-500/30 transition-all"
+                                                    className="p-2 border border-zinc-800 text-zinc-500 hover:text-[#ff0055] hover:border-[#ff0055] bg-black transition-all"
                                                 >
-                                                    <BiTrash size={18} />
+                                                    <BiTrash size={16} />
                                                 </button>
                                             </div>
                                         </div>
 
                                         {/* Sections Badges */}
-                                        <div className="flex flex-wrap gap-2 mb-3">
-                                            {config.displaySections?.map((section) => (
-                                                <span
-                                                    key={section}
-                                                    className={`flex items-center gap-1 text-xs px-3 py-1 rounded-full border ${getSectionColor(section)}`}
-                                                >
-                                                    {getSectionIcon(section)}
-                                                    {sectionOptions.find(s => s.value === section)?.label}
-                                                </span>
-                                            ))}
+                                        <div className="flex flex-wrap gap-2 mb-4">
+                                            {config.displaySections?.map((section) => {
+                                                const sectionData = sectionOptions.find(s => s.value === section);
+                                                return (
+                                                    <span
+                                                        key={section}
+                                                        className={`flex items-center gap-1 text-[10px] font-bold tracking-widest uppercase px-2 py-1 border bg-black ${sectionData?.borderCode} ${sectionData?.color}`}
+                                                    >
+                                                        {getSectionIcon(section)}
+                                                        {sectionData?.label}
+                                                    </span>
+                                                );
+                                            })}
                                         </div>
 
                                         {/* Promotional Info */}
                                         {config.promotionalData && (
-                                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-[10px] font-bold tracking-widest uppercase mt-4 pt-4 border-t border-zinc-800 border-dashed">
                                                 {config.promotionalData.discount && (
-                                                    <div className="bg-slate-800/50 rounded p-2">
-                                                        <p className="text-slate-400 mb-1">Descuento</p>
-                                                        <p className="text-cyan-400 font-semibold">
-                                                            {config.promotionalData.discount}%
+                                                    <div className="flex flex-col gap-1">
+                                                        <p className="text-zinc-500">[DISCOUNT]</p>
+                                                        <p className="text-[#e4ff00]">
+                                                            {config.promotionalData.discount}% OFF
                                                         </p>
                                                     </div>
                                                 )}
                                                 {config.promotionalData.badgeText && (
-                                                    <div className="bg-slate-800/50 rounded p-2">
-                                                        <p className="text-slate-400 mb-1">Badge</p>
-                                                        <p className="text-slate-100 font-semibold">
+                                                    <div className="flex flex-col gap-1">
+                                                        <p className="text-zinc-500">[BADGE]</p>
+                                                        <p className="text-white">
                                                             {config.promotionalData.badgeText}
                                                         </p>
                                                     </div>
                                                 )}
                                                 {config.promotionalData.startDate && (
-                                                    <div className="bg-slate-800/50 rounded p-2">
-                                                        <p className="text-slate-400 mb-1">Inicio</p>
-                                                        <p className="text-slate-100 font-semibold">
-                                                            {new Date(config.promotionalData.startDate).toLocaleDateString()}
+                                                    <div className="flex flex-col gap-1">
+                                                        <p className="text-zinc-500">[T-START]</p>
+                                                        <p className="text-white">
+                                                            {new Date(config.promotionalData.startDate).toISOString().slice(0, 10).replace(/-/g, '.')}
                                                         </p>
                                                     </div>
                                                 )}
                                                 {config.promotionalData.endDate && (
-                                                    <div className="bg-slate-800/50 rounded p-2">
-                                                        <p className="text-slate-400 mb-1">Fin</p>
-                                                        <p className="text-slate-100 font-semibold">
-                                                            {new Date(config.promotionalData.endDate).toLocaleDateString()}
+                                                    <div className="flex flex-col gap-1">
+                                                        <p className="text-zinc-500">[T-END]</p>
+                                                        <p className="text-white">
+                                                            {new Date(config.promotionalData.endDate).toISOString().slice(0, 10).replace(/-/g, '.')}
                                                         </p>
                                                     </div>
                                                 )}

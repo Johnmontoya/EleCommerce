@@ -12,26 +12,46 @@ const Promotion = () => {
 
   return (
     promotional?.slice(0, 2).map((product) => (
-      <div key={product.id} className="w-full flex mx-auto">
+      <div key={product.id} className="w-full flex mx-auto relative group">
+        {/* Terminal frame corners */}
+        <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-[#e4ff00] opacity-50 group-hover:opacity-100 transition-opacity z-20" />
+        <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-[#e4ff00] opacity-50 group-hover:opacity-100 transition-opacity z-20" />
+
         <div
-          className="w-full rounded-2xl p-8 text-white relative h-full min-h-[270px] drop-shadow-lg/50 drop-shadow-black-500/50"
-          style={{
-            backgroundImage: `url(${product.promotionalData?.bannerImageUrl})`,
-            backgroundSize: "cover",
-          }}
+          className="w-full p-8 text-white relative h-full min-h-[270px] bg-[#050505] border border-zinc-800 overflow-hidden flex flex-col justify-center"
         >
-          <p className="text-amber-400 text-xl font-semibold mb-4">
-            Descuento del {product.priceDiscount}% OFF
-          </p>
-          <p className="text-xs font-light mb-2 text-cyan-400">{product.brand}</p>
-          <h3 className="text-2xl font-bold mb-4">{product.name}</h3>
-          <button onClick={() => navigate(`/products/${product.slug}`)} className="border-2 rounded-2xl border-slate-400/40 p-4 text-white text-sm font-medium flex items-center hover:scale-105 hover:bg-slate-500/20 transition-all cursor-pointer">
-            <p>Comprar Ahora</p>
-            <FaArrowRight size={14} className="ml-1" />
-          </button>
-          <div className="absolute p-2 rounded-xl bg-cyan-500 right-4 top-4 font-light text-5xl">
-            <div>
-              ${product.price}<span className="text-sm">cop</span>
+          {/* Background Image with Heavy Filter */}
+          <div
+            className="absolute inset-0 z-0 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-50 transition-all duration-700 scale-105 group-hover:scale-100"
+            style={{
+              backgroundImage: `url(${product.promotionalData?.bannerImageUrl})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          {/* Scanline Grid Overlay */}
+          <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.8)_50%)] bg-[length:100%_4px] z-0" />
+
+          <div className="relative z-10 w-2/3">
+            <p className="text-[#e4ff00] text-xs font-mono tracking-widest uppercase mb-4 bg-black/50 w-fit px-2 py-1 border border-[#e4ff00]/30">
+              SYS_PROMO_ACTIVE // {product.priceDiscount}% OFF
+            </p>
+            <p className="text-xs font-bold tracking-[0.2em] mb-1 text-[#00f0ff] uppercase">{product.brand}</p>
+            <h3 className="text-3xl font-black mb-6 uppercase" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{product.name}</h3>
+
+            <button
+              onClick={() => navigate(`/products/${product.slug}`)}
+              className="border border-[#00f0ff] bg-black/50 text-[#00f0ff] px-6 py-3 text-xs font-bold tracking-widest uppercase flex items-center hover:bg-[#00f0ff] hover:text-black transition-all cursor-pointer w-fit"
+            >
+              <span>ACCESS_DEAL</span>
+              <FaArrowRight size={12} className="ml-3" />
+            </button>
+          </div>
+
+          <div className="absolute p-3 bg-black border border-zinc-700 bottom-8 right-8 font-mono text-2xl font-bold flex flex-col items-end shadow-2xl z-10 group-hover:border-[#e4ff00] transition-colors">
+            <span className="text-[10px] text-zinc-500 tracking-widest uppercase mb-1">PRICE_OVERRIDE</span>
+            <div className="text-white">
+              ${product.price}<span className="text-xs text-zinc-400 ml-1">COP</span>
             </div>
           </div>
         </div>

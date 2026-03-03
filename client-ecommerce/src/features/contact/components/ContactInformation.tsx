@@ -4,41 +4,46 @@ import { MdEmail } from "react-icons/md";
 
 const ContactInformation = () => {
   return (
-    <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
-      <h2 className="text-lg font-semibold">Información de Contacto</h2>
+    <div className="bg-[#050505] border border-zinc-800 p-8 relative font-mono text-white h-fit">
+      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff]" />
+      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
 
-      <div className="space-y-3 text-white/80 text-sm">
-        <div>
-          <p className="font-semibold">Dirección Principal</p>
-          <p>
+      <h2 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-6">
+        NODE_INFO // CONTACT
+      </h2>
+
+      <div className="space-y-8 text-sm">
+        <div className="border-l-2 border-[#00f0ff] pl-4">
+          <p className="font-bold text-xs tracking-widest uppercase text-zinc-500 mb-1">[HQ_LOCATION]</p>
+          <p className="text-zinc-300">
             Carrera 13A #9-40
             <br />
             Bogotá, Colombia
           </p>
         </div>
 
-        <div>
-          <p className="font-semibold">Correo Electrónico</p>
-          <p className="text-[#00c6ff]">soporte@ecommerce.com</p>
-          <p>Respuesta en 24h</p>
+        <div className="border-l-2 border-[#00f0ff] pl-4">
+          <p className="font-bold text-xs tracking-widest uppercase text-zinc-500 mb-1">[DIGITAL_COMM]</p>
+          <p className="text-[#00f0ff]">soporte@ecommerce.com</p>
+          <p className="text-[#e4ff00] text-[10px] tracking-widest uppercase mt-1">SLA: &lt; 24H</p>
         </div>
 
-        <div>
-          <p className="font-semibold">Llámanos</p>
-          <p>(+04) 123 456 7890</p>
-          <p>Lun-Vie: 9am - 6pm</p>
+        <div className="border-l-2 border-[#00f0ff] pl-4">
+          <p className="font-bold text-xs tracking-widest uppercase text-zinc-500 mb-1">[VOICE_LINK]</p>
+          <p className="text-zinc-300">(+04) 123 456 7890</p>
+          <p className="text-zinc-500 text-[10px] tracking-widest uppercase mt-1">LUN-VIE: 0900 - 1800</p>
         </div>
       </div>
 
-      <div className="flex gap-3 pt-3">
-        <div className="flex justify-center items-center w-8 h-8 bg-slate-600 rounded-full">
-          <MdEmail size={20} />
+      <div className="flex gap-4 mt-8 pt-8 border-t border-zinc-800">
+        <div className="flex justify-center items-center w-10 h-10 bg-black border border-zinc-800 hover:border-[#00f0ff] text-zinc-500 hover:text-[#00f0ff] transition-colors cursor-pointer group">
+          <MdEmail size={18} className="group-hover:scale-110 transition-transform" />
         </div>
-        <div className="flex justify-center items-center w-8 h-8 bg-slate-600 rounded-full">
-          <ImGoogle3 size={20} />
+        <div className="flex justify-center items-center w-10 h-10 bg-black border border-zinc-800 hover:border-[#00f0ff] text-zinc-500 hover:text-[#00f0ff] transition-colors cursor-pointer group">
+          <ImGoogle3 size={18} className="group-hover:scale-110 transition-transform" />
         </div>
-        <div className="flex justify-center items-center w-8 h-8 bg-slate-600 rounded-full">
-          <FaFacebook size={20} />
+        <div className="flex justify-center items-center w-10 h-10 bg-black border border-zinc-800 hover:border-[#00f0ff] text-zinc-500 hover:text-[#00f0ff] transition-colors cursor-pointer group">
+          <FaFacebook size={18} className="group-hover:scale-110 transition-transform" />
         </div>
       </div>
     </div>

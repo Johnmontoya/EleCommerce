@@ -7,7 +7,6 @@ import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
 import NavMobile from "../../../dashboard/components/NavMobile";
 import ButtonMobile from "../../../../shared/ui/ButtonMobile";
 import { BiCategory, BiSave } from "react-icons/bi";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { CiEraser } from "react-icons/ci";
 import FormCategory from "../../components/FormCreateCategory/FormCategory";
 
@@ -67,7 +66,7 @@ const DashCreateCategoryPage = () => {
     };
 
     return (
-        <div className="min-h-screen background-light dark:background-light">
+        <div className="min-h-screen bg-[#020202] text-white font-mono selection:bg-[#00f0ff] selection:text-black">
             <div className="flex">
                 {/* Sidebar */}
                 <Sidebar />
@@ -88,31 +87,31 @@ const DashCreateCategoryPage = () => {
                         />
 
                         {/* Header */}
-                        <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center justify-between mb-8 border-b border-zinc-800 pb-4">
                             <div>
-                                <h1 className="text-2xl lg:text-4xl font-bold text-slate-100 mb-2 flex items-center gap-3">
-                                    <BiCategory className="text-cyan-400" size={36} />
-                                    Crear Nueva Categoria
+                                <h1 className="text-2xl lg:text-4xl font-black text-white mb-2 flex items-center gap-3 uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                                    <BiCategory className="text-[#00f0ff]" size={36} />
+                                    [CREATE_CATEGORY]
                                 </h1>
-                                <p className="text-slate-400">
-                                    Completa la información de la categoria
+                                <p className="text-zinc-500 text-xs font-mono tracking-widest uppercase">
+                                    // INITIALIZE_NEW_CATEGORY_NODE //
                                 </p>
                             </div>
-                            <div className="flex flex-col lg:flex-row gap-3">
-                                <ButtonAction
+                            <div className="flex flex-col lg:flex-row gap-4">
+                                <button
                                     onClick={handleReset}
-                                    text={"Resetear"}
-                                    variant="secondary"
+                                    className="flex items-center gap-2 px-6 py-3 border border-zinc-800 bg-black text-zinc-500 hover:text-[#ff0055] hover:border-[#ff0055] hover:bg-[#ff0055]/5 transition-all font-bold uppercase tracking-widest text-xs"
                                 >
                                     <CiEraser size={18} />
-                                </ButtonAction>
-                                <ButtonAction
+                                    [RESET_FORM]
+                                </button>
+                                <button
                                     onClick={handleSubmit}
-                                    text={"Guardar"}
-                                    variant="primary"
+                                    className="flex items-center gap-2 px-6 py-3 border border-[#00f0ff] bg-[#00f0ff]/10 text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black transition-all font-bold uppercase tracking-widest text-xs"
                                 >
                                     <BiSave size={18} />
-                                </ButtonAction>
+                                    [SAVE_CONFIG]
+                                </button>
                             </div>
                         </div>
 

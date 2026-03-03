@@ -1,5 +1,4 @@
 import React from "react";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { useNavigate } from "react-router-dom";
 import { BsCartPlus } from "react-icons/bs";
 import type { Product } from "../../types/product.types";
@@ -30,67 +29,82 @@ const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
   return (
     <div
       key={product.id}
-      className={`dash-search dark:dash-search border-2 border-slate-600 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all group ${viewMode === "list" ? "flex gap-6" : ""
+      className={`bg-[#050505] border border-zinc-800 relative group overflow-hidden transition-all hover:border-[#00f0ff]/50 ${viewMode === "list" ? "flex flex-col sm:flex-row gap-6 p-4" : ""
         }`}
     >
+      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity" />
+
       <div
         onClick={() => navigate(`/products/${product.slug}`)}
-        className={`dash-search dark:dash-search flex items-center justify-center overflow-hidden cursor-pointer ${viewMode === "list" ? "w-48 shrink-0" : "h-64"
+        className={`relative overflow-hidden cursor-pointer bg-black/50 ${viewMode === "list" ? "w-full sm:w-64 h-48 shrink-0" : "h-64"
           }`}
       >
         {product.priceDiscount ? (
-          <div className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-lg text-xs font-bold z-10 shadow-lg">
-            -{product.priceDiscount}%
+          <div className="absolute top-2 left-2 bg-[#e4ff00] text-black px-2 py-1 text-[10px] font-bold z-10 font-mono tracking-widest border border-[#e4ff00]">
+            -{product.priceDiscount}% OFF
           </div>
         ) : null}
         <img
           src={product.images![0].url}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0"
         />
-      </div>
-      <div className="p-6 flex-1 justify-between">
-        <p className="h-4 text-cyan-400 text-xs font-semibold mb-2 uppercase">
-          {product.category.slug}
-        </p>
-        <h3 className="h-16 text-slate-100 font-bold text-lg mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
-          {product.name}
-        </h3>
 
-        {/* Rating */}
-        <div className="h-8 flex items-center gap-2 mb-3">
-          <div className="flex items-center gap-1">
-            <BiStar size={14} className="text-amber-400 fill-amber-400" />
-            <span className="text-slate-300 text-sm font-semibold">
-              {product.rating}
+        {/* Overlay grid lines */}
+        <div className="absolute inset-0 pointer-events-none opacity-20"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(0, 240, 255, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.2) 1px, transparent 1px)',
+            backgroundSize: '20px 20px'
+          }}>
+        </div>
+      </div>
+
+      <div className={`flex flex-col flex-1 justify-between ${viewMode === "grid" ? "p-5" : "py-2"}`}>
+        <div>
+          <div className="flex justify-between items-start mb-2">
+            <p className="text-[#00f0ff] text-[10px] font-mono font-bold uppercase tracking-widest">
+              {product.category.slug}
+            </p>
+            <div className="flex items-center gap-1 bg-black px-2 py-0.5 border border-zinc-800">
+              <BiStar size={10} className="text-[#e4ff00]" />
+              <span className="text-zinc-300 text-[10px] font-mono font-bold">
+                {product.rating}
+              </span>
+              <span className="text-zinc-600 text-[10px] font-mono">
+                ({product.reviewsCount})
+              </span>
+            </div>
+          </div>
+
+          <h3 className="text-white font-bold text-lg leading-tight mb-2 line-clamp-2 md:h-12 group-hover:text-[#00f0ff] transition-colors" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+            {product.name}
+          </h3>
+        </div>
+
+        <div className={`mt-auto pt-4 flex items-end justify-between gap-4 ${viewMode === "list" ? "flex-row" : "flex-col items-stretch"}`}>
+          {/* Price */}
+          <div className="flex flex-col">
+            {product.priceDiscount ? (
+              <span className="text-zinc-600 line-through text-[10px] font-mono">
+                USD {product.price}
+              </span>
+            ) : null}
+            <span className="text-xl font-bold text-[#e4ff00] font-mono leading-none">
+              ${Math.round(
+                product.price - (product.price * (product.priceDiscount || 0)) / 100
+              )}
             </span>
           </div>
-          <span className="text-slate-500 text-xs">
-            ({product.reviewsCount} reviews)
-          </span>
-        </div>
 
-        {/* Price */}
-        <div className="flex items-center gap-2 mb-4">
-          <span className="text-2xl font-bold text-cyan-400">
-            ${Math.round(
-              product.price - (product.price * product.priceDiscount!) / 100
-            )}
-          </span>
-          {product.priceDiscount ? (
-            <span className="text-slate-500 line-through text-sm">
-              ${product.price}
-            </span>
-          ) : null}
+          <button
+            onClick={handleAddToCart}
+            className={`flex items-center justify-center gap-2 bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 hover:bg-[#00f0ff] hover:text-black transition-all ${viewMode === "list" ? "px-6 py-2" : "w-full py-2"} font-mono text-xs font-bold tracking-widest uppercase`}
+          >
+            <BsCartPlus size={14} />
+            <span className={viewMode === "grid" ? "hidden xs:inline" : ""}>ADD_CART</span>
+          </button>
         </div>
-        <ButtonAction
-          className="w-full h-12 flex items-center justify-center"
-          onClick={handleAddToCart}
-          text={"Agregar al carrito"}
-          variant="primary"
-        >
-          <BsCartPlus size={18} />
-        </ButtonAction>
       </div>
     </div>
   );

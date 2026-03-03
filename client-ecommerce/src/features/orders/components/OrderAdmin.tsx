@@ -2,7 +2,6 @@ import type React from "react";
 import { BiCalendar, BiChevronDown, BiChevronUp, BiDollarCircle, BiMap, BiPackage } from "react-icons/bi";
 import type { OrderResponse } from "../types/order.types";
 import { BadgeStatus } from "../../../shared/ui/BadgeStatus";
-import ButtonAction from "../../../shared/ui/ButtonAction";
 import { useUpdateOrderStatus } from "../hook/mutation/useOrderMutation";
 import { MdLocalShipping } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -30,60 +29,67 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
 
     return (
         <>
-            <div className="space-y-4">
+            <div className="space-y-4 font-mono">
                 {orders && orders.length > 0 ? (
                     orders.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((order) => (
                         <div
                             key={order.id}
-                            className="dash-search dark:dash-search border border-slate-600 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-cyan-500/50 transition-all"
+                            className={`bg-[#050505] border border-zinc-800 transition-all overflow-hidden ${expandedOrder === order.id ? 'border-[#00f0ff]' : 'hover:border-zinc-600'}`}
                         >
-                            {/* Order Header */}
-                            <div className="p-6">
-                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            {/* Order Header / Summary Row */}
+                            <div className="p-4 sm:p-6 relative group">
+                                {/* Subtle Hover Accent */}
+                                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pl-2">
                                     <div className="flex-1">
-                                        <div className="flex items-center gap-3 mb-2">
-                                            <h3 className="text-xl font-bold text-slate-100">
+                                        <div className="flex items-center gap-4 mb-2">
+                                            <h3 className="text-lg font-black text-white uppercase tracking-widest flex items-center gap-2">
+                                                <span className="text-zinc-600 font-normal">{'>'}</span>
                                                 {order.trackingNumber}
                                             </h3>
                                             <BadgeStatus status={order.status} />
                                         </div>
-                                        <div className="flex flex-wrap gap-4 text-sm text-slate-400">
+                                        <div className="flex flex-wrap gap-6 text-xs text-zinc-500 font-bold uppercase tracking-widest">
                                             <div className="flex items-center gap-2">
-                                                <BiCalendar size={16} />
+                                                <BiCalendar size={14} className="text-zinc-600" />
                                                 {new Date(order.createdAt).toLocaleDateString("es-ES", {
                                                     year: "numeric",
-                                                    month: "long",
-                                                    day: "numeric",
-                                                })}
+                                                    month: "2-digit",
+                                                    day: "2-digit",
+                                                }).replace(/\//g, '.')}
                                             </div>
-                                            <div className="flex items-center gap-2">
-                                                <BiDollarCircle size={16} />
+                                            <div className="flex items-center gap-2 text-[#e4ff00]">
+                                                <BiDollarCircle size={14} />
                                                 ${order.total}
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-col gap-2">
-                                        <ButtonAction
-                                            text=""
-                                            variant="edit"
+                                    <div className="flex flex-row md:flex-col gap-2 shrink-0">
+                                        <button
                                             onClick={() => handleToggleExpand(order.id)}
+                                            className="text-zinc-500 hover:text-[#00f0ff] px-4 py-2 border border-transparent hover:border-[#00f0ff] hover:bg-[#00f0ff]/10 text-xs font-bold transition-all uppercase tracking-widest flex items-center justify-center gap-2 flex-1 md:flex-none"
                                         >
                                             {expandedOrder === order.id ? (
                                                 <>
-                                                    <BiChevronUp size={18} />
-                                                    Ocultar
+                                                    <BiChevronUp size={16} />
+                                                    [COLLAPSE]
                                                 </>
                                             ) : (
                                                 <>
-                                                    <BiChevronDown size={18} />
-                                                    Ver Detalles
+                                                    <BiChevronDown size={16} />
+                                                    [DETAILS]
                                                 </>
                                             )}
-                                        </ButtonAction>
-                                        <ButtonAction text="Rastrear envío" onClick={() => navigate(`/dashboard/tracking/create?orderId=${order.id}&trackingNumber=${order.trackingNumber}`)} variant="secondary">
-                                            <MdLocalShipping size={25} />
-                                        </ButtonAction>
+                                        </button>
+                                        <button
+                                            onClick={() => navigate(`/dashboard/tracking/create?orderId=${order.id}&trackingNumber=${order.trackingNumber}`)}
+                                            className="text-zinc-500 hover:text-[#e4ff00] px-4 py-2 border border-transparent hover:border-[#e4ff00] hover:bg-[#e4ff00]/10 text-xs font-bold transition-all uppercase tracking-widest flex items-center justify-center gap-2 flex-1 md:flex-none"
+                                        >
+                                            <MdLocalShipping size={16} />
+                                            [TRACK]
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -91,33 +97,37 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                             {/* Order Details (Expandible) */}
                             {expandedOrder === order.id && (
                                 <>
-                                    <div className="border-t border-slate-700 p-6 bg-slate-900/30">
-                                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                                            {/* Items */}
+                                    <div className="border-t border-zinc-800 p-6 bg-black">
+                                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                            {/* Items Container */}
                                             <div>
-                                                <h4 className="text-lg font-bold text-slate-100 mb-4">
-                                                    Productos ({order?.items?.length})
-                                                </h4>
-                                                <div className="space-y-3">
+                                                <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
+                                                    <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
+                                                        [ACQUIRED_ASSETS]
+                                                    </h4>
+                                                    <span className="text-zinc-600 text-[10px] tracking-widest uppercase font-bold">QTY: {order?.items?.length}</span>
+                                                </div>
+                                                <div className="space-y-4">
                                                     {order?.items?.map((item) => (
                                                         <div
                                                             key={item.id}
-                                                            className="flex items-center gap-4 bg-slate-800/50 p-3 rounded-lg"
+                                                            className="flex items-center gap-4 bg-[#050505] border border-zinc-900 shadow-sm p-3 relative group"
                                                         >
+                                                            <div className="absolute left-0 top-0 bottom-0 w-1 bg-zinc-800 group-hover:bg-[#e4ff00] transition-colors" />
                                                             <img
                                                                 src={item.productImage}
                                                                 alt={item.productName}
-                                                                className="w-16 h-16 object-cover rounded-lg"
+                                                                className="w-12 h-12 object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all border border-zinc-800"
                                                             />
-                                                            <div className="flex-1">
-                                                                <p className="text-slate-100 font-semibold">
+                                                            <div className="flex-1 overflow-hidden">
+                                                                <p className="text-white text-xs font-bold uppercase tracking-wider truncate">
                                                                     {item.productName}
                                                                 </p>
-                                                                <p className="text-slate-400 text-sm">
-                                                                    Cantidad: {item.quantity} × ${item.price}
+                                                                <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold mt-1">
+                                                                    QTY: {item.quantity} × ${item.price}
                                                                 </p>
                                                             </div>
-                                                            <p className="text-cyan-400 font-bold">
+                                                            <p className="text-[#e4ff00] font-black text-sm tracking-widest pl-2">
                                                                 ${(item.price * item.quantity).toFixed(2)}
                                                             </p>
                                                         </div>
@@ -125,64 +135,79 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                                 </div>
                                             </div>
 
-                                            {/* Customer & Shipping Info */}
-                                            <div className="space-y-4">
+                                            {/* Customer & Shipping Info Container */}
+                                            <div className="space-y-6">
 
                                                 {/* Shipping */}
-                                                <div className="bg-slate-800/50 p-4 rounded-lg">
-                                                    <h4 className="text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
-                                                        <BiMap className="text-cyan-400" size={20} />
-                                                        Dirección de Envío
-                                                    </h4>
-                                                    <div className="text-sm text-slate-300">
-                                                        <p>{order?.address?.street}</p>
-                                                        <p>
-                                                            {order?.address?.city},{" "}
-                                                            {order?.address?.state}
-                                                        </p>
-                                                        <p>
-                                                            {order?.address?.zipCode},{" "}
-                                                            {order?.address?.country}
-                                                        </p>
+                                                <div>
+                                                    <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
+                                                        <h4 className="flex items-center gap-2 text-xs font-bold text-zinc-500 uppercase tracking-widest">
+                                                            <BiMap className="text-[#00f0ff]" size={16} />
+                                                            [DELIVERY_COORDINATES]
+                                                        </h4>
                                                     </div>
-                                                    {order?.trackingNumber && (
-                                                        <div className="mt-3 pt-3 border-t border-slate-700">
-                                                            <p className="text-slate-500 text-xs mb-1">
-                                                                Tracking:
-                                                            </p>
-                                                            <p className="text-cyan-400 font-semibold">
-                                                                {order.trackingNumber}
-                                                            </p>
+                                                    <div className="bg-[#050505] border border-zinc-900 p-4 text-xs font-bold text-zinc-400 uppercase tracking-wider leading-relaxed">
+                                                        <p className="text-white">{order?.address?.street}</p>
+                                                        <p>
+                                                            {order?.address?.city}, {order?.address?.state}
+                                                        </p>
+                                                        <p>
+                                                            {order?.address?.zipCode}, {order?.address?.country}
+                                                        </p>
+
+                                                        {order?.trackingNumber && (
+                                                            <div className="mt-4 pt-4 border-t border-zinc-900 flex items-center justify-between">
+                                                                <p className="text-zinc-600 text-[10px]">
+                                                                    TRACKING_ID:
+                                                                </p>
+                                                                <p className="text-[#00f0ff] font-black tracking-widest">
+                                                                    {order.trackingNumber}
+                                                                </p>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+
+                                                {/* Payment & Status Wrapper */}
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    {/* Payment */}
+                                                    <div>
+                                                        <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
+                                                            <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
+                                                                [PAYMENT_TYPE]
+                                                            </h4>
                                                         </div>
-                                                    )}
-                                                </div>
+                                                        <div className="bg-[#050505] border border-zinc-900 p-4 flex items-center justify-center h-full min-h-[60px]">
+                                                            <p className="text-white text-xs font-black uppercase tracking-widest">{order?.paymentMethod || 'UNKNOWN'}</p>
+                                                        </div>
+                                                    </div>
 
-                                                {/* Payment */}
-                                                <div className="bg-slate-800/50 p-4 rounded-lg">
-                                                    <h4 className="text-lg font-bold text-slate-100 mb-3">
-                                                        Método de Pago
-                                                    </h4>
-                                                    <p className="text-slate-300">{order?.paymentMethod}</p>
-                                                </div>
-
-                                                {/* Update Status */}
-                                                <div className="bg-slate-800/50 p-4 rounded-lg">
-                                                    <h4 className="text-lg font-bold text-slate-100 mb-3">
-                                                        Actualizar Estado
-                                                    </h4>
-                                                    <select
-                                                        value={order?.status}
-                                                        onChange={(e) => handleUpdateOrderStatus(order.id, e.target.value)}
-                                                        className="w-full bg-slate-700 border border-slate-600 text-slate-100 px-4 py-2 rounded-lg outline-none focus:border-cyan-400 cursor-pointer"
-                                                    >
-                                                        <option value="PENDING">Pendiente</option>
-                                                        <option value="CONFIRMED">Confirmado</option>
-                                                        <option value="PROCESSING">Procesando</option>
-                                                        <option value="SHIPPED">Enviado</option>
-                                                        <option value="DELIVERED">Entregado</option>
-                                                        <option value="CANCELLED">Cancelado</option>
-                                                        <option value="REFUNDED">Reembolsado</option>
-                                                    </select>
+                                                    {/* Update Status (Admin) */}
+                                                    <div>
+                                                        <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
+                                                            <h4 className="text-xs font-bold text-[#ff0055] uppercase tracking-widest">
+                                                                [OVERRIDE_STATUS]
+                                                            </h4>
+                                                        </div>
+                                                        <div className="bg-[#050505] border border-[#ff0055]/30 p-2 relative h-full min-h-[60px] flex items-center">
+                                                            <select
+                                                                value={order?.status}
+                                                                onChange={(e) => handleUpdateOrderStatus(order.id, e.target.value)}
+                                                                className="w-full bg-black border border-zinc-800 text-[#ff0055] text-xs font-bold uppercase tracking-widest px-3 py-2 outline-none focus:border-[#ff0055] cursor-pointer appearance-none"
+                                                            >
+                                                                <option value="PENDING">[ PENDING ]</option>
+                                                                <option value="CONFIRMED">[ CONFIRMED ]</option>
+                                                                <option value="PROCESSING">[ PROCESSING ]</option>
+                                                                <option value="SHIPPED">[ SHIPPED ]</option>
+                                                                <option value="DELIVERED">[ DELIVERED ]</option>
+                                                                <option value="CANCELLED">[ CANCELLED ]</option>
+                                                                <option value="REFUNDED">[ REFUNDED ]</option>
+                                                            </select>
+                                                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#ff0055]">
+                                                                <BiChevronDown size={16} />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -191,13 +216,13 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                             )}
                         </div>
                     ))) : (
-                    <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-12 text-center backdrop-blur-sm">
-                        <BiPackage size={64} className="mx-auto text-slate-600 mb-4" />
-                        <p className="text-slate-400 text-lg mb-2">
-                            No se encontraron pedidos
+                    <div className="bg-[#050505] border border-zinc-800 p-12 text-center font-mono">
+                        <BiPackage size={48} className="mx-auto text-zinc-800 mb-4" />
+                        <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-1">
+                            [SYSTEM_ALERT]
                         </p>
-                        <p className="text-slate-500 text-sm">
-                            Intenta ajustar los filtros de búsqueda
+                        <p className="text-zinc-600 text-xs tracking-wider">
+                            NO RECORDS FOUND MATCHING QUERY PARAMETERS.
                         </p>
                     </div>
                 )}

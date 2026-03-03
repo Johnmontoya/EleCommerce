@@ -1,5 +1,4 @@
 import React from "react";
-import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
 import FeaturedPost from "../../components/FeaturedPost";
 import RegularPost from "../../components/RegularPost";
 import SearchPost from "../../components/SearchPost";
@@ -103,25 +102,33 @@ const BlogNewsPage: React.FC = () => {
   const regularPosts = blogPosts.filter((post) => !post.featured);
 
   return (
-    <div className="min-h-screen background-light dark:background-light">
-      {/* Breadcrumb */}
-      <BreadCrumbs />
+    <div className="min-h-screen bg-[#020202] relative font-mono text-white pb-12">
+      {/* Background Grid Pattern */}
+      <div
+        className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #ffffff 1px, transparent 1px),
+            linear-gradient(to bottom, #ffffff 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px'
+        }}
+      />
 
-      <div className="flex flex-col lg:flex-row gap-8 max-w-7xl w-full px-4 pb-8 mx-auto">
-        {/* Cart Items Section */}
+      <div className="flex flex-col lg:flex-row gap-8 max-w-7xl w-full px-4 pt-12 pb-8 mx-auto relative z-10">
         <div className="flex-1">
-          <div className="flex flex-col gap-1 items-start justify-start mb-8">
-            <h1 className="text-4xl font-bold text-slate-100">
-              Ultimas Noticias y Actualizaciones
+          <div className="flex flex-col gap-2 items-start justify-start mb-8 border-l-4 border-[#00f0ff] pl-6">
+            <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-wider" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+              SYS_LOGS // LATEST_UPDATES
             </h1>
-            <p className="text-slate-400 max-w-2xl">
-              La ultima tendencia en tecnologia, fitness y ofertas exclusivas en nuestra tienda.
+            <p className="text-zinc-500 max-w-2xl font-mono text-sm tracking-widest uppercase">
+              &gt; TECHNOLOGY_REPORTS | EQUIPMENT_ANNOUNCEMENTS | DATA_STREAMS
             </p>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 pb-8">
+      <div className="max-w-7xl mx-auto px-4 pb-8 relative z-10">
 
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}

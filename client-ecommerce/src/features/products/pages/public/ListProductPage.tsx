@@ -4,8 +4,6 @@ import CardProductList from "../../components/listProducts/CardProductList";
 import CardCategoryList from "../../components/listProducts/CardCategoryList";
 import CardFilterPrice from "../../components/listProducts/CardFilterPrice";
 import CardFilterBrand from "../../components/listProducts/CardFilterBrand";
-import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { useProductsInfiniteQuery } from "../../hook/queries/useProduct";
 import LoadingFallback from "../../../../shared/ui/LoadingFallback";
 import { useProductFilters } from "../../hook/queries/useProductFilters";
@@ -154,26 +152,34 @@ const ListProductsPage: React.FC = () => {
   if (error) return <div className="text-red-500 text-center py-8">{error.message}</div>
 
   return (
-    <div className="min-h-screen background-light dark:background-light">
-      {/* Breadcrumb */}
-      <BreadCrumbs />
+    <div className="min-h-screen bg-[#020202] relative font-mono text-white">
+      {/* Elemento decorativo de fondo */}
+      <div
+        className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #ffffff 1px, transparent 1px),
+            linear-gradient(to bottom, #ffffff 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px'
+        }}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar Filters */}
           <div className="lg:w-64 shrink-0 space-y-6">
-            {/* Filtros activos con chips */}
             {activeFiltersCount > 0 && (
-              <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-4">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm font-semibold text-slate-300">
-                    Filtros activos ({activeFiltersCount})
+              <div className="bg-[#050505] border border-zinc-800 p-4 relative mb-6">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-[10px] font-bold text-[#e4ff00] tracking-widest uppercase">
+                    ACTIVE_FILTERS ({activeFiltersCount})
                   </span>
                   <button
                     onClick={clearFilters}
-                    className="text-xs text-cyan-400 hover:text-cyan-300 font-medium"
+                    className="text-[10px] text-zinc-500 hover:text-red-500 font-bold tracking-widest uppercase transition-colors"
                   >
-                    Limpiar todo
+                    [CLR_ALL]
                   </button>
                 </div>
 
@@ -184,10 +190,10 @@ const ListProductsPage: React.FC = () => {
                       <span
                         key={brand}
                         onClick={() => toggleBrand(brand)}
-                        className="inline-flex items-center gap-1 px-3 py-1 bg-cyan-500/20 text-cyan-400 text-xs rounded-full cursor-pointer hover:bg-cyan-500/30 transition-colors"
+                        className="inline-flex items-center gap-1 px-2 py-1 bg-black border border-zinc-800 text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase cursor-pointer hover:border-red-500 hover:text-red-500 transition-colors"
                       >
                         {brand}
-                        <button className="hover:text-cyan-300">×</button>
+                        <button className="text-zinc-600 hover:text-red-500 ml-1">×</button>
                       </span>
                     ))}
                   </div>
@@ -197,10 +203,10 @@ const ListProductsPage: React.FC = () => {
                 {selectedCategoryObj && (
                   <span
                     onClick={() => setCategory(undefined)}
-                    className="inline-flex items-center gap-1 px-3 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-full cursor-pointer hover:bg-blue-500/30 transition-colors"
+                    className="inline-flex items-center gap-1 px-2 py-1 bg-black border border-zinc-800 text-[#e4ff00] text-[10px] font-bold tracking-widest uppercase cursor-pointer hover:border-red-500 hover:text-red-500 transition-colors mb-2"
                   >
                     {selectedCategoryObj.name}
-                    <button className="hover:text-blue-300">×</button>
+                    <button className="text-zinc-600 hover:text-red-500 ml-1">×</button>
                   </span>
                 )}
 
@@ -208,10 +214,10 @@ const ListProductsPage: React.FC = () => {
                 {(filters.minPrice || filters.maxPrice) && (
                   <span
                     onClick={() => updatePriceRange(0, 1000000)}
-                    className="inline-flex items-center gap-1 px-3 py-1 bg-green-500/20 text-green-400 text-xs rounded-full cursor-pointer hover:bg-green-500/30 transition-colors mt-2"
+                    className="inline-flex items-center gap-1 px-2 py-1 bg-black border border-zinc-800 text-white text-[10px] font-bold tracking-widest uppercase cursor-pointer hover:border-red-500 hover:text-red-500 transition-colors"
                   >
                     ${filters.minPrice || 0} - ${filters.maxPrice || 1000000}
-                    <button className="hover:text-green-300">×</button>
+                    <button className="text-zinc-600 hover:text-red-500 ml-1">×</button>
                   </span>
                 )}
               </div>
@@ -239,57 +245,53 @@ const ListProductsPage: React.FC = () => {
           {/* Main Content */}
           <div className="flex-1">
             {/* Header */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-              <p className="text-slate-400">
-                Mostrando {sortedProducts.length} de{" "}
-                <span className="text-cyan-400 font-semibold">
-                  {totalProducts} resultados
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-zinc-800 pb-4">
+              <p className="text-zinc-500 text-xs uppercase tracking-widest font-bold">
+                RENDERED {sortedProducts.length} OF{" "}
+                <span className="text-[#00f0ff]">
+                  {totalProducts} RESULTS
                 </span>
                 {isFetching && (
-                  <span className="ml-2 text-xs text-cyan-400">
-                    Actualizando...
+                  <span className="ml-2 text-[10px] text-[#e4ff00] animate-pulse">
+                    [UPDATING_DB...]
                   </span>
                 )}
               </p>
 
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-slate-400 text-sm">Ordenar por:</span>
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-3">
+                  <span className="text-zinc-600 text-[10px] font-bold tracking-[0.2em] uppercase hidden sm:block">SORT_ORDER:</span>
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="bg-slate-700 border border-slate-600 text-slate-100 px-4 py-2 rounded-lg outline-none focus:border-cyan-400 cursor-pointer"
+                    className="bg-black border border-zinc-800 text-[#00f0ff] px-3 py-2 text-xs font-bold tracking-widest uppercase outline-none focus:border-[#00f0ff] cursor-pointer"
                   >
-                    <option value="popularity">Popularidad</option>
-                    <option value="price-low">Precio: Bajo a Alto</option>
-                    <option value="price-high">Precio: Alto a Bajo</option>
-                    <option value="newest">Más Recientes</option>
+                    <option value="popularity">POPULARITY</option>
+                    <option value="price-low">PRICE_ASC</option>
+                    <option value="price-high">PRICE_DESC</option>
+                    <option value="newest">LATEST</option>
                   </select>
                 </div>
 
                 <div className="flex gap-2">
-                  <ButtonAction
+                  <button
                     onClick={() => setViewMode("grid")}
-                    className={`p-2 rounded-lg transition-all ${viewMode === "grid"
-                      ? "bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white"
-                      : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                    className={`p-2 border transition-all ${viewMode === "grid"
+                      ? "bg-[#00f0ff]/10 border-[#00f0ff] text-[#00f0ff]"
+                      : "bg-black border-zinc-800 text-zinc-500 hover:border-zinc-500 hover:text-white"
                       }`}
-                    text=""
-                    variant="outline"
                   >
-                    <BsGrid size={20} />
-                  </ButtonAction>
-                  <ButtonAction
-                    className={`p-2 rounded-lg transition-all ${viewMode === "list"
-                      ? "bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white"
-                      : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                      }`}
+                    <BsGrid size={16} />
+                  </button>
+                  <button
                     onClick={() => setViewMode("list")}
-                    text=""
-                    variant="outline"
+                    className={`p-2 border transition-all ${viewMode === "list"
+                      ? "bg-[#00f0ff]/10 border-[#00f0ff] text-[#00f0ff]"
+                      : "bg-black border-zinc-800 text-zinc-500 hover:border-zinc-500 hover:text-white"
+                      }`}
                   >
-                    <BsList size={20} />
-                  </ButtonAction>
+                    <BsList size={16} />
+                  </button>
                 </div>
               </div>
             </div>
@@ -318,32 +320,32 @@ const ListProductsPage: React.FC = () => {
                   className="h-20 flex justify-center items-center my-4"
                 >
                   {isFetchingNextPage && (
-                    <div className="flex items-center gap-3 text-cyan-400">
-                      <div className="w-6 h-6 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
-                      <span>Cargando más productos...</span>
+                    <div className="flex items-center gap-3 text-[#00f0ff] uppercase text-xs font-bold tracking-widest">
+                      <div className="w-4 h-4 border-2 border-[#00f0ff] border-t-transparent rounded-full animate-spin"></div>
+                      <span>[LOADING_RECORDS...]</span>
                     </div>
                   )}
                 </div>
 
                 {/* Mensaje de fin */}
                 {!hasNextPage && sortedProducts.length > 0 && (
-                  <div className="text-center text-slate-400 py-8 border-t border-slate-700">
-                    <p className="text-sm">
-                      Has visto todos los {sortedProducts.length} productos disponibles
+                  <div className="text-center text-zinc-600 py-8 border-t border-zinc-800 uppercase text-xs font-bold tracking-widest">
+                    <p>
+                      END_OF_RESULTS: {sortedProducts.length} RECORDS FOUND
                     </p>
                   </div>
                 )}
               </>
             ) : (
-              <div className="text-center py-16">
-                <p className="text-slate-400 text-lg mb-4">
-                  No se encontraron productos con estos filtros
+              <div className="text-center py-20 border border-zinc-800 bg-[#050505]">
+                <p className="text-[#e4ff00] text-sm font-bold tracking-widest uppercase mb-6">
+                  ERROR: NO_PRODUCTS_MATCH_PARAMETERS
                 </p>
                 <button
                   onClick={clearFilters}
-                  className="px-6 py-3 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600"
+                  className="px-8 py-3 bg-[#00f0ff] text-black font-bold tracking-widest uppercase text-xs hover:bg-black hover:text-[#00f0ff] border border-[#00f0ff] transition-all"
                 >
-                  Limpiar filtros
+                  RESET_SYS_FILTERS
                 </button>
               </div>
             )}

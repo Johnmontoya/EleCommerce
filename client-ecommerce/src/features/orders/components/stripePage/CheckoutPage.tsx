@@ -23,13 +23,24 @@ const STRIPE_OPTIONS = {
     appearance: {
         theme: "night" as const,
         variables: {
-            colorPrimary: "#38bdf8",
-            colorBackground: "#0c1222",
-            colorText: "#e2e8f0",
-            colorDanger: "#fb7185",
-            fontFamily: "system-ui, sans-serif",
-            borderRadius: "10px",
+            colorPrimary: "#00f0ff",
+            colorBackground: "#050505",
+            colorText: "#e5e7eb",
+            colorDanger: "#ff0055",
+            fontFamily: "'JetBrains Mono', monospace",
+            borderRadius: "0px",
+            colorTextPlaceholder: "#4b5563",
         },
+        rules: {
+            '.Input': {
+                border: '1px solid #27272a',
+                boxShadow: 'none',
+            },
+            '.Input:focus': {
+                border: '1px solid #00f0ff',
+                boxShadow: 'none',
+            },
+        }
     },
 };
 
@@ -101,19 +112,30 @@ const CheckoutPage = ({
     }
 
     return (
-        <div className="min-h-screen bg-[#080e1a] py-10 px-4">
-            {/* Fondo decorativo */}
-            <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-sky-600/5 blur-[100px] rounded-full" />
-                <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-700/5 blur-[120px] rounded-full" />
-            </div>
+        <div className="min-h-screen bg-[#020202] text-zinc-300 py-10 px-4 relative overflow-hidden" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+            {/* Fondo de cuadrícula técnico */}
+            <div className="fixed inset-0 pointer-events-none z-0"
+                style={{
+                    backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)`,
+                    backgroundSize: '40px 40px',
+                    backgroundPosition: '-1px -1px'
+                }}
+            />
+            {/* Scanline overlay */}
+            <div className="fixed inset-0 pointer-events-none z-0 bg-[linear-gradient(rgba(0,0,0,0)_50%,rgba(0,0,0,0.1)_50%)] bg-[length:100%_4px]" />
 
-            <div className="max-w-7xl mx-auto relative">
+            <div className="max-w-5xl mx-auto relative z-10">
                 {/* Stepper (oculto en pantalla de éxito) */}
                 {step !== "success" && <CheckoutStepper currentStep={step} />}
 
-                {/* Tarjeta principal */}
-                <div className="bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 shadow-2xl shadow-black/40">
+                {/* Tarjeta principal / Panel Técnico */}
+                <div className="bg-[#050505] border border-zinc-800 p-6 relative">
+                    {/* Detalles de esquinas (tech borders) */}
+                    <div className="absolute top-0 left-0 w-3 h-3 border-t-[3px] border-l-[3px] border-[#00f0ff]" />
+                    <div className="absolute top-0 right-0 w-3 h-3 border-t-[3px] border-r-[3px] border-[#00f0ff]" />
+                    <div className="absolute bottom-0 left-0 w-3 h-3 border-b-[3px] border-l-[3px] border-[#00f0ff]" />
+                    <div className="absolute bottom-0 right-0 w-3 h-3 border-b-[3px] border-r-[3px] border-[#00f0ff]" />
+
                     {step === "summary" && (
                         <SummaryStep
                             stock={stock}
@@ -152,32 +174,32 @@ const CheckoutPage = ({
                     )}
 
                     {step === "success" && (
-                        <div className="flex flex-col items-center py-10 gap-4 text-center">
-                            <div className="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
-                                <svg className="w-10 h-10 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        <div className="flex flex-col items-center py-16 gap-6 text-center">
+                            <div className="w-24 h-24 border border-[#00f0ff] flex items-center justify-center relative bg-[#00f0ff]/5">
+                                <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-[#00f0ff]" />
+                                <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-[#00f0ff]" />
+                                <svg className="w-12 h-12 text-[#00f0ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
                             <div>
-                                <h2 className="text-2xl font-bold text-white">¡Pago exitoso!</h2>
-                                <p className="text-slate-400 mt-1 text-sm">
-                                    Tu pedido ha sido confirmado. Redirigiendo...
+                                <h2 className="text-3xl font-bold text-white uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>PAYMENT_SUCCESS //</h2>
+                                <p className="text-zinc-500 mt-2 text-sm tracking-widest uppercase">
+                                    ORDER REDIRECTING...
                                 </p>
                             </div>
-                            <div className="w-full bg-slate-800/60 border border-slate-700/50 rounded-xl p-4 text-left">
-                                <p className="text-slate-500 text-xs mb-1">Número de orden</p>
-                                <p className="text-slate-200 font-mono text-sm">{orderId}</p>
+                            <div className="w-full max-w-sm bg-black border border-zinc-800 p-4 text-left relative mt-4">
+                                <span className="absolute -top-2.5 left-4 bg-[#050505] px-2 text-[10px] text-[#00f0ff] tracking-widest border border-zinc-800">ORDER_ID</span>
+                                <p className="text-zinc-300 font-mono text-sm tracking-wider mt-2">{orderId}</p>
                             </div>
                         </div>
                     )}
                 </div>
 
                 {/* Footer */}
-                <p className="text-center text-slate-700 text-xs mt-6 flex items-center justify-center gap-1.5">
-                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
-                    </svg>
-                    Pago seguro con cifrado SSL · Powered by Stripe
+                <p className="text-center text-zinc-600 text-[10px] tracking-[0.2em] uppercase mt-8 flex items-center justify-center gap-2">
+                    <span className="w-2 h-2 bg-emerald-500 animate-pulse"></span>
+                    SECURE_PAYMENT_SSL // POWERED_BY_STRIPE
                 </p>
             </div>
         </div>

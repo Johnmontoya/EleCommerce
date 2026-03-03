@@ -9,21 +9,25 @@ const SearchPost = () => {
     console.log("Searching for:", searchTerm);
   };
   return (
-    <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
-      <h3 className="text-xl font-bold text-slate-100 mb-4">Buscar</h3>
-      <form onSubmit={handleSearch} className="relative">
+    <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono">
+      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff]" />
+      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
+      <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-4">
+        SYS_SEARCH //
+      </h3>
+      <form onSubmit={handleSearch} className="relative group">
         <input
           type="text"
-          placeholder="Buscar articulos..."
+          placeholder="ENTER_QUERY..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+          className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-600 px-4 py-3 outline-none focus:border-[#00f0ff] transition-colors text-xs font-bold uppercase tracking-widest"
         />
         <button
           type="submit"
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-cyan-400 transition-colors"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-[#00f0ff] transition-colors"
         >
-          <BiSearch size={20} />
+          <BiSearch size={18} />
         </button>
       </form>
     </div>

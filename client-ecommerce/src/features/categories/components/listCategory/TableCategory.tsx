@@ -17,10 +17,10 @@ const TableCategory: React.FC<TableCategoryProps> = ({
 }) => {
 
     const theader = [
-        "Categoria",
-        "Descripcion",
-        "Estado",
-        "Acciones",
+        "[CATEGORY_ID]",
+        "[DESCRIPTION]",
+        "[STATUS]",
+        "[ACTIONS]",
     ];
 
     return (
@@ -42,8 +42,10 @@ const TableCategory: React.FC<TableCategoryProps> = ({
                     ))
                 ) : (
                     <tr>
-                        <td colSpan={7} className="p-12 text-center">
-                            <p className="text-slate-400 text-lg">No se encontraron categorias</p>
+                        <td colSpan={7} className="p-16 text-center border-t border-zinc-800 bg-black">
+                            <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest">
+                                [NO_CATEGORIES_FOUND_IN_DATABASE]
+                            </p>
                         </td>
                     </tr>
                 )}

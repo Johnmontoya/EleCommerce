@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BiMapPin } from "react-icons/bi";
-import ButtonAction from "../../../shared/ui/ButtonAction";
 import { MdPublishedWithChanges } from "react-icons/md";
 import type { User } from "../../auth/types/auth.types";
 import ModalAddress from "../../profile/components/ModalAddress";
@@ -20,35 +19,49 @@ const ShippingAddress: React.FC<UserProps> = ({ user }) => {
         title="Agregar Dirección"
         data={user!}
       />
-      <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-slate-100">Direccion de envio</h2>
-          <ButtonAction
-            variant="edit"
-            text="Cambiar"
+      <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono h-[100%]">
+        <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#ff0055]" />
+
+        <div className="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800">
+          <div>
+            <h2 className="text-xl font-black text-white uppercase tracking-widest">
+              [DELIVERY_COORDS]
+            </h2>
+          </div>
+          <button
             onClick={() => setIsModalOpenAddress(!isModalOpenAddress)}
+            className="text-[#ff0055] hover:text-white hover:bg-[#ff0055]/10 border border-transparent hover:border-[#ff0055] px-3 py-1.5 text-xs font-bold transition-all flex items-center gap-2 uppercase tracking-widest"
           >
-            <MdPublishedWithChanges size={16} />
-          </ButtonAction>
+            <span>[UPDATE]</span>
+            <MdPublishedWithChanges size={14} />
+          </button>
         </div>
 
-        <div className="space-y-4">
-          <div className="flex items-start gap-3">
-            <BiMapPin size={18} className="text-slate-500 mt-1" />
+        <div className="space-y-6">
+          <div className="flex items-start gap-4">
+            <div className="w-8 h-8 bg-black border border-zinc-800 flex items-center justify-center shrink-0">
+              <BiMapPin size={16} className="text-[#ff0055]" />
+            </div>
             <div>
-              <p className="text-slate-100 font-semibold mb-2">{user?.firstName} {user?.lastName}</p>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                {user?.addresses?.[0].street || "No especificado"}
-                <br />
-                {user?.addresses?.[0].city || "No especificado"}
-                <br />
-                {user?.addresses?.[0].country || "No especificado"}
+              <p className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">
+                [{user?.firstName?.toUpperCase()}_{user?.lastName?.toUpperCase()}]
               </p>
+              <div className="text-white font-bold tracking-wider text-sm leading-relaxed">
+                {user?.addresses && user.addresses.length > 0 ? (
+                  <>
+                    <p>{user.addresses[0].street}</p>
+                    <p>{user.addresses[0].city}</p>
+                    <p>{user.addresses[0].country}</p>
+                  </>
+                ) : (
+                  <span className="text-zinc-600">[DATA_NOT_FOUND]</span>
+                )}
+              </div>
             </div>
           </div>
 
-          <div className="w-full text-center mt-4 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 text-cyan-400 py-2 rounded-lg font-semibold text-sm transition-all">
-            Direccion actual
+          <div className="w-full text-center mt-6 bg-[#ff0055]/10 border border-[#ff0055]/30 text-[#ff0055] py-3 text-xs font-bold tracking-widest uppercase">
+            [ACTIVE_LOCATION]
           </div>
         </div>
       </div>

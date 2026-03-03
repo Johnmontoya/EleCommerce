@@ -11,31 +11,35 @@ const Subscribe = () => {
   };
 
   return (
-    <div className="bg-linear-to-br from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500/30 rounded-2xl p-6 backdrop-blur-sm">
-      <h3 className="text-xl font-bold text-slate-100 mb-2">Subscribe Now</h3>
-      <p className="text-slate-400 text-sm mb-4">
-        Get the latest updates delivered to your inbox.
+    <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono mt-6">
+      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#e4ff00]" />
+      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#e4ff00]" />
+      <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-2">
+        SYS_COMMS // SUBSCRIBE
+      </h3>
+      <p className="text-zinc-500 text-[10px] tracking-widest uppercase mb-6">
+        ESTABLISH DIRECT LINK FOR LATEST_UPDATES.
       </p>
-      <form onSubmit={handleSubscribe} className="space-y-3">
+      <form onSubmit={handleSubscribe} className="space-y-4">
         <div className="relative">
           <MdEmail
-            size={18}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"
+            size={16}
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500"
           />
           <input
             type="email"
-            placeholder="Your email address"
+            placeholder="ENTER_EMAIL..."
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-10 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+            className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-600 px-10 py-3 outline-none focus:border-[#e4ff00] transition-colors text-xs font-bold uppercase tracking-widest"
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-linear-to-r from-cyan-400 to-cyan-500 hover:from-cyan-500 hover:to-cyan-600 text-slate-100 font-bold py-3 rounded-lg transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-cyan-500/50"
+          className="w-full bg-[#e4ff00] text-black hover:bg-black hover:text-[#e4ff00] border border-[#e4ff00] font-bold py-3 transition-colors text-xs tracking-[0.2em] uppercase"
         >
-          Subscribe
+          INITIATE_LINK
         </button>
       </form>
     </div>

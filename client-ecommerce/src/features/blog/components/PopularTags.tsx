@@ -6,15 +6,19 @@ interface PopularProps {
 
 const PopularTags: React.FC<PopularProps> = ({ popularTags }) => {
   return (
-    <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
-      <h3 className="text-xl font-bold text-slate-100 mb-4">Popular Tags</h3>
+    <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono mt-6">
+      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff]" />
+      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
+      <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-4">
+        TRENDING_TAGS //
+      </h3>
       <div className="flex flex-wrap gap-2">
         {popularTags.map((tag) => (
           <button
             key={tag}
-            className="bg-slate-700/50 hover:bg-cyan-500/20 border border-slate-600 hover:border-cyan-400 text-slate-300 hover:text-cyan-400 px-4 py-2 rounded-lg text-sm font-medium transition-all"
+            className="bg-black hover:bg-[#00f0ff]/10 border border-zinc-800 hover:border-[#00f0ff] text-zinc-500 hover:text-[#00f0ff] px-3 py-1.5 text-[10px] font-bold tracking-widest uppercase transition-all"
           >
-            {tag}
+            #{tag}
           </button>
         ))}
       </div>

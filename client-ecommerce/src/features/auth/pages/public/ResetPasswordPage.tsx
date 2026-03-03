@@ -1,6 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { CiLock } from "react-icons/ci";
 import { BiArrowBack } from "react-icons/bi";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -146,136 +145,154 @@ const ResetPasswordPage = () => {
     };
 
     return (
-        <div className="min-h-screen background-light dark:background-light">
-            <div className="flex items-center justify-center px-4 py-16">
-                <div className="w-full max-w-md">
-                    <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-8 my-20 backdrop-blur-sm">
-                        {/* Title */}
-                        <div className="text-center mb-8">
-                            <h1 className="text-3xl font-bold text-slate-100 mb-2">
-                                Cambia tu contraseña
-                            </h1>
-                            <p className="text-slate-400 text-sm mt-3">
-                                Ingresa el código de 6 dígitos que enviamos a tu correo y tu nueva contraseña
-                            </p>
+        <div className="min-h-screen bg-[#020202] relative font-mono text-white flex items-center justify-center p-4">
+            {/* Background Grid Pattern */}
+            <div
+                className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"
+                style={{
+                    backgroundImage: `
+                        linear-gradient(to right, #ffffff 1px, transparent 1px),
+                        linear-gradient(to bottom, #ffffff 1px, transparent 1px)
+                    `,
+                    backgroundSize: '40px 40px'
+                }}
+            />
+
+            <div className="w-full max-w-md relative z-10 my-10">
+                <div className="bg-[#050505] border border-zinc-800 p-8 relative">
+                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#ff0055]" />
+                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#ff0055]" />
+
+                    {/* Title */}
+                    <div className="text-center mb-8 border-b border-zinc-900 pb-6">
+                        <h1 className="text-3xl font-black text-[#ff0055] uppercase tracking-widest mb-2" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                            KEY_OVERRIDE //
+                        </h1>
+                        <p className="text-zinc-500 text-[10px] tracking-widest uppercase">
+                            PROVIDE OTP SEQUENCE AND NEW SECURITY KEY.
+                        </p>
+                    </div>
+
+                    {/* Form */}
+                    <form className="space-y-6">
+                        {/* OTP Input */}
+                        <div>
+                            <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">
+                                [O.T.P._SEQUENCE]
+                            </label>
+                            <div className="flex flex-row gap-2 justify-between">
+                                {otp.map((digit, index) => (
+                                    <input
+                                        key={index}
+                                        type="text"
+                                        inputMode="numeric"
+                                        maxLength={1}
+                                        value={digit}
+                                        onChange={(e) => handleInput(e, index)}
+                                        onKeyDown={(e) => handleKeyDown(e, index)}
+                                        onFocus={handleFocus}
+                                        onPaste={handlePaste}
+                                        ref={(el) => {
+                                            inputRefs.current[index] = el;
+                                        }}
+                                        className="w-12 h-12 sm:w-14 sm:h-14 text-center text-xl font-bold tracking-widest bg-black border border-zinc-800 text-[#00f0ff] outline-none focus:border-[#ff0055] focus:bg-zinc-900 transition-colors uppercase"
+                                        aria-label={`Dígito ${index + 1}`}
+                                    />
+                                ))}
+                            </div>
+                            {errors.otp && (
+                                <p className="text-[#ff0055] font-bold tracking-widest uppercase text-[10px] mt-2">
+                                    [ERR]: {errors.otp}
+                                </p>
+                            )}
                         </div>
 
-                        {/* Form */}
-                        <form className="space-y-5">
-                            {/* OTP Input */}
-                            <div>
-                                <label className="block text-slate-300 text-sm font-medium mb-2">
-                                    Código de verificación
-                                </label>
-                                <div className="flex flex-row gap-2 justify-between">
-                                    {otp.map((digit, index) => (
-                                        <input
-                                            key={index}
-                                            type="text"
-                                            inputMode="numeric"
-                                            maxLength={1}
-                                            value={digit}
-                                            onChange={(e) => handleInput(e, index)}
-                                            onKeyDown={(e) => handleKeyDown(e, index)}
-                                            onFocus={handleFocus}
-                                            onPaste={handlePaste}
-                                            ref={(el) => {
-                                                inputRefs.current[index] = el;
-                                            }}
-                                            className="w-12 h-12 sm:w-14 sm:h-14 text-center text-2xl font-semibold bg-slate-700/50 border border-slate-600 text-slate-100 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                                            aria-label={`Dígito ${index + 1}`}
-                                        />
-                                    ))}
-                                </div>
-                                {errors.otp && (
-                                    <p className="text-red-400 text-sm mt-2">{errors.otp}</p>
-                                )}
+                        {/* New Password Input */}
+                        <div>
+                            <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">
+                                [NEW_SECURITY_KEY]
+                            </label>
+                            <div className="relative">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="MIN_8_CHARS"
+                                    name="new"
+                                    value={passwords.new}
+                                    onChange={onChangePasswords}
+                                    className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-700 px-4 py-3 pr-12 outline-none focus:border-[#ff0055] transition-colors text-sm font-bold tracking-widest uppercase"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white transition-colors p-2"
+                                >
+                                    {showPassword ? (
+                                        <AiOutlineEyeInvisible size={20} />
+                                    ) : (
+                                        <AiOutlineEye size={20} />
+                                    )}
+                                </button>
                             </div>
-
-                            {/* New Password Input */}
-                            <div>
-                                <label className="block text-slate-300 text-sm font-medium mb-2">
-                                    Nueva contraseña
-                                </label>
-                                <div className="relative">
-                                    <input
-                                        type={showPassword ? "text" : "password"}
-                                        placeholder="Mínimo 8 caracteres"
-                                        name="new"
-                                        value={passwords.new}
-                                        onChange={onChangePasswords}
-                                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 pr-12 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-300 transition-colors"
-                                    >
-                                        {showPassword ? (
-                                            <AiOutlineEyeInvisible size={20} />
-                                        ) : (
-                                            <AiOutlineEye size={20} />
-                                        )}
-                                    </button>
-                                </div>
-                                {errors.password && (
-                                    <p className="text-red-400 text-sm mt-2">{errors.password}</p>
-                                )}
-                            </div>
-
-                            {/* Confirm Password Input */}
-                            <div>
-                                <label className="block text-slate-300 text-sm font-medium mb-2">
-                                    Confirmar contraseña
-                                </label>
-                                <div className="relative">
-                                    <input
-                                        type={showConfirmPassword ? "text" : "password"}
-                                        placeholder="Repite tu contraseña"
-                                        name="confirm"
-                                        value={passwords.confirm}
-                                        onChange={onChangePasswords}
-                                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 pr-12 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-300 transition-colors"
-                                    >
-                                        {showConfirmPassword ? (
-                                            <AiOutlineEyeInvisible size={20} />
-                                        ) : (
-                                            <AiOutlineEye size={20} />
-                                        )}
-                                    </button>
-                                </div>
-                                {errors.confirmPassword && (
-                                    <p className="text-red-400 text-sm mt-2">{errors.confirmPassword}</p>
-                                )}
-                            </div>
-
-                            {/* Submit Button */}
-                            <ButtonAction
-                                onClick={handleSubmit}
-                                text={loading ? "Cambiando..." : "Cambiar contraseña"}
-                                variant="primary"
-                                className="w-full flex items-center justify-center"
-                                disabled={loading}
-                            >
-                                <CiLock size={18} />
-                            </ButtonAction>
-                        </form>
-
-                        {/* Back to Login */}
-                        <div className="mt-6">
-                            <Link
-                                to="/login"
-                                className="flex items-center justify-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors text-sm font-medium"
-                            >
-                                <BiArrowBack size={18} />
-                                Volver al inicio de sesión
-                            </Link>
+                            {errors.password && (
+                                <p className="text-[#ff0055] font-bold tracking-widest uppercase text-[10px] mt-2">
+                                    [ERR]: {errors.password}
+                                </p>
+                            )}
                         </div>
+
+                        {/* Confirm Password Input */}
+                        <div>
+                            <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">
+                                [CONFIRM_SECURITY_KEY]
+                            </label>
+                            <div className="relative">
+                                <input
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    placeholder="REPEAT_KEY"
+                                    name="confirm"
+                                    value={passwords.confirm}
+                                    onChange={onChangePasswords}
+                                    className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-700 px-4 py-3 pr-12 outline-none focus:border-[#ff0055] transition-colors text-sm font-bold tracking-widest uppercase"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white transition-colors p-2"
+                                >
+                                    {showConfirmPassword ? (
+                                        <AiOutlineEyeInvisible size={20} />
+                                    ) : (
+                                        <AiOutlineEye size={20} />
+                                    )}
+                                </button>
+                            </div>
+                            {errors.confirmPassword && (
+                                <p className="text-[#ff0055] font-bold tracking-widest uppercase text-[10px] mt-2">
+                                    [ERR]: {errors.confirmPassword}
+                                </p>
+                            )}
+                        </div>
+
+                        {/* Submit Button */}
+                        <button
+                            onClick={(e) => handleSubmit(e as any)}
+                            disabled={loading}
+                            className="w-full flex items-center justify-center gap-3 bg-[#ff0055] hover:bg-white text-black font-black py-4 uppercase tracking-[0.2em] transition-colors border-2 border-transparent hover:border-[#ff0055] disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            <span>{loading ? "PROCESSING..." : "UPDATE_KEY"}</span>
+                            <CiLock size={20} className="font-black" />
+                        </button>
+                    </form>
+
+                    {/* Back to Login */}
+                    <div className="mt-8 pt-6 border-t border-zinc-900 text-center">
+                        <Link
+                            to="/login"
+                            className="inline-flex items-center gap-2 text-zinc-500 hover:text-[#00f0ff] transition-colors text-[10px] font-bold uppercase tracking-widest"
+                        >
+                            <BiArrowBack size={14} />
+                            [ ABORT_OPERATION ]
+                        </Link>
                     </div>
                 </div>
             </div>

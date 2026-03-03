@@ -12,45 +12,56 @@ const Stats: React.FC<Props> = ({ totalOrders, pendingOrders, rewardPoints }) =>
   /* Borrar mas adelante cuando se obtenga los datos */
   const stats: StatCard[] = [
     {
-      label: "Total Orders",
+      label: "[TOTAL_ORDERS]",
       value: totalOrders,
       icon: <BiShoppingBag size={24} />,
-      color: "from-blue-500 to-blue-600",
+      color: "border-[#00f0ff] text-[#00f0ff]", // Accent configuration
     },
     {
-      label: "Pedidos pendientes",
+      label: "[PENDING_ORDERS]",
       value: pendingOrders,
       icon: <BiPackage size={24} />,
-      color: "from-orange-500 to-orange-600",
+      color: "border-[#ff0055] text-[#ff0055]",
     },
     {
-      label: "Gastos",
-      value: rewardPoints,
+      label: "[TOTAL_REVENUE]",
+      value: `$${rewardPoints}`,
       icon: <CiDollar size={24} />,
-      color: "from-green-500 to-green-600",
+      color: "border-[#e4ff00] text-[#e4ff00]",
     },
   ];
 
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 font-mono">
       {stats.map((stat, index) => (
         <div
           key={index}
-          className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-6 backdrop-blur-sm hover:border-cyan-500/50 transition-all"
+          className={`bg-[#050505] border border-zinc-800 p-6 relative group hover:border-zinc-600 transition-colors`}
         >
-          <div className="flex items-center justify-between">
+          {/* Subtle Accent Borders */}
+          <div className={`absolute top-0 left-0 w-2 h-2 border-t border-l ${stat.color.split(' ')[0]}`} />
+          <div className={`absolute bottom-0 right-0 w-2 h-2 border-b border-r ${stat.color.split(' ')[0]}`} />
+
+          <div className="flex items-start justify-between">
             <div>
-              <p className="text-slate-400 text-sm mb-2">{stat.label}</p>
-              <h3 className="text-3xl font-bold text-slate-100">
+              <p className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-2">
+                {stat.label}
+              </p>
+              <h3 className="text-3xl font-black text-white font-mono tracking-wider">
                 {stat.value}
               </h3>
             </div>
             <div
-              className={`w-14 h-14 rounded-xl bg-linear-to-br ${stat.color} flex items-center justify-center text-white shadow-lg`}
+              className={`w-12 h-12 bg-black border border-zinc-800 flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)] ${stat.color} transition-colors group-hover:bg-zinc-900 group-hover:${stat.color.split(' ')[0]}`}
             >
-              {stat.icon}
+              <span className={stat.color.split(' ')[1]}>
+                {stat.icon}
+              </span>
             </div>
           </div>
+
+          {/* Decorative scanline on hover */}
+          <div className="absolute left-0 bottom-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-700" />
         </div>
       ))}
     </div>

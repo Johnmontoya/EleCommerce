@@ -3,7 +3,7 @@ import { BiPlus, BiImage, BiTrendingUp } from "react-icons/bi";
 import { MdOutlineFeaturedPlayList, MdNewReleases } from "react-icons/md";
 import { AiFillStar } from "react-icons/ai";
 import { FaBullhorn } from "react-icons/fa";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
+
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
 import ProductConfig from "../../components/ProductConfig";
 import Sidebar from "../../../dashboard/components/Sidebar";
@@ -24,12 +24,12 @@ const DisplaySectionsManagerPage: React.FC = () => {
 
     const { data: banners } = useBannerAll();
 
-    const sectionOptions: { value: DisplaySection; label: string; icon: React.ReactNode; color: string }[] = [
-        { value: "banner", label: "Banner Principal", icon: <BiImage size={20} />, color: "card-shipped text-slate-300" },
-        { value: "featured", label: "Destacados", icon: <AiFillStar size={20} />, color: "card-pending text-slate-300" },
-        { value: "trending", label: "Tendencias", icon: <BiTrendingUp size={20} />, color: "card-completed text-slate-300" },
-        { value: "promotional", label: "Promocional", icon: <FaBullhorn size={20} />, color: "card-cancelled text-slate-300" },
-        { value: "new-arrival", label: "Nuevo Ingreso", icon: <MdNewReleases size={20} />, color: "card-refunded text-slate-300" },
+    const sectionOptions: { value: DisplaySection; label: string; icon: React.ReactNode; color: string; borderCode: string }[] = [
+        { value: "banner", label: "[MAIN_BANNER]", icon: <BiImage size={20} />, color: "text-[#00f0ff]", borderCode: "border-[#00f0ff] bg-[#00f0ff]/5" },
+        { value: "featured", label: "[FEATURED_ITEMS]", icon: <AiFillStar size={20} />, color: "text-[#e4ff00]", borderCode: "border-[#e4ff00] bg-[#e4ff00]/5" },
+        { value: "trending", label: "[TRENDS_LOG]", icon: <BiTrendingUp size={20} />, color: "text-[#00f0ff]", borderCode: "border-[#00f0ff] bg-[#00f0ff]/5" },
+        { value: "promotional", label: "[PROMO_ACTIONS]", icon: <FaBullhorn size={20} />, color: "text-[#ff0055]", borderCode: "border-[#ff0055] bg-[#ff0055]/5" },
+        { value: "new-arrival", label: "[NEW_DROPS]", icon: <MdNewReleases size={20} />, color: "text-[#e4ff00]", borderCode: "border-[#e4ff00] bg-[#e4ff00]/5" },
     ];
 
     const handleOpenModal = (banner?: Banner) => {
@@ -47,7 +47,7 @@ const DisplaySectionsManagerPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen background-light dark:background-dark">
+        <div className="min-h-screen bg-[#020202] text-white font-mono selection:bg-[#00f0ff] selection:text-black">
             <div className="flex">
                 <Sidebar />
 
@@ -74,14 +74,13 @@ const DisplaySectionsManagerPage: React.FC = () => {
                         />
 
                         <div className="flex items-center justify-end mb-6">
-                            <ButtonAction
+                            <button
                                 onClick={() => handleOpenModal()}
-                                variant="primary"
-                                className="flex items-center gap-2"
-                                text="Agregar Producto"
+                                className="bg-[#e4ff00] text-black px-6 py-3 font-bold tracking-widest text-xs uppercase hover:bg-white transition-colors flex items-center gap-2"
                             >
-                                <BiPlus size={20} />
-                            </ButtonAction>
+                                <BiPlus size={18} />
+                                [ADD_CONFIG]
+                            </button>
                         </div>
 
                         {/* Sections Overview */}
@@ -94,14 +93,17 @@ const DisplaySectionsManagerPage: React.FC = () => {
                                 return (
                                     <div
                                         key={section.value}
-                                        className={`${section.color} border-2 rounded-xl p-4 transition-all hover:scale-105`}
+                                        className={`border border-zinc-800 bg-[#050505] p-4 transition-all hover:border-[#00f0ff] relative group overflow-hidden`}
                                     >
-                                        <div className="flex items-center gap-2 mb-2">
+                                        <div className={`absolute left-0 top-0 bottom-0 w-1 ${section.borderCode.split(' ')[0]} opacity-50 group-hover:opacity-100`} />
+                                        <div className={`flex items-center gap-2 mb-2 ${section.color}`}>
                                             {section.icon}
-                                            <span className="font-semibold text-sm">{section.label}</span>
+                                            <span className="font-bold text-[10px] uppercase tracking-widest">{section.label}</span>
                                         </div>
-                                        <p className="text-2xl font-bold">{count}</p>
-                                        <p className="text-xs opacity-80">productos</p>
+                                        <div className="flex items-end gap-2">
+                                            <p className="text-3xl font-black text-white">{count}</p>
+                                            <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mb-1 pb-1">ITEMS</p>
+                                        </div>
                                     </div>
                                 );
                             })}

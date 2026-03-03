@@ -1,39 +1,10 @@
 // src/features/checkout/components/CheckoutStepper.tsx
 import type { CheckoutStep } from "../../types/checkout.types";
 
-const STEPS: { key: CheckoutStep; label: string; icon: React.ReactNode }[] = [
-    {
-        key: "summary",
-        label: "Resumen",
-        icon: (
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-            </svg>
-        ),
-    },
-    {
-        key: "address",
-        label: "Envío",
-        icon: (
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-        ),
-    },
-    {
-        key: "payment",
-        label: "Pago",
-        icon: (
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-            </svg>
-        ),
-    },
+const STEPS: { key: CheckoutStep; label: string }[] = [
+    { key: "summary", label: "SUMMARY" },
+    { key: "address", label: "ADDRESS" },
+    { key: "payment", label: "PAYMENT" },
 ];
 
 const STEP_ORDER: CheckoutStep[] = ["summary", "address", "payment"];
@@ -46,47 +17,48 @@ export function CheckoutStepper({ currentStep }: CheckoutStepperProps) {
     const currentIdx = STEP_ORDER.indexOf(currentStep);
 
     return (
-        <div className="flex items-center justify-center mb-4">
-            {STEPS.map((step, idx) => {
-                const isCompleted = idx < currentIdx;
-                const isActive = idx === currentIdx;
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-zinc-800/80 mt-6 relative" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+            <div className="absolute -bottom-[1px] left-0 w-8 h-[2px] bg-[#00f0ff]" />
+            <div className="flex items-center gap-1 sm:gap-4 w-full justify-between">
+                {STEPS.map((step, idx) => {
+                    const isCompleted = idx < currentIdx;
+                    const isActive = idx === currentIdx;
+                    const stepNum = `0${idx + 1}`;
 
-                return (
-                    <div key={step.key} className="flex items-center">
-                        {/* Círculo del paso */}
-                        <div className="flex flex-col items-center gap-1.5">
-                            <div className={`w-9 h-9 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${isCompleted
-                                ? "bg-sky-500 border-sky-500 text-white"
-                                : isActive
-                                    ? "border-sky-500 text-sky-400 bg-sky-500/10"
-                                    : "border-slate-700 text-slate-600"
-                                }`}>
-                                {isCompleted ? (
-                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                                    </svg>
-                                ) : (
-                                    step.icon
-                                )}
+                    return (
+                        <div key={step.key} className="flex items-center flex-1 last:flex-none">
+                            <div className={`flex flex-col gap-1 transition-all duration-300 ${isActive ? 'scale-105' : ''}`}>
+                                <div className="flex items-center gap-2">
+                                    <span className={`text-xs sm:text-sm font-bold tracking-widest ${isActive ? "text-[#00f0ff]" : isCompleted ? "text-zinc-400" : "text-zinc-700"
+                                        }`}>
+                                        [{stepNum}]
+                                    </span>
+                                    <span className={`text-[10px] sm:text-xs font-bold tracking-[0.2em] transform transition-all ${isActive
+                                        ? "text-zinc-100"
+                                        : isCompleted
+                                            ? "text-zinc-500"
+                                            : "text-zinc-700"
+                                        }`}>
+                                        {step.label}
+                                    </span>
+                                </div>
+                                <div className={`h-1 w-full flex gap-[1px]`}>
+                                    {/* Small progression bars below the text */}
+                                    <div className={`h-full w-2 ${isActive || isCompleted ? 'bg-[#00f0ff]' : 'bg-zinc-800'}`} />
+                                    <div className={`h-full flex-1 ${isActive ? 'bg-[#00f0ff]/40' : isCompleted ? 'bg-[#00f0ff]' : 'bg-zinc-800'}`} />
+                                </div>
                             </div>
-                            <span className={`text-xs font-medium transition-colors ${isActive
-                                ? "text-sky-400"
-                                : isCompleted
-                                    ? "text-slate-400"
-                                    : "text-slate-600"
-                                }`}>
-                                {step.label}
-                            </span>
-                        </div>
 
-                        {/* Línea conectora */}
-                        {idx < STEPS.length - 1 && (
-                            <div className={`w-16 h-0.5 mx-2 mb-5 rounded transition-colors duration-300 ${idx < currentIdx ? "bg-sky-500" : "bg-slate-700"
-                                }`} />
-                        )}
-                    </div>
-                );
-            })}
+                            {/* Separator line */}
+                            {idx < STEPS.length - 1 && (
+                                <div className="flex-1 px-2 sm:px-4 hidden sm:flex items-center">
+                                    <div className={`h-[1px] w-full border-t border-dashed ${isCompleted ? 'border-[#00f0ff]/50' : 'border-zinc-800'}`} />
+                                </div>
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 }

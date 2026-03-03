@@ -23,67 +23,80 @@ export function AddressStep({
     onBack,
 }: AddressStepProps) {
     return (
-        <div className="space-y-5">
+        <div className="space-y-6 animate-in fade-in duration-500 font-mono">
             {/* Encabezado */}
-            <div>
-                <h2 className="text-xl font-semibold text-white">Dirección de envío</h2>
-                <p className="text-slate-400 text-sm mt-0.5">
-                    Selecciona dónde recibirás tu pedido
+            <div className="border-l-4 border-[#00f0ff] pl-3 mb-6">
+                <h2 className="text-2xl font-bold text-white uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                    DESTINATION_SELECTION //
+                </h2>
+                <p className="text-zinc-500 text-xs tracking-widest mt-1 uppercase">
+                    SYSTEM.LOCATE_SHIPPING_COORDINATES()
                 </p>
             </div>
 
             {/* Lista de direcciones o estado vacío */}
             {addresses.length === 0 ? (
-                <div className="text-center py-10 text-slate-500">
-                    <svg className="w-10 h-10 mx-auto mb-3 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                <div className="text-center py-12 border border-dashed border-zinc-800 bg-[#050505] relative">
+                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-zinc-600" />
+                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-zinc-600" />
+
+                    <svg className="w-12 h-12 mx-auto mb-4 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1}
                             d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                        <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1}
                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <p className="text-sm">No tienes direcciones guardadas.</p>
-                    <a href="/profile/addresses" className="text-sky-400 text-sm hover:underline mt-1 inline-block">
-                        + Agregar dirección
+                    <p className="text-sm tracking-widest text-zinc-500 uppercase">NO_COORDINATES_FOUND</p>
+                    <a href="/profile/addresses" className="text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black hover:font-bold text-xs tracking-widest uppercase mt-4 inline-block border border-[#00f0ff] px-4 py-2 transition-all">
+                        INITIALIZE_NEW_LOCATION
                     </a>
                 </div>
             ) : (
-                <div className="space-y-2.5 max-h-64 overflow-y-auto pr-1">
+                <div className="grid gap-3 max-h-64 overflow-y-auto pr-2" style={{ scrollbarWidth: 'thin', scrollbarColor: '#27272a transparent' }}>
                     {addresses.map((addr) => {
                         const isSelected = selectedAddressId === addr.id;
                         return (
                             <button
                                 key={addr.id}
                                 onClick={() => onSelectAddress(addr.id)}
-                                className={`w-full text-left p-4 rounded-xl border transition-all duration-150 ${isSelected
-                                    ? "border-sky-500 bg-sky-500/10 ring-1 ring-sky-500/30"
-                                    : "border-slate-700/60 bg-slate-800/40 hover:border-slate-600"
+                                className={`w-full text-left p-4 relative transition-all duration-150 group ${isSelected
+                                    ? "bg-[#00f0ff]/5 border border-[#00f0ff]"
+                                    : "bg-[#050505] border border-zinc-800 hover:border-zinc-500"
                                     }`}
                             >
-                                <div className="flex items-start gap-3">
-                                    {/* Radio visual */}
-                                    <div className={`mt-0.5 w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center transition-colors ${isSelected ? "border-sky-500 bg-sky-500" : "border-slate-600"
+                                {/* Marcadores Técnicos */}
+                                {isSelected && (
+                                    <>
+                                        <div className="absolute top-0 left-0 w-2 h-2 bg-[#00f0ff]" />
+                                        <div className="absolute bottom-0 right-0 w-2 h-2 bg-[#00f0ff]" />
+                                    </>
+                                )}
+
+                                <div className="flex items-start gap-4">
+                                    {/* Check Visual Estilo Hardware */}
+                                    <div className={`mt-0.5 w-4 h-4 flex-shrink-0 flex items-center justify-center transition-colors ${isSelected ? "bg-[#00f0ff]" : "bg-zinc-800 border border-zinc-700 group-hover:bg-zinc-700"
                                         }`}>
                                         {isSelected && (
-                                            <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                                            <div className="w-2 h-2 bg-black" />
                                         )}
                                     </div>
 
                                     {/* Datos de la dirección */}
                                     <div className="flex-1">
-                                        <div className="flex items-center gap-2 flex-wrap mb-1">
-                                            <span className={`font-semibold text-sm ${isSelected ? "text-sky-300" : "text-slate-200"
+                                        <div className="flex items-center gap-3 flex-wrap mb-2">
+                                            <span className={`font-bold tracking-wider text-sm ${isSelected ? "text-white" : "text-zinc-300"
                                                 }`}>
                                                 {addr.street}
                                             </span>
-                                            <span className="text-xs text-slate-500 bg-slate-700/60 px-2 py-0.5 rounded-full">
-                                                {addr.city}
+                                            <span className="text-[10px] text-zinc-400 bg-zinc-900 border border-zinc-800 px-2 py-0.5 tracking-widest uppercase">
+                                                ID: {addr.city.substring(0, 3)}
                                             </span>
                                         </div>
-                                        <p className="text-slate-400 text-sm leading-relaxed">
-                                            {addr.street}, {addr.city}, {addr.state} {addr.zipCode}
+                                        <p className="text-zinc-500 text-xs tracking-wider leading-relaxed uppercase">
+                                            {addr.street} // {addr.city} // {addr.state} // {addr.zipCode}
                                         </p>
-                                        <p className="text-slate-600 text-xs mt-0.5">
-                                            Tel: {addr.phone}
+                                        <p className="text-zinc-600 text-[10px] tracking-widest mt-2 uppercase">
+                                            COMM_LINK: {addr.phone}
                                         </p>
                                     </div>
                                 </div>
@@ -96,61 +109,53 @@ export function AddressStep({
             {/* Agregar nueva dirección */}
             <a
                 href="/profile/addresses"
-                className="flex items-center gap-2 text-sm text-slate-500 hover:text-sky-400 transition-colors w-fit"
+                className="flex items-center gap-2 text-xs tracking-widest text-zinc-500 hover:text-[#00f0ff] transition-colors w-fit border-b border-transparent hover:border-[#00f0ff] pb-0.5 uppercase"
             >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
-                Agregar nueva dirección
+                [ + ] ADD_NEW_COORDINATES
             </a>
 
             {/* Notas del pedido */}
-            <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-300 flex items-center gap-1.5">
-                    <svg className="w-4 h-4 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                    </svg>
-                    Notas para el pedido
-                    <span className="text-slate-600 font-normal">(opcional)</span>
+            <div className="space-y-3 pt-4 border-t border-zinc-800/80">
+                <label className="text-xs font-bold tracking-widest text-zinc-400 flex items-center gap-2 uppercase">
+                    <span className="w-2 h-2 bg-zinc-600" />
+                    TRANSMISSION_NOTES <span className="text-zinc-600 text-[10px] font-normal">(OPTIONAL)</span>
                 </label>
-                <textarea
-                    value={notes}
-                    onChange={(e) => onNotesChange(e.target.value)}
-                    placeholder="Ej: Dejar con el portero, tocar el timbre 2 veces..."
-                    rows={3}
-                    className="w-full bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 text-sm placeholder-slate-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500/30 transition-colors resize-none"
-                />
+                <div className="relative">
+                    <div className="absolute top-2 left-2 text-[#00f0ff] opacity-50 select-none pointer-events-none">&gt;</div>
+                    <textarea
+                        value={notes}
+                        onChange={(e) => onNotesChange(e.target.value)}
+                        placeholder="ENTER DELIVERY INSTRUCTIONS HERE..."
+                        rows={3}
+                        className="w-full bg-[#020202] border border-zinc-800 px-6 py-3 text-zinc-300 text-xs placeholder-zinc-700 focus:outline-none focus:border-[#00f0ff] transition-colors resize-none uppercase font-mono tracking-wider"
+                    />
+                </div>
             </div>
 
             {/* Botones de navegación */}
-            <div className="flex gap-3">
+            <div className="flex gap-4 pt-2">
                 <button
                     onClick={onBack}
                     disabled={isLoading}
-                    className="flex-1 py-3.5 rounded-xl border border-slate-700 text-slate-400 hover:text-slate-200 hover:border-slate-600 disabled:opacity-40 font-medium transition-all text-sm"
+                    className="flex-1 py-4 border border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-500 disabled:opacity-40 font-bold uppercase tracking-widest transition-all text-xs bg-[#050505]"
                 >
-                    ← Volver
+                    [ RETURN ]
                 </button>
                 <button
                     onClick={onNext}
                     disabled={!selectedAddressId || isLoading}
-                    className="flex-[2] py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-semibold transition-all active:scale-[0.98] text-sm flex items-center justify-center gap-2"
+                    className="flex-[2] relative group overflow-hidden bg-white text-black font-bold uppercase tracking-[0.2em] py-4 flex items-center justify-center gap-3 transition-all hover:bg-[#00f0ff] hover:text-black disabled:bg-zinc-800 disabled:text-zinc-500 disabled:cursor-not-allowed text-xs"
                 >
                     {isLoading ? (
                         <>
-                            <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                            </svg>
-                            Preparando orden...
+                            <span className="w-2 h-2 bg-black animate-ping" />
+                            PROCESSING...
                         </>
                     ) : (
                         <>
-                            Continuar al pago
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
+                            <span className="relative z-10">LOCK_COORDINATES // NEXT</span>
+                            {/* Tech scanline effect on hover */}
+                            <div className="absolute inset-0 bg-[linear-gradient(transparent_0%,rgba(0,0,0,0.1)_50%,transparent_100%)] bg-[length:100%_4px] opacity-0 group-hover:opacity-100 animate-[scan_2s_linear_infinite]" />
                         </>
                     )}
                 </button>

@@ -13,20 +13,25 @@ const CardCategoryList: React.FC<CardCategoryListProps> = ({ selectedCategory, o
   if (isLoading) return <LoadingFallback />
 
   return (
-    <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
-      <h3 className="text-xl font-bold text-slate-100 mb-4">Categorías</h3>
+    <div className="bg-[#050505] border border-zinc-800 p-6 relative">
+      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff]" />
+      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
 
-      <ul className="space-y-2 h-96 overflow-y-auto">
+      <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-6">
+        SYS_CATEGORIES //
+      </h3>
+
+      <ul className="space-y-2 h-96 overflow-y-auto pr-2 custom-scrollbar">
         {/* Opción "Todas" */}
         <li>
           <button
             onClick={() => onSelectCategory(undefined)}
-            className={`w-full text-left px-4 py-2 rounded-lg transition-all ${!selectedCategory
-              ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white"
-              : "text-slate-300 hover:bg-slate-700"
+            className={`w-full text-left px-4 py-3 border transition-all text-xs font-mono tracking-widest uppercase flex items-center ${!selectedCategory
+              ? "bg-[#00f0ff]/10 border-[#00f0ff] text-[#00f0ff]"
+              : "bg-black border-zinc-800 text-zinc-500 hover:text-[#00f0ff] hover:border-zinc-600"
               }`}
           >
-            Todas las categorías
+            <span className="mr-2">{!selectedCategory ? "■" : "□"}</span> ALL_CATEGORIES
           </button>
         </li>
 
@@ -36,18 +41,18 @@ const CardCategoryList: React.FC<CardCategoryListProps> = ({ selectedCategory, o
             <li key={category.id}>
               <button
                 onClick={() => onSelectCategory(category)}
-                className={`w-full text-left px-4 py-2 rounded-lg transition-all ${selectedCategory === category.id
-                  ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white"
-                  : "text-slate-300 hover:bg-slate-700"
+                className={`w-full text-left px-4 py-3 border transition-all text-xs font-mono tracking-widest uppercase flex items-center ${selectedCategory === category.id
+                  ? "bg-[#00f0ff]/10 border-[#00f0ff] text-[#00f0ff]"
+                  : "bg-black border-zinc-800 text-zinc-500 hover:text-[#00f0ff] hover:border-zinc-600"
                   }`}
               >
-                {category.name}
+                <span className="mr-2">{selectedCategory === category.id ? "■" : "□"}</span> {category.name}
               </button>
             </li>
           ))
         ) : (
-          <li className="text-slate-400 text-sm px-4 py-2">
-            No hay categorías disponibles
+          <li className="text-zinc-600 font-mono text-xs px-4 py-3 bg-black border border-zinc-900 border-dashed">
+            NO_CATEGORIES_FOUND
           </li>
         )}
       </ul>

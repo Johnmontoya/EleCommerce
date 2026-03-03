@@ -1,5 +1,5 @@
 import React from "react";
-import { BiCalendar, BiChevronRight, BiUser } from "react-icons/bi";
+import { BiChevronRight } from "react-icons/bi";
 
 interface BlogPost {
   id: number;
@@ -18,41 +18,53 @@ interface FeaturesProps {
 
 const FeaturedPost: React.FC<FeaturesProps> = ({ featuredPost }) => {
   return (
-    <div className="mb-8 dash-search dark:dash-search border-2 border-slate-600 rounded-2xl overflow-hidden group hover:border-cyan-500/50 transition-all">
+    <div className="mb-8 bg-[#050505] border border-zinc-800 relative group overflow-hidden transition-all hover:border-[#00f0ff]/50 font-mono">
+      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity z-20" />
+      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity z-20" />
+
       <div className="relative h-96 overflow-hidden">
         <img
           src={featuredPost.image}
           alt={featuredPost.title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 grayscale group-hover:grayscale-0"
         />
-        <div className="absolute top-4 left-4">
-          <span className="bg-linear-to-r from-cyan-400 to-cyan-500 text-slate-900 px-4 py-2 rounded-lg text-xs font-bold uppercase">
+
+        {/* Overlay grid lines */}
+        <div className="absolute inset-0 pointer-events-none opacity-20 z-10"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(0, 240, 255, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.2) 1px, transparent 1px)',
+            backgroundSize: '20px 20px'
+          }}>
+        </div>
+
+        <div className="absolute top-4 left-4 z-20">
+          <span className="bg-[#e4ff00]/10 text-[#e4ff00] border border-[#e4ff00]/30 px-3 py-1 text-[10px] font-bold tracking-widest uppercase">
             {featuredPost.category}
           </span>
         </div>
-        <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 right-0 p-8">
-          <div className="flex items-center gap-4 text-slate-400 text-sm mb-3">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-10"></div>
+        <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
+          <div className="flex items-center gap-6 text-zinc-500 text-[10px] tracking-widest uppercase font-bold mb-4">
             <div className="flex items-center gap-2">
-              <BiCalendar size={16} />
+              <span className="text-[#00f0ff]">[DATE]</span>
               <span>{featuredPost.date}</span>
             </div>
             <div className="flex items-center gap-2">
-              <BiUser size={16} />
-              <span>Por {featuredPost.author}</span>
+              <span className="text-[#00f0ff]">[USER]</span>
+              <span>{featuredPost.author}</span>
             </div>
           </div>
-          <h2 className="text-3xl font-bold text-slate-100 mb-3 group-hover:text-cyan-400 transition-colors">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 group-hover:text-[#00f0ff] transition-colors leading-tight" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
             {featuredPost.title}
           </h2>
-          <p className="text-slate-300 mb-4 line-clamp-2">
+          <p className="text-zinc-400 mb-6 line-clamp-2 text-sm max-w-3xl">
             {featuredPost.excerpt}
           </p>
-          <button className="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-2 group/btn">
-            Leer Articulo
+          <button className="text-[#00f0ff] hover:text-white text-xs font-bold tracking-widest uppercase flex items-center gap-2 group/btn">
+            [READ_RECORD]
             <BiChevronRight
               size={16}
-              className="group-hover/btn:translate-x-1 transition-transform"
+              className="group-hover/btn:translate-x-2 transition-transform opacity-0 group-hover/btn:opacity-100"
             />
           </button>
         </div>

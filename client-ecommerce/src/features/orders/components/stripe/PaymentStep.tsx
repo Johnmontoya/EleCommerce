@@ -13,14 +13,15 @@ const fmt = (n: number) =>
 const STRIPE_ELEMENT_STYLE = {
     style: {
         base: {
-            fontSize: "15px",
-            color: "#e2e8f0",
-            fontFamily: "system-ui, sans-serif",
+            fontSize: "14px",
+            color: "#e5e7eb",
+            fontFamily: "'JetBrains Mono', monospace",
             "::placeholder": { color: "#475569" },
-            iconColor: "#38bdf8",
+            iconColor: "#00f0ff",
+            letterSpacing: "0.1em"
         },
-        invalid: { color: "#fb7185", iconColor: "#fb7185" },
-        complete: { color: "#4ade80", iconColor: "#4ade80" },
+        invalid: { color: "#ff0055", iconColor: "#ff0055" },
+        complete: { color: "#e4ff00", iconColor: "#e4ff00" },
     },
 };
 
@@ -67,28 +68,32 @@ export function PaymentStep({
     });
 
     return (
-        <div className="space-y-5">
+        <div className="space-y-6 animate-in fade-in duration-500 font-mono">
             {/* Encabezado */}
-            <div>
-                <h2 className="text-xl font-semibold text-white">Datos de pago</h2>
-                <p className="text-slate-400 text-sm mt-0.5">
-                    Conexión cifrada · Powered by Stripe
+            <div className="border-l-4 border-[#00f0ff] pl-3 mb-6">
+                <h2 className="text-2xl font-bold text-white uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                    SECURE_PAYMENT_GATEWAY //
+                </h2>
+                <p className="text-zinc-500 text-xs tracking-widest mt-1 uppercase">
+                    ESTABLISHING_ENCRYPTED_CONNECTION
                 </p>
             </div>
 
             {/* Resumen de dirección seleccionada */}
             {selectedAddress && (
-                <div className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-800/40 border border-slate-700/50">
-                    <svg className="w-4 h-4 text-sky-400 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                <div className="flex items-start gap-3 p-4 bg-[#050505] border border-zinc-800 relative">
+                    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-zinc-600" />
+
+                    <svg className="w-5 h-5 text-[#00f0ff] mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1.5}
                             d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <div className="text-sm">
-                        <p className="text-slate-300 font-medium">
-                            {selectedAddress.street} — {selectedAddress.city}
+                    <div className="text-xs">
+                        <p className="text-zinc-300 font-bold tracking-wider uppercase">
+                            TARGET_LOCATION // {selectedAddress.city}
                         </p>
-                        <p className="text-slate-500 mt-0.5">
+                        <p className="text-zinc-500 mt-1 uppercase tracking-widest">
                             {selectedAddress.street}, {selectedAddress.city},{" "}
                             {selectedAddress.state} {selectedAddress.zipCode}
                         </p>
@@ -97,16 +102,16 @@ export function PaymentStep({
             )}
 
             {/* Titular + marcas de tarjeta */}
-            <div className="flex items-center justify-between">
-                <div className="text-sm">
-                    <span className="text-slate-500">Titular: </span>
-                    <span className="text-slate-300 font-medium">{customerName}</span>
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
+                <div className="text-xs tracking-widest uppercase">
+                    <span className="text-zinc-500">AUTH_SUBJECT: </span>
+                    <span className="text-white font-bold">{customerName}</span>
                 </div>
-                <div className="flex gap-1.5">
+                <div className="flex gap-2">
                     {["VISA", "MC", "AMEX"].map((brand) => (
                         <span
                             key={brand}
-                            className="text-xs font-bold bg-slate-800 border border-slate-700 text-slate-400 px-2 py-1 rounded-lg tracking-wide"
+                            className="text-[10px] font-bold bg-[#0a0a0a] border border-zinc-700 text-zinc-400 px-2 py-0.5 tracking-widest"
                         >
                             {brand}
                         </span>
@@ -115,11 +120,13 @@ export function PaymentStep({
             </div>
 
             {/* Número de tarjeta */}
-            <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-300">
-                    Número de tarjeta
+            <div className="space-y-3">
+                <label className="text-xs font-bold tracking-widest text-zinc-400 flex items-center gap-2 uppercase">
+                    <span className="w-2 h-2 bg-zinc-600" />
+                    CARD_CREDENTIALS
                 </label>
-                <div className="bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3.5 focus-within:border-sky-500 focus-within:ring-1 focus-within:ring-sky-500/30 transition-all">
+                <div className="bg-[#020202] border border-zinc-700 p-4 focus-within:border-[#00f0ff] transition-all relative">
+                    <div className="absolute top-0 left-0 w-1 h-1 bg-[#00f0ff] opacity-0 focus-within:opacity-100" />
                     <CardNumberElement
                         options={{ ...STRIPE_ELEMENT_STYLE, showIcon: true }}
                         onChange={(e) => setFieldComplete("number", e.complete)}
@@ -128,21 +135,21 @@ export function PaymentStep({
             </div>
 
             {/* Expiración + CVC */}
-            <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-2">
-                    <label className="text-sm font-medium text-slate-300">
-                        Expiración
+            <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-3">
+                    <label className="text-xs font-bold tracking-widest text-zinc-400 uppercase">
+                        EXPIRATION_DATE
                     </label>
-                    <div className="bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3.5 focus-within:border-sky-500 focus-within:ring-1 focus-within:ring-sky-500/30 transition-all">
+                    <div className="bg-[#020202] border border-zinc-700 p-4 focus-within:border-[#00f0ff] transition-all">
                         <CardExpiryElement
                             options={STRIPE_ELEMENT_STYLE}
                             onChange={(e) => setFieldComplete("expiry", e.complete)}
                         />
                     </div>
                 </div>
-                <div className="space-y-2">
-                    <label className="text-sm font-medium text-slate-300">CVC</label>
-                    <div className="bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3.5 focus-within:border-sky-500 focus-within:ring-1 focus-within:ring-sky-500/30 transition-all">
+                <div className="space-y-3">
+                    <label className="text-xs font-bold tracking-widest text-zinc-400 uppercase">SECURITY_CODE</label>
+                    <div className="bg-[#020202] border border-zinc-700 p-4 focus-within:border-[#00f0ff] transition-all">
                         <CardCvcElement
                             options={STRIPE_ELEMENT_STYLE}
                             onChange={(e) => setFieldComplete("cvc", e.complete)}
@@ -153,59 +160,58 @@ export function PaymentStep({
 
             {/* Error de pago */}
             {errorMessage && (
-                <div className="flex items-start gap-2 bg-rose-500/10 border border-rose-500/30 rounded-xl px-4 py-3">
-                    <svg className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                <div className="flex items-start gap-3 bg-[#110000] border border-[#ff0055] p-4 relative">
+                    <div className="absolute top-0 left-0 w-8 h-[1px] bg-[#ff0055]" />
+                    <svg className="w-5 h-5 text-[#ff0055] flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2}
                             d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <p className="text-rose-400 text-sm">{errorMessage}</p>
+                    <div>
+                        <p className="text-[#ff0055] text-xs font-bold tracking-widest uppercase">AUTH_ERROR</p>
+                        <p className="text-zinc-400 text-[10px] tracking-wider uppercase mt-1">{errorMessage}</p>
+                    </div>
                 </div>
             )}
 
             {/* Total a pagar */}
-            <div className="flex items-center justify-between p-4 rounded-xl bg-sky-500/10 border border-sky-500/20">
-                <span className="text-slate-300 font-medium">Total a pagar</span>
-                <span className="text-sky-400 font-bold text-xl">{fmt(total)}</span>
+            <div className="flex items-center justify-between p-4 bg-[#0a0a0a] border-y border-zinc-800 my-4">
+                <span className="text-zinc-400 text-xs font-bold tracking-widest uppercase">TOTAL_TRANSACTION</span>
+                <span className="text-[#00f0ff] font-bold text-2xl tracking-wider">{fmt(total)}</span>
             </div>
 
             {/* Botones de navegación */}
-            <div className="flex gap-3">
+            <div className="flex gap-4 pt-4">
                 <button
                     onClick={onBack}
                     disabled={isProcessing}
-                    className="flex-1 py-3.5 rounded-xl border border-slate-700 text-slate-400 hover:text-slate-200 hover:border-slate-600 disabled:opacity-40 font-medium transition-all text-sm"
+                    className="flex-1 py-4 border border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-500 disabled:opacity-40 font-bold uppercase tracking-widest transition-all text-xs bg-[#050505]"
                 >
-                    ← Volver
+                    [ RETURN ]
                 </button>
                 <button
                     onClick={processPayment}
                     disabled={isProcessing || !isFormComplete}
-                    className="flex-[2] py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-semibold transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-sm"
+                    className="flex-[2] relative group overflow-hidden bg-[#00f0ff] text-black font-bold uppercase tracking-[0.2em] py-4 flex items-center justify-center gap-3 transition-all hover:bg-white hover:text-black disabled:bg-zinc-800 disabled:text-zinc-500 disabled:cursor-not-allowed text-xs"
                 >
                     {isProcessing ? (
                         <>
-                            <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                            </svg>
-                            Procesando...
+                            <span className="w-2 h-2 bg-black animate-ping" />
+                            AUTHORIZING...
                         </>
                     ) : (
                         <>
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                            </svg>
-                            Pagar {fmt(total)}
+                            <span className="relative z-10">EXECUTE_PAYMENT // {fmt(total)}</span>
+                            {/* Tech scanline effect on hover */}
+                            <div className="absolute inset-0 bg-[linear-gradient(transparent_0%,rgba(0,0,0,0.1)_50%,transparent_100%)] bg-[length:100%_4px] opacity-0 group-hover:opacity-100 animate-[scan_2s_linear_infinite]" />
                         </>
                     )}
                 </button>
             </div>
 
-            <p className="text-center text-slate-700 text-xs">
-                Al pagar aceptas nuestros{" "}
-                <a href="/terms" className="text-slate-600 hover:text-slate-400 underline underline-offset-2">
-                    términos y condiciones
+            <p className="text-center text-zinc-600 text-[10px] tracking-widest uppercase mt-4">
+                SYSTEM_LOG: COMPLYING WITH POLICIES AND{" "}
+                <a href="/terms" className="text-zinc-400 hover:text-[#00f0ff] border-b border-transparent hover:border-[#00f0ff]">
+                    TERMS_OF_SERVICE
                 </a>
             </p>
         </div>

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { CiLogin } from "react-icons/ci";
 import { useForgotPasswordMutation } from "../../hooks/mutation/useAuthMutation";
 
@@ -14,52 +13,69 @@ const ForgotPasswordPage = () => {
     };
 
     return (
-        <div className="min-h-screen background-light dark:background-light">
-            {/* Login Form */}
-            <div className="flex items-center justify-center px-4 py-16">
-                <div className="w-full max-w-md">
-                    <div className="bg-slate-800/50 border-2 border-slate-700 rounded-2xl p-8 my-20 backdrop-blur-sm">
-                        {/* Title */}
-                        <div className="text-center mb-8">
-                            <Link to={"/"} className="text-3xl font-bold text-slate-100 mb-2">
-                                Recupera tu cuenta{" "}
-                                <span className="bg-clip-text text-transparent bg-linear-to-r from-cyan-500 to-blue-500">ELECOMMERCE</span>
-                            </Link>
-                            <p className="text-slate-400 text-sm">Ingresa tu correo electrónico para restablecer tu contraseña</p>
+        <div className="min-h-screen bg-[#020202] relative font-mono text-white flex items-center justify-center p-4">
+            {/* Background Grid Pattern */}
+            <div
+                className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"
+                style={{
+                    backgroundImage: `
+                        linear-gradient(to right, #ffffff 1px, transparent 1px),
+                        linear-gradient(to bottom, #ffffff 1px, transparent 1px)
+                    `,
+                    backgroundSize: '40px 40px'
+                }}
+            />
+
+            {/* Forgot Password Form */}
+            <div className="w-full max-w-md relative z-10">
+                <div className="bg-[#050505] border border-zinc-800 p-8 relative">
+                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#ff0055]" />
+                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#ff0055]" />
+
+                    {/* Title */}
+                    <div className="text-center mb-8 border-b border-zinc-900 pb-6">
+                        <h1 className="text-3xl font-black text-[#ff0055] uppercase tracking-widest mb-2" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                            SYS_OVERRIDE //
+                        </h1>
+                        <p className="text-zinc-500 text-[10px] tracking-widest uppercase">
+                            ACCOUNT RECOVERY INITIATED. PROVIDE IDENTITY LINK.
+                        </p>
+                    </div>
+
+                    {/* Form */}
+                    <form className="space-y-6">
+                        {/* Email Input */}
+                        <div>
+                            <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">[REGISTERED_EMAIL]</label>
+                            <input
+                                type="text"
+                                placeholder="ENTER_EMAIL..."
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-700 px-4 py-3 outline-none focus:border-[#ff0055] transition-colors text-sm font-bold tracking-widest uppercase"
+                            />
                         </div>
 
-                        {/* Form */}
-                        <form className="space-y-5">
-                            {/* Email Input */}
-                            <div>
-                                <input
-                                    type="text"
-                                    placeholder="Correo electrónico"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                                />
-                            </div>
+                        {/* Sign In Button */}
+                        <button
+                            type="button"
+                            onClick={handleSubmit}
+                            className="w-full flex items-center justify-center gap-3 bg-[#ff0055] hover:bg-white text-black font-black py-4 uppercase tracking-[0.2em] transition-colors border-2 border-transparent hover:border-[#ff0055]"
+                        >
+                            <span>TRANSMIT_RECOVERY_LINK</span>
+                            <CiLogin size={20} className="font-black" />
+                        </button>
+                    </form>
 
-                            {/* Sign In Button */}
-                            <ButtonAction
-                                onClick={handleSubmit}
-                                text="Enviar correo"
-                                variant="primary"
-                                className="w-full flex items-center justify-center"
-                            >
-                                <CiLogin size={18} />
-                            </ButtonAction>
-                        </form>
-
-                        {/* Sign Up Link */}
-                        <p className="text-center text-slate-400 text-sm mt-6">
-                            ¿Ya tienes una cuenta?{" "}
+                    {/* Sign Up Link */}
+                    <div className="mt-8 pt-6 border-t border-zinc-900 text-center">
+                        <p className="text-zinc-500 text-[10px] tracking-widest uppercase font-bold">
+                            ABORT_OVERRIDE?{" "}
                             <Link
                                 to={"/login"}
-                                className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+                                className="text-white hover:text-[#00f0ff] transition-colors ml-2"
                             >
-                                Iniciar sesión
+                                [ RETURN_TO_LOGIN ]
                             </Link>
                         </p>
                     </div>

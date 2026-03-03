@@ -57,10 +57,14 @@ const Banner = (props: PropType) => {
     }
 
     return (
-        <section className="w-full mx-auto px-4 py-8 grid justify-center items-center gap-6">
+        <section className="w-full mx-auto px-4 py-8 grid justify-center items-center gap-6 mt-4">
             {/* Main Banner */}
-            <div className="max-w-7xl lg:col-span-3 drop-shadow-xl/50 drop-shadow-black-500/50">
-                <div className="embla overflow-hidden rounded-xl">
+            <div className="max-w-7xl lg:col-span-3">
+                <div className="embla overflow-hidden border border-zinc-800 bg-[#050505] relative">
+                    {/* Tech Corners */}
+                    <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#00f0ff] z-20" />
+                    <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#00f0ff] z-20" />
+
                     <div className="embla__viewport" ref={emblaRef}>
                         <div className="embla__container flex">
                             {slides?.map((slide) => (
@@ -69,48 +73,58 @@ const Banner = (props: PropType) => {
                                     className="embla__slide flex-[0_0_100%] min-w-0 relative"
                                 >
                                     <div
-                                        className="w-full h-[568px] p-12 text-white relative overflow-hidden"
+                                        className="w-full h-[568px] p-8 md:p-16 text-white relative overflow-hidden flex items-y-center"
                                         style={{
                                             backgroundImage: `url(${slide.promotionalData?.bannerImageUrl})`,
                                             backgroundSize: 'cover',
                                             backgroundPosition: 'center'
                                         }}
                                     >
-                                        {/* Overlay oscuro para mejor legibilidad */}
-                                        <div className="absolute inset-0 bg-black/30" />
+                                        {/* Overlay oscuro industrial (Scanline) */}
+                                        <div className="absolute inset-0 bg-black/60 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px]" />
+                                        {/* Degradado duro lateral */}
+                                        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
 
-                                        <div className="relative z-10 max-w-xl">
-                                            <p className="text-amber-400 mb-4">Descuento del {slide.priceDiscount}% OFF</p>
-                                            <p className="text-sm font-medium mb-2 uppercase">
-                                                {slide.brand}
+                                        <div className="relative z-10 max-w-xl flex flex-col justify-center h-full">
+                                            <div className="inline-block border border-[#e4ff00] bg-[#e4ff00]/10 px-3 py-1 text-[#e4ff00] font-mono text-xs tracking-widest uppercase mb-6 w-fit">
+                                                DISCOUNT_AUTHORIZED // {slide.priceDiscount}% OFF
+                                            </div>
+
+                                            <p className="text-[#00f0ff] text-sm font-bold tracking-[0.3em] mb-2 uppercase">
+                                                MANUFACTURER: {slide.brand}
                                             </p>
-                                            <h2 className="text-5xl font-bold mb-4">
+
+                                            <h2 className="text-5xl md:text-6xl font-black mb-6 uppercase tracking-wider" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
                                                 {slide.name}
                                             </h2>
-                                            <p className="text-blue-200 mb-6">
+
+                                            <p className="text-zinc-400 mb-8 font-mono text-sm leading-relaxed border-l-2 border-zinc-700 pl-4">
                                                 {slide.description}
                                             </p>
+
                                             <Link
                                                 to={`/products/${slide.slug}`}
-                                                className="w-40 flex flex-row justify-center items-center gap-2 bg-white text-blue-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition"
+                                                className="w-fit flex flex-row justify-center items-center gap-4 bg-[#050505] text-[#00f0ff] border border-[#00f0ff] px-8 py-4 font-bold tracking-[0.2em] uppercase hover:bg-[#00f0ff] hover:text-black transition-all group"
                                             >
-                                                {" Comprar"}
-                                                <FaArrowRight size={14} />
+                                                <span>EXECUTE_ORDER</span>
+                                                <FaArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                                             </Link>
                                         </div>
 
-                                        {/* Indicadores dentro del slide */}
-                                        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                                        {/* Indicadores técnicos dentro del slide */}
+                                        <div className="absolute bottom-8 right-8 flex space-x-3 z-20 font-mono text-xs items-center">
                                             {slides.map((_, idx) => (
                                                 <button
                                                     key={idx}
-                                                    className={`h-2 rounded-full transition-all ${idx === currentSlide
-                                                        ? "bg-white w-8"
-                                                        : "bg-white/50 w-2"
+                                                    className={`transition-all duration-300 tracking-widest font-bold ${idx === currentSlide
+                                                        ? "text-[#00f0ff] opacity-100"
+                                                        : "text-zinc-600 opacity-50 hover:opacity-80"
                                                         }`}
                                                     onClick={() => scrollTo(idx)}
                                                     aria-label={`Go to slide ${idx + 1}`}
-                                                />
+                                                >
+                                                    [ {String(idx + 1).padStart(2, '0')} ]
+                                                </button>
                                             ))}
                                         </div>
                                     </div>

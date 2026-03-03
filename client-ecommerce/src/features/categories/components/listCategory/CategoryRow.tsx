@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useDeleteCategoryMutation } from "../../hook/mutation/useCategoryMutation";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
+
 import { BiEdit } from "react-icons/bi";
 import { BsTrash2 } from "react-icons/bs";
 import { FaCheck } from "react-icons/fa";
@@ -34,63 +34,69 @@ const CategoryRow: React.FC<CategoryRowProps> = ({ category, selectData, handleS
     return (
         <tr
             key={category?.id}
-            className="text-center border-t border-slate-700 hover:bg-slate-700/30 transition-colors"
+            className="text-center border-t border-zinc-800 bg-[#050505] hover:bg-[#00f0ff]/5 transition-colors group font-mono"
         >
             <td className="px-6 py-4">
                 <label className="flex gap-3 items-center cursor-pointer relative">
                     <input type="checkbox" checked={selectData.includes(category?.id!)} onChange={() => handleSelectData(category?.id!)} className="hidden peer" />
-                    <span className="w-5 h-5 border border-slate-300 rounded relative flex items-center justify-center peer-checked:border-cyan-600"></span>
-                    <FaCheck size={12} className="absolute hidden peer-checked:inline left-1 top-1/2 transform -translate-y-1/2 text-cyan-600" />
+                    <span className="w-5 h-5 border border-zinc-500 bg-black rounded-none relative flex items-center justify-center peer-checked:border-[#00f0ff] peer-checked:bg-[#00f0ff]/10"></span>
+                    <FaCheck size={12} className="absolute hidden peer-checked:inline left-1 top-1/2 transform -translate-y-1/2 text-[#00f0ff]" />
                 </label>
             </td>
             <td className="px-6 py-4">
-                <div className="flex items-center justify-start gap-3">
-                    <img
-                        src={category.image || "/placeholder.png"}
-                        alt={category.name}
-                        className="w-10 h-10 rounded-full object-cover border-2 border-slate-600"
-                    />
-                    <div className="text-left">
-                        <p className="text-slate-100 font-semibold">{category.name}</p>
-                        <p className="text-slate-400 text-xs">{category.slug}</p>
+                <div className="flex items-center justify-start gap-4">
+                    <div className="w-12 h-12 border border-zinc-800 bg-black flex items-center justify-center overflow-hidden p-1 relative">
+                        <div className="absolute inset-0 bg-[#00f0ff]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                        <img
+                            src={category.image || "/placeholder.png"}
+                            alt={category.name}
+                            className="w-full h-full object-cover grayscale mix-blend-screen opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all"
+                        />
+                    </div>
+                    <div className="text-left flex flex-col items-start">
+                        <p className="text-white font-black uppercase tracking-widest text-sm" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{category.name}</p>
+                        <div className="flex items-center gap-2 mt-1">
+                            <span className="text-zinc-500">|</span>
+                            <span className="text-[10px] text-[#00f0ff] font-bold uppercase tracking-widest">{category.slug}</span>
+                        </div>
                     </div>
                 </div>
             </td>
-            <td className="px-6 py-4 text-slate-300">{category.description}</td>
-            <td className="px-6 py-4">
-                <span className={`flex items-center justify-center gap-2 px-3 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer ${category.isActive
-                    ? "bg-green-500/20 text-green-400 hover:bg-green-500/30"
-                    : "bg-red-500/20 text-red-400 hover:bg-red-500/30"
+            <td className="px-6 py-4 text-zinc-400 text-xs text-left max-w-xs truncate border-l border-zinc-900 mx-4">
+                {category.description}
+            </td>
+            <td className="px-6 py-4 border-l border-zinc-900">
+                <span className={`inline-flex items-center justify-center gap-2 px-3 py-1 text-[10px] font-bold uppercase tracking-widest border transition-all ${category.isActive
+                    ? "border-[#e4ff00]/30 bg-[#e4ff00]/5 text-[#e4ff00]"
+                    : "border-[#ff0055]/30 bg-[#ff0055]/5 text-[#ff0055]"
                     }`}>
                     {category.isActive ? (
                         <>
-                            <MdCheckCircle size={14} />
-                            Activo
+                            <MdCheckCircle size={12} />
+                            [ACTIVE]
                         </>
                     ) : (
                         <>
-                            <MdBlock size={14} />
-                            Inactivo
+                            <MdBlock size={12} />
+                            [INACTIVE]
                         </>
                     )}
                 </span>
             </td>
-            <td className="px-6 py-4">
+            <td className="px-6 py-4 border-l border-zinc-900">
                 <div className="flex items-center justify-center gap-2">
-                    <ButtonAction
-                        variant="edit"
+                    <button
                         onClick={() => navigate(`/dashboard/categories/${category.id}/edit`)}
-                        text=""
+                        className="p-2 border border-zinc-800 text-zinc-500 hover:text-[#00f0ff] hover:border-[#00f0ff] hover:bg-[#00f0ff]/10 transition-all bg-black"
                     >
-                        <BiEdit size={18} />
-                    </ButtonAction>
-                    <ButtonAction
-                        variant="delete"
+                        <BiEdit size={16} />
+                    </button>
+                    <button
                         onClick={() => handleDelete(category)}
-                        text=""
+                        className="p-2 border border-zinc-800 text-zinc-500 hover:text-[#ff0055] hover:border-[#ff0055] hover:bg-[#ff0055]/10 transition-all bg-black"
                     >
-                        <BsTrash2 size={18} />
-                    </ButtonAction>
+                        <BsTrash2 size={16} />
+                    </button>
                 </div>
             </td>
         </tr>

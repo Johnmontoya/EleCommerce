@@ -6,20 +6,17 @@ import {
   CiShoppingCart,
 } from "react-icons/ci";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import Footer from "../../features/home/components/Footer";
 import { useState } from "react";
+import Footer from "../../features/home/components/Footer";
 import { MdDashboard } from "react-icons/md";
-import ButtonAction from "./ButtonAction";
 import { SearchModal } from "../../features/search/components/SearchModal";
 import { useAuthStore } from "../../features/auth/store/useAuthStore";
 import { BsTruck } from "react-icons/bs";
 import { useCartCount } from "../../features/auth/hooks/queries/useUsers";
 import { useWishCount } from "../../features/wishlist/hook/queries/useWishList";
-import { useTheme } from "./ThemeContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { theme, setTheme, resolvedTheme } = useTheme();
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const { user } = useAuthStore();
   const { data: cartCount } = useCartCount(user?.id!);
@@ -30,66 +27,48 @@ const Navbar = () => {
     street = user?.addresses[0]?.state + ", " + user?.addresses[0]?.street;
   }
 
-  const toggle = () => {
-    if (theme === 'system') {
-      setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
-    } else {
-      setTheme(theme === 'dark' ? 'light' : 'dark');
-    }
-  };
-
   return (
     <>
-      <header className={`navbar-light dark:navbar-dark shadow-sm sticky top-0 z-50`}>
+      <header className={`bg-[#050505] border-b border-zinc-800 shadow-sm sticky top-0 z-50 font-mono`}>
         {/* Navigation */}
-        <nav className="navbar topbar-light dark:topbar-dark">
-          <div className="flex justify-between font-light items-center max-w-7xl mx-auto py-2 px-4 text-slate-100">
+        <nav className="border-b border-zinc-800 bg-black">
+          <div className="flex justify-between font-bold tracking-widest text-[#00f0ff] uppercase text-[10px] items-center max-w-7xl mx-auto py-1 px-4">
             {user && (
-              <div className="flex flex-row gap-2">
-                <div className="flex items-center text-sm">
-                  <p>{user?.phone}</p>
+              <div className="flex flex-row gap-4">
+                <div className="flex items-center">
+                  <p>COMM-LINK: {user?.phone}</p>
                 </div>
                 <div className="flex flex-row items-center gap-2">
-                  <CiLocationOn size={28} />
-                  <div className="text-xs">
-                    <p>Enviar a {user?.firstName}</p>
-                    <span>{street ? street : ""}</span>
+                  <CiLocationOn size={16} />
+                  <div>
+                    <span className="text-zinc-500">TARGET:</span> {user?.firstName} // {street ? street : "UNKNOWN_COORD"}
                   </div>
                 </div>
               </div>
             )}
-            <div className="hidden md:flex text-sm">
-              <p>Cuentale a un amigo sobre nuestra tienda y obtén 20% de descuento</p>
+            <div className="hidden md:flex">
+              <p className="text-[#e4ff00]">SYS_MSG: INVITATION BONUS ACTIVE // 20% DISCOUNT</p>
             </div>
-            <div className="flex flex-row text-sm gap-4 items-center">
-              <div>USD</div>
-              <button
-                onClick={toggle}
-                className="p-2 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-700"
-                aria-label="Cambiar tema"
-              >
-                {resolvedTheme === 'dark' ? '☀️ Modo claro' : '🌙 Modo oscuro'}
-              </button>
+            <div className="flex flex-row gap-4 items-center">
+              <div className="text-zinc-500 border-r border-zinc-800 pr-4">UTC // COP</div>
               {user ? (
-                <ButtonAction
+                <button
                   onClick={() => navigate("/dashboard")}
-                  text="Dashboard"
-                  variant="primary"
-                  className="py-2"
+                  className="flex items-center gap-2 text-[#00f0ff] hover:text-white transition-colors"
                   type="button"
                 >
-                  <MdDashboard size={18} />
-                </ButtonAction>
+                  <MdDashboard size={14} />
+                  <span>DASHBOARD</span>
+                </button>
               ) : (
-                <ButtonAction
+                <button
                   onClick={() => navigate("/login")}
-                  text="Login"
-                  variant="primary"
-                  className="py-2"
+                  className="flex items-center gap-2 text-[#00f0ff] hover:text-white transition-colors"
                   type="button"
                 >
-                  <CiLogin size={18} />
-                </ButtonAction>
+                  <CiLogin size={14} />
+                  <span>SYS_LOGIN</span>
+                </button>
               )}
             </div>
           </div>
@@ -102,95 +81,94 @@ const Navbar = () => {
         />
 
         {/* Menu */}
-        <div className="max-w-7xl mx-auto px-4 py-3">
+        <div className="max-w-7xl mx-auto px-4 py-3 relative">
+          {/* Tech Accents Left/Right */}
+          <div className="absolute top-0 left-0 w-1 h-full bg-[#00f0ff]" />
+          <div className="absolute top-0 right-0 w-1 h-full bg-[#e4ff00]" />
+
           <div className="flex items-center justify-between">
             <div className="w-full flex justify-between items-center md:space-x-8 space-x-0">
               <div
                 onClick={() => navigate("/")}
-                className="flex items-center space-x-2 cursor-pointer"
+                className="flex items-center space-x-4 cursor-pointer group"
               >
-                <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition duration-500">
-                  <span className="text-xl font-bold text-slate-100">
-                    <CiShoppingBasket size={32} />
+                <div className="w-10 h-10 bg-black border border-[#00f0ff] flex items-center justify-center relative">
+                  {/* Logo Target */}
+                  <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white" />
+                  <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white" />
+                  <span className="text-xl font-bold text-[#00f0ff] group-hover:scale-110 transition-transform">
+                    <CiShoppingBasket size={24} />
                   </span>
                 </div>
-                <h2 className="text-2xl font-bold uppercase bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-500">
-                  EleCommerce
+                <h2 className="text-2xl font-black uppercase tracking-[0.2em] text-white" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                  ELECOMMERCE
                 </h2>
               </div>
-              <div className="w-full flex justify-center items-center text-slate-100 font-light px-10">
+              <div className="w-full flex justify-center items-center text-zinc-400 font-bold px-10" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
                 <div className="relative hidden lg:block">
-                  <ul className="flex flex-row gap-4">
-                    <li className="hover:text-cyan-400 transition-all">
+                  <ul className="flex flex-row gap-8 text-sm tracking-widest">
+                    <li className="hover:text-[#00f0ff] transition-colors uppercase border-b-2 border-transparent hover:border-[#00f0ff]">
                       <Link to="/">HOME</Link>
                     </li>
-                    <li className="hover:text-cyan-400 transition-all">
-                      <Link to="/products">PRODUCTOS</Link>
+                    <li className="hover:text-[#00f0ff] transition-colors uppercase border-b-2 border-transparent hover:border-[#00f0ff]">
+                      <Link to="/products">INVENTORY_DB</Link>
                     </li>
-                    <li className="hover:text-cyan-400 transition-all">
-                      <Link to="/blog">BLOG</Link>
+                    <li className="hover:text-[#00f0ff] transition-colors uppercase border-b-2 border-transparent hover:border-[#00f0ff]">
+                      <Link to="/blog">COMM_LOGS</Link>
                     </li>
-                    <li className="hover:text-cyan-400 transition-all">
-                      <Link to="/faq">AYUDAS</Link>
+                    <li className="hover:text-[#00f0ff] transition-colors uppercase border-b-2 border-transparent hover:border-[#00f0ff]">
+                      <Link to="/faq">SUPPORT_NET</Link>
                     </li>
-                    <li className="hover:text-cyan-400 transition-all">
-                      <Link to="/contact">CONTACTO</Link>
+                    <li className="hover:text-[#00f0ff] transition-colors uppercase border-b-2 border-transparent hover:border-[#00f0ff]">
+                      <Link to="/contact">PING_US</Link>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-row items-center -space-x-6">
-              <ButtonAction
-                text=""
+            <div className="flex flex-row items-center gap-4">
+              <button
                 onClick={() => setIsSearchModalOpen(true)}
-                className="relative transition-all duration-300 hover:scale-120 cursor-pointer"
-                variant="outline"
+                className="p-2 border border-zinc-800 hover:border-[#00f0ff] hover:text-[#00f0ff] text-zinc-400 transition-colors bg-black"
                 type="button"
               >
-                <BiSearch className="w-6 h-6 text-gray-200" />
-              </ButtonAction>
-              <ButtonAction
-                className="relative"
-                onClick={() => navigate("/wishlist")}
-                variant="outline"
-                text=""
-                type="button"
-              >
-                <BiHeart size={24} />
+                <BiSearch size={20} />
+              </button>
 
+              <button
+                onClick={() => navigate("/wishlist")}
+                className="p-2 border border-zinc-800 hover:border-[#ff0055] hover:text-[#ff0055] text-zinc-400 transition-colors bg-black relative"
+                type="button"
+              >
+                <BiHeart size={20} />
                 {wishCount?.count! > 0 && (
-                  <span className="absolute top-1 right-4 bg-cyan-500 shadow-lg shadow-cyan-500/90 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="absolute -top-2 -right-2 bg-[#ff0055] text-white text-[10px] font-bold px-1.5 py-0.5 border border-black z-10">
                     {wishCount?.count || 0}
                   </span>
                 )}
-              </ButtonAction>
-              <ButtonAction
-                className="relative"
+              </button>
+
+              <button
                 onClick={() => navigate("/cart")}
-                variant="outline"
-                text=""
+                className="p-2 border border-zinc-800 hover:border-[#e4ff00] hover:text-[#e4ff00] text-zinc-400 transition-colors bg-black relative"
                 type="button"
               >
-                <CiShoppingCart size={24} />
-
+                <CiShoppingCart size={20} />
                 {cartCount?.count! > 0 && (
-                  <span className="absolute top-1 right-4 bg-cyan-500 shadow-lg shadow-cyan-500/90 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="absolute -top-2 -right-2 bg-[#e4ff00] text-black text-[10px] font-bold px-1.5 py-0.5 border border-black z-10">
                     {cartCount?.count || 0}
                   </span>
                 )}
+              </button>
 
-              </ButtonAction>
-              <ButtonAction
-                className="relative"
+              <button
                 onClick={() => navigate("/tracking")}
-                variant="outline"
-                text=""
+                className="p-2 border border-zinc-800 hover:border-[#00f0ff] hover:text-[#00f0ff] text-zinc-400 transition-colors bg-black"
                 type="button"
               >
-                <BsTruck size={24} />
-              </ButtonAction>
+                <BsTruck size={20} />
+              </button>
             </div>
           </div>
         </div>

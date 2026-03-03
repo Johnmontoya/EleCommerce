@@ -5,10 +5,10 @@ import Banner from '../../components/Banner';
 import Category from '../../../categories/components/Category';
 import Promotion from '../../components/Promotion';
 import Trends from '../../components/Trends';
-import ProductShowCase from '../../components/ProductShowCase';
 import Products from '../../../products/components/Products';
 import CTA from '../../components/CTA';
 import Features from '../../components/Features';
+import ProductShowCase from '../../components/ProductShowCase';
 
 const OPTIONS: EmblaOptionsType = {
   loop: true,
@@ -32,21 +32,34 @@ const HomePage = () => {
   }
 
   return (
-    <div className='background-light dark:background-light'>
-      {/* useLocalData={true} para usar datos locales */}
-      {/* useLocalData={false} para usar API */}
-      <Banner options={OPTIONS} />
-      <Category />
-      <motion.div ref={ref} variants={variants} initial="hidden" animate={isInView ? "visible" : "hidden"} className='max-w-7xl mx-auto flex flex-row justify-center items-center gap-6'>
-        <Promotion />
-      </motion.div>
-      <Trends />
-      <motion.div ref={refShow} variants={variantsShow} initial="hidden" animate={isInViewShow ? "visible" : "hidden"}>
-        <ProductShowCase />
-      </motion.div>
-      <Products />
-      <CTA />
-      <Features />
+    <div className='min-h-screen bg-[#020202] text-zinc-300 font-mono relative overflow-hidden'>
+      {/* Tech Grid Background (similar to Checkout) */}
+      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #27272a 1px, transparent 1px),
+            linear-gradient(to bottom, #27272a 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px'
+        }}
+      />
+      {/* Scanline overlay */}
+      <div className="absolute inset-0 z-0 opacity-5 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,1)_50%)] bg-[length:100%_4px]" />
+
+      <div className="relative z-10 space-y-12">
+        <Banner options={OPTIONS} />
+        <Category />
+        <motion.div ref={ref} variants={variants} initial="hidden" animate={isInView ? "visible" : "hidden"} className='max-w-7xl mx-auto flex flex-row items-center gap-6 px-4'>
+          <Promotion />
+        </motion.div>
+        <Trends />
+        <motion.div ref={refShow} variants={variantsShow} initial="hidden" animate={isInViewShow ? "visible" : "hidden"} className="px-4">
+          <ProductShowCase />
+        </motion.div>
+        <Products />
+        <CTA />
+        <Features />
+      </div>
     </div>
   )
 }

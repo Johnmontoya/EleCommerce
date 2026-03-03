@@ -39,62 +39,64 @@ const SecurityInfo = ({ activeTab }: SecurityInfoProps) => {
     return (
         <>
             {activeTab === "security" && (
-                <div className="dash-search dark:dash-search border border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
-                    <div className="flex items-center justify-between mb-6">
-                        <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-                            <BiLock size={20} className="text-cyan-400" />
-                            Cambiar Contraseña
+                <div className="bg-[#050505] border border-zinc-800 p-6 md:p-8 font-mono relative group">
+                    <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-zinc-600 group-hover:border-[#FF0055] transition-colors" />
+
+                    <div className="flex items-center justify-between mb-8">
+                        <h2 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2">
+                            <span className="text-[#FF0055]">{'>'}</span> [SECURITY_PARAMETERS]
                         </h2>
                     </div>
 
-                    <div className="space-y-4">
-                        <div>
-                            <label className="block text-slate-300 font-semibold mb-2">
-                                Contraseña Actual
+                    <div className="space-y-6 max-w-xl">
+                        <div className="space-y-1">
+                            <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800">
+                                [CURRENT_PASSWORD]
                             </label>
                             <input
                                 type="password"
                                 name="current"
                                 value={passwords.current}
                                 onChange={onChangePasswords}
-                                className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-400"
+                                className="w-full bg-black border border-zinc-800 text-white px-4 py-3 outline-none focus:border-[#FF0055] transition-colors font-mono tracking-widest"
                                 placeholder="••••••••"
                             />
                         </div>
 
-                        <div>
-                            <label className="block text-slate-300 font-semibold mb-2">
-                                Nueva Contraseña
+                        <div className="space-y-1">
+                            <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800">
+                                [NEW_PASSWORD]
                             </label>
                             <input
                                 type="password"
                                 name="new"
                                 value={passwords.new}
                                 onChange={onChangePasswords}
-                                className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-400"
+                                className="w-full bg-black border border-zinc-800 text-white px-4 py-3 outline-none focus:border-[#FF0055] transition-colors font-mono tracking-widest"
                                 placeholder="••••••••"
                             />
                         </div>
 
-                        <div>
-                            <label className="block text-slate-300 font-semibold mb-2">
-                                Confirmar Nueva Contraseña
+                        <div className="space-y-1">
+                            <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800">
+                                [VERIFY_NEW_PASSWORD]
                             </label>
                             <input
                                 type="password"
                                 name="confirm"
                                 value={passwords.confirm}
                                 onChange={onChangePasswords}
-                                className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-400"
+                                className="w-full bg-black border border-zinc-800 text-white px-4 py-3 outline-none focus:border-[#FF0055] transition-colors font-mono tracking-widest"
                                 placeholder="••••••••"
                             />
                         </div>
 
                         <button
                             onClick={handleChangePassword}
-                            className="w-full bg-cyan-500 hover:bg-cyan-600 text-white py-3 rounded-lg font-semibold transition-all"
+                            className="w-full bg-[#050505] border border-[#FF0055] hover:bg-[#FF0055] text-[#FF0055] hover:text-black mt-4 py-4 font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2"
                         >
-                            Actualizar Contraseña
+                            <BiLock size={18} />
+                            [UPDATE_CREDENTIALS]
                         </button>
                     </div>
                 </div>
