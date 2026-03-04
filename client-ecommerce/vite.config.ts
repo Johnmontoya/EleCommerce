@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     allowedHosts: [
       "https://elecommerce-production.up.railway.app",
-      "unstuffed-jodi-invigoratedly.ngrok-free.dev"
+      //"unstuffed-jodi-invigoratedly.ngrok-free.dev"
     ]
   }
 })
