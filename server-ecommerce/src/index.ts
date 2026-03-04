@@ -14,11 +14,20 @@ import trackingRoutes from "./routes/tracking.routes.js"
 
 const app = express();
 
-const corsOptions = {
-  origin: process.env.FRONTEND_URL,
+const corsOptions: cors.CorsOptions = {
+  origin: (origin, callback) => {
+    const frontendUrl = process.env.FRONTEND_URL;
+    // Si no hay origin (como en herramientas de test) o coincide (limpiando slashes finales)
+    if (!origin || (frontendUrl && origin.replace(/\/$/, "") === frontendUrl.replace(/\/$/, ""))) {
+      callback(null, true);
+    } else {
+      console.log("CORS blocked origin:", origin, "Expected:", frontendUrl);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Si necesitas manejar cookies o cabeceras de autorización
-  optionsSuccessStatus: 204 // Código de estado para respuestas OPTIONS exitosas
+  credentials: true,
+  optionsSuccessStatus: 204
 }
 
 app.use(express.json())
