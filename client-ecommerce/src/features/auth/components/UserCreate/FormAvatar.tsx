@@ -16,13 +16,13 @@ const FormAvatar: React.FC<FormAvatarProps> = ({
 
             <h2 className="text-[#00f0ff] font-mono text-[12px] font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
                 <BiImage size={16} className="text-[#00f0ff]" />
-                [SYS_AVATAR_IMAGE]
+                [AVATAR_SISTEMA]
             </h2>
 
             <div className="space-y-6">
                 <div>
                     <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
-                        [URL_AVATAR_NODE]
+                        [URL_AVATAR]
                     </label>
                     <input
                         type="url"
@@ -47,10 +47,10 @@ const FormAvatar: React.FC<FormAvatarProps> = ({
                         />
                         <div className="flex-1 font-mono">
                             <p className="text-[#e4ff00] font-bold text-[10px] uppercase tracking-widest">
-                                [PREVIEW_MATRIX]
+                                [PREVIEW_AVATAR]
                             </p>
                             <p className="text-zinc-500 text-[10px] uppercase tracking-widest mt-1">
-                                [RENDERED_OUTPUT_DISPLAY]
+                                [VISUALIZACION_AVATAR]
                             </p>
                         </div>
                     </div>

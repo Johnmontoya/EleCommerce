@@ -75,7 +75,7 @@ const RegisterPage = () => {
               ELECOMMERCE <span className="text-[#e4ff00]">//</span>
             </Link>
             <p className="text-zinc-500 text-[10px] tracking-widest uppercase">
-              NEW ENTITY REGISTRATION.
+              [REGISTRO_DE_NUEVA_ENTIDAD].
             </p>
           </div>
 
@@ -83,11 +83,11 @@ const RegisterPage = () => {
           <form className="space-y-6">
             {/* Username Input */}
             <div>
-              <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">[USER_ALIAS]</label>
+              <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">[ALIAS_USUARIO]</label>
               <input
                 type="text"
                 name="username"
-                placeholder="ENTER_ALIAS..."
+                placeholder="[INGRESE_ALIAS]..."
                 value={authData.username}
                 onChange={onChangeAuthData}
                 className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-700 px-4 py-3 outline-none focus:border-[#e4ff00] transition-colors text-sm font-bold tracking-widest uppercase"
@@ -101,11 +101,11 @@ const RegisterPage = () => {
 
             {/* Email Input */}
             <div>
-              <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">[EMAIL_ADDRESS]</label>
+              <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">[CORREO_ELECTRONICO]</label>
               <input
                 type="text"
                 name="email"
-                placeholder="ENTER_EMAIL..."
+                placeholder="[INGRESE_CORREO]..."
                 value={authData.email}
                 onChange={onChangeAuthData}
                 className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-700 px-4 py-3 outline-none focus:border-[#e4ff00] transition-colors text-sm font-bold tracking-widest uppercase"
@@ -119,11 +119,11 @@ const RegisterPage = () => {
 
             {/* Password Input */}
             <div>
-              <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">[SECURITY_KEY]</label>
+              <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">[LLAVE_DE_SEGURIDAD]</label>
               <input
                 type="password"
                 name="password"
-                placeholder="ENTER_PASSWORD..."
+                placeholder="[INGRESE_CONTRASEÑA]..."
                 value={authData.password}
                 onChange={onChangeAuthData}
                 className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-700 px-4 py-3 outline-none focus:border-[#e4ff00] transition-colors text-sm font-bold tracking-widest uppercase"
@@ -140,7 +140,7 @@ const RegisterPage = () => {
               onClick={handleSubmit}
               className="w-full flex items-center justify-center gap-3 bg-[#e4ff00] hover:bg-white text-black font-black py-4 uppercase tracking-[0.2em] transition-colors border-2 border-transparent hover:border-[#e4ff00]"
             >
-              <span>REGISTER_ENTITY</span>
+              <span>[REGISTRAR_ENTIDAD]</span>
               <CiLogout size={20} className="font-black" />
             </button>
           </form>
@@ -152,7 +152,7 @@ const RegisterPage = () => {
             </div>
             <div className="relative flex justify-center text-[10px] tracking-widest uppercase font-bold">
               <span className="px-4 bg-[#050505] text-zinc-600">
-                AUXILIARY_METHODS
+                [METODOS_AUXILIARES]
               </span>
             </div>
           </div>
@@ -178,12 +178,12 @@ const RegisterPage = () => {
           {/* Sign Up Link */}
           <div className="mt-8 pt-6 border-t border-zinc-900 text-center">
             <p className="text-zinc-500 text-[10px] tracking-widest uppercase font-bold">
-              VERIFIED_ENTITY?{" "}
+              [ENTIDAD_VERIFICADA]?{" "}
               <Link
                 to={"/login"}
                 className="text-white hover:text-[#e4ff00] transition-colors ml-2"
               >
-                [ INITIATE_SESSION ]
+                [ INICIAR_SESION ]
               </Link>
             </p>
           </div>

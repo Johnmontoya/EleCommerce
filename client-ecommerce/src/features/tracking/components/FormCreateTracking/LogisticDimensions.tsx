@@ -14,13 +14,13 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
 
             <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100 mb-6 flex items-center gap-2 border-b border-zinc-800 pb-4">
                 <BiPackage size={18} className="text-[#00f0ff]" />
-                [LOGISTICS_AND_DIMENSIONS]
+                [LOGÍSTICA_Y_DIMENSIONES]
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="w-full">
                     <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
-                        [LOGISTICS_CARRIER] *
+                        [LOGÍSTICA] *
                     </label>
                     <select
                         value={tracking.tracking.carrier}
@@ -29,7 +29,7 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
                         className="w-full bg-[#050505] border border-zinc-800 text-zinc-100 font-mono tracking-wider placeholder-zinc-700 px-4 py-3 outline-none focus:border-[#00f0ff] focus:bg-black transition-all appearance-none cursor-pointer"
                     >
                         <option value="" disabled className="bg-black text-zinc-600">
-                            [SELECT_CARRIER]
+                            [SELECCIONAR_LOGÍSTICA]
                         </option>
                         <option value="ups" className="bg-black">[UPS]</option>
                         <option value="fedex" className="bg-black">[FEDEX]</option>
@@ -42,7 +42,7 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
                 </div>
                 <div className="w-full">
                     <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
-                        [EST_DELIVERY_CYCLE]
+                        [CICLO_DE_ENTREGA_ESTIMADO]
                     </label>
                     <input
                         type="date"
@@ -57,7 +57,7 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
                 </div>
                 <div className="w-full">
                     <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
-                        [ORIGIN_NODE] *
+                        [NODO_DE_ORIGEN] *
                     </label>
                     <input
                         type="text"
@@ -75,7 +75,7 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
                 </div>
                 <div className="w-full">
                     <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
-                        [DESTINATION_NODE] *
+                        [NODO_DE_DESTINO] *
                     </label>
                     <input
                         type="text"
@@ -93,7 +93,7 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
                 </div>
                 <div className="w-full border-r border-zinc-900 pr-4">
                     <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
-                        [MASS_KG]
+                        [PESO_KG]
                     </label>
                     <input
                         type="text"
@@ -111,7 +111,7 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
                 </div>
                 <div className="w-full pl-0 md:pl-2">
                     <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
-                        [GEOMETRY_LWH_CM]
+                        [GEOMETRÍA_LWH_CM]
                     </label>
                     <input
                         type="text"

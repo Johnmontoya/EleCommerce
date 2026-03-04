@@ -20,13 +20,13 @@ const FormRoleAndState: React.FC<FormRoleAndStateProps> = ({
 
                 <h2 className="text-[#00f0ff] font-mono text-[12px] font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
                     <MdAdminPanelSettings size={16} className="text-[#00f0ff]" />
-                    [SYS_ROLE_PERMISSIONS]
+                    [ROL_PERMISOS_SISTEMA]
                 </h2>
 
                 <div className="space-y-6">
                     <div>
                         <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
-                            [USER_ROLE]
+                            [ROL_USUARIO]
                         </label>
                         <select
                             name="role"
@@ -34,10 +34,9 @@ const FormRoleAndState: React.FC<FormRoleAndStateProps> = ({
                             onChange={onChangeCreateData}
                             className="w-full bg-black border border-zinc-800 text-white px-4 py-3 rounded-none outline-none focus:border-[#00f0ff] font-mono text-[10px] uppercase tracking-widest cursor-pointer transition-all"
                         >
-                            <option value="">[SELECT_ROLE]</option>
-                            <option value="USER">[USER]</option>
-                            <option value="ADMIN">[ADMIN]</option>
-                            <option value="SUPER_ADMIN">[SUPER_ADMIN]</option>
+                            <option value="">[SELECCIONAR_ROL]</option>
+                            <option value="USER">[USUARIO]</option>
+                            <option value="ADMIN">[ADMINISTRADOR]</option>
                         </select>
                     </div>
 
@@ -63,7 +62,7 @@ const FormRoleAndState: React.FC<FormRoleAndStateProps> = ({
 
                 <h2 className="text-[#00f0ff] font-mono text-[12px] font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
                     <MdVerifiedUser size={16} className="text-[#00f0ff]" />
-                    [ACCOUNT_STATUS]
+                    [ESTADO_CUENTA]
                 </h2>
 
                 <div className="space-y-4">
@@ -80,10 +79,10 @@ const FormRoleAndState: React.FC<FormRoleAndStateProps> = ({
                         </div>
                         <div className="font-mono">
                             <p className="text-white text-[10px] uppercase tracking-widest font-bold">
-                                [ACTIVE_ACCOUNT]
+                                [CUENTA_ACTIVA]
                             </p>
                             <p className="text-zinc-500 text-[9px] uppercase tracking-widest mt-1">
-                                [USER_ACCESS_PERMITTED]
+                                [PERMISO_ACCESO_USUARIO]
                             </p>
                         </div>
                     </label>
@@ -101,10 +100,10 @@ const FormRoleAndState: React.FC<FormRoleAndStateProps> = ({
                         </div>
                         <div className="font-mono">
                             <p className="text-white text-[10px] uppercase tracking-widest font-bold">
-                                [EMAIL_VERIFIED]
+                                [EMAIL_VERIFICADO]
                             </p>
                             <p className="text-zinc-500 text-[9px] uppercase tracking-widest mt-1">
-                                [EMAIL_SYSTEM_CONFIRMED]
+                                [EMAIL_CONFIRMADO_SISTEMA]
                             </p>
                         </div>
                     </label>
@@ -114,21 +113,21 @@ const FormRoleAndState: React.FC<FormRoleAndStateProps> = ({
             {/* Info Card */}
             <div className="bg-[#00f0ff]/5 border border-[#00f0ff]/30 p-6 relative">
                 <h3 className="text-[#00f0ff] font-mono text-[12px] font-bold tracking-widest uppercase mb-4">
-                    [SYSTEM_TIPS]
+                    [CONSEJOS_SISTEMA]
                 </h3>
                 <ul className="text-zinc-400 text-[10px] font-mono uppercase tracking-widest space-y-3">
                     <li className="flex items-start gap-2">
                         <span className="text-[#00f0ff]">{">"}</span>
-                        <span>[USE &gt;= 8 CHARS FOR PASSWORDS]</span>
+                        <span>[USE &gt;= 8 CARACTERES PARA LA CONTRASEÑA]</span>
                     </li>
                     <li className="flex items-start gap-2">
                         <span className="text-[#00f0ff]">{">"}</span>
-                        <span>[VERIFY EMAIL BEFORE ACTIVATION]</span>
+                        <span>[VERIFICAR EL CORREO ELECTRONICO ANTES DE LA ACTIVACION]</span>
                     </li>
                     <li className="flex items-start gap-2">
                         <span className="text-[#00f0ff]">{">"}</span>
                         <span>
-                            [ASSIGN PROPER SYSTEM CLEARANCE LEVELS]
+                            [ASIGNAR LOS NIVELES DE ACCESO AL SISTEMA]
                         </span>
                     </li>
                 </ul>

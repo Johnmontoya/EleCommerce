@@ -166,10 +166,10 @@ const ResetPasswordPage = () => {
                     {/* Title */}
                     <div className="text-center mb-8 border-b border-zinc-900 pb-6">
                         <h1 className="text-3xl font-black text-[#ff0055] uppercase tracking-widest mb-2" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-                            KEY_OVERRIDE //
+                            [SOBREESCRITURA_DE_LLAVE] //
                         </h1>
                         <p className="text-zinc-500 text-[10px] tracking-widest uppercase">
-                            PROVIDE OTP SEQUENCE AND NEW SECURITY KEY.
+                            [PROPORCIONE_LA_SECUENCIA_OTP_Y_LA_NUEVA_LLAVE_DE_SEGURIDAD]
                         </p>
                     </div>
 
@@ -178,7 +178,7 @@ const ResetPasswordPage = () => {
                         {/* OTP Input */}
                         <div>
                             <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">
-                                [O.T.P._SEQUENCE]
+                                [SECUENCIA_OTP]
                             </label>
                             <div className="flex flex-row gap-2 justify-between">
                                 {otp.map((digit, index) => (
@@ -210,7 +210,7 @@ const ResetPasswordPage = () => {
                         {/* New Password Input */}
                         <div>
                             <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">
-                                [NEW_SECURITY_KEY]
+                                [NUEVA_LLAVE_DE_SEGURIDAD]
                             </label>
                             <div className="relative">
                                 <input
@@ -243,12 +243,12 @@ const ResetPasswordPage = () => {
                         {/* Confirm Password Input */}
                         <div>
                             <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">
-                                [CONFIRM_SECURITY_KEY]
+                                [CONFIRMAR_LLAVE_DE_SEGURIDAD]
                             </label>
                             <div className="relative">
                                 <input
                                     type={showConfirmPassword ? "text" : "password"}
-                                    placeholder="REPEAT_KEY"
+                                    placeholder="[REPETIR_LLAVE]"
                                     name="confirm"
                                     value={passwords.confirm}
                                     onChange={onChangePasswords}
@@ -279,7 +279,7 @@ const ResetPasswordPage = () => {
                             disabled={loading}
                             className="w-full flex items-center justify-center gap-3 bg-[#ff0055] hover:bg-white text-black font-black py-4 uppercase tracking-[0.2em] transition-colors border-2 border-transparent hover:border-[#ff0055] disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            <span>{loading ? "PROCESSING..." : "UPDATE_KEY"}</span>
+                            <span>{loading ? "PROCESANDO..." : "ACTUALIZAR_LLAVE"}</span>
                             <CiLock size={20} className="font-black" />
                         </button>
                     </form>
@@ -291,7 +291,7 @@ const ResetPasswordPage = () => {
                             className="inline-flex items-center gap-2 text-zinc-500 hover:text-[#00f0ff] transition-colors text-[10px] font-bold uppercase tracking-widest"
                         >
                             <BiArrowBack size={14} />
-                            [ ABORT_OPERATION ]
+                            [ ABORTAR_OPERACION ]
                         </Link>
                     </div>
                 </div>

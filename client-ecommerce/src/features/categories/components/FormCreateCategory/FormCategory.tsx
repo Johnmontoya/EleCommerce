@@ -65,12 +65,12 @@ const FormCategory: React.FC<CardCategoryProps> = ({
 
             <h2 className="text-xl font-bold text-[#00f0ff] mb-8 flex items-center gap-2 uppercase tracking-widest border-b border-zinc-800 pb-4">
                 <BiCategory size={20} />
-                [CATEGORY_DATA_ENTRY]
+                [INGRESO_DATOS_CATEGORIA]
             </h2>
             <div className="space-y-6">
                 <div className="flex flex-col gap-2">
                     <label htmlFor="name" className="text-[10px] text-[#00f0ff] font-bold uppercase tracking-widest pl-1 border-l-2 border-[#00f0ff] mb-1">
-                        [CATEGORY_NAME]
+                        [NOMBRE_CATEGORIA]
                     </label>
                     <input
                         type="text"
@@ -90,7 +90,7 @@ const FormCategory: React.FC<CardCategoryProps> = ({
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="slug" className="text-[10px] text-[#00f0ff] font-bold uppercase tracking-widest pl-1 border-l-2 border-[#00f0ff] mb-1">
-                        [IDENTIFIER_SLUG]
+                        [IDENTIFICADOR_SLUG]
                     </label>
                     <input
                         type="text"
@@ -110,7 +110,7 @@ const FormCategory: React.FC<CardCategoryProps> = ({
                 </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="image" className="text-[10px] text-[#00f0ff] font-bold uppercase tracking-widest pl-1 border-l-2 border-[#00f0ff] mb-1">
-                        [IMAGE_URL_SOURCE]
+                        [FUENTE_URL_IMAGEN]
                     </label>
                     <div className="flex items-stretch gap-2">
                         <input
@@ -162,7 +162,7 @@ const FormCategory: React.FC<CardCategoryProps> = ({
 
                 <div className="flex flex-col gap-2 mt-4">
                     <label htmlFor="description" className="text-[10px] text-[#00f0ff] font-bold uppercase tracking-widest pl-1 border-l-2 border-[#00f0ff] mb-1">
-                        [CATEGORY_DESCRIPTION_DATA]
+                        [DESCRIPCION_CATEGORIA]
                     </label>
                     <textarea
                         id="description"
@@ -186,7 +186,7 @@ const FormCategory: React.FC<CardCategoryProps> = ({
                         ) : (
                             <FiEyeOff size={16} className="text-[#ff0055]" />
                         )}
-                        [SYSTEM_STATUS_TOGGLE]
+                        [TOGGLE_ESTADO_SISTEMA]
                     </h2>
 
                     <label className="flex items-center gap-4 cursor-pointer bg-black border border-zinc-800 p-4 hover:border-[#00f0ff] transition-all relative overflow-hidden group">
@@ -203,10 +203,10 @@ const FormCategory: React.FC<CardCategoryProps> = ({
                         </div>
                         <div>
                             <p className="text-white font-bold uppercase tracking-widest text-xs">
-                                {category.isActive ? "[STATUS: VISIBLE_IN_DIRECTORY]" : "[STATUS: HIDDEN_FROM_DIRECTORY]"}
+                                {category.isActive ? "[ESTADO: VISIBLE]" : "[ESTADO: OCULTO]"}
                             </p>
                             <p className="text-zinc-500 text-[10px] uppercase font-mono mt-1">
-                                // TOGGLE CATEGORY EXPOSURE TO CLIENT INTERFACES //
+                                // TOGGLE CATEGORIA EXPOSURE TO CLIENT INTERFACES //
                             </p>
                         </div>
                     </label>

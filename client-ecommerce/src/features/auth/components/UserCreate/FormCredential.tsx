@@ -24,13 +24,13 @@ const FormCredential: React.FC<FormCredentialProps> = ({
 
             <h2 className="text-[#00f0ff] font-mono text-[12px] font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
                 <BiLock size={16} className="text-[#00f0ff]" />
-                [SYS_ACCESS_CREDENTIALS]
+                [CRED_ACCESO_SISTEMA]
             </h2>
 
             <div className="space-y-6">
                 <div>
                     <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
-                        [EMAIL_ADDRESS] *
+                        [CORREO_ELECTRONICO] *
                     </label>
                     <div className="relative">
                         <BiEnvelope
@@ -55,7 +55,7 @@ const FormCredential: React.FC<FormCredentialProps> = ({
                 <div className="grid grid-cols-2 gap-6">
                     <div>
                         <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
-                            [PASSWORD_KEY] *
+                            [CONTRASEÑA] *
                         </label>
                         <input
                             type="password"
@@ -73,7 +73,7 @@ const FormCredential: React.FC<FormCredentialProps> = ({
 
                     <div>
                         <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
-                            [CONFIRM_PASSWORD_KEY] *
+                            [CONFIRMAR_CONTRASEÑA] *
                         </label>
                         <input
                             type="password"
@@ -91,7 +91,7 @@ const FormCredential: React.FC<FormCredentialProps> = ({
 
                 <div className="bg-black border border-[#e4ff00]/50 p-4 relative">
                     <p className="text-[#e4ff00] font-mono text-[10px] uppercase tracking-widest leading-relaxed">
-                        [SYS_WARNING: PASSWORD MUST CONTAIN &gt;= 8 CHARS. REQUIRES CAPS, LOWERCASE &amp; NUMERALS TO PASS ENCRYPTION LAYER.]
+                        [ADVERTENCIA_SISTEMA: LA CONTRASEÑA DEBE CONTENER &gt;= 8 CARACTERES. REQUIERE MAYÚSCULAS, MINÚSCULAS Y NÚMEROS PARA PASAR LA CAPA DE ENCRIPTACIÓN.]
                     </p>
                 </div>
             </div>

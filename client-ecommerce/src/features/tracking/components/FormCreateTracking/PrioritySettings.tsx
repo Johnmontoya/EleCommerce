@@ -10,11 +10,11 @@ const PrioritySettings = ({ priority, setPriority, priorityOptions }: PrioritySe
 
             <div className="flex items-center gap-2 mb-6 border-b border-zinc-800 pb-4">
                 <div className="w-2 h-5 bg-[#ff0055]"></div>
-                <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100">[CONFIG_PRIORITY]</h2>
+                <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100">[CONFIG_PRIORIDAD]</h2>
             </div>
 
             <div>
-                <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-4">[DISPATCH_LEVEL]</label>
+                <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-4">[NIVEL_DE_DESPACHO]</label>
                 <div className="space-y-3">
                     {priorityOptions.map((option) => (
                         <label

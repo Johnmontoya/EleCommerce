@@ -12,12 +12,12 @@ const GeneralInformation: React.FC<GeneralInformationProps> = ({ tracking, onCha
 
             <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100 mb-6 flex items-center gap-2 border-b border-zinc-800 pb-4">
                 <BiPackage size={18} className="text-[#00f0ff]" />
-                [GENERAL_INFORMATION]
+                [INFORMACIÓN_GENERAL]
             </h2>
             <div className="flex flex-col md:flex-row gap-6 space-y-0">
                 <div className="w-full">
                     <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
-                        [TRACKING_ID] *
+                        [ID_DE_SEGUIMIENTO] *
                     </label>
                     <input
                         type="text"
@@ -32,7 +32,7 @@ const GeneralInformation: React.FC<GeneralInformationProps> = ({ tracking, onCha
                 </div>
                 <div className="w-full">
                     <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
-                        [ORDER_REFERENCE] *
+                        [REFERENCIA_DE_LA_ORDEN] *
                     </label>
                     <input
                         type="text"

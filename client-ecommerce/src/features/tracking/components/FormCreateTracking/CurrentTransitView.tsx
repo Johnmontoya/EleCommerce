@@ -9,7 +9,7 @@ const CurrentTransitView: React.FC = () => {
                 <div className="w-5 h-5 flex items-center justify-center text-xs border border-[#00f0ff] bg-[#00f0ff]/10">
                     <BiMapPin className="w-3 h-3 text-[#00f0ff]" />
                 </div>
-                <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100">[TRANSIT_RADAR_FEED]</h2>
+                <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100">[RADAR_DE_TRANSITO]</h2>
             </div>
 
             <div className="relative h-64 bg-[#050505] border border-zinc-800 overflow-hidden">
@@ -45,7 +45,7 @@ const CurrentTransitView: React.FC = () => {
                         <div className="bg-[#e4ff00]/10 border border-[#e4ff00] p-1">
                             <BiMapPin className="w-3 h-3 text-[#e4ff00]" />
                         </div>
-                        <span className="font-mono text-xs text-[#00f0ff] tracking-widest uppercase truncate">[GEO_LOCK] NEAR OKLAHOMA CITY HUB</span>
+                        <span className="font-mono text-xs text-[#00f0ff] tracking-widest uppercase truncate">[GEO_LOCK] CERCA DEL CENTRO DE DISTRIBUCIÓN DE OKLAHOMA CITY</span>
                     </div>
                 </div>
             </div>

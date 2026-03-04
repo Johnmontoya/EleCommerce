@@ -91,10 +91,10 @@ const DashCreateCategoryPage = () => {
                             <div>
                                 <h1 className="text-2xl lg:text-4xl font-black text-white mb-2 flex items-center gap-3 uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
                                     <BiCategory className="text-[#00f0ff]" size={36} />
-                                    [CREATE_CATEGORY]
+                                    [CREAR_CATEGORIA]
                                 </h1>
                                 <p className="text-zinc-500 text-xs font-mono tracking-widest uppercase">
-                                    // INITIALIZE_NEW_CATEGORY_NODE //
+                                    // INICIALIZAR_NUEVO_NODO_CATEGORIA //
                                 </p>
                             </div>
                             <div className="flex flex-col lg:flex-row gap-4">
@@ -103,14 +103,14 @@ const DashCreateCategoryPage = () => {
                                     className="flex items-center gap-2 px-6 py-3 border border-zinc-800 bg-black text-zinc-500 hover:text-[#ff0055] hover:border-[#ff0055] hover:bg-[#ff0055]/5 transition-all font-bold uppercase tracking-widest text-xs"
                                 >
                                     <CiEraser size={18} />
-                                    [RESET_FORM]
+                                    [RESETEAR_FORMULARIO]
                                 </button>
                                 <button
                                     onClick={handleSubmit}
                                     className="flex items-center gap-2 px-6 py-3 border border-[#00f0ff] bg-[#00f0ff]/10 text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black transition-all font-bold uppercase tracking-widest text-xs"
                                 >
                                     <BiSave size={18} />
-                                    [SAVE_CONFIG]
+                                    [GUARDAR_CONFIGURACION]
                                 </button>
                             </div>
                         </div>

@@ -29,13 +29,13 @@ const FormInfoPersonal: React.FC<FormInfoPersonalProps> = ({
 
             <h2 className="text-[#00f0ff] font-mono text-[12px] font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
                 <BiUser size={16} className="text-[#00f0ff]" />
-                [SYS_PERSONAL_INFO]
+                [INFO_PERSONAL_SISTEMA]
             </h2>
 
             <div className="grid grid-cols-2 gap-6">
                 <div>
                     <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
-                        [FIRST_NAME] *
+                        [NOMBRE] *
                     </label>
                     <input
                         type="text"
@@ -52,7 +52,7 @@ const FormInfoPersonal: React.FC<FormInfoPersonalProps> = ({
 
                 <div>
                     <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
-                        [LAST_NAME] *
+                        [APELLIDO] *
                     </label>
                     <input
                         type="text"
@@ -69,7 +69,7 @@ const FormInfoPersonal: React.FC<FormInfoPersonalProps> = ({
 
                 <div className="col-span-2">
                     <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
-                        [USERNAME_ID]
+                        [ID_USUARIO]
                     </label>
                     <div className="flex gap-2">
                         <input
@@ -85,7 +85,7 @@ const FormInfoPersonal: React.FC<FormInfoPersonalProps> = ({
                             onClick={generateUsername}
                             className="bg-[#e4ff00]/10 border border-[#e4ff00] text-[#e4ff00] hover:bg-[#e4ff00]/20 px-4 py-3 rounded-none font-bold uppercase tracking-widest text-[10px] transition-all whitespace-nowrap"
                         >
-                            [AUTO_GEN]
+                            [GEN_AUTO]
                         </button>
                     </div>
                     <div className="text-[#ff0055] font-mono text-[10px] uppercase tracking-widest mt-1">
@@ -95,7 +95,7 @@ const FormInfoPersonal: React.FC<FormInfoPersonalProps> = ({
 
                 <div className="col-span-2">
                     <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
-                        [COMM_CHANNEL_TLF]
+                        [TELEFONO]
                     </label>
                     <div className="relative">
                         <BiPhone

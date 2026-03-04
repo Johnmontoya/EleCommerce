@@ -69,7 +69,7 @@ const LoginPage: React.FC = () => {
               ELECOMMERCE <span className="text-[#00f0ff]">//</span>
             </Link>
             <p className="text-zinc-500 text-[10px] tracking-widest uppercase">
-              AUTHORIZATION REQUIRED. ENTER CREDENTIALS.
+              [AUTORIZACION_REQUERIDA_INGRESE_CREDENCIAES]
             </p>
           </div>
 
@@ -80,7 +80,7 @@ const LoginPage: React.FC = () => {
               <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">[USER_IDENTIFICATION]</label>
               <input
                 type="text"
-                placeholder="ENTER_EMAIL..."
+                placeholder="[INGRESE_CORREO]..."
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-700 px-4 py-3 outline-none focus:border-[#00f0ff] transition-colors text-sm font-bold tracking-widest uppercase"
@@ -92,7 +92,7 @@ const LoginPage: React.FC = () => {
               <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2">[SECURITY_KEY]</label>
               <input
                 type="password"
-                placeholder="ENTER_PASSWORD..."
+                placeholder="[INGRESE_CONTRASEÑA]..."
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-700 px-4 py-3 outline-none focus:border-[#00f0ff] transition-colors text-sm font-bold tracking-widest uppercase"
@@ -109,13 +109,13 @@ const LoginPage: React.FC = () => {
                   className="appearance-none w-4 h-4 border border-zinc-600 bg-black checked:bg-[#00f0ff] checked:border-[#00f0ff] transition-colors cursor-pointer relative"
                 />
                 <span className="text-zinc-500 group-hover:text-white transition-colors">
-                  MEMORIZE_DATA
+                  [RECORDAR_DATOS]
                 </span>
               </label>
               <Link to={"/forgot-password"}
                 className="text-[#ff0055] hover:text-white transition-colors border-b border-[#ff0055]/30 pb-0.5"
               >
-                FORGOTTEN_KEY?
+                [OLVIDASTE_TU_CONTRASEÑA?]
               </Link>
             </div>
 
@@ -124,7 +124,7 @@ const LoginPage: React.FC = () => {
               onClick={handleSubmit}
               className="w-full flex items-center justify-center gap-3 bg-[#00f0ff] hover:bg-white text-black font-black py-4 uppercase tracking-[0.2em] transition-colors border-2 border-transparent hover:border-[#00f0ff]"
             >
-              <span>INITIATE_SESSION</span>
+              <span>[INICIAR_SESION]</span>
               <CiLogin size={20} className="font-black" />
             </button>
           </form>
@@ -136,7 +136,7 @@ const LoginPage: React.FC = () => {
             </div>
             <div className="relative flex justify-center text-[10px] tracking-widest uppercase font-bold">
               <span className="px-4 bg-[#050505] text-zinc-600">
-                AUXILIARY_METHODS
+                [METODOS_AUXILIARES]
               </span>
             </div>
           </div>
@@ -162,12 +162,12 @@ const LoginPage: React.FC = () => {
           {/* Sign Up Link */}
           <div className="mt-8 pt-6 border-t border-zinc-900 text-center">
             <p className="text-zinc-500 text-[10px] tracking-widest uppercase font-bold">
-              ORPHAN_ENTITY?{" "}
+              [ENTIDAD_HUERFANA]?{" "}
               <Link
                 to={"/register"}
                 className="text-white hover:text-[#00f0ff] transition-colors ml-2"
               >
-                [ CREATE_NEW_RECORD ]
+                [ CREAR_NUEVO_REGISTRO ]
               </Link>
             </p>
           </div>

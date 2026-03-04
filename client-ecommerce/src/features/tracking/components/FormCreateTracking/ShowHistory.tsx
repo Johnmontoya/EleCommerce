@@ -38,15 +38,15 @@ const ShowHistory = ({ showHistory, trackingId, handleDeleteEvent }: ShowHistory
                 <div className="bg-[#0a0a0a] border border-zinc-800 p-6 relative mt-6">
                     <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-[#00f0ff] opacity-50"></div>
                     <div className="flex items-center justify-between mb-6 border-b border-zinc-800 pb-4">
-                        <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100">[TELEMETRY_LOGS]</h2>
-                        <span className="text-[10px] font-mono tracking-widest uppercase text-[#00f0ff] bg-[#00f0ff]/10 px-2 py-1 border border-[#00f0ff]/30">{trackingEvents?.data?.length} RECORDED_EVENTS</span>
+                        <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100">[TELEMETRÍA_DE_SEGUIMIENTO]</h2>
+                        <span className="text-[10px] font-mono tracking-widest uppercase text-[#00f0ff] bg-[#00f0ff]/10 px-2 py-1 border border-[#00f0ff]/30">{trackingEvents?.data?.length} EVENTOS_REGISTRADOS</span>
                     </div>
 
                     <div className="space-y-0">
                         {trackingEvents?.data?.length === 0 ? (
                             <div className="text-center py-8 text-zinc-600 bg-[#050505] border border-zinc-800 border-dashed">
                                 <BiPackage className="w-8 h-8 mx-auto mb-3 opacity-50" />
-                                <p className="font-mono text-xs tracking-widest uppercase">[NO_DATA_AVAILABLE]</p>
+                                <p className="font-mono text-xs tracking-widest uppercase">[NO_HAY_EVENTOS_REGISTRADOS]</p>
                             </div>
                         ) : (
                             orderedEvents.map((event: any) => (
@@ -112,7 +112,7 @@ const ShowHistory = ({ showHistory, trackingId, handleDeleteEvent }: ShowHistory
                                             {event.completed && (
                                                 <span className="flex items-center gap-1 text-[#e4ff00] ml-auto">
                                                     <BiCheckCircle className="w-3 h-3" />
-                                                    [EXECUTED]
+                                                    [EJECUTADO]
                                                 </span>
                                             )}
                                         </div>

@@ -34,7 +34,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
                         }`}
                 >
                     <BiFilter size={18} />
-                    [FILTERS]
+                    [FILTROS]
                 </button>
             </div>
 
@@ -43,16 +43,16 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
                 <div className="mt-6 pt-6 border-t border-zinc-800 border-dashed grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-2">
-                            [FILTER_STATUS]
+                            [ESTADO_FILTROS]
                         </label>
                         <select
                             value={isActive === null ? "all" : String(isActive)}
                             onChange={handleActiveUserChange}
                             className="w-full bg-black border border-zinc-800 text-white uppercase tracking-widest text-xs px-4 py-3 outline-none focus:border-[#00f0ff] appearance-none"
                         >
-                            <option value="all">[ALL_STATUSES]</option>
-                            <option value="true">[ACTIVE_ONLY]</option>
-                            <option value="false">[INACTIVE_ONLY]</option>
+                            <option value="all">[TODOS_ESTADOS]</option>
+                            <option value="true">[ESTADO_ACTIVO]</option>
+                            <option value="false">[ESTADO_INACTIVO]</option>
                         </select>
                     </div>
                 </div>

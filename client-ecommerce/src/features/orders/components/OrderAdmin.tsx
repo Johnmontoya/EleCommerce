@@ -74,12 +74,12 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                             {expandedOrder === order.id ? (
                                                 <>
                                                     <BiChevronUp size={16} />
-                                                    [COLLAPSE]
+                                                    [OCULTAR]
                                                 </>
                                             ) : (
                                                 <>
                                                     <BiChevronDown size={16} />
-                                                    [DETAILS]
+                                                    [DETALLES]
                                                 </>
                                             )}
                                         </button>
@@ -88,7 +88,7 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                             className="text-zinc-500 hover:text-[#e4ff00] px-4 py-2 border border-transparent hover:border-[#e4ff00] hover:bg-[#e4ff00]/10 text-xs font-bold transition-all uppercase tracking-widest flex items-center justify-center gap-2 flex-1 md:flex-none"
                                         >
                                             <MdLocalShipping size={16} />
-                                            [TRACK]
+                                            [SEGUIMIENTO]
                                         </button>
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                             <div>
                                                 <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
                                                     <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
-                                                        [ACQUIRED_ASSETS]
+                                                        [ARTICULOS_ADQUIRIDOS]
                                                     </h4>
                                                     <span className="text-zinc-600 text-[10px] tracking-widest uppercase font-bold">QTY: {order?.items?.length}</span>
                                                 </div>
@@ -143,7 +143,7 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                                     <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
                                                         <h4 className="flex items-center gap-2 text-xs font-bold text-zinc-500 uppercase tracking-widest">
                                                             <BiMap className="text-[#00f0ff]" size={16} />
-                                                            [DELIVERY_COORDINATES]
+                                                            [COORDENADAS_DE_ENTREGA]
                                                         </h4>
                                                     </div>
                                                     <div className="bg-[#050505] border border-zinc-900 p-4 text-xs font-bold text-zinc-400 uppercase tracking-wider leading-relaxed">
@@ -158,7 +158,7 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                                         {order?.trackingNumber && (
                                                             <div className="mt-4 pt-4 border-t border-zinc-900 flex items-center justify-between">
                                                                 <p className="text-zinc-600 text-[10px]">
-                                                                    TRACKING_ID:
+                                                                    [ID_DE_SEGUIMIENTO]:
                                                                 </p>
                                                                 <p className="text-[#00f0ff] font-black tracking-widest">
                                                                     {order.trackingNumber}
@@ -174,7 +174,7 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                                     <div>
                                                         <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
                                                             <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
-                                                                [PAYMENT_TYPE]
+                                                                [TIPO_DE_PAGO]
                                                             </h4>
                                                         </div>
                                                         <div className="bg-[#050505] border border-zinc-900 p-4 flex items-center justify-center h-full min-h-[60px]">
@@ -186,7 +186,7 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                                     <div>
                                                         <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
                                                             <h4 className="text-xs font-bold text-[#ff0055] uppercase tracking-widest">
-                                                                [OVERRIDE_STATUS]
+                                                                [SOBRESCRIBIR_ESTADO]
                                                             </h4>
                                                         </div>
                                                         <div className="bg-[#050505] border border-[#ff0055]/30 p-2 relative h-full min-h-[60px] flex items-center">
@@ -195,13 +195,13 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                                                 onChange={(e) => handleUpdateOrderStatus(order.id, e.target.value)}
                                                                 className="w-full bg-black border border-zinc-800 text-[#ff0055] text-xs font-bold uppercase tracking-widest px-3 py-2 outline-none focus:border-[#ff0055] cursor-pointer appearance-none"
                                                             >
-                                                                <option value="PENDING">[ PENDING ]</option>
-                                                                <option value="CONFIRMED">[ CONFIRMED ]</option>
-                                                                <option value="PROCESSING">[ PROCESSING ]</option>
-                                                                <option value="SHIPPED">[ SHIPPED ]</option>
-                                                                <option value="DELIVERED">[ DELIVERED ]</option>
-                                                                <option value="CANCELLED">[ CANCELLED ]</option>
-                                                                <option value="REFUNDED">[ REFUNDED ]</option>
+                                                                <option value="PENDING">[ PENDIENTE ]</option>
+                                                                <option value="CONFIRMED">[ CONFIRMADO ]</option>
+                                                                <option value="PROCESSING">[ PROCESANDO ]</option>
+                                                                <option value="SHIPPED">[ ENVIADO ]</option>
+                                                                <option value="DELIVERED">[ ENTREGADO ]</option>
+                                                                <option value="CANCELLED">[ CANCELADO ]</option>
+                                                                <option value="REFUNDED">[ REEMBOLSADO ]</option>
                                                             </select>
                                                             <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#ff0055]">
                                                                 <BiChevronDown size={16} />
@@ -219,10 +219,10 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                     <div className="bg-[#050505] border border-zinc-800 p-12 text-center font-mono">
                         <BiPackage size={48} className="mx-auto text-zinc-800 mb-4" />
                         <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-1">
-                            [SYSTEM_ALERT]
+                            [ALERTA_DEL_SISTEMA]
                         </p>
                         <p className="text-zinc-600 text-xs tracking-wider">
-                            NO RECORDS FOUND MATCHING QUERY PARAMETERS.
+                            NO SE ENCONTRARON REGISTROS QUE COINCIDAN CON LOS PARÁMETROS DE LA CONSULTA.
                         </p>
                     </div>
                 )}
