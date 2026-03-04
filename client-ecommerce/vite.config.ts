@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss(),],
   server: {
     allowedHosts: [
-      //"https://elecommerce.onrender.com",
+      "https://elecommerce.onrender.com",
       "unstuffed-jodi-invigoratedly.ngrok-free.dev"
     ]
   }
