@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss(),],
   server: {
     allowedHosts: [
-      "https://ele-commerce-backend.vercel.app",
+      "elecommerce-production.up.railway.app",
       "unstuffed-jodi-invigoratedly.ngrok-free.dev"
     ]
   }
