@@ -1,10 +1,14 @@
-// components/CheckoutForm/CheckoutForm.tsx
 import { useState } from 'react';
 import {
     CardNumberElement,
     CardExpiryElement,
     CardCvcElement,
 } from '@stripe/react-stripe-js';
+import type {
+    StripeCardNumberElementChangeEvent,
+    StripeCardExpiryElementChangeEvent,
+    StripeCardCvcElementChangeEvent
+} from "@stripe/stripe-js";
 import { useStripePayment } from '../../hook/useStripePayment';
 
 interface CheckoutFormProps {
@@ -96,7 +100,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                             showIcon: true,
                             placeholder: '1234 5678 9012 3456',
                         }}
-                        onChange={(e) => setCardNumberComplete(e.complete)}
+                        onChange={(e: StripeCardNumberElementChangeEvent) => setCardNumberComplete(e.complete)}
                     />
                 </div>
             </div>
@@ -113,7 +117,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                                 ...STRIPE_ELEMENT_STYLE,
                                 placeholder: 'MM / AA',
                             }}
-                            onChange={(e) => setCardExpiryComplete(e.complete)}
+                            onChange={(e: StripeCardExpiryElementChangeEvent) => setCardExpiryComplete(e.complete)}
                         />
                     </div>
                 </div>
@@ -128,7 +132,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                                 ...STRIPE_ELEMENT_STYLE,
                                 placeholder: '123',
                             }}
-                            onChange={(e) => setCardCvcComplete(e.complete)}
+                            onChange={(e: StripeCardCvcElementChangeEvent) => setCardCvcComplete(e.complete)}
                         />
                     </div>
                 </div>

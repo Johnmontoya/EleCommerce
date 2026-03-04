@@ -3,6 +3,11 @@ import {
     CardExpiryElement,
     CardCvcElement,
 } from "@stripe/react-stripe-js";
+import type {
+    StripeCardNumberElementChangeEvent,
+    StripeCardExpiryElementChangeEvent,
+    StripeCardCvcElementChangeEvent
+} from "@stripe/stripe-js";
 import { useStripePayment } from "../../hook/useStripePayment";
 import type { SavedAddress } from "../../types/checkout.types";
 
@@ -128,7 +133,7 @@ export function PaymentStep({
                     <div className="absolute top-0 left-0 w-1 h-1 bg-[#00f0ff] opacity-0 focus-within:opacity-100" />
                     <CardNumberElement
                         options={{ ...STRIPE_ELEMENT_STYLE, showIcon: true }}
-                        onChange={(e) => setFieldComplete("number", e.complete)}
+                        onChange={(e: StripeCardNumberElementChangeEvent) => setFieldComplete("number", e.complete)}
                     />
                 </div>
             </div>
@@ -142,7 +147,7 @@ export function PaymentStep({
                     <div className="bg-[#020202] border border-zinc-700 p-4 focus-within:border-[#00f0ff] transition-all">
                         <CardExpiryElement
                             options={STRIPE_ELEMENT_STYLE}
-                            onChange={(e) => setFieldComplete("expiry", e.complete)}
+                            onChange={(e: StripeCardExpiryElementChangeEvent) => setFieldComplete("expiry", e.complete)}
                         />
                     </div>
                 </div>
@@ -151,7 +156,7 @@ export function PaymentStep({
                     <div className="bg-[#020202] border border-zinc-700 p-4 focus-within:border-[#00f0ff] transition-all">
                         <CardCvcElement
                             options={STRIPE_ELEMENT_STYLE}
-                            onChange={(e) => setFieldComplete("cvc", e.complete)}
+                            onChange={(e: StripeCardCvcElementChangeEvent) => setFieldComplete("cvc", e.complete)}
                         />
                     </div>
                 </div>
