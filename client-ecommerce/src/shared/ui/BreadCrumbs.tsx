@@ -1,4 +1,3 @@
-import { HiOutlineSlash } from "react-icons/hi2";
 import { Link, useLocation } from "react-router-dom";
 
 const BreadCrumbs = () => {

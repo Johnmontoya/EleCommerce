@@ -1,4 +1,3 @@
-// src/features/checkout/components/PaymentStep.tsx
 import {
     CardNumberElement,
     CardExpiryElement,
