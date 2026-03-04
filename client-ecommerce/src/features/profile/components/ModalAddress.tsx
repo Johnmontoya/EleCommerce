@@ -65,22 +65,22 @@ const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, data }) =>
         <MiModal
             isOpen={isOpen}
             onClose={onClose}
-            title={`> [EDIT_COORDINATES]`}
+            title={`> [EDITAR_COORDINADAS]`}
         >
             <form className="w-full text-left font-mono">
                 <div className="mb-8">
                     <h2 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2 mb-6">
-                        <span className="text-[#00f0ff]">{'>'}</span> [LOCATION_DATA]
+                        <span className="text-[#00f0ff]">{'>'}</span> [DATOS_DE_UBICACIÓN]
                     </h2>
 
                     <div className="flex flex-col sm:flex-row gap-4 mb-4">
                         <div className="w-full">
                             <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-1">
-                                [STREET_ADDRESS]
+                                [DIRECCIÓN_DE_CALLE]
                             </label>
                             <div className="flex items-center w-full bg-black border border-zinc-800 h-12 overflow-hidden px-4 gap-3 focus-within:border-[#00f0ff] transition-colors">
                                 <BiMap size={18} className="text-zinc-600" />
-                                <input type="text" name="street" placeholder="[ENTER_ADDRESS]"
+                                <input type="text" name="street" placeholder="[INTRODUCIR_DIRECCIÓN]"
                                     className="w-full bg-transparent text-white placeholder-zinc-700 border-none outline-none text-xs tracking-widest uppercase font-bold"
                                     value={editAddress.street} onChange={onChangeEditAddress} required />
                             </div>
@@ -88,11 +88,11 @@ const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, data }) =>
 
                         <div className="w-full">
                             <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-1">
-                                [CITY_SECTOR]
+                                [SECTOR_DE_LA_CIUDAD]
                             </label>
                             <div className="flex items-center w-full bg-black border border-zinc-800 h-12 overflow-hidden px-4 gap-3 focus-within:border-[#00f0ff] transition-colors">
                                 <MdLocationCity size={18} className="text-zinc-600" />
-                                <input type="text" name="city" placeholder="[ENTER_CITY]"
+                                <input type="text" name="city" placeholder="[INTRODUCIR_CIUDAD]"
                                     className="w-full bg-transparent text-white placeholder-zinc-700 border-none outline-none text-xs tracking-widest uppercase font-bold"
                                     value={editAddress.city} onChange={onChangeEditAddress} required />
                             </div>
@@ -102,11 +102,11 @@ const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, data }) =>
                     <div className="flex flex-col sm:flex-row gap-4 mb-4">
                         <div className="w-full">
                             <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-1">
-                                [STATE_REGION]
+                                [ESTADO_O_REGIÓN]
                             </label>
                             <div className="flex items-center w-full bg-black border border-zinc-800 h-12 overflow-hidden px-4 gap-3 focus-within:border-[#00f0ff] transition-colors">
                                 <PiCityFill size={18} className="text-zinc-600" />
-                                <input type="text" name="state" placeholder="[ENTER_STATE]"
+                                <input type="text" name="state" placeholder="[INTRODUCIR_ESTADO]"
                                     className="w-full bg-transparent text-white placeholder-zinc-700 border-none outline-none text-xs tracking-widest uppercase font-bold"
                                     value={editAddress.state} onChange={onChangeEditAddress} required />
                             </div>
@@ -114,11 +114,11 @@ const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, data }) =>
 
                         <div className="w-full">
                             <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-1">
-                                [TERRITORY]
+                                [TERRITORIO]
                             </label>
                             <div className="flex items-center w-full bg-black border border-zinc-800 h-12 overflow-hidden px-4 gap-3 focus-within:border-[#00f0ff] transition-colors">
                                 <FaCity size={18} className="text-zinc-600" />
-                                <input type="text" name="country" placeholder="[ENTER_COUNTRY]"
+                                <input type="text" name="country" placeholder="[INTRODUCIR_TERRITORIO]"
                                     className="w-full bg-transparent text-white placeholder-zinc-700 border-none outline-none text-xs tracking-widest uppercase font-bold"
                                     value={editAddress.country} onChange={onChangeEditAddress} required />
                             </div>
@@ -127,11 +127,11 @@ const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, data }) =>
 
                     <div className="w-full">
                         <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-1">
-                            [POSTAL_CODE]
+                            [CÓDIGO_POSTAL]
                         </label>
                         <div className="flex items-center w-full bg-black border border-zinc-800 h-12 overflow-hidden px-4 gap-3 focus-within:border-[#00f0ff] transition-colors">
                             <FaMapLocationDot size={18} className="text-zinc-600" />
-                            <input type="text" name="zipCode" placeholder="[ENTER_ZIPCODE]"
+                            <input type="text" name="zipCode" placeholder="[INTRODUCIR_CÓDIGO_POSTAL]"
                                 className="w-full bg-transparent text-white placeholder-zinc-700 border-none outline-none text-xs tracking-widest uppercase font-bold"
                                 value={editAddress.zipCode} onChange={onChangeEditAddress} required />
                         </div>
@@ -144,7 +144,7 @@ const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, data }) =>
                         onClick={onClose}
                         className="flex-1 bg-black border border-zinc-800 hover:border-zinc-500 text-zinc-400 hover:text-white h-12 font-black uppercase tracking-widest text-xs transition-colors"
                     >
-                        [CANCEL]
+                        [CANCELAR]
                     </button>
                     <button
                         onClick={handleSubmit}
@@ -157,7 +157,7 @@ const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, data }) =>
                         ) : (
                             <>
                                 <BiSave size={16} />
-                                [SAVE_DATA]
+                                [GUARDAR_DATOS]
                             </>
                         )}
                     </button>

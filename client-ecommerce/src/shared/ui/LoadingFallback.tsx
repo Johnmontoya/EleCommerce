@@ -28,11 +28,11 @@ const LoadingFallback = () => {
         <div className="flex flex-col items-center gap-2">
           <h2 className="text-[#00f0ff] font-mono text-xs uppercase tracking-widest flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-[#00f0ff] animate-ping"></span>
-            [SYSTEM_INITIALIZING...]
+            [INICIANDO_SISTEMA...]
           </h2>
           <div className="flex items-center gap-1">
             <div className="h-[1px] w-6 bg-[#00f0ff]/30"></div>
-            <span className="text-zinc-500 font-mono text-[10px] uppercase tracking-wider animate-pulse">ESTABLISHING_SECURE_LINK</span>
+            <span className="text-zinc-500 font-mono text-[10px] uppercase tracking-wider animate-pulse">ESTABLECIENDO_ENLACE_SEGURO</span>
             <div className="h-[1px] w-6 bg-[#00f0ff]/30"></div>
           </div>
         </div>

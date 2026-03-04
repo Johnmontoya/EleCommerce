@@ -153,7 +153,7 @@ const ImageForm: React.FC<ImageFormProps> = ({
       <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
       <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
-        [PRODUCT_IMAGERY]
+        [PRODUCTOS_IMAGENES]
       </h2>
 
       <div className="space-y-6">
@@ -192,7 +192,7 @@ const ImageForm: React.FC<ImageFormProps> = ({
                 {isDragging ? '[DROP_FILES_HERE!]' : '[DRAG_&_DROP_FILES]'}
               </p>
               <p className="text-zinc-500 text-[10px] uppercase tracking-widest">
-                [OR_CLICK_TO_BROWSE_DIRECTORY]
+                [O_CLICK]
               </p>
             </div>
             <p className="text-[#ff0055] text-[10px] mt-2 uppercase tracking-widest font-bold">
@@ -212,12 +212,12 @@ const ImageForm: React.FC<ImageFormProps> = ({
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">
-                [{imageFiles.length}_FILES_QUEUED]
+                [{imageFiles.length}_ARCHIVOS_ENCOLADOS]
               </p>
               {coverImageId && (
                 <p className="text-[#00f0ff] text-[10px] uppercase tracking-widest font-bold flex items-center gap-1">
                   <span className="w-1.5 h-1.5 bg-[#00f0ff] animate-pulse"></span>
-                  [PRIMARY_IMAGE_SET]
+                  [IMAGEN_PRINCIPAL]
                 </p>
               )}
             </div>
@@ -256,18 +256,18 @@ const ImageForm: React.FC<ImageFormProps> = ({
                         type="button"
                         onClick={() => setCoverImage(imageFile.id)}
                         className="bg-transparent border border-[#00f0ff] text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black px-3 py-1 text-[10px] font-bold uppercase tracking-widest transition-all"
-                        title="[SET_AS_COVER]"
+                        title="[HACER_IMAGEN_PRINCIPAL]"
                       >
-                        [MAKE_PRIMARY]
+                        [HACER_IMAGEN_PRINCIPAL]
                       </button>
                     )}
                     <button
                       type="button"
                       onClick={() => removeImage(imageFile.id)}
                       className="bg-transparent border border-[#ff0055] text-[#ff0055] hover:bg-[#ff0055] hover:text-white px-3 py-1 text-[10px] font-bold uppercase tracking-widest transition-all"
-                      title="[EXEC_DELETE]"
+                      title="[ELIMINAR_ARCHIVO]"
                     >
-                      [REMOVE_FILE]
+                      [ELIMINAR_ARCHIVO]
                     </button>
                   </div>
 
@@ -286,12 +286,12 @@ const ImageForm: React.FC<ImageFormProps> = ({
         {/* Info adicional */}
         <div className="bg-[#e4ff00]/5 border border-[#e4ff00]/20 p-4 font-mono">
           <p className="text-[#e4ff00] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-            [SYS_ADVISORY]:
+            [ADVERTENCIA]:
           </p>
           <ul className="text-zinc-400 text-[10px] uppercase font-bold tracking-widest space-y-1">
-            <li>&gt; FIRST_IMAGE_DEFAULTS_TO_COVER</li>
+            <li>&gt; PRIMERA_IMAGEN_POR_DEFECTO</li>
             <li>&gt; CLICK_MAKE_PRIMARY_TO_OVERRIDE</li>
-            <li>&gt; SUPPORTED:_PNG_JPG_WEBP</li>
+            <li>&gt; SOPORTADO:_PNG_JPG_WEBP</li>
             <li>&gt; MAX_FILE_SIZE_5MB</li>
           </ul>
         </div>

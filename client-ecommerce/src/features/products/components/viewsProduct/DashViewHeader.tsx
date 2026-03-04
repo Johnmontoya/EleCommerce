@@ -32,21 +32,21 @@ const DashViewHeader: React.FC<DashViewHeaderProps> = ({ data, handleTogglePubli
                         }`}
                 >
                     {data.isPublished ? <FiEyeOff size={16} /> : <BsEye size={16} />}
-                    {data.isPublished ? "[UNPUBLISH]" : "[PUBLISH]"}
+                    {data.isPublished ? "[DESHABILITAR]" : "[HABILITAR]"}
                 </button>
                 <button
                     onClick={() => navigate(`/dashboard/products/${data.id}/edit`)}
                     className="bg-transparent border border-[#00f0ff] text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black transition-all flex items-center justify-center gap-2 px-4 py-2 text-[10px] font-bold uppercase tracking-widest"
                 >
                     <BiEdit size={16} />
-                    [EDIT]
+                    [EDITAR]
                 </button>
                 <button
                     onClick={handleDelete}
                     className="bg-transparent border border-[#ff0055] text-[#ff0055] hover:bg-[#ff0055] hover:text-white transition-all flex items-center justify-center gap-2 px-4 py-2 text-[10px] font-bold uppercase tracking-widest"
                 >
                     <BsTrash2 size={16} />
-                    [DELETE]
+                    [ELIMINAR]
                 </button>
             </div>
         </div>

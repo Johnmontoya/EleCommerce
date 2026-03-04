@@ -102,14 +102,14 @@ const DashOrderPage = () => {
                         <div className="mb-6">
                             <DashHeader
                                 data={orders}
-                                title="[ORDER_HISTORY]"
+                                title="[HISTORIAL_DE_PEDIDOS]"
                                 titleData="TRANSACTIONS"
                                 path="orders"
                                 titleIcon={<BiPackage className="text-[#00f0ff]" size={36} />}
                                 list={false}
                             />
                             <p className="text-zinc-500 text-xs font-bold tracking-widest uppercase mt-2">
-                                SYSTEM LOG: {filteredOrders?.length} [RECORDS_FOUND]
+                                SYSTEM LOG: {filteredOrders?.length} [REGISTROS_ENCONTRADOS]
                             </p>
                         </div>
 

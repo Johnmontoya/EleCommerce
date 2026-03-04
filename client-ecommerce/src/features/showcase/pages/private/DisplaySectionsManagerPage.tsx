@@ -79,7 +79,7 @@ const DisplaySectionsManagerPage: React.FC = () => {
                                 className="bg-[#e4ff00] text-black px-6 py-3 font-bold tracking-widest text-xs uppercase hover:bg-white transition-colors flex items-center gap-2"
                             >
                                 <BiPlus size={18} />
-                                [ADD_CONFIG]
+                                [AGREGAR_CONFIGURACION]
                             </button>
                         </div>
 

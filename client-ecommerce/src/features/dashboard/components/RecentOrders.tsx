@@ -29,7 +29,7 @@ const RecentOrders: React.FC<Props> = ({ data }) => {
       <ModalOrderDetails
         isOpen={openModal}
         onClose={() => setOpenModal(false)}
-        title="[ORDER_DETAILS]"
+        title="[DETALLES_DEL_PEDIDO]"
         data={order}
       />
       <div className="bg-[#050505] border border-zinc-800 p-6 relative mb-8 font-mono">
@@ -39,17 +39,17 @@ const RecentOrders: React.FC<Props> = ({ data }) => {
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800">
           <div>
             <h2 className="text-xl font-black text-white uppercase tracking-widest">
-              [RECENT_TRANSACTIONS]
+              [TRANSACCIONES_RECENTES]
             </h2>
             <p className="text-zinc-500 text-[10px] tracking-widest uppercase mt-1">
-              SYSTEM LOG: LATEST ORDERS PROCESSED.
+              LOG_DEL_SISTEMA: ÚLTIMOS PEDIDOS PROCESADOS.
             </p>
           </div>
           <button
             onClick={() => navigate("/dashboard/orders")}
             className="text-[#00f0ff] hover:text-white hover:bg-[#00f0ff]/10 border border-transparent hover:border-[#00f0ff] px-4 py-2 text-xs font-bold transition-all uppercase tracking-widest"
           >
-            [VIEW_ALL]
+            [VER_TODO]
           </button>
         </div>
 
@@ -59,19 +59,19 @@ const RecentOrders: React.FC<Props> = ({ data }) => {
             <thead>
               <tr className="border-b-2 border-zinc-800">
                 <th className="text-zinc-500 font-bold text-[10px] uppercase tracking-widest py-3 px-4">
-                  [ORDER_ID]
+                  [ID_DEL_PEDIDO]
                 </th>
                 <th className="text-zinc-500 font-bold text-[10px] uppercase tracking-widest py-3 px-4">
-                  [TIMESTAMP]
+                  [FECHA]
                 </th>
                 <th className="text-zinc-500 font-bold text-[10px] uppercase tracking-widest py-3 px-4">
-                  [STATUS]
+                  [ESTADO]
                 </th>
                 <th className="text-zinc-500 font-bold text-[10px] uppercase tracking-widest py-3 px-4">
-                  [TOTAL_VALUE]
+                  [VALOR_TOTAL]
                 </th>
                 <th className="text-zinc-500 font-bold text-[10px] uppercase tracking-widest py-3 px-4 text-right">
-                  [ACTION]
+                  [ACCIÓN]
                 </th>
               </tr>
             </thead>
@@ -99,7 +99,7 @@ const RecentOrders: React.FC<Props> = ({ data }) => {
                       onClick={() => handleOpenModal(order.id)}
                       className="text-zinc-500 group-hover:text-[#00f0ff] text-xs font-bold tracking-widest uppercase transition-colors"
                     >
-                      [DETAILS]
+                      [DETALLES]
                     </button>
                   </td>
                 </tr>
@@ -107,7 +107,7 @@ const RecentOrders: React.FC<Props> = ({ data }) => {
               {(!data || data.length === 0) && (
                 <tr>
                   <td colSpan={5} className="py-8 text-center text-zinc-600 text-[10px] uppercase tracking-widest font-bold">
-                    NO_TRANSACTIONS_FOUND
+                    NO SE ENCONTRARON TRANSACCIONES
                   </td>
                 </tr>
               )}

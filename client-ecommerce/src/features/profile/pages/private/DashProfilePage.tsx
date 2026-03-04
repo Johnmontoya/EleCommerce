@@ -24,8 +24,8 @@ interface Stats {
 const DashProfilePage = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<
-        "overview" | "orders" | "security" | "preferences"
-    >("overview");
+        "inicio" | "pedidos" | "seguridad" | "preferencias"
+    >("inicio");
 
     const { data: profile } = useProfile();
     const { data: orders } = useOrderUser();
@@ -129,14 +129,14 @@ const DashProfilePage = () => {
                                 </div>
 
                                 <button className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[#050505] border border-zinc-700 hover:border-[#00f0ff] text-zinc-400 hover:text-[#00f0ff] px-4 py-1 text-xs font-bold uppercase tracking-widest transition-all z-10 flex items-center justify-center gap-2">
-                                    <BiCamera size={14} /> [UPDATE]
+                                    <BiCamera size={14} /> [ACTUALIZAR]
                                 </button>
                             </div>
 
                             {/* Registry Info */}
                             <div className="flex-1 text-center md:text-left pt-2 md:pt-0">
                                 <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">
-                                    [USER_IDENTIFICATION]
+                                    [IDENTIFICACIÓN_DEL_USUARIO]
                                 </p>
                                 <h1 className="text-3xl md:text-4xl font-black uppercase tracking-wider text-white mb-2 leading-none">
                                     {profile?.firstName || ""} {profile?.lastName || ""}
@@ -150,11 +150,11 @@ const DashProfilePage = () => {
                                     {profile?.emailVerified && (
                                         <span className="bg-[#050505] text-[#e4ff00] border border-[#e4ff00]/30 px-3 py-1 text-xs font-bold uppercase tracking-widest flex items-center gap-2">
                                             <MdVerifiedUser size={14} />
-                                            [VERIFIED_STATUS]
+                                            [ESTADO_VERIFICADO]
                                         </span>
                                     )}
                                     <span className="bg-[#050505] text-zinc-400 border border-zinc-800 px-3 py-1 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
-                                        SYS_ID: {profile?.id?.slice(0, 8) || 'UNKNOWN'}
+                                        ID_SISTEMA: {profile?.id?.slice(0, 8) || 'UNKNOWN'}
                                     </span>
                                 </div>
                             </div>
@@ -169,44 +169,44 @@ const DashProfilePage = () => {
                     {/* Terminal Navigation Tabs */}
                     <div className="flex flex-wrap border-b border-zinc-800 mb-8 overflow-x-auto no-scrollbar">
                         <button
-                            onClick={() => setActiveTab("overview")}
-                            className={`flex items-center gap-2 px-6 py-3 font-bold text-xs uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === "overview"
+                            onClick={() => setActiveTab("inicio")}
+                            className={`flex items-center gap-2 px-6 py-3 font-bold text-xs uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === "inicio"
                                 ? "text-[#00f0ff] border-b-2 border-[#00f0ff] bg-[#00f0ff]/5"
                                 : "text-zinc-500 border-b-2 border-transparent hover:text-zinc-300 hover:bg-zinc-900/50"
                                 }`}
                         >
                             <BiUser size={16} />
-                            [SYS_OVERVIEW]
+                            [INICIO]
                         </button>
                         <button
-                            onClick={() => setActiveTab("orders")}
-                            className={`flex items-center gap-2 px-6 py-3 font-bold text-xs uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === "orders"
+                            onClick={() => setActiveTab("pedidos")}
+                            className={`flex items-center gap-2 px-6 py-3 font-bold text-xs uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === "pedidos"
                                 ? "text-[#00f0ff] border-b-2 border-[#00f0ff] bg-[#00f0ff]/5"
                                 : "text-zinc-500 border-b-2 border-transparent hover:text-zinc-300 hover:bg-zinc-900/50"
                                 }`}
                         >
                             <BiPackage size={16} />
-                            [TRANSACTIONS]
+                            [TRANSACCIONES]
                         </button>
                         <button
-                            onClick={() => setActiveTab("security")}
-                            className={`flex items-center gap-2 px-6 py-3 font-bold text-xs uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === "security"
+                            onClick={() => setActiveTab("seguridad")}
+                            className={`flex items-center gap-2 px-6 py-3 font-bold text-xs uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === "seguridad"
                                 ? "text-[#FF0055] border-b-2 border-[#FF0055] bg-[#FF0055]/5"
                                 : "text-zinc-500 border-b-2 border-transparent hover:text-zinc-300 hover:bg-zinc-900/50"
                                 }`}
                         >
                             <MdSecurity size={16} />
-                            [SECURITY]
+                            [SEGURIDAD]
                         </button>
                         <button
-                            onClick={() => setActiveTab("preferences")}
-                            className={`flex items-center gap-2 px-6 py-3 font-bold text-xs uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === "preferences"
+                            onClick={() => setActiveTab("preferencias")}
+                            className={`flex items-center gap-2 px-6 py-3 font-bold text-xs uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === "preferencias"
                                 ? "text-[#e4ff00] border-b-2 border-[#e4ff00] bg-[#e4ff00]/5"
                                 : "text-zinc-500 border-b-2 border-transparent hover:text-zinc-300 hover:bg-zinc-900/50"
                                 }`}
                         >
                             <MdNotifications size={16} />
-                            [PREFERENCES]
+                            [PREFERENCIAS]
                         </button>
                     </div>
                     <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-6">

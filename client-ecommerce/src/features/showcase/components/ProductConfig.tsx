@@ -43,18 +43,18 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
     return (
         <div className="border border-zinc-800 bg-[#050505] font-mono p-6">
             <h2 className="text-sm font-black text-white uppercase tracking-widest mb-6 flex items-center gap-2">
-                <span className="text-[#00f0ff]">{'>'}</span> [CONFIGURED_PRODUCTS]
+                <span className="text-[#00f0ff]">{'>'}</span> [CONFIGURACION_DE_PRODUCTOS]
             </h2>
 
             {!configurations || configurations.length === 0 ? (
                 <div className="text-center py-16 border border-zinc-800 bg-black">
                     <MdOutlineFeaturedPlayList size={48} className="text-zinc-700 mx-auto mb-4" />
-                    <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">NO_PRODUCTS_CONFIGURED</p>
+                    <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">NO_CONFIGURADO</p>
                     <button
                         onClick={() => onEdit({} as Banner)}
                         className="border border-[#00f0ff] text-[#00f0ff] px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-[#00f0ff] hover:text-black transition-colors"
                     >
-                        [INITIALIZE_FIRST_ITEM]
+                        [INICIALIZAR_PRIMER_ITEM]
                     </button>
                 </div>
             ) : (
@@ -88,12 +88,12 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                                                 </h3>
                                                 <div className="flex items-center gap-4">
                                                     <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest flex items-center gap-2">
-                                                        <span className="text-zinc-700">|</span> <span className="text-[#00f0ff]">PRIORITY:</span> {config.displayPriority}
+                                                        <span className="text-zinc-700">|</span> <span className="text-[#00f0ff]">PRIORIDAD:</span> {config.displayPriority}
                                                     </span>
                                                     {config.isFeatured && (
                                                         <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-[#e4ff00] border border-[#e4ff00]/30 px-2 py-0.5 bg-[#e4ff00]/5">
                                                             <AiFillStar size={10} />
-                                                            FEATURED
+                                                            DESTACADO
                                                         </span>
                                                     )}
                                                 </div>
@@ -137,7 +137,7 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-[10px] font-bold tracking-widest uppercase mt-4 pt-4 border-t border-zinc-800 border-dashed">
                                                 {config.promotionalData.discount && (
                                                     <div className="flex flex-col gap-1">
-                                                        <p className="text-zinc-500">[DISCOUNT]</p>
+                                                        <p className="text-zinc-500">[DESCUENTO]</p>
                                                         <p className="text-[#e4ff00]">
                                                             {config.promotionalData.discount}% OFF
                                                         </p>
@@ -145,7 +145,7 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                                                 )}
                                                 {config.promotionalData.badgeText && (
                                                     <div className="flex flex-col gap-1">
-                                                        <p className="text-zinc-500">[BADGE]</p>
+                                                        <p className="text-zinc-500">[ETIQUETA]</p>
                                                         <p className="text-white">
                                                             {config.promotionalData.badgeText}
                                                         </p>
@@ -153,7 +153,7 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                                                 )}
                                                 {config.promotionalData.startDate && (
                                                     <div className="flex flex-col gap-1">
-                                                        <p className="text-zinc-500">[T-START]</p>
+                                                        <p className="text-zinc-500">[FECHA_INICIO]</p>
                                                         <p className="text-white">
                                                             {new Date(config.promotionalData.startDate).toISOString().slice(0, 10).replace(/-/g, '.')}
                                                         </p>
@@ -161,7 +161,7 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                                                 )}
                                                 {config.promotionalData.endDate && (
                                                     <div className="flex flex-col gap-1">
-                                                        <p className="text-zinc-500">[T-END]</p>
+                                                        <p className="text-zinc-500">[FECHA_FIN]</p>
                                                         <p className="text-white">
                                                             {new Date(config.promotionalData.endDate).toISOString().slice(0, 10).replace(/-/g, '.')}
                                                         </p>

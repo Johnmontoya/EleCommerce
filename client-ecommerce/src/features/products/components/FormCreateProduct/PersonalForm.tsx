@@ -26,7 +26,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
       <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
       <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
-        [BASIC_INFORMATION]
+        [INFORMACION_BASICA]
       </h2>
 
       <div className="space-y-4">
@@ -34,7 +34,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
         <div className="w-full flex flex-row items-start gap-2">
           <div className="w-full">
             <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-              [PRODUCT_NAME] *
+              [NOMBRE_PRODUCTO] *
             </label>
             <input
               type="text"
@@ -57,12 +57,12 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
             {isSubmitting ? (
               <>
                 <AiOutlineLoading3Quarters className="w-4 h-4 animate-spin" />
-                <span className="md:block hidden">[ANALYZING...]</span>
+                <span className="md:block hidden">[ANALIZANDO...]</span>
               </>
             ) : (
               <>
                 <BiSearch className="w-4 h-4" />
-                <span className="md:block hidden">[AI_ANALYZE]</span>
+                <span className="md:block hidden">[ANALIZAR_CON_AI]</span>
               </>
             )}
           </button>
@@ -88,7 +88,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
         {/* Descripción */}
         <div>
           <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-            [DESCRIPTION] *
+            [DESCRIPCION] *
           </label>
           <textarea
             {...register('description')}
@@ -106,7 +106,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-              [BRAND]
+              [MARCA]
             </label>
             <input
               type="text"
@@ -122,7 +122,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
 
           <div>
             <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-              [CATEGORY] *
+              [CATEGORIA] *
             </label>
             <div className="relative">
               <select
@@ -131,7 +131,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
                   } text-white placeholder-zinc-700 px-4 py-3 pr-10 rounded-none outline-none text-[10px] uppercase font-bold tracking-[0.2em] transition-all appearance-none cursor-pointer`}
               >
                 <option value="" disabled>
-                  [SELECT_CATEGORY]
+                  [SELECCIONAR_CATEGORIA]
                 </option>
                 {categories?.map((option) => (
                   <option key={option.id} value={option.id} className="bg-black text-[#00f0ff]">

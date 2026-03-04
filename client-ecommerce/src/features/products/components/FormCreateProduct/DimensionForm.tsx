@@ -12,13 +12,13 @@ const DimensionForm: React.FC<DimensionFormProps> = ({ register, errors }) => {
       <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
       <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
-        [DIMENSIONS_AND_WEIGHT]
+        [DIMENSIONES_Y_PESO]
       </h2>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div>
           <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-            [WEIGHT_KG]
+            [PESO_KG]
           </label>
           <input
             type="number"
@@ -36,7 +36,7 @@ const DimensionForm: React.FC<DimensionFormProps> = ({ register, errors }) => {
 
         <div>
           <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-            [WIDTH_CM]
+            [ANCHO_CM]
           </label>
           <input
             type="number"
@@ -54,7 +54,7 @@ const DimensionForm: React.FC<DimensionFormProps> = ({ register, errors }) => {
 
         <div>
           <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-            [HEIGHT_CM]
+            [ALTO_CM]
           </label>
           <input
             type="number"
@@ -72,7 +72,7 @@ const DimensionForm: React.FC<DimensionFormProps> = ({ register, errors }) => {
 
         <div>
           <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-            [DEPTH_CM]
+            [PROFUNDIDAD_CM]
           </label>
           <input
             type="number"

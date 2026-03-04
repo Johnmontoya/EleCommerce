@@ -114,7 +114,7 @@ const DashPaymentPage: React.FC = () => {
                         <div className="flex items-center gap-3 mb-8 border-b border-zinc-800 pb-4">
                             <BiDesktop className="text-[#00f0ff]" size={36} />
                             <h1 className="text-2xl lg:text-4xl font-black text-white uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-                                [PAYMENT_GATEWAY]
+                                [PASARELA_DE_PAGO]
                             </h1>
                         </div>
 

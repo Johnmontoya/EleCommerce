@@ -21,14 +21,14 @@ const PriceForm: React.FC<PriceFormProps> = ({ register, errors, watch }) => {
       <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
       <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
-        [PRICE_AND_INVENTORY]
+        [PRECIO_Y_INVENTARIO]
       </h2>
 
       <div className="grid grid-cols-2 gap-4">
         {/* Precio */}
         <div>
           <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-            [PRICE] *
+            [PRECIO] *
           </label>
           <input
             type="number"
@@ -47,7 +47,7 @@ const PriceForm: React.FC<PriceFormProps> = ({ register, errors, watch }) => {
         {/* Descuento */}
         <div>
           <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-            [DISCOUNT] (%)
+            [DESCUENTO] (%)
           </label>
           <input
             type="number"
@@ -112,7 +112,7 @@ const PriceForm: React.FC<PriceFormProps> = ({ register, errors, watch }) => {
         {/* Código de Barras */}
         <div className="col-span-2">
           <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-            [BARCODE]
+            [CODIGO_DE_BARRAS]
           </label>
           <input
             type="text"

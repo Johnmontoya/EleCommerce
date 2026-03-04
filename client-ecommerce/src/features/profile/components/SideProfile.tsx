@@ -18,14 +18,14 @@ const SideProfile = ({ profile }: SideProfileProps) => {
                 <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-zinc-600 group-hover:border-[#00f0ff] transition-colors" />
 
                 <h3 className="text-sm font-black text-white uppercase tracking-widest mb-6 flex items-center gap-2">
-                    <span className="text-[#00f0ff]">{'>'}</span> [ACCOUNT_DATA]
+                    <span className="text-[#00f0ff]">{'>'}</span> [DATOS_DE_CUENTA]
                 </h3>
 
                 <div className="space-y-4">
                     <div className="border border-zinc-900 bg-black p-4">
                         <div className="flex items-center gap-2 text-zinc-500 mb-2 text-xs font-bold uppercase tracking-widest">
                             <BiCalendar size={14} className="text-zinc-400" />
-                            [MEMBER_SINCE]
+                            [MIEMBRO_DESDE]
                         </div>
                         <p className="text-[#e4ff00] font-black tracking-widest text-sm pl-6">
                             {new Date(profile?.createdAt!).toLocaleDateString("es-ES", {
@@ -45,30 +45,30 @@ const SideProfile = ({ profile }: SideProfileProps) => {
                 <div className="flex items-center gap-3 mb-6">
                     <BiShield className="text-[#00f0ff]" size={20} />
                     <h3 className="text-sm font-black text-[#00f0ff] uppercase tracking-widest">
-                        [SECURITY_STATUS]
+                        [ESTADO_DE_SEGURIDAD]
                     </h3>
                 </div>
 
                 <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
                     <div className="flex flex-col bg-black p-3 border border-zinc-900 gap-2">
                         <div className="flex items-center justify-between">
-                            <span className="text-zinc-500">[EMAIL_VERIFIED]</span>
+                            <span className="text-zinc-500">[CORREO_VERIFICADO]</span>
                             {profile?.emailVerified ? (
                                 <MdVerifiedUser className="text-[#e4ff00]" size={16} />
                             ) : (
-                                <span className="text-[#ff0055] text-[10px]">[PENDING]</span>
+                                <span className="text-[#ff0055] text-[10px]">[PENDIENTE]</span>
                             )}
                         </div>
                     </div>
                     <div className="flex flex-col bg-black p-3 border border-zinc-900 gap-2">
                         <div className="flex items-center justify-between">
                             <span className="text-zinc-500">[2FA_AUTH]</span>
-                            <span className="text-[#ff0055] text-[10px]">[DISABLED]</span>
+                            <span className="text-[#ff0055] text-[10px]">[DESHABILITADO]</span>
                         </div>
                     </div>
                     <div className="flex flex-col bg-black p-3 border border-[#00f0ff]/20 gap-2">
                         <div className="flex items-center justify-between">
-                            <span className="text-[#00f0ff]">[SYSTEM_STATUS]</span>
+                            <span className="text-[#00f0ff]">[ESTADO_DEL_SISTEMA]</span>
                             <span className="text-[#00f0ff]">[ACTIVE]</span>
                         </div>
                     </div>
@@ -78,7 +78,7 @@ const SideProfile = ({ profile }: SideProfileProps) => {
             {/* Quick Actions */}
             <div className="bg-[#050505] border border-zinc-800 p-6">
                 <h3 className="text-sm font-black text-white uppercase tracking-widest mb-6 flex items-center gap-2">
-                    <span className="text-[#00f0ff]">{'>'}</span> [QUICK_ACTIONS]
+                    <span className="text-[#00f0ff]">{'>'}</span> [ACCIONES_RAPIDAS]
                 </h3>
 
                 <div className="space-y-3">
@@ -102,12 +102,12 @@ const SideProfile = ({ profile }: SideProfileProps) => {
 
                     <button className="w-full text-left px-4 py-3 bg-black border border-zinc-800 hover:border-zinc-500 hover:bg-zinc-900 text-zinc-400 hover:text-white transition-all flex items-center gap-3 text-xs font-bold uppercase tracking-widest group">
                         <BiMap size={16} className="text-zinc-600 group-hover:text-white transition-colors" />
-                        [SAVED_COORDINATES]
+                        [COORDENADAS_GUARDADAS]
                     </button>
 
                     <button className="w-full text-left px-4 py-3 bg-black border border-zinc-800 hover:border-zinc-500 hover:bg-zinc-900 text-zinc-400 hover:text-white transition-all flex items-center gap-3 text-xs font-bold uppercase tracking-widest group">
                         <MdLanguage size={16} className="text-zinc-600 group-hover:text-white transition-colors" />
-                        [REGION_SETTINGS]
+                        [CONFIGURACION_DE_REGION]
                     </button>
                 </div>
             </div>

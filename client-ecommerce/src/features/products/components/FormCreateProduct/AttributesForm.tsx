@@ -42,7 +42,7 @@ const AttributesForm: React.FC<AttributesFormProps> = ({ watch, setValue, errors
       <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
       <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
-        [PRODUCT_ATTRIBUTES]
+        [PRODUCTOS_ATRIBUTO]
       </h2>
 
       <div className="space-y-4">
@@ -70,7 +70,7 @@ const AttributesForm: React.FC<AttributesFormProps> = ({ watch, setValue, errors
           onClick={addAttribute}
           className="w-full bg-[#00f0ff]/10 border border-[#00f0ff] text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black transition-all flex justify-center items-center gap-2 px-4 py-3 font-bold text-[10px] tracking-widest uppercase"
         >
-          <BiPlus size={16} /> [ADD_ATTRIBUTE]
+          <BiPlus size={16} /> [AGREGAR_ATRIBUTO]
         </button>
 
         {errors.attributes && (
@@ -93,7 +93,7 @@ const AttributesForm: React.FC<AttributesFormProps> = ({ watch, setValue, errors
                   type="button"
                   onClick={() => removeAttribute(index)}
                   className="text-zinc-600 hover:text-[#ff0055] transition-colors ml-4"
-                  title="[DELETE_ATTR]"
+                  title="[ELIMINAR_ATRIBUTO]"
                 >
                   <BsTrash2 size={16} />
                 </button>

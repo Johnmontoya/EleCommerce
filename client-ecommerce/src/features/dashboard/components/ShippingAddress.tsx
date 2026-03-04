@@ -25,14 +25,14 @@ const ShippingAddress: React.FC<UserProps> = ({ user }) => {
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800">
           <div>
             <h2 className="text-xl font-black text-white uppercase tracking-widest">
-              [ADDRESS]
+              [DIRECCIÓN_DE_ENTREGA]
             </h2>
           </div>
           <button
             onClick={() => setIsModalOpenAddress(!isModalOpenAddress)}
             className="text-[#ff0055] hover:text-white hover:bg-[#ff0055]/10 border border-transparent hover:border-[#ff0055] px-3 py-1.5 text-xs font-bold transition-all flex items-center gap-2 uppercase tracking-widest"
           >
-            <span>[UPDATE]</span>
+            <span>[ACTUALIZAR]</span>
             <MdPublishedWithChanges size={14} />
           </button>
         </div>
@@ -54,14 +54,14 @@ const ShippingAddress: React.FC<UserProps> = ({ user }) => {
                     <p>{user.addresses[0].country}</p>
                   </>
                 ) : (
-                  <span className="text-zinc-600">[DATA_NOT_FOUND]</span>
+                  <span className="text-zinc-600">[DATOS_NO_ENCONTRADOS]</span>
                 )}
               </div>
             </div>
           </div>
 
           <div className="w-full text-center mt-6 bg-[#ff0055]/10 border border-[#ff0055]/30 text-[#ff0055] py-3 text-xs font-bold tracking-widest uppercase">
-            [ACTIVE_LOCATION]
+            [DIRECCIÓN_ACTIVA]
           </div>
         </div>
       </div>

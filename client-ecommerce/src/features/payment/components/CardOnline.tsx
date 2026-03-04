@@ -12,7 +12,7 @@ const CardOnline: React.FC<CardOnlineProps> = ({ selectedMethod }) => {
         selectedMethod === "online" && (
             <div className="border border-zinc-800 bg-[#050505] p-6 relative mt-6">
                 <h2 className="text-[#ff0055] text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-[#ff0055] mb-6">
-                    [SECURE_ONLINE_PAYMENT]
+                    [PAGO_SEGURO_EN_LINEA]
                 </h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <button className="h-28 p-4 bg-black border border-zinc-800 hover:border-[#ff0055] hover:bg-[#ff0055]/5 transition-all outline-none flex flex-col items-center justify-center gap-3">

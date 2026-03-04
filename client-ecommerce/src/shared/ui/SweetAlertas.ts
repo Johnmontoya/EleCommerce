@@ -12,14 +12,14 @@ interface SuccessAlertProps {
 
 function OnDialogChoose({ message, onConfirm, onCancel }: ConfirmAlertProps) {
     Swal.fire({
-        title: `[CONFIRM_ACTION]`,
+        title: `[ACCION_CONFIRMADA]`,
         text: message,
         showDenyButton: false,
         showCancelButton: true,
         confirmButtonColor: "#ff0055",
         cancelButtonColor: "#27272a",
-        confirmButtonText: "[EXECUTE]",
-        cancelButtonText: "[CANCEL]",
+        confirmButtonText: "[EJECUTAR]",
+        cancelButtonText: "[CANCELAR]",
         background: "#050505",
         color: "#ffffff",
         customClass: {
@@ -32,13 +32,13 @@ function OnDialogChoose({ message, onConfirm, onCancel }: ConfirmAlertProps) {
         if (result.isConfirmed) {
             onConfirm();
             Swal.fire({
-                title: "[SUCCESS]",
-                text: "ACTION_COMPLETED_SUCCESSFULLY.",
+                title: "[EXITO]",
+                text: "ACCION_COMPLETADA_EXITOSAMENTE.",
                 icon: "success",
                 background: "#050505",
                 color: "#e4ff00",
                 confirmButtonColor: "#e4ff00",
-                confirmButtonText: "[ACKNOWLEDGE]",
+                confirmButtonText: "[ACEPTAR]",
                 customClass: {
                     popup: 'border border-zinc-800 rounded-none font-mono tracking-wider',
                     title: 'text-[#e4ff00] uppercase tracking-widest text-lg font-bold',

@@ -15,7 +15,7 @@ const DigitalForm: React.FC<DigitalFormProps> = ({ register, watch, errors }) =>
       <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
       <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
-        [DIGITAL_PRODUCT_SETTINGS]
+        [PRODUCTO_DIGITAL]
       </h2>
 
       <div className="space-y-4">
@@ -27,14 +27,14 @@ const DigitalForm: React.FC<DigitalFormProps> = ({ register, watch, errors }) =>
               before:content-[''] before:hidden checked:before:block before:w-2 before:h-2 before:bg-[#00f0ff] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 transition-all"
           />
           <span className="text-zinc-400 text-[10px] uppercase font-bold tracking-widest peer-checked:text-[#00f0ff] transition-colors">
-            [ENABLE_DIGITAL_DELIVERY]
+            [HABILITAR_ENVIO_DIGITAL]
           </span>
         </label>
 
         {isDigital && (
           <div>
             <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-              [DIGITAL_FILE_URL]
+              [ARCHIVO_DIGITAL]
             </label>
             <input
               type="url"

@@ -14,7 +14,7 @@ const HeaderAction: React.FC<HeaderActionProps> = ({ isSubmitting, handleSubmit,
         <div className="flex items-center justify-between mb-8 pb-4 border-b border-zinc-800 mt-2">
             <div>
                 <p className="text-[#00f0ff] font-mono uppercase tracking-widest text-[10px] font-bold">
-                    [SYSTEM_PROMPT: COMPLETE_{title?.toUpperCase()}_DATA]
+                    [SYSTEM_PROMPT: COMPLETAR_{title?.toUpperCase()}_DATOS]
                 </p>
             </div>
             <div className="flex gap-3">
@@ -24,7 +24,7 @@ const HeaderAction: React.FC<HeaderActionProps> = ({ isSubmitting, handleSubmit,
                     className="flex items-center justify-center gap-2 px-4 py-2 font-mono uppercase tracking-widest text-[10px] bg-transparent border border-zinc-700 text-zinc-400 hover:border-[#ff0055] hover:text-[#ff0055] transition-all"
                 >
                     <CiEraser size={14} />
-                    [RESET_DATA]
+                    [RESETEAR_DATOS]
                 </button>
                 <button
                     onClick={handleSubmit}
@@ -34,12 +34,12 @@ const HeaderAction: React.FC<HeaderActionProps> = ({ isSubmitting, handleSubmit,
                     {isSubmitting ? (
                         <>
                             <div className="animate-spin h-3 w-3 border-2 border-[#00f0ff] border-t-transparent rounded-none" />
-                            [PROCESSING...]
+                            [PROCESANDO...]
                         </>
                     ) : (
                         <>
                             <BiSave size={14} />
-                            [EXECUTE_SAVE]
+                            [EJECUTAR_GUARDADO]
                         </>
                     )}
                 </button>

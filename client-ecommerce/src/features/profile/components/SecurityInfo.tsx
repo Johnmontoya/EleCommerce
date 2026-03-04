@@ -5,7 +5,7 @@ import { useAuthStore } from "../../auth/store/useAuthStore";
 import { toast } from "sonner";
 
 interface SecurityInfoProps {
-    activeTab: "overview" | "orders" | "security" | "preferences";
+    activeTab: "inicio" | "pedidos" | "seguridad" | "preferencias";
 }
 
 const SecurityInfo = ({ activeTab }: SecurityInfoProps) => {
@@ -38,20 +38,20 @@ const SecurityInfo = ({ activeTab }: SecurityInfoProps) => {
     };
     return (
         <>
-            {activeTab === "security" && (
+            {activeTab === "seguridad" && (
                 <div className="bg-[#050505] border border-zinc-800 p-6 md:p-8 font-mono relative group">
                     <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-zinc-600 group-hover:border-[#FF0055] transition-colors" />
 
                     <div className="flex items-center justify-between mb-8">
                         <h2 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2">
-                            <span className="text-[#FF0055]">{'>'}</span> [SECURITY_PARAMETERS]
+                            <span className="text-[#FF0055]">{'>'}</span> [PARAMETROS_DE_SEGURIDAD]
                         </h2>
                     </div>
 
                     <div className="space-y-6 max-w-xl">
                         <div className="space-y-1">
                             <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800">
-                                [CURRENT_PASSWORD]
+                                [CONTRASEÑA_ACTUAL]
                             </label>
                             <input
                                 type="password"
@@ -65,7 +65,7 @@ const SecurityInfo = ({ activeTab }: SecurityInfoProps) => {
 
                         <div className="space-y-1">
                             <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800">
-                                [NEW_PASSWORD]
+                                [NUEVA_CONTRASEÑA]
                             </label>
                             <input
                                 type="password"
@@ -79,7 +79,7 @@ const SecurityInfo = ({ activeTab }: SecurityInfoProps) => {
 
                         <div className="space-y-1">
                             <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800">
-                                [VERIFY_NEW_PASSWORD]
+                                [VERIFICAR_NUEVA_CONTRASEÑA]
                             </label>
                             <input
                                 type="password"
@@ -96,7 +96,7 @@ const SecurityInfo = ({ activeTab }: SecurityInfoProps) => {
                             className="w-full bg-[#050505] border border-[#FF0055] hover:bg-[#FF0055] text-[#FF0055] hover:text-black mt-4 py-4 font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2"
                         >
                             <BiLock size={18} />
-                            [UPDATE_CREDENTIALS]
+                            [ACTUALIZAR_CREDENCIA]
                         </button>
                     </div>
                 </div>

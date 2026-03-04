@@ -27,9 +27,9 @@ const SelectMethod: React.FC<SelectMethodProps> = ({ selectedMethod, setSelected
                 >
                     <BiCreditCard size={32} className={selectedMethod === "card" ? "text-[#00f0ff]" : "text-zinc-500"} />
                     <p className={`mt-2 font-bold uppercase tracking-widest text-sm ${selectedMethod === "card" ? "text-white" : "text-zinc-400"}`}>
-                        [CREDIT_CARD]
+                        [TARJETA_DE_CREDITO]
                     </p>
-                    <p className="text-[10px] text-zinc-500 font-mono tracking-widest uppercase mt-1">Debit & Credit Supported</p>
+                    <p className="text-[10px] text-zinc-500 font-mono tracking-widest uppercase mt-1">Débito & Crédito Soportadas</p>
                 </button>
 
                 {/* Cash on Delivery */}
@@ -42,9 +42,9 @@ const SelectMethod: React.FC<SelectMethodProps> = ({ selectedMethod, setSelected
                 >
                     <MdOutlineAccountBalanceWallet size={32} className={selectedMethod === "cash" ? "text-[#e4ff00]" : "text-zinc-500"} />
                     <p className={`mt-2 font-bold uppercase tracking-widest text-sm ${selectedMethod === "cash" ? "text-white" : "text-zinc-400"}`}>
-                        [PAY_ON_DELIVERY]
+                        [PAGO_CONTRA_ENTREGA]
                     </p>
-                    <p className="text-[10px] text-zinc-500 font-mono tracking-widest uppercase mt-1">Cash Transactions Only</p>
+                    <p className="text-[10px] text-zinc-500 font-mono tracking-widest uppercase mt-1">Transacciones en Efectivo Únicamente</p>
                 </button>
 
                 {/* Online Payment */}
@@ -57,9 +57,9 @@ const SelectMethod: React.FC<SelectMethodProps> = ({ selectedMethod, setSelected
                 >
                     <RiSecurePaymentLine size={32} className={selectedMethod === "online" ? "text-[#ff0055]" : "text-zinc-500"} />
                     <p className={`mt-2 font-bold uppercase tracking-widest text-sm ${selectedMethod === "online" ? "text-white" : "text-zinc-400"}`}>
-                        [SECURE_ONLINE_PAYMENT]
+                        [PAGO_SEGURO_EN_LINEA]
                     </p>
-                    <p className="text-[10px] text-zinc-500 font-mono tracking-widest uppercase mt-1">PSE, Nequi & Third-Parties</p>
+                    <p className="text-[10px] text-zinc-500 font-mono tracking-widest uppercase mt-1">PSE, Nequi & Terceros</p>
                 </button>
             </div>
         </div>

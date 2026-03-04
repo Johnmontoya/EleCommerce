@@ -19,7 +19,6 @@ const PersonalInfo = ({ activeTab, profile }: Props) => {
             <ModalInfo
                 isOpen={isModalOpenPersonal}
                 onClose={() => setIsModalOpenPersonal(false)}
-                title="Editar Usuario"
                 data={profile}
             />
             <ModalAddress
@@ -28,7 +27,7 @@ const PersonalInfo = ({ activeTab, profile }: Props) => {
                 title="Editar Dirección"
                 data={profile}
             />
-            {activeTab === "overview" && (
+            {activeTab === "inicio" && (
                 <div className="space-y-6 font-mono">
                     {/* Personal Information */}
                     <div className="bg-[#050505] border border-zinc-800 p-6 md:p-8 relative group">
@@ -37,7 +36,7 @@ const PersonalInfo = ({ activeTab, profile }: Props) => {
 
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                             <h2 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2">
-                                <span className="text-[#00f0ff]">{'>'}</span> [PERSONAL_DATA]
+                                <span className="text-[#00f0ff]">{'>'}</span> [DATOS_PERSONALES]
                             </h2>
 
                             <button
@@ -45,14 +44,14 @@ const PersonalInfo = ({ activeTab, profile }: Props) => {
                                 className="bg-[#050505] border border-zinc-700 hover:border-[#00f0ff] text-zinc-400 hover:text-[#00f0ff] px-4 py-2 text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full sm:w-auto"
                             >
                                 <BiEdit size={16} />
-                                [EDIT_RECORD]
+                                [EDITAR_REGISTRO]
                             </button>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-black p-6 border border-zinc-900">
                             <div className="border-l-2 border-zinc-800 pl-4 py-1">
                                 <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">
-                                    [FIRST_NAME]
+                                    [NOMBRE]
                                 </label>
                                 <p className="text-white font-bold tracking-wider uppercase">
                                     {profile?.firstName}
@@ -61,7 +60,7 @@ const PersonalInfo = ({ activeTab, profile }: Props) => {
 
                             <div className="border-l-2 border-zinc-800 pl-4 py-1">
                                 <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">
-                                    [LAST_NAME]
+                                    [APELLIDO]
                                 </label>
                                 <p className="text-white font-bold tracking-wider uppercase">
                                     {profile?.lastName}
@@ -70,7 +69,7 @@ const PersonalInfo = ({ activeTab, profile }: Props) => {
 
                             <div className="border-l-2 border-zinc-800 pl-4 py-1">
                                 <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">
-                                    [CONTACT_EMAIL]
+                                    [CORREO_CONTACTO]
                                 </label>
                                 <p className="text-white font-bold tracking-wider flex items-center gap-2">
                                     {profile?.email}
@@ -82,10 +81,10 @@ const PersonalInfo = ({ activeTab, profile }: Props) => {
 
                             <div className="border-l-2 border-zinc-800 pl-4 py-1">
                                 <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">
-                                    [COMM_LINK]
+                                    [COMUNICACION]
                                 </label>
                                 <p className="text-white font-bold tracking-wider uppercase">
-                                    {profile?.phone || "UNSPECIFIED"}
+                                    {profile?.phone || "NO_REGISTRADO"}
                                 </p>
                             </div>
                         </div>
@@ -98,60 +97,60 @@ const PersonalInfo = ({ activeTab, profile }: Props) => {
 
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                             <h2 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2">
-                                <span className="text-[#00f0ff]">{'>'}</span> [LOCATION_DATA]
+                                <span className="text-[#00f0ff]">{'>'}</span> [DATOS_DE_UBICACION]
                             </h2>
                             <button
                                 onClick={() => setIsModalOpenAddress(true)}
                                 className="bg-[#050505] border border-zinc-700 hover:border-[#00f0ff] text-zinc-400 hover:text-[#00f0ff] px-4 py-2 text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full sm:w-auto"
                             >
                                 <BiEdit size={16} />
-                                [EDIT_COORDINATES]
+                                [EDITAR_COORDENADAS]
                             </button>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-black p-6 border border-zinc-900">
                             <div className="col-span-1 md:col-span-2 border-l-2 border-zinc-800 pl-4 py-1">
                                 <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">
-                                    [STREET_ADDRESS]
+                                    [DIRECCION_CALLE]
                                 </label>
                                 <p className="text-white font-bold tracking-wider uppercase">
-                                    {profile?.addresses![0]?.street || "UNSPECIFIED"}
+                                    {profile?.addresses![0]?.street || "NO_REGISTRADO"}
                                 </p>
                             </div>
 
                             <div className="border-l-2 border-zinc-800 pl-4 py-1">
                                 <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">
-                                    [CITY_SECTOR]
+                                    [CIUDAD_SECTOR]
                                 </label>
                                 <p className="text-white font-bold tracking-wider uppercase">
-                                    {profile?.addresses![0]?.city || "UNSPECIFIED"}
+                                    {profile?.addresses![0]?.city || "NO_REGISTRADO"}
                                 </p>
                             </div>
 
                             <div className="border-l-2 border-zinc-800 pl-4 py-1">
                                 <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">
-                                    [POSTAL_CODE]
+                                    [CODIGO_POSTAL]
                                 </label>
                                 <p className="text-white font-bold tracking-wider uppercase">
-                                    {profile?.addresses![0]?.zipCode || "UNSPECIFIED"}
+                                    {profile?.addresses![0]?.zipCode || "NO_REGISTRADO"}
                                 </p>
                             </div>
 
                             <div className="border-l-2 border-zinc-800 pl-4 py-1">
                                 <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">
-                                    [STATE_REGION]
+                                    [ESTADO_REGION]
                                 </label>
                                 <p className="text-white font-bold tracking-wider uppercase">
-                                    {profile?.addresses![0]?.state || "UNSPECIFIED"}
+                                    {profile?.addresses![0]?.state || "NO_REGISTRADO"}
                                 </p>
                             </div>
 
                             <div className="border-l-2 border-zinc-800 pl-4 py-1">
                                 <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">
-                                    [TERRITORY]
+                                    [TERRITORIO]
                                 </label>
                                 <p className="text-white font-bold tracking-wider uppercase">
-                                    {profile?.addresses![0]?.country || "UNSPECIFIED"}
+                                    {profile?.addresses![0]?.country || "NO_REGISTRADO"}
                                 </p>
                             </div>
                         </div>

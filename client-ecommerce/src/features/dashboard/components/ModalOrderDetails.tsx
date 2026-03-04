@@ -23,7 +23,7 @@ const ModalOrderDetails = ({ isOpen, onClose, title, data }: Props) => {
                     <div>
                         <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
                             <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
-                                [ACQUIRED_ASSETS]
+                                [ARTICULOS_ADQUIRIDOS]
                             </h4>
                             <span className="text-zinc-600 text-[10px] tracking-widest uppercase font-bold">QTY: {data?.items?.length}</span>
                         </div>
@@ -63,7 +63,7 @@ const ModalOrderDetails = ({ isOpen, onClose, title, data }: Props) => {
                             <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
                                 <h4 className="flex items-center gap-2 text-xs font-bold text-zinc-500 uppercase tracking-widest">
                                     <BiMapPin className="text-[#00f0ff]" size={16} />
-                                    [DELIVERY_COORDINATES]
+                                    [DIRECCIÓN_DE_ENTREGA]
                                 </h4>
                             </div>
                             <div className="bg-[#050505] border border-zinc-900 p-4 text-xs font-bold text-zinc-400 uppercase tracking-wider leading-relaxed">
@@ -79,7 +79,7 @@ const ModalOrderDetails = ({ isOpen, onClose, title, data }: Props) => {
                                 {data?.trackingNumber && (
                                     <div className="mt-4 pt-4 border-t border-zinc-900 flex items-center justify-between">
                                         <p className="text-zinc-600 text-[10px]">
-                                            TRACKING_ID:
+                                            ID_DE_SEGUIMIENTO:
                                         </p>
                                         <p className="text-[#00f0ff] font-black tracking-widest">
                                             {data?.trackingNumber}
@@ -93,7 +93,7 @@ const ModalOrderDetails = ({ isOpen, onClose, title, data }: Props) => {
                         <div>
                             <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
                                 <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
-                                    [PAYMENT_TYPE]
+                                    [TIPO_DE_PAGO]
                                 </h4>
                             </div>
                             <div className="bg-[#050505] border border-zinc-900 p-4 flex items-center h-[60px]">

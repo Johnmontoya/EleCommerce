@@ -35,7 +35,7 @@ const TagsForm: React.FC<TagsFormProps> = ({ watch, setValue, errors }) => {
       <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
       <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
-        [PRODUCT_TAGS]
+        [ETIQUETAS_DE_PRODUCTO]
       </h2>
 
       <div className="space-y-3">

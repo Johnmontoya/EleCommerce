@@ -12,19 +12,19 @@ const Stats: React.FC<Props> = ({ totalOrders, pendingOrders, rewardPoints }) =>
   /* Borrar mas adelante cuando se obtenga los datos */
   const stats: StatCard[] = [
     {
-      label: "[TOTAL_ORDERS]",
+      label: "[TOTAL_PEDIDOS]",
       value: totalOrders,
       icon: <BiShoppingBag size={24} />,
       color: "border-[#00f0ff] text-[#00f0ff]", // Accent configuration
     },
     {
-      label: "[PENDING_ORDERS]",
+      label: "[PEDIDOS_PENDIENTES]",
       value: pendingOrders,
       icon: <BiPackage size={24} />,
       color: "border-[#ff0055] text-[#ff0055]",
     },
     {
-      label: "[TOTAL_REVENUE]",
+      label: "[TOTAL_INGRESOS]",
       value: `$${rewardPoints}`,
       icon: <CiDollar size={24} />,
       color: "border-[#e4ff00] text-[#e4ff00]",

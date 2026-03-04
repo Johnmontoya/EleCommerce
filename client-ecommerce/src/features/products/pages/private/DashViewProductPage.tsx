@@ -50,7 +50,7 @@ const DashViewProductPage: React.FC = () => {
             <div className="min-h-screen bg-[#020202] flex items-center justify-center font-mono">
                 <div className="text-center">
                     <div className="animate-spin rounded-none h-12 w-12 border-2 border-t-[#00f0ff] border-r-transparent border-b-[#ff0055] border-l-transparent mx-auto"></div>
-                    <p className="mt-4 text-[#00f0ff] tracking-widest text-xs uppercase">[SYS_LOADING_PRODUCT_DATA...]</p>
+                    <p className="mt-4 text-[#00f0ff] tracking-widest text-xs uppercase">[CARGANDO_DATOS_DEL_PRODUCTO...]</p>
                 </div>
             </div>
         );
@@ -64,13 +64,13 @@ const DashViewProductPage: React.FC = () => {
                     <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#ff0055]" />
                     <p className="text-[#ff0055] tracking-widest text-xs uppercase font-bold mb-8 flex flex-col items-center">
                         <span className="text-4xl block mb-2">⚠</span>
-                        [ERR:_PRODUCT_NOT_FOUND]
+                        [ERR:_PRODUCTO_NO_ENCONTRADO]
                     </p>
                     <button
                         onClick={() => navigate("/dashboard/products")}
                         className="px-6 py-2 bg-[#ff0055]/10 text-[#ff0055] border border-[#ff0055] hover:bg-[#ff0055] hover:text-white transition-all text-[10px] tracking-widest uppercase font-bold"
                     >
-                        [RETURN_TO_DATABASE]
+                        [REGRESAR_A_LA_BASE_DE_DATOS]
                     </button>
                 </div>
             </div>

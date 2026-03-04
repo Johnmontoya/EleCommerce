@@ -49,22 +49,22 @@ const ModalInfo: React.FC<ModalInfoProps> = ({ isOpen, onClose, data }) => {
         <MiModal
             isOpen={isOpen}
             onClose={onClose}
-            title={`> [EDIT_RECORD]`}
+            title={`> [EDITAR_PERFIL]`}
         >
             <form className="w-full text-left font-mono">
                 <div className="mb-8">
                     <h2 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2 mb-6">
-                        <span className="text-[#00f0ff]">{'>'}</span> [PERSONAL_DATA]
+                        <span className="text-[#00f0ff]">{'>'}</span> [DATOS_PERSONALES]
                     </h2>
 
                     <div className="flex flex-col sm:flex-row gap-4 mb-4">
                         <div className="w-full">
                             <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-1">
-                                [FIRST_NAME]
+                                [NOMBRE]
                             </label>
                             <div className="flex items-center w-full bg-black border border-zinc-800 h-12 overflow-hidden px-4 gap-3 focus-within:border-[#00f0ff] transition-colors">
                                 <BiUser size={18} className="text-zinc-600" />
-                                <input type="text" name="firstName" placeholder="[ENTER_NAME]"
+                                <input type="text" name="firstName" placeholder="[INTRODUCIR_NOMBRE]"
                                     className="w-full bg-transparent text-white placeholder-zinc-700 border-none outline-none text-xs tracking-widest uppercase font-bold"
                                     value={editProfile.firstName} onChange={onChangeEditProfile} required />
                             </div>
@@ -72,11 +72,11 @@ const ModalInfo: React.FC<ModalInfoProps> = ({ isOpen, onClose, data }) => {
 
                         <div className="w-full">
                             <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-1">
-                                [LAST_NAME]
+                                [APELLIDO]
                             </label>
                             <div className="flex items-center w-full bg-black border border-zinc-800 h-12 overflow-hidden px-4 gap-3 focus-within:border-[#00f0ff] transition-colors">
                                 <BiUser size={18} className="text-zinc-600" />
-                                <input type="text" name="lastName" placeholder="[ENTER_LASTNAME]"
+                                <input type="text" name="lastName" placeholder="[INTRODUCIR_APELLIDO]"
                                     className="w-full bg-transparent text-white placeholder-zinc-700 border-none outline-none text-xs tracking-widest uppercase font-bold"
                                     value={editProfile.lastName} onChange={onChangeEditProfile} required />
                             </div>
@@ -85,11 +85,11 @@ const ModalInfo: React.FC<ModalInfoProps> = ({ isOpen, onClose, data }) => {
 
                     <div className="w-full">
                         <label className="block text-zinc-500 text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-zinc-800 mb-1">
-                            [COMM_LINK]
+                            [COMUNICACIÓN_VOZ]
                         </label>
                         <div className="flex items-center w-full bg-black border border-zinc-800 h-12 overflow-hidden px-4 gap-3 focus-within:border-[#00f0ff] transition-colors">
                             <BiPhone size={18} className="text-zinc-600" />
-                            <input type="text" name="phone" placeholder="[ENTER_PHONE]"
+                            <input type="text" name="phone" placeholder="[INTRODUCIR_TELEFONO]"
                                 className="w-full bg-transparent text-white placeholder-zinc-700 border-none outline-none text-xs tracking-widest uppercase font-bold"
                                 value={editProfile.phone} onChange={onChangeEditProfile} required />
                         </div>
@@ -102,7 +102,7 @@ const ModalInfo: React.FC<ModalInfoProps> = ({ isOpen, onClose, data }) => {
                         onClick={onClose}
                         className="flex-1 bg-black border border-zinc-800 hover:border-zinc-500 text-zinc-400 hover:text-white h-12 font-black uppercase tracking-widest text-xs transition-colors"
                     >
-                        [CANCEL]
+                        [CANCELAR]
                     </button>
                     <button
                         onClick={handleSubmit}
@@ -115,7 +115,7 @@ const ModalInfo: React.FC<ModalInfoProps> = ({ isOpen, onClose, data }) => {
                         ) : (
                             <>
                                 <BiSave size={16} />
-                                [SAVE_DATA]
+                                [GUARDAR_DATOS]
                             </>
                         )}
                     </button>

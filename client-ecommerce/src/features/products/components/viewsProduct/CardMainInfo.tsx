@@ -13,7 +13,7 @@ const CardMainInfo: React.FC<CardMainInfoProps> = ({ product }) => {
                 <div className="flex items-center gap-3 mb-6 border-b border-zinc-800/50 pb-4">
                     <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
                     <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase">
-                        [PRODUCT_IMAGES]
+                        [IMAGENES_DEL_PRODUCTO]
                     </h2>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -36,7 +36,7 @@ const CardMainInfo: React.FC<CardMainInfoProps> = ({ product }) => {
                 <div className="flex items-center gap-3 mb-6 border-b border-zinc-800/50 pb-4">
                     <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
                     <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase">
-                        [SYSTEM_DESCRIPTION]
+                        [DESCRIPCION_DEL_SISTEMA]
                     </h2>
                 </div>
                 <p className="text-zinc-400 text-xs tracking-wider leading-relaxed bg-black border border-zinc-900 p-4">{product.description}</p>
@@ -50,7 +50,7 @@ const CardMainInfo: React.FC<CardMainInfoProps> = ({ product }) => {
                     <div className="flex items-center gap-3 mb-6 border-b border-zinc-800/50 pb-4">
                         <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
                         <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase">
-                            [PRODUCT_VARIANTS]
+                            [VARIANTES_DEL_PRODUCTO]
                         </h2>
                     </div>
                     <div className="space-y-4">
@@ -81,7 +81,7 @@ const CardMainInfo: React.FC<CardMainInfoProps> = ({ product }) => {
                     <div className="flex items-center gap-3 mb-6 border-b border-zinc-800/50 pb-4">
                         <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
                         <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase">
-                            [ATTRIBUTES_MATRIX]
+                            [MATRIZ_DE_ATRIBUTOS]
                         </h2>
                     </div>
                     <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">

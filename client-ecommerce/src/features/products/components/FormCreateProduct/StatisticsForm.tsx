@@ -12,13 +12,13 @@ const StatisticsForm: React.FC<StatisticsFormProps> = ({ register, errors }) => 
       <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
       <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
-        [SYS_STATISTICS]
+        [ESTADISTICAS]
       </h2>
 
       <div className="space-y-4">
         <div>
           <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-            [RATING_SCORE]
+            [Puntuacion]
           </label>
           <input
             type="number"
@@ -37,7 +37,7 @@ const StatisticsForm: React.FC<StatisticsFormProps> = ({ register, errors }) => 
 
         <div>
           <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-            [REVIEWS_COUNT]
+            [CANTIDAD_RESEÑAS]
           </label>
           <input
             type="number"
@@ -54,7 +54,7 @@ const StatisticsForm: React.FC<StatisticsFormProps> = ({ register, errors }) => 
 
         <div>
           <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
-            [UNITS_SOLD]
+            [UNIDADES_VENDIDAS]
           </label>
           <input
             type="number"

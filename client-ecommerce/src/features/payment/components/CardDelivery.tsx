@@ -9,7 +9,7 @@ const CardDelivery: React.FC<CardDeliveryProps> = ({ selectedMethod }) => {
         selectedMethod === "cash" && (
             <div className="border border-zinc-800 bg-[#050505] p-6 relative mt-6">
                 <h2 className="text-[#e4ff00] text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-[#e4ff00] mb-6">
-                    [PAY_ON_DELIVERY]
+                    [PAGO_CONTRA_ENTREGA]
                 </h2>
                 <div className="bg-black border border-[#e4ff00]/30 p-6 relative">
                     <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#e4ff00]" />
@@ -18,7 +18,7 @@ const CardDelivery: React.FC<CardDeliveryProps> = ({ selectedMethod }) => {
                         <BiCheckCircle size={24} className="text-[#e4ff00] shrink-0 mt-1" />
                         <div>
                             <p className="text-white font-bold uppercase tracking-widest text-sm mb-3">
-                                [IMPORTANT_INFORMATION]
+                                [INFORMACION_IMPORTANTE]
                             </p>
                             <ul className="text-zinc-400 font-mono text-xs space-y-2 uppercase">
                                 <li>&gt; PAGARÁS EN EFECTIVO AL RECIBIR TU PEDIDO</li>

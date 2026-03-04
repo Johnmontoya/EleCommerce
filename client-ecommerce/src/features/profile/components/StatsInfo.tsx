@@ -21,7 +21,7 @@ const StatsInfo: React.FC<{ stats: Stats }> = ({ stats }) => {
                     </span>
                 </div>
                 <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">
-                    [TOTAL_ORDERS]
+                    [TOTAL_PEDIDOS]
                 </p>
             </div>
 
@@ -35,7 +35,7 @@ const StatsInfo: React.FC<{ stats: Stats }> = ({ stats }) => {
                     </span>
                 </div>
                 <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">
-                    [TOTAL_EXPENDITURE]
+                    [TOTAL_GASTADO]
                 </p>
             </div>
 
@@ -49,7 +49,7 @@ const StatsInfo: React.FC<{ stats: Stats }> = ({ stats }) => {
                     </span>
                 </div>
                 <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">
-                    [WISHLIST_ASSETS]
+                    [ARTICULOS_EN_LISTA_DE_DESEOS]
                 </p>
             </div>
 
@@ -63,7 +63,7 @@ const StatsInfo: React.FC<{ stats: Stats }> = ({ stats }) => {
                     </span>
                 </div>
                 <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">
-                    [REVIEWS_PUBLISHED]
+                    [RESEÑAS_PUBLICADAS]
                 </p>
             </div>
         </div>

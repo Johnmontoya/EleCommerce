@@ -15,7 +15,6 @@ const PersonalProfile: React.FC<UserProps> = ({ user }) => {
       <ModalInfo
         isOpen={isEditingProfile}
         onClose={() => setIsEditingProfile(false)}
-        title="Cambiar Información Personal"
         data={user!}
       />
       <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono">
@@ -24,14 +23,14 @@ const PersonalProfile: React.FC<UserProps> = ({ user }) => {
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800">
           <div>
             <h2 className="text-xl font-black text-white uppercase tracking-widest">
-              [USER_PROFILE]
+              [PERFIL_DE_USUARIO]
             </h2>
           </div>
           <button
             onClick={() => setIsEditingProfile(!isEditingProfile)}
             className="text-[#e4ff00] hover:text-white hover:bg-[#e4ff00]/10 border border-transparent hover:border-[#e4ff00] px-3 py-1.5 text-xs font-bold transition-all flex items-center gap-2 uppercase tracking-widest"
           >
-            <span>[EDIT]</span>
+            <span>[EDITAR]</span>
             <BiEdit size={14} />
           </button>
         </div>
@@ -42,7 +41,7 @@ const PersonalProfile: React.FC<UserProps> = ({ user }) => {
               <BiUser size={16} className="text-[#e4ff00]" />
             </div>
             <div>
-              <p className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">[FULL_NAME]</p>
+              <p className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">[NOMBRE_COMPLETO]</p>
               <p className="text-white font-bold tracking-wider text-sm">{user?.firstName} {user?.lastName}</p>
             </div>
           </div>
@@ -52,7 +51,7 @@ const PersonalProfile: React.FC<UserProps> = ({ user }) => {
               <MdEmail size={16} className="text-[#e4ff00]" />
             </div>
             <div>
-              <p className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">[EMAIL_LINK]</p>
+              <p className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">[CORREO_ELECTRÓNICO]</p>
               <p className="text-white font-bold tracking-wider text-sm">{user?.email}</p>
             </div>
           </div>
@@ -62,8 +61,8 @@ const PersonalProfile: React.FC<UserProps> = ({ user }) => {
               <BiPhone size={16} className="text-[#e4ff00]" />
             </div>
             <div>
-              <p className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">[VOICE_COMMS]</p>
-              <p className="text-white font-bold tracking-wider text-sm">{user?.phone || 'UNREGISTERED'}</p>
+              <p className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">[COMUNICACIÓN_VOZ]</p>
+              <p className="text-white font-bold tracking-wider text-sm">{user?.phone || 'NO REGISTRADO'}</p>
             </div>
           </div>
         </div>

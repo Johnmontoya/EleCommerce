@@ -58,7 +58,7 @@ const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) =>
       <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
       <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
-        [PRODUCT_VARIANTS]
+        [VARIANTES_DE_PRODUCTO]
       </h2>
 
       <div className="space-y-4">
@@ -74,7 +74,7 @@ const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) =>
               }
             }}
             className="flex-1 bg-black border border-zinc-800 text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none focus:border-[#00f0ff] transition-all text-[10px] font-bold tracking-[0.2em] uppercase"
-            placeholder="[VARIANT_TYPE_COLOR/SIZE...]"
+            placeholder="[TIPO_COLOR/TAMAÑO...]"
           />
           <button
             onClick={addVariant}
@@ -101,7 +101,7 @@ const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) =>
                 type="button"
                 onClick={() => removeVariant(variantIndex)}
                 className="text-zinc-500 hover:text-[#ff0055] transition-colors"
-                title="[REMOVE_VARIANT]"
+                title="[ELIMINAR_VARIANT]"
               >
                 <BsTrash2 size={16} />
               </button>
@@ -117,13 +117,13 @@ const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) =>
                 })}
                 onKeyPress={(e) => handleOptionKeyPress(e, variantIndex)}
                 className="flex-1 bg-black border border-zinc-800 border-dashed text-white placeholder-zinc-700 px-3 py-2 rounded-none outline-none focus:border-[#e4ff00] transition-all text-[10px] font-bold tracking-[0.2em] uppercase"
-                placeholder="[ADD_OPTION_VALUE]"
+                placeholder="[VALOR_DE_LA_OPCION]"
               />
               <button
                 type="button"
                 onClick={() => addVariantOption(variantIndex)}
                 className="bg-transparent border border-zinc-700 text-zinc-400 hover:border-[#e4ff00] hover:text-[#e4ff00] px-3 py-2 transition-all"
-                title="[INSERT_OPTION]"
+                title="[INSERTAR_OPCION]"
               >
                 <BiPlus size={16} />
               </button>

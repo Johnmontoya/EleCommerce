@@ -1,27 +1,27 @@
 
 interface PreferenceInfoProps {
-    activeTab: "overview" | "orders" | "security" | "preferences";
+    activeTab: "inicio" | "pedidos" | "seguridad" | "preferencias";
 }
 
 const PreferenceInfo = ({ activeTab }: PreferenceInfoProps) => {
     return (
         <>
-            {activeTab === "preferences" && (
+            {activeTab === "preferencias" && (
                 <div className="bg-[#050505] border border-zinc-800 p-6 md:p-8 font-mono relative group">
                     <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-zinc-600 group-hover:border-[#e4ff00] transition-colors" />
 
                     <h2 className="text-sm font-black text-white uppercase tracking-widest mb-8 flex items-center gap-2">
-                        <span className="text-[#e4ff00]">{'>'}</span> [NOTIFICATION_PREFS]
+                        <span className="text-[#e4ff00]">{'>'}</span> [PREFERENCIAS_DE_NOTIFICACION]
                     </h2>
 
                     <div className="space-y-4">
                         <label className="flex items-start sm:items-center justify-between p-4 bg-black border border-zinc-900 cursor-pointer hover:border-[#e4ff00] transition-all group flex-col sm:flex-row gap-4">
                             <div className="border-l-2 border-zinc-800 pl-4">
                                 <p className="text-white text-xs font-bold uppercase tracking-widest mb-1 group-hover:text-[#e4ff00] transition-colors">
-                                    [EMAIL_NOTIFICATIONS]
+                                    [NOTIFICACIONES_POR_CORREO]
                                 </p>
                                 <p className="text-zinc-500 text-[10px] uppercase tracking-widest">
-                                    RECEIVE ORDER UPDATES VIA EMAIL ALERTS
+                                    RECIBIR ACTUALIZACIONES DE PEDIDOS POR CORREO ELECTRÓNICO
                                 </p>
                             </div>
                             <div className="relative flex items-center shrink-0 sm:ml-4">
@@ -37,10 +37,10 @@ const PreferenceInfo = ({ activeTab }: PreferenceInfoProps) => {
                         <label className="flex items-start sm:items-center justify-between p-4 bg-black border border-zinc-900 cursor-pointer hover:border-[#e4ff00] transition-all group flex-col sm:flex-row gap-4">
                             <div className="border-l-2 border-zinc-800 pl-4">
                                 <p className="text-white text-xs font-bold uppercase tracking-widest mb-1 group-hover:text-[#e4ff00] transition-colors">
-                                    [SYSTEM_PROMOTIONS]
+                                    [PROMOCIONES_DEL_SISTEMA]
                                 </p>
                                 <p className="text-zinc-500 text-[10px] uppercase tracking-widest">
-                                    RECEIVE DATA ON SPECIAL OFFERS
+                                    RECIBIR DATOS SOBRE OFERTAS ESPECIALES
                                 </p>
                             </div>
                             <div className="relative flex items-center shrink-0 sm:ml-4">
@@ -56,10 +56,10 @@ const PreferenceInfo = ({ activeTab }: PreferenceInfoProps) => {
                         <label className="flex items-start sm:items-center justify-between p-4 bg-black border border-zinc-900 cursor-pointer hover:border-[#e4ff00] transition-all group flex-col sm:flex-row gap-4">
                             <div className="border-l-2 border-zinc-800 pl-4">
                                 <p className="text-white text-xs font-bold uppercase tracking-widest mb-1 group-hover:text-[#e4ff00] transition-colors">
-                                    [WEEKLY_NEWSLETTER]
+                                    [BOLETÍN_SEMANAL]
                                 </p>
                                 <p className="text-zinc-500 text-[10px] uppercase tracking-widest">
-                                    RECEIVE WEEKLY SUMMARY OF SYSTEM LOGS
+                                    RECIBIR RESUMEN SEMANAL DE LOS REGISTROS DEL SISTEMA
                                 </p>
                             </div>
                             <div className="relative flex items-center shrink-0 sm:ml-4">

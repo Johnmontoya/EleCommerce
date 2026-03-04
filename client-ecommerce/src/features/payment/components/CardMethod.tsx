@@ -111,7 +111,7 @@ const CardMethod = ({
                 <div className="flex flex-row justify-between items-center mb-8">
                     <h2 className="text-[#00f0ff] text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-[#00f0ff] m-0 flex items-center gap-2">
                         <BiCreditCard size={18} />
-                        [CARD_DETAILS]
+                        [DETALLES_DE_LA_TARJETA]
                     </h2>
 
                     {cardData.id && (
@@ -123,7 +123,7 @@ const CardMethod = ({
                                     aria-label="Cancelar"
                                 >
                                     <BiX size={16} />
-                                    [CANCEL]
+                                    [CANCELAR]
                                 </button>
                             ) : (
                                 <>
@@ -133,7 +133,7 @@ const CardMethod = ({
                                         aria-label="Editar"
                                     >
                                         <CiEdit size={16} />
-                                        [EDIT]
+                                        [EDITAR]
                                     </button>
                                     <button
                                         onClick={handleDelete}
@@ -141,7 +141,7 @@ const CardMethod = ({
                                         aria-label="Eliminar"
                                     >
                                         <CiTrash size={16} />
-                                        [DELETE]
+                                        [ELIMINAR]
                                     </button>
                                 </>
                             )}
@@ -209,11 +209,11 @@ const CardMethod = ({
                                 </div>
 
                                 <div className="px-6 mt-6 font-mono text-[8px] uppercase tracking-widest text-zinc-500">
-                                    <p className="mb-1">FOR CUSTOMER SERVICE CALL 1-800-SYS-911</p>
-                                    <p>SEE REVERSE FOR IMPORTANT SYSTEM INFORMATION</p>
+                                    <p className="mb-1">PARA SERVICIO AL CLIENTE LLAME AL 1-800-SYS-911</p>
+                                    <p>VER REVERSO PARA INFORMACIÓN IMPORTANTE DEL SISTEMA</p>
                                 </div>
                                 <div className="absolute bottom-4 right-6 font-mono text-[8px] uppercase tracking-widest text-[#ff0055] opacity-80">
-                                    [AUTHORIZED_SIGNATURE_REQUIRED]
+                                    [FIRMA_DE_AUTORIZACIÓN_REQUERIDA]
                                 </div>
                             </div>
                         </div>
@@ -225,7 +225,7 @@ const CardMethod = ({
                     <div className="space-y-6 mt-8 border-t border-zinc-800 pt-8 relative">
                         <div>
                             <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
-                                [CARD_NUMBER]
+                                [NUMERO_DE_TARJETA]
                             </label>
                             <input
                                 type="text"
@@ -244,7 +244,7 @@ const CardMethod = ({
 
                         <div>
                             <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
-                                [CARD_HOLDER_NAME]
+                                [NOMBRE_DEL_TITULAR_DE_LA_TARJETA]
                             </label>
                             <input
                                 type="text"
@@ -263,7 +263,7 @@ const CardMethod = ({
                         <div className="grid grid-cols-2 gap-6">
                             <div>
                                 <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
-                                    [EXPIRATION_DATE]
+                                    [FECHA_DE_EXPIRACION]
                                 </label>
                                 <input
                                     type="text"
@@ -282,7 +282,7 @@ const CardMethod = ({
 
                             <div>
                                 <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2 flex items-center gap-2">
-                                    [CVV_CODE]
+                                    [CODIGO_CVV]
                                 </label>
                                 <input
                                     type="text"
@@ -311,7 +311,7 @@ const CardMethod = ({
                                 ) : (
                                     <>
                                         <CiCreditCard1 size={18} />
-                                        {cardData.id ? "[UPDATE_RECORD]" : "[SAVE_RECORD]"}
+                                        {cardData.id ? "[ACTUALIZAR_REGISTRO]" : "[GUARDAR_REGISTRO]"}
                                     </>
                                 )}
                             </button>
@@ -323,7 +323,7 @@ const CardMethod = ({
                                     className="flex items-center gap-2 px-6 py-3 border border-zinc-800 bg-black text-zinc-500 hover:bg-[#ff0055]/10 hover:border-[#ff0055] hover:text-[#ff0055] transition-all font-bold uppercase tracking-widest text-xs"
                                 >
                                     <BiX size={18} />
-                                    [CANCEL]
+                                    [CANCELAR]
                                 </button>
                             )}
                         </div>
@@ -334,7 +334,7 @@ const CardMethod = ({
                 {!isEditMode && cardData.id && (
                     <div className="mt-6 border-t border-zinc-900 pt-6">
                         <p className="text-center text-zinc-500 font-mono text-[10px] uppercase tracking-widest border border-zinc-800 bg-black p-4">
-                            [TRANSACTION_METHOD_VERIFIED AND STORED SECURELY]
+                            [METODO_DE_TRANSACCION_VERIFICADO_Y_ALMACENADO_DE_FORMA_SEGURA]
                         </p>
                     </div>
                 )}

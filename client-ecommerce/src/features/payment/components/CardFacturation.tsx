@@ -18,7 +18,7 @@ const CardFacturation: React.FC<CardFacturationProps> = ({
                 <div className="grid md:grid-cols-2 gap-6">
                     <div>
                         <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
-                            [FULL_NAME] *
+                            [NOMBRE_COMPLETO] *
                         </label>
                         <input
                             type="text"
@@ -31,7 +31,7 @@ const CardFacturation: React.FC<CardFacturationProps> = ({
                     </div>
                     <div>
                         <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
-                            [EMAIL_ADDRESS] *
+                            [CORREO_ELECTRONICO] *
                         </label>
                         <input
                             type="email"
@@ -46,7 +46,7 @@ const CardFacturation: React.FC<CardFacturationProps> = ({
 
                 <div>
                     <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
-                        [PHONE_NUMBER] *
+                        [NUMERO_DE_TELEFONO] *
                     </label>
                     <input
                         type="tel"
@@ -60,7 +60,7 @@ const CardFacturation: React.FC<CardFacturationProps> = ({
 
                 <div>
                     <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
-                        [STREET_ADDRESS] *
+                        [DIRECCION_DE_CALLE] *
                     </label>
                     <input
                         type="text"
@@ -75,7 +75,7 @@ const CardFacturation: React.FC<CardFacturationProps> = ({
                 <div className="grid md:grid-cols-3 gap-6">
                     <div>
                         <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
-                            [CITY]
+                            [CIUDAD]
                         </label>
                         <input
                             type="text"
@@ -88,7 +88,7 @@ const CardFacturation: React.FC<CardFacturationProps> = ({
                     </div>
                     <div>
                         <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
-                            [ZIP_CODE]
+                            [CODIGO_POSTAL]
                         </label>
                         <input
                             type="text"
@@ -101,7 +101,7 @@ const CardFacturation: React.FC<CardFacturationProps> = ({
                     </div>
                     <div>
                         <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
-                            [COUNTRY]
+                            [PAIS]
                         </label>
                         <input
                             type="text"

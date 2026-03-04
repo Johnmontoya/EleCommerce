@@ -79,12 +79,12 @@ const OrderList: React.FC<OrderListProps> = ({
                                             {expandedOrder === order.id ? (
                                                 <>
                                                     <BiChevronUp size={16} />
-                                                    [COLLAPSE]
+                                                    [OCULTAR]
                                                 </>
                                             ) : (
                                                 <>
                                                     <BiChevronDown size={16} />
-                                                    [DETAILS]
+                                                    [DETALLES]
                                                 </>
                                             )}
                                         </button>
@@ -93,7 +93,7 @@ const OrderList: React.FC<OrderListProps> = ({
                                             className="text-zinc-500 hover:text-[#ff0055] px-4 py-2 border border-transparent hover:border-[#ff0055] hover:bg-[#ff0055]/10 text-xs font-bold transition-all uppercase tracking-widest flex items-center justify-center gap-2 flex-1 md:flex-none"
                                         >
                                             <BiTrash size={16} />
-                                            [CANCEL]
+                                            [CANCELAR]
                                         </button>
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@ const OrderList: React.FC<OrderListProps> = ({
                                         <div>
                                             <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
                                                 <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
-                                                    [ACQUIRED_ASSETS]
+                                                    [ASSETS_ADQUIRIDOS]
                                                 </h4>
                                                 <span className="text-zinc-600 text-[10px] tracking-widest uppercase font-bold">QTY: {order?.items?.length}</span>
                                             </div>
@@ -146,7 +146,7 @@ const OrderList: React.FC<OrderListProps> = ({
                                                 <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
                                                     <h4 className="flex items-center gap-2 text-xs font-bold text-zinc-500 uppercase tracking-widest">
                                                         <BiMap className="text-[#00f0ff]" size={16} />
-                                                        [DELIVERY_COORDINATES]
+                                                        [COORDENADAS_DE_ENTREGA]
                                                     </h4>
                                                 </div>
                                                 <div className="bg-[#050505] border border-zinc-900 p-4 text-xs font-bold text-zinc-400 uppercase tracking-wider leading-relaxed">
@@ -161,7 +161,7 @@ const OrderList: React.FC<OrderListProps> = ({
                                                     {order?.trackingNumber && (
                                                         <div className="mt-4 pt-4 border-t border-zinc-900 flex items-center justify-between">
                                                             <p className="text-zinc-600 text-[10px]">
-                                                                TRACKING_ID:
+                                                                ID_DE_SEGUIMIENTO:
                                                             </p>
                                                             <p className="text-[#00f0ff] font-black tracking-widest">
                                                                 {order.trackingNumber}
@@ -175,7 +175,7 @@ const OrderList: React.FC<OrderListProps> = ({
                                             <div>
                                                 <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
                                                     <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
-                                                        [PAYMENT_TYPE]
+                                                        [TIPO_DE_PAGO]
                                                     </h4>
                                                 </div>
                                                 <div className="bg-[#050505] border border-zinc-900 p-4 flex items-center h-[60px]">
@@ -192,10 +192,10 @@ const OrderList: React.FC<OrderListProps> = ({
                     <div className="bg-[#050505] border border-zinc-800 p-12 text-center font-mono">
                         <BiPackage size={48} className="mx-auto text-zinc-800 mb-4" />
                         <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest mb-1">
-                            [SYSTEM_ALERT]
+                            [ALERTA_DEL_SISTEMA]
                         </p>
                         <p className="text-zinc-600 text-xs tracking-wider">
-                            NO RECORDS FOUND MATCHING QUERY PARAMETERS.
+                            NO SE ENCONTRARON REGISTROS QUE COINCIDAN CON LOS PARÁMETROS DE LA CONSULTA.
                         </p>
                     </div>
                 )}

@@ -16,25 +16,32 @@ const DashHeader: React.FC<DashHeaderProps> = ({ data, title, titleData, path, t
 
 
     return (
-        <div className="flex justify-between items-center">
-            <div>
-                <h1 className="text-2xl lg:text-4xl font-bold text-slate-100 mb-3 flex items-center gap-3">
+        <div className="flex flex-col md:flex-row justify-between md:items-center gap-6 border-b border-zinc-800 pb-6 mb-8">
+            <div className="flex flex-col gap-2">
+                <h1 className="text-2xl lg:text-3xl font-bold text-[#00f0ff] font-mono tracking-[0.2em] uppercase flex items-center gap-4">
+                    <span className="text-[#00f0ff]/50">{'//'}</span>
                     {titleIcon}
-                    {title}
+                    <span className="tracking-widest">{title}</span>
                 </h1>
-                {list && <p className="text-slate-400">
-                    {data?.length || 0} {titleData}(s) en total
-                </p>}
+                {list && (
+                    <div className="flex items-center gap-3 mt-2">
+                        <span className="text-zinc-600 font-mono">--</span>
+                        <p className="text-zinc-400 font-mono text-xs tracking-widest uppercase bg-[#050505] border border-zinc-800 px-3 py-1 w-fit flex items-center gap-2">
+                            TOTAL REGISTROS: <span className="text-[#e4ff00] font-bold">[{data?.length || 0}]</span>
+                        </p>
+                    </div>
+                )}
             </div>
             {list && (
-                <ButtonAction
-                    text={`Nuevo ${titleData}`}
-                    variant="primary"
-                    onClick={() => navigate(`/dashboard/${path}/create`)}
-                    className="mt-7"
-                >
-                    <BiPlus size={20} />
-                </ButtonAction>
+                <div className="flex-shrink-0">
+                    <ButtonAction
+                        text={`NUEVO ${titleData}`}
+                        variant="primary"
+                        onClick={() => navigate(`/dashboard/${path}/create`)}
+                    >
+                        <BiPlus size={18} />
+                    </ButtonAction>
+                </div>
             )}
         </div>
     );

@@ -12,12 +12,12 @@ interface TableProductProps {
 const TableProduct: React.FC<TableProductProps> = ({ currentData, selectedData, handleSelectAll, handleSelectData }) => {
 
     const theader = [
-        "Producto",
-        "Categoria",
-        "Precio y Descuento",
-        "Stock",
-        "Estado",
-        "Acciones",
+        "[PRODUCTO]",
+        "[CATEGORIA]",
+        "[PRECIO Y DESCUENTO]",
+        "[STOCK]",
+        "[ESTADO]",
+        "[ACCIONES]",
     ];
 
     return (
