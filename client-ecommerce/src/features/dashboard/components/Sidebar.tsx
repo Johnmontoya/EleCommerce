@@ -42,7 +42,7 @@ const Sidebar = () => {
     : menuItems;
 
   return (
-    <aside className="hidden md:flex flex-col w-64 min-h-screen bg-[#050505] border-r border-zinc-800 p-6 shrink-0 font-mono relative">
+    <aside className="hidden lg:flex flex-col w-64 min-h-screen bg-[#050505] border-r border-zinc-800 p-6 shrink-0 font-mono relative">
       {/* Corner Accents */}
       <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff]" />
       <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />

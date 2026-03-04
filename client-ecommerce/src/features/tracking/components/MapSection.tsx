@@ -34,7 +34,7 @@ const MapSection: React.FC<StatusProps> = ({ status }) => {
         <div className="bg-[#050505] border border-zinc-800 p-6 mb-8 relative">
             <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100 mb-6 flex items-center gap-2 border-b border-zinc-800 pb-4">
                 <BiMapPin size={18} className="text-[#e4ff00]" />
-                [TELEMETRY_LOCATION_DATA]
+                [DATOS_DE_UBICACION_TELEMETRICA]
             </h2>
 
             <div className="relative h-80 bg-[#0a0a0a] border border-zinc-800 overflow-hidden">
@@ -86,7 +86,7 @@ const MapSection: React.FC<StatusProps> = ({ status }) => {
                             </div>
                             <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
                                 <p className="text-[10px] text-[#00f0ff] font-mono tracking-widest uppercase bg-black border border-[#00f0ff]/30 px-2 py-0.5 shadow-[0_0_10px_rgba(0,240,255,0.3)]">
-                                    [ORIGIN_NODE]
+                                    [NODO_ORIGEN]
                                 </p>
                             </div>
                         </div>
@@ -116,7 +116,7 @@ const MapSection: React.FC<StatusProps> = ({ status }) => {
                             </div>
                             <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
                                 <p className="text-[10px] text-zinc-400 font-mono tracking-widest uppercase bg-black border border-zinc-800 px-2 py-0.5">
-                                    [DESTINATION_NODE]
+                                    [NODO_DESTINO]
                                 </p>
                             </div>
                         </div>

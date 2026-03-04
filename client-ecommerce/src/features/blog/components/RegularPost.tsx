@@ -62,7 +62,7 @@ const RegularPost: React.FC<RegularProps> = ({ post }) => {
           {post.excerpt}
         </p>
         <button className="text-[#00f0ff] hover:text-white text-[10px] font-bold tracking-widest uppercase flex items-center gap-2 group/btn mt-auto">
-          [READ_RECORD]
+          [LEER_REGISTRO]
           <BiChevronRight
             size={14}
             className="group-hover/btn:translate-x-2 transition-transform opacity-0 group-hover/btn:opacity-100"

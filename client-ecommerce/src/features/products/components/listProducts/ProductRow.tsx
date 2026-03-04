@@ -91,12 +91,12 @@ const ProductRow: React.FC<ProductRowProps> = ({ product, selectedData, handleSe
                     {product.isPublished ? (
                         <>
                             <span className="w-1.5 h-1.5 bg-[#00f0ff]"></span>
-                            [LIVE]
+                            [EN_LINEA]
                         </>
                     ) : (
                         <>
                             <span className="w-1.5 h-1.5 bg-zinc-500"></span>
-                            [DRAFT]
+                            [BORRADOR]
                         </>
                     )}
                 </span>

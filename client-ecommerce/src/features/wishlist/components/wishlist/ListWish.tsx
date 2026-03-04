@@ -68,7 +68,7 @@ const ListWish: React.FC<WishlistItemProps> = ({ wishlistItems }) => {
             {!item && (
               <div className="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center">
                 <span className="bg-red-500 text-white px-4 py-2 font-mono text-xs uppercase tracking-widest border border-red-500">
-                  [OUT_OF_STOCK]
+                  [SIN_STOCK]
                 </span>
               </div>
             )}
@@ -120,7 +120,7 @@ const ListWish: React.FC<WishlistItemProps> = ({ wishlistItems }) => {
               }`}
           >
             <CiShoppingCart size={18} />
-            {item.stock ? "[ADD_TO_CART]" : "[UNAVAILABLE]"}
+            {item.stock ? "[AGREGAR_AL_CARRITO]" : "[SIN_STOCK]"}
           </button>
         </div>
       ))}

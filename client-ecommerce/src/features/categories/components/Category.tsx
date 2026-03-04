@@ -20,7 +20,7 @@ const Category = () => {
       <div className="flex items-center justify-center gap-4 mb-10 w-full">
         <div className="h-[1px] bg-zinc-800 flex-1 hidden md:block max-w-xs" />
         <h1 className="font-bold text-2xl text-white uppercase tracking-[0.2em]" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-          TRENDING_CATEGORIES //
+          CATEGORÍAS EN TENDENCIA //
         </h1>
         <div className="h-[1px] bg-zinc-800 flex-1 hidden md:block max-w-xs" />
       </div>

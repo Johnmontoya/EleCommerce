@@ -47,12 +47,12 @@ const Stats: React.FC<Props> = ({ totalOrders, pendingOrders, rewardPoints }) =>
               <p className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-2">
                 {stat.label}
               </p>
-              <h3 className="text-3xl font-black text-white font-mono tracking-wider">
+              <h3 className="text-2xl font-black text-white font-mono tracking-wider">
                 {stat.value}
               </h3>
             </div>
             <div
-              className={`w-12 h-12 bg-black border border-zinc-800 flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)] ${stat.color} transition-colors group-hover:bg-zinc-900 group-hover:${stat.color.split(' ')[0]}`}
+              className={`hidden lg:flex w-12 h-12 bg-black border border-zinc-800 flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)] ${stat.color} transition-colors group-hover:bg-zinc-900 group-hover:${stat.color.split(' ')[0]}`}
             >
               <span className={stat.color.split(' ')[1]}>
                 {stat.icon}

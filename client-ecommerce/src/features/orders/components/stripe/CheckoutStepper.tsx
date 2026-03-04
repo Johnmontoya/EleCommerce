@@ -2,12 +2,12 @@
 import type { CheckoutStep } from "../../types/checkout.types";
 
 const STEPS: { key: CheckoutStep; label: string }[] = [
-    { key: "summary", label: "SUMMARY" },
-    { key: "address", label: "ADDRESS" },
-    { key: "payment", label: "PAYMENT" },
+    { key: "resumen", label: "RESUMEN" },
+    { key: "direccion", label: "DIRECCION" },
+    { key: "pago", label: "PAGO" },
 ];
 
-const STEP_ORDER: CheckoutStep[] = ["summary", "address", "payment"];
+const STEP_ORDER: CheckoutStep[] = ["resumen", "direccion", "pago"];
 
 interface CheckoutStepperProps {
     currentStep: CheckoutStep;

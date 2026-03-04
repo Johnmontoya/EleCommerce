@@ -41,13 +41,13 @@ const Navbar = () => {
                 <div className="flex flex-row items-center gap-2">
                   <CiLocationOn size={16} />
                   <div>
-                    <span className="text-zinc-500">TARGET:</span> {user?.firstName} // {street ? street : "UNKNOWN_COORD"}
+                    <span className="text-zinc-500">OBJETIVO:</span> {user?.firstName} // {street ? street : "COORD_DESCONOCIDA"}
                   </div>
                 </div>
               </div>
             )}
             <div className="hidden md:flex">
-              <p className="text-[#e4ff00]">SYS_MSG: INVITATION BONUS ACTIVE // 20% DISCOUNT</p>
+              <p className="text-[#e4ff00]">SYS_MSG: BONO DE INVITACIÓN ACTIVO // 20% DE DESCUENTO</p>
             </div>
             <div className="flex flex-row gap-4 items-center">
               <div className="text-zinc-500 border-r border-zinc-800 pr-4">UTC // COP</div>
@@ -100,7 +100,7 @@ const Navbar = () => {
                     <CiShoppingBasket size={24} />
                   </span>
                 </div>
-                <h2 className="text-2xl font-black uppercase tracking-[0.2em] text-white" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                <h2 className="hidden md:flextext-2xl font-black uppercase tracking-[0.2em] text-white" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
                   ELECOMMERCE
                 </h2>
               </div>
@@ -111,16 +111,16 @@ const Navbar = () => {
                       <Link to="/">HOME</Link>
                     </li>
                     <li className="hover:text-[#00f0ff] transition-colors uppercase border-b-2 border-transparent hover:border-[#00f0ff]">
-                      <Link to="/products">INVENTORY_DB</Link>
+                      <Link to="/products">PRODUCTOS</Link>
                     </li>
                     <li className="hover:text-[#00f0ff] transition-colors uppercase border-b-2 border-transparent hover:border-[#00f0ff]">
-                      <Link to="/blog">COMM_LOGS</Link>
+                      <Link to="/blog">BLOG</Link>
                     </li>
                     <li className="hover:text-[#00f0ff] transition-colors uppercase border-b-2 border-transparent hover:border-[#00f0ff]">
-                      <Link to="/faq">SUPPORT_NET</Link>
+                      <Link to="/faq">AYUDA</Link>
                     </li>
                     <li className="hover:text-[#00f0ff] transition-colors uppercase border-b-2 border-transparent hover:border-[#00f0ff]">
-                      <Link to="/contact">PING_US</Link>
+                      <Link to="/contact">CONTACTO</Link>
                     </li>
                   </ul>
                 </div>

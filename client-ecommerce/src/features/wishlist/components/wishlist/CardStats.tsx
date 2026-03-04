@@ -24,7 +24,7 @@ const CardStats: React.FC<WishlistItemProps> = ({ wishlistItems }) => {
         <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff] opacity-50 group-hover:opacity-100 transition-opacity"></div>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest mb-1">[TOTAL_VALUE]</p>
+            <p className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest mb-1">[VALOR_TOTAL]</p>
             <p className="text-2xl font-bold text-[#00f0ff] drop-shadow-[0_0_5px_rgba(0,240,255,0.3)]">
               ${totalValue}
             </p>
@@ -39,7 +39,7 @@ const CardStats: React.FC<WishlistItemProps> = ({ wishlistItems }) => {
         <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#e4ff00] opacity-50 group-hover:opacity-100 transition-opacity"></div>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest mb-1">[AVAILABLE_UNITS]</p>
+            <p className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest mb-1">[UNIDADES_DISPONIBLES]</p>
             <p className="text-2xl font-bold text-[#e4ff00] drop-shadow-[0_0_5px_rgba(228,255,0,0.3)]">
               {inStockCount}/{wishlistItems?.length}
             </p>
@@ -54,7 +54,7 @@ const CardStats: React.FC<WishlistItemProps> = ({ wishlistItems }) => {
         <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#ff0055] opacity-50 group-hover:opacity-100 transition-opacity"></div>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest mb-1">[TOTAL_SAVINGS]</p>
+            <p className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest mb-1">[AHORRO_TOTAL]</p>
             <p className="text-2xl font-bold text-[#ff0055] drop-shadow-[0_0_5px_rgba(255,0,85,0.3)]">
               ${totalSavings}
             </p>

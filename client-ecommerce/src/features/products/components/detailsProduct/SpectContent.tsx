@@ -18,7 +18,7 @@ const SpecsContent: React.FC<SpecsContentProps> = ({ product }) => {
                 <div>
                     <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 bg-[#e4ff00]"></span>
-                        PRODUCT_VARIANTS //
+                        VARIANTES_DEL_PRODUCTO //
                     </h3>
                     <ul className="space-y-2 border-l border-zinc-800 pl-4">
                         {product.variants?.map((variant, index) => (
@@ -35,7 +35,7 @@ const SpecsContent: React.FC<SpecsContentProps> = ({ product }) => {
                 <div>
                     <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-4 flex items-center gap-2 mt-8">
                         <span className="w-1.5 h-1.5 bg-[#e4ff00]"></span>
-                        SYSTEM_ATTRIBUTES //
+                        ATTRIBUTES_DEL_SISTEMA //
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {attributes.map((attr, index) => (

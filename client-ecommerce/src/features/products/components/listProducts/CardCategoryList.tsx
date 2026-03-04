@@ -18,7 +18,7 @@ const CardCategoryList: React.FC<CardCategoryListProps> = ({ selectedCategory, o
       <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
 
       <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-6">
-        SYS_CATEGORIES //
+        SYS_CATEGORIAS //
       </h3>
 
       <ul className="space-y-2 h-96 overflow-y-auto pr-2 custom-scrollbar">
@@ -52,7 +52,7 @@ const CardCategoryList: React.FC<CardCategoryListProps> = ({ selectedCategory, o
           ))
         ) : (
           <li className="text-zinc-600 font-mono text-xs px-4 py-3 bg-black border border-zinc-900 border-dashed">
-            NO_CATEGORIES_FOUND
+            NO_HAY_CATEGORIAS
           </li>
         )}
       </ul>

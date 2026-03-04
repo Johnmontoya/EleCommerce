@@ -25,7 +25,7 @@ const ShippingAddress: React.FC<UserProps> = ({ user }) => {
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800">
           <div>
             <h2 className="text-xl font-black text-white uppercase tracking-widest">
-              [DELIVERY_COORDS]
+              [ADDRESS]
             </h2>
           </div>
           <button

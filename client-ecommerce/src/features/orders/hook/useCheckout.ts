@@ -22,7 +22,7 @@ export function useCheckout({
     const navigate = useNavigate();
 
     // ── Flujo ────────────────────────────────────────────────────────────────
-    const [step, setStep] = useState<CheckoutStep>("summary");
+    const [step, setStep] = useState<CheckoutStep>("resumen");
     const [isCreatingOrder, setIsCreatingOrder] = useState(false);
 
     // ── Selección de dirección y notas ────────────────────────────────────────
@@ -36,8 +36,8 @@ export function useCheckout({
     );
 
     // ── Navegación entre pasos ────────────────────────────────────────────────
-    const goToAddress = () => setStep("address");
-    const goToSummary = () => setStep("summary");
+    const goToAddress = () => setStep("direccion");
+    const goToSummary = () => setStep("resumen");
 
     /**
      * Crea la orden en el backend y avanza al paso de pago.
@@ -53,7 +53,7 @@ export function useCheckout({
             console.log("✅ Orden creada:", result);
             setOrderId(result.orderId);
             setOrderTotal(result.total);
-            setStep("payment");
+            setStep("pago");
         } catch {
             toast.error("Error al preparar la orden. Intenta de nuevo.");
         } finally {

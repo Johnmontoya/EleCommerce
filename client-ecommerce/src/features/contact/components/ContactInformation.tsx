@@ -9,12 +9,12 @@ const ContactInformation = () => {
       <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
 
       <h2 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-6">
-        NODE_INFO // CONTACT
+        INFORMACIÓN_DEL_NODO // CONTACTO
       </h2>
 
       <div className="space-y-8 text-sm">
         <div className="border-l-2 border-[#00f0ff] pl-4">
-          <p className="font-bold text-xs tracking-widest uppercase text-zinc-500 mb-1">[HQ_LOCATION]</p>
+          <p className="font-bold text-xs tracking-widest uppercase text-zinc-500 mb-1">[UBICACIÓN_HQ]</p>
           <p className="text-zinc-300">
             Carrera 13A #9-40
             <br />
@@ -23,13 +23,13 @@ const ContactInformation = () => {
         </div>
 
         <div className="border-l-2 border-[#00f0ff] pl-4">
-          <p className="font-bold text-xs tracking-widest uppercase text-zinc-500 mb-1">[DIGITAL_COMM]</p>
+          <p className="font-bold text-xs tracking-widest uppercase text-zinc-500 mb-1">[COMUNICACIÓN_DIGITAL]</p>
           <p className="text-[#00f0ff]">soporte@ecommerce.com</p>
           <p className="text-[#e4ff00] text-[10px] tracking-widest uppercase mt-1">SLA: &lt; 24H</p>
         </div>
 
         <div className="border-l-2 border-[#00f0ff] pl-4">
-          <p className="font-bold text-xs tracking-widest uppercase text-zinc-500 mb-1">[VOICE_LINK]</p>
+          <p className="font-bold text-xs tracking-widest uppercase text-zinc-500 mb-1">[ENLACE_DE_VOZ]</p>
           <p className="text-zinc-300">(+04) 123 456 7890</p>
           <p className="text-zinc-500 text-[10px] tracking-widest uppercase mt-1">LUN-VIE: 0900 - 1800</p>
         </div>

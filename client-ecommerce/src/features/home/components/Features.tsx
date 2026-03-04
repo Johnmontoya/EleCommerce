@@ -7,7 +7,7 @@ const Features = () => {
         <div className="flex items-center justify-center gap-4 mb-16 w-full">
           <div className="h-[1px] bg-zinc-800 flex-1 hidden md:block max-w-xs" />
           <h1 className="font-bold text-2xl text-white uppercase tracking-[0.2em]" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-            SYSTEM_CAPABILITIES //
+            CAPACIDADES DEL SISTEMA //
           </h1>
           <div className="h-[1px] bg-zinc-800 flex-1 hidden md:block max-w-xs" />
         </div>
@@ -19,9 +19,9 @@ const Features = () => {
             <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6 bg-black border border-zinc-800 grayscale group-hover:grayscale-0 transition-all p-4">
               <img src={Assets.Features1} className="w-16" />
             </div>
-            <h4 className="font-bold text-[#e4ff00] mb-3 text-sm tracking-widest font-mono">FREE_SHIPPING</h4>
+            <h4 className="font-bold text-[#e4ff00] mb-3 text-sm tracking-widest font-mono">ENVÍO GRATIS</h4>
             <p className="text-xs text-zinc-500 font-mono tracking-wide">
-              AUTHORIZED TO US CLUSTERS & ORDERS OVER 15K CREDITS.
+              AUTORIZADO A CLÚSTERES DE EE. UU. Y PEDIDOS SUPERIORES A 15K CRÉDITOS.
             </p>
           </div>
           <div className="text-center group border border-zinc-800 bg-[#050505] p-6 hover:border-[#00f0ff] transition-all relative">
@@ -30,9 +30,9 @@ const Features = () => {
             <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6 bg-black border border-zinc-800 grayscale group-hover:grayscale-0 transition-all p-4">
               <img src={Assets.Features2} className="w-16" />
             </div>
-            <h4 className="font-bold text-[#e4ff00] mb-3 text-sm tracking-widest font-mono">SECURE_PAYMENT</h4>
+            <h4 className="font-bold text-[#e4ff00] mb-3 text-sm tracking-widest font-mono">PAGO SEGURO</h4>
             <p className="text-xs text-zinc-500 font-mono tracking-wide">
-              ENCRYPTED TRANSACTIONS: VISA, AMEX, PAYPAL, MASTERCARD.
+              TRANSACCIONES ENCRIPTADAS: VISA, AMEX, PAYPAL, MASTERCARD.
             </p>
           </div>
           <div className="text-center group border border-zinc-800 bg-[#050505] p-6 hover:border-[#00f0ff] transition-all relative">
@@ -41,9 +41,9 @@ const Features = () => {
             <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6 bg-black border border-zinc-800 grayscale group-hover:grayscale-0 transition-all p-4">
               <img src={Assets.Features3} className="w-16" />
             </div>
-            <h4 className="font-bold text-[#e4ff00] mb-3 text-sm tracking-widest font-mono">1_YEAR_WARRANTY</h4>
+            <h4 className="font-bold text-[#e4ff00] mb-3 text-sm tracking-widest font-mono">1_AÑO_DE_GARANTÍA</h4>
             <p className="text-xs text-zinc-500 font-mono tracking-wide">
-              HARDWARE PROTECTED AGAINST MANUFACTURING DEFECTS.
+              HARDWARE PROTEGIDO CONTRA DEFECTOS DE FABRICACIÓN.
             </p>
           </div>
           <div className="text-center group border border-zinc-800 bg-[#050505] p-6 hover:border-[#00f0ff] transition-all relative">
@@ -52,9 +52,9 @@ const Features = () => {
             <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6 bg-black border border-zinc-800 grayscale group-hover:grayscale-0 transition-all p-4">
               <img src={Assets.Features4} className="w-16" />
             </div>
-            <h4 className="font-bold text-[#e4ff00] mb-3 text-sm tracking-widest font-mono">SUPPORT_24/7</h4>
+            <h4 className="font-bold text-[#e4ff00] mb-3 text-sm tracking-widest font-mono">SOPORTE 24/7</h4>
             <p className="text-xs text-zinc-500 font-mono tracking-wide">
-              COMM-LINK ALWAYS ACTIVE. CONNECT: 0123-456-789.
+              COMM-LINK SIEMPRE ACTIVO. CONECTA: 0123-456-789.
             </p>
           </div>
         </div>

@@ -37,7 +37,7 @@ const TrackingTimeLine: React.FC<TrackingTimeLineProps> = ({ trackingHistory }) 
                 <div className="absolute bottom-0 left-0 w-32 h-1 bg-[#00f0ff] opacity-20"></div>
 
                 <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100 mb-8 flex items-center gap-2 border-b border-zinc-800 pb-4">
-                    <span className="text-[#00f0ff]">&gt;</span> [TRANSIT_LOG_HISTORY]
+                    <span className="text-[#00f0ff]">&gt;</span> [HISTORIAL_DE_TRANSITO]
                 </h2>
 
                 <div className="space-y-0">
@@ -72,7 +72,7 @@ const TrackingTimeLine: React.FC<TrackingTimeLineProps> = ({ trackingHistory }) 
                                         </h3>
                                         {event.completed && (
                                             <span className="text-[#00f0ff] font-mono text-[10px] tracking-widest uppercase animate-pulse border border-[#00f0ff]/30 px-2 py-0.5">
-                                                [VERIFIED]
+                                                [VERIFICADO]
                                             </span>
                                         )}
                                     </div>

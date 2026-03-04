@@ -58,7 +58,7 @@ const ProductShowCase = () => {
         {/* Text Section */}
         <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center">
           <div className="inline-block border border-[#e4ff00] bg-[#e4ff00]/10 px-3 py-1 text-[#e4ff00] font-mono text-xs tracking-widest uppercase mb-6 w-fit">
-            FLASH_SALE // LIMITED TIME
+            OFERTA RELÁMPAGO // TIEMPO LIMITADO
           </div>
 
           <h1 className="text-4xl md:text-5xl font-black text-white uppercase mb-6" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
@@ -87,7 +87,7 @@ const ProductShowCase = () => {
           </div>
 
           <button onClick={() => navigate(`/products/${product.slug}`)} className="bg-[#e4ff00] text-black px-8 py-4 font-bold tracking-[0.2em] font-mono text-xs uppercase hover:bg-white transition-colors w-fit flex items-center gap-3 group/btn">
-            <span>PROCURE LOGISTICALLY</span>
+            <span>COMPRAR AHORA</span>
             <FaArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
           </button>
         </div>
@@ -112,7 +112,7 @@ const ProductShowCase = () => {
           <div className="absolute bottom-8 right-8 bg-[#050505] border border-zinc-800 p-4 font-mono z-20 shadow-[0_0_30px_rgba(0,0,0,0.8)] flex flex-col items-end group-hover:border-[#00f0ff] transition-colors">
             <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-zinc-500" />
             <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-zinc-500" />
-            <div className="text-[10px] text-[#00f0ff] tracking-widest uppercase mb-1">FLASH_PRICE //</div>
+            <div className="text-[10px] text-[#00f0ff] tracking-widest uppercase mb-1">PRECIO_FINAL //</div>
             {product.priceDiscount ? (
               <div className="flex flex-col items-end">
                 <span className="line-through text-zinc-600 text-[10px] tracking-widest">${product.price}</span>

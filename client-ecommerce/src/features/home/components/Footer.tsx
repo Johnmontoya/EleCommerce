@@ -36,7 +36,7 @@ const Footer = () => {
             </div>
 
             <p className="text-[10px] uppercase tracking-widest leading-relaxed text-zinc-500 mb-6 border-l border-zinc-700 pl-3">
-              YOUR VERIFIED ONLINE DEPOT FOR PROCURING ADVANCED EQUIPMENT AND MERCHANDISE.
+              TU DEPÓSITO EN LÍNEA VERIFICADO PARA ADQUIRIR EQUIPOS Y MERCANCÍAS AVANZADAS.
             </p>
 
             <div className="flex gap-4 mb-8">
@@ -73,10 +73,10 @@ const Footer = () => {
           {/* Columna 2: Enlaces Rápidos */}
           <div className="pt-4 md:pl-4 border-t border-zinc-800 md:border-t-0 md:border-l">
             <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-6">
-              QUICK_LINKS //
+              ENLACES RÁPIDOS //
             </h3>
             <ul className="space-y-4">
-              {['START_PAGE', 'ABOUT_PROTOCOL', 'STOREFRONT', 'COMMS'].map((link) => (
+              {['INICIO', 'SOBRE EL PROTOCOLO', 'TIENDA', 'COMMS'].map((link) => (
                 <li key={link}>
                   <a
                     href="#"
@@ -92,10 +92,10 @@ const Footer = () => {
           {/* Columna 3: Mi Cuenta */}
           <div className="pt-4 md:pl-4 border-t border-zinc-800 md:border-t-0 md:border-l">
             <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-6">
-              MY_ACCOUNT //
+              MI CUENTA //
             </h3>
             <ul className="space-y-4">
-              {['USER_PROFILE', 'ORDER_HISTORY', 'SAVED_ITEMS', 'SUPPORT_DESK'].map((link) => (
+              {['PERFIL_USUARIO', 'HISTORIAL_DE_PEDIDOS', 'ARTÍCULOS_GUARDADOS', 'SOPORTE_TÉCNICO'].map((link) => (
                 <li key={link}>
                   <a
                     href="#"
@@ -111,10 +111,10 @@ const Footer = () => {
           {/* Columna 4: Recursos */}
           <div className="pt-4 md:pl-4 border-t border-zinc-800 md:border-t-0 md:border-l">
             <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-6">
-              RESOURCES //
+              RECURSOS //
             </h3>
             <ul className="space-y-4">
-              {['SYSTEM_BLOG', 'HELP_CENTER', 'TERMS_OF_ENGAGEMENT', 'PRIVACY_PROTOCOL'].map((link) => (
+              {['BLOG_DEL_SISTEMA', 'CENTRO_DE_AYUDA', 'TÉRMINOS_DE_COMPROMISO', 'PROTOCOLO_DE_PRIVACIDAD'].map((link) => (
                 <li key={link}>
                   <a
                     href="#"
@@ -130,7 +130,7 @@ const Footer = () => {
           {/* Columna 5: Suscríbete */}
           <div className="pt-4 md:pl-4 border-t border-zinc-800 md:border-t-0 md:border-l">
             <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-6">
-              SYNC_COMMUNICATIONS //
+              SISTEMA DE COMUNICACIÓN //
             </h3>
             <div className="flex flex-col gap-3">
               <input
@@ -139,7 +139,7 @@ const Footer = () => {
                 className="w-full bg-black border border-zinc-800 p-3 text-xs text-white outline-none focus:border-[#00f0ff] transition-colors uppercase tracking-widest font-mono placeholder:text-zinc-700"
               />
               <button className="w-full border border-[#00f0ff] bg-black text-[#00f0ff] p-3 text-xs font-bold tracking-widest uppercase hover:bg-[#00f0ff] hover:text-black transition-all">
-                SUBSCRIBE_TO_GRID
+                SUSCRÍBETE A LA RED
               </button>
             </div>
           </div>

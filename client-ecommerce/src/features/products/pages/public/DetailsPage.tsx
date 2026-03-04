@@ -92,7 +92,7 @@ const DetailsPage: React.FC = () => {
         }}
       />
       {/* Breadcrumb */}
-      <div className="relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         <BreadCrumbs />
       </div>
 
@@ -152,7 +152,7 @@ const DetailsPage: React.FC = () => {
             {/* Rating */}
             <div className="flex items-center gap-1 mb-6">
               <span className="text-[#00f0ff] text-[10px] uppercase tracking-widest bg-[#00f0ff]/10 border border-[#00f0ff]/30 px-2 py-0.5 mr-2">
-                SYS_RATING
+                CALIFICACION_DEL_SISTEMA
               </span>
               {Array(5)
                 .fill("")
@@ -175,7 +175,7 @@ const DetailsPage: React.FC = () => {
             {/* Price section */}
             <div className="mb-8 border border-zinc-800 bg-[#050505] p-6 relative">
               <div className="absolute top-0 right-0 px-2 py-1 bg-black border-l border-b border-zinc-800 text-[10px] text-zinc-500 uppercase tracking-widest">
-                FINANCIAL_DATA //
+                DATOS_FINANCIEROS //
               </div>
 
               <div className="flex flex-col gap-1 mt-2">
@@ -197,7 +197,7 @@ const DetailsPage: React.FC = () => {
                 </p>
 
                 <span className="text-zinc-600 text-[10px] uppercase tracking-widest mt-2 border-t border-zinc-800 border-dashed pt-2 inline-block">
-                  [TAXES_INCLUDED]
+                  [IMPUESTOS_INCLUIDOS]
                 </span>
               </div>
             </div>
@@ -206,17 +206,17 @@ const DetailsPage: React.FC = () => {
             <div className="mb-8">
               <h3 className="text-[#e4ff00] text-xs font-bold tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-[#e4ff00] animate-pulse"></span>
-                PRODUCT_SPECS //
+                ESPECIFICACIONES_DEL_PRODUCTO //
               </h3>
               <div className="space-y-2 text-zinc-400 text-sm border-l-2 border-zinc-800 pl-4">
-                <p className="font-mono text-xs uppercase tracking-widest text-[#00f0ff] mb-1">DATA_STREAM_EMPTY</p>
+                <p className="font-mono text-xs uppercase tracking-widest text-[#00f0ff] mb-1">NO_HAY_ESPECIFICACIONES</p>
               </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-6 mt-auto border-t border-zinc-800 pt-8">
               {/* Quantity Selector */}
               <div className="flex flex-col gap-2">
-                <span className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">SET_QUANTITY</span>
+                <span className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">CANTIDAD_A_SELECCIONAR</span>
                 <div className="w-32 h-12 border border-zinc-600 bg-black flex justify-between items-center group">
                   <button
                     onClick={handleDecrement}
@@ -243,14 +243,14 @@ const DetailsPage: React.FC = () => {
                   className="flex-1 h-12 flex items-center justify-center gap-2 bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 hover:bg-[#00f0ff] hover:text-black transition-all font-mono text-[10px] font-bold tracking-[0.2em] uppercase w-full"
                 >
                   <BsCartPlus size={16} />
-                  [ADD_TO_CART]
+                  [AGREGAR_AL_CARRITO]
                 </button>
                 <button
                   onClick={() => { }}
                   className="flex-1 h-12 flex items-center justify-center gap-2 bg-[#00f0ff] text-black border border-[#00f0ff] hover:bg-black hover:text-[#00f0ff] transition-all font-mono text-[10px] font-bold tracking-[0.2em] uppercase w-full"
                 >
                   <BsCartCheck size={16} />
-                  [EXEC_PURCHASE]
+                  [EJECUTAR_COMPRA]
                 </button>
               </div>
             </div>

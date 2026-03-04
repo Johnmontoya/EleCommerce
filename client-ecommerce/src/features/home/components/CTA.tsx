@@ -12,13 +12,13 @@ const CTA = () => {
 
       <div className="flex flex-col text-center md:text-left items-center md:items-start pt-14 md:p-12 relative z-10 w-full md:w-1/2">
         <p className="text-[#00f0ff] font-mono text-xs tracking-[0.2em] mb-4 uppercase inline-block border-b border-[#00f0ff] pb-1 w-fit">
-          MOBILE_ACCESS //
+          ACCESO MÓVIL //
         </p>
         <h2 className="md:text-5xl text-3xl font-bold text-white uppercase" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-          DOWNLOAD THE HUB
+          DESCARGA LA APP
         </h2>
         <p className="text-zinc-500 font-mono text-xs mt-4 w-11/12 leading-relaxed tracking-wide">
-          SYNCHRONIZE YOUR PURCHASES VIA <span className="text-zinc-300 font-bold">iOS</span> & <span className="text-zinc-300 font-bold">ANDROID</span> SYSTEMS. MAINTAIN FULL CONTROL OVER YOUR TRANSACTIONS REMOTELY.
+          SINCRONIZA TUS COMPRAS A TRAVÉS DE <span className="text-zinc-300 font-bold">iOS</span> & <span className="text-zinc-300 font-bold">ANDROID</span> SISTEMAS. MANTÉN CONTROL TOTAL SOBRE TUS TRANSACCIONES DE FORMA REMOTA.
         </p>
 
         <div className="flex flex-wrap justify-center md:justify-start items-center gap-6 mt-10">

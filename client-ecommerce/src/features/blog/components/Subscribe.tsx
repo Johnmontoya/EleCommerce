@@ -15,10 +15,10 @@ const Subscribe = () => {
       <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#e4ff00]" />
       <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#e4ff00]" />
       <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-2">
-        SYS_COMMS // SUBSCRIBE
+        SYS_COMMS // SUSCRÍBETE
       </h3>
       <p className="text-zinc-500 text-[10px] tracking-widest uppercase mb-6">
-        ESTABLISH DIRECT LINK FOR LATEST_UPDATES.
+        ESTABLECER ENLACE DIRECTO PARA ACTUALIZACIONES MÁS RECIENTES.
       </p>
       <form onSubmit={handleSubscribe} className="space-y-4">
         <div className="relative">
@@ -39,7 +39,7 @@ const Subscribe = () => {
           type="submit"
           className="w-full bg-[#e4ff00] text-black hover:bg-black hover:text-[#e4ff00] border border-[#e4ff00] font-bold py-3 transition-colors text-xs tracking-[0.2em] uppercase"
         >
-          INITIATE_LINK
+          INICIAR_ENLACE
         </button>
       </form>
     </div>

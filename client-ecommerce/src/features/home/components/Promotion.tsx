@@ -34,7 +34,7 @@ const Promotion = () => {
 
           <div className="relative z-10 w-2/3">
             <p className="text-[#e4ff00] text-xs font-mono tracking-widest uppercase mb-4 bg-black/50 w-fit px-2 py-1 border border-[#e4ff00]/30">
-              SYS_PROMO_ACTIVE // {product.priceDiscount}% OFF
+              DESCUENTO_AUTORIZADO // {product.priceDiscount}% OFF
             </p>
             <p className="text-xs font-bold tracking-[0.2em] mb-1 text-[#00f0ff] uppercase">{product.brand}</p>
             <h3 className="text-3xl font-black mb-6 uppercase" style={{ fontFamily: "'Rajdhani', sans-serif" }}>{product.name}</h3>
@@ -43,13 +43,13 @@ const Promotion = () => {
               onClick={() => navigate(`/products/${product.slug}`)}
               className="border border-[#00f0ff] bg-black/50 text-[#00f0ff] px-6 py-3 text-xs font-bold tracking-widest uppercase flex items-center hover:bg-[#00f0ff] hover:text-black transition-all cursor-pointer w-fit"
             >
-              <span>ACCESS_DEAL</span>
+              <span>COMPRAR AHORA</span>
               <FaArrowRight size={12} className="ml-3" />
             </button>
           </div>
 
           <div className="absolute p-3 bg-black border border-zinc-700 bottom-8 right-8 font-mono text-2xl font-bold flex flex-col items-end shadow-2xl z-10 group-hover:border-[#e4ff00] transition-colors">
-            <span className="text-[10px] text-zinc-500 tracking-widest uppercase mb-1">PRICE_OVERRIDE</span>
+            <span className="text-[10px] text-zinc-500 tracking-widest uppercase mb-1">PRECIO_FINAL</span>
             <div className="text-white">
               ${product.price}<span className="text-xs text-zinc-400 ml-1">COP</span>
             </div>

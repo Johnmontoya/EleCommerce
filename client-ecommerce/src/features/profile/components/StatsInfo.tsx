@@ -10,45 +10,61 @@ interface Stats {
 const StatsInfo: React.FC<{ stats: Stats }> = ({ stats }) => {
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-            <div className="dash-search dark:dash-search border border-slate-600 rounded-xl p-4 backdrop-blur-sm">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 font-mono">
+            {/* Total Orders */}
+            <div className="bg-[#050505] border border-zinc-800 p-4 relative group hover:border-[#00f0ff] transition-colors">
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-zinc-800 group-hover:bg-[#00f0ff] transition-colors" />
                 <div className="flex items-center justify-between mb-2">
-                    <BiPackage className="text-cyan-400" size={24} />
-                    <span className="text-2xl font-bold text-slate-100">
+                    <BiPackage className="text-[#00f0ff]" size={24} />
+                    <span className="text-2xl font-black text-white tracking-widest">
                         {stats.totalOrders}
                     </span>
                 </div>
-                <p className="text-slate-400 text-sm">Pedidos Totales</p>
+                <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">
+                    [TOTAL_ORDERS]
+                </p>
             </div>
 
-            <div className="dash-search dark:dash-search border border-slate-600 rounded-xl p-4 backdrop-blur-sm">
+            {/* Total Spent */}
+            <div className="bg-[#050505] border border-zinc-800 p-4 relative group hover:border-[#e4ff00] transition-colors">
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-zinc-800 group-hover:bg-[#e4ff00] transition-colors" />
                 <div className="flex items-center justify-between mb-2">
-                    <span className="text-cyan-400 text-xl">💰</span>
-                    <span className="text-2xl font-bold text-slate-100">
-                        ${stats.totalSpent}
+                    <span className="text-[#e4ff00] font-bold text-xl">$</span>
+                    <span className="text-2xl font-black text-white tracking-widest">
+                        {stats.totalSpent.toFixed(2)}
                     </span>
                 </div>
-                <p className="text-slate-400 text-sm">Total Gastado</p>
+                <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">
+                    [TOTAL_EXPENDITURE]
+                </p>
             </div>
 
-            <div className="dash-search dark:dash-search border border-slate-600 rounded-xl p-4 backdrop-blur-sm">
+            {/* Wishlist Items */}
+            <div className="bg-[#050505] border border-zinc-800 p-4 relative group hover:border-[#ff0055] transition-colors">
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-zinc-800 group-hover:bg-[#ff0055] transition-colors" />
                 <div className="flex items-center justify-between mb-2">
-                    <BiHeart className="text-cyan-400" size={24} />
-                    <span className="text-2xl font-bold text-slate-100">
+                    <BiHeart className="text-[#ff0055]" size={24} />
+                    <span className="text-2xl font-black text-white tracking-widest">
                         {stats.wishlistItems}
                     </span>
                 </div>
-                <p className="text-slate-400 text-sm">Lista de Deseos</p>
+                <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">
+                    [WISHLIST_ASSETS]
+                </p>
             </div>
 
-            <div className="dash-search dark:dash-search border border-slate-600 rounded-xl p-4 backdrop-blur-sm">
+            {/* Reviews Written */}
+            <div className="bg-[#050505] border border-zinc-800 p-4 relative group hover:border-[#00ffaa] transition-colors">
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-zinc-800 group-hover:bg-[#00ffaa] transition-colors" />
                 <div className="flex items-center justify-between mb-2">
-                    <span className="text-cyan-400 text-xl">⭐</span>
-                    <span className="text-2xl font-bold text-slate-100">
+                    <span className="text-[#00ffaa] font-bold text-xl">★</span>
+                    <span className="text-2xl font-black text-white tracking-widest">
                         {stats.reviewsWritten}
                     </span>
                 </div>
-                <p className="text-slate-400 text-sm">Reviews Escritas</p>
+                <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">
+                    [REVIEWS_PUBLISHED]
+                </p>
             </div>
         </div>
     );

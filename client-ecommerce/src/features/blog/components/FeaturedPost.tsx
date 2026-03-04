@@ -61,7 +61,7 @@ const FeaturedPost: React.FC<FeaturesProps> = ({ featuredPost }) => {
             {featuredPost.excerpt}
           </p>
           <button className="text-[#00f0ff] hover:text-white text-xs font-bold tracking-widest uppercase flex items-center gap-2 group/btn">
-            [READ_RECORD]
+            [LEER_REGISTRO]
             <BiChevronRight
               size={16}
               className="group-hover/btn:translate-x-2 transition-transform opacity-0 group-hover/btn:opacity-100"

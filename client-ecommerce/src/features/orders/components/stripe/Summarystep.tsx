@@ -62,10 +62,10 @@ export function SummaryStep({ stock, items, pricing, onNext, onUpdateQuantity }:
             {/* Encabezado Técnico */}
             <div className="border-l-4 border-[#00f0ff] pl-3 mb-6">
                 <h2 className="text-2xl font-bold text-white uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-                    INVENTORY_MANIFEST //
+                    MANIFIESTO_DE_INVENTARIO //
                 </h2>
                 <p className="text-zinc-500 text-xs font-mono tracking-widest mt-1 uppercase">
-                    SYSTEM.VERIFY_ITEMS(AWAITING_CONFIRMATION)
+                    SYSTEM.VERIFICAR(ESPERANDO_CONFIRMACION)
                 </p>
             </div>
 
@@ -106,7 +106,7 @@ export function SummaryStep({ stock, items, pricing, onNext, onUpdateQuantity }:
                                     </p>
                                     <div className="flex items-center gap-2 mt-1">
                                         <p className="text-zinc-500 text-xs font-mono">
-                                            UNIT: {fmt(item.price)}
+                                            UNIDAD: {fmt(item.price)}
                                         </p>
                                         {item.discount && item.discount > 0 && (
                                             <span className="text-[9px] text-black bg-[#e4ff00] px-1 font-bold tracking-wider">
@@ -159,7 +159,7 @@ export function SummaryStep({ stock, items, pricing, onNext, onUpdateQuantity }:
                                 </p>
                                 {item.discount && item.discount > 0 && (
                                     <p className="text-[9px] text-[#e4ff00] tracking-widest uppercase">
-                                        SAVE:{fmt((item.price * item.quantity) * (item.discount / 100))}
+                                        AHORRO: {fmt((item.price * item.quantity) * (item.discount / 100))}
                                     </p>
                                 )}
                             </div>
@@ -181,23 +181,23 @@ export function SummaryStep({ stock, items, pricing, onNext, onUpdateQuantity }:
                     </div>
                     {tax > 0 && (
                         <div className="flex justify-between items-end">
-                            <span className="text-zinc-500 tracking-wider">TAX_FEE (2%)</span>
+                            <span className="text-zinc-500 tracking-wider">IMPUESTO (2%)</span>
                             <div className="flex-1 border-b border-dashed border-zinc-800 mx-4 mb-2"></div>
                             <span className="text-zinc-300">{fmt(tax)}</span>
                         </div>
                     )}
                     {discount > 0 && (
                         <div className="flex justify-between items-end">
-                            <span className="text-zinc-500 tracking-wider">DISCOUNT</span>
+                            <span className="text-zinc-500 tracking-wider">DESCUENTO</span>
                             <div className="flex-1 border-b border-dashed border-zinc-800 mx-4 mb-2"></div>
                             <span className="text-[#e4ff00]">- {fmt(discount)}</span>
                         </div>
                     )}
                     <div className="flex justify-between items-end">
-                        <span className="text-zinc-500 tracking-wider">LOGISTICS</span>
+                        <span className="text-zinc-500 tracking-wider">LOGISTICA</span>
                         <div className="flex-1 border-b border-dashed border-zinc-800 mx-4 mb-2"></div>
                         <span className={shippingCost === 0 ? "text-[#00f0ff]" : "text-zinc-300"}>
-                            {shippingCost === 0 ? "FREE_TIER" : fmt(shippingCost)}
+                            {shippingCost === 0 ? "ENVIO_GRATIS" : fmt(shippingCost)}
                         </span>
                     </div>
 
@@ -208,8 +208,8 @@ export function SummaryStep({ stock, items, pricing, onNext, onUpdateQuantity }:
 
                     <div className="flex justify-between items-center pt-2">
                         <div className="flex flex-col">
-                            <span className="text-white font-bold tracking-widest text-lg" style={{ fontFamily: "'Rajdhani', sans-serif" }}>TOTAL_AMOUNT</span>
-                            <span className="text-[10px] text-zinc-600 uppercase">CURRENCY: MXN</span>
+                            <span className="text-white font-bold tracking-widest text-lg" style={{ fontFamily: "'Rajdhani', sans-serif" }}>TOTAL_MONTO</span>
+                            <span className="text-[10px] text-zinc-600 uppercase">MONEDA: COP</span>
                         </div>
                         <span className="text-[#00f0ff] font-bold text-2xl tracking-wider">{fmt(total)}</span>
                     </div>
@@ -221,7 +221,7 @@ export function SummaryStep({ stock, items, pricing, onNext, onUpdateQuantity }:
                 className="w-full relative group overflow-hidden bg-white text-black font-bold uppercase tracking-[0.2em] py-4 flex items-center justify-center gap-3 transition-all hover:bg-[#00f0ff] hover:text-black disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={items.length === 0}
             >
-                <span className="relative z-10">CONFIRM_INVENTORY // PROCEED</span>
+                <span className="relative z-10">CONFIRMAR_INVENTARIO // PROCEDER</span>
                 <svg className="w-5 h-5 relative z-10 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>

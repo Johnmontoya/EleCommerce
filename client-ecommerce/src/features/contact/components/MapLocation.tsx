@@ -26,7 +26,7 @@ const MapLocation = () => {
         </div>
 
         <div className="absolute bottom-4 left-4 bg-black/80 border border-zinc-800 px-4 py-2 text-xs font-bold tracking-widest text-[#00f0ff] z-10 uppercase flex flex-col gap-1 backdrop-blur-sm">
-          <span className="text-white">TARGET_LOC //</span>
+          <span className="text-white">UBICACIÓN_OBJETIVO //</span>
           <span>LAT: 4.6097 / LNG: -74.0817</span>
           <span className="text-zinc-500 mt-1">Carrera 13A #9-40, Bogotá</span>
         </div>

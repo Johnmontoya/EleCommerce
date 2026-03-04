@@ -49,7 +49,7 @@ export const SearchResultItem: React.FC<SearchResultItemProps> = ({
           </h3>
           {data.stock! <= 0 && (
             <span className="bg-[#ff0055]/10 text-[#ff0055] border border-[#ff0055] px-2 py-0.5 text-[10px] font-mono tracking-widest uppercase">
-              [DEPLETED]
+              [AGOTADO]
             </span>
           )}
         </div>

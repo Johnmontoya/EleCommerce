@@ -10,7 +10,7 @@ const PopularTags: React.FC<PopularProps> = ({ popularTags }) => {
       <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff]" />
       <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
       <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-4">
-        TRENDING_TAGS //
+        TAGS_POPULARES //
       </h3>
       <div className="flex flex-wrap gap-2">
         {popularTags.map((tag) => (

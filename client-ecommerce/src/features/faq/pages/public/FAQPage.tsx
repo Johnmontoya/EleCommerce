@@ -19,10 +19,10 @@ const FAQPage = () => {
         <div className="flex-1">
           <div className="flex flex-col gap-2 items-start justify-start mb-8 border-l-4 border-[#ff0055] pl-6">
             <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-wider" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-              SYS_SUPPORT // FAQ
+              SYS_SUPPORT // PREGUNTAS_FRECUENTES
             </h1>
             <p className="text-zinc-500 max-w-2xl font-mono text-sm tracking-widest uppercase">
-              &gt; DATA_KNOWLEDGEBASE | TROUBLESHOOTING_GUIDES | TRANSMISSION_LOGS
+              &gt; BASE_DE_CONOCIMIENTO | GUÍAS_DE_SOLUCIÓN_DE_PROBLEMAS | REGISTROS_DE_TRANSMISIÓN
             </p>
           </div>
         </div>
@@ -30,7 +30,7 @@ const FAQPage = () => {
 
       <div className="w-full max-w-7xl mx-auto px-4 pb-8 relative z-10">
         <p className="text-[#00f0ff] mb-6 text-sm tracking-widest uppercase font-bold">
-          [ INPUT QUERY PARAMETERS ]
+          [ PARÁMETROS_DE_CONSULTA ]
         </p>
 
         {/* Search Bar */}
@@ -39,7 +39,7 @@ const FAQPage = () => {
           <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
           <input
             type="text"
-            placeholder="EXECUTE_SEARCH >"
+            placeholder="EJECUTAR_BUSQUEDA >"
             className="w-full bg-[#050505] border border-zinc-800 text-white placeholder-zinc-600 px-6 py-4 outline-none focus:border-[#00f0ff] transition-colors text-sm font-bold uppercase tracking-widest"
           />
         </div>
@@ -51,7 +51,7 @@ const FAQPage = () => {
             <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#ff0055]" />
 
             <h3 className="text-xs font-bold text-[#ff0055] tracking-[0.2em] uppercase mb-6">
-              DIR_CATEGORIES //
+              CATEGORÍAS_DE_DIRECCIÓN //
             </h3>
 
             <ul className="space-y-1 text-xs tracking-widest uppercase font-bold text-zinc-400">
@@ -74,10 +74,10 @@ const FAQPage = () => {
 
             <div className="mt-8 border-t border-zinc-800 pt-6">
               <p className="text-[#00f0ff] text-[10px] tracking-widest uppercase mb-4">
-                [ REQUIRES_HUMAN_OVERRIDE ? ]
+                [ ¿SOBREESCRITURA_HUMANA? ]
               </p>
               <button className="w-full bg-[#ff0055] text-white hover:bg-white hover:text-[#ff0055] font-bold py-3 transition-colors text-xs tracking-widest uppercase border border-[#ff0055]">
-                INITIATE_CONTACT
+                INICIAR_CONTACTO
               </button>
             </div>
           </div>

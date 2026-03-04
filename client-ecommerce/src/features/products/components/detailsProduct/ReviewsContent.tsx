@@ -26,7 +26,7 @@ const ReviewsContent: React.FC<ReviewsContentProps> = ({ product }) => {
                         ))}
                     </div>
                     <p className="text-[10px] text-zinc-500 uppercase tracking-[0.2em] font-bold mt-1">
-                        [{reviewsCount}] VERIFIED_LOGS
+                        [{reviewsCount}] VERIFICADO
                     </p>
                 </div>
             </div>
@@ -34,10 +34,10 @@ const ReviewsContent: React.FC<ReviewsContentProps> = ({ product }) => {
             <div className="bg-black border border-zinc-800 p-4">
                 <p className="text-[10px] text-[#ff0055] font-bold tracking-[0.2em] uppercase mb-2 animate-pulse flex items-center gap-2">
                     <span className="w-1.5 h-1.5 bg-[#ff0055]"></span>
-                    [SYS_WARN: FETCHING_REVIEW_DATA]
+                    [ERROR: NO_HAY_RESEÑAS]
                 </p>
                 <p className="text-xs text-zinc-500 uppercase tracking-widest border-l-2 border-zinc-800 pl-3">
-                    USER_FEEDBACK_MODULE_OFFLINE... AWAITING_CONNECTION.
+                    MODULO_DE_RESPUESTA_DEL_USUARIO_DESCONECTADO... ESPERANDO_CONEXIÓN.
                 </p>
             </div>
         </div>

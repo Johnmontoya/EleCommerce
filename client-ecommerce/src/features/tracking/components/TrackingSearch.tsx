@@ -36,7 +36,7 @@ const TrackingSearch: React.FC<TrackingSearchProps> = ({
             <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff] opacity-50 group-hover:opacity-100 transition-opacity"></div>
 
             <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100 mb-4 flex items-center gap-2">
-                <span className="text-[#00f0ff]">&gt;</span> ENTER_TRACKING_ID
+                <span className="text-[#00f0ff]">&gt;</span> [INGRESA_ID_DE_SEGUIMIENTO]
             </h2>
             <div className="flex gap-4 flex-col sm:flex-row">
                 <div className="flex-1 relative flex items-center">
@@ -59,11 +59,11 @@ const TrackingSearch: React.FC<TrackingSearchProps> = ({
                     disabled={trackingLoading || !isTracking.trackingNumber.trim()}
                     className="bg-[#00f0ff]/10 border border-[#00f0ff] text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black transition-all px-8 py-4 font-mono text-xs uppercase tracking-widest disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                 >
-                    {trackingLoading ? "[SCANNING...]" : "[LOCATE_SHIPMENT]"}
+                    {trackingLoading ? "[ESCANEANDO...]" : "[LOCALIZAR_ENVIO]"}
                 </button>
             </div>
             <p className="text-zinc-600 font-mono text-[10px] mt-3 uppercase tracking-widest border-l border-[#00f0ff] pl-2">
-                REFER TO CONFIRMATION DISPATCH FOR ID SEQUENCE
+                CONSULTA EL CORREO DE CONFIRMACIÓN DE ENVÍO PARA OBTENER LA SECUENCIA ID
             </p>
         </div>
     );

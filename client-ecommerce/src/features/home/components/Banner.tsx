@@ -87,11 +87,11 @@ const Banner = (props: PropType) => {
 
                                         <div className="relative z-10 max-w-xl flex flex-col justify-center h-full">
                                             <div className="inline-block border border-[#e4ff00] bg-[#e4ff00]/10 px-3 py-1 text-[#e4ff00] font-mono text-xs tracking-widest uppercase mb-6 w-fit">
-                                                DISCOUNT_AUTHORIZED // {slide.priceDiscount}% OFF
+                                                DESCUENTO // {slide.priceDiscount}% OFF
                                             </div>
 
                                             <p className="text-[#00f0ff] text-sm font-bold tracking-[0.3em] mb-2 uppercase">
-                                                MANUFACTURER: {slide.brand}
+                                                {slide.category.name}
                                             </p>
 
                                             <h2 className="text-5xl md:text-6xl font-black mb-6 uppercase tracking-wider" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
@@ -106,7 +106,7 @@ const Banner = (props: PropType) => {
                                                 to={`/products/${slide.slug}`}
                                                 className="w-fit flex flex-row justify-center items-center gap-4 bg-[#050505] text-[#00f0ff] border border-[#00f0ff] px-8 py-4 font-bold tracking-[0.2em] uppercase hover:bg-[#00f0ff] hover:text-black transition-all group"
                                             >
-                                                <span>EXECUTE_ORDER</span>
+                                                <span>COMPRAR AHORA</span>
                                                 <FaArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                                             </Link>
                                         </div>

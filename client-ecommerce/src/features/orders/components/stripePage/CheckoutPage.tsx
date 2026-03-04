@@ -88,7 +88,6 @@ const CheckoutPage = ({
         onCreateOrder,
     });
 
-    // Función para actualizar cantidad - ¡YA LA TIENES!
     const handleUpdateQuantity = async (productId: string, newQuantity: number) => {
         await updateCartMutation.mutateAsync({
             id: productId,
@@ -136,17 +135,17 @@ const CheckoutPage = ({
                     <div className="absolute bottom-0 left-0 w-3 h-3 border-b-[3px] border-l-[3px] border-[#00f0ff]" />
                     <div className="absolute bottom-0 right-0 w-3 h-3 border-b-[3px] border-r-[3px] border-[#00f0ff]" />
 
-                    {step === "summary" && (
+                    {step === "resumen" && (
                         <SummaryStep
                             stock={stock}
                             items={cartItems}
                             pricing={pricing}
                             onNext={goToAddress}
-                            onUpdateQuantity={handleUpdateQuantity} // 👈 ESTA ES LA LÍNEA QUE FALTABA
+                            onUpdateQuantity={handleUpdateQuantity}
                         />
                     )}
 
-                    {step === "address" && (
+                    {step === "direccion" && (
                         <AddressStep
                             addresses={savedAddresses}
                             selectedAddressId={selectedAddressId}
@@ -159,7 +158,7 @@ const CheckoutPage = ({
                         />
                     )}
 
-                    {step === "payment" && (
+                    {step === "pago" && (
                         <Elements stripe={stripePromise} options={STRIPE_OPTIONS}>
                             <PaymentStep
                                 orderId={orderId}
@@ -183,13 +182,13 @@ const CheckoutPage = ({
                                 </svg>
                             </div>
                             <div>
-                                <h2 className="text-3xl font-bold text-white uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>PAYMENT_SUCCESS //</h2>
+                                <h2 className="text-3xl font-bold text-white uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>PAGO_EXITOSO //</h2>
                                 <p className="text-zinc-500 mt-2 text-sm tracking-widest uppercase">
-                                    ORDER REDIRECTING...
+                                    ORDEN REDIRIGIENDO...
                                 </p>
                             </div>
                             <div className="w-full max-w-sm bg-black border border-zinc-800 p-4 text-left relative mt-4">
-                                <span className="absolute -top-2.5 left-4 bg-[#050505] px-2 text-[10px] text-[#00f0ff] tracking-widest border border-zinc-800">ORDER_ID</span>
+                                <span className="absolute -top-2.5 left-4 bg-[#050505] px-2 text-[10px] text-[#00f0ff] tracking-widest border border-zinc-800">ID_ORDEN</span>
                                 <p className="text-zinc-300 font-mono text-sm tracking-wider mt-2">{orderId}</p>
                             </div>
                         </div>
@@ -199,7 +198,7 @@ const CheckoutPage = ({
                 {/* Footer */}
                 <p className="text-center text-zinc-600 text-[10px] tracking-[0.2em] uppercase mt-8 flex items-center justify-center gap-2">
                     <span className="w-2 h-2 bg-emerald-500 animate-pulse"></span>
-                    SECURE_PAYMENT_SSL // POWERED_BY_STRIPE
+                    PAGO_SEGURO_SSL // POWERED_BY_STRIPE
                 </p>
             </div>
         </div>

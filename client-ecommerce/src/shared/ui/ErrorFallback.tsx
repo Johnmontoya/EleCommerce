@@ -24,11 +24,11 @@ const ErrorFallback = ({ resetErrorBoundary }: IErrorFallbackProps) => {
           </h1>
           <div className="inline-block bg-[#ff0055]/10 border border-[#ff0055]/30 px-6 py-2 mb-6">
             <p className="text-[#ff0055] font-mono text-xl md:text-2xl font-bold uppercase tracking-widest">
-              [CRITICAL_SYSTEM_FAILURE]
+              [FALLO_CRITICO_DEL_SISTEMA]
             </p>
           </div>
           <p className="text-zinc-400 font-mono text-sm tracking-widest uppercase mb-10 max-w-lg mx-auto leading-relaxed border-l-2 border-[#ff0055] pl-4 text-left">
-            AN UNEXPECTED ERROR HAS OCCURRED IN THE MAINFRAME. WE APOLOGIZE FOR THE INCONVENIENCE. PLEASE INITIATE A REBOOT SEQUENCE OR CONTACT SYSTEM ADMINISTRATOR.
+            HA OCURRIDO UN ERROR INESPERADO EN EL SISTEMA PRINCIPAL. LAMENTAMOS LOS INCONVENIENTES. POR FAVOR, INICIE UNA SECUENCIA DE REINICIO O CONTACTE AL ADMINISTRADOR DEL SISTEMA.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -36,7 +36,7 @@ const ErrorFallback = ({ resetErrorBoundary }: IErrorFallbackProps) => {
               onClick={() => resetErrorBoundary()}
               className="flex items-center justify-center gap-2 border border-[#ff0055] bg-[#ff0055]/10 text-[#ff0055] px-6 py-4 hover:bg-[#ff0055] hover:text-white transition-all font-mono text-xs uppercase tracking-widest shadow-[0_0_15px_rgba(255,0,85,0.3)]"
             >
-              [INITIATE_RETRY_SEQUENCE]
+              [INICIAR_SECUENCIA_DE_REINTENTO]
             </button>
             <button
               onClick={() => {
@@ -45,7 +45,7 @@ const ErrorFallback = ({ resetErrorBoundary }: IErrorFallbackProps) => {
               }}
               className="flex items-center justify-center gap-2 border border-zinc-800 bg-[#0a0a0a] text-zinc-400 px-6 py-4 hover:border-[#00f0ff] hover:text-[#00f0ff] transition-all font-mono text-xs uppercase tracking-widest"
             >
-              [ABORT_TO_HOME]
+              [ABORTAR_A_INICIO]
             </button>
           </div>
         </div>

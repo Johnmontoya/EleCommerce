@@ -22,20 +22,20 @@ const ButtonAction: React.FC<ButtonProps> = ({
   // Mapa de Clases: Define todos los estilos de las variantes aquí
   const variantClasses: Record<ButtonProps["variant"], string> = {
     primary:
-      "bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 shadow-cyan-500/50 shadow-lg",
-    secondary: "bg-slate-700 hover:bg-slate-600",
+      "bg-[#00f0ff]/10 border border-[#00f0ff] text-[#00f0ff] hover:bg-[#00f0ff]/20 shadow-[0_0_10px_rgba(0,240,255,0.15)] hover:shadow-[0_0_15px_rgba(0,240,255,0.3)]",
+    secondary: "bg-black border border-zinc-700 hover:border-zinc-500 text-zinc-300 hover:text-white",
     danger:
-      "bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 shadow-red-500/50 shadow-lg",
-    outline: "bg-transparent",
-    edit: "bg-cyan-600 hover:bg-cyan-500/30 text-cyan-400 p-1 rounded-lg transition-all",
-    delete: "bg-red-500/80 hover:bg-red-500/30 text-red-400 p-1 rounded-lg transition-all",
-    view: "bg-slate-700/50 text-slate-400 border-slate-500/30 p-1 rounded-lg transition-all"
+      "bg-[#ff0055]/10 border border-[#ff0055] text-[#ff0055] hover:bg-[#ff0055]/20 shadow-[0_0_10px_rgba(255,0,85,0.15)] hover:shadow-[0_0_15px_rgba(255,0,85,0.3)]",
+    outline: "bg-transparent border border-zinc-700 text-zinc-400 hover:border-[#00f0ff] hover:text-[#00f0ff]",
+    edit: "bg-transparent border border-[#e4ff00] text-[#e4ff00] hover:bg-[#e4ff00]/20 p-2 rounded-none transition-all shadow-[0_0_8px_rgba(228,255,0,0.15)]",
+    delete: "bg-transparent border border-[#ff0055] text-[#ff0055] hover:bg-[#ff0055]/20 p-2 rounded-none transition-all shadow-[0_0_8px_rgba(255,0,85,0.15)]",
+    view: "bg-black border border-zinc-700 text-zinc-400 hover:border-[#00f0ff] hover:text-[#00f0ff] p-2 rounded-none transition-all"
   };
 
   const colorClasses = variantClasses[variant] || variantClasses.primary;
 
   const disabledStyle = disabled
-    ? "opacity-50 cursor-not-allowed transform-none shadow-none"
+    ? "opacity-30 cursor-not-allowed hover:bg-transparent hover:shadow-none hover:border-zinc-700"
     : "";
 
   return (
@@ -43,9 +43,9 @@ const ButtonAction: React.FC<ButtonProps> = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`${className} ${colorClasses} ${disabledStyle} text-white px-6 py-3 rounded-xl font-semibold transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer`}
+      className={`${className} ${colorClasses} ${disabledStyle} px-6 py-3 rounded-none font-mono font-bold text-[10px] uppercase tracking-widest transition-all flex items-center justify-center gap-2 cursor-pointer w-max`}
     >
-      {children} {text}
+      {children} {text && `[${text}]`}
     </button>
   );
 };

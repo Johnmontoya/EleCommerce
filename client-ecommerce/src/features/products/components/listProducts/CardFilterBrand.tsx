@@ -20,7 +20,7 @@ const CardFilterBrand: React.FC<CardProps> = ({ selectedBrands, onToggleBrand })
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] flex items-center gap-2">
           <span className="w-1.5 h-1.5 bg-[#e4ff00] animate-pulse"></span>
-          MANUF_ORIGIN //
+          ORIGEN_DE_FABRICACION //
         </h3>
         {/* ✨ Contador de marcas seleccionadas */}
         {selectedBrands.length > 0 && (
@@ -61,7 +61,7 @@ const CardFilterBrand: React.FC<CardProps> = ({ selectedBrands, onToggleBrand })
         </ul>
       ) : (
         <div className="text-[#ff0055] font-mono text-[10px] tracking-widest px-4 py-4 bg-[#050505] border border-zinc-900 border-dashed uppercase text-center mt-4">
-          [ERR: SYS_N_BRANDS_FND]
+          [ERROR: NO_HAY_MARCAS]
         </div>
       )}
     </div>

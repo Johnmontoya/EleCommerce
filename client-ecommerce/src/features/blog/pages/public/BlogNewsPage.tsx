@@ -119,10 +119,10 @@ const BlogNewsPage: React.FC = () => {
         <div className="flex-1">
           <div className="flex flex-col gap-2 items-start justify-start mb-8 border-l-4 border-[#00f0ff] pl-6">
             <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-wider" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-              SYS_LOGS // LATEST_UPDATES
+              SYS_LOGS // ACTUALIZACIONES_MÁS_RECENTES
             </h1>
             <p className="text-zinc-500 max-w-2xl font-mono text-sm tracking-widest uppercase">
-              &gt; TECHNOLOGY_REPORTS | EQUIPMENT_ANNOUNCEMENTS | DATA_STREAMS
+              &gt; REPORTES_DE_TECNOLOGÍA | ANUNCIOS_DE_EQUIPOS | FLUJOS_DE_DATOS
             </p>
           </div>
         </div>

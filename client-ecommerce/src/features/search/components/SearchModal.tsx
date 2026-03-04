@@ -56,7 +56,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           <div className="flex items-center gap-3">
             <div className="w-2 h-6 bg-[#00f0ff] animate-pulse"></div>
             <h1 className="text-[#00f0ff] font-mono tracking-widest uppercase text-sm font-bold">
-              [SYSTEM_SEARCH_PROTOCOL]
+              [PROTOCOLO_DE_BÚSQUEDA_DEL_SISTEMA]
             </h1>
           </div>
           <button
@@ -74,7 +74,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             value={query}
             onChange={search}
             isLoading={isLoading}
-            placeholder="[ENTER_PRODUCT_OR_CATEGORY_PARAMETER...]"
+            placeholder="[CONSULTA_DE_PRODUCTO_O_CATEGORÍA...]"
           />
         </div>
 
@@ -89,10 +89,10 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           {!isLoading && results.length === 0 && query && (
             <div className="text-center py-12 border border-zinc-800 border-dashed bg-[#050505] mt-2">
               <p className="text-[#ff0055] font-mono tracking-widest uppercase text-sm mb-2">
-                [ERR: NO_MATCHES_FOUND "{query}"]
+                [ERR: NO SE ENCONTRARON COINCIDENCIAS "{query}"]
               </p>
               <p className="text-zinc-500 font-mono text-xs uppercase tracking-wider">
-                [RECOMMENDATION: MODIFY_SEARCH_PARAMETERS]
+                [RECOMMENDATION: MODIFICAR_PARAMETROS_DE_BÚSQUEDA]
               </p>
             </div>
           )}
@@ -103,7 +103,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 <div className="w-2 h-2 bg-zinc-700 animate-pulse"></div>
               </div>
               <p className="text-zinc-500 font-mono text-xs uppercase tracking-widest">
-                [AWAITING_INPUT_STREAM]
+                [ESPERANDO_FLUJO_DE_ENTRADA]
               </p>
             </div>
           )}
@@ -111,7 +111,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           {results.length > 0 && (
             <div className="space-y-3 mt-2">
               <p className="text-[#00f0ff] font-mono bg-[#00f0ff]/10 border border-[#00f0ff]/30 px-3 py-1 text-[10px] tracking-widest uppercase inline-block mb-2">
-                [{results.length} RECORD{results.length !== 1 ? "S" : ""} RETRIEVED]
+                [{results.length} REGISTRO{results.length !== 1 ? "S" : ""} RECUPERADO]
               </p>
               {results?.map((product) => (
                 <SearchResultItem

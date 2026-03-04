@@ -21,14 +21,16 @@ const DashTrackPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#020202] text-zinc-300">
-      <BreadCrumbs />
+      <div className="max-w-7xl mx-auto">
+        <BreadCrumbs />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8 border-b border-zinc-800 pb-4">
           <BiPackage size={36} className="text-[#00f0ff]" />
-          <h1 className="text-3xl font-bold text-zinc-100 font-mono tracking-widest uppercase">
-            [TRACKING_PORTAL]
+          <h1 className="text-2xl font-bold text-zinc-100 font-mono tracking-widest uppercase">
+            [PORTAL_DE_SEGUIMIENTO]
           </h1>
         </div>
 
@@ -72,10 +74,10 @@ const DashTrackPage: React.FC = () => {
 
             <BiPackage size={64} className="text-zinc-600 mx-auto mb-6" />
             <p className="text-zinc-400 text-sm font-mono tracking-widest uppercase">
-              // AWAITING_TELEMETRY_INPUT
+              // ESPERANDO_TELEMETRIA_INPUT
             </p>
             <p className="text-zinc-500 text-xs font-mono mt-2 uppercase">
-              ENTER TRACKING SEQUENCE TO ESTABLISH CONNECTION
+              INGRESA LA SECUENCIA DE SEGUIMIENTO PARA ESTABLECER CONEXIÓN
             </p>
           </div>
         )}

@@ -14,7 +14,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
   isLoading,
   onSubmit,
-  placeholder = "[INPUT_SEARCH_QUERY_DOM...]",
+  placeholder = "[CONSULTA DE BÚSQUEDA...]",
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -55,7 +55,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             type="submit"
             className="bg-[#00f0ff]/10 border border-[#00f0ff] hover:bg-[#00f0ff] hover:text-black w-32 h-[38px] text-[10px] text-[#00f0ff] font-mono uppercase tracking-widest transition-colors flex items-center justify-center gap-2"
           >
-            [EXECUTE]
+            [EJECUTAR]
           </button>
         )}
       </div>

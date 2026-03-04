@@ -30,13 +30,13 @@ const CardFilterPrice = ({ priceRange, onPriceChange }: CardFilterPriceProps) =>
       <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
       <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-[#e4ff00] animate-pulse"></span>
-        PRICE_PARAMS //
+        PARAMETROS_DE_PRECIO //
       </h3>
       <div className="space-y-5">
         {/* Input de precio mínimo */}
         <div>
           <label className="text-[10px] text-zinc-500 tracking-widest uppercase mb-2 block">
-            MIN_VALUE [USD]
+            VALOR_MINIMO [USD]
           </label>
           <div className="relative">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-600 text-xs">
@@ -56,7 +56,7 @@ const CardFilterPrice = ({ priceRange, onPriceChange }: CardFilterPriceProps) =>
         {/* Input de precio máximo */}
         <div>
           <label className="text-[10px] text-zinc-500 tracking-widest uppercase mb-2 block">
-            MAX_VALUE [USD]
+            VALOR_MAXIMO [USD]
           </label>
           <div className="relative">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-600 text-xs">
@@ -94,7 +94,7 @@ const CardFilterPrice = ({ priceRange, onPriceChange }: CardFilterPriceProps) =>
             onClick={handleApply}
             className="flex-1 bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 hover:bg-[#00f0ff] hover:text-black py-2 text-[10px] font-bold tracking-[0.2em] transition-all uppercase"
           >
-            [EXECUTE_Q]
+            [EJECUTAR_CONSULTA]
           </button>
           <button
             onClick={handleReset}

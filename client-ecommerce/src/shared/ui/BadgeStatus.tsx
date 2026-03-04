@@ -4,54 +4,58 @@ export const BadgeStatus: React.FC<{ status: string }> = ({ status }) => {
     switch (status) {
         case "PENDING":
             return (
-                <div className="bg-yellow-600 text-yellow-400 px-4 py-2 rounded-lg flex items-center gap-2">
-                    <MdPending size={16} className="text-slate-100" />
-                    <span className="text-sm text-slate-100">Pendiente</span>
+                <div className="bg-[#ffaa00]/10 border border-[#ffaa00] text-[#ffaa00] px-3 py-1 rounded-none flex items-center gap-2 font-mono uppercase tracking-widest text-[10px] w-max shadow-[0_0_8px_rgba(255,170,0,0.15)]">
+                    <MdPending size={14} />
+                    <span>[PENDING]</span>
                 </div>
             );
         case "CONFIRMED":
             return (
-                <div className="bg-emerald-600 text-emerald-400 px-4 py-2 rounded-lg flex items-center gap-2">
-                    <MdCheckCircle size={16} className="text-slate-100" />
-                    <span className="text-sm text-slate-100">Confirmado</span>
+                <div className="bg-[#00ffaa]/10 border border-[#00ffaa] text-[#00ffaa] px-3 py-1 rounded-none flex items-center gap-2 font-mono uppercase tracking-widest text-[10px] w-max shadow-[0_0_8px_rgba(0,255,170,0.15)]">
+                    <MdCheckCircle size={14} />
+                    <span>[CONFIRMED]</span>
                 </div>
             );
         case "PROCESSING":
             return (
-                <div className="bg-blue-600 text-blue-400 px-4 py-2 rounded-lg flex items-center gap-2">
-                    <MdLocalShipping size={16} className="text-slate-100" />
-                    <span className="text-sm text-slate-100">Procesando</span>
+                <div className="bg-[#00f0ff]/10 border border-[#00f0ff] text-[#00f0ff] px-3 py-1 rounded-none flex items-center gap-2 font-mono uppercase tracking-widest text-[10px] w-max shadow-[0_0_8px_rgba(0,240,255,0.15)]">
+                    <MdLocalShipping size={14} />
+                    <span>[PROCESSING]</span>
                 </div>
             );
         case "SHIPPED":
             return (
-                <div className="bg-indigo-500/20 text-indigo-400 px-4 py-2 rounded-lg flex items-center gap-2">
-                    <MdLocalShipping size={16} className="text-slate-100" />
-                    <span className="text-sm text-slate-100">Enviado</span>
+                <div className="bg-[#a200ff]/10 border border-[#a200ff] text-[#a200ff] px-3 py-1 rounded-none flex items-center gap-2 font-mono uppercase tracking-widest text-[10px] w-max shadow-[0_0_8px_rgba(162,0,255,0.15)]">
+                    <MdLocalShipping size={14} />
+                    <span>[SHIPPED]</span>
                 </div>
             );
         case "DELIVERED":
             return (
-                <div className="bg-green-600 text-green-400 px-4 py-2 rounded-lg flex items-center gap-2">
-                    <MdCheckCircle size={16} className="text-slate-100" />
-                    <span className="text-sm text-slate-100">Entregado</span>
+                <div className="bg-[#e4ff00]/10 border border-[#e4ff00] text-[#e4ff00] px-3 py-1 rounded-none flex items-center gap-2 font-mono uppercase tracking-widest text-[10px] w-max shadow-[0_0_8px_rgba(228,255,0,0.15)]">
+                    <MdCheckCircle size={14} />
+                    <span>[DELIVERED]</span>
                 </div>
             );
         case "CANCELLED":
             return (
-                <div className="bg-red-600 text-red-400 px-4 py-2 rounded-lg flex items-center gap-2">
-                    <MdCancel size={16} className="text-slate-100" />
-                    <span className="text-sm text-slate-100">Cancelado</span>
+                <div className="bg-[#ff0055]/10 border border-[#ff0055] text-[#ff0055] px-3 py-1 rounded-none flex items-center gap-2 font-mono uppercase tracking-widest text-[10px] w-max shadow-[0_0_8px_rgba(255,0,85,0.15)]">
+                    <MdCancel size={14} />
+                    <span>[CANCELLED]</span>
                 </div>
             );
         case "REFUNDED":
             return (
-                <div className="bg-slate-600 text-slate-400 px-4 py-2 rounded-lg flex items-center gap-2">
-                    <MdRefresh size={16} className="text-slate-100" />
-                    <span className="text-sm text-slate-100">Devuelto</span>
+                <div className="bg-zinc-800/50 border border-zinc-500 text-zinc-400 px-3 py-1 rounded-none flex items-center gap-2 font-mono uppercase tracking-widest text-[10px] w-max shadow-[0_0_8px_rgba(161,161,170,0.15)]">
+                    <MdRefresh size={14} />
+                    <span>[REFUNDED]</span>
                 </div>
             );
         default:
-            return "Desconocido";
+            return (
+                <div className="bg-black border border-zinc-700 text-zinc-500 px-3 py-1 rounded-none flex items-center gap-2 font-mono uppercase tracking-widest text-[10px] w-max">
+                    <span>[UNKNOWN_STATUS]</span>
+                </div>
+            );
     }
 }

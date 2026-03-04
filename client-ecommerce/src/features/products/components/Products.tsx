@@ -81,7 +81,7 @@ const Products = () => {
       <div className="flex items-center justify-center gap-4 mb-10 w-full relative z-10">
         <div className="h-[1px] bg-zinc-800 flex-1 hidden md:block max-w-xs" />
         <h1 className="font-bold text-2xl text-white uppercase tracking-[0.2em]" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-          GLOBAL_INVENTORY //
+          INVENTARIO GLOBAL //
         </h1>
         <div className="h-[1px] bg-zinc-800 flex-1 hidden md:block max-w-xs" />
       </div>
@@ -169,7 +169,7 @@ const Products = () => {
         {isFetchingNextPage && (
           <div className="flex items-center gap-3 text-[#00f0ff] uppercase text-xs font-bold tracking-widest font-mono">
             <div className="w-4 h-4 border-2 border-[#00f0ff] border-t-transparent animate-[spin_2s_linear_infinite]"></div>
-            <span>[RETRIEVING_DATA...]</span>
+            <span>[OBTENIENDO_DATOS...]</span>
           </div>
         )}
       </div>
@@ -178,7 +178,7 @@ const Products = () => {
       {!hasNextPage && allProducts.length > 0 && (
         <div className="w-full text-center text-zinc-600 py-8 mt-4 border-t border-zinc-900 border-dashed">
           <p className="text-[10px] font-mono tracking-[0.2em] font-bold uppercase">
-            END_OF_INVENTORY // {allProducts.length} ITEMS EXTRACTED
+            FIN DEL INVENTARIO // {allProducts.length} ITEMS EXTRAIDOS
           </p>
         </div>
       )}
@@ -187,7 +187,7 @@ const Products = () => {
       {allProducts.length === 0 && !isLoading && (
         <div className="w-full text-center py-16 border border-zinc-800 bg-[#050505] mt-8">
           <p className="text-[#ff0055] text-xs font-mono font-bold tracking-widest uppercase">
-            [ERR_NO_GLOBAL_INVENTORY_DETECTED]
+            [ERROR: NO_HAY_INVENTARIO_GLOBAL]
           </p>
         </div>
       )}

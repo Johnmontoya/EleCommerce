@@ -8,28 +8,37 @@ interface NavMobileProps {
 }
 
 const NavMobile: React.FC<NavMobileProps> = ({ isMenuOpen, setIsMenuOpen }) => {
-    
+
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-screen bg-white text-base flex flex-col md:hidden items-center justify-center gap-6 font-medium z-50 text-gray-800 transition-all duration-500 ${
-        isMenuOpen ? "translate-x-0" : "-translate-x-full"
-      }`}
+      className={`fixed top-0 left-0 w-full h-screen bg-black/95 backdrop-blur-md border-r border-[#00f0ff]/30 text-base flex flex-col lg:hidden items-center justify-center gap-8 font-mono z-50 transition-all duration-500 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
     >
+      <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00f0ff] to-transparent opacity-50" />
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00f0ff] to-transparent opacity-50" />
+
+      <div className="flex flex-col items-center gap-6 w-full px-8">
+        {navLinksMobile.map((item, i) => (
+          <a
+            key={i}
+            href={item.link}
+            onClick={() => setIsMenuOpen(false)}
+            className="w-full text-center py-4 border-b border-zinc-800 text-zinc-400 font-bold uppercase tracking-widest hover:text-[#00f0ff] hover:border-[#00f0ff] hover:bg-[#00f0ff]/5 transition-all"
+          >
+            [{item.name}]
+          </a>
+        ))}
+      </div>
+
+      <button className="bg-transparent border border-[#ff0055] text-[#ff0055] px-8 py-4 font-bold uppercase tracking-widest hover:bg-[#ff0055]/10 shadow-[0_0_10px_rgba(255,0,85,0.15)] transition-all">
+        [TERMINATE_SESSION]
+      </button>
+
       <button
-        className="absolute top-4 right-4"
+        className="w-10 h-10 text-zinc-400 hover:text-[#ff0055] transition-colors p-2 border border-transparent hover:border-[#ff0055] hover:bg-[#ff0055]/10 rounded-none"
         onClick={() => setIsMenuOpen(false)}
       >
         <MdClose size={24} />
-      </button>
-
-      {navLinksMobile.map((item, i) => (
-        <a key={i} href={item.link} onClick={() => setIsMenuOpen(false)}>
-          {item.name}
-        </a>
-      ))}
-
-      <button className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500">
-        Cerrar Sesion
       </button>
     </div>
   );

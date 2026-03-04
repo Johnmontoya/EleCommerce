@@ -82,7 +82,7 @@ const DashboardPage: React.FC = () => {
         <NavMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
         {/* Main Content */}
-        <main className="w-full flex-1 p-8">
+        <main className="w-full flex-1 p-4">
           <ButtonMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
           {/* Stats Cards */}

@@ -21,10 +21,10 @@ const ContactPage = () => {
         <div className="flex-1">
           <div className="flex flex-col gap-2 items-start justify-start mb-8 border-l-4 border-[#e4ff00] pl-6">
             <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-wider" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-              SYS_COMMS // CONTACT
+              SYS_COMMS // CONTACTO
             </h1>
             <p className="text-zinc-500 max-w-2xl font-mono text-sm tracking-widest uppercase">
-              &gt; DIRECT_LINK | SUPPORT_CHANNELS | LOCATION_DATA
+              &gt; ENLACE_DIRECTO | CANALES_DE_SOPORTE | DATOS_DE_UBICACIÓN
             </p>
           </div>
         </div>
@@ -43,7 +43,7 @@ const ContactPage = () => {
           <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
 
           <h2 className="text-xs font-bold text-[#00f0ff] uppercase tracking-[0.2em] mb-4">
-            QUICK_FAQ //
+            PREGUNTAS_FRECUENTES //
           </h2>
 
           <div className="space-y-4">

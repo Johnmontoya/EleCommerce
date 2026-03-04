@@ -36,4 +36,4 @@ export interface CreateOrderResult {
     total: number;
 }
 
-export type CheckoutStep = "summary" | "address" | "payment" | "success";
+export type CheckoutStep = "resumen" | "direccion" | "pago" | "success";

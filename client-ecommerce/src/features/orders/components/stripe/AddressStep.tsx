@@ -27,10 +27,10 @@ export function AddressStep({
             {/* Encabezado */}
             <div className="border-l-4 border-[#00f0ff] pl-3 mb-6">
                 <h2 className="text-2xl font-bold text-white uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-                    DESTINATION_SELECTION //
+                    SELECCIÓN_DE_DESTINO //
                 </h2>
                 <p className="text-zinc-500 text-xs tracking-widest mt-1 uppercase">
-                    SYSTEM.LOCATE_SHIPPING_COORDINATES()
+                    SYSTEM.LOCALIZAR_COORDENADAS_DE_ENVIO()
                 </p>
             </div>
 
@@ -46,9 +46,9 @@ export function AddressStep({
                         <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1}
                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <p className="text-sm tracking-widest text-zinc-500 uppercase">NO_COORDINATES_FOUND</p>
+                    <p className="text-sm tracking-widest text-zinc-500 uppercase">NO_HAY_DIRECCIONES_REGISTRADAS</p>
                     <a href="/profile/addresses" className="text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black hover:font-bold text-xs tracking-widest uppercase mt-4 inline-block border border-[#00f0ff] px-4 py-2 transition-all">
-                        INITIALIZE_NEW_LOCATION
+                        REGISTRAR_NUEVA_DIRECCION
                     </a>
                 </div>
             ) : (
@@ -111,21 +111,21 @@ export function AddressStep({
                 href="/profile/addresses"
                 className="flex items-center gap-2 text-xs tracking-widest text-zinc-500 hover:text-[#00f0ff] transition-colors w-fit border-b border-transparent hover:border-[#00f0ff] pb-0.5 uppercase"
             >
-                [ + ] ADD_NEW_COORDINATES
+                [ + ] REGISTRAR_NUEVA_DIRECCION
             </a>
 
             {/* Notas del pedido */}
             <div className="space-y-3 pt-4 border-t border-zinc-800/80">
                 <label className="text-xs font-bold tracking-widest text-zinc-400 flex items-center gap-2 uppercase">
                     <span className="w-2 h-2 bg-zinc-600" />
-                    TRANSMISSION_NOTES <span className="text-zinc-600 text-[10px] font-normal">(OPTIONAL)</span>
+                    TRANSMISION_NOTA <span className="text-zinc-600 text-[10px] font-normal">(OPCIONAL)</span>
                 </label>
                 <div className="relative">
                     <div className="absolute top-2 left-2 text-[#00f0ff] opacity-50 select-none pointer-events-none">&gt;</div>
                     <textarea
                         value={notes}
                         onChange={(e) => onNotesChange(e.target.value)}
-                        placeholder="ENTER DELIVERY INSTRUCTIONS HERE..."
+                        placeholder="INGRESA INSTRUCCIONES DE ENTREGA AQUÍ..."
                         rows={3}
                         className="w-full bg-[#020202] border border-zinc-800 px-6 py-3 text-zinc-300 text-xs placeholder-zinc-700 focus:outline-none focus:border-[#00f0ff] transition-colors resize-none uppercase font-mono tracking-wider"
                     />
@@ -139,7 +139,7 @@ export function AddressStep({
                     disabled={isLoading}
                     className="flex-1 py-4 border border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-500 disabled:opacity-40 font-bold uppercase tracking-widest transition-all text-xs bg-[#050505]"
                 >
-                    [ RETURN ]
+                    [ REGRESAR ]
                 </button>
                 <button
                     onClick={onNext}
@@ -149,11 +149,11 @@ export function AddressStep({
                     {isLoading ? (
                         <>
                             <span className="w-2 h-2 bg-black animate-ping" />
-                            PROCESSING...
+                            PROCESANDO...
                         </>
                     ) : (
                         <>
-                            <span className="relative z-10">LOCK_COORDINATES // NEXT</span>
+                            <span className="relative z-10">ENVIAR_COORDENADAS // SIGUIENTE</span>
                             {/* Tech scanline effect on hover */}
                             <div className="absolute inset-0 bg-[linear-gradient(transparent_0%,rgba(0,0,0,0.1)_50%,transparent_100%)] bg-[length:100%_4px] opacity-0 group-hover:opacity-100 animate-[scan_2s_linear_infinite]" />
                         </>

@@ -174,7 +174,7 @@ const ListProductsPage: React.FC = () => {
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-[10px] font-bold text-[#e4ff00] tracking-[0.2em] uppercase flex items-center gap-2">
                     <span className="w-1.5 h-1.5 bg-[#e4ff00] animate-pulse"></span>
-                    ACTIVE_FILTERS ({activeFiltersCount})
+                    FILTROS ACTIVOS ({activeFiltersCount})
                   </span>
                   <button
                     onClick={clearFilters}
@@ -248,14 +248,14 @@ const ListProductsPage: React.FC = () => {
             {/* Header */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-zinc-800 pb-4">
               <p className="text-zinc-500 text-[10px] uppercase tracking-[0.2em] font-bold">
-                RENDERED <span className="text-white">{sortedProducts.length}</span> OF{" "}
+                RENDERIZADOS <span className="text-white">{sortedProducts.length}</span> DE{" "}
                 <span className="text-[#00f0ff]">
-                  {totalProducts} RESULTS
+                  {totalProducts} RESULTADOS
                 </span>
                 {isFetching && (
                   <span className="ml-3 text-[#e4ff00] animate-pulse inline-flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-[#e4ff00]"></span>
-                    [UPDATING_DB...]
+                    [ACTUALIZANDO_BASE_DE_DATOS...]
                   </span>
                 )}
               </p>
@@ -268,10 +268,10 @@ const ListProductsPage: React.FC = () => {
                     onChange={(e) => setSortBy(e.target.value)}
                     className="bg-[#050505] border border-zinc-800 text-[#00f0ff] px-3 py-2 text-xs font-bold tracking-[0.1em] uppercase outline-none focus:border-[#00f0ff] cursor-pointer appearance-none hover:border-zinc-600 transition-colors"
                   >
-                    <option value="popularity">POPULARITY</option>
-                    <option value="price-low">PRICE_ASC</option>
-                    <option value="price-high">PRICE_DESC</option>
-                    <option value="newest">LATEST</option>
+                    <option value="popularity">POPULARIDAD</option>
+                    <option value="price-low">PRECIO_ASC</option>
+                    <option value="price-high">PRECIO_DESC</option>
+                    <option value="newest">MÁS_RECENTES</option>
                   </select>
                 </div>
 
@@ -324,7 +324,7 @@ const ListProductsPage: React.FC = () => {
                   {isFetchingNextPage && (
                     <div className="flex items-center gap-3 text-[#00f0ff] uppercase text-[10px] font-bold tracking-widest">
                       <div className="w-3 h-3 border border-[#00f0ff] border-t-transparent animate-spin"></div>
-                      <span>[LOADING_ADDITIONAL_RECORDS...]</span>
+                      <span>[CARGANDO_REGISTROS_ADICIONALES...]</span>
                     </div>
                   )}
                 </div>
@@ -333,7 +333,7 @@ const ListProductsPage: React.FC = () => {
                 {!hasNextPage && sortedProducts.length > 0 && (
                   <div className="text-center text-zinc-600 py-8 border-t border-zinc-900 border-dashed uppercase text-[10px] font-bold tracking-[0.2em]">
                     <p>
-                      END_OF_RESULTS: {sortedProducts.length} RECORDS COMPLETED
+                      FIN_DE_RESULTADOS: {sortedProducts.length} REGISTROS COMPLETADOS
                     </p>
                   </div>
                 )}
@@ -344,10 +344,10 @@ const ListProductsPage: React.FC = () => {
 
                 <h2 className="text-[#ff0055] text-xs font-bold tracking-[0.2em] uppercase mb-2 flex items-center justify-center gap-2">
                   <div className="w-2 h-2 bg-[#ff0055] animate-ping"></div>
-                  [ERR: QUERY_RETURNED_NULL]
+                  [ERROR: LA_CONSULTA_DEVUELVE_NULL]
                 </h2>
                 <p className="text-zinc-500 text-[10px] tracking-widest uppercase mb-8">
-                  NO_PRODUCTS_MATCH_CURRENT_PARAMETERS
+                  NO_HAY_PRODUCTOS_CON_ESTOS_FILTROS
                 </p>
                 <button
                   onClick={clearFilters}

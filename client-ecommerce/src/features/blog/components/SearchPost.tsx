@@ -13,12 +13,12 @@ const SearchPost = () => {
       <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff]" />
       <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
       <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-4">
-        SYS_SEARCH //
+        SYS_SEARCH // BUSCAR
       </h3>
       <form onSubmit={handleSearch} className="relative group">
         <input
           type="text"
-          placeholder="ENTER_QUERY..."
+          placeholder="BUSCAR_ENTRADA..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-600 px-4 py-3 outline-none focus:border-[#00f0ff] transition-colors text-xs font-bold uppercase tracking-widest"
