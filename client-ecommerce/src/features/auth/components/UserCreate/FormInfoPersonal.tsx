@@ -23,50 +23,53 @@ const FormInfoPersonal: React.FC<FormInfoPersonalProps> = ({
     };
 
     return (
-        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
-            <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
-                <BiUser size={20} className="text-cyan-400" />
-                Información Personal
+        <div className="bg-[#050505] border border-zinc-800 p-6 relative">
+            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50 pointer-events-none" />
+
+            <h2 className="text-[#00f0ff] font-mono text-[12px] font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
+                <BiUser size={16} className="text-[#00f0ff]" />
+                [SYS_PERSONAL_INFO]
             </h2>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-6">
                 <div>
-                    <label className="block text-slate-300 font-semibold mb-2">
-                        Nombre *
+                    <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
+                        [FIRST_NAME] *
                     </label>
                     <input
                         type="text"
                         name="firstName"
                         value={userData.firstName || ""}
                         onChange={onChangeCreateData}
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                        placeholder="John"
+                        className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-600 px-4 py-3 rounded-none outline-none focus:border-[#00f0ff] font-mono text-[10px] uppercase tracking-widest transition-all"
+                        placeholder="[INPUT_NAME]"
                     />
-                    <div className="text-red-500 text-sm mt-1">
+                    <div className="text-[#ff0055] font-mono text-[10px] uppercase tracking-widest mt-1">
                         {getFieldsError?.("firstName")}
                     </div>
                 </div>
 
                 <div>
-                    <label className="block text-slate-300 font-semibold mb-2">
-                        Apellido *
+                    <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
+                        [LAST_NAME] *
                     </label>
                     <input
                         type="text"
                         name="lastName"
                         value={userData.lastName || ""}
                         onChange={onChangeCreateData}
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                        placeholder="Doe"
+                        className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-600 px-4 py-3 rounded-none outline-none focus:border-[#00f0ff] font-mono text-[10px] uppercase tracking-widest transition-all"
+                        placeholder="[INPUT_SURNAME]"
                     />
-                    <div className="text-red-500 text-sm mt-1">
+                    <div className="text-[#ff0055] font-mono text-[10px] uppercase tracking-widest mt-1">
                         {getFieldsError?.("lastName")}
                     </div>
                 </div>
 
                 <div className="col-span-2">
-                    <label className="block text-slate-300 font-semibold mb-2">
-                        Username
+                    <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
+                        [USERNAME_ID]
                     </label>
                     <div className="flex gap-2">
                         <input
@@ -74,41 +77,41 @@ const FormInfoPersonal: React.FC<FormInfoPersonalProps> = ({
                             name="username"
                             value={userData.username || ""}
                             onChange={onChangeCreateData}
-                            className="flex-1 bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                            placeholder="john.doe"
+                            className="flex-1 bg-black border border-zinc-800 text-white placeholder-zinc-600 px-4 py-3 rounded-none outline-none focus:border-[#00f0ff] font-mono text-[10px] uppercase tracking-widest transition-all"
+                            placeholder="[INPUT_ID]"
                         />
                         <button
                             type="button"
                             onClick={generateUsername}
-                            className="bg-slate-600 hover:bg-slate-500 text-slate-200 px-4 py-3 rounded-lg font-semibold transition-all whitespace-nowrap"
+                            className="bg-[#e4ff00]/10 border border-[#e4ff00] text-[#e4ff00] hover:bg-[#e4ff00]/20 px-4 py-3 rounded-none font-bold uppercase tracking-widest text-[10px] transition-all whitespace-nowrap"
                         >
-                            Generar
+                            [AUTO_GEN]
                         </button>
                     </div>
-                    <div className="text-red-500 text-sm mt-1">
+                    <div className="text-[#ff0055] font-mono text-[10px] uppercase tracking-widest mt-1">
                         {getFieldsError?.("username")}
                     </div>
                 </div>
 
                 <div className="col-span-2">
-                    <label className="block text-slate-300 font-semibold mb-2">
-                        Teléfono
+                    <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
+                        [COMM_CHANNEL_TLF]
                     </label>
                     <div className="relative">
                         <BiPhone
-                            size={18}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"
+                            size={16}
+                            className="absolute left-3 top-1/2 -translate-y-1/2 text-[#00f0ff]"
                         />
                         <input
                             type="tel"
                             name="phone"
                             value={userData.phone || ""}
                             onChange={onChangeCreateData}
-                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 pl-10 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                            placeholder="+57 300 123 4567"
+                            className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-600 px-4 py-3 pl-10 rounded-none outline-none focus:border-[#00f0ff] font-mono text-[10px] uppercase tracking-widest transition-all"
+                            placeholder="[+XX XXX XXX XXXX]"
                         />
                     </div>
-                    <div className="text-red-500 text-sm mt-1">
+                    <div className="text-[#ff0055] font-mono text-[10px] uppercase tracking-widest mt-1">
                         {getFieldsError?.("phone")}
                     </div>
                 </div>

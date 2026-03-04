@@ -1,7 +1,7 @@
 import { MdBlock, MdCheckCircle, MdEmail, MdPhone, MdVerifiedUser } from "react-icons/md";
 import type { User } from "../../types/auth.types";
 import { FaCheck } from "react-icons/fa";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
+
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { useAuthStore } from "../../store/useAuthStore";
@@ -40,20 +40,20 @@ const UserRow: React.FC<UserRowProps> = ({ user, selectedData, handleSelectData 
 
     const getRoleBadge = (role: string) => {
         const styles = {
-            ADMIN: "bg-purple-500/20 text-purple-400 border-purple-500/30",
-            SUPER_ADMIN: "bg-blue-500/20 text-blue-400 border-blue-500/30",
-            USER: "bg-orange-500/20 text-orange-400 border-orange-500/30"
+            ADMIN: "bg-[#ff0055]/10 text-[#ff0055] border-[#ff0055]/50",
+            SUPER_ADMIN: "bg-[#00f0ff]/10 text-[#00f0ff] border-[#00f0ff]/50",
+            USER: "bg-[#e4ff00]/10 text-[#e4ff00] border-[#e4ff00]/50"
         };
 
         const labels = {
-            ADMIN: "Admin",
-            SUPER_ADMIN: "Super Admin",
-            USER: "Usuario"
+            ADMIN: "[ADMIN]",
+            SUPER_ADMIN: "[SUPER_ADMIN]",
+            USER: "[USER]"
         };
 
         return (
             <span
-                className={`px-3 py-1 rounded-full text-xs font-semibold border ${styles[role as keyof typeof styles]}`}
+                className={`px-2 py-1 uppercase tracking-widest text-[10px] font-mono border ${styles[role as keyof typeof styles]}`}
             >
                 {labels[role as keyof typeof labels]}
             </span>
@@ -63,13 +63,13 @@ const UserRow: React.FC<UserRowProps> = ({ user, selectedData, handleSelectData 
     return (
         <tr
             key={user?.id}
-            className="text-center border-t border-slate-700 hover:bg-slate-700/30 transition-colors"
+            className="text-center border-b border-zinc-800 bg-[#050505] hover:bg-[#00f0ff]/5 transition-colors group"
         >
             <td className="px-6 py-4">
-                <label className="flex gap-3 items-center cursor-pointer relative">
+                <label className="flex gap-3 items-center cursor-pointer relative justify-center">
                     <input type="checkbox" checked={selectedData.includes(user?.id!)} onChange={() => handleSelectData(user?.id!)} className="hidden peer" />
-                    <span className="w-5 h-5 border border-slate-300 rounded relative flex items-center justify-center peer-checked:border-cyan-600"></span>
-                    <FaCheck size={12} className="absolute hidden peer-checked:inline left-1 top-1/2 transform -translate-y-1/2 text-cyan-600" />
+                    <span className="w-4 h-4 border border-zinc-600 bg-black relative flex items-center justify-center peer-checked:border-[#00f0ff] peer-checked:bg-[#00f0ff]/20 transition-all rounded-none"></span>
+                    <FaCheck size={10} className="absolute hidden peer-checked:inline top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#00f0ff]" />
                 </label>
             </td>
             <td className="px-6 py-4">
@@ -77,13 +77,13 @@ const UserRow: React.FC<UserRowProps> = ({ user, selectedData, handleSelectData 
                     <img
                         src={user?.avatar || "https://via.placeholder.com/40"}
                         alt={user?.username || "User"}
-                        className="w-10 h-10 rounded-full object-cover border-2 border-slate-600"
+                        className="w-10 h-10 object-cover border border-zinc-700 group-hover:border-[#00f0ff] transition-colors rounded-none grayscale group-hover:grayscale-0"
                     />
                     <div className="text-left">
-                        <p className="text-slate-100 font-semibold">
+                        <p className="text-white font-mono uppercase tracking-widest text-[11px]">
                             {user?.firstName} {user?.lastName}
                         </p>
-                        <p className="text-slate-400 text-xs">
+                        <p className="text-zinc-500 font-mono text-[10px]">
                             @{user?.username && user.username.length > 20
                                 ? `${user.username.substring(0, 20)}...`
                                 : user.username}
@@ -92,21 +92,21 @@ const UserRow: React.FC<UserRowProps> = ({ user, selectedData, handleSelectData 
                 </div>
             </td>
             <td className="px-6 py-4">
-                <div className="space-y-1">
-                    <div className="flex items-center gap-2 text-slate-300 text-sm">
-                        <MdEmail size={14} className="text-slate-500" />
+                <div className="space-y-1 font-mono">
+                    <div className="flex items-center gap-2 text-zinc-400 text-[10px] uppercase tracking-widest">
+                        <MdEmail size={12} className="text-[#00f0ff]" />
                         {user?.email}
                         {user?.emailVerified && (
                             <MdVerifiedUser
-                                size={14}
-                                className="text-cyan-400"
+                                size={12}
+                                className="text-[#e4ff00]"
                                 title="Email verificado"
                             />
                         )}
                     </div>
                     {user.phone && (
-                        <div className="flex items-center gap-2 text-slate-400 text-xs">
-                            <MdPhone size={14} className="text-slate-500" />
+                        <div className="flex items-center gap-2 text-zinc-500 text-[10px] uppercase tracking-widest">
+                            <MdPhone size={12} className="text-[#00f0ff]" />
                             {user.phone}
                         </div>
                     )}
@@ -116,46 +116,43 @@ const UserRow: React.FC<UserRowProps> = ({ user, selectedData, handleSelectData 
             <td className="flex-1 justify-items-center items-center">
                 <button
                     onClick={() => handleToggleActive(user?.id!)}
-                    className={`flex items-center justify-center gap-2 px-3 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer ${user?.isActive
-                        ? "bg-green-500/20 text-green-400 hover:bg-green-500/30"
-                        : "bg-red-500/20 text-red-400 hover:bg-red-500/30"
+                    className={`flex items-center justify-center gap-2 px-2 py-1 font-mono uppercase tracking-widest text-[10px] transition-all cursor-pointer border ${user?.isActive
+                        ? "bg-[#00f0ff]/10 text-[#00f0ff] border-[#00f0ff]/50 hover:bg-[#00f0ff]/20"
+                        : "bg-[#ff0055]/10 text-[#ff0055] border-[#ff0055]/50 hover:bg-[#ff0055]/20"
                         }`}
                 >
                     {user.isActive ? (
                         <>
-                            <MdCheckCircle size={14} />
-                            Activo
+                            <MdCheckCircle size={12} />
+                            [ACTIVE]
                         </>
                     ) : (
                         <>
-                            <MdBlock size={14} />
-                            Inactivo
+                            <MdBlock size={12} />
+                            [INACTIVE]
                         </>
                     )}
                 </button>
             </td>
             <td className="px-6 py-4">
-                <p className="text-slate-500 text-xs">
-                    Creado:{" "}
+                <p className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
                     {moment(user.createdAt).format("DD/MM/YYYY")}
                 </p>
             </td>
             <td className="px-6 py-4">
                 <div className="flex mx-auto items-center justify-center gap-2">
-                    <ButtonAction
-                        variant="edit"
+                    <button
                         onClick={() => navigate(`/dashboard/users/${user.id}/edit`)}
-                        text=""
+                        className="p-2 border border-zinc-700 bg-transparent text-zinc-400 hover:border-[#00f0ff] hover:text-[#00f0ff] transition-all"
                     >
-                        <BiEdit size={18} />
-                    </ButtonAction>
-                    <ButtonAction
-                        variant="delete"
+                        <BiEdit size={16} />
+                    </button>
+                    <button
                         onClick={() => handleDelete(user?.id!)}
-                        text=""
+                        className="p-2 border border-zinc-700 bg-transparent text-zinc-400 hover:border-[#ff0055] hover:text-[#ff0055] transition-all"
                     >
-                        <BiTrash size={18} />
-                    </ButtonAction>
+                        <BiTrash size={16} />
+                    </button>
                 </div>
             </td>
         </tr>

@@ -14,7 +14,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
   isLoading,
   onSubmit,
-  placeholder = "Buscar productos...",
+  placeholder = "[INPUT_SEARCH_QUERY_DOM...]",
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -29,27 +29,33 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative">
-      <div className="flex items-center border pl-4 gap-2 bg-white border-slate-600/30 h-[46px] rounded-full overflow-hidden w-full">
-        <BiSearch size={24} className="text-slate-400" />
+    <form onSubmit={handleSubmit} className="relative w-full group">
+      {/* External decorative glow lines */}
+      <div className="absolute -inset-1 bg-gradient-to-r from-[#00f0ff]/20 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity blur-sm"></div>
+
+      <div className="relative flex items-center pl-4 pr-1 gap-2 bg-[#050505] border border-zinc-700 group-focus-within:border-[#00f0ff] shadow-inner h-[50px] overflow-hidden w-full transition-colors">
+        {/* Terminal decorative block */}
+        <div className="h-full w-2 bg-[#00f0ff] animate-pulse"></div>
+
+        <BiSearch size={22} className="text-[#00f0ff] mr-2" />
         <input
           ref={inputRef}
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full h-full outline-none text-sm text-slate-700 bg-transparent"
+          className="w-full h-full outline-none text-sm text-zinc-100 font-mono tracking-wider bg-transparent placeholder-zinc-700 uppercase"
           placeholder={placeholder}
         />
         {isLoading ? (
           <div className="mr-4">
-            <div className="animate-spin h-5 w-5 border-2 border-cyan-400 border-t-transparent rounded-full" />
+            <div className="animate-spin h-5 w-5 border border-[#00f0ff] border-t-transparent rounded-none" />
           </div>
         ) : (
           <button
             type="submit"
-            className="bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 w-32 h-9 rounded-full text-sm text-white mr-[5px] font-semibold transition-all"
+            className="bg-[#00f0ff]/10 border border-[#00f0ff] hover:bg-[#00f0ff] hover:text-black w-32 h-[38px] text-[10px] text-[#00f0ff] font-mono uppercase tracking-widest transition-colors flex items-center justify-center gap-2"
           >
-            Buscar
+            [EXECUTE]
           </button>
         )}
       </div>

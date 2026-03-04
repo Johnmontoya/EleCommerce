@@ -172,12 +172,13 @@ const ListProductsPage: React.FC = () => {
             {activeFiltersCount > 0 && (
               <div className="bg-[#050505] border border-zinc-800 p-4 relative mb-6">
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-[10px] font-bold text-[#e4ff00] tracking-widest uppercase">
+                  <span className="text-[10px] font-bold text-[#e4ff00] tracking-[0.2em] uppercase flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-[#e4ff00] animate-pulse"></span>
                     ACTIVE_FILTERS ({activeFiltersCount})
                   </span>
                   <button
                     onClick={clearFilters}
-                    className="text-[10px] text-zinc-500 hover:text-red-500 font-bold tracking-widest uppercase transition-colors"
+                    className="text-[10px] text-zinc-500 hover:text-[#ff0055] font-bold tracking-widest uppercase transition-colors"
                   >
                     [CLR_ALL]
                   </button>
@@ -190,10 +191,10 @@ const ListProductsPage: React.FC = () => {
                       <span
                         key={brand}
                         onClick={() => toggleBrand(brand)}
-                        className="inline-flex items-center gap-1 px-2 py-1 bg-black border border-zinc-800 text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase cursor-pointer hover:border-red-500 hover:text-red-500 transition-colors"
+                        className="inline-flex items-center gap-1 px-2 py-1 bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff] text-[10px] font-bold tracking-[0.15em] uppercase cursor-pointer hover:bg-[#ff0055]/10 hover:border-[#ff0055] hover:text-[#ff0055] transition-all"
                       >
                         {brand}
-                        <button className="text-zinc-600 hover:text-red-500 ml-1">×</button>
+                        <button className="text-zinc-500 hover:text-[#ff0055] ml-1">×</button>
                       </span>
                     ))}
                   </div>
@@ -203,21 +204,21 @@ const ListProductsPage: React.FC = () => {
                 {selectedCategoryObj && (
                   <span
                     onClick={() => setCategory(undefined)}
-                    className="inline-flex items-center gap-1 px-2 py-1 bg-black border border-zinc-800 text-[#e4ff00] text-[10px] font-bold tracking-widest uppercase cursor-pointer hover:border-red-500 hover:text-red-500 transition-colors mb-2"
+                    className="inline-flex items-center gap-1 px-2 py-1 bg-[#e4ff00]/10 border border-[#e4ff00]/30 text-[#e4ff00] text-[10px] font-bold tracking-[0.15em] uppercase cursor-pointer hover:bg-[#ff0055]/10 hover:border-[#ff0055] hover:text-[#ff0055] transition-all mb-2"
                   >
-                    {selectedCategoryObj.name}
-                    <button className="text-zinc-600 hover:text-red-500 ml-1">×</button>
+                    CAT_ {selectedCategoryObj.name}
+                    <button className="text-zinc-500 hover:text-[#ff0055] ml-1">×</button>
                   </span>
                 )}
 
                 {/* Chip de precio */}
-                {(filters.minPrice || filters.maxPrice) && (
+                {(filters.minPrice || filters.maxPrice || filters.minPrice === 0) && (
                   <span
                     onClick={() => updatePriceRange(0, 1000000)}
-                    className="inline-flex items-center gap-1 px-2 py-1 bg-black border border-zinc-800 text-white text-[10px] font-bold tracking-widest uppercase cursor-pointer hover:border-red-500 hover:text-red-500 transition-colors"
+                    className="inline-flex items-center gap-1 px-2 py-1 bg-zinc-900 border border-zinc-700 text-zinc-300 text-[10px] font-bold tracking-[0.15em] uppercase cursor-pointer hover:bg-[#ff0055]/10 hover:border-[#ff0055] hover:text-[#ff0055] transition-all"
                   >
-                    ${filters.minPrice || 0} - ${filters.maxPrice || 1000000}
-                    <button className="text-zinc-600 hover:text-red-500 ml-1">×</button>
+                    CR_{filters.minPrice || 0} - CR_{filters.maxPrice || 1000000}
+                    <button className="text-zinc-500 hover:text-[#ff0055] ml-1">×</button>
                   </span>
                 )}
               </div>
@@ -246,13 +247,14 @@ const ListProductsPage: React.FC = () => {
           <div className="flex-1">
             {/* Header */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 border-b border-zinc-800 pb-4">
-              <p className="text-zinc-500 text-xs uppercase tracking-widest font-bold">
-                RENDERED {sortedProducts.length} OF{" "}
+              <p className="text-zinc-500 text-[10px] uppercase tracking-[0.2em] font-bold">
+                RENDERED <span className="text-white">{sortedProducts.length}</span> OF{" "}
                 <span className="text-[#00f0ff]">
                   {totalProducts} RESULTS
                 </span>
                 {isFetching && (
-                  <span className="ml-2 text-[10px] text-[#e4ff00] animate-pulse">
+                  <span className="ml-3 text-[#e4ff00] animate-pulse inline-flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 bg-[#e4ff00]"></span>
                     [UPDATING_DB...]
                   </span>
                 )}
@@ -264,7 +266,7 @@ const ListProductsPage: React.FC = () => {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="bg-black border border-zinc-800 text-[#00f0ff] px-3 py-2 text-xs font-bold tracking-widest uppercase outline-none focus:border-[#00f0ff] cursor-pointer"
+                    className="bg-[#050505] border border-zinc-800 text-[#00f0ff] px-3 py-2 text-xs font-bold tracking-[0.1em] uppercase outline-none focus:border-[#00f0ff] cursor-pointer appearance-none hover:border-zinc-600 transition-colors"
                   >
                     <option value="popularity">POPULARITY</option>
                     <option value="price-low">PRICE_ASC</option>
@@ -273,24 +275,24 @@ const ListProductsPage: React.FC = () => {
                   </select>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 bg-[#050505] border border-zinc-800 p-1">
                   <button
                     onClick={() => setViewMode("grid")}
-                    className={`p-2 border transition-all ${viewMode === "grid"
-                      ? "bg-[#00f0ff]/10 border-[#00f0ff] text-[#00f0ff]"
-                      : "bg-black border-zinc-800 text-zinc-500 hover:border-zinc-500 hover:text-white"
+                    className={`p-1.5 transition-all ${viewMode === "grid"
+                      ? "bg-[#00f0ff]/20 text-[#00f0ff]"
+                      : "bg-transparent text-zinc-600 hover:text-zinc-300"
                       }`}
                   >
-                    <BsGrid size={16} />
+                    <BsGrid size={14} />
                   </button>
                   <button
                     onClick={() => setViewMode("list")}
-                    className={`p-2 border transition-all ${viewMode === "list"
-                      ? "bg-[#00f0ff]/10 border-[#00f0ff] text-[#00f0ff]"
-                      : "bg-black border-zinc-800 text-zinc-500 hover:border-zinc-500 hover:text-white"
+                    className={`p-1.5 transition-all ${viewMode === "list"
+                      ? "bg-[#00f0ff]/20 text-[#00f0ff]"
+                      : "bg-transparent text-zinc-600 hover:text-zinc-300"
                       }`}
                   >
-                    <BsList size={16} />
+                    <BsList size={14} />
                   </button>
                 </div>
               </div>
@@ -320,32 +322,38 @@ const ListProductsPage: React.FC = () => {
                   className="h-20 flex justify-center items-center my-4"
                 >
                   {isFetchingNextPage && (
-                    <div className="flex items-center gap-3 text-[#00f0ff] uppercase text-xs font-bold tracking-widest">
-                      <div className="w-4 h-4 border-2 border-[#00f0ff] border-t-transparent rounded-full animate-spin"></div>
-                      <span>[LOADING_RECORDS...]</span>
+                    <div className="flex items-center gap-3 text-[#00f0ff] uppercase text-[10px] font-bold tracking-widest">
+                      <div className="w-3 h-3 border border-[#00f0ff] border-t-transparent animate-spin"></div>
+                      <span>[LOADING_ADDITIONAL_RECORDS...]</span>
                     </div>
                   )}
                 </div>
 
                 {/* Mensaje de fin */}
                 {!hasNextPage && sortedProducts.length > 0 && (
-                  <div className="text-center text-zinc-600 py-8 border-t border-zinc-800 uppercase text-xs font-bold tracking-widest">
+                  <div className="text-center text-zinc-600 py-8 border-t border-zinc-900 border-dashed uppercase text-[10px] font-bold tracking-[0.2em]">
                     <p>
-                      END_OF_RESULTS: {sortedProducts.length} RECORDS FOUND
+                      END_OF_RESULTS: {sortedProducts.length} RECORDS COMPLETED
                     </p>
                   </div>
                 )}
               </>
             ) : (
-              <div className="text-center py-20 border border-zinc-800 bg-[#050505]">
-                <p className="text-[#e4ff00] text-sm font-bold tracking-widest uppercase mb-6">
-                  ERROR: NO_PRODUCTS_MATCH_PARAMETERS
+              <div className="text-center py-20 border border-zinc-800 bg-[#050505] relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-[1px] bg-[linear-gradient(90deg,transparent,#ff0055,transparent)] opacity-20"></div>
+
+                <h2 className="text-[#ff0055] text-xs font-bold tracking-[0.2em] uppercase mb-2 flex items-center justify-center gap-2">
+                  <div className="w-2 h-2 bg-[#ff0055] animate-ping"></div>
+                  [ERR: QUERY_RETURNED_NULL]
+                </h2>
+                <p className="text-zinc-500 text-[10px] tracking-widest uppercase mb-8">
+                  NO_PRODUCTS_MATCH_CURRENT_PARAMETERS
                 </p>
                 <button
                   onClick={clearFilters}
-                  className="px-8 py-3 bg-[#00f0ff] text-black font-bold tracking-widest uppercase text-xs hover:bg-black hover:text-[#00f0ff] border border-[#00f0ff] transition-all"
+                  className="px-8 py-3 bg-[#00f0ff]/10 text-[#00f0ff] font-bold tracking-[0.2em] uppercase text-[10px] hover:bg-[#00f0ff] hover:text-black border border-[#00f0ff]/30 transition-all"
                 >
-                  RESET_SYS_FILTERS
+                  [RESET_SYS_FILTERS]
                 </button>
               </div>
             )}

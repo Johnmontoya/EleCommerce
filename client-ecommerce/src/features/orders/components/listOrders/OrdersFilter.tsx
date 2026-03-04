@@ -1,5 +1,4 @@
 import { BiExport, BiFilter, BiSearch } from "react-icons/bi";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
 
 interface OrdersProps {
     searchTerm: string;
@@ -33,65 +32,65 @@ const OrdersFilter: React.FC<OrdersProps> = ({
         }
     };
     return (
-        <div className="dash-search-border dark:dash-search-border border border-slate-700 rounded-2xl p-4 backdrop-blur-sm mb-6">
-            <div className="flex flex-col md:flex-row gap-4">
+        <div className="bg-black border border-zinc-800 p-4 mb-6 relative">
+            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-zinc-600 opacity-50 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-zinc-600 opacity-50 pointer-events-none" />
+            <div className="flex flex-col md:flex-row gap-4 relative z-10">
                 {/* Search */}
                 <div className="flex-1 relative">
                     <BiSearch
-                        size={20}
-                        className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                        size={16}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500"
                     />
                     <input
                         type="text"
                         value={searchTerm}
                         onChange={handleSearchChange}
-                        placeholder="Buscar por número de orden"
-                        className="w-full dash-search dark:dash-search border border-slate-700 text-slate-100 placeholder-slate-400 px-4 py-3 pl-10 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                        placeholder="[SEARCH_TRACKING_ID]"
+                        className="w-full bg-transparent border border-zinc-700 text-[#00f0ff] placeholder-zinc-600 px-4 py-3 pl-10 rounded-none outline-none focus:border-[#00f0ff] transition-all font-mono uppercase tracking-widest text-[10px]"
                     />
                 </div>
 
                 {/* Filter Button */}
-                <ButtonAction
-                    variant="outline"
+                <button
                     onClick={() => setShowFilters(!showFilters)}
-                    text="Filtros"
-                    className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all ${showFilters
-                        ? "bg-slate-700/30 border border-slate-500 text-slate-200 hover:bg-slate-800/70"
-                        : "bg-slate-900/30 border border-slate-500 text-slate-200 hover:bg-slate-800/70"
+                    className={`flex items-center gap-2 px-6 py-3 rounded-none font-mono font-bold uppercase tracking-widest text-[10px] transition-all border ${showFilters
+                        ? "bg-[#00f0ff]/10 border-[#00f0ff] text-[#00f0ff]"
+                        : "bg-black border-zinc-700 text-zinc-400 hover:text-[#00f0ff] hover:border-[#00f0ff]"
                         }`}
                 >
-                    <BiFilter size={20} />
-                </ButtonAction>
+                    <BiFilter size={16} />
+                    [FILTERS]
+                </button>
 
                 {/* Export Button */}
-                <ButtonAction
-                    variant="outline"
-                    text="Exportar"
+                <button
                     onClick={() => { }}
-                    className="flex items-center gap-2 bg-slate-900/30 border border-slate-500 text-slate-200 hover:bg-slate-800/70 px-6 py-3 rounded-lg font-semibold transition-all">
-                    <BiExport size={20} />
-                </ButtonAction>
+                    className="flex items-center gap-2 bg-black border border-zinc-700 text-zinc-400 hover:text-white hover:border-white hover:bg-zinc-800 px-6 py-3 rounded-none font-mono font-bold uppercase tracking-widest text-[10px] transition-all">
+                    <BiExport size={16} />
+                    [EXPORT_DATA]
+                </button>
             </div>
 
             {/* Filters Panel */}
             {showFilters && (
-                <div className="mt-4 pt-4 border-t border-slate-700">
-                    <label className="block text-slate-300 text-sm font-semibold mb-2">
-                        Filtrar por Estado
+                <div className="mt-4 pt-4 border-t border-zinc-800 relative z-10">
+                    <label className="block text-zinc-500 text-[10px] font-mono tracking-widest uppercase mb-2">
+                        [FILTER_BY_STATUS]
                     </label>
                     <select
                         value={filterStatus === null ? "all" : String(filterStatus)}
                         onChange={handleStatusChange}
-                        className="w-full md:w-64 bg-slate-700 border border-slate-600 text-slate-100 px-4 py-2 rounded-lg outline-none focus:border-cyan-400 cursor-pointer"
+                        className="w-full md:w-64 bg-black border border-zinc-700 text-[#00f0ff] px-4 py-2 rounded-none outline-none focus:border-[#00f0ff] cursor-pointer font-mono uppercase tracking-widest text-[10px]"
                     >
-                        <option value="all">Todos los estados</option>
-                        <option value="PENDING">Pendiente</option>
-                        <option value="CONFIRMED">Confirmado</option>
-                        <option value="PROCESSING">Procesando</option>
-                        <option value="SHIPPED">Enviado</option>
-                        <option value="DELIVERED">Entregado</option>
-                        <option value="CANCELLED">Cancelado</option>
-                        <option value="REFUNDED">Reembolsado</option>
+                        <option value="all">[ALL_STATES]</option>
+                        <option value="PENDING">[PENDING]</option>
+                        <option value="CONFIRMED">[CONFIRMED]</option>
+                        <option value="PROCESSING">[PROCESSING]</option>
+                        <option value="SHIPPED">[SHIPPED]</option>
+                        <option value="DELIVERED">[DELIVERED]</option>
+                        <option value="CANCELLED">[CANCELLED]</option>
+                        <option value="REFUNDED">[REFUNDED]</option>
                     </select>
                 </div>
             )}

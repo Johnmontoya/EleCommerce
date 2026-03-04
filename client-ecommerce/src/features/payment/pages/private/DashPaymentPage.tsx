@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { RiSecurePaymentLine } from "react-icons/ri";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
 import useInputs from "../../../../shared/hooks/useInputs";
 import Sidebar from "../../../dashboard/components/Sidebar";
@@ -12,6 +11,7 @@ import CardDelivery from "../../components/CardDelivery";
 import CardOnline from "../../components/CardOnline";
 import CardFacturation from "../../components/CardFacturation";
 import { usePayment } from "../../hook/queries/usePayment";
+import { BiDesktop } from "react-icons/bi";
 
 type PaymentMethod = "card" | "cash" | "online";
 
@@ -93,7 +93,7 @@ const DashPaymentPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen background-light dark:background-dark">
+        <div className="min-h-screen bg-[#020202] text-white font-mono selection:bg-[#00f0ff] selection:text-black">
             <div className="flex">
                 <Sidebar />
 
@@ -111,9 +111,11 @@ const DashPaymentPage: React.FC = () => {
                             setIsMenuOpen={setIsMenuOpen}
                         />
 
-                        <div className="flex items-center gap-3 mb-8">
-                            <RiSecurePaymentLine size={36} className="text-cyan-400" />
-                            <h1 className="text-4xl font-bold text-slate-100">Método de Pago</h1>
+                        <div className="flex items-center gap-3 mb-8 border-b border-zinc-800 pb-4">
+                            <BiDesktop className="text-[#00f0ff]" size={36} />
+                            <h1 className="text-2xl lg:text-4xl font-black text-white uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                                [PAYMENT_GATEWAY]
+                            </h1>
                         </div>
 
                         <div className="grid lg:grid-cols-2 gap-8">

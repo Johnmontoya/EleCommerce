@@ -10,44 +10,47 @@ const FormAvatar: React.FC<FormAvatarProps> = ({
     onChangeCreateData,
 }) => {
     return (
-        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
-            <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
-                <BiImage size={20} className="text-cyan-400" />
-                Foto de Perfil
+        <div className="bg-[#050505] p-6 border border-zinc-800 relative mt-6 lg:mt-0">
+            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50 pointer-events-none" />
+
+            <h2 className="text-[#00f0ff] font-mono text-[12px] font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
+                <BiImage size={16} className="text-[#00f0ff]" />
+                [SYS_AVATAR_IMAGE]
             </h2>
 
-            <div className="space-y-4">
+            <div className="space-y-6">
                 <div>
-                    <label className="block text-slate-300 font-semibold mb-2">
-                        URL del Avatar
+                    <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
+                        [URL_AVATAR_NODE]
                     </label>
                     <input
                         type="url"
                         name="avatar"
                         value={userData.avatar || ""}
                         onChange={onChangeCreateData}
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                        placeholder="https://example.com/avatar.jpg"
+                        className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-600 px-4 py-3 rounded-none outline-none focus:border-[#00f0ff] font-mono text-[10px] uppercase tracking-widest transition-all"
+                        placeholder="[HTTPS://...]"
                     />
                 </div>
 
                 {userData.avatar && (
-                    <div className="flex items-center gap-4 bg-slate-700/30 p-4 rounded-lg">
+                    <div className="flex items-center gap-6 bg-black border border-zinc-800 p-4 relative">
                         <img
                             src={userData.avatar}
                             alt="Avatar preview"
-                            className="w-20 h-20 rounded-full object-cover border-2 border-cyan-400"
+                            className="w-20 h-20 object-cover border border-[#e4ff00] rounded-none grayscale hover:grayscale-0 transition-all"
                             onError={(e) => {
                                 (e.target as HTMLImageElement).src =
                                     "https://via.placeholder.com/80";
                             }}
                         />
-                        <div className="flex-1">
-                            <p className="text-slate-200 font-semibold">
-                                Vista Previa
+                        <div className="flex-1 font-mono">
+                            <p className="text-[#e4ff00] font-bold text-[10px] uppercase tracking-widest">
+                                [PREVIEW_MATRIX]
                             </p>
-                            <p className="text-slate-400 text-xs">
-                                Así se verá tu avatar
+                            <p className="text-zinc-500 text-[10px] uppercase tracking-widest mt-1">
+                                [RENDERED_OUTPUT_DISPLAY]
                             </p>
                         </div>
                     </div>

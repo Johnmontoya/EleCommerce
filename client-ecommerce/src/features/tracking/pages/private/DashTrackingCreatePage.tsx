@@ -206,13 +206,13 @@ const DashTrackingCreatePage = () => {
     };
 
     if (isLoading) {
-        return <div className="min-h-screen background-light dark:background-light flex items-center justify-center">
-            <div className="text-white">Cargando...</div>
+        return <div className="min-h-screen bg-[#020202] flex items-center justify-center">
+            <div className="text-[#00f0ff] font-mono uppercase tracking-widest animate-pulse">[ESTABLISHING_LINK...]</div>
         </div>;
     }
 
     return (
-        <div className="min-h-screen background-light dark:background-light">
+        <div className="min-h-screen bg-[#020202]">
             <div className='flex'>
                 {/* Sidebar */}
                 <Sidebar />

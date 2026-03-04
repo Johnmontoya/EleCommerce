@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { BiPlus, BiTag, BiX } from "react-icons/bi";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
+import { BiPlus, BiX } from "react-icons/bi";
 
 interface TagsFormProps {
   watch: any;
@@ -31,10 +30,12 @@ const TagsForm: React.FC<TagsFormProps> = ({ watch, setValue, errors }) => {
   };
 
   return (
-    <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
-      <h2 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
-        <BiTag size={20} className="text-cyan-400" />
-        Etiquetas
+    <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono mt-4">
+      <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
+      <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
+      <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
+        <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
+        [PRODUCT_TAGS]
       </h2>
 
       <div className="space-y-3">
@@ -44,37 +45,36 @@ const TagsForm: React.FC<TagsFormProps> = ({ watch, setValue, errors }) => {
             value={newTag}
             onChange={(e) => setNewTag(e.target.value)}
             onKeyPress={handleKeyPress}
-            className="flex-1 bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-3 py-2 rounded-lg outline-none focus:border-cyan-400 transition-all text-sm"
-            placeholder="Agregar etiqueta"
+            className="flex-1 bg-black border border-zinc-800 text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none focus:border-[#00f0ff] transition-all text-[10px] font-bold tracking-[0.2em] uppercase"
+            placeholder="[ADD_TAG]"
           />
-          <ButtonAction
-            variant="primary"
-            text=""
+          <button
             type="button"
             onClick={addTag}
+            className="bg-[#00f0ff]/10 border border-[#00f0ff] text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black transition-all flex justify-center items-center px-4 py-3 min-w-[48px]"
           >
             <BiPlus size={16} />
-          </ButtonAction>
+          </button>
         </div>
 
         {errors.tags && (
-          <p className="text-red-500 text-sm">{errors.tags.message}</p>
+          <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.tags.message}]</p>
         )}
 
         {tags.length > 0 && (
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mt-4">
             {tags.map((tag: any, index: number) => (
               <span
                 key={index}
-                className="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-lg text-sm font-medium flex items-center gap-2"
+                className="bg-[#00f0ff]/10 border border-[#00f0ff]/50 text-[#00f0ff] px-3 py-1.5 rounded-none text-[10px] font-bold uppercase tracking-widest flex items-center gap-2"
               >
                 {tag}
                 <button
                   type="button"
                   onClick={() => removeTag(index)}
-                  className="hover:bg-slate-700 rounded-full transition-colors"
+                  className="hover:bg-[#ff0055] hover:text-white transition-colors rounded-none p-0.5 flex items-center justify-center"
                 >
-                  <BiX size={16} />
+                  <BiX size={14} />
                 </button>
               </span>
             ))}

@@ -12,6 +12,7 @@ interface TrackingSearchProps {
 }
 
 const TrackingSearch: React.FC<TrackingSearchProps> = ({
+    trackingLoading,
     setTrackingLoading,
     onChangeTracking,
     isTracking,
@@ -29,15 +30,19 @@ const TrackingSearch: React.FC<TrackingSearchProps> = ({
     };
 
     return (
-        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 mb-8">
-            <h2 className="text-xl font-bold text-slate-100 mb-4">
-                Ingresa tu número de rastreo
+        <div className="bg-[#050505] border border-zinc-800 p-6 mb-8 relative group">
+            {/* Neon Corner Accents */}
+            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff] opacity-50 group-hover:opacity-100 transition-opacity"></div>
+            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff] opacity-50 group-hover:opacity-100 transition-opacity"></div>
+
+            <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100 mb-4 flex items-center gap-2">
+                <span className="text-[#00f0ff]">&gt;</span> ENTER_TRACKING_ID
             </h2>
-            <div className="flex gap-4">
-                <div className="flex-1 relative">
+            <div className="flex gap-4 flex-col sm:flex-row">
+                <div className="flex-1 relative flex items-center">
                     <BiSearch
-                        size={20}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                        size={18}
+                        className="absolute left-4 text-zinc-500"
                     />
                     <input
                         type="text"
@@ -45,13 +50,20 @@ const TrackingSearch: React.FC<TrackingSearchProps> = ({
                         value={isTracking.trackingNumber}
                         onChange={onChangeTracking}
                         onKeyPress={(e) => e.key === "Enter" && handleTrackPackage()}
-                        placeholder="Ej: TK-2026001234567"
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-10 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                        placeholder="TK-2026001234567_"
+                        className="w-full bg-[#0a0a0a] border border-zinc-800 text-[#00f0ff] font-mono tracking-wider placeholder-zinc-700 px-12 py-4 outline-none focus:border-[#00f0ff] focus:bg-black transition-all shadow-inner"
                     />
                 </div>
+                <button
+                    onClick={handleTrackPackage}
+                    disabled={trackingLoading || !isTracking.trackingNumber.trim()}
+                    className="bg-[#00f0ff]/10 border border-[#00f0ff] text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black transition-all px-8 py-4 font-mono text-xs uppercase tracking-widest disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                >
+                    {trackingLoading ? "[SCANNING...]" : "[LOCATE_SHIPMENT]"}
+                </button>
             </div>
-            <p className="text-slate-400 text-sm mt-3">
-                Puedes encontrar tu número de rastreo en el email de confirmación
+            <p className="text-zinc-600 font-mono text-[10px] mt-3 uppercase tracking-widest border-l border-[#00f0ff] pl-2">
+                REFER TO CONFIRMATION DISPATCH FOR ID SEQUENCE
             </p>
         </div>
     );

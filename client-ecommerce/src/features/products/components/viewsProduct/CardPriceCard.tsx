@@ -11,72 +11,84 @@ const CardPriceCard: React.FC<CardPriceCardProps> = ({ product }) => {
     return (
         <div className="space-y-6">
             {/* Price Card */}
-            <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
-                <div className="flex items-center gap-3 mb-4">
-                    <FaDollarSign className="text-cyan-400" size={24} />
-                    <h2 className="text-xl font-bold text-white">Precio</h2>
+            <div className="bg-[#050505] border border-zinc-800 p-6 relative">
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
+                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
+                <div className="flex items-center gap-3 mb-6 border-b border-zinc-800/50 pb-4">
+                    <FaDollarSign className="text-[#00f0ff]" size={16} />
+                    <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase">
+                        [SYS_PRICING_DATA]
+                    </h2>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-4">
                     <div>
-                        <p className="text-slate-400 text-sm">Precio Regular</p>
-                        <p className="text-3xl font-bold text-white">${product.price}</p>
+                        <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">[BASE_PRICE]</p>
+                        <p className="text-white text-xl font-bold mt-1">CR_{product.price}</p>
                     </div>
                     {product.priceDiscount && (
                         <div>
-                            <p className="text-slate-400 text-sm">Precio con Descuento</p>
-                            <p className="text-2xl font-bold text-green-400">${Math.round(
+                            <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">[DISCOUNTED_PRICE]</p>
+                            <p className="text-[#e4ff00] text-xl font-bold mt-1">CR_{Math.round(
                                 product.price - (product.price * product.priceDiscount!) / 100
                             )}</p>
-                            <p className="text-sm text-green-400 mt-1">
-                                Ahorro: {product.priceDiscount}%
+                            <p className="text-[10px] text-[#e4ff00] mt-1 font-bold uppercase tracking-widest">
+                                [SAVINGS:_{product.priceDiscount}%]
                             </p>
                         </div>)}
                 </div>
             </div>
 
             {/* Stock Card */}
-            <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
-                <div className="flex items-center gap-3 mb-4">
-                    <BiPackage className="text-cyan-400" size={24} />
-                    <h2 className="text-xl font-bold text-white">Inventario</h2>
+            <div className="bg-[#050505] border border-zinc-800 p-6 relative">
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
+                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
+                <div className="flex items-center gap-3 mb-6 border-b border-zinc-800/50 pb-4">
+                    <BiPackage className="text-[#00f0ff]" size={16} />
+                    <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase">
+                        [INVENTORY_STATUS]
+                    </h2>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-4">
                     <div>
-                        <p className="text-slate-400 text-sm">Stock Disponible</p>
-                        <p className={`text-3xl font-bold ${product.stock > 10 ? "text-cyan-400" :
-                            product.stock > 0 ? "text-yellow-400" : "text-red-400"
+                        <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">[AVAILABLE_UNITS]</p>
+                        <p className={`text-xl font-bold mt-1 ${product.stock > 10 ? "text-white" :
+                            product.stock > 0 ? "text-[#e4ff00]" : "text-[#ff0055]"
                             }`}>
                             {product.stock}
                         </p>
                     </div>
-                    {product.price !== undefined && (
+                    {product.soldCount !== undefined && (
                         <div>
-                            <p className="text-slate-400 text-sm">Unidades Vendidas</p>
-                            <p className="text-xl font-bold text-white">{product.price}</p>
+                            <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">[UNITS_SOLD]</p>
+                            <p className="text-white text-xl font-bold mt-1">{product.soldCount}</p>
                         </div>
                     )}
                 </div>
             </div>
 
             {/* Category & Brand */}
-            <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
-                <div className="flex items-center gap-3 mb-4">
-                    <BiTag className="text-purple-400" size={24} />
-                    <h2 className="text-xl font-bold text-white">Categorización</h2>
+            <div className="bg-[#050505] border border-zinc-800 p-6 relative">
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
+                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
+                <div className="flex items-center gap-3 mb-6 border-b border-zinc-800/50 pb-4">
+                    <BiTag className="text-[#00f0ff]" size={16} />
+                    <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase">
+                        [CLASSIFICATION]
+                    </h2>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-4">
                     <div>
-                        <p className="text-slate-400 text-sm">Categoría</p>
-                        <p className="text-white font-medium">{product.category.slug}</p>
+                        <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">[CATEGORY_ID]</p>
+                        <p className="text-white text-[10px] font-bold tracking-widest uppercase mt-1">{product.category.slug}</p>
                     </div>
                     <div>
-                        <p className="text-slate-400 text-sm">Marca</p>
-                        <p className="text-white font-medium">{product.brand}</p>
+                        <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">[MANUFACTURER]</p>
+                        <p className="text-white text-[10px] font-bold tracking-widest uppercase mt-1">{product.brand}</p>
                     </div>
                     {product.sku && (
                         <div>
-                            <p className="text-slate-400 text-sm">SKU</p>
-                            <p className="text-white font-medium">{product.sku}</p>
+                            <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">[SKU_REFERENCE]</p>
+                            <p className="text-white text-[10px] font-bold tracking-widest uppercase mt-1">{product.sku}</p>
                         </div>
                     )}
                 </div>
@@ -84,25 +96,29 @@ const CardPriceCard: React.FC<CardPriceCardProps> = ({ product }) => {
 
             {/* Shipping */}
             {product.shipping && (
-                <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                        <BsTruck className="text-blue-400" size={24} />
-                        <h2 className="text-xl font-bold text-white">Envío</h2>
+                <div className="bg-[#050505] border border-zinc-800 p-6 relative">
+                    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
+                    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
+                    <div className="flex items-center gap-3 mb-6 border-b border-zinc-800/50 pb-4">
+                        <BsTruck className="text-[#00f0ff]" size={16} />
+                        <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase">
+                            [LOGISTICS]
+                        </h2>
                     </div>
-                    <div className="space-y-3">
-                        <div className="flex items-center justify-between">
-                            <p className="text-slate-400">Envío Gratis</p>
-                            <span className={`px-3 py-1 rounded-full text-sm font-medium ${product.shipping.free
-                                ? "bg-green-500/20 text-green-400"
-                                : "bg-red-500/20 text-red-400"
+                    <div className="space-y-4">
+                        <div className="flex items-center justify-between border border-zinc-800 p-3">
+                            <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">[FREE_SHIPPING]</p>
+                            <span className={`px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase border ${product.shipping.free
+                                ? "border-[#e4ff00] bg-[#e4ff00]/10 text-[#e4ff00]"
+                                : "border-zinc-500 bg-black text-zinc-500"
                                 }`}>
-                                {product.shipping.free ? "Sí" : "No"}
+                                {product.shipping.free ? "[TRUE]" : "[FALSE]"}
                             </span>
                         </div>
                         {!product.shipping.free && (
-                            <div>
-                                <p className="text-slate-400 text-sm">Costo de Envío</p>
-                                <p className="text-white font-medium">${product.shipping.cost}</p>
+                            <div className="mt-4">
+                                <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">[SHIPPING_FEE]</p>
+                                <p className="text-white text-lg font-bold mt-1">CR_{product.shipping.cost}</p>
                             </div>
                         )}
                     </div>

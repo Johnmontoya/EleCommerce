@@ -67,8 +67,20 @@ const DashOrderPage = () => {
     };
 
     return (
-        <div className={`min-h-screen background-light dark:background-dark`}>
-            <div className="flex">
+        <div className="min-h-screen bg-[#020202] relative font-mono text-white">
+            {/* Background Grid Pattern */}
+            <div
+                className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"
+                style={{
+                    backgroundImage: `
+                    linear-gradient(to right, #ffffff 1px, transparent 1px),
+                    linear-gradient(to bottom, #ffffff 1px, transparent 1px)
+                  `,
+                    backgroundSize: '40px 40px'
+                }}
+            />
+
+            <div className="flex relative z-10">
                 {/* Sidebar */}
                 <Sidebar />
 
@@ -87,18 +99,19 @@ const DashOrderPage = () => {
                         />
 
                         {/* Header */}
-                        <DashHeader
-                            data={orders}
-                            title="Gestion de Pedidos"
-                            titleData="Pedido"
-                            path="orders"
-                            titleIcon={<BiPackage className="text-cyan-400" size={36} />}
-                            list={false}
-                        />
-
-                        <p className="text-slate-400">
-                            {filteredOrders?.length} pedido(s) encontrado(s)
-                        </p>
+                        <div className="mb-6">
+                            <DashHeader
+                                data={orders}
+                                title="[ORDER_HISTORY]"
+                                titleData="TRANSACTIONS"
+                                path="orders"
+                                titleIcon={<BiPackage className="text-[#00f0ff]" size={36} />}
+                                list={false}
+                            />
+                            <p className="text-zinc-500 text-xs font-bold tracking-widest uppercase mt-2">
+                                SYSTEM LOG: {filteredOrders?.length} [RECORDS_FOUND]
+                            </p>
+                        </div>
 
                         <div className="w-full mx-auto py-8">
                             <StatsInfo stats={stats} isAdmin={false} />
@@ -119,7 +132,7 @@ const DashOrderPage = () => {
                             />
 
                             <Pagination
-                                title="pedidos"
+                                title="RECORDS"
                                 data={orders}
                                 currentPage={currentPage}
                                 setCurrentPage={setCurrentPage}

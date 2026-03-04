@@ -6,23 +6,23 @@ interface MetadataProps {
 
 const Metadata: React.FC<MetadataProps> = ({ metadata }) => {
     return (
-        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
-            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">METADATA</h3>
+        <div className="bg-[#0a0a0a] border border-zinc-800 p-6 relative">
+            <h3 className="text-[10px] font-mono font-bold text-zinc-600 uppercase tracking-widest mb-4 border-b border-zinc-800 pb-2">[SYSTEM_METADATA]</h3>
 
-            <div className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                    <span className="text-gray-400">Creado el</span>
-                    <span className="text-white">{moment(metadata?.data?.createdAt).format('DD/MM/YYYY')}</span>
+            <div className="space-y-4 text-xs font-mono tracking-wider">
+                <div className="flex justify-between items-center bg-[#050505] border border-zinc-800 px-3 py-2">
+                    <span className="text-zinc-500 uppercase">[CREATED_AT]</span>
+                    <span className="text-zinc-300">{moment(metadata?.data?.createdAt).format('DD/MM/YYYY')}</span>
                 </div>
-                <div className="flex justify-between">
-                    <span className="text-gray-400">Ultima modificacion</span>
-                    <span className="text-white">{moment(metadata?.data?.updatedAt).format('DD/MM/YYYY')}</span>
+                <div className="flex justify-between items-center bg-[#050505] border border-zinc-800 px-3 py-2">
+                    <span className="text-zinc-500 uppercase">[LAST_MODIFIED]</span>
+                    <span className="text-[#00f0ff]">{moment(metadata?.data?.updatedAt).format('DD/MM/YYYY')}</span>
                 </div>
-                <div className="flex justify-between">
-                    <span className="text-gray-400">Enlace del sistema</span>
-                    <a href="#" className="text-blue-400 hover:text-blue-300 flex items-center gap-1">
-                        Ver logs de la API
-                        <span className="text-xs">↗</span>
+                <div className="flex justify-between items-center px-3 py-2">
+                    <span className="text-zinc-500 uppercase text-[10px]">[SYSTEM_LINK]</span>
+                    <a href="#" className="text-[#e4ff00] hover:text-white flex items-center gap-1 transition-colors uppercase text-[10px] tracking-widest hover:underline">
+                        [VIEW_API_LOGS]
+                        <span className="text-[10px]">↗</span>
                     </a>
                 </div>
             </div>

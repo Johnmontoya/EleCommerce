@@ -5,33 +5,35 @@ interface PrioritySettingsProps {
 }
 const PrioritySettings = ({ priority, setPriority, priorityOptions }: PrioritySettingsProps) => {
     return (
-        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
-            <div className="flex items-center gap-2 mb-6">
-                <div className="w-1 h-5 bg-blue-600 rounded-full"></div>
-                <h2 className="block text-slate-300 font-semibold">Prioridad de configuracion</h2>
+        <div className="bg-[#0a0a0a] border border-zinc-800 p-6 relative">
+            <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-[#ff0055] opacity-50"></div>
+
+            <div className="flex items-center gap-2 mb-6 border-b border-zinc-800 pb-4">
+                <div className="w-2 h-5 bg-[#ff0055]"></div>
+                <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100">[CONFIG_PRIORITY]</h2>
             </div>
 
             <div>
-                <label className="block text-sm text-gray-400 mb-3">Prioridad de envio</label>
+                <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-4">[DISPATCH_LEVEL]</label>
                 <div className="space-y-3">
                     {priorityOptions.map((option) => (
                         <label
                             key={option.value}
-                            className={`flex items-center justify-between p-3 rounded-lg border-2 cursor-pointer transition-all ${priority === option.value
-                                ? 'border-blue-600 bg-blue-600/10'
-                                : 'border-slate-600 hover:border-gray-600'
+                            className={`flex items-center justify-between p-3 border cursor-pointer transition-all ${priority === option.value
+                                ? 'border-[#00f0ff] bg-[#00f0ff]/5'
+                                : 'border-zinc-800 bg-[#050505] hover:border-zinc-600'
                                 }`}
                         >
                             <div className="flex items-center gap-3">
-                                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${priority === option.value ? 'border-blue-600' : 'border-gray-600'
+                                <div className={`w-4 h-4 border flex items-center justify-center ${priority === option.value ? 'border-[#00f0ff]' : 'border-zinc-600'
                                     }`}>
                                     {priority === option.value && (
-                                        <div className="w-2.5 h-2.5 bg-blue-600 rounded-full"></div>
+                                        <div className="w-2 h-2 bg-[#00f0ff]"></div>
                                     )}
                                 </div>
-                                <span className="text-slate-300">{option.value}</span>
+                                <span className="text-zinc-300 font-mono tracking-wider uppercase text-xs">[{option.value}]</span>
                             </div>
-                            <span className={`${option.color} text-white text-xs px-2.5 py-0.5 rounded-full font-medium`}>
+                            <span className={`${option.color} text-black font-mono tracking-widest uppercase text-[10px] px-2 py-1`}>
                                 {option.label}
                             </span>
                             <input

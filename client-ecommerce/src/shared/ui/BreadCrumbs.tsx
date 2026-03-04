@@ -6,15 +6,13 @@ const BreadCrumbs = () => {
   const pathnames = location.pathname.split("/").filter((x) => x);
 
   return (
-    <div className="max-w-7xl mx-auto flex justify-start items-center px-4 py-4">
-      <Link to={"/"} className="flex items-center justify-center">
-        <p className="ml-1 text-sm font-medium text-slate-100 hover:text-cyan-600 md:ml-1">
-          Home
+    <div className="flex justify-start items-center py-2 px-1 font-mono uppercase tracking-widest text-[10px]">
+      <Link to={"/"} className="flex items-center justify-center group">
+        <p className="text-zinc-500 group-hover:text-[#00f0ff] transition-colors font-bold">
+          [BASE]
         </p>
       </Link>
-      <ol className="inline-flex items-center space-x-1 md:space-x-1">
-        {/* Enlace inicial a Home */}
-
+      <ol className="inline-flex items-center space-x-2 ml-2">
         {/* Mapeamos los segmentos restantes */}
         {pathnames.map((name, index) => {
           // Construye la URL acumulativa (ej: "/productos", luego "/productos/123")
@@ -23,20 +21,19 @@ const BreadCrumbs = () => {
 
           return (
             <div key={routeTo} aria-current={isLast ? "page" : undefined}>
-              <div className="flex items-center">
-                <HiOutlineSlash className="text-slate-100" size={18} />
+              <div className="flex items-center space-x-2">
+                <span className="text-zinc-700 font-bold">/</span>
                 {isLast ? (
-                  // Si es el último, es solo texto sin enlace
-                  <span className="ml-1 text-sm font-medium text-cyan-500 md:ml-1">
-                    {/* Formatea el nombre (ej: "123" -> "Producto 123", o usa un hook para nombres reales) */}
-                    {name.charAt(0).toUpperCase() + name.slice(1)}
+                  // Si es el último, es texto resaltado
+                  <span className="text-[#00f0ff] font-black [text-shadow:_0_0_8px_#00f0ff80]">
+                    {name}
                   </span>
                 ) : (
                   <Link
                     to={routeTo}
-                    className="ml-1 text-sm font-medium text-slate-100 hover:text-cyan-600 md:ml-1"
+                    className="text-white hover:text-[#00f0ff] transition-colors font-bold"
                   >
-                    {name.charAt(0).toUpperCase() + name.slice(1)}
+                    {name}
                   </Link>
                 )}
               </div>

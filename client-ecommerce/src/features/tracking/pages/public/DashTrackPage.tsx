@@ -20,14 +20,16 @@ const DashTrackPage: React.FC = () => {
   const status = trackingData?.data?.events.length - 1;
 
   return (
-    <div className="min-h-screen background-light dark:background-light">
+    <div className="min-h-screen bg-[#020202] text-zinc-300">
       <BreadCrumbs />
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
-        <div className="flex items-center gap-3 mb-8">
-          <BiPackage size={36} className="text-cyan-400" />
-          <h1 className="text-4xl font-bold text-slate-100">Rastrear Envío</h1>
+        <div className="flex items-center gap-4 mb-8 border-b border-zinc-800 pb-4">
+          <BiPackage size={36} className="text-[#00f0ff]" />
+          <h1 className="text-3xl font-bold text-zinc-100 font-mono tracking-widest uppercase">
+            [TRACKING_PORTAL]
+          </h1>
         </div>
 
         {/* Tracking Input */}
@@ -64,10 +66,16 @@ const DashTrackPage: React.FC = () => {
 
         {/* Empty State */}
         {!trackingData && !isTracking && (
-          <div className="text-center py-12">
-            <BiPackage size={64} className="text-slate-600 mx-auto mb-4" />
-            <p className="text-slate-400 text-lg">
-              Ingresa tu número de rastreo para ver el estado de tu envío
+          <div className="text-center py-16 bg-[#050505] border border-zinc-800 mt-8 relative overflow-hidden group">
+            {/* Scanline Effect */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-[#ff0055]/30 group-hover:animate-[scan_2s_ease-in-out_infinite]"></div>
+
+            <BiPackage size={64} className="text-zinc-600 mx-auto mb-6" />
+            <p className="text-zinc-400 text-sm font-mono tracking-widest uppercase">
+              // AWAITING_TELEMETRY_INPUT
+            </p>
+            <p className="text-zinc-500 text-xs font-mono mt-2 uppercase">
+              ENTER TRACKING SEQUENCE TO ESTABLISH CONNECTION
             </p>
           </div>
         )}

@@ -35,45 +35,53 @@ const ShowHistory = ({ showHistory, trackingId, handleDeleteEvent }: ShowHistory
         <div>
             {/* Tracking History */}
             {showHistory && (
-                <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
-                    <div className="flex items-center justify-between mb-6">
-                        <h2 className="block text-slate-300 font-semibold">Historial de seguimiento</h2>
-                        <span className="text-sm text-gray-400">{trackingEvents?.data?.length} eventos</span>
+                <div className="bg-[#0a0a0a] border border-zinc-800 p-6 relative mt-6">
+                    <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-[#00f0ff] opacity-50"></div>
+                    <div className="flex items-center justify-between mb-6 border-b border-zinc-800 pb-4">
+                        <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100">[TELEMETRY_LOGS]</h2>
+                        <span className="text-[10px] font-mono tracking-widest uppercase text-[#00f0ff] bg-[#00f0ff]/10 px-2 py-1 border border-[#00f0ff]/30">{trackingEvents?.data?.length} RECORDED_EVENTS</span>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-0">
                         {trackingEvents?.data?.length === 0 ? (
-                            <div className="text-center py-8 text-gray-500">
-                                <BiPackage className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                                <p>No hay eventos</p>
+                            <div className="text-center py-8 text-zinc-600 bg-[#050505] border border-zinc-800 border-dashed">
+                                <BiPackage className="w-8 h-8 mx-auto mb-3 opacity-50" />
+                                <p className="font-mono text-xs tracking-widest uppercase">[NO_DATA_AVAILABLE]</p>
                             </div>
                         ) : (
                             orderedEvents.map((event: any) => (
                                 <div
                                     key={event.id}
-                                    className="relative pl-8 pb-6 border-l-2 border-gray-700 last:border-l-0 last:pb-0"
+                                    className="relative pl-8 pb-8 border-l border-zinc-700 last:border-l-0 last:pb-0"
                                 >
-                                    {/* Timeline dot */}
-                                    <div className={`absolute left-0 top-0 -translate-x-[9px] w-4 h-4 rounded-full border-2 ${event.completed
-                                        ? 'bg-emerald-600 border-emerald-600'
-                                        : 'bg-blue-600 border-blue-600'
+                                    {/* Timeline square node */}
+                                    <div className={`absolute left-0 top-0 -translate-x-[5px] w-2.5 h-2.5 border flex items-center justify-center ${event.completed
+                                        ? 'bg-[#e4ff00] border-[#e4ff00]'
+                                        : 'bg-[#00f0ff]/20 border-[#00f0ff]'
                                         }`}></div>
 
-                                    <div className="bg-slate-700 rounded-lg p-4 hover:bg-[#1e2839] transition-colors">
-                                        <div className="flex items-start justify-between mb-2">
+                                    <div className="bg-[#050505] border border-zinc-800 p-4 hover:border-zinc-600 transition-colors group relative">
+                                        {/* Corner Accents */}
+                                        <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-zinc-700 opacity-50"></div>
+                                        <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-zinc-700 opacity-50"></div>
+
+                                        <div className="flex items-start justify-between mb-3 border-b border-zinc-900 pb-3">
                                             <div>
-                                                <h3 className="font-semibold text-white mb-1">{event.status}</h3>
-                                                <div className="flex items-center gap-2 text-sm text-gray-400">
-                                                    <BiMapPin className="w-3.5 h-3.5" />
+                                                <h3 className="font-mono text-sm font-bold text-zinc-100 tracking-wider uppercase flex items-center gap-2">
+                                                    <span className={`${event.completed ? 'text-[#e4ff00]' : 'text-[#00f0ff]'}`}>&gt;</span>
+                                                    [{event.status}]
+                                                </h3>
+                                                <div className="flex items-center gap-2 text-[10px] font-mono text-zinc-500 uppercase tracking-widest mt-1">
+                                                    <BiMapPin className="w-3 h-3 text-zinc-400" />
                                                     <span>{event.location}</span>
                                                 </div>
                                             </div>
-                                            <div className="flex flex-row items-center gap-2">
+                                            <div className="flex flex-row items-center gap-1">
                                                 <ButtonAction
                                                     onClick={() => handleCompleteEvent(event.id)}
-                                                    variant="primary"
+                                                    variant="secondary"
                                                     text=""
-                                                    className="text-gray-500 group-hover:text-green-500"
+                                                    className="p-1 border border-zinc-800 bg-transparent text-zinc-500 hover:text-[#e4ff00] hover:border-[#e4ff00] transition-colors rounded-none"
                                                 >
                                                     <FaCheckCircle className="w-4 h-4" />
                                                 </ButtonAction>
@@ -81,28 +89,30 @@ const ShowHistory = ({ showHistory, trackingId, handleDeleteEvent }: ShowHistory
                                                     onClick={() => handleDeleteEvent(event.id)}
                                                     variant="danger"
                                                     text=""
-                                                    className="text-gray-500 group-hover:text-red-500"
+                                                    className="p-1 border border-zinc-800 bg-transparent text-zinc-500 hover:text-[#ff0055] hover:border-[#ff0055] transition-colors rounded-none"
                                                 >
                                                     <BsTrash2 className="w-4 h-4" />
                                                 </ButtonAction>
                                             </div>
                                         </div>
 
-                                        <p className="text-sm text-gray-300 mb-3">{event.description}</p>
+                                        <p className="font-mono text-[11px] text-zinc-400 mb-4 leading-relaxed uppercase tracking-wider pl-4 border-l border-zinc-800">
+                                            {event.description}
+                                        </p>
 
-                                        <div className="flex items-center gap-4 text-xs text-gray-500">
-                                            <div className="flex items-center gap-1">
-                                                <BiCalendar className="w-3 h-3" />
+                                        <div className="flex items-center gap-4 text-[10px] font-mono text-zinc-600 uppercase tracking-widest">
+                                            <div className="flex items-center gap-1 bg-black px-2 py-1 border border-zinc-900">
+                                                <BiCalendar className="w-3 h-3 text-zinc-500" />
                                                 <span>{event.date}</span>
                                             </div>
-                                            <div className="flex items-center gap-1">
-                                                <CiLock className="w-3 h-3" />
+                                            <div className="flex items-center gap-1 bg-black px-2 py-1 border border-zinc-900">
+                                                <CiLock className="w-3 h-3 text-zinc-500" />
                                                 <span>{event.time}</span>
                                             </div>
                                             {event.completed && (
-                                                <span className="flex items-center gap-1 text-green-500">
+                                                <span className="flex items-center gap-1 text-[#e4ff00] ml-auto">
                                                     <BiCheckCircle className="w-3 h-3" />
-                                                    Completed
+                                                    [EXECUTED]
                                                 </span>
                                             )}
                                         </div>

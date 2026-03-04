@@ -18,21 +18,24 @@ const FormCredential: React.FC<FormCredentialProps> = ({
     setConfirmPassword,
 }) => {
     return (
-        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
-            <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
-                <BiLock size={20} className="text-cyan-400" />
-                Credenciales de Acceso
+        <div className="bg-[#050505] p-6 border border-zinc-800 relative mt-6">
+            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50 pointer-events-none" />
+
+            <h2 className="text-[#00f0ff] font-mono text-[12px] font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
+                <BiLock size={16} className="text-[#00f0ff]" />
+                [SYS_ACCESS_CREDENTIALS]
             </h2>
 
-            <div className="space-y-4">
+            <div className="space-y-6">
                 <div>
-                    <label className="block text-slate-300 font-semibold mb-2">
-                        Email *
+                    <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
+                        [EMAIL_ADDRESS] *
                     </label>
                     <div className="relative">
                         <BiEnvelope
-                            size={18}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"
+                            size={16}
+                            className="absolute left-3 top-1/2 -translate-y-1/2 text-[#00f0ff]"
                         />
                         <input
                             type="email"
@@ -40,19 +43,19 @@ const FormCredential: React.FC<FormCredentialProps> = ({
                             value={userData.email || ""}
                             onChange={onChangeCreateData}
                             required
-                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-10 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                            placeholder="john.doe@example.com"
+                            className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-600 px-10 py-3 rounded-none outline-none focus:border-[#e4ff00] font-mono text-[10px] uppercase tracking-widest transition-all"
+                            placeholder="[INPUT_EMAIL_NODE]"
                         />
                     </div>
-                    <div className="text-red-500 text-sm mt-1">
+                    <div className="text-[#ff0055] font-mono text-[10px] uppercase tracking-widest mt-1">
                         {getFieldsError?.("email")}
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-6">
                     <div>
-                        <label className="block text-slate-300 font-semibold mb-2">
-                            Contraseña *
+                        <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
+                            [PASSWORD_KEY] *
                         </label>
                         <input
                             type="password"
@@ -60,36 +63,35 @@ const FormCredential: React.FC<FormCredentialProps> = ({
                             value={userData.password || ""}
                             onChange={onChangeCreateData}
                             required
-                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                            placeholder="••••••••"
+                            className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-600 px-4 py-3 rounded-none outline-none focus:border-[#e4ff00] font-mono text-[10px] uppercase tracking-widest transition-all"
+                            placeholder="[********]"
                         />
-                        <div className="text-red-500 text-sm mt-1">
+                        <div className="text-[#ff0055] font-mono text-[10px] uppercase tracking-widest mt-1">
                             {getFieldsError?.("password")}
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-slate-300 font-semibold mb-2">
-                            Confirmar Contraseña *
+                        <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
+                            [CONFIRM_PASSWORD_KEY] *
                         </label>
                         <input
                             type="password"
                             value={confirmPassword || ""}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
-                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                            placeholder="••••••••"
+                            className="w-full bg-black border border-zinc-800 text-white placeholder-zinc-600 px-4 py-3 rounded-none outline-none focus:border-[#e4ff00] font-mono text-[10px] uppercase tracking-widest transition-all"
+                            placeholder="[********]"
                         />
-                        <div className="text-red-500 text-sm mt-1">
+                        <div className="text-[#ff0055] font-mono text-[10px] uppercase tracking-widest mt-1">
                             {getFieldsError?.("confirmPassword")}
                         </div>
                     </div>
                 </div>
 
-                <div className="bg-slate-700/30 border border-slate-600 rounded-lg p-3">
-                    <p className="text-slate-400 text-xs">
-                        La contraseña debe tener al menos 8 caracteres e incluir
-                        mayúsculas, minúsculas y números.
+                <div className="bg-black border border-[#e4ff00]/50 p-4 relative">
+                    <p className="text-[#e4ff00] font-mono text-[10px] uppercase tracking-widest leading-relaxed">
+                        [SYS_WARNING: PASSWORD MUST CONTAIN &gt;= 8 CHARS. REQUIRES CAPS, LOWERCASE &amp; NUMERALS TO PASS ENCRYPTION LAYER.]
                     </p>
                 </div>
             </div>

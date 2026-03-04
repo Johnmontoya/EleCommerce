@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useProduct } from "../../hook/queries/useProduct";
 import { useDeleteProductMutation, useUpdatePublishProductMutation } from "../../hook/mutation/useProductMutation";
-import LoadingFallback from "../../../../shared/ui/LoadingFallback";
 import Sidebar from "../../../dashboard/components/Sidebar";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
 import NavMobile from "../../../dashboard/components/NavMobile";
@@ -46,17 +45,32 @@ const DashViewProductPage: React.FC = () => {
         }
     };
 
-    if (isLoading) return <LoadingFallback />;
+    if (isLoading) {
+        return (
+            <div className="min-h-screen bg-[#020202] flex items-center justify-center font-mono">
+                <div className="text-center">
+                    <div className="animate-spin rounded-none h-12 w-12 border-2 border-t-[#00f0ff] border-r-transparent border-b-[#ff0055] border-l-transparent mx-auto"></div>
+                    <p className="mt-4 text-[#00f0ff] tracking-widest text-xs uppercase">[SYS_LOADING_PRODUCT_DATA...]</p>
+                </div>
+            </div>
+        );
+    }
+
     if (!product) {
         return (
-            <div className="min-h-screen background-light dark:background-light flex items-center justify-center">
-                <div className="text-center">
-                    <p className="text-white text-xl mb-4">Producto no encontrado</p>
+            <div className="min-h-screen bg-[#020202] flex items-center justify-center font-mono">
+                <div className="text-center border border-[#ff0055] border-dashed p-12 relative bg-[#050505]">
+                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#ff0055]" />
+                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#ff0055]" />
+                    <p className="text-[#ff0055] tracking-widest text-xs uppercase font-bold mb-8 flex flex-col items-center">
+                        <span className="text-4xl block mb-2">⚠</span>
+                        [ERR:_PRODUCT_NOT_FOUND]
+                    </p>
                     <button
                         onClick={() => navigate("/dashboard/products")}
-                        className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg"
+                        className="px-6 py-2 bg-[#ff0055]/10 text-[#ff0055] border border-[#ff0055] hover:bg-[#ff0055] hover:text-white transition-all text-[10px] tracking-widest uppercase font-bold"
                     >
-                        Volver a la lista
+                        [RETURN_TO_DATABASE]
                     </button>
                 </div>
             </div>
@@ -64,7 +78,7 @@ const DashViewProductPage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen background-light dark:background-light">
+        <div className="min-h-screen bg-[#020202] text-white font-mono selection:bg-[#00f0ff] selection:text-black">
             <div className="flex">
                 {/** Sidebar */}
                 <Sidebar />

@@ -29,8 +29,11 @@ const TableProduct: React.FC<TableProductProps> = ({ currentData, selectedData, 
                     ))
                 ) : (
                     <tr>
-                        <td colSpan={7} className="p-12 text-center">
-                            <p className="text-slate-400 text-lg">No se encontraron productos</p>
+                        <td colSpan={6} className="p-12 text-center bg-[#050505] border-t border-zinc-900 border-dashed">
+                            <p className="text-[#ff0055] text-[10px] font-mono tracking-[0.2em] uppercase font-bold flex items-center justify-center gap-2">
+                                <span className="w-1.5 h-1.5 bg-[#ff0055] animate-ping"></span>
+                                [ERR: SYS_DB_QUERY_RETURNED_NULL]
+                            </p>
                         </td>
                     </tr>
                 )}

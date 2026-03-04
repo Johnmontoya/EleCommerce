@@ -1,5 +1,4 @@
 import React from "react";
-import { BiPackage } from "react-icons/bi";
 
 interface DimensionFormProps {
   register: any;
@@ -8,82 +7,84 @@ interface DimensionFormProps {
 
 const DimensionForm: React.FC<DimensionFormProps> = ({ register, errors }) => {
   return (
-    <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
-      <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
-        <BiPackage size={20} className="text-cyan-400" />
-        Dimensiones
+    <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono mt-4">
+      <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
+      <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
+      <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
+        <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
+        [DIMENSIONS_AND_WEIGHT]
       </h2>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div>
-          <label className="block text-slate-300 font-semibold mb-2 text-sm">
-            Peso (kg)
+          <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
+            [WEIGHT_KG]
           </label>
           <input
             type="number"
             {...register('dimensions.weight', { valueAsNumber: true })}
             min="0"
             step="0.01"
-            className={`w-full bg-slate-700/50 border ${errors.dimensions?.weight ? 'border-red-500' : 'border-slate-600'
-              } text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all`}
-            placeholder="0.18"
+            className={`w-full bg-black border ${errors.dimensions?.weight ? 'border-[#ff0055] focus:border-[#ff0055]' : 'border-zinc-800 focus:border-[#00f0ff]'
+              } text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none text-[10px] uppercase font-bold tracking-[0.2em] transition-all`}
+            placeholder="[0.18]"
           />
           {errors.dimensions?.weight && (
-            <p className="text-red-500 text-xs mt-1">{errors.dimensions.weight.message}</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.dimensions.weight.message}]</p>
           )}
         </div>
 
         <div>
-          <label className="block text-slate-300 font-semibold mb-2 text-sm">
-            Ancho (cm)
+          <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
+            [WIDTH_CM]
           </label>
           <input
             type="number"
             {...register('dimensions.width', { valueAsNumber: true })}
             min="0"
             step="0.01"
-            className={`w-full bg-slate-700/50 border ${errors.dimensions?.width ? 'border-red-500' : 'border-slate-600'
-              } text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all`}
-            placeholder="6"
+            className={`w-full bg-black border ${errors.dimensions?.width ? 'border-[#ff0055] focus:border-[#ff0055]' : 'border-zinc-800 focus:border-[#00f0ff]'
+              } text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none text-[10px] uppercase font-bold tracking-[0.2em] transition-all`}
+            placeholder="[6]"
           />
           {errors.dimensions?.width && (
-            <p className="text-red-500 text-xs mt-1">{errors.dimensions.width.message}</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.dimensions.width.message}]</p>
           )}
         </div>
 
         <div>
-          <label className="block text-slate-300 font-semibold mb-2 text-sm">
-            Alto (cm)
+          <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
+            [HEIGHT_CM]
           </label>
           <input
             type="number"
             {...register('dimensions.height', { valueAsNumber: true })}
             min="0"
             step="0.01"
-            className={`w-full bg-slate-700/50 border ${errors.dimensions?.height ? 'border-red-500' : 'border-slate-600'
-              } text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all`}
-            placeholder="4"
+            className={`w-full bg-black border ${errors.dimensions?.height ? 'border-[#ff0055] focus:border-[#ff0055]' : 'border-zinc-800 focus:border-[#00f0ff]'
+              } text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none text-[10px] uppercase font-bold tracking-[0.2em] transition-all`}
+            placeholder="[4]"
           />
           {errors.dimensions?.height && (
-            <p className="text-red-500 text-xs mt-1">{errors.dimensions.height.message}</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.dimensions.height.message}]</p>
           )}
         </div>
 
         <div>
-          <label className="block text-slate-300 font-semibold mb-2 text-sm">
-            Profundidad (cm)
+          <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
+            [DEPTH_CM]
           </label>
           <input
             type="number"
             {...register('dimensions.depth', { valueAsNumber: true })}
             min="0"
             step="0.01"
-            className={`w-full bg-slate-700/50 border ${errors.dimensions?.depth ? 'border-red-500' : 'border-slate-600'
-              } text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all`}
-            placeholder="3"
+            className={`w-full bg-black border ${errors.dimensions?.depth ? 'border-[#ff0055] focus:border-[#ff0055]' : 'border-zinc-800 focus:border-[#00f0ff]'
+              } text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none text-[10px] uppercase font-bold tracking-[0.2em] transition-all`}
+            placeholder="[3]"
           />
           {errors.dimensions?.depth && (
-            <p className="text-red-500 text-xs mt-1">{errors.dimensions.depth.message}</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.dimensions.depth.message}]</p>
           )}
         </div>
       </div>

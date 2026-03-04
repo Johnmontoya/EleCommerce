@@ -1,5 +1,4 @@
 import React from "react";
-import { FaDollarSign } from "react-icons/fa";
 
 interface PriceFormProps {
   register: any;
@@ -17,110 +16,113 @@ const PriceForm: React.FC<PriceFormProps> = ({ register, errors, watch }) => {
   };
 
   return (
-    <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
-      <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
-        <FaDollarSign size={20} className="text-cyan-400" />
-        Precio e Inventario
+    <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono mt-4">
+      <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
+      <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
+      <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
+        <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
+        [PRICE_AND_INVENTORY]
       </h2>
 
       <div className="grid grid-cols-2 gap-4">
         {/* Precio */}
         <div>
-          <label className="block text-slate-300 font-semibold mb-2">
-            Precio *
+          <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
+            [PRICE] *
           </label>
           <input
             type="number"
             {...register('price', { valueAsNumber: true })}
             min="0"
             step="0.01"
-            className={`w-full bg-slate-700/50 border ${errors.price ? 'border-red-500' : 'border-slate-600'
-              } text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all`}
-            placeholder="249900"
+            className={`w-full bg-black border ${errors.price ? 'border-[#ff0055] focus:border-[#ff0055]' : 'border-zinc-800 focus:border-[#00f0ff]'
+              } text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none text-[10px] uppercase font-bold tracking-[0.2em] transition-all`}
+            placeholder="[249900]"
           />
           {errors.price && (
-            <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.price.message}]</p>
           )}
         </div>
 
         {/* Descuento */}
         <div>
-          <label className="block text-slate-300 font-semibold mb-2">
-            Descuento (%)
+          <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
+            [DISCOUNT] (%)
           </label>
           <input
             type="number"
             {...register('priceDiscount', { valueAsNumber: true })}
             min="0"
             max="100"
-            className={`w-full bg-slate-700/50 border ${errors.priceDiscount ? 'border-red-500' : 'border-slate-600'
-              } text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all`}
-            placeholder="19"
+            className={`w-full bg-black border ${errors.priceDiscount ? 'border-[#ff0055] focus:border-[#ff0055]' : 'border-zinc-800 focus:border-[#00f0ff]'
+              } text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none text-[10px] uppercase font-bold tracking-[0.2em] transition-all`}
+            placeholder="[19]"
           />
           {errors.priceDiscount && (
-            <p className="text-red-500 text-sm mt-1">{errors.priceDiscount.message}</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.priceDiscount.message}]</p>
           )}
         </div>
 
         {/* Precio Final (si hay descuento) */}
         {priceDiscount > 0 && (
-          <div className="col-span-2 bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-3">
-            <p className="text-slate-400 text-sm mb-1">Precio Final:</p>
-            <p className="text-2xl font-bold text-cyan-400">
-              ${calculateFinalPrice().toFixed(2)}
+          <div className="col-span-2 bg-[#e4ff00]/10 border border-[#e4ff00]/30 rounded-none p-4 flex flex-col items-center justify-center relative">
+            <div className="absolute top-2 left-2 w-1 h-1 bg-[#e4ff00] animate-pulse"></div>
+            <p className="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-1">[FINAL_COMPUTED_PRICE]:</p>
+            <p className="text-xl font-bold text-[#e4ff00] font-mono tracking-widest">
+              CR_{calculateFinalPrice().toFixed(2)}
             </p>
           </div>
         )}
 
         {/* Stock */}
         <div>
-          <label className="block text-slate-300 font-semibold mb-2">
-            Stock *
+          <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
+            [STOCK] *
           </label>
           <input
             type="number"
             {...register('stock', { valueAsNumber: true })}
             min="0"
-            className={`w-full bg-slate-700/50 border ${errors.stock ? 'border-red-500' : 'border-slate-600'
-              } text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all`}
-            placeholder="65"
+            className={`w-full bg-black border ${errors.stock ? 'border-[#ff0055] focus:border-[#ff0055]' : 'border-zinc-800 focus:border-[#00f0ff]'
+              } text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none text-[10px] uppercase font-bold tracking-[0.2em] transition-all`}
+            placeholder="[65]"
           />
           {errors.stock && (
-            <p className="text-red-500 text-sm mt-1">{errors.stock.message}</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.stock.message}]</p>
           )}
         </div>
 
         {/* SKU */}
         <div>
-          <label className="block text-slate-300 font-semibold mb-2">
-            SKU *
+          <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
+            [SKU] *
           </label>
           <input
             type="text"
             {...register('sku')}
-            className={`w-full bg-slate-700/50 border ${errors.sku ? 'border-red-500' : 'border-slate-600'
-              } text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all`}
-            placeholder="AUD-PROX-2024"
+            className={`w-full bg-black border ${errors.sku ? 'border-[#ff0055] focus:border-[#ff0055]' : 'border-zinc-800 focus:border-[#00f0ff]'
+              } text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none text-[10px] uppercase font-bold tracking-[0.2em] transition-all`}
+            placeholder="[AUD-PROX-2024]"
           />
           {errors.sku && (
-            <p className="text-red-500 text-sm mt-1">{errors.sku.message}</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.sku.message}]</p>
           )}
         </div>
 
         {/* Código de Barras */}
         <div className="col-span-2">
-          <label className="block text-slate-300 font-semibold mb-2">
-            Código de Barras
+          <label className="block text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] mb-2 uppercase">
+            [BARCODE]
           </label>
           <input
             type="text"
             {...register('barcode')}
-            className={`w-full bg-slate-700/50 border ${errors.barcode ? 'border-red-500' : 'border-slate-600'
-              } text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all`}
-            placeholder="8909876543211"
+            className={`w-full bg-black border ${errors.barcode ? 'border-[#ff0055] focus:border-[#ff0055]' : 'border-zinc-800 focus:border-[#00f0ff]'
+              } text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none text-[10px] uppercase font-bold tracking-[0.2em] transition-all`}
+            placeholder="[8909876543211]"
           />
           {errors.barcode && (
-            <p className="text-red-500 text-sm mt-1">{errors.barcode.message}</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.barcode.message}]</p>
           )}
         </div>
       </div>

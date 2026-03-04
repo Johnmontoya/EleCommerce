@@ -1,9 +1,7 @@
 import { FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { BsEye, BsTrash2 } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
-import { MdBlock, MdCheckCircle } from "react-icons/md";
 import { useDeleteProductMutation } from "../../hook/mutation/useProductMutation";
 import SweetAlertas from "../../../../shared/ui/SweetAlertas";
 
@@ -33,100 +31,103 @@ const ProductRow: React.FC<ProductRowProps> = ({ product, selectedData, handleSe
     return (
         <tr
             key={product?.id}
-            className="text-center border-t border-slate-600 hover:bg-slate-700/60 transition-colors"
+            className="text-center border-t border-zinc-800 border-dashed hover:bg-[#050505] transition-colors font-mono"
         >
             <td className="px-6 py-4">
-                <label className="flex gap-3 items-center cursor-pointer relative">
+                <label className="flex gap-3 items-center cursor-pointer relative justify-center">
                     <input type="checkbox" checked={selectedData.includes(product?.id!)} onChange={() => handleSelectData(product?.id!)} className="hidden peer" />
-                    <span className="w-5 h-5 border border-slate-300 rounded relative flex items-center justify-center peer-checked:border-cyan-600"></span>
-                    <FaCheck size={12} className="absolute hidden peer-checked:inline left-1 top-1/2 transform -translate-y-1/2 text-cyan-600" />
+                    <span className="w-4 h-4 bg-black border border-zinc-600 relative flex items-center justify-center peer-checked:border-[#00f0ff] peer-checked:bg-[#00f0ff]/20 transition-all"></span>
+                    <FaCheck size={10} className="absolute hidden peer-checked:inline left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#00f0ff]" />
                 </label>
             </td>
             <td className="px-6 py-4">
-                <div className="flex items-center justify-start gap-3">
-                    <img
-                        src={product.images?.[0]?.url || "/placeholder.png"}
-                        alt={product.name}
-                        className="w-10 h-10 rounded-full object-cover border-2 border-slate-600"
-                    />
+                <div className="flex items-center justify-start gap-4">
+                    <div className="relative group w-12 h-12">
+                        <div className="absolute inset-0 border border-zinc-700 group-hover:border-[#00f0ff] transition-colors" />
+                        <img
+                            src={product.images?.[0]?.url || "/placeholder.png"}
+                            alt={product.name}
+                            className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all"
+                        />
+                    </div>
                     <div className="text-left">
-                        <p className="text-slate-100 font-semibold">{product.name}</p>
-                        <p className="text-slate-400 text-xs">{product.brand}</p>
+                        <p className="text-[#e4ff00] font-bold text-xs uppercase tracking-widest">{product.name}</p>
+                        <p className="text-zinc-500 text-[10px] uppercase tracking-[0.2em] mt-1">[{product.brand}]</p>
                     </div>
                 </div>
             </td>
             <td className="px-6 py-4">
-                <span className="px-3 py-1 bg-blue-500/20 text-blue-400 border-blue-500/30 rounded-full text-sm">
+                <span className="px-2 py-1 bg-black border border-zinc-800 text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] uppercase">
                     {product?.category?.slug}
                 </span>
             </td>
             <td className="px-6 py-4">
-                <div className="text-slate-100 font-light">
-                    ${Math.round(
-                        product.price - (product.price * product.priceDiscount!) / 100
+                <div className="text-white text-xs font-bold tracking-widest text-left inline-block">
+                    CR_{Math.round(
+                        product.price - (product.price * (product.priceDiscount || 0)) / 100
                     )}
-                    {product.priceDiscount && (
-                        <span className="ml-2 text-sm text-green-400">
-                            {product.priceDiscount}%
-                        </span>
-                    )}
+                    {(product.priceDiscount && product.priceDiscount > 0) ? (
+                        <div className="text-[10px] text-[#ff0055] mt-1 tracking-[0.2em]">
+                            -[{product.priceDiscount}%]
+                        </div>
+                    ) : null}
                 </div>
             </td>
             <td className="px-6 py-4">
-                <span className={`font-light ${product.stock > 10
-                    ? "text-green-400"
+                <span className={`text-[10px] font-bold tracking-[0.2em] uppercase ${product.stock > 10
+                    ? "text-[#e4ff00]"
                     : product.stock > 0
-                        ? "text-yellow-400"
-                        : "text-red-400"
+                        ? "text-[#ff0055]"
+                        : "text-zinc-500"
                     }`}>
-                    {product.stock}
+                    {product.stock}_UNT
                 </span>
             </td>
             <td className="px-6 py-4">
-                <span className={`flex items-center justify-center gap-2 px-3 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer ${product.isPublished
-                    ? "bg-green-500/20 text-green-400 hover:bg-green-500/30"
-                    : "bg-red-500/20 text-red-400 hover:bg-red-500/30"
+                <span className={`flex items-center justify-center gap-2 px-2 py-1 text-[10px] font-bold tracking-[0.2em] uppercase border transition-all ${product.isPublished
+                    ? "bg-[#00f0ff]/10 border-[#00f0ff]/30 text-[#00f0ff]"
+                    : "bg-black border-zinc-800 text-zinc-500"
                     }`}>
                     {product.isPublished ? (
                         <>
-                            <MdCheckCircle size={14} />
-                            Publicado
+                            <span className="w-1.5 h-1.5 bg-[#00f0ff]"></span>
+                            [LIVE]
                         </>
                     ) : (
                         <>
-                            <MdBlock size={14} />
-                            Borrador
+                            <span className="w-1.5 h-1.5 bg-zinc-500"></span>
+                            [DRAFT]
                         </>
                     )}
                 </span>
             </td>
             <td className="px-6 py-4">
-                <div className="flex mx-auto items-center justify-center gap-2">
-                    <ButtonAction
-                        variant="view"
+                <div className="flex mx-auto items-center justify-center gap-3">
+                    <button
                         onClick={() => navigate(`/dashboard/products/${product.id}`)}
-                        text=""
+                        className="text-zinc-400 hover:text-[#00f0ff] transition-colors p-1"
+                        title="VIEW_DATA"
                     >
-                        <BsEye size={18} />
-                    </ButtonAction>
-                    <ButtonAction
-                        variant="edit"
+                        <BsEye size={16} />
+                    </button>
+                    <button
                         onClick={() => navigate(`/dashboard/products/${product.id}/edit`)}
-                        text=""
+                        className="text-zinc-400 hover:text-[#e4ff00] transition-colors p-1"
+                        title="EDIT_AUTH"
                     >
-                        <BiEdit size={18} />
-                    </ButtonAction>
-                    <ButtonAction
-                        variant="delete"
+                        <BiEdit size={16} />
+                    </button>
+                    <button
                         onClick={() => handleDelete(product)}
-                        text=""
+                        className="text-zinc-400 hover:text-[#ff0055] transition-colors p-1"
+                        title="EXEC_DELETE"
                     >
-                        <BsTrash2 size={18} />
-                    </ButtonAction>
+                        <BsTrash2 size={16} />
+                    </button>
                 </div>
             </td>
         </tr>
-    )
-}
+    );
+};
 
 export default ProductRow

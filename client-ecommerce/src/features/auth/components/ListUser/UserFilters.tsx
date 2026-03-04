@@ -1,5 +1,5 @@
 import { BiExport, BiFilter, BiSearch } from "react-icons/bi"
-import ButtonAction from "../../../../shared/ui/ButtonAction"
+
 
 interface UserFiltersProps {
     searchTerm: string;
@@ -38,77 +38,77 @@ const UserFilters: React.FC<UserFiltersProps> = ({
     };
 
     return (
-        <div className="dash-search-border dark:dash-search-border border border-slate-700 rounded-2xl p-4 backdrop-blur-sm my-6">
+        <div className="bg-black border border-zinc-800 p-6 my-6 relative">
+            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50 pointer-events-none" />
             <div className="flex flex-col lg:flex-row gap-4">
                 {/* Search */}
                 <div className="flex-1 relative py-1">
                     <BiSearch
-                        size={20}
-                        className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                        size={16}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 text-[#00f0ff]"
                     />
                     <input
                         type="text"
                         value={searchTerm}
                         onChange={handleSearchChange}
-                        placeholder="Buscar por nombre, email o username..."
-                        className="w-full dash-search dark:dash-search border border-slate-700 text-slate-100 placeholder-slate-400 px-4 py-3 pl-10 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                        placeholder="[SEARCH_SYS_ARCHIVES...]"
+                        className="w-full bg-[#050505] border border-zinc-800 text-white placeholder-zinc-600 px-4 py-3 pl-10 rounded-none outline-none focus:border-[#00f0ff] focus:ring-1 focus:ring-[#00f0ff] transition-all font-mono text-[10px] uppercase tracking-widest"
                     />
                 </div>
 
                 {/* Filter Button */}
-                <ButtonAction
-                    variant="outline"
+                <button
                     onClick={() => setShowFilters(!showFilters)}
-                    text="Filtros"
-                    className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all ${showFilters
-                        ? "bg-slate-700/30 border border-slate-500 text-slate-200 hover:bg-slate-800/70"
-                        : "bg-slate-900/30 border border-slate-500 text-slate-200 hover:bg-slate-800/70"
+                    className={`flex items-center justify-center gap-2 px-6 py-3 font-bold transition-all text-[10px] uppercase tracking-widest border ${showFilters
+                        ? "bg-[#00f0ff]/10 border-[#00f0ff] text-[#00f0ff]"
+                        : "bg-transparent border-zinc-700 text-zinc-400 hover:border-[#00f0ff] hover:text-[#00f0ff]"
                         }`}
                 >
-                    <BiFilter size={20} />
-                </ButtonAction>
+                    <BiFilter size={16} />
+                    [FILTERS]
+                </button>
 
                 {/* Export Button */}
-                <ButtonAction
-                    variant="outline"
-                    text="Exportar"
+                <button
                     onClick={() => { }}
-                    className="flex items-center gap-2 bg-slate-900/30 border border-slate-500 text-slate-200 hover:bg-slate-800/70 px-6 py-3 rounded-lg font-semibold transition-all">
-                    <BiExport size={20} />
-                </ButtonAction>
+                    className="flex items-center justify-center gap-2 bg-transparent border border-zinc-700 text-zinc-400 hover:border-[#e4ff00] hover:text-[#e4ff00] px-6 py-3 font-bold transition-all text-[10px] uppercase tracking-widest">
+                    <BiExport size={16} />
+                    [EXPORT_DATA]
+                </button>
             </div>
 
             {/* Filters Panel */}
             {showFilters && (
-                <div className="mt-4 pt-4 border-t border-slate-700 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="mt-6 pt-6 border-t border-zinc-800 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label className="block text-slate-300 text-sm font-semibold mb-2">
-                            Filtrar por Rol
+                        <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
+                            [FILTER_BY_ROLE]
                         </label>
                         <select
                             value={filterRole}
                             onChange={(e) => setFilterRole(e.target.value)}
-                            className="w-full bg-slate-700 border border-slate-600 text-slate-100 px-4 py-2 rounded-lg outline-none focus:border-cyan-400 cursor-pointer"
+                            className="w-full bg-black border border-zinc-800 text-zinc-300 px-4 py-2 rounded-none outline-none focus:border-[#e4ff00] cursor-pointer font-mono text-[10px] uppercase tracking-widest"
                         >
-                            <option value="all">Todos los roles</option>
-                            <option value="SUPER_ADMIN">Super Admin</option>
-                            <option value="ADMIN">Admin</option>
-                            <option value="USER">User</option>
+                            <option value="all">[ALL_ROLES]</option>
+                            <option value="SUPER_ADMIN">[SUPER_ADMIN]</option>
+                            <option value="ADMIN">[ADMIN]</option>
+                            <option value="USER">[USER]</option>
                         </select>
                     </div>
 
                     <div>
-                        <label className="block text-slate-300 text-sm font-semibold mb-2">
-                            Filtrar por Estado
+                        <label className="block text-[#00f0ff] text-[10px] font-bold tracking-widest uppercase mb-2">
+                            [FILTER_BY_STATUS]
                         </label>
                         <select
                             value={isActive === null ? "all" : String(isActive)}
                             onChange={handleActiveUserChange}
-                            className="w-full bg-slate-700 border border-slate-600 text-slate-100 px-4 py-2 rounded-lg outline-none focus:border-cyan-400 cursor-pointer"
+                            className="w-full bg-black border border-zinc-800 text-zinc-300 px-4 py-2 rounded-none outline-none focus:border-[#e4ff00] cursor-pointer font-mono text-[10px] uppercase tracking-widest"
                         >
-                            <option value="all">Todos los estados</option>
-                            <option value="true">Activos</option>
-                            <option value="false">Inactivos</option>
+                            <option value="all">[ALL_STATUSES]</option>
+                            <option value="true">[STATUS:ACTIVE]</option>
+                            <option value="false">[STATUS:INACTIVE]</option>
                         </select>
                     </div>
                 </div>

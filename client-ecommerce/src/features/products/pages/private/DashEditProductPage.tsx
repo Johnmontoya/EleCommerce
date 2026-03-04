@@ -344,10 +344,10 @@ const DashEditProductPage: React.FC = () => {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen background-light dark:background-dark flex items-center justify-center">
+            <div className="min-h-screen bg-[#020202] flex items-center justify-center font-mono">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto"></div>
-                    <p className="mt-4 text-slate-600 dark:text-slate-400">Cargando producto...</p>
+                    <div className="animate-spin rounded-none h-12 w-12 border-2 border-t-[#00f0ff] border-r-transparent border-b-[#ff0055] border-l-transparent mx-auto"></div>
+                    <p className="mt-4 text-[#00f0ff] tracking-widest text-xs uppercase">[SYS_LOADING_PRODUCT_DATA...]</p>
                 </div>
             </div>
         );
@@ -355,15 +355,17 @@ const DashEditProductPage: React.FC = () => {
 
     if (!product) {
         return (
-            <div className="min-h-screen background-light dark:background-dark flex items-center justify-center">
-                <div className="text-center">
-                    <BiPackage className="mx-auto text-slate-400" size={64} />
-                    <p className="mt-4 text-slate-600 dark:text-slate-400">Producto no encontrado</p>
+            <div className="min-h-screen bg-[#020202] flex items-center justify-center font-mono">
+                <div className="text-center border border-[#ff0055] border-dashed p-12 relative bg-[#050505]">
+                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#ff0055]" />
+                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#ff0055]" />
+                    <BiPackage className="mx-auto text-[#ff0055] opacity-50 mb-4" size={64} />
+                    <p className="text-[#ff0055] tracking-widest text-xs uppercase font-bold">[ERR:_PRODUCT_NOT_FOUND]</p>
                     <button
                         onClick={() => navigate('/dashboard/products')}
-                        className="mt-4 px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600"
+                        className="mt-8 px-6 py-2 bg-[#ff0055]/10 text-[#ff0055] border border-[#ff0055] hover:bg-[#ff0055] hover:text-white transition-all text-[10px] tracking-widest uppercase font-bold"
                     >
-                        Volver a productos
+                        [RETURN_TO_DATABASE]
                     </button>
                 </div>
             </div>
@@ -371,7 +373,7 @@ const DashEditProductPage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen background-light dark:background-dark">
+        <div className="min-h-screen bg-[#020202] text-white font-mono selection:bg-[#00f0ff] selection:text-black">
             <div className="flex">
                 <Sidebar />
 
@@ -422,40 +424,42 @@ const DashEditProductPage: React.FC = () => {
 
                                     {/* Imágenes Existentes */}
                                     {existingImages.length > 0 && (
-                                        <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
-                                            <h2 className="text-xl font-bold text-slate-100 mb-4">
-                                                Imágenes Actuales
+                                        <div className="bg-[#050505] border border-zinc-800 border-dashed p-6 relative">
+                                            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
+                                            <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
+                                                <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
+                                                [CURRENT_IMAGES_DATABANK]
                                             </h2>
                                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                                 {existingImages.map((image, index) => (
                                                     <div
                                                         key={image.fileId}
-                                                        className="relative group bg-slate-700/50 rounded-lg overflow-hidden border-2 border-slate-600 hover:border-slate-500"
+                                                        className="relative group bg-black overflow-hidden border border-zinc-700 hover:border-[#ff0055] transition-colors"
                                                     >
                                                         {index === 0 && (
-                                                            <div className="absolute top-2 left-2 z-10 bg-cyan-400 text-slate-900 px-2 py-1 rounded text-xs font-bold">
-                                                                Principal
+                                                            <div className="absolute top-0 left-0 z-10 bg-[#e4ff00] text-black px-2 py-0.5 text-[8px] font-bold tracking-widest uppercase">
+                                                                [PRIMARY]
                                                             </div>
                                                         )}
                                                         <img
                                                             src={image.url}
                                                             alt={`Imagen ${index + 1}`}
-                                                            className="w-full h-32 object-cover"
+                                                            className="w-full h-32 object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all"
                                                         />
-                                                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                        <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
                                                             <button
                                                                 type="button"
                                                                 onClick={() => handleDeleteExistingImage(image.fileId)}
-                                                                className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
+                                                                className="bg-transparent border border-[#ff0055] text-[#ff0055] hover:bg-[#ff0055] hover:text-white px-3 py-1 text-[10px] font-bold uppercase tracking-widest transition-all"
                                                             >
-                                                                Eliminar
+                                                                [EXEC_DELETE]
                                                             </button>
                                                         </div>
                                                     </div>
                                                 ))}
                                             </div>
-                                            <p className="text-slate-400 text-sm mt-4">
-                                                {existingImages.length} {existingImages.length === 1 ? 'imagen actual' : 'imágenes actuales'}
+                                            <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mt-6">
+                                                [{existingImages.length}_FILES_FOUND]
                                             </p>
                                         </div>
                                     )}

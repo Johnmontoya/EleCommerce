@@ -11,55 +11,55 @@ interface SelectMethodProps {
 
 const SelectMethod: React.FC<SelectMethodProps> = ({ selectedMethod, setSelectedMethod }) => {
     return (
-        <div className="dash-search dark:dash-search border border-slate-600 rounded-2xl p-6">
-            <h2 className="text-xl font-bold text-slate-100 mb-4">
-                Selecciona tu método de pago
+        <div className="border border-zinc-800 bg-[#050505] p-6 relative">
+            <h2 className="text-[#00f0ff] text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-[#00f0ff] mb-6">
+                [SELECT_TRANSACTION_METHOD]
             </h2>
 
             <div className="grid md:grid-cols-3 gap-4">
                 {/* Credit/Debit Card */}
                 <button
                     onClick={() => setSelectedMethod("card")}
-                    className={`p-4 rounded-xl border-2 transition-all ${selectedMethod === "card"
-                        ? "border-cyan-500 bg-cyan-500/10"
-                        : "border-slate-600 bg-slate-700/30 hover:border-slate-500"
+                    className={`p-4 border transition-all text-left flex flex-col items-start ${selectedMethod === "card"
+                        ? "border-[#00f0ff] bg-[#00f0ff]/10"
+                        : "border-zinc-800 bg-black hover:border-[#00f0ff]/50"
                         }`}
                 >
-                    <BiCreditCard size={32} className={selectedMethod === "card" ? "text-cyan-400" : "text-slate-400"} />
-                    <p className={`mt-2 font-semibold ${selectedMethod === "card" ? "text-cyan-400" : "text-slate-300"}`}>
-                        Tarjeta
+                    <BiCreditCard size={32} className={selectedMethod === "card" ? "text-[#00f0ff]" : "text-zinc-500"} />
+                    <p className={`mt-2 font-bold uppercase tracking-widest text-sm ${selectedMethod === "card" ? "text-white" : "text-zinc-400"}`}>
+                        [CREDIT_CARD]
                     </p>
-                    <p className="text-xs text-slate-400 mt-1">Crédito o Débito</p>
+                    <p className="text-[10px] text-zinc-500 font-mono tracking-widest uppercase mt-1">Debit & Credit Supported</p>
                 </button>
 
                 {/* Cash on Delivery */}
                 <button
                     onClick={() => setSelectedMethod("cash")}
-                    className={`p-4 rounded-xl border-2 transition-all ${selectedMethod === "cash"
-                        ? "border-cyan-500 bg-cyan-500/10"
-                        : "border-slate-600 bg-slate-700/30 hover:border-slate-500"
+                    className={`p-4 border transition-all text-left flex flex-col items-start ${selectedMethod === "cash"
+                        ? "border-[#e4ff00] bg-[#e4ff00]/10"
+                        : "border-zinc-800 bg-black hover:border-[#e4ff00]/50"
                         }`}
                 >
-                    <MdOutlineAccountBalanceWallet size={32} className={selectedMethod === "cash" ? "text-cyan-400" : "text-slate-400"} />
-                    <p className={`mt-2 font-semibold ${selectedMethod === "cash" ? "text-cyan-400" : "text-slate-300"}`}>
-                        Contra Entrega
+                    <MdOutlineAccountBalanceWallet size={32} className={selectedMethod === "cash" ? "text-[#e4ff00]" : "text-zinc-500"} />
+                    <p className={`mt-2 font-bold uppercase tracking-widest text-sm ${selectedMethod === "cash" ? "text-white" : "text-zinc-400"}`}>
+                        [PAY_ON_DELIVERY]
                     </p>
-                    <p className="text-xs text-slate-400 mt-1">Pagar en efectivo</p>
+                    <p className="text-[10px] text-zinc-500 font-mono tracking-widest uppercase mt-1">Cash Transactions Only</p>
                 </button>
 
                 {/* Online Payment */}
                 <button
                     onClick={() => setSelectedMethod("online")}
-                    className={`p-4 rounded-xl border-2 transition-all ${selectedMethod === "online"
-                        ? "border-cyan-500 bg-cyan-500/10"
-                        : "border-slate-600 bg-slate-700/30 hover:border-slate-500"
+                    className={`p-4 border transition-all text-left flex flex-col items-start ${selectedMethod === "online"
+                        ? "border-[#ff0055] bg-[#ff0055]/10"
+                        : "border-zinc-800 bg-black hover:border-[#ff0055]/50"
                         }`}
                 >
-                    <RiSecurePaymentLine size={32} className={selectedMethod === "online" ? "text-cyan-400" : "text-slate-400"} />
-                    <p className={`mt-2 font-semibold ${selectedMethod === "online" ? "text-cyan-400" : "text-slate-300"}`}>
-                        Pago Online
+                    <RiSecurePaymentLine size={32} className={selectedMethod === "online" ? "text-[#ff0055]" : "text-zinc-500"} />
+                    <p className={`mt-2 font-bold uppercase tracking-widest text-sm ${selectedMethod === "online" ? "text-white" : "text-zinc-400"}`}>
+                        [SECURE_ONLINE_PAYMENT]
                     </p>
-                    <p className="text-xs text-slate-400 mt-1">PSE, Nequi, etc.</p>
+                    <p className="text-[10px] text-zinc-500 font-mono tracking-widest uppercase mt-1">PSE, Nequi & Third-Parties</p>
                 </button>
             </div>
         </div>

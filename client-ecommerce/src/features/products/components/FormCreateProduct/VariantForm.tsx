@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { BiPlus, BiTag, BiX } from "react-icons/bi";
+import { BiPlus, BiX } from "react-icons/bi";
 import { BsTrash2 } from "react-icons/bs";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
-
 interface VariantFormProps {
   watch: any;
   setValue: any;
@@ -55,10 +53,12 @@ const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) =>
   };
 
   return (
-    <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
-      <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
-        <BiTag size={20} className="text-cyan-400" />
-        Variantes
+    <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono mt-4">
+      <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
+      <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
+      <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
+        <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
+        [PRODUCT_VARIANTS]
       </h2>
 
       <div className="space-y-4">
@@ -73,40 +73,41 @@ const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) =>
                 addVariant();
               }
             }}
-            className="flex-1 bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-            placeholder="Nombre de variante (Ej: Color, Talla)"
+            className="flex-1 bg-black border border-zinc-800 text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none focus:border-[#00f0ff] transition-all text-[10px] font-bold tracking-[0.2em] uppercase"
+            placeholder="[VARIANT_TYPE_COLOR/SIZE...]"
           />
-          <ButtonAction
+          <button
             onClick={addVariant}
-            variant="primary"
             type="button"
-            text="Agregar"
+            className="bg-transparent border border-[#00f0ff] text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black px-4 py-2 flex items-center gap-2 transition-all font-bold text-[10px] tracking-widest uppercase"
           >
-            <BiPlus size={18} />
-          </ButtonAction>
+            <BiPlus size={16} /> [ADD]
+          </button>
         </div>
 
         {errors.variants && (
-          <p className="text-red-500 text-sm">{errors.variants.message}</p>
+          <p className="text-[#ff0055] text-[10px] uppercase font-bold tracking-widest">[{errors.variants.message}]</p>
         )}
 
         {variants.map((variant: any, variantIndex: number) => (
           <div
             key={variantIndex}
-            className="bg-slate-700/30 border border-slate-600 rounded-lg p-4"
+            className="bg-black border border-zinc-800 p-4 relative"
           >
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-slate-100 font-semibold">{variant.name}</h3>
+            <div className="absolute top-2 left-2 w-1 h-1 bg-[#ff0055]"></div>
+            <div className="flex items-center justify-between mb-4 mt-2">
+              <h3 className="text-[#e4ff00] text-xs font-bold tracking-[0.2em] uppercase">{variant.name}</h3>
               <button
                 type="button"
                 onClick={() => removeVariant(variantIndex)}
-                className="text-red-400 hover:text-red-300 transition-colors"
+                className="text-zinc-500 hover:text-[#ff0055] transition-colors"
+                title="[REMOVE_VARIANT]"
               >
                 <BsTrash2 size={16} />
               </button>
             </div>
 
-            <div className="flex gap-2 mb-3">
+            <div className="flex gap-2 mb-4">
               <input
                 type="text"
                 value={newVariantOptions[variantIndex] || ""}
@@ -115,13 +116,14 @@ const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) =>
                   [variantIndex]: e.target.value
                 })}
                 onKeyPress={(e) => handleOptionKeyPress(e, variantIndex)}
-                className="flex-1 bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-3 py-2 rounded-lg outline-none focus:border-cyan-400 transition-all text-sm"
-                placeholder="Agregar opción"
+                className="flex-1 bg-black border border-zinc-800 border-dashed text-white placeholder-zinc-700 px-3 py-2 rounded-none outline-none focus:border-[#e4ff00] transition-all text-[10px] font-bold tracking-[0.2em] uppercase"
+                placeholder="[ADD_OPTION_VALUE]"
               />
               <button
                 type="button"
                 onClick={() => addVariantOption(variantIndex)}
-                className="bg-slate-600 hover:bg-slate-500 text-slate-200 px-4 py-2 rounded-lg font-semibold transition-all text-sm"
+                className="bg-transparent border border-zinc-700 text-zinc-400 hover:border-[#e4ff00] hover:text-[#e4ff00] px-3 py-2 transition-all"
+                title="[INSERT_OPTION]"
               >
                 <BiPlus size={16} />
               </button>
@@ -132,13 +134,13 @@ const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) =>
                 {variant.options.map((option: any, optionIndex: number) => (
                   <span
                     key={optionIndex}
-                    className="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-lg text-sm font-medium flex items-center gap-2"
+                    className="bg-transparent border border-[#00f0ff]/30 text-[#00f0ff] px-2 py-1 text-[10px] font-bold tracking-widest uppercase flex items-center gap-2 group"
                   >
                     {option}
                     <button
                       type="button"
                       onClick={() => removeVariantOption(variantIndex, optionIndex)}
-                      className="hover:text-cyan-300 transition-colors"
+                      className="text-zinc-500 group-hover:text-[#ff0055] transition-colors"
                     >
                       <BiX size={14} />
                     </button>
@@ -148,8 +150,8 @@ const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) =>
             )}
 
             {errors.variants?.[variantIndex]?.options && (
-              <p className="text-red-500 text-xs mt-2">
-                {errors.variants[variantIndex]?.options?.message}
+              <p className="text-[#ff0055] text-[10px] mt-2 font-bold tracking-widest uppercase">
+                [{errors.variants[variantIndex]?.options?.message}]
               </p>
             )}
           </div>

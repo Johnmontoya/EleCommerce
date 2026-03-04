@@ -1,7 +1,7 @@
 import { BiCreditCard, BiX } from "react-icons/bi";
 import { CiCreditCard1, CiEdit, CiTrash } from "react-icons/ci";
 import { FaCcAmex, FaCcMastercard, FaCcVisa } from "react-icons/fa";
-import ButtonAction from "../../../shared/ui/ButtonAction";
+// Removed duplicate import
 import { useDeletePaymentMutation, usePaymentMutation, useUpdatePaymentMutation } from "../hook/mutation/usePaymentMutation";
 import type { PaymentInput } from "../types/payment.types";
 import { useState } from "react";
@@ -107,61 +107,84 @@ const CardMethod = ({
 
     return (
         selectedMethod === "card" && (
-            <div className="dash-search dark:dash-search border border-slate-600 rounded-2xl p-6">
-                <div className="flex flex-row justify-between items-center mb-4">
-                    <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-                        <BiCreditCard size={24} className="text-cyan-400" />
-                        Detalles de la Tarjeta
+            <div className="border border-zinc-800 bg-[#050505] p-6 relative mt-6">
+                <div className="flex flex-row justify-between items-center mb-8">
+                    <h2 className="text-[#00f0ff] text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-[#00f0ff] m-0 flex items-center gap-2">
+                        <BiCreditCard size={18} />
+                        [CARD_DETAILS]
                     </h2>
 
                     {cardData.id && (
-                        <div className="flex flex-row gap-2">
+                        <div className="flex flex-row gap-4">
                             {isEditMode ? (
-                                <ButtonAction text="Cancelar" variant="secondary" onClick={handleCancel}><BiX size={20} /></ButtonAction>
+                                <button
+                                    onClick={handleCancel}
+                                    className="flex items-center gap-2 px-4 py-2 border border-zinc-800 bg-black text-zinc-500 hover:text-[#ff0055] hover:border-[#ff0055] hover:bg-[#ff0055]/10 transition-all font-bold uppercase tracking-widest text-[10px]"
+                                    aria-label="Cancelar"
+                                >
+                                    <BiX size={16} />
+                                    [CANCEL]
+                                </button>
                             ) : (
                                 <>
-                                    <ButtonAction text="" variant="edit" onClick={handleEdit}>
-                                        <CiEdit size={20} />
-                                    </ButtonAction>
-                                    <ButtonAction text="" variant="delete" onClick={handleDelete}>
-                                        <CiTrash size={20} />
-                                    </ButtonAction>
+                                    <button
+                                        onClick={handleEdit}
+                                        className="flex items-center gap-2 px-4 py-2 border border-zinc-800 bg-black text-zinc-500 hover:text-[#00f0ff] hover:border-[#00f0ff] hover:bg-[#00f0ff]/10 transition-all font-bold uppercase tracking-widest text-[10px]"
+                                        aria-label="Editar"
+                                    >
+                                        <CiEdit size={16} />
+                                        [EDIT]
+                                    </button>
+                                    <button
+                                        onClick={handleDelete}
+                                        className="flex items-center gap-2 px-4 py-2 border border-zinc-800 bg-black text-zinc-500 hover:text-[#ff0055] hover:border-[#ff0055] hover:bg-[#ff0055]/10 transition-all font-bold uppercase tracking-widest text-[10px]"
+                                        aria-label="Eliminar"
+                                    >
+                                        <CiTrash size={16} />
+                                        [DELETE]
+                                    </button>
                                 </>
                             )}
                         </div>
                     )}
                 </div>
 
-                <div className="w-96 mx-auto flip-card">
+                <div className="w-96 mx-auto flip-card mb-8">
                     <div className="flip-card-inner relative">
                         <div className="flip-card-front">
-                            <div className="card-gradient-blue rounded-2xl p-8 text-white card-shadow relative overflow-hidden h-56 w-96">
-                                <div className="absolute inset-0 opacity-10">
-                                    <div className="absolute top-4 right-4 w-32 h-32 border-2 border-white rounded-full"></div>
-                                    <div className="absolute bottom-4 left-4 w-24 h-24 border border-white rounded-full"></div>
-                                </div>
+                            <div className="bg-black border border-zinc-800 p-8 text-white relative overflow-hidden h-56 w-96 group">
+                                {/* Neon Accents */}
+                                <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#00f0ff] opacity-50 group-hover:opacity-100 transition-opacity" />
+                                <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#00f0ff] opacity-50 group-hover:opacity-100 transition-opacity" />
 
-                                <div className="flex justify-between items-start mb-8">
-                                    <div className="chip w-12 h-10 rounded-lg" />
-                                    <div className="contactless">
+                                {/* Background Grid */}
+                                <div className="absolute inset-0 bg-[#00f0ff]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" style={{ backgroundImage: "linear-gradient(#00f0ff 1px, transparent 1px), linear-gradient(90deg, #00f0ff 1px, transparent 1px)", backgroundSize: "20px 20px", backgroundPosition: "-1px -1px" }} />
+
+                                <div className="flex justify-between items-start mb-8 relative z-10">
+                                    <div className="w-12 h-10 border border-[#e4ff00]/50 bg-[#e4ff00]/10 flex items-center justify-center">
+                                        <div className="w-8 h-6 border border-[#e4ff00]/30 grid grid-cols-3 grid-rows-2">
+                                            {[...Array(6)].map((_, i) => <div key={i} className="border border-[#e4ff00]/20" />)}
+                                        </div>
+                                    </div>
+                                    <div className="text-[#00f0ff] opacity-80">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
                                         </svg>
                                     </div>
                                 </div>
 
-                                <div className="card-number text-2xl font-medium mb-6 tracking-wider">
+                                <div className="text-2xl font-mono tracking-[0.2em] mb-6 text-white drop-shadow-[0_0_8px_rgba(0,240,255,0.5)] relative z-10">
                                     {cardData.cardNumber || "•••• •••• •••• ••••"}
                                 </div>
 
-                                <div className="flex justify-between items-end">
+                                <div className="flex justify-between items-end relative z-10">
                                     <div>
-                                        <div className="text-xs opacity-80 mb-1">CARD HOLDER</div>
-                                        <div className="font-medium"> {cardData.cardHolder || "NOMBRE APELLIDO"}</div>
+                                        <div className="text-[8px] font-mono uppercase tracking-widest text-[#00f0ff] mb-1">[CARD_HOLDER]</div>
+                                        <div className="font-mono text-sm uppercase tracking-wide"> {cardData.cardHolder || "NOMBRE APELLIDO"}</div>
                                     </div>
                                     <div>
-                                        <div className="text-xs opacity-80 mb-1">EXPIRES</div>
-                                        <div className="font-medium">{cardData.cardExpiration || "MM/AA"}</div>
+                                        <div className="text-[8px] font-mono uppercase tracking-widest text-[#00f0ff] mb-1">[EXPIRES]</div>
+                                        <div className="font-mono text-sm tracking-wide">{cardData.cardExpiration || "MM/AA"}</div>
                                     </div>
                                     <div className="text-right">
                                         {getCardIcon()}
@@ -171,22 +194,26 @@ const CardMethod = ({
                         </div>
 
                         <div className="flip-card-back absolute inset-0">
-                            <div className="card-gradient-blue rounded-2xl text-white card-shadow h-56 w-96 relative">
-                                <div className="magnetic-strip h-12 w-full mt-6"></div>
+                            <div className="bg-black border border-zinc-800 text-white h-56 w-96 relative overflow-hidden group">
+                                {/* Neon Accents */}
+                                <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#ff0055] opacity-50 group-hover:opacity-100 transition-opacity" />
+                                <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#ff0055] opacity-50 group-hover:opacity-100 transition-opacity" />
 
-                                <div className="bg-white mx-6 mt-8 h-10 rounded flex items-center px-4">
-                                    <div className="text-gray-600 text-sm italic">{cardData.cardHolder || "NOMBRE APELLIDO"}</div>
-                                    <div className="ml-auto bg-gray-100 px-3 py-1 rounded text-xs text-gray-700 font-mono">
+                                <div className="bg-[#050505] border-y border-zinc-800 h-10 w-full mt-6 shadow-[0_0_10px_rgba(0,0,0,0.8)]"></div>
+
+                                <div className="bg-zinc-900 border border-zinc-800 mx-6 mt-6 h-10 flex items-center px-4 justify-between">
+                                    <div className="text-zinc-500 font-mono text-[10px] uppercase truncate max-w-[150px]">{cardData.cardHolder || "NOMBRE APELLIDO"}</div>
+                                    <div className="bg-black border border-zinc-700 px-3 py-1 text-xs text-[#ff0055] font-mono drop-shadow-[0_0_5px_rgba(255,0,85,0.5)]">
                                         {cardData.cardCvv || "123"}
                                     </div>
                                 </div>
 
-                                <div className="px-6 mt-4 text-xs">
-                                    <p className="mb-2">For customer service call 1-800-VISA-911</p>
-                                    <p>See reverse for important information</p>
+                                <div className="px-6 mt-6 font-mono text-[8px] uppercase tracking-widest text-zinc-500">
+                                    <p className="mb-1">FOR CUSTOMER SERVICE CALL 1-800-SYS-911</p>
+                                    <p>SEE REVERSE FOR IMPORTANT SYSTEM INFORMATION</p>
                                 </div>
-                                <div className="absolute bottom-4 right-6 text-xs opacity-80">
-                                    Valid only when signed
+                                <div className="absolute bottom-4 right-6 font-mono text-[8px] uppercase tracking-widest text-[#ff0055] opacity-80">
+                                    [AUTHORIZED_SIGNATURE_REQUIRED]
                                 </div>
                             </div>
                         </div>
@@ -195,10 +222,10 @@ const CardMethod = ({
 
                 {/* Formulario - solo editable en modo edición */}
                 {(isEditMode || !cardData.id) && (
-                    <div className="space-y-4">
+                    <div className="space-y-6 mt-8 border-t border-zinc-800 pt-8 relative">
                         <div>
-                            <label className="block text-sm font-semibold text-slate-200 mb-2">
-                                Número de Tarjeta
+                            <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
+                                [CARD_NUMBER]
                             </label>
                             <input
                                 type="text"
@@ -206,37 +233,37 @@ const CardMethod = ({
                                 value={cardData.cardNumber}
                                 onChange={handleCardNumberChange}
                                 placeholder="1234 5678 9012 3456"
-                                className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-500 transition-colors"
+                                className="w-full bg-black border border-zinc-800 text-white p-3 font-mono text-sm focus:border-[#00f0ff] focus:ring-1 focus:ring-[#00f0ff] transition-all outline-none placeholder:text-zinc-700"
                                 maxLength={19}
                                 disabled={isSubmitting}
                             />
                             {getFieldsError("cardNumber") && (
-                                <p className="text-red-500 text-sm mt-1">{getFieldsError("cardNumber")}</p>
+                                <p className="text-[#ff0055] text-[10px] font-mono uppercase tracking-widest mt-2">{getFieldsError("cardNumber")}</p>
                             )}
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold text-slate-200 mb-2">
-                                Nombre del Titular
+                            <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
+                                [CARD_HOLDER_NAME]
                             </label>
                             <input
                                 type="text"
                                 name="cardHolder"
                                 value={cardData.cardHolder}
                                 onChange={onChangeCardData}
-                                placeholder="Juan Pérez"
-                                className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-500 transition-colors uppercase"
+                                placeholder="NOMBRE APELLIDO"
+                                className="w-full bg-black border border-zinc-800 text-white p-3 font-mono text-sm focus:border-[#00f0ff] focus:ring-1 focus:ring-[#00f0ff] transition-all outline-none placeholder:text-zinc-700 uppercase"
                                 disabled={isSubmitting}
                             />
                             {getFieldsError("cardHolder") && (
-                                <p className="text-red-500 text-sm mt-1">{getFieldsError("cardHolder")}</p>
+                                <p className="text-[#ff0055] text-[10px] font-mono uppercase tracking-widest mt-2">{getFieldsError("cardHolder")}</p>
                             )}
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-2 gap-6">
                             <div>
-                                <label className="block text-sm font-semibold text-slate-200 mb-2">
-                                    Fecha de Expiración
+                                <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2">
+                                    [EXPIRATION_DATE]
                                 </label>
                                 <input
                                     type="text"
@@ -244,19 +271,18 @@ const CardMethod = ({
                                     value={cardData.cardExpiration}
                                     onChange={handleExpiryChange}
                                     placeholder="MM/AA"
-                                    className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-500 transition-colors"
+                                    className="w-full bg-black border border-zinc-800 text-white p-3 font-mono text-sm focus:border-[#00f0ff] focus:ring-1 focus:ring-[#00f0ff] transition-all outline-none placeholder:text-zinc-700"
                                     maxLength={5}
                                     disabled={isSubmitting}
                                 />
                                 {getFieldsError("cardExpiration") && (
-                                    <p className="text-red-500 text-sm mt-1">{getFieldsError("cardExpiration")}</p>
+                                    <p className="text-[#ff0055] text-[10px] font-mono uppercase tracking-widest mt-2">{getFieldsError("cardExpiration")}</p>
                                 )}
                             </div>
 
                             <div>
-                                <label className="block text-sm font-semibold text-slate-200 mb-2 flex items-center gap-2">
-                                    CVV
-                                    <span className="text-xs text-slate-400">(Código de seguridad)</span>
+                                <label className="block text-[10px] text-zinc-500 font-mono tracking-widest uppercase mb-2 flex items-center gap-2">
+                                    [CVV_CODE]
                                 </label>
                                 <input
                                     type="text"
@@ -264,39 +290,41 @@ const CardMethod = ({
                                     value={cardData.cardCvv}
                                     onChange={handleCvvChange}
                                     placeholder="123"
-                                    className="w-full bg-slate-700 border-2 border-slate-600 text-slate-100 px-4 py-3 rounded-lg outline-none focus:border-cyan-500 transition-colors"
+                                    className="w-full bg-black border border-zinc-800 text-white p-3 font-mono text-sm focus:border-[#00f0ff] focus:ring-1 focus:ring-[#00f0ff] transition-all outline-none placeholder:text-zinc-700"
                                     maxLength={4}
                                     disabled={isSubmitting}
                                 />
                                 {getFieldsError("cardCvv") && (
-                                    <p className="text-red-500 text-sm mt-1">{getFieldsError("cardCvv")}</p>
+                                    <p className="text-[#ff0055] text-[10px] font-mono uppercase tracking-widest mt-2">{getFieldsError("cardCvv")}</p>
                                 )}
                             </div>
                         </div>
 
-                        <div className="flex gap-3">
-                            <ButtonAction
+                        <div className="flex gap-4 pt-4">
+                            <button
                                 onClick={handleCardSubmit}
-                                variant="primary"
-                                text={cardData.id ? "Actualizar Tarjeta" : "Guardar Tarjeta"}
                                 disabled={isSubmitting}
+                                className="flex items-center justify-center min-w-[200px] gap-2 px-6 py-3 border border-zinc-800 bg-black text-[#00f0ff] hover:bg-[#00f0ff]/10 hover:border-[#00f0ff] transition-all font-bold uppercase tracking-widest text-xs"
                             >
                                 {isSubmitting ? (
-                                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                    <div className="w-4 h-4 border-2 border-[#00f0ff] border-t-transparent animate-spin"></div>
                                 ) : (
-                                    <CiCreditCard1 size={24} />
+                                    <>
+                                        <CiCreditCard1 size={18} />
+                                        {cardData.id ? "[UPDATE_RECORD]" : "[SAVE_RECORD]"}
+                                    </>
                                 )}
-                            </ButtonAction>
+                            </button>
 
                             {cardData.id && (
-                                <ButtonAction
+                                <button
                                     onClick={handleCancel}
-                                    variant="secondary"
-                                    text="Cancelar"
                                     disabled={isSubmitting}
+                                    className="flex items-center gap-2 px-6 py-3 border border-zinc-800 bg-black text-zinc-500 hover:bg-[#ff0055]/10 hover:border-[#ff0055] hover:text-[#ff0055] transition-all font-bold uppercase tracking-widest text-xs"
                                 >
-                                    <BiX size={24} />
-                                </ButtonAction>
+                                    <BiX size={18} />
+                                    [CANCEL]
+                                </button>
                             )}
                         </div>
                     </div>
@@ -304,9 +332,11 @@ const CardMethod = ({
 
                 {/* Si ya existe y no está en edición, mostrar mensaje */}
                 {!isEditMode && cardData.id && (
-                    <p className="text-center text-slate-400 mt-4">
-                        Tarjeta guardada correctamente. Haz clic en editar para modificarla.
-                    </p>
+                    <div className="mt-6 border-t border-zinc-900 pt-6">
+                        <p className="text-center text-zinc-500 font-mono text-[10px] uppercase tracking-widest border border-zinc-800 bg-black p-4">
+                            [TRANSACTION_METHOD_VERIFIED AND STORED SECURELY]
+                        </p>
+                    </div>
                 )}
             </div>
         )

@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import { MdClose } from "react-icons/md";
 import { useProductSearch } from "../hooks/useProductSearch";
 import { SearchResultItem } from "./SearchResultItem";
-import ButtonAction from "../../../shared/ui/ButtonAction";
 import { SearchBar } from "./SearchBar";
 
 interface SearchModalProps {
@@ -44,21 +43,29 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed z-50 inset-0 bg-slate-900/80 backdrop-blur-sm overflow-y-auto h-full w-full px-4 flex items-start justify-center pt-20">
-      <div className="w-full relative mx-auto shadow-2xl rounded-2xl bg-linear-to-br from-slate-800 to-slate-900 border-2 border-cyan-500/30 max-w-2xl">
+    <div className="fixed z-50 inset-0 bg-[#020202]/90 backdrop-blur-md overflow-y-auto h-full w-full px-4 flex items-start justify-center pt-20">
+      <div className="w-full relative mx-auto bg-[#0a0a0a] border border-[#00f0ff] max-w-2xl shadow-[0_0_30px_rgba(0,240,255,0.1)]">
+        {/* Corner Accents */}
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#00f0ff] -translate-x-1 -translate-y-1"></div>
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#00f0ff] translate-x-1 -translate-y-1"></div>
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#00f0ff] -translate-x-1 translate-y-1"></div>
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#00f0ff] translate-x-1 translate-y-1"></div>
+
         {/* Header */}
-        <div className="flex justify-between items-center p-4 border-b border-slate-700">
-          <h1 className="text-slate-100 font-bold text-lg">
-            Busca el producto que deseas
-          </h1>
-          <ButtonAction
+        <div className="flex justify-between items-center p-4 border-b border-zinc-800 bg-[#050505]">
+          <div className="flex items-center gap-3">
+            <div className="w-2 h-6 bg-[#00f0ff] animate-pulse"></div>
+            <h1 className="text-[#00f0ff] font-mono tracking-widest uppercase text-sm font-bold">
+              [SYSTEM_SEARCH_PROTOCOL]
+            </h1>
+          </div>
+          <button
             onClick={onClose}
-            text=""
-            variant="secondary"
+            className="text-zinc-500 hover:text-[#ff0055] transition-colors p-1 border border-transparent hover:border-[#ff0055] bg-transparent"
             type="button"
           >
             <MdClose size={24} />
-          </ButtonAction>
+          </button>
         </div>
 
         {/* Search Bar */}
@@ -67,42 +74,44 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             value={query}
             onChange={search}
             isLoading={isLoading}
-            placeholder="Buscar productos, categorías, marcas..."
+            placeholder="[ENTER_PRODUCT_OR_CATEGORY_PARAMETER...]"
           />
         </div>
 
         {/* Results */}
-        <div className="px-4 pb-4 max-h-96 overflow-y-auto">
+        <div className="px-4 pb-4 max-h-96 overflow-y-auto custom-scrollbar">
           {isLoading && query && (
-            <div className="flex items-center justify-center py-8">
-              <div className="animate-spin h-8 w-8 border-4 border-cyan-400 border-t-transparent rounded-full" />
+            <div className="flex items-center justify-center py-12">
+              <div className="animate-spin h-10 w-10 border-2 border-[#00f0ff] border-t-transparent rounded-none" />
             </div>
           )}
 
           {!isLoading && results.length === 0 && query && (
-            <div className="text-center py-8">
-              <p className="text-slate-400 mb-2">
-                No se encontraron productos para "{query}"
+            <div className="text-center py-12 border border-zinc-800 border-dashed bg-[#050505] mt-2">
+              <p className="text-[#ff0055] font-mono tracking-widest uppercase text-sm mb-2">
+                [ERR: NO_MATCHES_FOUND "{query}"]
               </p>
-              <p className="text-slate-500 text-sm">
-                Intenta con otros términos de búsqueda
+              <p className="text-zinc-500 font-mono text-xs uppercase tracking-wider">
+                [RECOMMENDATION: MODIFY_SEARCH_PARAMETERS]
               </p>
             </div>
           )}
 
           {!isLoading && results.length === 0 && !query && (
-            <div className="text-center py-8">
-              <p className="text-slate-400 text-sm">
-                Comienza a escribir para buscar productos
+            <div className="text-center py-12 border border-zinc-900 bg-[#050505] mt-2">
+              <div className="w-8 h-8 mx-auto mb-4 border border-zinc-700 flex items-center justify-center">
+                <div className="w-2 h-2 bg-zinc-700 animate-pulse"></div>
+              </div>
+              <p className="text-zinc-500 font-mono text-xs uppercase tracking-widest">
+                [AWAITING_INPUT_STREAM]
               </p>
             </div>
           )}
 
           {results.length > 0 && (
-            <div className="space-y-2">
-              <p className="text-slate-400 text-sm mb-3">
-                {results.length} resultado{results.length !== 1 ? "s" : ""}{" "}
-                encontrado{results.length !== 1 ? "s" : ""}
+            <div className="space-y-3 mt-2">
+              <p className="text-[#00f0ff] font-mono bg-[#00f0ff]/10 border border-[#00f0ff]/30 px-3 py-1 text-[10px] tracking-widest uppercase inline-block mb-2">
+                [{results.length} RECORD{results.length !== 1 ? "S" : ""} RETRIEVED]
               </p>
               {results?.map((product) => (
                 <SearchResultItem

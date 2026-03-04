@@ -1,6 +1,5 @@
 import type React from "react";
 import { BiSave } from "react-icons/bi";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { CiEraser } from "react-icons/ci";
 
 interface HeaderActionProps {
@@ -12,35 +11,38 @@ interface HeaderActionProps {
 const HeaderAction: React.FC<HeaderActionProps> = ({ isSubmitting, handleSubmit, handleReset, title }) => {
 
     return (
-        <div className="flex items-center justify-between my-5 lg:-mt-5">
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-zinc-800 mt-2">
             <div>
-                <p className="text-slate-400">
-                    Completa la información del {title}
+                <p className="text-[#00f0ff] font-mono uppercase tracking-widest text-[10px] font-bold">
+                    [SYSTEM_PROMPT: COMPLETE_{title?.toUpperCase()}_DATA]
                 </p>
             </div>
             <div className="flex gap-3">
-                <ButtonAction
+                <button
                     onClick={handleReset}
-                    text={"Resetear"}
-                    variant="secondary"
+                    type="button"
+                    className="flex items-center justify-center gap-2 px-4 py-2 font-mono uppercase tracking-widest text-[10px] bg-transparent border border-zinc-700 text-zinc-400 hover:border-[#ff0055] hover:text-[#ff0055] transition-all"
                 >
-                    <CiEraser size={18} />
-                </ButtonAction>
-                <ButtonAction
+                    <CiEraser size={14} />
+                    [RESET_DATA]
+                </button>
+                <button
                     onClick={handleSubmit}
-                    text={"Guardar"}
-                    variant="primary"
+                    type="button"
+                    className="flex items-center justify-center gap-2 px-6 py-2 font-mono uppercase tracking-widest text-[10px] font-bold bg-[#00f0ff]/10 border border-[#00f0ff] text-[#00f0ff] hover:bg-[#00f0ff]/20 transition-all"
                 >
                     {isSubmitting ? (
                         <>
-                            <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full" />
+                            <div className="animate-spin h-3 w-3 border-2 border-[#00f0ff] border-t-transparent rounded-none" />
+                            [PROCESSING...]
                         </>
                     ) : (
                         <>
-                            <BiSave size={18} />
+                            <BiSave size={14} />
+                            [EXECUTE_SAVE]
                         </>
                     )}
-                </ButtonAction>
+                </button>
             </div>
         </div>
     );

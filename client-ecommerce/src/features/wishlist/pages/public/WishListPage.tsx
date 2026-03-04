@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BiHeart, BiX } from "react-icons/bi";
 import { CiLink, CiSearch, CiShare2 } from "react-icons/ci";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
+// Removed ButtonAction import
 import { useNavigate } from "react-router-dom";
 import { MdOutlineEmail, MdWhatsapp } from "react-icons/md";
 import ListWish from "../../components/wishlist/ListWish";
@@ -19,33 +19,33 @@ const WishlistPage: React.FC = () => {
   if (isLoading) return <LoadingFallback />;
 
   return (
-    <div className="min-h-screen background-light dark:background-light">
+    <div className="min-h-screen bg-[#020202] text-zinc-300">
       {/* Breadcrumb */}
       <BreadCrumbs />
 
       <div className="max-w-7xl mx-auto px-4 pb-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-4xl font-bold text-slate-100 mb-2 flex items-center gap-3">
-                <BiHeart className="text-cyan-400 fill-cyan-400" size={36} />
-                Mi Lista de Deseos
+              <h1 className="text-3xl font-bold text-[#00f0ff] mb-2 flex items-center gap-3 font-mono uppercase tracking-widest">
+                <BiHeart className="text-[#ff0055]" size={36} />
+                [WISHLIST]
               </h1>
-              <p className="text-slate-400">
+              <p className="text-zinc-500 font-mono text-sm tracking-widest uppercase ml-12">
                 {wishlistItems?.length}{" "}
-                {wishlistItems?.length === 1 ? "producto" : "productos"}{" "}
-                guardados
+                {wishlistItems?.length === 1 ? "UNIT" : "UNITS"}{" "}
+                STORED IN MEMORY
               </p>
             </div>
             <div className="flex flex-col lg:flex-row gap-3">
-              <ButtonAction
+              <button
                 onClick={() => setShowShareModal(true)}
-                text="Compartir Lista"
-                variant="secondary"
+                className="flex items-center gap-2 border border-zinc-800 bg-[#050505] text-zinc-400 px-4 py-2 hover:border-[#00f0ff] hover:text-[#00f0ff] hover:bg-[#00f0ff]/10 transition-all font-mono text-xs uppercase tracking-widest"
               >
                 <CiShare2 size={18} />
-              </ButtonAction>
+                [SHARE_DATA]
+              </button>
             </div>
           </div>
 
@@ -55,27 +55,29 @@ const WishlistPage: React.FC = () => {
 
         {/* Wishlist Items */}
         {wishlistItems?.length === undefined ? (
-          <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-16 text-center backdrop-blur-sm">
+          <div className="border border-zinc-800 bg-[#050505] p-16 text-center relative overflow-hidden group">
+            {/* Neon Accent */}
+            <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#ff0055] opacity-50"></div>
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#ff0055] opacity-50"></div>
+
             <BiHeart
-              className="mx-auto mb-4 text-slate-600"
+              className="mx-auto mb-6 text-zinc-800"
               size={64}
               strokeWidth={1}
             />
-            <h3 className="text-2xl font-bold text-slate-300 mb-2">
-              Tu lista de deseos está vacía
+            <h3 className="text-xl font-bold text-[#ff0055] mb-2 font-mono uppercase tracking-widest drop-shadow-[0_0_8px_rgba(255,0,85,0.5)]">
+              [SYSTEM_WARNING: NO_RECORDS_FOUND]
             </h3>
-            <p className="text-slate-500 mb-6">
-              Agrega productos que te gusten para encontrarlos fácilmente
-              después
+            <p className="text-zinc-500 mb-8 font-mono text-xs uppercase tracking-widest max-w-md mx-auto">
+              ADD ENTITIES TO WISHLIST STORAGE TO RETRIEVE THEM LATER.
             </p>
-            <ButtonAction
+            <button
               onClick={() => navigate("/products")}
-              text="Explorar Productos"
-              variant="primary"
-              className="flex mx-auto"
+              className="inline-flex items-center gap-2 border border-[#00f0ff] bg-[#00f0ff]/10 text-[#00f0ff] px-6 py-3 hover:bg-[#00f0ff]/30 transition-all font-mono text-sm uppercase tracking-widest mx-auto shadow-[0_0_15px_rgba(0,240,255,0.3)]"
             >
               <CiSearch size={20} />
-            </ButtonAction>
+              [INITIATE_EXPLORATION]
+            </button>
           </div>
         ) : (
           <ListWish wishlistItems={wishlistItems} />
@@ -83,54 +85,55 @@ const WishlistPage: React.FC = () => {
 
         {/* Share Modal */}
         {showShareModal && (
-          <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="bg-slate-800 border-2 border-slate-700 rounded-2xl p-8 max-w-md w-full relative">
-              <ButtonAction
+          <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="bg-[#050505] border border-[#00f0ff] p-8 max-w-md w-full relative shadow-[0_0_30px_rgba(0,240,255,0.15)]">
+              {/* Corner Accents */}
+              <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#00f0ff]"></div>
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#00f0ff]"></div>
+
+              <button
                 onClick={() => setShowShareModal(false)}
-                variant="outline"
-                text=""
-                className="absolute top-4 right-4"
+                className="absolute top-4 right-4 text-zinc-500 hover:text-[#ff0055] transition-colors"
+                aria-label="Cerrar"
               >
                 <BiX size={24} />
-              </ButtonAction>
+              </button>
 
-              <div className="text-center mb-6">
-                <div className="bg-cyan-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CiShare2 className="text-cyan-400" size={32} />
+              <div className="text-center mb-8">
+                <div className="border border-[#00f0ff]/30 bg-[#00f0ff]/10 w-16 h-16 flex items-center justify-center mx-auto mb-4 relative">
+                  <div className="absolute inset-0 border border-[#00f0ff]/20 animate-ping opacity-20"></div>
+                  <CiShare2 className="text-[#00f0ff]" size={32} />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-100 mb-2">
-                  Compartir Lista de Deseos
+                <h3 className="text-xl font-bold text-[#00f0ff] mb-2 font-mono uppercase tracking-widest drop-shadow-[0_0_5px_rgba(0,240,255,0.5)]">
+                  [SHARE_DATA_PROTOCOL]
                 </h3>
-                <p className="text-slate-400 text-sm">
-                  Comparte tu lista con amigos y familia
+                <p className="text-zinc-500 text-xs font-mono tracking-widest uppercase">
+                  DISTRIBUTE ACCESS TO LIST
                 </p>
               </div>
 
-              <div className="space-y-3">
-                <ButtonAction
-                  text="Compartir por Email"
-                  variant="secondary"
+              <div className="space-y-4">
+                <button
                   onClick={() => { }}
-                  className="w-full flex justify-center"
+                  className="w-full flex items-center justify-center gap-3 border border-zinc-800 bg-[#0a0a0a] text-zinc-400 p-3 hover:border-[#00f0ff] hover:text-[#00f0ff] transition-all font-mono text-xs uppercase tracking-widest"
                 >
-                  <MdOutlineEmail size={20} />
-                </ButtonAction>
-                <ButtonAction
-                  text="Compartir por WhatsApp"
-                  variant="secondary"
+                  <MdOutlineEmail size={18} />
+                  [TRANSMIT_VIA_EMAIL]
+                </button>
+                <button
                   onClick={() => { }}
-                  className="w-full flex justify-center"
+                  className="w-full flex items-center justify-center gap-3 border border-zinc-800 bg-[#0a0a0a] text-zinc-400 p-3 hover:border-[#00f0ff] hover:text-[#00f0ff] transition-all font-mono text-xs uppercase tracking-widest"
                 >
-                  <MdWhatsapp size={20} />
-                </ButtonAction>
-                <ButtonAction
-                  text="Copiar Enlace"
-                  variant="secondary"
+                  <MdWhatsapp size={18} />
+                  [TRANSMIT_VIA_WHATSAPP]
+                </button>
+                <button
                   onClick={() => { }}
-                  className="w-full flex justify-center"
+                  className="w-full flex items-center justify-center gap-3 border border-[#00f0ff]/50 bg-[#00f0ff]/10 text-[#00f0ff] p-3 hover:bg-[#00f0ff]/30 transition-all font-mono text-xs uppercase tracking-widest"
                 >
-                  <CiLink size={20} />
-                </ButtonAction>
+                  <CiLink size={18} />
+                  [COPY_SYSTEM_LINK]
+                </button>
               </div>
             </div>
           </div>

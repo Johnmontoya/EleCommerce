@@ -22,32 +22,33 @@ const CardStatus: React.FC<CardStatusProps> = ({ packageData }) => {
     return (
         <div className="grid md:grid-cols-2 gap-6 mb-8">
             {/* Current Status Card */}
-            <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6">
-                <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center">
-                        <MdLocalShipping size={24} className="text-cyan-400" />
+            <div className="bg-[#050505] border border-zinc-800 p-6 relative group overflow-hidden">
+                <div className="absolute top-0 right-0 w-16 h-16 bg-[#00f0ff]/5 blur-2xl group-hover:bg-[#00f0ff]/10 transition-colors"></div>
+                <div className="flex items-center gap-4 mb-6 border-b border-zinc-800 pb-4">
+                    <div className="w-12 h-12 border border-[#00f0ff]/30 bg-[#00f0ff]/10 flex items-center justify-center">
+                        <MdLocalShipping size={24} className="text-[#00f0ff]" />
                     </div>
                     <div>
-                        <p className="text-sm text-slate-400">Estado Actual</p>
-                        <p className="text-xl font-bold text-cyan-400">{packageData?.data?.origin}</p>
+                        <p className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest mb-1">[CURRENT_STATUS]</p>
+                        <p className="text-xl font-bold text-[#00f0ff] font-mono uppercase tracking-wider">{packageData?.data?.origin}</p>
                     </div>
                 </div>
-                <div className="space-y-3">
-                    <div className="flex justify-between">
-                        <span className="text-slate-400">Número de Rastreo</span>
-                        <span className="text-slate-100 font-semibold">
+                <div className="space-y-4">
+                    <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
+                        <span className="font-mono text-xs text-zinc-500 uppercase tracking-widest">[TRACKING_ID]</span>
+                        <span className="text-zinc-100 font-mono tracking-wider">
                             {packageData?.data?.trackingNumber}
                         </span>
                     </div>
-                    <div className="flex justify-between">
-                        <span className="text-slate-400">Número de Pedido</span>
-                        <span className="text-slate-100 font-semibold">
+                    <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
+                        <span className="font-mono text-xs text-zinc-500 uppercase tracking-widest">[ORDER_REF]</span>
+                        <span className="text-zinc-100 font-mono tracking-wider">
                             {packageData?.data?.orderNumber}
                         </span>
                     </div>
-                    <div className="flex justify-between">
-                        <span className="text-slate-400">Transportadora</span>
-                        <span className="text-slate-100 font-semibold">
+                    <div className="flex justify-between items-center">
+                        <span className="font-mono text-xs text-zinc-500 uppercase tracking-widest">[CARRIER_SYSTEM]</span>
+                        <span className="text-zinc-100 font-mono tracking-wider uppercase">
                             {packageData?.data?.carrier}
                         </span>
                     </div>
@@ -55,30 +56,31 @@ const CardStatus: React.FC<CardStatusProps> = ({ packageData }) => {
             </div>
 
             {/* Delivery Info Card */}
-            <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6">
-                <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center">
-                        <BiTime size={24} className="text-green-400" />
+            <div className="bg-[#050505] border border-zinc-800 p-6 relative group overflow-hidden">
+                <div className="absolute top-0 right-0 w-16 h-16 bg-[#e4ff00]/5 blur-2xl group-hover:bg-[#e4ff00]/10 transition-colors"></div>
+                <div className="flex items-center gap-4 mb-6 border-b border-zinc-800 pb-4">
+                    <div className="w-12 h-12 border border-[#e4ff00]/30 bg-[#e4ff00]/10 flex items-center justify-center">
+                        <BiTime size={24} className="text-[#e4ff00]" />
                     </div>
                     <div>
-                        <p className="text-sm text-slate-400">Entrega Estimada</p>
-                        <p className="text-xl font-bold text-green-400">
+                        <p className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest mb-1">[ESTIMATED_DELIVERY]</p>
+                        <p className="text-xl font-bold text-[#e4ff00] font-mono tracking-wider">
                             {packageData?.data?.estimatedDelivery}
                         </p>
                     </div>
                 </div>
-                <div className="space-y-3">
-                    <div>
-                        <p className="text-slate-400 text-sm mb-1">Ubicación Inicial</p>
-                        <p className="text-slate-100 font-semibold flex items-center gap-2">
-                            <BiMapPin size={16} className="text-cyan-400" />
+                <div className="space-y-4">
+                    <div className="border-b border-zinc-900 pb-3">
+                        <p className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest mb-1">[ORIGIN_NODE]</p>
+                        <p className="text-zinc-100 font-mono tracking-wider flex items-center gap-3 uppercase">
+                            <BiMapPin size={16} className="text-[#00f0ff]" />
                             {packageData?.data?.origin}
                         </p>
                     </div>
                     <div>
-                        <p className="text-slate-400 text-sm mb-1">Destino</p>
-                        <p className="text-slate-100 font-semibold flex items-center gap-2">
-                            <IoLocationSharp size={16} className="text-green-400" />
+                        <p className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest mb-1">[DESTINATION_NODE]</p>
+                        <p className="text-zinc-100 font-mono tracking-wider flex items-center gap-3 uppercase">
+                            <IoLocationSharp size={16} className="text-[#e4ff00]" />
                             {packageData?.data?.destination}
                         </p>
                     </div>

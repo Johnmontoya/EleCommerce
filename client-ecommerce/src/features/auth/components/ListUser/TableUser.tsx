@@ -12,12 +12,12 @@ interface TableUserPros {
 const TableUser: React.FC<TableUserPros> = ({ currentData, selectedData, handleSelectAll, handleSelectData }) => {
 
     const theader = [
-        "Usuario",
-        "Contacto",
-        "Rol",
-        "Estado",
-        "Último Acceso",
-        "Acciones",
+        "[USER_IDENT]",
+        "[CONTACT_NET]",
+        "[SYS_ROLE]",
+        "[SYS_STATUS]",
+        "[CREATION_CYCLE]",
+        "[EXEC]"
     ];
 
     return (
@@ -29,8 +29,8 @@ const TableUser: React.FC<TableUserPros> = ({ currentData, selectedData, handleS
                     ))
                 ) : (
                     <tr>
-                        <td colSpan={7} className="p-12 text-center">
-                            <p className="text-slate-400 text-lg">No se encontraron productos</p>
+                        <td colSpan={7} className="p-12 text-center border-b border-zinc-800 bg-black">
+                            <p className="text-[#ff0055] text-[10px] font-bold tracking-[0.2em] uppercase">[SYS_NO_USERS_FOUND: DATABASE_EMPTY_OR_FILTER_MISMATCH]</p>
                         </td>
                     </tr>
                 )}

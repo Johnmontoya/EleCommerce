@@ -9,51 +9,55 @@ interface LogisticDimensionsProps {
 
 const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTracking, getFieldsError }) => {
     return (
-        <div className="dash-search dark:dash-search border-2 border-slate-600 rounded-2xl p-6 backdrop-blur-sm">
-            <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
-                <BiPackage size={20} className="text-cyan-400" />
-                Dimensiones y Logística
+        <div className="bg-[#0a0a0a] border border-zinc-800 p-6 relative">
+            <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-[#00f0ff] opacity-50"></div>
+
+            <h2 className="text-sm font-mono tracking-widest uppercase text-zinc-100 mb-6 flex items-center gap-2 border-b border-zinc-800 pb-4">
+                <BiPackage size={18} className="text-[#00f0ff]" />
+                [LOGISTICS_AND_DIMENSIONS]
             </h2>
 
-            <div className="grid grid-cols-2 gap-4 space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="w-full">
-                    <label className="block text-slate-300 mb-2">
-                        Empresa de logística *
+                    <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
+                        [LOGISTICS_CARRIER] *
                     </label>
                     <select
                         value={tracking.tracking.carrier}
                         name="carrier"
                         onChange={(e) => setTracking({ ...tracking, tracking: { ...tracking.tracking, carrier: e.target.value } })}
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                        className="w-full bg-[#050505] border border-zinc-800 text-zinc-100 font-mono tracking-wider placeholder-zinc-700 px-4 py-3 outline-none focus:border-[#00f0ff] focus:bg-black transition-all appearance-none cursor-pointer"
                     >
-                        <option value="" disabled>
-                            {"Seleccione una categoría"}
+                        <option value="" disabled className="bg-black text-zinc-600">
+                            [SELECT_CARRIER]
                         </option>
-                        <option value="ups">UPS (United Parcel Service)</option>
-                        <option value="fedex">FedEx</option>
-                        <option value="dhl">DHL</option>
-                        <option value="usps">USPS</option>
+                        <option value="ups" className="bg-black">[UPS]</option>
+                        <option value="fedex" className="bg-black">[FEDEX]</option>
+                        <option value="dhl" className="bg-black">[DHL]</option>
+                        <option value="usps" className="bg-black">[USPS]</option>
                     </select>
-                    <div className="text-red-500 text-sm mt-1">
+                    <div className="text-[#ff0055] font-mono text-[10px] tracking-widest uppercase mt-2">
                         {getFieldsError("carrier")}
                     </div>
                 </div>
                 <div className="w-full">
-                    <label className="block text-slate-300 mb-2">Tiempo de envio</label>
+                    <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
+                        [EST_DELIVERY_CYCLE]
+                    </label>
                     <input
                         type="date"
                         name="estimatedDelivery"
                         value={tracking.tracking.estimatedDelivery}
                         onChange={(e) => setTracking({ ...tracking, tracking: { ...tracking.tracking, estimatedDelivery: e.target.value } })}
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
+                        className="w-full bg-[#050505] border border-zinc-800 text-[#00f0ff] font-mono tracking-wider px-4 py-3 outline-none focus:border-[#00f0ff] focus:bg-black transition-all"
                     />
-                    <div className="text-red-500 text-sm mt-1">
+                    <div className="text-[#ff0055] font-mono text-[10px] tracking-widest uppercase mt-2">
                         {getFieldsError("estimatedDelivery")}
                     </div>
                 </div>
                 <div className="w-full">
-                    <label className="block text-slate-300 font-semibold mb-2">
-                        Dirección de origen *
+                    <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
+                        [ORIGIN_NODE] *
                     </label>
                     <input
                         type="text"
@@ -61,17 +65,17 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
                         value={tracking.tracking.origin}
                         onChange={(e) => setTracking({ ...tracking, tracking: { ...tracking.tracking, origin: e.target.value } })}
                         required
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                        placeholder="Seattle, WA, USA"
+                        className="w-full bg-[#050505] border border-zinc-800 text-zinc-100 font-mono tracking-wider placeholder-zinc-700 px-4 py-3 outline-none focus:border-[#00f0ff] focus:bg-black transition-all shadow-inner"
+                        placeholder="[AWAITING_INPUT]"
                     />
 
-                    <div className="text-red-500 text-sm mt-1">
+                    <div className="text-[#ff0055] font-mono text-[10px] tracking-widest uppercase mt-2">
                         {getFieldsError("origin")}
                     </div>
                 </div>
                 <div className="w-full">
-                    <label className="block text-slate-300 font-semibold mb-2">
-                        Dirección de destino *
+                    <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
+                        [DESTINATION_NODE] *
                     </label>
                     <input
                         type="text"
@@ -79,50 +83,46 @@ const LogisticDimensions: React.FC<LogisticDimensionsProps> = ({ tracking, setTr
                         value={tracking.tracking.destination}
                         onChange={(e) => setTracking({ ...tracking, tracking: { ...tracking.tracking, destination: e.target.value } })}
                         required
-                        className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                        placeholder="Austin, TX, USA"
+                        className="w-full bg-[#050505] border border-zinc-800 text-zinc-100 font-mono tracking-wider placeholder-zinc-700 px-4 py-3 outline-none focus:border-[#00f0ff] focus:bg-black transition-all shadow-inner"
+                        placeholder="[AWAITING_INPUT]"
                     />
 
-                    <div className="text-red-500 text-sm mt-1">
+                    <div className="text-[#ff0055] font-mono text-[10px] tracking-widest uppercase mt-2">
                         {getFieldsError("destination")}
                     </div>
                 </div>
-                <div className="w-full flex flex-row gap-4">
-                    <div className="w-44">
-                        <label className="block text-slate-300 mb-2">
-                            Peso (kg)
-                        </label>
-                        <input
-                            type="text"
-                            name="weight"
-                            value={tracking.tracking.weight}
-                            onChange={(e) => setTracking({ ...tracking, tracking: { ...tracking.tracking, weight: e.target.value } })}
-                            required
-                            className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                            placeholder="12.5"
-                        />
+                <div className="w-full border-r border-zinc-900 pr-4">
+                    <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
+                        [MASS_KG]
+                    </label>
+                    <input
+                        type="text"
+                        name="weight"
+                        value={tracking.tracking.weight}
+                        onChange={(e) => setTracking({ ...tracking, tracking: { ...tracking.tracking, weight: e.target.value } })}
+                        required
+                        className="w-full bg-[#050505] border border-zinc-800 text-zinc-100 font-mono tracking-wider placeholder-zinc-700 px-4 py-3 outline-none focus:border-[#00f0ff] focus:bg-black transition-all shadow-inner"
+                        placeholder="0.00"
+                    />
 
-                        <div className="text-red-500 text-sm mt-1">
-                            {getFieldsError("weight")}
-                        </div>
+                    <div className="text-[#ff0055] font-mono text-[10px] tracking-widest uppercase mt-2">
+                        {getFieldsError("weight")}
                     </div>
                 </div>
-                <div className="w-full flex flex-row gap-4">
-                    <div className="w-96">
-                        <label className="block text-slate-300 mb-2">Dimensiones (L × W × H cm)</label>
-                        <div className="flex flex-col items-center gap-2">
-                            <input
-                                type="text"
-                                name="dimensions"
-                                value={tracking.tracking.dimensions}
-                                onChange={(e) => setTracking({ ...tracking, tracking: { ...tracking.tracking, dimensions: e.target.value } })}
-                                className="w-full bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-                                placeholder="45"
-                            />
-                            <div className="text-red-500 text-sm mt-1">
-                                {getFieldsError("dimensions")}
-                            </div>
-                        </div>
+                <div className="w-full pl-0 md:pl-2">
+                    <label className="block text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-2">
+                        [GEOMETRY_LWH_CM]
+                    </label>
+                    <input
+                        type="text"
+                        name="dimensions"
+                        value={tracking.tracking.dimensions}
+                        onChange={(e) => setTracking({ ...tracking, tracking: { ...tracking.tracking, dimensions: e.target.value } })}
+                        className="w-full bg-[#050505] border border-zinc-800 text-zinc-100 font-mono tracking-wider placeholder-zinc-700 px-4 py-3 outline-none focus:border-[#00f0ff] focus:bg-black transition-all shadow-inner"
+                        placeholder="0x0x0"
+                    />
+                    <div className="text-[#ff0055] font-mono text-[10px] tracking-widest uppercase mt-2">
+                        {getFieldsError("dimensions")}
                     </div>
                 </div>
             </div>

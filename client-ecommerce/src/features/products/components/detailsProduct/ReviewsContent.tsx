@@ -9,28 +9,37 @@ interface ReviewsContentProps {
 }
 
 const ReviewsContent: React.FC<ReviewsContentProps> = ({ product }) => {
-    
+
     const rating = product.rating || 0;
     const reviewsCount = product.reviewsCount || 0;
 
     return (
-        <div className="space-y-6 text-slate-300">
-            <div className="flex items-center gap-4 border-b border-slate-700 pb-4">
-                <div className="text-5xl font-extrabold text-cyan-400">{rating.toFixed(1)}</div>
-                <div>
-                    <div className="flex text-amber-400">
+        <div className="space-y-6 text-zinc-300 font-mono">
+            <div className="flex items-center gap-6 border-b border-zinc-800 border-dashed pb-6">
+                <div className="text-5xl font-bold text-[#00f0ff] tracking-tighter">
+                    {rating.toFixed(1)}
+                </div>
+                <div className="flex flex-col gap-1">
+                    <div className="flex gap-1 text-[#e4ff00]">
                         {Array(5).fill("").map((_, i) => (
-                            <FaStar key={i} className={rating > i ? "fill-amber-400" : "fill-slate-500"} />
+                            <FaStar key={i} size={16} className={rating > i ? "text-[#e4ff00]" : "text-zinc-800"} />
                         ))}
                     </div>
-                    <p className="text-sm text-slate-400">{reviewsCount} opiniones verificadas</p>
+                    <p className="text-[10px] text-zinc-500 uppercase tracking-[0.2em] font-bold mt-1">
+                        [{reviewsCount}] VERIFIED_LOGS
+                    </p>
                 </div>
             </div>
-            
-            <p className="italic text-slate-400">
-                Aquí iría una lista de los comentarios reales de los clientes...
-            </p>
-            {/* Aquí iría la lógica para listar las reviews individuales */}
+
+            <div className="bg-black border border-zinc-800 p-4">
+                <p className="text-[10px] text-[#ff0055] font-bold tracking-[0.2em] uppercase mb-2 animate-pulse flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-[#ff0055]"></span>
+                    [SYS_WARN: FETCHING_REVIEW_DATA]
+                </p>
+                <p className="text-xs text-zinc-500 uppercase tracking-widest border-l-2 border-zinc-800 pl-3">
+                    USER_FEEDBACK_MODULE_OFFLINE... AWAITING_CONNECTION.
+                </p>
+            </div>
         </div>
     );
 };

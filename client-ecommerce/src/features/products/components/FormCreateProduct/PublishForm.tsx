@@ -1,6 +1,4 @@
 import React from "react";
-import { BsEye } from "react-icons/bs";
-import { FiEyeOff } from "react-icons/fi";
 
 interface PublishFormProps {
   register: any;
@@ -11,26 +9,25 @@ const PublishForm: React.FC<PublishFormProps> = ({ register, watch }) => {
   const isPublished = watch('isPublished');
 
   return (
-    <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
-      <h2 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
-        {isPublished ? (
-          <BsEye size={20} className="text-cyan-400" />
-        ) : (
-          <FiEyeOff size={20} className="text-slate-400" />
-        )}
-        Estado de Publicación
+    <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono mt-4">
+      <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
+      <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
+      <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
+        <span className={`w-1.5 h-1.5 inline-block ${isPublished ? 'bg-[#e4ff00] animate-pulse' : 'bg-zinc-600'}`}></span>
+        [SYS_PUBLICATION_STATUS]
       </h2>
 
-      <label className="flex items-center gap-3 cursor-pointer bg-slate-700/30 p-4 rounded-lg hover:bg-slate-700/50 transition-all">
+      <label className="flex items-center gap-4 cursor-pointer bg-black border border-zinc-800 p-4 hover:border-[#00f0ff]/50 transition-all group">
         <input
           type="checkbox"
           {...register('isPublished')}
-          className="w-5 h-5 rounded border-slate-600 bg-slate-700 text-cyan-400 focus:ring-cyan-400 focus:ring-offset-0 cursor-pointer"
+          className="appearance-none w-5 h-5 border border-zinc-600 bg-black checked:border-[#e4ff00] flex items-center justify-center cursor-pointer relative
+              before:content-[''] before:hidden checked:before:block before:w-2.5 before:h-2.5 before:bg-[#e4ff00] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 transition-all flex-shrink-0"
         />
         <div>
-          <p className="text-slate-200 font-medium">Publicar Producto</p>
-          <p className="text-slate-500 text-xs">
-            El producto será visible en la tienda
+          <p className="text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] uppercase">[SET_PRODUCT_LIVE]</p>
+          <p className="text-zinc-500 text-[8px] uppercase tracking-widest font-bold mt-1">
+            [SYS_ADVISORY:_ITEM_BECOMES_PUBLICLY_ACCESSIBLE]
           </p>
         </div>
       </label>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { BiBarChart, BiPlus } from "react-icons/bi";
+import { BiPlus } from "react-icons/bi";
 import { BsTrash2 } from "react-icons/bs";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
 
 interface AttributesFormProps {
   watch: any;
@@ -38,10 +37,12 @@ const AttributesForm: React.FC<AttributesFormProps> = ({ watch, setValue, errors
   };
 
   return (
-    <div className="dash-search dark:dash-search backdrop-blur-sm border border-slate-600 rounded-xl p-6">
-      <h2 className="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
-        <BiBarChart size={20} className="text-cyan-400" />
-        Atributos
+    <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono mt-4">
+      <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
+      <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
+      <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
+        <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
+        [PRODUCT_ATTRIBUTES]
       </h2>
 
       <div className="space-y-4">
@@ -51,48 +52,48 @@ const AttributesForm: React.FC<AttributesFormProps> = ({ watch, setValue, errors
             value={newAttributeName}
             onChange={(e) => setNewAttributeName(e.target.value)}
             onKeyPress={handleKeyPress}
-            className="bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-            placeholder="Nombre (Ej: Duración de Batería)"
+            className="bg-black border border-zinc-800 text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none focus:border-[#00f0ff] transition-all text-[10px] font-bold tracking-[0.2em] uppercase"
+            placeholder="[NAME_EG._BATTERY]"
           />
           <input
             type="text"
             value={newAttributeValue}
             onChange={(e) => setNewAttributeValue(e.target.value)}
             onKeyPress={handleKeyPress}
-            className="bg-slate-700/50 border border-slate-600 text-slate-100 placeholder-slate-400 px-4 py-3 rounded-lg outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all"
-            placeholder="Valor (Ej: 30 horas)"
+            className="bg-black border border-zinc-800 text-white placeholder-zinc-700 px-4 py-3 rounded-none outline-none focus:border-[#00f0ff] transition-all text-[10px] font-bold tracking-[0.2em] uppercase"
+            placeholder="[VALUE_EG._30H]"
           />
         </div>
 
-        <ButtonAction
-          variant="primary"
+        <button
           type="button"
           onClick={addAttribute}
-          text="Agregar Atributo"
-          className="w-full flex justify-center"
+          className="w-full bg-[#00f0ff]/10 border border-[#00f0ff] text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black transition-all flex justify-center items-center gap-2 px-4 py-3 font-bold text-[10px] tracking-widest uppercase"
         >
-          <BiPlus size={18} />
-        </ButtonAction>
+          <BiPlus size={16} /> [ADD_ATTRIBUTE]
+        </button>
 
         {errors.attributes && (
-          <p className="text-red-500 text-sm">{errors.attributes.message}</p>
+          <p className="text-[#ff0055] text-[10px] uppercase tracking-widest font-bold">[{errors.attributes.message}]</p>
         )}
 
         {attributes.length > 0 && (
-          <div className="space-y-2">
+          <div className="space-y-2 mt-4">
             {attributes.map((attr: any, index: number) => (
               <div
                 key={index}
-                className="bg-slate-700/30 border border-slate-600 rounded-lg p-3 flex items-center justify-between"
+                className="bg-black border border-zinc-800 p-3 flex items-center justify-between relative group"
               >
-                <div>
-                  <p className="text-slate-400 text-sm">{attr.name}</p>
-                  <p className="text-slate-100 font-medium">{attr.value}</p>
+                <div className="absolute top-0 left-0 w-1 h-full bg-[#00f0ff]/50 group-hover:bg-[#00f0ff] transition-colors"></div>
+                <div className="pl-3 w-full grid grid-cols-2 gap-2">
+                  <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">{attr.name}</p>
+                  <p className="text-[#00f0ff] text-[10px] uppercase tracking-widest font-bold">{attr.value}</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => removeAttribute(index)}
-                  className="text-red-400 hover:text-red-300 transition-colors"
+                  className="text-zinc-600 hover:text-[#ff0055] transition-colors ml-4"
+                  title="[DELETE_ATTR]"
                 >
                   <BsTrash2 size={16} />
                 </button>

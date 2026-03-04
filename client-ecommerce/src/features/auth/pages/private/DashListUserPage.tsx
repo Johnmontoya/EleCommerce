@@ -43,7 +43,7 @@ const DashListUserPage = () => {
     const { handleSelectAll, handleSelectData, handleBulkDelete } = useDataActions(users, selectedUsers, setSelectedUsers);
 
     return (
-        <div className="min-h-screen background-light dark:background-light">
+        <div className="min-h-screen bg-[#020202] text-white font-mono selection:bg-[#00f0ff] selection:text-black">
             <div className="flex">
                 {/** Sidebar */}
                 <Sidebar />
@@ -93,7 +93,9 @@ const DashListUserPage = () => {
                             />
                         )}
 
-                        <div className="w-[500px] md:w-[420px] lg:w-[680px] xl:w-full 2xl:w-full bg-slate-800/50 border-2 border-slate-700 rounded-2xl overflow-hidden backdrop-blur-sm">
+                        <div className="w-[500px] md:w-[420px] lg:w-[680px] xl:w-full 2xl:w-full bg-[#050505] border border-zinc-800 relative">
+                            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50 pointer-events-none" />
+                            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50 pointer-events-none" />
                             <div className="overflow-x-auto">
                                 <TableUser
                                     currentData={currentUsers}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { IoIosAdd } from "react-icons/io";
 import { RiSubtractFill } from "react-icons/ri";
-import ButtonAction from "../../../../shared/ui/ButtonAction";
 import { BsCartCheck, BsCartPlus } from "react-icons/bs";
 import TabsSection from "../../components/detailsProduct/TabsSection";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
@@ -80,114 +79,180 @@ const DetailsPage: React.FC = () => {
   if (!product) return <div>Producto no encontrado</div>;
 
   return (
-    <div className="min-h-screen background-light dark:background-light">
+    <div className="min-h-screen bg-[#020202] relative font-mono text-white">
+      {/* Elemento decorativo de fondo */}
+      <div
+        className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #ffffff 1px, transparent 1px),
+            linear-gradient(to bottom, #ffffff 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px'
+        }}
+      />
       {/* Breadcrumb */}
-      <BreadCrumbs />
+      <div className="relative z-10">
+        <BreadCrumbs />
+      </div>
 
       {/* Main Product Section */}
-      <div className="max-w-7xl mx-auto w-full px-6 py-10">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 py-10 relative z-10">
         <div className="flex flex-col lg:flex-row gap-12 relative">
-          <BiHeart size={36}
+          <BiHeart size={32}
             onClick={() => handleAddToWishlist(product)}
-            className="absolute top-3 right-3 z-50 text-slate-300 hover:text-cyan-500 hover:bg-slate-700 rounded-full p-1 cursor-pointer" />
+            className="absolute top-0 right-0 z-50 text-zinc-500 hover:text-[#ff0055] transition-colors cursor-pointer bg-black/50 p-1.5 border border-transparent hover:border-[#ff0055]" />
           {/* Image Gallery */}
-          <div className="flex gap-4 lg:w-1/2">
+          <div className="flex flex-col-reverse md:flex-row gap-4 lg:w-1/2">
             {/* Thumbnails */}
-            <div className="flex flex-col gap-3">
+            <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible custom-scrollbar pb-2 md:pb-0">
               {product?.images!.map((image: { url: string }, index: number) => (
                 <div
                   key={index}
                   onClick={() => setThumbnail(image.url)}
-                  className={`border-2 w-20 h-20 rounded-lg overflow-hidden cursor-pointer transition-all ${thumbnail === image.url
-                    ? "border-cyan-400 shadow-lg shadow-cyan-400/50"
-                    : "border-slate-600 hover:border-slate-400"
+                  className={`relative w-20 h-20 overflow-hidden cursor-pointer transition-all border ${thumbnail === image.url
+                    ? "border-[#00f0ff] opacity-100"
+                    : "border-zinc-800 opacity-60 hover:opacity-100 hover:border-[#00f0ff]/50"
                     }`}
                 >
                   <img
                     src={image.url}
                     alt={`Thumbnail ${index + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                   />
+                  {thumbnail === image.url && (
+                    <div className="absolute inset-0 bg-[#00f0ff]/10 pointer-events-none" />
+                  )}
                 </div>
               ))}
             </div>
 
             {/* Main Image */}
-            <div className="w-[480px] h-[480px] flex-1 border-2 border-slate-600 rounded-2xl overflow-hidden bg-slate-800/50">
+            <div className="w-full aspect-square md:w-[480px] md:h-[480px] flex-1 border border-zinc-800 bg-[#050505] relative overflow-hidden group">
+              <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#00f0ff] opacity-50 z-20" />
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#00f0ff] opacity-50 z-20" />
+
+              {/* Scanline subtle */}
+              <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,240,255,0.03)_50%)] bg-[length:100%_4px] z-10 pointer-events-none" />
+
               <img
                 src={thumbnail}
                 alt="Selected product"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain relative z-0 transition-transform duration-500 group-hover:scale-105"
               />
             </div>
           </div>
 
           {/* Product Info */}
-          <div className="lg:w-1/2">
-            <h1 className="text-4xl text-slate-100 font-bold mb-2">
+          <div className="lg:w-1/2 flex flex-col pt-2">
+            <h1 className="text-3xl sm:text-4xl text-white font-bold mb-4 uppercase tracking-widest leading-tight" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
               {product?.name}
             </h1>
 
             {/* Rating */}
             <div className="flex items-center gap-1 mb-6">
+              <span className="text-[#00f0ff] text-[10px] uppercase tracking-widest bg-[#00f0ff]/10 border border-[#00f0ff]/30 px-2 py-0.5 mr-2">
+                SYS_RATING
+              </span>
               {Array(5)
                 .fill("")
                 .map((_, i: number) => (
                   <FaStar
                     key={i}
-                    size={18}
+                    size={14}
                     className={
                       product?.rating! > i
-                        ? "fill-amber-400 text-amber-400"
-                        : "text-slate-500"
+                        ? "text-[#e4ff00]"
+                        : "text-zinc-700"
                     }
                   />
                 ))}
-              <p className="text-base ml-2 text-slate-300">
-                ({product?.rating}.0)
+              <p className="text-[10px] ml-2 text-zinc-400 font-bold tracking-widest">
+                [ {product?.rating}.0 ]
               </p>
             </div>
 
-            {/* Price */}
-            <div className="mb-8 bg-slate-800/50 p-4 rounded-xl">
-              <p className="text-slate-400 line-through text-lg">
-                MRP: ${product?.price}
-              </p>
-              <p className="text-3xl font-bold text-cyan-400">
-                {Math.round(
-                  product?.price - (product?.price * product?.priceDiscount!) / 100
-                )}
-              </p>
-              <span className="text-slate-500 text-sm mr-1">
-                (Incluye todos los impuestos)
-              </span>
-              <div className="mt-2 inline-block bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-medium">
-                Ahorra {product?.priceDiscount}%
+            {/* Price section */}
+            <div className="mb-8 border border-zinc-800 bg-[#050505] p-6 relative">
+              <div className="absolute top-0 right-0 px-2 py-1 bg-black border-l border-b border-zinc-800 text-[10px] text-zinc-500 uppercase tracking-widest">
+                FINANCIAL_DATA //
+              </div>
+
+              <div className="flex flex-col gap-1 mt-2">
+                {product?.priceDiscount ? (
+                  <div className="flex items-center gap-3">
+                    <p className="text-zinc-500 line-through text-xs font-mono uppercase tracking-widest">
+                      CR_{product?.price}
+                    </p>
+                    <div className="bg-[#e4ff00] text-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase">
+                      -{product?.priceDiscount}%
+                    </div>
+                  </div>
+                ) : null}
+
+                <p className="text-4xl font-bold text-[#00f0ff] font-mono tracking-wider mt-1">
+                  CR_{Math.round(
+                    product?.price! - (product?.price! * (product?.priceDiscount || 0)) / 100
+                  )}
+                </p>
+
+                <span className="text-zinc-600 text-[10px] uppercase tracking-widest mt-2 border-t border-zinc-800 border-dashed pt-2 inline-block">
+                  [TAXES_INCLUDED]
+                </span>
               </div>
             </div>
 
-            {/* Description */}
+            {/* About the product - placeholder layout for future use if description exists in product object otherwise leave empty spaces */}
             <div className="mb-8">
-              <p className="text-lg text-slate-200 font-semibold mb-3">
-                Acerca del Producto
-              </p>
-              <ul className="space-y-2 text-slate-400">
-
-              </ul>
+              <h3 className="text-[#e4ff00] text-xs font-bold tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-[#e4ff00] animate-pulse"></span>
+                PRODUCT_SPECS //
+              </h3>
+              <div className="space-y-2 text-zinc-400 text-sm border-l-2 border-zinc-800 pl-4">
+                <p className="font-mono text-xs uppercase tracking-widest text-[#00f0ff] mb-1">DATA_STREAM_EMPTY</p>
+              </div>
             </div>
 
-            <div className="w-44 p-2 my-9 rounded-[170px] border border-cyan-500 justify-around items-center flex">
-              <RiSubtractFill size={20} className="cursor-pointer text-cyan-500" onClick={handleDecrement} />
-              <span className="w-10 text-center text-cyan-500 text-base font-normal leading-normal">
-                {quantity}
-              </span>
-              <IoIosAdd size={20} className="cursor-pointer text-cyan-500" onClick={handleIncrement} />
-            </div>
+            <div className="flex flex-wrap items-center gap-6 mt-auto border-t border-zinc-800 pt-8">
+              {/* Quantity Selector */}
+              <div className="flex flex-col gap-2">
+                <span className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">SET_QUANTITY</span>
+                <div className="w-32 h-12 border border-zinc-600 bg-black flex justify-between items-center group">
+                  <button
+                    onClick={handleDecrement}
+                    className="w-10 h-full flex items-center justify-center text-zinc-400 hover:text-[#00f0ff] hover:bg-zinc-900 border-r border-zinc-800 transition-colors"
+                  >
+                    <RiSubtractFill size={16} />
+                  </button>
+                  <span className="flex-1 text-center text-white text-sm font-bold font-mono">
+                    {quantity}
+                  </span>
+                  <button
+                    onClick={handleIncrement}
+                    className="w-10 h-full flex items-center justify-center text-zinc-400 hover:text-[#00f0ff] hover:bg-zinc-900 border-l border-zinc-800 transition-colors"
+                  >
+                    <IoIosAdd size={16} />
+                  </button>
+                </div>
+              </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <ButtonAction onClick={handleAddToCart} children={<BsCartPlus size={18} />} text={"Agregar al carrito"} variant="secondary" />
-              <ButtonAction onClick={() => { }} children={<BsCartCheck size={18} />} text={"Comprar"} variant="primary" />
+              {/* Action Buttons */}
+              <div className="flex flex-1 flex-col sm:flex-row gap-4 mt-6 sm:mt-0 items-end">
+                <button
+                  onClick={handleAddToCart}
+                  className="flex-1 h-12 flex items-center justify-center gap-2 bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 hover:bg-[#00f0ff] hover:text-black transition-all font-mono text-[10px] font-bold tracking-[0.2em] uppercase w-full"
+                >
+                  <BsCartPlus size={16} />
+                  [ADD_TO_CART]
+                </button>
+                <button
+                  onClick={() => { }}
+                  className="flex-1 h-12 flex items-center justify-center gap-2 bg-[#00f0ff] text-black border border-[#00f0ff] hover:bg-black hover:text-[#00f0ff] transition-all font-mono text-[10px] font-bold tracking-[0.2em] uppercase w-full"
+                >
+                  <BsCartCheck size={16} />
+                  [EXEC_PURCHASE]
+                </button>
+              </div>
             </div>
           </div>
         </div>

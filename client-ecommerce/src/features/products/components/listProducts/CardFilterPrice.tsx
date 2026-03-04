@@ -28,10 +28,11 @@ const CardFilterPrice = ({ priceRange, onPriceChange }: CardFilterPriceProps) =>
     <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono mt-6">
       <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff]" />
       <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
-      <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-6">
+      <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+        <span className="w-1.5 h-1.5 bg-[#e4ff00] animate-pulse"></span>
         PRICE_PARAMS //
       </h3>
-      <div className="space-y-6">
+      <div className="space-y-5">
         {/* Input de precio mínimo */}
         <div>
           <label className="text-[10px] text-zinc-500 tracking-widest uppercase mb-2 block">
@@ -88,18 +89,18 @@ const CardFilterPrice = ({ priceRange, onPriceChange }: CardFilterPriceProps) =>
         </div>
 
         {/* Botones */}
-        <div className="flex gap-3 pt-4">
+        <div className="flex gap-2 pt-4 border-t border-zinc-900 border-dashed">
           <button
             onClick={handleApply}
-            className="flex-1 bg-[#00f0ff] text-black border border-[#00f0ff] hover:bg-black hover:text-[#00f0ff] py-3 text-xs font-bold tracking-[0.2em] transition-all uppercase"
+            className="flex-1 bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 hover:bg-[#00f0ff] hover:text-black py-2 text-[10px] font-bold tracking-[0.2em] transition-all uppercase"
           >
-            EXECUTE
+            [EXECUTE_Q]
           </button>
           <button
             onClick={handleReset}
-            className="px-6 bg-black text-zinc-500 border border-zinc-800 hover:border-zinc-500 hover:text-white py-3 text-xs font-bold tracking-widest transition-all uppercase"
+            className="px-4 bg-black text-zinc-500 border border-zinc-800 hover:border-red-500 hover:text-red-500 py-2 text-[10px] font-bold tracking-widest transition-all uppercase"
           >
-            CLR
+            [CLR]
           </button>
         </div>
       </div>

@@ -4,42 +4,51 @@ interface StatsProps {
 }
 const StatsInfo: React.FC<StatsProps> = ({ stats, isAdmin }) => {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-8">
-            <div className="card-total border-2 border-slate-700 rounded-xl p-4 backdrop-blur-sm">
-                <p className="text-slate-100 text-xs mb-1">Total</p>
-                <p className="text-2xl font-bold text-slate-100">{stats.total}</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-8 font-mono">
+            <div className="border border-[#00f0ff] bg-[#00f0ff]/5 p-4 relative group hover:bg-[#00f0ff]/10 transition-colors">
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
+                <p className="text-[#00f0ff] text-[9px] mb-1 uppercase tracking-widest">[TOTAL_RECORDS]</p>
+                <p className="text-2xl font-bold text-white [text-shadow:_0_0_8px_#00f0ff]">{stats.total}</p>
             </div>
-            <div className="card-pending border-2 border-yellow-500/30 rounded-xl p-4 backdrop-blur-sm">
-                <p className="text-yellow-100 text-xs mb-1">Pendientes</p>
-                <p className="text-2xl font-bold text-yellow-100">{stats.pending}</p>
+            <div className="border border-[#ffaa00] bg-[#ffaa00]/5 p-4 relative group hover:bg-[#ffaa00]/10 transition-colors">
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#ffaa00] opacity-50" />
+                <p className="text-[#ffaa00] text-[9px] mb-1 uppercase tracking-widest">[PENDING]</p>
+                <p className="text-2xl font-bold text-white [text-shadow:_0_0_8px_#ffaa00]">{stats.pending}</p>
             </div>
-            <div className="card-confirmed border-2 border-emerald-500/30 rounded-xl p-4 backdrop-blur-sm">
-                <p className="text-emerald-100 text-xs mb-1">Confirmados</p>
-                <p className="text-2xl font-bold text-emerald-100">{stats.confirmed}</p>
+            <div className="border border-[#00ffaa] bg-[#00ffaa]/5 p-4 relative group hover:bg-[#00ffaa]/10 transition-colors">
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00ffaa] opacity-50" />
+                <p className="text-[#00ffaa] text-[9px] mb-1 uppercase tracking-widest">[CONFIRMED]</p>
+                <p className="text-2xl font-bold text-white [text-shadow:_0_0_8px_#00ffaa]">{stats.confirmed}</p>
             </div>
-            <div className="card-processing border-2 border-blue-500/30 rounded-xl p-4 backdrop-blur-sm">
-                <p className="text-slate-100 text-xs mb-1">Procesando</p>
-                <p className="text-2xl font-bold text-slate-100">{stats.processing}</p>
+            <div className="border border-[#e4ff00] bg-[#e4ff00]/5 p-4 relative group hover:bg-[#e4ff00]/10 transition-colors">
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#e4ff00] opacity-50" />
+                <p className="text-[#e4ff00] text-[9px] mb-1 uppercase tracking-widest">[PROCESSING]</p>
+                <p className="text-2xl font-bold text-white [text-shadow:_0_0_8px_#e4ff00]">{stats.processing}</p>
             </div>
-            <div className="card-shipped border-2 rounded-xl p-4 backdrop-blur-sm">
-                <p className="text-purple-100 text-xs mb-1">Enviados</p>
-                <p className="text-2xl font-bold text-purple-100">{stats.shipped}</p>
+            <div className="border border-[#a200ff] bg-[#a200ff]/5 p-4 relative group hover:bg-[#a200ff]/10 transition-colors">
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#a200ff] opacity-50" />
+                <p className="text-[#a200ff] text-[9px] mb-1 uppercase tracking-widest">[SHIPPED]</p>
+                <p className="text-2xl font-bold text-white [text-shadow:_0_0_8px_#a200ff]">{stats.shipped}</p>
             </div>
-            <div className="card-delivered border-2 rounded-xl p-4 backdrop-blur-sm">
-                <p className="text-green-100 text-xs mb-1">Entregados</p>
-                <p className="text-2xl font-bold text-green-100">{stats.delivered}</p>
+            <div className="border border-[#00f0ff] bg-[#00f0ff]/5 p-4 relative group hover:bg-[#00f0ff]/10 transition-colors">
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
+                <p className="text-[#00f0ff] text-[9px] mb-1 uppercase tracking-widest">[DELIVERED]</p>
+                <p className="text-2xl font-bold text-white [text-shadow:_0_0_8px_#00f0ff]">{stats.delivered}</p>
             </div>
-            <div className="card-cancelled border-2 rounded-xl p-4 backdrop-blur-sm">
-                <p className="text-red-100 text-xs mb-1">Cancelados</p>
-                <p className="text-2xl font-bold text-red-100">{stats.cancelled}</p>
+            <div className="border border-[#ff0055] bg-[#ff0055]/5 p-4 relative group hover:bg-[#ff0055]/10 transition-colors">
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#ff0055] opacity-50" />
+                <p className="text-[#ff0055] text-[9px] mb-1 uppercase tracking-widest">[CANCELLED]</p>
+                <p className="text-2xl font-bold text-white [text-shadow:_0_0_8px_#ff0055]">{stats.cancelled}</p>
             </div>
-            <div className="card-refunded/10 border-2 border-slate-500/30 rounded-xl p-4 backdrop-blur-sm">
-                <p className="text-slate-100 text-xs mb-1">Reembolsados</p>
-                <p className="text-2xl font-bold text-slate-100">{stats.refunded}</p>
+            <div className="border border-zinc-500 bg-zinc-500/5 p-4 relative group hover:bg-zinc-500/10 transition-colors">
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-zinc-500 opacity-50" />
+                <p className="text-zinc-400 text-[9px] mb-1 uppercase tracking-widest">[REFUNDED]</p>
+                <p className="text-2xl font-bold text-white [text-shadow:_0_0_8px_#71717a]">{stats.refunded}</p>
             </div>
-            <div className="card-gastos border-2 border-cyan-500/30 rounded-xl p-4 backdrop-blur-sm">
-                <p className="text-cyan-100 text-xs mb-1">{isAdmin ? "Ganancias" : "Gastos"}</p>
-                <p className="text-lg font-bold text-cyan-100">
+            <div className="border border-[#e4ff00] bg-[#e4ff00]/5 p-4 relative group hover:bg-[#e4ff00]/10 transition-colors">
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#e4ff00] opacity-50" />
+                <p className="text-[#e4ff00] text-[9px] mb-1 uppercase tracking-widest">{isAdmin ? "[REVENUE]" : "[EXPENSES]"}</p>
+                <p className="text-lg font-bold text-white [text-shadow:_0_0_8px_#e4ff00]">
                     ${stats.totalRevenue.toFixed(0)}
                 </p>
             </div>

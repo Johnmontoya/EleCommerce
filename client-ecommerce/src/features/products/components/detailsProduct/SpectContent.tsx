@@ -2,42 +2,50 @@
 
 import React from 'react';
 import type { Product } from '../../types/product.types';
-import { FaPalette } from 'react-icons/fa';
 
 interface SpecsContentProps {
     product: Product;
 }
 
 const SpecsContent: React.FC<SpecsContentProps> = ({ product }) => {
-    
+
     // Si tienes atributos, puedes listarlos aquí:
-    const attributes = product.attributes || []; 
-    
+    const attributes = product.attributes || [];
+
     return (
-        <div className="space-y-6 text-slate-300">
-            <h3 className="text-xl font-semibold text-cyan-400 border-b border-slate-700 pb-2">Opciones y Variantes</h3>
-            <ul className="space-y-3">
-                {product.variants?.map((variant, index) => (
-                    <li key={index} className="flex items-center gap-3">
-                        <FaPalette className="text-xl text-yellow-500" />
-                        <span className="font-bold text-slate-100">{variant.name}:</span>
-                        <span>{variant.options.join(", ")}</span>
-                    </li>
-                ))}
-            </ul>
-            
+        <div className="space-y-8 text-zinc-300 font-mono">
+            {product.variants && product.variants.length > 0 && (
+                <div>
+                    <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 bg-[#e4ff00]"></span>
+                        PRODUCT_VARIANTS //
+                    </h3>
+                    <ul className="space-y-2 border-l border-zinc-800 pl-4">
+                        {product.variants?.map((variant, index) => (
+                            <li key={index} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 py-2 border-b border-zinc-900 border-dashed last:border-0">
+                                <span className="text-[10px] text-zinc-500 font-bold tracking-[0.2em] w-32 uppercase">[{variant.name}]</span>
+                                <span className="text-white text-xs tracking-widest uppercase">{variant.options.join(" / ")}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
             {attributes.length > 0 && (
-                <>
-                    <h3 className="text-xl font-semibold text-cyan-400 border-b border-slate-700 pb-2">Atributos Clave</h3>
+                <div>
+                    <h3 className="text-xs font-bold text-[#e4ff00] uppercase tracking-[0.2em] mb-4 flex items-center gap-2 mt-8">
+                        <span className="w-1.5 h-1.5 bg-[#e4ff00]"></span>
+                        SYSTEM_ATTRIBUTES //
+                    </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {attributes.map((attr, index) => (
-                            <div key={index} className="flex justify-between p-3 bg-slate-700/50 rounded-lg">
-                                <span className="font-medium">{attr.name}</span>
-                                <span className="text-cyan-300">{attr.value}</span>
+                            <div key={index} className="flex justify-between items-center p-3 bg-black border border-zinc-800 hover:border-[#00f0ff] transition-colors group">
+                                <span className="text-[10px] text-zinc-500 font-bold tracking-[0.2em] uppercase group-hover:text-zinc-300 transition-colors">[{attr.name}]</span>
+                                <span className="text-[#00f0ff] text-xs tracking-widest uppercase text-right">{attr.value}</span>
                             </div>
                         ))}
                     </div>
-                </>
+                </div>
             )}
         </div>
     );

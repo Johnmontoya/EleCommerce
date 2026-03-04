@@ -167,27 +167,27 @@ const Products = () => {
         className="w-full h-20 flex justify-center items-center mt-8"
       >
         {isFetchingNextPage && (
-          <div className="flex items-center gap-3 text-cyan-400">
-            <div className="w-8 h-8 border-3 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
-            <span className="font-semibold">Cargando más productos...</span>
+          <div className="flex items-center gap-3 text-[#00f0ff] uppercase text-xs font-bold tracking-widest font-mono">
+            <div className="w-4 h-4 border-2 border-[#00f0ff] border-t-transparent animate-[spin_2s_linear_infinite]"></div>
+            <span>[RETRIEVING_DATA...]</span>
           </div>
         )}
       </div>
 
       {/* Mensaje cuando no hay más productos */}
       {!hasNextPage && allProducts.length > 0 && (
-        <div className="w-full text-center text-slate-400 py-8 mt-4">
-          <p className="text-sm">
-            ✨ Has visto todos los {allProducts.length} productos populares
+        <div className="w-full text-center text-zinc-600 py-8 mt-4 border-t border-zinc-900 border-dashed">
+          <p className="text-[10px] font-mono tracking-[0.2em] font-bold uppercase">
+            END_OF_INVENTORY // {allProducts.length} ITEMS EXTRACTED
           </p>
         </div>
       )}
 
       {/* Mensaje cuando no hay productos */}
       {allProducts.length === 0 && !isLoading && (
-        <div className="w-full text-center py-16">
-          <p className="text-slate-400 text-lg">
-            No hay productos disponibles en este momento
+        <div className="w-full text-center py-16 border border-zinc-800 bg-[#050505] mt-8">
+          <p className="text-[#ff0055] text-xs font-mono font-bold tracking-widest uppercase">
+            [ERR_NO_GLOBAL_INVENTORY_DETECTED]
           </p>
         </div>
       )}
