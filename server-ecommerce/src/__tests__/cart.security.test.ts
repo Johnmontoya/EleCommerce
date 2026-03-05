@@ -4,139 +4,113 @@ import app from '../index.js';
 const FAKE_JWT =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NSIsImVtYWlsIjoiZmFrZUBmYWtlLmNvbSIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNTE2MjM5MDIyfQ.fake_signature_part';
 
-// index.ts: app.use('/categories', categoryRoutes)
-// categoryRoutes: router.post('/categories', ...) → full path: /categories/categories
-const BASE = '/categories/categories';
+// index.ts: app.use('/cart', cartRoutes) + routes use /cart prefix → /cart/cart/*
+const BASE = '/cart/cart';
 
 /**
- * NOTE: Public GET endpoints are omitted here because they use MongoCategoryRepository
- * which requires a live MongoDB connection. In CI without MongoDB, those requests
- * hang and timeout. Only write endpoints are tested here since they return 401
- * at the auth middleware layer — before ever touching the database.
+ * NOTE: GET /cart/cart/count/:userId is omitted because it uses PrismaCartItemRepository
+ * which requires a live DB connection unavailable in CI — causing timeouts.
+ * The remaining endpoints all return 401 at the auth middleware before touching Prisma.
  */
-describe('API Security - Categories (Authorization & Input Validation)', () => {
+describe('API Security - Cart (Authorization & Input Validation)', () => {
 
     // ─────────────────────────────────────────────────────────────────────────
-    // POST /categories/categories — Requires AUTH + ADMIN (create)
+    // POST /cart/cart/add — Requires AUTH
     // ─────────────────────────────────────────────────────────────────────────
-    describe('POST /categories/categories — Requires AUTH + ADMIN (create)', () => {
+    describe('POST /cart/cart/add — Requires AUTH (add item)', () => {
 
         it('should return 401 when no token is provided', async () => {
             const res = await request(app)
-                .post(BASE)
-                .send({ name: 'Hacked Category', slug: 'hacked' });
+                .post(`${BASE}/add`)
+                .send({ productId: '507f1f77bcf86cd799439011', quantity: 1 });
             expect(res.status).toBe(401);
         });
 
         it('should return 401 when an invalid token is provided', async () => {
             const res = await request(app)
-                .post(BASE)
+                .post(`${BASE}/add`)
                 .set('Authorization', `Bearer ${FAKE_JWT}`)
-                .send({ name: 'Hacked Category', slug: 'hacked' });
+                .send({ productId: '507f1f77bcf86cd799439011', quantity: 1 });
             expect(res.status).toBe(401);
         });
 
-        it('should block XSS payload at auth layer (before DB)', async () => {
+        it('should block NoSQL injection at auth layer', async () => {
             const res = await request(app)
-                .post(BASE)
+                .post(`${BASE}/add`)
                 .set('Authorization', `Bearer ${FAKE_JWT}`)
-                .send({
-                    name: '<script>alert("xss")</script>',
-                    slug: '<img src=x onerror=alert(1)>',
-                });
+                .send({ productId: { "$gt": "" }, quantity: 1 });
             expect(res.status).toBe(401);
-            expect(res.body).not.toHaveProperty('stack');
         });
 
-        it('should block NoSQL injection at auth layer (before DB)', async () => {
+        it('should block negative quantity at auth layer', async () => {
             const res = await request(app)
-                .post(BASE)
+                .post(`${BASE}/add`)
                 .set('Authorization', `Bearer ${FAKE_JWT}`)
-                .send({ name: { "$gt": "" }, slug: { "$gt": "" } });
+                .send({ productId: '507f1f77bcf86cd799439011', quantity: -999 });
             expect(res.status).toBe(401);
         });
     });
 
     // ─────────────────────────────────────────────────────────────────────────
-    // PUT /categories/categories/:id — Requires AUTH + ADMIN (update)
+    // GET /cart/cart/me — Requires AUTH
     // ─────────────────────────────────────────────────────────────────────────
-    describe('PUT /categories/categories/:id — Requires AUTH + ADMIN (update)', () => {
+    describe('GET /cart/cart/me — Requires AUTH (get own cart)', () => {
 
         it('should return 401 when no token is provided', async () => {
-            const res = await request(app)
-                .put(`${BASE}/507f1f77bcf86cd799439011`)
-                .send({ name: 'Tampered' });
+            const res = await request(app).get(`${BASE}/me`);
             expect(res.status).toBe(401);
         });
 
         it('should return 401 when an invalid token is provided', async () => {
             const res = await request(app)
-                .put(`${BASE}/507f1f77bcf86cd799439011`)
-                .set('Authorization', `Bearer ${FAKE_JWT}`)
-                .send({ name: 'Tampered' });
-            expect(res.status).toBe(401);
-        });
-
-        it('should block SQL injection in ID at auth layer', async () => {
-            const res = await request(app)
-                .put(`${BASE}/1' OR '1'='1`)
-                .set('Authorization', `Bearer ${FAKE_JWT}`)
-                .send({ name: 'Injected' });
+                .get(`${BASE}/me`)
+                .set('Authorization', `Bearer ${FAKE_JWT}`);
             expect(res.status).toBe(401);
         });
     });
 
     // ─────────────────────────────────────────────────────────────────────────
-    // DELETE /categories/categories/:id — Requires AUTH + ADMIN (single)
+    // PUT /cart/cart — Requires AUTH
     // ─────────────────────────────────────────────────────────────────────────
-    describe('DELETE /categories/categories/:id — Requires AUTH + ADMIN', () => {
+    describe('PUT /cart/cart — Requires AUTH (update cart)', () => {
 
         it('should return 401 when no token is provided', async () => {
             const res = await request(app)
-                .delete(`${BASE}/507f1f77bcf86cd799439999`);
+                .put(BASE)
+                .send({ cartItemId: '1', quantity: 2 });
             expect(res.status).toBe(401);
         });
 
         it('should return 401 when an invalid token is provided', async () => {
             const res = await request(app)
-                .delete(`${BASE}/507f1f77bcf86cd799439999`)
+                .put(BASE)
+                .set('Authorization', `Bearer ${FAKE_JWT}`)
+                .send({ cartItemId: '1', quantity: 2 });
+            expect(res.status).toBe(401);
+        });
+    });
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // DELETE /cart/cart/:id — Requires AUTH
+    // ─────────────────────────────────────────────────────────────────────────
+    describe('DELETE /cart/cart/:id — Requires AUTH (remove item)', () => {
+
+        it('should return 401 when no token is provided', async () => {
+            const res = await request(app).delete(`${BASE}/1`);
+            expect(res.status).toBe(401);
+        });
+
+        it('should return 401 when an invalid token is provided', async () => {
+            const res = await request(app)
+                .delete(`${BASE}/1`)
                 .set('Authorization', `Bearer ${FAKE_JWT}`);
             expect(res.status).toBe(401);
         });
 
-        it('should block injection in ID at auth layer', async () => {
+        it('should block injection in cart item ID at auth layer', async () => {
             const res = await request(app)
                 .delete(`${BASE}/1' OR '1'='1`)
                 .set('Authorization', `Bearer ${FAKE_JWT}`);
-            expect(res.status).toBe(401);
-        });
-    });
-
-    // ─────────────────────────────────────────────────────────────────────────
-    // DELETE /categories/categories — Requires AUTH + ADMIN (bulk)
-    // ─────────────────────────────────────────────────────────────────────────
-    describe('DELETE /categories/categories — Requires AUTH + ADMIN (bulk delete)', () => {
-
-        it('should return 401 when no token is provided', async () => {
-            const res = await request(app)
-                .delete(BASE)
-                .send({ ids: ['507f1f77bcf86cd799439999'] });
-            expect(res.status).toBe(401);
-        });
-
-        it('should return 401 when an invalid token is provided', async () => {
-            const res = await request(app)
-                .delete(BASE)
-                .set('Authorization', `Bearer ${FAKE_JWT}`)
-                .send({ ids: ['507f1f77bcf86cd799439999'] });
-            expect(res.status).toBe(401);
-        });
-
-        it('should return 401 on empty body (blocked before DB)', async () => {
-            const res = await request(app)
-                .delete(BASE)
-                .set('Authorization', `Bearer ${FAKE_JWT}`)
-                .send({});
             expect(res.status).toBe(401);
         });
     });

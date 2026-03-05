@@ -17,6 +17,8 @@ env:
   RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
   EMAIL_USER: ${{ secrets.EMAIL_USER }}
   EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
+  STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+  STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
 
 jobs:
   test-client:
