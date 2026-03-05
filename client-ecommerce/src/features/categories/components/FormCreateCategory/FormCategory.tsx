@@ -63,9 +63,9 @@ const FormCategory: React.FC<CardCategoryProps> = ({
             <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff]" />
             <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
 
-            <h2 className="text-xl font-bold text-[#00f0ff] mb-8 flex items-center gap-2 uppercase tracking-widest border-b border-zinc-800 pb-4">
+            <h2 className="text-lg font-bold text-[#00f0ff] mb-8 flex items-center gap-2 uppercase tracking-widest border-b border-zinc-800 pb-4">
                 <BiCategory size={20} />
-                [INGRESO_DATOS_CATEGORIA]
+                [DATOS_CATEGORIA]
             </h2>
             <div className="space-y-6">
                 <div className="flex flex-col gap-2">
@@ -128,7 +128,7 @@ const FormCategory: React.FC<CardCategoryProps> = ({
                             className="flex items-center justify-center gap-2 px-6 border border-[#00f0ff] bg-[#00f0ff]/10 text-[#00f0ff] hover:bg-[#00f0ff] hover:text-black transition-all font-bold uppercase tracking-widest text-xs"
                         >
                             <BiPlus size={18} />
-                            [ADD]
+                            <span className="hidden md:flex">[ADD]</span>
                         </button>
                     </div>
                     {getFieldsError("image") && (

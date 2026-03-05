@@ -93,7 +93,7 @@ const DashListUserPage = () => {
                             />
                         )}
 
-                        <div className="w-[500px] md:w-[420px] lg:w-[680px] xl:w-full 2xl:w-full bg-[#050505] border border-zinc-800 relative">
+                        <div className="w-72 sm:w-[500px] md:w-[420px] lg:w-[680px] xl:w-full 2xl:w-full bg-[#050505] border border-zinc-800 relative">
                             <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50 pointer-events-none" />
                             <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50 pointer-events-none" />
                             <div className="overflow-x-auto">

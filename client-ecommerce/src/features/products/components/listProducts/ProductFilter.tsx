@@ -29,7 +29,7 @@ const ProductFilter: React.FC<ProductFiltersProps> = ({
     };
 
     return (
-        <div className="bg-[#050505] border border-zinc-800 border-dashed p-6 relative my-6 font-mono">
+        <div className="w-72 sm:w-full bg-[#050505] border border-zinc-800 border-dashed p-6 relative my-6 font-mono">
             <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
             <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
             <div className="flex flex-col lg:flex-row gap-4">

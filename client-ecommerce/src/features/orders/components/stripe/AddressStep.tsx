@@ -30,7 +30,7 @@ export function AddressStep({
                     SELECCIÓN_DE_DESTINO //
                 </h2>
                 <p className="text-zinc-500 text-xs tracking-widest mt-1 uppercase">
-                    SYSTEM.LOCALIZAR_COORDENADAS_DE_ENVIO()
+                    LOCALIZAR_COORDENADAS_DE_ENVIO()
                 </p>
             </div>
 

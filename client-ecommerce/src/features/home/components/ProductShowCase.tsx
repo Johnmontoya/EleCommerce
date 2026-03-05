@@ -102,7 +102,7 @@ const ProductShowCase = () => {
 
           {product.images?.[0]?.url && (
             <img
-              src={product.images[0].url}
+              src={product.promotionalData?.bannerImageUrl}
               alt={product.name}
               className="max-w-[80%] max-h-[350px] object-contain relative z-10 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700 filter drop-shadow-[0_0_15px_rgba(228,255,0,0.1)] hover:drop-shadow-[0_0_20px_rgba(228,255,0,0.3)] mix-blend-screen"
             />

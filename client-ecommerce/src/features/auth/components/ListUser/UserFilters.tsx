@@ -38,7 +38,7 @@ const UserFilters: React.FC<UserFiltersProps> = ({
     };
 
     return (
-        <div className="bg-black border border-zinc-800 p-6 my-6 relative">
+        <div className="w-72 sm:w-full bg-black border border-zinc-800 p-6 my-6 relative">
             <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50 pointer-events-none" />
             <div className="flex flex-col lg:flex-row gap-4">

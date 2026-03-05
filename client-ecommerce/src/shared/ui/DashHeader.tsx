@@ -18,8 +18,8 @@ const DashHeader: React.FC<DashHeaderProps> = ({ data, title, titleData, path, t
     return (
         <div className="flex flex-col md:flex-row justify-between md:items-center gap-6 border-b border-zinc-800 pb-6 mb-8">
             <div className="flex flex-col gap-2">
-                <h1 className="text-2xl lg:text-3xl font-bold text-[#00f0ff] font-mono tracking-[0.2em] uppercase flex items-center gap-4">
-                    <span className="text-[#00f0ff]/50">{'//'}</span>
+                <h1 className="text-sm lg:text-2xl font-bold text-[#00f0ff] font-mono tracking-[0.2em] uppercase flex items-center gap-4">
+                    <span className="text-[#00f0ff]/50"></span>
                     {titleIcon}
                     <span className="tracking-widest">{title}</span>
                 </h1>

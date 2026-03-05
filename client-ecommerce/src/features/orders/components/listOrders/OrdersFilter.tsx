@@ -32,7 +32,7 @@ const OrdersFilter: React.FC<OrdersProps> = ({
         }
     };
     return (
-        <div className="bg-black border border-zinc-800 p-4 mb-6 relative">
+        <div className="w-72 sm:w-full bg-black border border-zinc-800 p-4 mb-6 relative">
             <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-zinc-600 opacity-50 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-zinc-600 opacity-50 pointer-events-none" />
             <div className="flex flex-col md:flex-row gap-4 relative z-10">

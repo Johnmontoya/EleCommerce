@@ -29,7 +29,7 @@ const DashTrackPage: React.FC = () => {
         {/* Header */}
         <div className="flex items-center gap-4 mb-8 border-b border-zinc-800 pb-4">
           <BiPackage size={36} className="text-[#00f0ff]" />
-          <h1 className="text-2xl font-bold text-zinc-100 font-mono tracking-widest uppercase">
+          <h1 className="text-xl font-bold text-zinc-100 font-mono tracking-widest uppercase">
             [PORTAL_DE_SEGUIMIENTO]
           </h1>
         </div>

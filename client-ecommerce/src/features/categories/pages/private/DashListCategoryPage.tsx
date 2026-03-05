@@ -83,7 +83,7 @@ const DashListCategoryPage = () => {
                         )}
 
                         {/* Table */}
-                        <div className="w-[500px] md:w-[420px] lg:w-[680px] xl:w-full 2xl:w-full border border-zinc-800 bg-[#050505] overflow-hidden my-6">
+                        <div className="w-72 md:w-[500px] md:w-[420px] lg:w-[680px] xl:w-full 2xl:w-full border border-zinc-800 bg-[#050505] overflow-hidden my-6">
                             <div className="overflow-x-auto">
                                 <TableCategory
                                     currentData={currentCategories}

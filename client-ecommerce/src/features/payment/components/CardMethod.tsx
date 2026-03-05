@@ -149,10 +149,10 @@ const CardMethod = ({
                     )}
                 </div>
 
-                <div className="w-96 mx-auto flip-card mb-8">
+                <div className="mx-auto flip-card mb-8">
                     <div className="flip-card-inner relative">
                         <div className="flip-card-front">
-                            <div className="bg-black border border-zinc-800 p-8 text-white relative overflow-hidden h-56 w-96 group">
+                            <div className="bg-black border border-zinc-800 p-8 text-white relative overflow-hidden h-68 md:h-56 md:w-96 w-64 group">
                                 {/* Neon Accents */}
                                 <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#00f0ff] opacity-50 group-hover:opacity-100 transition-opacity" />
                                 <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#00f0ff] opacity-50 group-hover:opacity-100 transition-opacity" />
@@ -194,7 +194,7 @@ const CardMethod = ({
                         </div>
 
                         <div className="flip-card-back absolute inset-0">
-                            <div className="bg-black border border-zinc-800 text-white h-56 w-96 relative overflow-hidden group">
+                            <div className="bg-black border border-zinc-800 text-white h-68 md:h-56 md:w-96 w-64 relative overflow-hidden group">
                                 {/* Neon Accents */}
                                 <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#ff0055] opacity-50 group-hover:opacity-100 transition-opacity" />
                                 <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#ff0055] opacity-50 group-hover:opacity-100 transition-opacity" />

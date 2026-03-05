@@ -360,12 +360,12 @@ const DashEditProductPage: React.FC = () => {
                     <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#ff0055]" />
                     <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#ff0055]" />
                     <BiPackage className="mx-auto text-[#ff0055] opacity-50 mb-4" size={64} />
-                    <p className="text-[#ff0055] tracking-widest text-xs uppercase font-bold">[ERR:_PRODUCT_NOT_FOUND]</p>
+                    <p className="text-[#ff0055] tracking-widest text-xs uppercase font-bold">[ERR:_PRODUCTO_NO_ENCONTRADO]</p>
                     <button
                         onClick={() => navigate('/dashboard/products')}
                         className="mt-8 px-6 py-2 bg-[#ff0055]/10 text-[#ff0055] border border-[#ff0055] hover:bg-[#ff0055] hover:text-white transition-all text-[10px] tracking-widest uppercase font-bold"
                     >
-                        [RETURN_TO_DATABASE]
+                        [REGRESAR]
                     </button>
                 </div>
             </div>
@@ -378,7 +378,7 @@ const DashEditProductPage: React.FC = () => {
                 <Sidebar />
 
                 <div className="flex flex-col flex-1">
-                    <div className="max-w-7xl px-0 md:px-9">
+                    <div className="hidden sm:flex max-w-7xl px-0 md:px-9">
                         <BreadCrumbs />
                     </div>
 
@@ -424,11 +424,11 @@ const DashEditProductPage: React.FC = () => {
 
                                     {/* Imágenes Existentes */}
                                     {existingImages.length > 0 && (
-                                        <div className="bg-[#050505] border border-zinc-800 border-dashed p-6 relative">
+                                        <div className="w-72 sm:w-full bg-[#050505] border border-zinc-800 border-dashed p-6 relative">
                                             <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
                                             <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
                                                 <span className="w-1.5 h-1.5 bg-[#00f0ff] inline-block"></span>
-                                                [CURRENT_IMAGES_DATABANK]
+                                                [IMAGENES]
                                             </h2>
                                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                                 {existingImages.map((image, index) => (
@@ -438,7 +438,7 @@ const DashEditProductPage: React.FC = () => {
                                                     >
                                                         {index === 0 && (
                                                             <div className="absolute top-0 left-0 z-10 bg-[#e4ff00] text-black px-2 py-0.5 text-[8px] font-bold tracking-widest uppercase">
-                                                                [PRIMARY]
+                                                                [PRINCIPAL]
                                                             </div>
                                                         )}
                                                         <img
@@ -452,14 +452,14 @@ const DashEditProductPage: React.FC = () => {
                                                                 onClick={() => handleDeleteExistingImage(image.fileId)}
                                                                 className="bg-transparent border border-[#ff0055] text-[#ff0055] hover:bg-[#ff0055] hover:text-white px-3 py-1 text-[10px] font-bold uppercase tracking-widest transition-all"
                                                             >
-                                                                [EXEC_DELETE]
+                                                                [ELIMINAR]
                                                             </button>
                                                         </div>
                                                     </div>
                                                 ))}
                                             </div>
                                             <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mt-6">
-                                                [{existingImages.length}_FILES_FOUND]
+                                                [{existingImages.length}_IMAGENES_ENCONTRADAS]
                                             </p>
                                         </div>
                                     )}

@@ -11,13 +11,13 @@ interface HeaderActionProps {
 const HeaderAction: React.FC<HeaderActionProps> = ({ isSubmitting, handleSubmit, handleReset, title }) => {
 
     return (
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-zinc-800 mt-2">
+        <div className="flex flex-col sm:flex-row items-center justify-between mb-8 pb-4 border-b border-zinc-800 mt-2">
             <div>
                 <p className="text-[#00f0ff] font-mono uppercase tracking-widest text-[10px] font-bold">
                     [SYSTEM_PROMPT: COMPLETAR_{title?.toUpperCase()}_DATOS]
                 </p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
                 <button
                     onClick={handleReset}
                     type="button"

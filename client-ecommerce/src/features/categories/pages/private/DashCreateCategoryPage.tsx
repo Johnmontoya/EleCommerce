@@ -87,14 +87,14 @@ const DashCreateCategoryPage = () => {
                         />
 
                         {/* Header */}
-                        <div className="flex items-center justify-between mb-8 border-b border-zinc-800 pb-4">
+                        <div className="flex flex-col sm:flex-row items-center justify-between mb-8 border-b border-zinc-800 pb-4">
                             <div>
                                 <h1 className="text-2xl lg:text-4xl font-black text-white mb-2 flex items-center gap-3 uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
                                     <BiCategory className="text-[#00f0ff]" size={36} />
                                     [CREAR_CATEGORIA]
                                 </h1>
                                 <p className="text-zinc-500 text-xs font-mono tracking-widest uppercase">
-                                    // INICIALIZAR_NUEVO_NODO_CATEGORIA //
+                                    // INICIALIZAR_NUEVO_NODO_CATEGORIA
                                 </p>
                             </div>
                             <div className="flex flex-col lg:flex-row gap-4">

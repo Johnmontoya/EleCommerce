@@ -56,7 +56,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           <div className="flex items-center gap-3">
             <div className="w-2 h-6 bg-[#00f0ff] animate-pulse"></div>
             <h1 className="text-[#00f0ff] font-mono tracking-widest uppercase text-sm font-bold">
-              [PROTOCOLO_DE_BÚSQUEDA_DEL_SISTEMA]
+              [BÚSQUEDA_DEL_SISTEMA]
             </h1>
           </div>
           <button

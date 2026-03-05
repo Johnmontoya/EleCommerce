@@ -37,13 +37,13 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                             className={`bg-[#050505] border border-zinc-800 transition-all overflow-hidden ${expandedOrder === order.id ? 'border-[#00f0ff]' : 'hover:border-zinc-600'}`}
                         >
                             {/* Order Header / Summary Row */}
-                            <div className="p-4 sm:p-6 relative group">
+                            <div className="w-72 sm:w-full p-4 sm:p-6 relative group">
                                 {/* Subtle Hover Accent */}
                                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity" />
 
                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pl-2">
                                     <div className="flex-1">
-                                        <div className="flex items-center gap-4 mb-2">
+                                        <div className="flex flex-col sm:flex-row items-center gap-4 mb-2">
                                             <h3 className="text-lg font-black text-white uppercase tracking-widest flex items-center gap-2">
                                                 <span className="text-zinc-600 font-normal">{'>'}</span>
                                                 {order.trackingNumber}
@@ -66,7 +66,7 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-row md:flex-col gap-2 shrink-0">
+                                    <div className="flex flex-row md:flex-col gap-0 shrink-0">
                                         <button
                                             onClick={() => handleToggleExpand(order.id)}
                                             className="text-zinc-500 hover:text-[#00f0ff] px-4 py-2 border border-transparent hover:border-[#00f0ff] hover:bg-[#00f0ff]/10 text-xs font-bold transition-all uppercase tracking-widest flex items-center justify-center gap-2 flex-1 md:flex-none"
@@ -111,7 +111,7 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                                     {order?.items?.map((item) => (
                                                         <div
                                                             key={item.id}
-                                                            className="flex items-center gap-4 bg-[#050505] border border-zinc-900 shadow-sm p-3 relative group"
+                                                            className="flex flex-col sm:flex-row items-center gap-4 bg-[#050505] border border-zinc-900 shadow-sm p-3 relative group"
                                                         >
                                                             <div className="absolute left-0 top-0 bottom-0 w-1 bg-zinc-800 group-hover:bg-[#e4ff00] transition-colors" />
                                                             <img
@@ -156,7 +156,7 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                                         </p>
 
                                                         {order?.trackingNumber && (
-                                                            <div className="mt-4 pt-4 border-t border-zinc-900 flex items-center justify-between">
+                                                            <div className="mt-4 pt-4 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between">
                                                                 <p className="text-zinc-600 text-[10px]">
                                                                     [ID_DE_SEGUIMIENTO]:
                                                                 </p>
@@ -183,10 +183,10 @@ const OrderAdmin: React.FC<OrderAdminProps> = ({
                                                     </div>
 
                                                     {/* Update Status (Admin) */}
-                                                    <div>
+                                                    <div className="flex flex-col sm:flex-row">
                                                         <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-4">
                                                             <h4 className="text-xs font-bold text-[#ff0055] uppercase tracking-widest">
-                                                                [SOBRESCRIBIR_ESTADO]
+                                                                [ESTADO]
                                                             </h4>
                                                         </div>
                                                         <div className="bg-[#050505] border border-[#ff0055]/30 p-2 relative h-full min-h-[60px] flex items-center">

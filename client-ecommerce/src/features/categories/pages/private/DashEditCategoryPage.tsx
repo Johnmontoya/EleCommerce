@@ -74,7 +74,7 @@ const DashEditCategoryPage = () => {
 
                 <div className="flex flex-col flex-1">
                     {/* Breadcrumb */}
-                    <div className="max-w-7xl px-0 md:px-9">
+                    <div className="hidden sm:block max-w-7xl px-0 md:px-9">
                         <BreadCrumbs />
                     </div>
 

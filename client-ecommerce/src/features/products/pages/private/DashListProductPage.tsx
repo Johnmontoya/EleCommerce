@@ -94,7 +94,7 @@ const DashListProductPage = () => {
                         )}
 
                         {/* Products Table */}
-                        <div className="w-[500px] md:w-[420px] lg:w-[680px] xl:w-full 2xl:w-full bg-[#050505] border border-zinc-800 relative mt-4">
+                        <div className="w-72 sm:w-[500px] md:w-[420px] lg:w-[680px] xl:w-full 2xl:w-full bg-[#050505] border border-zinc-800 relative mt-4">
                             <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff] z-10" />
                             <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff] z-10" />
 

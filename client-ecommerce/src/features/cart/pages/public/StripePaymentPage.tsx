@@ -49,15 +49,8 @@ const StripePaymentPage = () => {
         };
     }, [cart]);
 
-    // ── Trackign number único ──────────────────────────────────────────────────
     const [trackingNumber] = useState(() => `TRK-${crypto.randomUUID().toUpperCase()}`);
 
-    // ── Crear orden en el backend ──────────────────────────────────────────────
-    /**
-     * Esta función se llama desde `useCheckout.goToPayment()`.
-     * Crea la orden en el backend y devuelve { orderId, total }
-     * para que el payment step sepa a qué orden cobrar.
-     */
     const handleCreateOrder = async (addressId: string, notes: string) => {
         if (!user || !cart || cart.length === 0) {
             throw new Error("No hay sesión o carrito vacío");
@@ -89,13 +82,11 @@ const StripePaymentPage = () => {
             items,
         });
 
-        return result; // { orderId, total }
+        return result;
     };
 
-    // ── Datos del cliente ──────────────────────────────────────────────────────
     const customer = {
         email: user?.email ?? "",
-        // Fallback: firstName → username → email prefix
         name: user?.firstName || user?.username || user?.email?.split("@")[0] || "Cliente",
     };
 

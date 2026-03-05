@@ -41,8 +41,8 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
     };
 
     return (
-        <div className="border border-zinc-800 bg-[#050505] font-mono p-6">
-            <h2 className="text-sm font-black text-white uppercase tracking-widest mb-6 flex items-center gap-2">
+        <div className="w-72 sm:w-full border border-zinc-800 bg-[#050505] font-mono p-6">
+            <h2 className="text-xs font-black text-white uppercase tracking-widest mb-6 flex items-center gap-2">
                 <span className="text-[#00f0ff]">{'>'}</span> [CONFIGURACION_DE_PRODUCTOS]
             </h2>
 
@@ -68,7 +68,7 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                             >
                                 <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-zinc-500" />
                                 <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-zinc-500" />
-                                <div className="flex items-start gap-6">
+                                <div className="flex flex-col sm:flex-row items-start gap-6">
                                     {/* Product Image */}
                                     <div className="w-24 h-24 bg-[#050505] border border-zinc-800 overflow-hidden shrink-0 relative flex items-center justify-center p-2">
                                         <div className="absolute inset-0 bg-[#00f0ff]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
@@ -86,7 +86,7 @@ const ProductConfig: React.FC<ProductConfigProps> = ({
                                                 <h3 className="text-base font-black text-white uppercase tracking-wider mb-2" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
                                                     {config.productName}
                                                 </h3>
-                                                <div className="flex items-center gap-4">
+                                                <div className="flex flex-col md:flex-row items-center gap-4">
                                                     <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest flex items-center gap-2">
                                                         <span className="text-zinc-700">|</span> <span className="text-[#00f0ff]">PRIORIDAD:</span> {config.displayPriority}
                                                     </span>

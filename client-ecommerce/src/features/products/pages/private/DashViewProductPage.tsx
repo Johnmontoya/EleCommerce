@@ -84,7 +84,7 @@ const DashViewProductPage: React.FC = () => {
                 <Sidebar />
 
                 <div className="flex flex-col flex-1">
-                    <div className="max-w-7xl px-0 md:px-9">
+                    <div className="hidden sm:flex max-w-7xl px-0 md:px-9">
                         <BreadCrumbs />
                     </div>
 

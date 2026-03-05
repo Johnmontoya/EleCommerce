@@ -13,7 +13,7 @@ const SelectMethod: React.FC<SelectMethodProps> = ({ selectedMethod, setSelected
     return (
         <div className="border border-zinc-800 bg-[#050505] p-6 relative">
             <h2 className="text-[#00f0ff] text-[10px] font-bold uppercase tracking-widest pl-1 border-l-2 border-[#00f0ff] mb-6">
-                [SELECT_TRANSACTION_METHOD]
+                [SELECCIONAR_METODO_DE_PAGO]
             </h2>
 
             <div className="grid md:grid-cols-3 gap-4">

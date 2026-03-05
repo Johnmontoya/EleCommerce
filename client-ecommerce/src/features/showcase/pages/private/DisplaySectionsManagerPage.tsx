@@ -84,7 +84,7 @@ const DisplaySectionsManagerPage: React.FC = () => {
                         </div>
 
                         {/* Sections Overview */}
-                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+                        <div className="w-72 sm:w-full grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
                             {sectionOptions?.map((section) => {
                                 const count = banners?.filter(c =>
                                     c.displaySections?.includes(section.value)

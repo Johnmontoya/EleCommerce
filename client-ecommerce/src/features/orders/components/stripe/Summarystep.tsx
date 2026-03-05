@@ -61,11 +61,11 @@ export function SummaryStep({ stock, items, pricing, onNext, onUpdateQuantity }:
         <div className="space-y-6 animate-in fade-in duration-500">
             {/* Encabezado Técnico */}
             <div className="border-l-4 border-[#00f0ff] pl-3 mb-6">
-                <h2 className="text-2xl font-bold text-white uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                <h2 className="text-xl font-bold text-white uppercase tracking-widest" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
                     MANIFIESTO_DE_INVENTARIO //
                 </h2>
                 <p className="text-zinc-500 text-xs font-mono tracking-widest mt-1 uppercase">
-                    SYSTEM.VERIFICAR(ESPERANDO_CONFIRMACION)
+                    VERIFICAR(ESPERANDO_CONFIRMACION)
                 </p>
             </div>
 
@@ -99,7 +99,7 @@ export function SummaryStep({ stock, items, pricing, onNext, onUpdateQuantity }:
                             </div>
 
                             {/* Info */}
-                            <div className="flex-1 min-w-0 flex flex-col justify-between">
+                            <div className="flex-1 min-w-0 mb-6 md:mb-0 flex flex-col justify-between">
                                 <div>
                                     <p className="text-zinc-200 text-sm font-bold tracking-wide uppercase truncate" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
                                         {item.name}
@@ -206,8 +206,8 @@ export function SummaryStep({ stock, items, pricing, onNext, onUpdateQuantity }:
                         <div className="absolute -top-1 -right-1 w-2 h-2 border border-zinc-600 bg-black" />
                     </div>
 
-                    <div className="flex justify-between items-center pt-2">
-                        <div className="flex flex-col">
+                    <div className="flex flex-col md:flex-row justify-between items-center pt-2">
+                        <div className="flex flex-col md:flex-row">
                             <span className="text-white font-bold tracking-widest text-lg" style={{ fontFamily: "'Rajdhani', sans-serif" }}>TOTAL_MONTO</span>
                             <span className="text-[10px] text-zinc-600 uppercase">MONEDA: COP</span>
                         </div>

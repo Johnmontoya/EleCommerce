@@ -53,7 +53,7 @@ const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) =>
   };
 
   return (
-    <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono mt-4">
+    <div className="w-72 sm:w-full bg-[#050505] border border-zinc-800 p-6 relative font-mono mt-4">
       <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
       <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#00f0ff] opacity-50" />
       <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">

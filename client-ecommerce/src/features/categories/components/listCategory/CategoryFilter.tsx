@@ -23,7 +23,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
         }
     };
     return (
-        <div className="border border-zinc-800 bg-[#050505] p-6 my-6 font-mono">
+        <div className="w-72 sm:w-full border border-zinc-800 bg-[#050505] p-6 my-6 font-mono">
             <div className="flex flex-col lg:flex-row gap-4">
                 {/* Filter Button */}
                 <button
