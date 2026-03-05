@@ -67,7 +67,7 @@ const UserRow: React.FC<UserRowProps> = ({ user, selectedData, handleSelectData 
         >
             <td className="px-6 py-4">
                 <label className="flex gap-3 items-center cursor-pointer relative justify-center">
-                    <input type="checkbox" checked={selectedData.includes(user?.id!)} onChange={() => handleSelectData(user?.id!)} className="hidden peer" />
+                    <input type="checkbox" checked={selectedData.includes(user.id || "")} onChange={() => handleSelectData(user.id || "")} className="hidden peer" />
                     <span className="w-4 h-4 border border-zinc-600 bg-black relative flex items-center justify-center peer-checked:border-[#00f0ff] peer-checked:bg-[#00f0ff]/20 transition-all rounded-none"></span>
                     <FaCheck size={10} className="absolute hidden peer-checked:inline top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#00f0ff]" />
                 </label>
@@ -112,10 +112,10 @@ const UserRow: React.FC<UserRowProps> = ({ user, selectedData, handleSelectData 
                     )}
                 </div>
             </td>
-            <td className="flex-1 m-auto px-6 py-4">{getRoleBadge(user?.role!)}</td>
+            <td className="flex-1 m-auto px-6 py-4">{getRoleBadge(user.role || "")}</td>
             <td className="flex-1 justify-items-center items-center">
                 <button
-                    onClick={() => handleToggleActive(user?.id!)}
+                    onClick={() => handleToggleActive(user.id || "")}
                     className={`flex items-center justify-center gap-2 px-2 py-1 font-mono uppercase tracking-widest text-[10px] transition-all cursor-pointer border ${user?.isActive
                         ? "bg-[#00f0ff]/10 text-[#00f0ff] border-[#00f0ff]/50 hover:bg-[#00f0ff]/20"
                         : "bg-[#ff0055]/10 text-[#ff0055] border-[#ff0055]/50 hover:bg-[#ff0055]/20"
@@ -148,7 +148,7 @@ const UserRow: React.FC<UserRowProps> = ({ user, selectedData, handleSelectData 
                         <BiEdit size={16} />
                     </button>
                     <button
-                        onClick={() => handleDelete(user?.id!)}
+                        onClick={() => handleDelete(user.id || "")}
                         className="p-2 border border-zinc-700 bg-transparent text-zinc-400 hover:border-[#ff0055] hover:text-[#ff0055] transition-all"
                     >
                         <BiTrash size={16} />

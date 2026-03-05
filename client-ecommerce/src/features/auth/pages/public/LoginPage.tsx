@@ -12,14 +12,14 @@ const LoginPage: React.FC = () => {
   const [rememberMe, setRememberMe] = useState<boolean>(false);
 
   const { login, isAuthenticated, clearError } = useAuthStore();
-  const from = (location.state as any)?.from?.pathname || '/dashboard';
+  const from = (location.state as { from?: { pathname: string } })?.from?.pathname || '/dashboard';
 
   // Redirigir si ya está autenticado
   useEffect(() => {
     if (isAuthenticated) {
       navigate(from, { replace: true });
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, from]);
 
   // Limpiar error al desmontar
   useEffect(() => {

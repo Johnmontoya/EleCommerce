@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useDeleteCategoryMutation } from "../../hook/mutation/useCategoryMutation";
+import type { Category } from "../../type/category.types";
 
 import { BiEdit } from "react-icons/bi";
 import { BsTrash2 } from "react-icons/bs";
@@ -8,7 +9,7 @@ import { MdBlock, MdCheckCircle } from "react-icons/md";
 import SweetAlertas from "../../../../shared/ui/SweetAlertas";
 
 interface CategoryRowProps {
-    category: any;
+    category: Category;
     selectData: string[];
     handleSelectData: (id: string) => void;
 }
@@ -23,7 +24,7 @@ const CategoryRow: React.FC<CategoryRowProps> = ({ category, selectData, handleS
         deletecategory.mutateAsync(id);
     };
 
-    const handleDelete = (categoria: any) => {
+    const handleDelete = (categoria: Category) => {
         SweetAlertas.OnDialogChoose({
             message: `Estas seguro de eliminar la categoria ${categoria.name}`,
             onConfirm: () => ConfirmDeleteBlog(categoria.id),
@@ -38,7 +39,7 @@ const CategoryRow: React.FC<CategoryRowProps> = ({ category, selectData, handleS
         >
             <td className="px-6 py-4">
                 <label className="flex gap-3 items-center cursor-pointer relative">
-                    <input type="checkbox" checked={selectData.includes(category?.id!)} onChange={() => handleSelectData(category?.id!)} className="hidden peer" />
+                    <input type="checkbox" checked={selectData.includes(category.id || "")} onChange={() => handleSelectData(category.id || "")} className="hidden peer" />
                     <span className="w-5 h-5 border border-zinc-500 bg-black rounded-none relative flex items-center justify-center peer-checked:border-[#00f0ff] peer-checked:bg-[#00f0ff]/10"></span>
                     <FaCheck size={12} className="absolute hidden peer-checked:inline left-1 top-1/2 transform -translate-y-1/2 text-[#00f0ff]" />
                 </label>

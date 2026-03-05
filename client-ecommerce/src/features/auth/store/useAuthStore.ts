@@ -3,6 +3,7 @@ import { authService } from "../services/authService";
 import type { AuthResponse, LoginRequest, User } from "../types/auth.types";
 import { persist } from "zustand/middleware";
 import { create } from "zustand";
+import { AxiosError } from "axios";
 
 interface AuthState {
     user: User | null;
@@ -51,8 +52,9 @@ export const useAuthStore = create<AuthStore>()(
                     })
 
                     toast.success('Inicio de sesión exitoso');
-                } catch (error: any) {
-                    const errorMessage = error.response?.data?.message || 'Error al iniciar sesión';
+                } catch (error) {
+                    const err = error as AxiosError<{ message: string }>;
+                    const errorMessage = err.response?.data?.message || 'Error al iniciar sesión';
                     set({ isLoading: false, error: errorMessage, isAuthenticated: false });
                     toast.error(errorMessage);
                     throw error;
@@ -69,8 +71,9 @@ export const useAuthStore = create<AuthStore>()(
                     }
                     set({ user: null, accessToken: null, refreshToken: null, isAuthenticated: false, isLoading: false, error: null });
                     toast.success('Cierre de sesión exitoso');
-                } catch (error: any) {
-                    const errorMessage = error.response?.data?.message || 'Error al cerrar sesión';
+                } catch (error) {
+                    const err = error as AxiosError<{ message: string }>;
+                    const errorMessage = err.response?.data?.message || 'Error al cerrar sesión';
                     set({ isLoading: false });
                     toast.error(errorMessage);
                 }
@@ -92,8 +95,9 @@ export const useAuthStore = create<AuthStore>()(
                     });
 
                     toast.success('Sesión cerrada en todos los dispositivos');
-                } catch (error: any) {
-                    const errorMessage = error.response?.data?.message || 'Error al cerrar sesiones';
+                } catch (error) {
+                    const err = error as AxiosError<{ message: string }>;
+                    const errorMessage = err.response?.data?.message || 'Error al cerrar sesiones';
                     set({ isLoading: false });
                     toast.error(errorMessage);
                 }
@@ -134,9 +138,10 @@ export const useAuthStore = create<AuthStore>()(
                         user: response.data,
                         isLoading: false,
                     });
-                } catch (error: any) {
+                } catch (error) {
+                    const err = error as AxiosError<{ message: string }>;
                     set({
-                        error: error.response?.data?.message || 'Error al obtener usuario',
+                        error: err.response?.data?.message || 'Error al obtener usuario',
                         isLoading: false,
                     });
                 }

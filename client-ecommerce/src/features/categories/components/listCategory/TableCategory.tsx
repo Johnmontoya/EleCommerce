@@ -32,7 +32,7 @@ const TableCategory: React.FC<TableCategoryProps> = ({
                 handleSelectAll={handleSelectAll}
             >
                 {currentData && currentData.length > 0 ? (
-                    currentData?.map((category: any) => (
+                    currentData?.map((category: Category) => (
                         <CategoryRow
                             key={category.id}
                             category={category}

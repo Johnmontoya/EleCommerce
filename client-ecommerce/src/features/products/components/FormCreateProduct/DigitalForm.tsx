@@ -1,9 +1,15 @@
 import React from "react";
+import type { UseFormRegister, UseFormWatch, FieldErrors, FieldValues } from "react-hook-form";
+
+interface DigitalFormValues extends FieldValues {
+  isDigital: boolean;
+  digitalFile: string;
+}
 
 interface DigitalFormProps {
-  register: any;
-  watch: any;
-  errors: any;
+  register: UseFormRegister<DigitalFormValues>;
+  watch: UseFormWatch<DigitalFormValues>;
+  errors: FieldErrors<DigitalFormValues>;
 }
 
 const DigitalForm: React.FC<DigitalFormProps> = ({ register, watch, errors }) => {
@@ -44,7 +50,7 @@ const DigitalForm: React.FC<DigitalFormProps> = ({ register, watch, errors }) =>
               placeholder="[HTTPS://...]"
             />
             {errors.digitalFile && (
-              <p className="text-[#ff0055] text-[10px] uppercase tracking-widest font-bold mt-1">[{errors.digitalFile.message}]</p>
+              <p className="text-[#ff0055] text-[10px] uppercase tracking-widest font-bold mt-1">[{errors.digitalFile.message as string}]</p>
             )}
           </div>
         )}

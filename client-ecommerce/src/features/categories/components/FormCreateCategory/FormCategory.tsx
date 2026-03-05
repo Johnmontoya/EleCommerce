@@ -15,7 +15,7 @@ interface CategoryProps {
 interface CardCategoryProps {
     category: CategoryProps;
     onChangeCreateData: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
-    setCreateData: React.Dispatch<React.SetStateAction<any>>;
+    setCreateData: React.Dispatch<React.SetStateAction<CategoryProps>>;
     getFieldsError: (fieldName: string) => string | undefined;
 }
 

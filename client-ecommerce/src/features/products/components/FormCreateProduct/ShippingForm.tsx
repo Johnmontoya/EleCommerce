@@ -1,10 +1,18 @@
 import React from "react";
+import type { UseFormRegister, UseFormWatch, UseFormSetValue, FieldErrors, FieldValues } from "react-hook-form";
+
+interface ShippingFormValues extends FieldValues {
+  shipping: {
+    free: boolean;
+    cost: number;
+  };
+}
 
 interface ShippingFormProps {
-  register: any;
-  watch: any;
-  setValue: any;
-  errors: any;
+  register: UseFormRegister<ShippingFormValues>;
+  watch: UseFormWatch<ShippingFormValues>;
+  setValue: UseFormSetValue<ShippingFormValues>;
+  errors: FieldErrors<ShippingFormValues>;
 }
 
 const ShippingForm: React.FC<ShippingFormProps> = ({ register, watch, errors }) => {
@@ -47,7 +55,7 @@ const ShippingForm: React.FC<ShippingFormProps> = ({ register, watch, errors }) 
               placeholder="[0.00]"
             />
             {errors.shipping?.cost && (
-              <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest font-bold">[{errors.shipping.cost.message}]</p>
+              <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest font-bold">[{errors.shipping.cost.message as string}]</p>
             )}
           </div>
         )}

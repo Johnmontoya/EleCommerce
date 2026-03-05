@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { BsTrash2 } from "react-icons/bs";
+import type { UseFormWatch, UseFormSetValue, FieldErrors, FieldValues } from "react-hook-form";
+
+interface AttributesFormValues extends FieldValues {
+  attributes: { name: string; value: string }[];
+}
 
 interface AttributesFormProps {
-  watch: any;
-  setValue: any;
-  errors: any;
+  watch: UseFormWatch<AttributesFormValues>;
+  setValue: UseFormSetValue<AttributesFormValues>;
+  errors: FieldErrors<AttributesFormValues>;
 }
 
 const AttributesForm: React.FC<AttributesFormProps> = ({ watch, setValue, errors }) => {
@@ -26,7 +31,7 @@ const AttributesForm: React.FC<AttributesFormProps> = ({ watch, setValue, errors
   };
 
   const removeAttribute = (index: number) => {
-    setValue('attributes', attributes.filter((_: any, i: number) => i !== index), { shouldValidate: true });
+    setValue('attributes', attributes.filter((_: unknown, i: number) => i !== index), { shouldValidate: true });
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -74,12 +79,12 @@ const AttributesForm: React.FC<AttributesFormProps> = ({ watch, setValue, errors
         </button>
 
         {errors.attributes && (
-          <p className="text-[#ff0055] text-[10px] uppercase tracking-widest font-bold">[{errors.attributes.message}]</p>
+          <p className="text-[#ff0055] text-[10px] uppercase tracking-widest font-bold">[{errors.attributes.message as string}]</p>
         )}
 
         {attributes.length > 0 && (
           <div className="space-y-2 mt-4">
-            {attributes.map((attr: any, index: number) => (
+            {attributes.map((attr: { name: string; value: string }, index: number) => (
               <div
                 key={index}
                 className="bg-black border border-zinc-800 p-3 flex items-center justify-between relative group"

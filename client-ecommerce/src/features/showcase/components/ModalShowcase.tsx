@@ -65,7 +65,7 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
                 bannerImageUrl: editingBanner.promotionalData?.bannerImageUrl || '',
             });
         }
-    }, [editingBanner]);
+    }, [editingBanner, setFormData]);
 
     const handleSubmit = async () => {
 
@@ -110,7 +110,7 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
             } else {
                 // Crear nuevo
                 await addBannerMutation.mutateAsync({
-                    id: selectedProduct?.id!,
+                    id: selectedProduct?.id || "",
                     banner: bannerData
                 });
             }

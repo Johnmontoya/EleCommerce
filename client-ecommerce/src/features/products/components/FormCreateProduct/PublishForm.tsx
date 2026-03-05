@@ -1,8 +1,13 @@
 import React from "react";
+import type { UseFormRegister, UseFormWatch, FieldValues } from "react-hook-form";
+
+interface PublishFormValues extends FieldValues {
+  isPublished: boolean;
+}
 
 interface PublishFormProps {
-  register: any;
-  watch: any;
+  register: UseFormRegister<PublishFormValues>;
+  watch: UseFormWatch<PublishFormValues>;
 }
 
 const PublishForm: React.FC<PublishFormProps> = ({ register, watch }) => {

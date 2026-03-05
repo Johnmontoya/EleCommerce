@@ -3,19 +3,20 @@ import { queryKeys } from "../../../../shared/lib/queryClient";
 import { toast } from "sonner";
 import type { Category } from "../../type/category.types";
 import { categoryService } from "../../services/categoryService";
+import { AxiosError } from "axios";
 
 export const useCreateCategoryMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
         mutationFn: (category: Category) => categoryService.create(category),
-        onSuccess: (response: any) => {
+        onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['categories'] });
 
-            toast.success(response.message || "Categoria creada exitosamente");
+            toast.success("Categoria creada exitosamente");
         },
-        onError: (error: any) => {
-            toast.error(error.response?.data.message || "Error al crear la categoria");
+        onError: (error: AxiosError<{ message: string }>) => {
+            toast.error(error.response?.data?.message || "Error al crear la categoria");
         }
     })
 }
@@ -38,10 +39,10 @@ export const useUpdateCategoryMutation = () => {
                 response
             )
 
-            toast.success(response.message || "Producto actualizado exitosamente");
+            toast.success("Producto actualizado exitosamente");
         },
-        onError: (error: any) => {
-            toast.error(error.response?.data.message || "Error al actualizar el producto");
+        onError: (error: AxiosError<{ message: string }>) => {
+            toast.error(error.response?.data?.message || "Error al actualizar el producto");
         }
     });
 };
@@ -51,13 +52,13 @@ export const useDeleteCategoryMutation = () => {
 
     return useMutation({
         mutationFn: (id: string) => categoryService.delete(id),
-        onSuccess: (response) => {
+        onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['categories'] });
 
-            toast.success(response.message || "Producto eliminado exitosamente");
+            toast.success("Producto eliminado exitosamente");
         },
-        onError: (error: any) => {
-            toast.error(error.response?.data.message || "Error al eliminar el producto");
+        onError: (error: AxiosError<{ message: string }>) => {
+            toast.error(error.response?.data?.message || "Error al eliminar el producto");
         }
     })
 }
@@ -67,13 +68,13 @@ export const useDeleteManyCategoryMutation = () => {
 
     return useMutation({
         mutationFn: (ids: string[]) => categoryService.deleteMany(ids),
-        onSuccess: (response) => {
+        onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['categories'] });
 
-            toast.success(response.message || "Productos eliminados exitosamente");
+            toast.success("Productos eliminados exitosamente");
         },
-        onError: (error: any) => {
-            toast.error(error.response?.data.message || "Error al eliminar los productos");
+        onError: (error: AxiosError<{ message: string }>) => {
+            toast.error(error.response?.data?.message || "Error al eliminar los productos");
         }
     })
 }

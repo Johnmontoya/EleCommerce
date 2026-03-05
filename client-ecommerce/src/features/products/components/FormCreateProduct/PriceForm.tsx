@@ -1,9 +1,18 @@
 import React from "react";
+import type { UseFormRegister, UseFormWatch, FieldErrors, FieldValues } from "react-hook-form";
+
+interface PriceFormValues extends FieldValues {
+  price: number;
+  priceDiscount: number;
+  stock: number;
+  sku: string;
+  barcode: string;
+}
 
 interface PriceFormProps {
-  register: any;
-  errors: any;
-  watch: any;
+  register: UseFormRegister<PriceFormValues>;
+  errors: FieldErrors<PriceFormValues>;
+  watch: UseFormWatch<PriceFormValues>;
 }
 
 const PriceForm: React.FC<PriceFormProps> = ({ register, errors, watch }) => {
@@ -40,7 +49,7 @@ const PriceForm: React.FC<PriceFormProps> = ({ register, errors, watch }) => {
             placeholder="[249900]"
           />
           {errors.price && (
-            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.price.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.price.message as string}]</p>
           )}
         </div>
 
@@ -59,7 +68,7 @@ const PriceForm: React.FC<PriceFormProps> = ({ register, errors, watch }) => {
             placeholder="[19]"
           />
           {errors.priceDiscount && (
-            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.priceDiscount.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.priceDiscount.message as string}]</p>
           )}
         </div>
 
@@ -88,7 +97,7 @@ const PriceForm: React.FC<PriceFormProps> = ({ register, errors, watch }) => {
             placeholder="[65]"
           />
           {errors.stock && (
-            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.stock.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.stock.message as string}]</p>
           )}
         </div>
 
@@ -105,7 +114,7 @@ const PriceForm: React.FC<PriceFormProps> = ({ register, errors, watch }) => {
             placeholder="[AUD-PROX-2024]"
           />
           {errors.sku && (
-            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.sku.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.sku.message as string}]</p>
           )}
         </div>
 
@@ -122,7 +131,7 @@ const PriceForm: React.FC<PriceFormProps> = ({ register, errors, watch }) => {
             placeholder="[8909876543211]"
           />
           {errors.barcode && (
-            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.barcode.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.barcode.message as string}]</p>
           )}
         </div>
       </div>

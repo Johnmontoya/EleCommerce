@@ -1,7 +1,8 @@
 import { useDeleteUsersMutation } from "./mutation/useAuthMutation";
 import { useAuthStore } from "../store/useAuthStore";
+import type { User } from "../types/auth.types";
 
-export const useDataActions = (Data: any[] | undefined, selectedData: string[], setSelectedData: React.Dispatch<React.SetStateAction<string[]>>) => {
+export const useDataActions = (Data: User[] | undefined, selectedData: string[], setSelectedData: React.Dispatch<React.SetStateAction<string[]>>) => {
     const deleteSelectMutation = useDeleteUsersMutation();
     const { accessToken } = useAuthStore();
 
@@ -10,7 +11,7 @@ export const useDataActions = (Data: any[] | undefined, selectedData: string[], 
         if (selectedData.length === Data.length) {
             setSelectedData([]);
         } else {
-            setSelectedData(Data.map((u: any) => u.id));
+            setSelectedData(Data.map((u: User) => u.id || ""));
         }
     }
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BiCamera, BiPackage, BiUser } from "react-icons/bi";
 import { MdNotifications, MdSecurity, MdVerifiedUser } from "react-icons/md";
 import { useProfile } from "../../hook/queries/useProfile";
@@ -30,14 +30,8 @@ const DashProfilePage = () => {
     const { data: profile } = useProfile();
     const { data: orders } = useOrderUser();
 
-    const [totalOrders, setTotalOrders] = useState(0);
-    const [totalSpent, setTotalSpent] = useState(0);
-    useEffect(() => {
-        if (orders) {
-            setTotalOrders(orders.length);
-            setTotalSpent(orders.reduce((total, order) => total + order.total, 0));
-        }
-    }, [orders]);
+    const totalOrders = orders ? orders.length : 0;
+    const totalSpent = orders ? orders.reduce((total, order) => total + order.total, 0) : 0;
 
     const wishlistItems = 12;
     const reviewsWritten = 12;
@@ -146,7 +140,7 @@ const DashProfilePage = () => {
                                 </p>
 
                                 <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                                    {getRoleBadge(profile?.role!)}
+                                    {getRoleBadge(profile?.role || "")}
                                     {profile?.emailVerified && (
                                         <span className="bg-[#050505] text-[#e4ff00] border border-[#e4ff00]/30 px-3 py-1 text-xs font-bold uppercase tracking-widest flex items-center gap-2">
                                             <MdVerifiedUser size={14} />

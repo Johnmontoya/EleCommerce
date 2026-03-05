@@ -24,7 +24,7 @@ const TableUser: React.FC<TableUserPros> = ({ currentData, selectedData, handleS
         <>
             <TableData theader={theader} Data={currentData} selectedData={selectedData} handleSelectAll={handleSelectAll}>
                 {currentData && currentData.length > 0 ? (
-                    currentData?.map((user: any) => (
+                    currentData?.map((user: User) => (
                         <UserRow key={user.id} user={user} selectedData={selectedData} handleSelectData={handleSelectData} />
                     ))
                 ) : (

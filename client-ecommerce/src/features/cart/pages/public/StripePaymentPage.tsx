@@ -4,6 +4,7 @@ import { useAddressUser, useCartUser } from "../../hook/queries/useCart";
 import { useAuthStore } from "../../../auth/store/useAuthStore";
 import type { SavedAddress } from "../../../orders/types/checkout.types";
 import type { CartResponseItems } from "../../types/cart.types";
+import type { Address } from "../../../profile/types/profile.types";
 import LoadingFallback from "../../../../shared/ui/LoadingFallback";
 import { orderService } from "../../../orders/services/orderService";
 
@@ -90,7 +91,7 @@ const StripePaymentPage = () => {
         name: user?.firstName || user?.username || user?.email?.split("@")[0] || "Cliente",
     };
 
-    const savedAddresses: SavedAddress[] = addressUser?.map((address: any) => ({
+    const savedAddresses: SavedAddress[] = addressUser?.map((address: Address) => ({
         id: address.id,
         street: address.street,
         city: address.city,
@@ -99,7 +100,7 @@ const StripePaymentPage = () => {
         phone: address.phone,
     })) ?? [];
 
-    const cartItemsStock = sortedCart.map((item: any) => item.stock);
+    const cartItemsStock = sortedCart.map((item: CartResponseItems) => item.stock);
 
     if (isLoading) return <LoadingFallback />;
 

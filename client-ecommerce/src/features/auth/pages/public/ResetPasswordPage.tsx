@@ -127,7 +127,7 @@ const ResetPasswordPage = () => {
 
         try {
             const otpValue = otp.join("");
-            let data = {
+            const data = {
                 email: email!,
                 otp: otpValue,
                 password: passwords.new
@@ -275,7 +275,7 @@ const ResetPasswordPage = () => {
 
                         {/* Submit Button */}
                         <button
-                            onClick={(e) => handleSubmit(e as any)}
+                            onClick={handleSubmit}
                             disabled={loading}
                             className="w-full flex items-center justify-center gap-3 bg-[#ff0055] hover:bg-white text-black font-black py-4 uppercase tracking-[0.2em] transition-colors border-2 border-transparent hover:border-[#ff0055] disabled:opacity-50 disabled:cursor-not-allowed"
                         >

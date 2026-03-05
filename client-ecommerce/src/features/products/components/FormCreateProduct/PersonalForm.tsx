@@ -2,10 +2,20 @@ import React from "react";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useCategories } from "../../../categories/hook/queries/useCategory";
+import type { UseFormRegister, UseFormWatch, FieldErrors, FieldValues } from "react-hook-form";
+
+interface PersonalFormValues extends FieldValues {
+  name: string;
+  slug: string;
+  description: string;
+  brand: string;
+  category: string;
+}
+
 interface PersonalFormProps {
-  register: any;
-  errors: any;
-  watch: any;
+  register: UseFormRegister<PersonalFormValues>;
+  errors: FieldErrors<PersonalFormValues>;
+  watch: UseFormWatch<PersonalFormValues>;
   handleAnalyzeTitle: () => void;
   isSubmitting: boolean;
 }
@@ -44,7 +54,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
               placeholder="[EJ:_AUDIFONOS_INALAMBRICOS]"
             />
             {errors.name && (
-              <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.name.message}]</p>
+              <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.name.message as string}]</p>
             )}
           </div>
 
@@ -81,7 +91,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
             placeholder="[audifonos-inalambricos-pro-x]"
           />
           {errors.slug && (
-            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.slug.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.slug.message as string}]</p>
           )}
         </div>
 
@@ -98,7 +108,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
             placeholder="[DESCRIBE_PRODUCT_FEATURES...]"
           />
           {errors.description && (
-            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.description.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.description.message as string}]</p>
           )}
         </div>
 
@@ -116,7 +126,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
               placeholder="[EJ:_SOUNDMAX]"
             />
             {errors.brand && (
-              <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.brand.message}]</p>
+              <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.brand.message as string}]</p>
             )}
           </div>
 
@@ -144,7 +154,7 @@ const PersonalForm: React.FC<PersonalFormProps> = ({
               </div>
             </div>
             {errors.category && (
-              <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.category.message}]</p>
+              <p className="text-[#ff0055] text-[10px] mt-1 uppercase tracking-widest">[{errors.category.message as string}]</p>
             )}
           </div>
         </div>

@@ -54,7 +54,7 @@ const DashEditUserPage = () => {
                 emailVerified: data.emailVerified,
             })
         }
-    }, [data])
+    }, [data, setUserData])
 
     const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
 

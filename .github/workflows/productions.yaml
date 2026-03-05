@@ -8,6 +8,8 @@ on:
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  JWT_SECRET: "test_secret"
+  POSTGRESQL_LOCAL: ${{ secrets.POSTGRESQL_LOCAL }}
 
 jobs:
   test-client:
@@ -50,6 +52,14 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        working-directory: ./server-ecommerce
+
+      - name: Prisma Generate
+        run: npx prisma generate
+        working-directory: ./server-ecommerce
+
+      - name: Run Linter
+        run: npm run lint
         working-directory: ./server-ecommerce
 
       - name: Run tests

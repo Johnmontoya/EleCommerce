@@ -20,9 +20,10 @@ const DashListUserPage = () => {
     const [isActive, setIsActive] = useState<boolean | null>(null);
     const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    let itemsPerPage = 10;
+    const itemsPerPage = 10;
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         setCurrentPage(1);
     }, [searchTerm, filterRole, isActive]);
 

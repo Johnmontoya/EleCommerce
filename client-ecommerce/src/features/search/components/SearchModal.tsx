@@ -26,7 +26,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     if (!isOpen) {
       clearResults();
     }
-  }, [isOpen]);
+  }, [isOpen, clearResults]);
 
   // Cerrar con ESC
   useEffect(() => {

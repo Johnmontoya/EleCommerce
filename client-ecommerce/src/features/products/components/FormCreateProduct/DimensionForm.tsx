@@ -1,8 +1,18 @@
 import React from "react";
+import type { UseFormRegister, FieldErrors, FieldValues } from "react-hook-form";
+
+interface DimensionFormValues extends FieldValues {
+  dimensions: {
+    weight: number;
+    width: number;
+    height: number;
+    depth: number;
+  };
+}
 
 interface DimensionFormProps {
-  register: any;
-  errors: any;
+  register: UseFormRegister<DimensionFormValues>;
+  errors: FieldErrors<DimensionFormValues>;
 }
 
 const DimensionForm: React.FC<DimensionFormProps> = ({ register, errors }) => {
@@ -30,7 +40,7 @@ const DimensionForm: React.FC<DimensionFormProps> = ({ register, errors }) => {
             placeholder="[0.18]"
           />
           {errors.dimensions?.weight && (
-            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.dimensions.weight.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.dimensions.weight.message as string}]</p>
           )}
         </div>
 
@@ -48,7 +58,7 @@ const DimensionForm: React.FC<DimensionFormProps> = ({ register, errors }) => {
             placeholder="[6]"
           />
           {errors.dimensions?.width && (
-            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.dimensions.width.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.dimensions.width.message as string}]</p>
           )}
         </div>
 
@@ -66,7 +76,7 @@ const DimensionForm: React.FC<DimensionFormProps> = ({ register, errors }) => {
             placeholder="[4]"
           />
           {errors.dimensions?.height && (
-            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.dimensions.height.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.dimensions.height.message as string}]</p>
           )}
         </div>
 
@@ -84,7 +94,7 @@ const DimensionForm: React.FC<DimensionFormProps> = ({ register, errors }) => {
             placeholder="[3]"
           />
           {errors.dimensions?.depth && (
-            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.dimensions.depth.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.dimensions.depth.message as string}]</p>
           )}
         </div>
       </div>
