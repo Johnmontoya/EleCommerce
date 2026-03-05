@@ -7,6 +7,8 @@ const defaultEsmPreset = {
 const jestConfig: JestConfigWithTsJest = {
     ...defaultEsmPreset,
     testEnvironment: 'node',
+    testMatch: ['**/src/__tests__/**/*.test.ts'],
+    testPathIgnorePatterns: ['/node_modules/', '/dist/'],
     moduleNameMapper: {
         '^(\\.{1,2}/.*)\\.js$': '$1',
     },

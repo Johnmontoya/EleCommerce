@@ -13,14 +13,16 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-// Verificar la conexión al iniciar
-transporter.verify((error, success) => {
-    if (error) {
-        console.error('❌ Error al conectar con Gmail:', error);
-    } else {
-        console.log('✅ Servidor de email listo para enviar mensajes');
-    }
-});
+// Verificar la conexión al iniciar (se omite en tests para evitar conexiones SMTP reales)
+if (process.env.NODE_ENV !== 'test') {
+    transporter.verify((error, _success) => {
+        if (error) {
+            console.error('❌ Error al conectar con Gmail:', error);
+        } else {
+            console.log('✅ Servidor de email listo para enviar mensajes');
+        }
+    });
+}
 
 export const emailService = {
     sendPasswordResetEmail: async (email: string, otp: string): Promise<void> => {

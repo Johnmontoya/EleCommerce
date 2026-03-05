@@ -11,7 +11,8 @@
     "target": "esnext",
     "moduleResolution": "nodenext",
     "types": [
-      "node"
+      "node",
+      "jest"
     ],
     "lib": [
       "ESNext"
