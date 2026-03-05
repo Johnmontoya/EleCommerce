@@ -5,6 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "lint": "tsc --noEmit",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "build": "prisma generate && tsc",
     "start": "npm run migrate:prod && node dist/server.js",

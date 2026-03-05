@@ -48,8 +48,8 @@ const DashEditUserPage = () => {
     useEffect(() => {
         if (data) {
             setUserData({
-                ...userData,
                 email: data.email,
+                password: '',
                 username: data.username ?? '',
                 firstName: data.firstName ?? '',
                 lastName: data.lastName ?? '',
