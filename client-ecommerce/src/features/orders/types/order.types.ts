@@ -34,6 +34,7 @@ export interface OrderItem {
 }
 
 export interface OrderFilters {
+    [key: string]: unknown;
     search?: string;
     status?: string;
 }

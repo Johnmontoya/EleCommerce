@@ -27,7 +27,7 @@ const Category = () => {
       <section className="max-w-7xl mx-auto w-full px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 items-center gap-6 py-2">
           {categories?.slice(0, 6).map((item, index) => (
-            <div key={index} onClick={() => handleCategoryClick(item.id)} className="w-full h-48 flex flex-col relative group cursor-pointer transition-all">
+            <div key={index} onClick={() => handleCategoryClick(item.id!)} className="w-full h-48 flex flex-col relative group cursor-pointer transition-all">
               {/* Tech Accents Hover */}
               <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity z-20" />
               <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-[#00f0ff] opacity-0 group-hover:opacity-100 transition-opacity z-20" />

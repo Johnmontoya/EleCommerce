@@ -111,7 +111,7 @@ const DashEditProductPage: React.FC = () => {
             setValue("sku", product.sku || "");
             setValue("barcode", product.barcode || "");
             setValue("brand", product.brand || "");
-            setValue("category", typeof product.category === 'object' ? product.category.id : product.category);
+            setValue("category", typeof product.category === 'object' ? product.category.id ?? '' : product.category);
             setValue("tags", product.tags || []);
             setValue("rating", product.rating || 0);
             setValue("reviewsCount", product.reviewsCount || 0);
@@ -294,7 +294,7 @@ const DashEditProductPage: React.FC = () => {
                     const categoryId = typeof response.data.category === 'object'
                         ? response.data.category.id
                         : response.data.category;
-                    setValue('category', categoryId);
+                    setValue('category', categoryId ?? '');
                 }
 
                 setValue('tags', response.data.tags ?? []);

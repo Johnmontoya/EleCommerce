@@ -27,7 +27,7 @@ const CategoryRow: React.FC<CategoryRowProps> = ({ category, selectData, handleS
     const handleDelete = (categoria: Category) => {
         SweetAlertas.OnDialogChoose({
             message: `Estas seguro de eliminar la categoria ${categoria.name}`,
-            onConfirm: () => ConfirmDeleteBlog(categoria.id),
+            onConfirm: () => ConfirmDeleteBlog(categoria.id!),
             onCancel: Cancel,
         });
     };

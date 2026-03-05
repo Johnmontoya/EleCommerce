@@ -88,6 +88,7 @@ export interface ProductAutocomplete {
 }
 
 export interface ProductFilters {
+  [key: string]: unknown;
   category?: string;
   brand?: string;
   brands?: string[];

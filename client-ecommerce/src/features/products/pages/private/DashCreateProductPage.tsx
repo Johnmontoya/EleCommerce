@@ -195,7 +195,7 @@ const DashCreateProductPage: React.FC = () => {
           const categoryId = typeof response.data.category === 'object'
             ? response.data.category.id
             : response.data.category;
-          setValue('category', categoryId);
+          setValue('category', categoryId ?? '');
         }
 
         setValue('tags', response.data.tags ?? []);

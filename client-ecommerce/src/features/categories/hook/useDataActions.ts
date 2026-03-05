@@ -9,7 +9,7 @@ export const useDataActions = (Data: Category[] | undefined, selectedData: strin
         if (selectedData.length === Data.length) {
             setSelectedData([]);
         } else {
-            setSelectedData(Data.map((u: Category) => u.id));
+            setSelectedData(Data.map((u: Category) => u.id).filter((id): id is string => id !== undefined));
         }
     }
 

@@ -97,7 +97,7 @@ const ModalShowcase: React.FC<ModalShowcaseProps> = ({
                 displaySections: formData.displaySections,
                 displayPriority: Number(formData.displayPriority) || 1,
                 isFeatured: formData.isFeatured,
-                featuredUntil: formData.featuredUntil || undefined,
+                featuredUntil: formData.featuredUntil ? new Date(formData.featuredUntil) : undefined,
                 promotionalData,
             };
 

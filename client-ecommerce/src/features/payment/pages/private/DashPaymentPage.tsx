@@ -33,7 +33,7 @@ const DashPaymentPage: React.FC = () => {
 
     const [cardData, onChangeCardData, setCardData] = useInputs({
         id: "",
-        userId: user?.id,
+        userId: user?.id ?? "",
         cardNumber: "",
         cardHolder: "",
         cardExpiration: "",
@@ -45,21 +45,21 @@ const DashPaymentPage: React.FC = () => {
     useEffect(() => {
         if (user) {
             setPaymentData({
-                fullName: user.firstName,
+                fullName: user.firstName ?? '',
                 email: user.email,
-                phone: user.phone,
-                address: user.addresses?.[0].street,
-                city: user.addresses?.[0].city,
-                zipCode: user.addresses?.[0].zipCode,
-                country: user.addresses?.[0].country,
+                phone: user.phone ?? '',
+                address: user.addresses?.[0]?.street ?? '',
+                city: user.addresses?.[0]?.city ?? '',
+                zipCode: user.addresses?.[0]?.zipCode ?? '',
+                country: user.addresses?.[0]?.country ?? '',
             })
             setCardData({
-                id: payment?.id,
-                userId: user?.id,
-                cardNumber: payment?.cardNumber,
-                cardHolder: payment?.cardHolder,
-                cardExpiration: payment?.cardExpiration,
-                cardCvv: payment?.cardCvv,
+                id: payment?.id ?? '',
+                userId: user?.id ?? '',
+                cardNumber: payment?.cardNumber ?? '',
+                cardHolder: payment?.cardHolder ?? '',
+                cardExpiration: payment?.cardExpiration ?? '',
+                cardCvv: payment?.cardCvv ?? '',
                 createdAt: new Date(),
                 updatedAt: new Date(),
             })

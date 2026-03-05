@@ -23,7 +23,6 @@ const DashCreateCategoryPage = () => {
         slug: "",
         image: "",
         description: "",
-        parent: "",
         isActive: false,
     });
 
@@ -33,13 +32,12 @@ const DashCreateCategoryPage = () => {
         e?.preventDefault();
         setValidationErrors({});
         try {
-            await createCategory.mutateAsync(createData);
+            await createCategory.mutateAsync(createData as import('../../type/category.types').Category);
             setCreateData({
                 name: "",
                 slug: "",
                 image: "",
                 description: "",
-                parent: "",
                 isActive: false,
             });
         } catch (error) {
@@ -59,7 +57,6 @@ const DashCreateCategoryPage = () => {
             slug: "",
             image: "",
             description: "",
-            parent: "",
             isActive: false,
         });
         setValidationErrors({});

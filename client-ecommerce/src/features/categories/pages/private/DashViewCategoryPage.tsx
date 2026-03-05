@@ -30,7 +30,7 @@ const DashViewCategoryPage = () => {
     const handleTogglePublish = async () => {
         if (category) {
             await updateCategory.mutateAsync({
-                id: category.id,
+                id: category.id!,
                 data: { isActive: !category.isActive }
             });
         }

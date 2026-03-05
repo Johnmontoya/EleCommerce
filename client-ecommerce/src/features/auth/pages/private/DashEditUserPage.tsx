@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../../hooks/queries/useUsers";
 import useInputs from "../../../../shared/hooks/useInputs";
+import type { User } from "../../types/auth.types";
 import { useEffect, useState } from "react";
 import Sidebar from "../../../dashboard/components/Sidebar";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
@@ -27,7 +28,7 @@ const DashEditUserPage = () => {
     const updateUserMutation = useUpdateUserMutation();
     const { data } = useUser(id!);
 
-    const [userData, onChangeCreateData, setUserData] = useInputs({
+    const [userData, onChangeCreateData, setUserData] = useInputs<User>({
         email: "",
         password: "",
         username: "",
@@ -38,20 +39,29 @@ const DashEditUserPage = () => {
         role: "USER",
         isActive: true,
         emailVerified: false,
+        otp: undefined,
+        createdAt: undefined,
+        updatedAt: undefined,
+        addresses: undefined,
     });
 
     useEffect(() => {
         if (data) {
             setUserData({
+                ...userData,
                 email: data.email,
-                username: data.username,
-                firstName: data.firstName,
-                lastName: data.lastName,
-                phone: data.phone,
-                avatar: data.avatar,
-                role: data.role,
+                username: data.username ?? '',
+                firstName: data.firstName ?? '',
+                lastName: data.lastName ?? '',
+                phone: data.phone ?? '',
+                avatar: data.avatar ?? '',
+                role: data.role ?? '',
                 isActive: data.isActive,
                 emailVerified: data.emailVerified,
+                otp: data.otp,
+                createdAt: data.createdAt,
+                updatedAt: data.updatedAt,
+                addresses: data.addresses,
             })
         }
     }, [data, setUserData])

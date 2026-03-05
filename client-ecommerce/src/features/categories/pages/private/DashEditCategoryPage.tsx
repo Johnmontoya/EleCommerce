@@ -38,7 +38,7 @@ const DashEditCategoryPage = () => {
                 name: category.name,
                 slug: category.slug,
                 image: category.image,
-                description: category.description,
+                description: category.description ?? '',
                 isActive: category.isActive
             })
         }

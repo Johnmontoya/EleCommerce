@@ -1,4 +1,5 @@
 export interface User {
+    [key: string]: unknown;
     id?: string;
     email: string;
     password: string;
@@ -85,6 +86,7 @@ export interface AuthResponse {
 }
 
 export interface UsersFilters {
+    [key: string]: unknown;
     isActive?: boolean | undefined;
     role?: string | undefined;
     search?: string | undefined;

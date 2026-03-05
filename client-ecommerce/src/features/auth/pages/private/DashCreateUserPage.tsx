@@ -11,6 +11,7 @@ import FormCredential from "../../components/UserCreate/FormCredential";
 import FormAvatar from "../../components/UserCreate/FormAvatar";
 import FormRoleAndState from "../../components/UserCreate/FormRoleAndState";
 import useInputs from "../../../../shared/hooks/useInputs";
+import type { User } from "../../types/auth.types";
 import { AxiosError } from "axios";
 import { useAuthRegisterMutation } from "../../hooks/mutation/useAuthMutation";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +27,7 @@ const DashCreateUserPage = () => {
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-    const [userData, onChangeCreateData, setUserData] = useInputs({
+    const initialUserData = {
         email: "",
         password: "",
         username: "",
@@ -37,7 +38,12 @@ const DashCreateUserPage = () => {
         role: "customer",
         isActive: true,
         emailVerified: false,
-    });
+        otp: undefined,
+        createdAt: undefined,
+        updatedAt: undefined,
+        addresses: undefined,
+    };
+    const [userData, onChangeCreateData, setUserData] = useInputs<User>(initialUserData);
 
     const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
 
@@ -58,9 +64,9 @@ const DashCreateUserPage = () => {
                 return;
             }
 
-            await createUserMutation.mutateAsync(userData);
+            await createUserMutation.mutateAsync(userData as import('../../types/auth.types').RegisterRequest);
             setIsSubmitting(false);
-            setUserData({});
+            setUserData(initialUserData);
             navigate("/dashboard/users");
         } catch (error) {
             if (error instanceof AxiosError && error.response?.data?.errors) {
@@ -72,7 +78,7 @@ const DashCreateUserPage = () => {
     };
 
     const handleReset = () => {
-        setUserData({});
+        setUserData(initialUserData);
         setValidationErrors({});
     };
 
