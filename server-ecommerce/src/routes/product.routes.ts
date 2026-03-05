@@ -3,6 +3,7 @@ import { ProductController } from "../presentation/controllers/ProductController
 import { CreateProductUseCase, GetProductByIdUseCase, GetAllProductsUseCase, UpdateProductUseCase, GetProductBySlugUseCase, SearchProductsAutoCompleteUseCase, GetProductsByCategoryUseCase, GetProductsByBrandUseCase, DeleteProductUseCase, DeleteManyProductsUseCase, GetBannersUseCase, UpdateBannerUseCase, DeleteBannerUseCase, GetShowcaseUseCase, AnalyzeTitleUseCase } from "../application/use-cases/products/ProductUseCase.js";
 import { MongoProductRepository } from "../infrastructure/repositories/MongoProductRepository.js";
 import { upload } from "../infrastructure/middlewares/multerMiddleware.js";
+import { authenticate, authorize } from "../infrastructure/middlewares/authMiddleware.js";
 
 const router = Router();
 
@@ -42,22 +43,31 @@ const productController = new ProductController(
     analyzeTitleUseCase
 )
 
-router.post('/products', upload.array('images', 5), productController.createProduct);
+// Add a quick middleware to validate search query length to prevent DoS
+const validateSearchQuery = (req: any, res: any, next: any) => {
+    if (req.query.q && typeof req.query.q === 'string' && req.query.q.length > 200) {
+        return res.status(400).json({ success: false, message: 'Search query is too long' });
+    }
+    next();
+};
+
+router.post('/products', authenticate, authorize('ADMIN'), upload.array('images', 5), productController.createProduct);
 router.get('/products', productController.getAll);
-router.get('/products/search', productController.searchAutoComplete); // ⚠️ Debe ir ANTES de /:id
+router.get('/products/search', validateSearchQuery, productController.searchAutoComplete); // ⚠️ Debe ir ANTES de /:id
 router.get('/products/slug/:slug', productController.getBySlug);
 router.get('/products/category/:category', productController.getByCategory);
 router.get('/products/brand/:brand', productController.getByBrand);
 router.get('/products/:id', productController.getIdProduct);
-router.put('/products/:id', upload.array('images', 5), productController.updateProduct);
-router.put('/products/:id/publish', productController.updatePublish);
-router.delete('/products/:id', productController.deleteProduct);
-router.delete('/products', productController.deleteMany);
+router.put('/products/:id', authenticate, authorize('ADMIN'), upload.array('images', 5), productController.updateProduct);
+router.put('/products/:id/publish', authenticate, authorize('ADMIN'), productController.updatePublish);
+router.delete('/products/:id', authenticate, authorize('ADMIN'), productController.deleteProduct);
+router.delete('/products', authenticate, authorize('ADMIN'), productController.deleteMany);
 router.get('/banners', productController.getAllBanners);
-router.put('/banners/:id', productController.updateBanner);
+router.put('/banners/:id', authenticate, authorize('ADMIN'), productController.updateBanner);
 /*router.put('/banners/:id', productController.updateBanner);
 router.delete('/banners/:id', productController.deleteBanner);*/
 router.get('/showcase', productController.getShowcase);
-router.post('/products/analyze-title', productController.analyzeTitle);
+router.post('/products/analyze-title', authenticate, authorize('ADMIN'), productController.analyzeTitle);
 
 export default router;
+
