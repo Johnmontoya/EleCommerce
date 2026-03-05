@@ -1,20 +1,14 @@
 import { BiLoader, BiPlus } from "react-icons/bi";
+import type { TrackingEventData, TrackingDataResponse } from "../../types/tracking.types";
+import type { ApiResponse } from "../../../products/types/product.types";
 
 interface TrackingEventFormProps {
-    currentEvent: {
-        status: string;
-        description: string;
-        location: string;
-        date: string;
-        time: string;
-        completed: boolean;
-        order: number;
-    };
-    setCurrentEvent: (event: any) => void;
+    currentEvent: TrackingEventData;
+    setCurrentEvent: (event: TrackingEventData) => void;
     handleSaveEvent: () => void;
     setShowHistory: (value: boolean) => void;
     showHistory: boolean;
-    trackingHistory: any;
+    trackingHistory: ApiResponse<TrackingDataResponse> | undefined;
     //isLoading?: boolean;
 }
 
@@ -28,7 +22,7 @@ const TrackingEventForm: React.FC<TrackingEventFormProps> = ({
     //isLoading = false
 }) => {
 
-    const handleChange = (field: string, value: any) => {
+    const handleChange = (field: keyof TrackingEventData, value: string | boolean | number) => {
         setCurrentEvent({
             ...currentEvent,
             [field]: value
@@ -56,7 +50,7 @@ const TrackingEventForm: React.FC<TrackingEventFormProps> = ({
                         [ESTADO_LOGÍSTICO_ACTUAL] *
                     </label>
                     <select
-                        value={currentEvent.status}
+                        value={currentEvent.status ?? ""}
                         onChange={(e) => handleChange('status', e.target.value)}
                         className="w-full bg-[#050505] border border-zinc-800 text-zinc-100 font-mono tracking-wider px-4 py-3 outline-none focus:border-[#00f0ff] focus:bg-black transition-all appearance-none cursor-pointer"
                     >
@@ -75,7 +69,7 @@ const TrackingEventForm: React.FC<TrackingEventFormProps> = ({
                     <div className="relative">
                         <input
                             type="text"
-                            value={currentEvent.location}
+                            value={currentEvent.location ?? ""}
                             onChange={(e) => handleChange('location', e.target.value)}
                             className="w-full bg-[#050505] border border-zinc-800 text-zinc-100 font-mono tracking-wider placeholder-zinc-700 px-4 py-3 outline-none focus:border-[#00f0ff] focus:bg-black transition-all shadow-inner"
                             placeholder="[INPUT_LOCATION]"
@@ -92,7 +86,7 @@ const TrackingEventForm: React.FC<TrackingEventFormProps> = ({
                     <div className="relative">
                         <input
                             type="date"
-                            value={currentEvent.date}
+                            value={currentEvent.date ?? ""}
                             onChange={(e) => handleChange('date', e.target.value)}
                             className="w-full bg-[#050505] border border-zinc-800 text-[#00f0ff] font-mono tracking-wider px-4 py-3 outline-none focus:border-[#00f0ff] focus:bg-black transition-all cursor-pointer"
                         />
@@ -105,7 +99,7 @@ const TrackingEventForm: React.FC<TrackingEventFormProps> = ({
                     <div className="relative">
                         <input
                             type="time"
-                            value={currentEvent.time}
+                            value={currentEvent.time ?? ""}
                             onChange={(e) => handleChange('time', e.target.value)}
                             className="w-full bg-[#050505] border border-zinc-800 text-[#00f0ff] font-mono tracking-wider px-4 py-3 outline-none focus:border-[#00f0ff] focus:bg-black transition-all cursor-pointer"
                         />
@@ -118,7 +112,7 @@ const TrackingEventForm: React.FC<TrackingEventFormProps> = ({
                     [DESCRIPCIÓN_DEL_REGISTRO_DE_ESTADO] *
                 </label>
                 <textarea
-                    value={currentEvent.description}
+                    value={currentEvent.description ?? ""}
                     onChange={(e) => handleChange('description', e.target.value)}
                     className="w-full bg-[#050505] border border-zinc-800 text-zinc-100 font-mono tracking-wider placeholder-zinc-700 px-4 py-4 focus:outline-none focus:border-[#00f0ff] focus:bg-black transition-all min-h-[100px] resize-none disabled:opacity-50 disabled:cursor-not-allowed shadow-inner"
                     placeholder="[INTRODUZCA_LOS_DATOS_DEL_REGISTRO...]"

@@ -107,9 +107,10 @@ export function useStripePayment({
                 setErrorMessage(msg);
                 onError(msg);
             }
-        } catch (err: any) {
+        } catch (err: unknown) {
+            const error = err as { response?: { data?: { message?: string } } };
             const msg =
-                err.response?.data?.message || "Error al procesar el pago";
+                error.response?.data?.message || "Error al procesar el pago";
             setErrorMessage(msg);
             onError(msg);
         } finally {

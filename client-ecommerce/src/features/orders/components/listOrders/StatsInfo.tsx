@@ -1,5 +1,15 @@
 interface StatsProps {
-    stats: any
+    stats: {
+        total: number;
+        pending: number;
+        confirmed: number;
+        processing: number;
+        shipped: number;
+        delivered: number;
+        cancelled: number;
+        refunded: number;
+        totalRevenue: number;
+    }
     isAdmin: boolean
 }
 const StatsInfo: React.FC<StatsProps> = ({ stats, isAdmin }) => {

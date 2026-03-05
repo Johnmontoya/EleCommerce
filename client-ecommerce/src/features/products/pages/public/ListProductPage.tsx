@@ -60,7 +60,7 @@ const ListProductsPage: React.FC = () => {
 
       isInitializedRef.current = true;
     }
-  }, []);
+  }, [allCategories, searchParams, setCategory, toggleBrand, updatePriceRange]);
 
   // ✨ Actualizar URL cuando cambian los filtros
   useEffect(() => {
@@ -77,7 +77,7 @@ const ListProductsPage: React.FC = () => {
     if (filters.search) params.set('search', filters.search);
 
     setSearchParams(params, { replace: true });
-  }, [filters]);
+  }, [filters, setSearchParams]);
 
   // 🚀 Usar React Query Infinite con los filtros
   const {

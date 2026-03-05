@@ -62,14 +62,14 @@ const Products = () => {
     await addWishlistItem.mutateAsync({
       productId: item.id,
       productName: item.name,
-      productImage: item.images![0].url,
+      productImage: item.images?.[0]?.url || "",
       price: item.price,
-      discount: item.priceDiscount!,
+      discount: item.priceDiscount || 0,
       category: item.category.slug,
       stock: item.stock,
-      reviews: item?.reviewsCount!,
-      rating: item?.rating!,
-      total: item.price - (item.price * item.priceDiscount!) / 100
+      reviews: item.reviewsCount || 0,
+      rating: item.rating || 0,
+      total: item.price - (item.price * (item.priceDiscount || 0)) / 100
     });
   };
 

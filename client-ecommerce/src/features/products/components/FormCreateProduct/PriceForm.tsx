@@ -1,18 +1,11 @@
 import React from "react";
-import type { UseFormRegister, UseFormWatch, FieldErrors, FieldValues } from "react-hook-form";
-
-interface PriceFormValues extends FieldValues {
-  price: number;
-  priceDiscount: number;
-  stock: number;
-  sku: string;
-  barcode: string;
-}
+import type { UseFormRegister, UseFormWatch, FieldErrors } from "react-hook-form";
+import type { ProductSchemaType } from "../../types/product.schema";
 
 interface PriceFormProps {
-  register: UseFormRegister<PriceFormValues>;
-  errors: FieldErrors<PriceFormValues>;
-  watch: UseFormWatch<PriceFormValues>;
+  register: UseFormRegister<ProductSchemaType>;
+  errors: FieldErrors<ProductSchemaType>;
+  watch: UseFormWatch<ProductSchemaType>;
 }
 
 const PriceForm: React.FC<PriceFormProps> = ({ register, errors, watch }) => {

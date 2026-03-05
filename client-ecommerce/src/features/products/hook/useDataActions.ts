@@ -1,6 +1,7 @@
 import { useDeleteManyProductsMutation } from "./mutation/useProductMutation";
+import type { Product } from "../types/product.types";
 
-export const useDataActions = (Data: any[] | undefined, selectedData: string[], setSelectedData: React.Dispatch<React.SetStateAction<string[]>>) => {
+export const useDataActions = (Data: Product[] | undefined, selectedData: string[], setSelectedData: React.Dispatch<React.SetStateAction<string[]>>) => {
     const deleteSelectMutation = useDeleteManyProductsMutation();
 
     const handleSelectAll = () => {
@@ -8,7 +9,7 @@ export const useDataActions = (Data: any[] | undefined, selectedData: string[], 
         if (selectedData.length === Data.length) {
             setSelectedData([]);
         } else {
-            setSelectedData(Data.map((u: any) => u.id));
+            setSelectedData(Data.map((u: Product) => u.id));
         }
     }
 

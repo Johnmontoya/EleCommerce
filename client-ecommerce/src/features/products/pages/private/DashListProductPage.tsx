@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BiPackage } from "react-icons/bi";
 import { useProducts } from "../../hook/queries/useProduct";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
@@ -19,13 +19,19 @@ const DashListProductPage = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>("");
     const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    let itemsPerPage = 10;
+    const itemsPerPage = 10;
 
     const { data: categories } = useCategories()
 
-    useEffect(() => {
+    const onSearchChange = (term: string) => {
+        setSearchTerm(term);
         setCurrentPage(1);
-    }, [searchTerm, selectedCategory]);
+    };
+
+    const onCategoryChange = (category: string) => {
+        setSelectedCategory(category);
+        setCurrentPage(1);
+    };
 
     // Queries y mutations
     const { data: products } = useProducts({
@@ -78,9 +84,9 @@ const DashListProductPage = () => {
                         {/* Search and Filters Bar */}
                         <ProductFilter
                             searchTerm={searchTerm}
-                            setSearchTerm={setSearchTerm}
+                            setSearchTerm={onSearchChange}
                             selectedCategory={selectedCategory}
-                            setSelectedCategory={setSelectedCategory}
+                            setSelectedCategory={onCategoryChange}
                             categories={categories}
                         />
 

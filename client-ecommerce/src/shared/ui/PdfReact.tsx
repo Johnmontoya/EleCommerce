@@ -176,11 +176,11 @@ const PDF: React.FC<PDFProps> = ({ orderData, orderItems, user }) => (
                 </View>
                 <View style={styles.totalLine}>
                     <Text>IVA ({orderData?.tax}%):</Text>
-                    <Text>${Math.round(orderData?.tax!).toLocaleString('es-CO')}</Text>
+                    <Text>${Math.round(orderData?.tax ?? 0).toLocaleString('es-CO')}</Text>
                 </View>
                 <View style={[styles.totalLine, styles.grandTotal]}>
                     <Text>Total a pagar:</Text>
-                    <Text>${Math.round(orderData?.total!).toLocaleString('es-CO')}</Text>
+                    <Text>${Math.round(orderData?.total ?? 0).toLocaleString('es-CO')}</Text>
                 </View>
             </View>
 

@@ -4,16 +4,18 @@ import { handleApiError } from "../../../../shared/lib/errorHandler";
 import { toast } from "sonner";
 import { trackingService } from "../../service/trackingService";
 import { queryClient } from "../../../../shared/lib/queryClient";
+import type { ApiResponse } from "../../../products/types/product.types";
+import type { TrackingDataResponse } from "../../types/tracking.types";
 
 // Hook para crear/actualizar tracking
 export const useTrackingMutation = () => {
     const mutation = useMutation({
         mutationFn: (trackingData: TrackingData) => trackingService.createTracking(trackingData),
-        onSuccess: (response: any) => {
+        onSuccess: (response: ApiResponse<TrackingDataResponse>) => {
             queryClient.invalidateQueries({ queryKey: ['tracking'] });
             toast.success(response.message || 'Seguimiento creado exitosamente');
         },
-        onError: (error: any) => {
+        onError: (error: unknown) => {
             handleApiError(error, 'Error al crear el seguimiento');
         }
     });
@@ -25,13 +27,13 @@ export const useTrackingEventMutation = (trackingId: string) => {
     const mutation = useMutation({
         mutationFn: (eventData: TrackingEventData) =>
             trackingService.createTrackingEvent(trackingId, eventData),
-        onSuccess: (response: any) => {
+        onSuccess: (response: ApiResponse<TrackingDataResponse>) => {
             // Invalida la query específica del tracking
             queryClient.invalidateQueries({ queryKey: ['tracking', trackingId] });
             queryClient.invalidateQueries({ queryKey: ['tracking-events', trackingId] });
             toast.success(response.message || 'Evento de seguimiento agregado exitosamente');
         },
-        onError: (error: any) => {
+        onError: (error: unknown) => {
             handleApiError(error, 'Error al agregar el evento de seguimiento');
         }
     });
@@ -43,12 +45,12 @@ export const useUpdateTrackingMutation = (trackingId: string) => {
     const mutation = useMutation({
         mutationFn: (trackingData: Partial<TrackingData>) =>
             trackingService.updateTracking(trackingId, trackingData),
-        onSuccess: (response: any) => {
+        onSuccess: (response: ApiResponse<TrackingDataResponse>) => {
             queryClient.invalidateQueries({ queryKey: ['tracking', trackingId] });
             queryClient.invalidateQueries({ queryKey: ['tracking-events', trackingId] });
             toast.success(response.message || 'Seguimiento actualizado exitosamente');
         },
-        onError: (error: any) => {
+        onError: (error: unknown) => {
             handleApiError(error, 'Error al actualizar el seguimiento');
         }
     });
@@ -60,12 +62,12 @@ export const useDeleteTrackingEventMutation = (trackingId: string) => {
     const mutation = useMutation({
         mutationFn: (eventId: string) =>
             trackingService.deleteTrackingEvent(trackingId, eventId),
-        onSuccess: (response: any) => {
+        onSuccess: (response: ApiResponse<TrackingDataResponse>) => {
             queryClient.invalidateQueries({ queryKey: ['tracking', trackingId] });
             queryClient.invalidateQueries({ queryKey: ['tracking-events', trackingId] });
             toast.success(response.message || 'Evento eliminado exitosamente');
         },
-        onError: (error: any) => {
+        onError: (error: unknown) => {
             handleApiError(error, 'Error al eliminar el evento');
         }
     });
@@ -76,12 +78,12 @@ export const useUpdateTrackingEventMutation = (trackingId: string) => {
     const mutation = useMutation({
         mutationFn: (eventData: Partial<TrackingEventData>) =>
             trackingService.updateTrackingEvent(trackingId, eventData.id!, eventData),
-        onSuccess: (response: any) => {
+        onSuccess: (response: ApiResponse<TrackingDataResponse>) => {
             queryClient.invalidateQueries({ queryKey: ['tracking', trackingId] });
             queryClient.invalidateQueries({ queryKey: ['tracking-events', trackingId] });
             toast.success(response.message || 'Evento actualizado exitosamente');
         },
-        onError: (error: any) => {
+        onError: (error: unknown) => {
             handleApiError(error, 'Error al actualizar el evento');
         }
     });

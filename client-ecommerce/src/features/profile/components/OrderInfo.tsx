@@ -18,8 +18,8 @@ const OrderInfo = ({ activeTab, orders }: OrderInfoProps) => {
                         <span className="text-[#00f0ff]">{'>'}</span> [HISTORIAL_DE_TRANSACCIONES]
                     </h2>
                     <div className="space-y-4">
-                        {orders?.length! > 0 ? (
-                            orders!.map((order) => (
+                        {(orders?.length ?? 0) > 0 ? (
+                            orders?.map((order) => (
                                 <OrderCard key={order.id} order={order} />
                             ))
                         ) : (

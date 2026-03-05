@@ -3,13 +3,13 @@ import { BiExport, BiFilter, BiSearch } from "react-icons/bi"
 
 interface UserFiltersProps {
     searchTerm: string;
-    setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+    setSearchTerm: (term: string) => void;
     filterRole: string;
-    setFilterRole: React.Dispatch<React.SetStateAction<string>>;
+    setFilterRole: (role: string) => void;
     showFilters: boolean;
-    setShowFilters: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowFilters: (show: boolean) => void;
     isActive: boolean | null;
-    setIsActive: React.Dispatch<React.SetStateAction<boolean | null>>;
+    setIsActive: (active: boolean | null) => void;
 }
 
 const UserFilters: React.FC<UserFiltersProps> = ({

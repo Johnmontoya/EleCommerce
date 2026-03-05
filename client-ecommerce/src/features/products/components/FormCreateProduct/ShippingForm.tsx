@@ -1,18 +1,12 @@
 import React from "react";
-import type { UseFormRegister, UseFormWatch, UseFormSetValue, FieldErrors, FieldValues } from "react-hook-form";
-
-interface ShippingFormValues extends FieldValues {
-  shipping: {
-    free: boolean;
-    cost: number;
-  };
-}
+import type { UseFormRegister, UseFormWatch, UseFormSetValue, FieldErrors } from "react-hook-form";
+import type { ProductSchemaType } from "../../types/product.schema";
 
 interface ShippingFormProps {
-  register: UseFormRegister<ShippingFormValues>;
-  watch: UseFormWatch<ShippingFormValues>;
-  setValue: UseFormSetValue<ShippingFormValues>;
-  errors: FieldErrors<ShippingFormValues>;
+  register: UseFormRegister<ProductSchemaType>;
+  watch: UseFormWatch<ProductSchemaType>;
+  setValue: UseFormSetValue<ProductSchemaType>;
+  errors: FieldErrors<ProductSchemaType>;
 }
 
 const ShippingForm: React.FC<ShippingFormProps> = ({ register, watch, errors }) => {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
 import ButtonMobile from "../../../../shared/ui/ButtonMobile";
 import NavMobile from "../../../dashboard/components/NavMobile";
@@ -18,11 +18,12 @@ const DashListCategoryPage = () => {
     const [isActive, setIsActive] = useState<boolean | null>(null);
     const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    let itemsPerPage = 10;
+    const itemsPerPage = 10;
 
-    useEffect(() => {
+    const handleFilterActive = (active: boolean | null) => {
+        setIsActive(active);
         setCurrentPage(1);
-    }, [isActive]);
+    }
 
     const { data: categories } = useCategories({
         isPublished: isActive === null ? undefined : isActive,
@@ -70,7 +71,7 @@ const DashListCategoryPage = () => {
                             showFilters={showFilters}
                             setShowFilters={setShowFilters}
                             isActive={isActive}
-                            setIsActive={setIsActive}
+                            setIsActive={handleFilterActive}
                         />
 
                         {/* Bulk Actions */}

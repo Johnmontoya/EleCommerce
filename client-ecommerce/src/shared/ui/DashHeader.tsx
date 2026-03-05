@@ -3,7 +3,7 @@ import ButtonAction from "./ButtonAction";
 import { useNavigate } from "react-router-dom";
 
 interface DashHeaderProps {
-    data: any[] | undefined;
+    data: unknown[] | undefined;
     title: string;
     titleData: string;
     path: string;

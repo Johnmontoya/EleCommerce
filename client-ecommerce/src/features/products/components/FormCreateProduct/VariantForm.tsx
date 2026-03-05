@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { BiPlus, BiX } from "react-icons/bi";
 import { BsTrash2 } from "react-icons/bs";
+import type { FieldErrors, UseFormSetValue, UseFormWatch } from "react-hook-form";
+import type { ProductSchemaType } from "../../types/product.schema";
+import type { Variant } from "../../types/product.types";
 interface VariantFormProps {
-  watch: any;
-  setValue: any;
-  errors: any;
+  watch: UseFormWatch<ProductSchemaType>;
+  setValue: UseFormSetValue<ProductSchemaType>;
+  errors: FieldErrors<ProductSchemaType>;
 }
 
 const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) => {
@@ -34,13 +37,13 @@ const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) =>
   };
 
   const removeVariant = (index: number) => {
-    setValue('variants', variants.filter((_: any, i: number) => i !== index), { shouldValidate: true });
+    setValue('variants', variants.filter((_: Variant, i: number) => i !== index), { shouldValidate: true });
   };
 
   const removeVariantOption = (variantIndex: number, optionIndex: number) => {
     const updatedVariants = [...variants];
     updatedVariants[variantIndex].options = updatedVariants[variantIndex].options.filter(
-      (_: any, i: number) => i !== optionIndex
+      (_: string, i: number) => i !== optionIndex
     );
     setValue('variants', updatedVariants, { shouldValidate: true });
   };
@@ -86,10 +89,10 @@ const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) =>
         </div>
 
         {errors.variants && (
-          <p className="text-[#ff0055] text-[10px] uppercase font-bold tracking-widest">[{errors.variants.message}]</p>
+          <p className="text-[#ff0055] text-[10px] uppercase font-bold tracking-widest">[{errors.variants.message as string}]</p>
         )}
 
-        {variants.map((variant: any, variantIndex: number) => (
+        {variants.map((variant: Variant, variantIndex: number) => (
           <div
             key={variantIndex}
             className="bg-black border border-zinc-800 p-4 relative"
@@ -129,29 +132,27 @@ const VariantForm: React.FC<VariantFormProps> = ({ watch, setValue, errors }) =>
               </button>
             </div>
 
-            {variant.options.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {variant.options.map((option: any, optionIndex: number) => (
-                  <span
-                    key={optionIndex}
-                    className="bg-transparent border border-[#00f0ff]/30 text-[#00f0ff] px-2 py-1 text-[10px] font-bold tracking-widest uppercase flex items-center gap-2 group"
+            <div className="flex flex-wrap gap-2">
+              {variant.options.map((option: string, optionIndex: number) => (
+                <span
+                  key={optionIndex}
+                  className="bg-transparent border border-[#00f0ff]/30 text-[#00f0ff] px-2 py-1 text-[10px] font-bold tracking-widest uppercase flex items-center gap-2 group"
+                >
+                  {option}
+                  <button
+                    type="button"
+                    onClick={() => removeVariantOption(variantIndex, optionIndex)}
+                    className="text-zinc-500 group-hover:text-[#ff0055] transition-colors"
                   >
-                    {option}
-                    <button
-                      type="button"
-                      onClick={() => removeVariantOption(variantIndex, optionIndex)}
-                      className="text-zinc-500 group-hover:text-[#ff0055] transition-colors"
-                    >
-                      <BiX size={14} />
-                    </button>
-                  </span>
-                ))}
-              </div>
-            )}
+                    <BiX size={14} />
+                  </button>
+                </span>
+              ))}
+            </div>
 
-            {errors.variants?.[variantIndex]?.options && (
+            {(errors.variants as unknown as Array<{ options?: { message?: string } } | undefined>)?.[variantIndex]?.options && (
               <p className="text-[#ff0055] text-[10px] mt-2 font-bold tracking-widest uppercase">
-                [{errors.variants[variantIndex]?.options?.message}]
+                {(errors.variants as unknown as Array<{ options?: { message?: string } } | undefined>)?.[variantIndex]?.options?.message}
               </p>
             )}
           </div>

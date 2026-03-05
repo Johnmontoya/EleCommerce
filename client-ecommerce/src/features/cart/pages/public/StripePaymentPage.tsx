@@ -97,7 +97,7 @@ const StripePaymentPage = () => {
         city: address.city,
         state: address.state,
         zipCode: address.zipCode,
-        phone: address.phone,
+        phone: address.phone || "",
     })) ?? [];
 
     const cartItemsStock = sortedCart.map((item: CartResponseItems) => item.stock);

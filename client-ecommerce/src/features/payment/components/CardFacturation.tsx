@@ -1,6 +1,14 @@
 
 interface CardFacturationProps {
-    paymentData: any;
+    paymentData: {
+        fullName: string;
+        email: string;
+        phone: string;
+        address: string;
+        city: string;
+        zipCode: string;
+        country: string;
+    };
     onChangePaymentData: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

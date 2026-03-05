@@ -2,20 +2,13 @@ import React from "react";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useCategories } from "../../../categories/hook/queries/useCategory";
-import type { UseFormRegister, UseFormWatch, FieldErrors, FieldValues } from "react-hook-form";
-
-interface PersonalFormValues extends FieldValues {
-  name: string;
-  slug: string;
-  description: string;
-  brand: string;
-  category: string;
-}
+import type { UseFormRegister, UseFormWatch, FieldErrors } from "react-hook-form";
+import type { ProductSchemaType } from "../../types/product.schema";
 
 interface PersonalFormProps {
-  register: UseFormRegister<PersonalFormValues>;
-  errors: FieldErrors<PersonalFormValues>;
-  watch: UseFormWatch<PersonalFormValues>;
+  register: UseFormRegister<ProductSchemaType>;
+  errors: FieldErrors<ProductSchemaType>;
+  watch: UseFormWatch<ProductSchemaType>;
   handleAnalyzeTitle: () => void;
   isSubmitting: boolean;
 }

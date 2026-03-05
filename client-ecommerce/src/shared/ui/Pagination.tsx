@@ -4,7 +4,7 @@ interface PaginationProps {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>,
   indexOfFirstItem: number,
   indexOfLastItem: number,
-  data: any[] | undefined,
+  data: unknown[] | undefined,
   title?: string,
 }
 const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, currentPage, setCurrentPage, indexOfFirstItem, indexOfLastItem, data, title }) => {

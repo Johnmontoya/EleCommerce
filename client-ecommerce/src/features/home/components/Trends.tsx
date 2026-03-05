@@ -19,9 +19,9 @@ const Trends = () => {
       discount: item.priceDiscount!,
       category: item.category.slug,
       stock: item.stock,
-      reviews: item?.reviewsCount!,
-      rating: item?.rating!,
-      total: item.price - (item.price * item.priceDiscount!) / 100
+      reviews: item.reviewsCount ?? 0,
+      rating: item.rating ?? 0,
+      total: item.price - (item.price * (item.priceDiscount ?? 0)) / 100
     });
   };
 
@@ -91,7 +91,7 @@ const Trends = () => {
                 <div className="flex items-center justify-between border-t border-zinc-800 pt-3 mt-1">
                   <span className="font-mono text-lg font-bold text-[#00f0ff]">
                     ${Math.round(
-                      item.price - (item.price * item.priceDiscount!) / 100
+                      item.price - (item.price * (item.priceDiscount ?? 0)) / 100
                     )}
                   </span>
                   {item.priceDiscount ? (

@@ -23,6 +23,7 @@ import {
 } from '../../hook/mutation/useTrackingMutation';
 import { useLocation } from 'react-router-dom';
 import { useTracking } from '../../hook/queries/useTracking';
+import type { TrackingEventData, TrackingData } from '../../types/tracking.types';
 
 interface ValidationErrors {
     [key: string]: string[];
@@ -38,11 +39,11 @@ const DashTrackingCreatePage = () => {
     const trackingNumber = query.get('trackingNumber');
 
     // Queries y Mutations
-    const { data: tracking, isLoading } = useTracking(trackingNumber);
+    const { data: tracking, isLoading } = useTracking(trackingNumber ?? "");
     const createTracking = useTrackingMutation();
-    const updateTracking = useUpdateTrackingMutation(trackingNumber!);
-    const createEvent = useTrackingEventMutation(tracking?.data?.id!);
-    const deleteEvent = useDeleteTrackingEventMutation(tracking?.data?.id!);
+    const updateTracking = useUpdateTrackingMutation(trackingNumber ?? "");
+    const createEvent = useTrackingEventMutation(tracking?.data?.id ?? "");
+    const deleteEvent = useDeleteTrackingEventMutation(tracking?.data?.id ?? "");
 
     // Estados
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -52,10 +53,10 @@ const DashTrackingCreatePage = () => {
     const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
 
     // Estado principal del tracking
-    const [createData, onChangeCreateData, setCreateData] = useInputs({
-        orderId: orderId,
+    const [createData, onChangeCreateData, setCreateData] = useInputs<TrackingData>({
+        orderId: orderId ?? "",
         tracking: {
-            trackingNumber: trackingNumber,
+            trackingNumber: trackingNumber ?? "",
             orderNumber: "",
             estimatedDelivery: "",
             origin: "",
@@ -68,7 +69,7 @@ const DashTrackingCreatePage = () => {
     });
 
     // Estado separado para el evento actual
-    const [currentEvent, setCurrentEvent] = useState({
+    const [currentEvent, setCurrentEvent] = useState<TrackingEventData>({
         status: "CONFIRMED",
         description: "",
         location: "",
@@ -82,9 +83,9 @@ const DashTrackingCreatePage = () => {
     useEffect(() => {
         if (tracking && trackingNumber) {
             setCreateData({
-                orderId: orderId,
+                orderId: orderId ?? "",
                 tracking: {
-                    trackingNumber: trackingNumber,
+                    trackingNumber: trackingNumber ?? "",
                     orderNumber: tracking?.data?.orderNumber || "",
                     estimatedDelivery: tracking?.data?.estimatedDelivery || "",
                     origin: tracking?.data?.origin || "",
@@ -96,7 +97,7 @@ const DashTrackingCreatePage = () => {
                 }
             });
         }
-    }, [tracking, trackingNumber, orderId]);
+    }, [tracking, trackingNumber, orderId, setCreateData]);
 
     const priorityOptions = [
         { value: 'Medium', label: 'Normal', color: 'bg-emerald-500' },
@@ -112,9 +113,10 @@ const DashTrackingCreatePage = () => {
 
         try {
             const trackingData = {
-                orderId: orderId!,
+                orderId: orderId ?? "",
                 tracking: {
                     ...createData.tracking,
+                    trackingNumber: createData.tracking.trackingNumber ?? "",
                     orderNumber: createData.tracking.orderNumber ||
                         `${Math.floor(Math.random() * 9000000000) + 1000000000}`,
                     priority: priority
@@ -122,7 +124,7 @@ const DashTrackingCreatePage = () => {
             };
 
             // Si ya existe el tracking, actualizar, si no, crear
-            if (tracking.data !== null) {
+            if (tracking?.data) {
                 await updateTracking.mutateAsync(trackingData);
             } else {
                 await createTracking.mutateAsync(trackingData);
@@ -177,9 +179,9 @@ const DashTrackingCreatePage = () => {
 
     const handleReset = () => {
         setCreateData({
-            orderId: orderId,
+            orderId: orderId ?? "",
             tracking: {
-                trackingNumber: trackingNumber,
+                trackingNumber: trackingNumber ?? "",
                 orderNumber: "",
                 estimatedDelivery: "",
                 origin: "",
@@ -266,7 +268,7 @@ const DashTrackingCreatePage = () => {
 
                                     {/* Tracking Event Form */}
                                     {
-                                        tracking.data !== null && (
+                                        tracking?.data && (
                                             <TrackingEventForm
                                                 currentEvent={currentEvent}
                                                 setCurrentEvent={setCurrentEvent}

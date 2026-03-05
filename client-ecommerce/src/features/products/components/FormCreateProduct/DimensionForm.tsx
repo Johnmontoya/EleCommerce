@@ -1,18 +1,10 @@
 import React from "react";
-import type { UseFormRegister, FieldErrors, FieldValues } from "react-hook-form";
-
-interface DimensionFormValues extends FieldValues {
-  dimensions: {
-    weight: number;
-    width: number;
-    height: number;
-    depth: number;
-  };
-}
+import type { UseFormRegister, FieldErrors } from "react-hook-form";
+import type { ProductSchemaType } from "../../types/product.schema";
 
 interface DimensionFormProps {
-  register: UseFormRegister<DimensionFormValues>;
-  errors: FieldErrors<DimensionFormValues>;
+  register: UseFormRegister<ProductSchemaType>;
+  errors: FieldErrors<ProductSchemaType>;
 }
 
 const DimensionForm: React.FC<DimensionFormProps> = ({ register, errors }) => {

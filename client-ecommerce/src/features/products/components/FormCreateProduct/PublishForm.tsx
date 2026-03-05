@@ -1,13 +1,10 @@
 import React from "react";
-import type { UseFormRegister, UseFormWatch, FieldValues } from "react-hook-form";
-
-interface PublishFormValues extends FieldValues {
-  isPublished: boolean;
-}
+import type { UseFormRegister, UseFormWatch } from "react-hook-form";
+import type { ProductSchemaType } from "../../types/product.schema";
 
 interface PublishFormProps {
-  register: UseFormRegister<PublishFormValues>;
-  watch: UseFormWatch<PublishFormValues>;
+  register: UseFormRegister<ProductSchemaType>;
+  watch: UseFormWatch<ProductSchemaType>;
 }
 
 const PublishForm: React.FC<PublishFormProps> = ({ register, watch }) => {

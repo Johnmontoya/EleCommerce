@@ -1,4 +1,4 @@
-export interface TrackingData {
+export type TrackingData = {
     orderId: string;
     tracking: {
         trackingNumber: string;

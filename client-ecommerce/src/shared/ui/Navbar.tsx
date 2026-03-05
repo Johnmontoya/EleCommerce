@@ -19,8 +19,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const { user } = useAuthStore();
-  const { data: cartCount } = useCartCount(user?.id!);
-  const { data: wishCount } = useWishCount(user?.id!)
+  const { data: cartCount } = useCartCount(user?.id ?? "");
+  const { data: wishCount } = useWishCount(user?.id ?? "");
 
   let street = "";
   if (user?.addresses) {
@@ -142,7 +142,7 @@ const Navbar = () => {
                 type="button"
               >
                 <BiHeart size={20} />
-                {wishCount?.count! > 0 && (
+                {(wishCount?.count ?? 0) > 0 && (
                   <span className="absolute -top-2 -right-2 bg-[#ff0055] text-white text-[10px] font-bold px-1.5 py-0.5 border border-black z-10">
                     {wishCount?.count || 0}
                   </span>
@@ -155,7 +155,7 @@ const Navbar = () => {
                 type="button"
               >
                 <CiShoppingCart size={20} />
-                {cartCount?.count! > 0 && (
+                {(cartCount?.count ?? 0) > 0 && (
                   <span className="absolute -top-2 -right-2 bg-[#e4ff00] text-black text-[10px] font-bold px-1.5 py-0.5 border border-black z-10">
                     {cartCount?.count || 0}
                   </span>

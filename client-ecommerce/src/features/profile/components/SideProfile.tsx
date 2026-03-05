@@ -28,7 +28,7 @@ const SideProfile = ({ profile }: SideProfileProps) => {
                             [MIEMBRO_DESDE]
                         </div>
                         <p className="text-[#e4ff00] font-black tracking-widest text-sm pl-6">
-                            {new Date(profile?.createdAt!).toLocaleDateString("es-ES", {
+                            {new Date(profile?.createdAt ?? "").toLocaleDateString("es-ES", {
                                 year: "numeric",
                                 month: "2-digit",
                                 day: "2-digit",

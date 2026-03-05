@@ -10,13 +10,13 @@ interface ShowHistoryProps {
     showHistory: boolean;
     trackingId: string;
     setShowHistory: (showHistory: boolean) => void;
-    handleDeleteEvent: (id: any) => void;
+    handleDeleteEvent: (id: string) => void;
 }
 const ShowHistory = ({ showHistory, trackingId, handleDeleteEvent }: ShowHistoryProps) => {
     const { mutate: updateTrackingEvent } = useUpdateTrackingEventMutation(trackingId);
     const { data: trackingEvents } = useTrackingEvents(trackingId);
 
-    const handleCompleteEvent = (id: any) => {
+    const handleCompleteEvent = (id: string) => {
         const eventData = {
             id: id,
             completed: true
@@ -49,7 +49,7 @@ const ShowHistory = ({ showHistory, trackingId, handleDeleteEvent }: ShowHistory
                                 <p className="font-mono text-xs tracking-widest uppercase">[NO_HAY_EVENTOS_REGISTRADOS]</p>
                             </div>
                         ) : (
-                            orderedEvents.map((event: any) => (
+                            orderedEvents.map((event) => (
                                 <div
                                     key={event.id}
                                     className="relative pl-8 pb-8 border-l border-zinc-700 last:border-l-0 last:pb-0"

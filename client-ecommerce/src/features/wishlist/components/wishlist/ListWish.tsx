@@ -18,7 +18,7 @@ const ListWish: React.FC<WishlistItemProps> = ({ wishlistItems }) => {
     await deleteWishlistItem.mutateAsync(id);
   };
 
-  const handleAddToCart = async (item: any) => {
+  const handleAddToCart = async (item: WishlistItem) => {
     await useCartMutation.mutateAsync({
       productId: item.productId,
       quantity: 1,

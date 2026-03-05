@@ -1,7 +1,10 @@
 import moment from "moment";
 
+import type { TrackingDataResponse } from "../../types/tracking.types";
+import type { ApiResponse } from "../../../products/types/product.types";
+
 interface MetadataProps {
-    metadata: any;
+    metadata: ApiResponse<TrackingDataResponse> | undefined;
 }
 
 const Metadata: React.FC<MetadataProps> = ({ metadata }) => {

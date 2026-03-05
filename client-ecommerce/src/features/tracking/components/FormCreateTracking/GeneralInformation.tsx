@@ -1,7 +1,9 @@
 import { BiPackage } from "react-icons/bi";
 
+import type { TrackingData } from "../../types/tracking.types";
+
 interface GeneralInformationProps {
-    tracking: any;
+    tracking: TrackingData;
     onChangeCreateData: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

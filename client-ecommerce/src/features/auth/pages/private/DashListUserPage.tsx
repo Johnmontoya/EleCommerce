@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useUsers } from "../../hooks/queries/useUsers";
 import TableUser from "../../components/ListUser/TableUser";
 import Pagination from "../../../../shared/ui/Pagination";
@@ -22,10 +22,21 @@ const DashListUserPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+    /* Reseteo de página al filtrar */
+    const handleSearch = (term: string) => {
+        setSearchTerm(term);
         setCurrentPage(1);
-    }, [searchTerm, filterRole, isActive]);
+    }
+
+    const handleFilterRole = (role: string) => {
+        setFilterRole(role);
+        setCurrentPage(1);
+    }
+
+    const handleFilterActive = (active: boolean | null) => {
+        setIsActive(active);
+        setCurrentPage(1);
+    }
 
     const { data: users } = useUsers({
         search: searchTerm,
@@ -76,13 +87,13 @@ const DashListUserPage = () => {
                         {/* Search and Filters Bar */}
                         <UserFilters
                             searchTerm={searchTerm}
-                            setSearchTerm={setSearchTerm}
+                            setSearchTerm={handleSearch}
                             filterRole={filterRole}
-                            setFilterRole={setFilterRole}
+                            setFilterRole={handleFilterRole}
                             showFilters={showFilters}
                             setShowFilters={setShowFilters}
                             isActive={isActive}
-                            setIsActive={setIsActive}
+                            setIsActive={handleFilterActive}
                         />
 
                         {/* Bulk Actions */}

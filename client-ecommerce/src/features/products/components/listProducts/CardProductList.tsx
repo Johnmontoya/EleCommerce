@@ -6,7 +6,7 @@ import { useCartAddMutation } from "../../../cart/hook/mutation/useCartMutation"
 
 interface CardProductPros {
   product: Product;
-  viewMode: String;
+  viewMode: string;
 }
 
 const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
@@ -15,13 +15,13 @@ const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
 
   const handleAddToCart = async () => {
     await useCartMutation.mutateAsync({
-      productId: product?.id!,
+      productId: product.id,
       quantity: 1,
-      name: product?.name!,
-      image: product?.images![0].url!,
-      price: product?.price!,
-      discount: product?.priceDiscount!,
-      stock: product?.stock!,
+      name: product.name,
+      image: product.images?.[0]?.url || "",
+      price: product.price,
+      discount: product.priceDiscount || 0,
+      stock: product.stock,
     });
   };
 
@@ -51,7 +51,7 @@ const CardProductList: React.FC<CardProductPros> = ({ product, viewMode }) => {
         <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,240,255,0.03)_50%)] bg-[length:100%_4px] z-10 pointer-events-none" />
 
         <img
-          src={product.images![0].url}
+          src={product.images?.[0]?.url || ""}
           alt={product.name}
           className={`object-contain transition-all duration-500 grayscale group-hover:grayscale-0 relative z-0 ${viewMode === "list" ? "max-h-full max-w-full" : "h-48 w-full object-contain"}`}
         />

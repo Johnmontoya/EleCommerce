@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { IoIosAdd } from "react-icons/io";
 import { RiSubtractFill } from "react-icons/ri";
@@ -22,8 +22,7 @@ const DetailsPage: React.FC = () => {
   const [quantity, setQuantity] = useState(1);
 
   const handleIncrement = () => {
-    product?.stock!
-    if (quantity < product?.stock!) {
+    if (product && quantity < product.stock) {
       setQuantity(quantity + 1);
     }
   };
@@ -34,22 +33,19 @@ const DetailsPage: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    // Solo actualiza si el producto está cargado y tiene imágenes
-    if (product && product.images && product.images.length > 0) {
-      setThumbnail(product.images[0].url);
-    }
-  }, [product]);
+  // Use the first image as default thumbnail if no thumbnail is selected
+  const activeThumbnail = thumbnail || (product?.images && product.images.length > 0 ? product.images[0].url : undefined);
 
   const handleAddToCart = async () => {
+    if (!product) return;
     await useCartMutation.mutateAsync({
-      productId: product?.id!,
+      productId: product.id,
       quantity: quantity,
-      name: product?.name!,
-      image: product?.images![0].url!,
-      price: product?.price!,
-      discount: product?.priceDiscount!,
-      stock: product?.stock!,
+      name: product.name,
+      image: (product.images && product.images[0]?.url) || "",
+      price: product.price,
+      discount: product.priceDiscount || 0,
+      stock: product.stock,
     });
   };
 
@@ -57,14 +53,14 @@ const DetailsPage: React.FC = () => {
     await addWishlistItem.mutateAsync({
       productId: item.id,
       productName: item.name,
-      productImage: item.images![0].url!,
+      productImage: (item.images && item.images[0]?.url) || "",
       price: item.price,
-      discount: item.priceDiscount!,
+      discount: item.priceDiscount || 0,
       category: item.slug,
       stock: item.stock,
-      reviews: item?.reviewsCount!,
-      rating: item?.rating!,
-      total: item.price - (item.price * item.priceDiscount!) / 100
+      reviews: item.reviewsCount || 0,
+      rating: item.rating || 0,
+      total: item.price - (item.price * (item.priceDiscount || 0)) / 100
     });
   };
 
@@ -100,7 +96,7 @@ const DetailsPage: React.FC = () => {
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 py-10 relative z-10">
         <div className="flex flex-col lg:flex-row gap-12 relative">
           <BiHeart size={32}
-            onClick={() => handleAddToWishlist(product)}
+            onClick={() => product && handleAddToWishlist(product)}
             className="absolute top-0 right-0 z-50 text-zinc-500 hover:text-[#ff0055] transition-colors cursor-pointer bg-black/50 p-1.5 border border-transparent hover:border-[#ff0055]" />
           {/* Image Gallery */}
           <div className="flex flex-col-reverse md:flex-row gap-4 lg:w-1/2">
@@ -110,7 +106,7 @@ const DetailsPage: React.FC = () => {
                 <div
                   key={index}
                   onClick={() => setThumbnail(image.url)}
-                  className={`relative w-20 h-20 overflow-hidden cursor-pointer transition-all border ${thumbnail === image.url
+                  className={`relative w-20 h-20 overflow-hidden cursor-pointer transition-all border ${activeThumbnail === image.url
                     ? "border-[#00f0ff] opacity-100"
                     : "border-zinc-800 opacity-60 hover:opacity-100 hover:border-[#00f0ff]/50"
                     }`}
@@ -120,7 +116,7 @@ const DetailsPage: React.FC = () => {
                     alt={`Thumbnail ${index + 1}`}
                     className="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                   />
-                  {thumbnail === image.url && (
+                  {activeThumbnail === image.url && (
                     <div className="absolute inset-0 bg-[#00f0ff]/10 pointer-events-none" />
                   )}
                 </div>
@@ -136,7 +132,7 @@ const DetailsPage: React.FC = () => {
               <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,240,255,0.03)_50%)] bg-[length:100%_4px] z-10 pointer-events-none" />
 
               <img
-                src={thumbnail}
+                src={activeThumbnail}
                 alt="Selected product"
                 className="w-full h-full object-contain relative z-0 transition-transform duration-500 group-hover:scale-105"
               />
@@ -161,7 +157,7 @@ const DetailsPage: React.FC = () => {
                     key={i}
                     size={14}
                     className={
-                      product?.rating! > i
+                      (product?.rating || 0) > i
                         ? "text-[#e4ff00]"
                         : "text-zinc-700"
                     }
@@ -192,7 +188,7 @@ const DetailsPage: React.FC = () => {
 
                 <p className="text-4xl font-bold text-[#00f0ff] font-mono tracking-wider mt-1">
                   CR_{Math.round(
-                    product?.price! - (product?.price! * (product?.priceDiscount || 0)) / 100
+                    (product?.price || 0) - ((product?.price || 0) * (product?.priceDiscount || 0)) / 100
                   )}
                 </p>
 

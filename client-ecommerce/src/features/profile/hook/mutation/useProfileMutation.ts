@@ -3,6 +3,7 @@ import { authService } from "../../../auth/services/authService";
 import { toast } from "sonner";
 import type { ChangePasswordInput, UpdateAddressInput } from "../../types/profile.types";
 import { profileService } from "../../services/profileService";
+import { handleApiError } from "../../../../shared/lib/errorHandler";
 
 export const useChangePasswordMutation = () => {
     const queryClient = useQueryClient();
@@ -14,8 +15,8 @@ export const useChangePasswordMutation = () => {
 
             toast.success(response.message || "Contraseña cambiada exitosamente");
         },
-        onError: (error: any) => {
-            toast.error(error.response?.data.message || "Error al cambiar la contraseña");
+        onError: (error: unknown) => {
+            handleApiError(error, "Error al cambiar la contraseña");
         }
     })
 }
@@ -32,8 +33,8 @@ export const useUpdateAddressMutation = () => {
 
             toast.success(response.message || "Direccion actualizada exitosamente");
         },
-        onError: (error: any) => {
-            toast.error(error.response?.data.message || "Error al actualizar la direccion");
+        onError: (error: unknown) => {
+            handleApiError(error, "Error al actualizar la direccion");
         }
     })
 }

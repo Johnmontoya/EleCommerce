@@ -19,7 +19,7 @@ const DashPaymentPage: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>("card");
     const { user } = useAuthStore();
-    const { data: payment } = usePayment(user?.id!);
+    const { data: payment } = usePayment(user?.id || "");
 
     const [paymentData, onChangePaymentData, setPaymentData] = useInputs({
         fullName: "",
@@ -64,7 +64,7 @@ const DashPaymentPage: React.FC = () => {
                 updatedAt: new Date(),
             })
         }
-    }, [user])
+    }, [user, payment, setPaymentData, setCardData])
 
     const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let value = e.target.value.replace(/\s/g, '');

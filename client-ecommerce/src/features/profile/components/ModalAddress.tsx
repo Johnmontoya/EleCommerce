@@ -22,7 +22,7 @@ const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, data }) =>
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const updateAddressMutation = useUpdateAddressMutation();
     const [editAddress, onChangeEditAddress, setEditAddress] = useInputs({
-        id: data?.addresses![0].id,
+        id: data?.addresses?.[0]?.id || "",
         city: "",
         state: "",
         street: "",
@@ -35,23 +35,23 @@ const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, data }) =>
 
     useEffect(() => {
         setEditAddress({
-            id: data?.addresses![0].id,
-            city: data?.addresses![0].city,
-            state: data?.addresses![0].state,
-            street: data?.addresses![0].street,
-            country: data?.addresses![0].country,
-            zipCode: data?.addresses![0].zipCode,
+            id: data?.addresses?.[0]?.id || "",
+            city: data?.addresses?.[0]?.city || "",
+            state: data?.addresses?.[0]?.state || "",
+            street: data?.addresses?.[0]?.street || "",
+            country: data?.addresses?.[0]?.country || "",
+            zipCode: data?.addresses?.[0]?.zipCode || "",
             fullName: null,
             phone: null,
             isDefault: true
         })
-    }, [data])
+    }, [data, setEditAddress])
 
     const handleSubmit = async (e?: React.FormEvent<HTMLButtonElement>) => {
         e?.preventDefault();
         setIsSubmitting(true);
         try {
-            await updateAddressMutation.mutateAsync({ id: editAddress.id, addressData: editAddress });
+            await updateAddressMutation.mutateAsync({ id: editAddress.id || "", addressData: editAddress });
         } catch (error) {
             if (error instanceof AxiosError && error.response?.data?.errors) {
                 toast.error(error.response.data.errors);

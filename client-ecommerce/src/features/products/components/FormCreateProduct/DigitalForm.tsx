@@ -1,15 +1,11 @@
 import React from "react";
-import type { UseFormRegister, UseFormWatch, FieldErrors, FieldValues } from "react-hook-form";
-
-interface DigitalFormValues extends FieldValues {
-  isDigital: boolean;
-  digitalFile: string;
-}
+import type { UseFormRegister, UseFormWatch, FieldErrors } from "react-hook-form";
+import type { ProductSchemaType } from "../../types/product.schema";
 
 interface DigitalFormProps {
-  register: UseFormRegister<DigitalFormValues>;
-  watch: UseFormWatch<DigitalFormValues>;
-  errors: FieldErrors<DigitalFormValues>;
+  register: UseFormRegister<ProductSchemaType>;
+  watch: UseFormWatch<ProductSchemaType>;
+  errors: FieldErrors<ProductSchemaType>;
 }
 
 const DigitalForm: React.FC<DigitalFormProps> = ({ register, watch, errors }) => {

@@ -2,9 +2,10 @@ import { BsEye, BsTrash2 } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { FiEyeOff } from "react-icons/fi";
 import { BiEdit } from "react-icons/bi";
+import type { Product } from "../../types/product.types";
 
 interface DashViewHeaderProps {
-    data: any;
+    data: Product;
     handleTogglePublish?: () => void;
     handleDelete: () => void;
 }

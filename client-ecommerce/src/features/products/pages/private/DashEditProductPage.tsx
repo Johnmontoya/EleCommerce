@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAnalyzeTitleMutation, useUpdateProductMutation } from "../../hook/mutation/useProductMutation";
 import PersonalForm from "../../components/FormCreateProduct/PersonalForm";
@@ -18,19 +18,15 @@ import TagsForm from "../../components/FormCreateProduct/TagsForm";
 import DigitalForm from "../../components/FormCreateProduct/DigitalForm";
 import ShippingForm from "../../components/FormCreateProduct/ShippingForm";
 import StatisticsForm from "../../components/FormCreateProduct/StatisticsForm";
+import type { Attribute } from "../../types/product.types";
 import PublishForm from "../../components/FormCreateProduct/PublishForm";
 import DashHeader from "../../../../shared/ui/DashHeader";
 import HeaderAction from "../../../auth/components/UserCreate/HeaderAction";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ProductSchemaUpdate, type ProductSchemaUpdateType } from "../../types/product.schema";
+import { ProductSchema, type ProductSchemaType } from "../../types/product.schema";
 import { toast } from "sonner";
 
-// Tipo para las imágenes existentes
-interface ExistingImage {
-    url: string;
-    fileId: string;
-}
 
 const DashEditProductPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -42,11 +38,18 @@ const DashEditProductPage: React.FC = () => {
     const [, setCoverFile] = useState<File | null>(null);
     const [coverPreview, setCoverPreview] = useState<string | null>(null);
     const [allImageFiles, setAllImageFiles] = useState<File[]>([]);
-    const [existingImages, setExistingImages] = useState<ExistingImage[]>([]);
     const [imagesToDelete, setImagesToDelete] = useState<string[]>([]);
 
     const updateProduct = useUpdateProductMutation();
     const { data: product, isLoading } = useProduct(id!);
+
+    // Derivar imágenes existentes (no marcadas para borrar)
+    const currentExistingImages = useMemo(() => {
+        return (product?.images || []).filter(img => !imagesToDelete.includes(img.fileId));
+    }, [product, imagesToDelete]);
+
+    // Derivar el preview de la portada si no hay uno seleccionado explícitamente
+    const activeCoverPreview = coverPreview || (currentExistingImages.length > 0 ? currentExistingImages[0].url : null);
 
     const {
         register,
@@ -55,8 +58,9 @@ const DashEditProductPage: React.FC = () => {
         reset,
         setValue,
         watch,
-    } = useForm<ProductSchemaUpdateType>({
-        resolver: zodResolver(ProductSchemaUpdate),
+        getValues,
+    } = useForm<ProductSchemaType>({
+        resolver: zodResolver(ProductSchema),
         defaultValues: {
             name: "",
             slug: "",
@@ -102,32 +106,24 @@ const DashEditProductPage: React.FC = () => {
             setValue("slug", product.slug);
             setValue("description", product.description);
             setValue("price", product.price);
-            setValue("priceDiscount", product.priceDiscount);
+            setValue("priceDiscount", product.priceDiscount || 0);
             setValue("stock", product.stock);
-            setValue("sku", product.sku);
+            setValue("sku", product.sku || "");
             setValue("barcode", product.barcode || "");
             setValue("brand", product.brand || "");
-            setValue("category", typeof product.category === 'object' ? product.category.name : product.category);
+            setValue("category", typeof product.category === 'object' ? product.category.id : product.category);
             setValue("tags", product.tags || []);
-            setValue("rating", product.rating);
-            setValue("reviewsCount", product.reviewsCount);
+            setValue("rating", product.rating || 0);
+            setValue("reviewsCount", product.reviewsCount || 0);
             setValue("variants", product.variants || []);
             setValue("attributes", product.attributes || []);
-            setValue("dimensions", product.dimensions);
-            setValue("shipping", product.shipping);
-            setValue("isDigital", product.isDigital);
+            setValue("dimensions", product.dimensions || { weight: 0, width: 0, height: 0, depth: 0 });
+            setValue("shipping", product.shipping || { free: false, cost: 0 });
+            setValue("isDigital", product.isDigital || false);
             setValue("digitalFile", product.digitalFile || "");
             setValue("relatedProducts", product.relatedProducts || []);
-            setValue("soldCount", product.soldCount);
-            setValue("isPublished", product.isPublished);
-
-            // Cargar imágenes existentes
-            if (product.images && product.images.length > 0) {
-                console.log("Imágenes existentes:", product.images.length);
-                setExistingImages(product.images);
-                // Establecer la primera imagen como preview
-                setCoverPreview(product.images[0].url);
-            }
+            setValue("soldCount", product.soldCount || 0);
+            setValue("isPublished", product.isPublished || false);
         }
     }, [product, setValue]);
 
@@ -138,27 +134,18 @@ const DashEditProductPage: React.FC = () => {
     // Eliminar una imagen existente
     const handleDeleteExistingImage = (fileId: string) => {
         console.log("Marcando imagen para eliminar:", fileId);
-
-        setExistingImages(prev => prev.filter(img => img.fileId !== fileId));
         setImagesToDelete(prev => [...prev, fileId]);
 
-        // Si era el preview, actualizar con otra imagen o limpiar
-        if (coverPreview) {
-            const deletedImage = existingImages.find(img => img.fileId === fileId);
-            if (deletedImage && deletedImage.url === coverPreview) {
-                const remainingImages = existingImages.filter(img => img.fileId !== fileId);
-                if (remainingImages.length > 0) {
-                    setCoverPreview(remainingImages[0].url);
-                } else {
-                    setCoverPreview(null);
-                }
-            }
+        // Si era el preview personalizado, lo limpiamos para que regrese al default
+        const deletedImage = product?.images?.find(img => img.fileId === fileId);
+        if (deletedImage && deletedImage.url === coverPreview) {
+            setCoverPreview(null);
         }
     };
 
-    const onSubmit: SubmitHandler<ProductSchemaUpdateType> = async (data) => {
+    const onSubmit: SubmitHandler<ProductSchemaType> = async (data) => {
         // Validar que tenga al menos una imagen (existente o nueva)
-        const totalImages = existingImages.length + allImageFiles.length;
+        const totalImages = currentExistingImages.length + allImageFiles.length;
         if (totalImages === 0) {
             toast.error('El producto debe tener al menos una imagen');
             return;
@@ -166,7 +153,7 @@ const DashEditProductPage: React.FC = () => {
 
         try {
             console.log("=== ACTUALIZANDO PRODUCTO ===");
-            console.log("Imágenes existentes:", existingImages.length);
+            console.log("Imágenes existentes:", currentExistingImages.length);
             console.log("Nuevas imágenes:", allImageFiles.length);
             console.log("Imágenes a eliminar:", imagesToDelete.length);
 
@@ -242,7 +229,7 @@ const DashEditProductPage: React.FC = () => {
 
             // Debug: ver contenido del FormData
             console.log("=== FORMDATA CONTENTS ===");
-            for (let [key, value] of formData.entries()) {
+            for (const [key, value] of formData.entries()) {
                 if (value instanceof File) {
                     console.log(`${key}:`, `File(${value.name})`);
                 } else {
@@ -277,18 +264,14 @@ const DashEditProductPage: React.FC = () => {
         if (product) {
             // Restaurar datos originales del producto
             reset();
-            setExistingImages(product.images || []);
             setImagesToDelete([]);
             setAllImageFiles([]);
-            setCoverFile(null);
-            if (product.images && product.images.length > 0) {
-                setCoverPreview(product.images[0].url);
-            }
+            setCoverPreview(null);
         }
     };
 
     const handleAnalyzeTitle = async () => {
-        const name = watch('name');
+        const name = getValues('name');
 
         if (!name || name.trim().length === 0) {
             toast.error('Por favor ingresa un nombre de producto primero');
@@ -324,10 +307,10 @@ const DashEditProductPage: React.FC = () => {
                 setValue('variants', response.data.variants ?? []);
 
                 const validAttributes = response.data.attributes
-                    ?.filter((attr: any) => attr.name && attr.value)
-                    .map((attr: any) => ({
-                        name: attr.name as string,
-                        value: attr.value as string,
+                    ?.filter((attr: Attribute) => attr.name && attr.value)
+                    .map((attr: Attribute) => ({
+                        name: attr.name,
+                        value: attr.value,
                     })) ?? [];
                 setValue('attributes', validAttributes);
 
@@ -423,7 +406,7 @@ const DashEditProductPage: React.FC = () => {
                                     />
 
                                     {/* Imágenes Existentes */}
-                                    {existingImages.length > 0 && (
+                                    {currentExistingImages.length > 0 && (
                                         <div className="w-72 sm:w-full bg-[#050505] border border-zinc-800 border-dashed p-6 relative">
                                             <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#00f0ff] opacity-50" />
                                             <h2 className="text-[#00f0ff] text-xs font-bold tracking-widest uppercase mb-6 flex items-center gap-2">
@@ -431,12 +414,12 @@ const DashEditProductPage: React.FC = () => {
                                                 [IMAGENES]
                                             </h2>
                                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                                {existingImages.map((image, index) => (
+                                                {currentExistingImages.map((image, index) => (
                                                     <div
                                                         key={image.fileId}
                                                         className="relative group bg-black overflow-hidden border border-zinc-700 hover:border-[#ff0055] transition-colors"
                                                     >
-                                                        {index === 0 && (
+                                                        {image.url === activeCoverPreview && (
                                                             <div className="absolute top-0 left-0 z-10 bg-[#e4ff00] text-black px-2 py-0.5 text-[8px] font-bold tracking-widest uppercase">
                                                                 [PRINCIPAL]
                                                             </div>
@@ -459,14 +442,14 @@ const DashEditProductPage: React.FC = () => {
                                                 ))}
                                             </div>
                                             <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mt-6">
-                                                [{existingImages.length}_IMAGENES_ENCONTRADAS]
+                                                [{currentExistingImages.length}_IMAGENES_ENCONTRADAS]
                                             </p>
                                         </div>
                                     )}
 
                                     {/* Nuevas Imágenes */}
                                     <ImageForm
-                                        coverPreview={coverPreview}
+                                        coverPreview={activeCoverPreview}
                                         setCoverPreview={setCoverPreview}
                                         onFileChange={handleFileChange}
                                         allImageFiles={allImageFiles}

@@ -24,7 +24,7 @@ const transit: { label: TransitStatus; coordenates: string }[] = [
 
 const MapSection: React.FC<StatusProps> = ({ status }) => {
     const currentTransit = transit.find(t => t.label === status);
-    let markerPosition = currentTransit?.coordenates ?? "left-1/12 top-2/3";
+    const markerPosition = currentTransit?.coordenates ?? "left-1/12 top-2/3";
     let position = "";
     if (status === "CANCELLED" || status === "REFUNDED") {
         position = "scale-x-[-1]";

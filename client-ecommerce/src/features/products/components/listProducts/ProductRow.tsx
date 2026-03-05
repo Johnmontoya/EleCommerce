@@ -4,9 +4,10 @@ import { BsEye, BsTrash2 } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
 import { useDeleteProductMutation } from "../../hook/mutation/useProductMutation";
 import SweetAlertas from "../../../../shared/ui/SweetAlertas";
+import type { Product } from "../../types/product.types";
 
 interface ProductRowProps {
-    product: any;
+    product: Product;
     selectedData: string[];
     handleSelectData: (userId: string) => void;
 }
@@ -20,22 +21,22 @@ const ProductRow: React.FC<ProductRowProps> = ({ product, selectedData, handleSe
         await deleteProduct.mutateAsync(id);
     };
 
-    const handleDelete = (product: any) => {
+    const handleDelete = (prod: Product) => {
         SweetAlertas.OnDialogChoose({
-            message: `Estas seguro de eliminar el producto ${product.name}`,
-            onConfirm: () => ConfirmDeleteBlog(product.id),
+            message: `Estas seguro de eliminar el producto ${prod.name}`,
+            onConfirm: () => ConfirmDeleteBlog(prod.id),
             onCancel: Cancel,
         });
     };
 
     return (
         <tr
-            key={product?.id}
+            key={product.id}
             className="text-center border-t border-zinc-800 border-dashed hover:bg-[#050505] transition-colors font-mono"
         >
             <td className="px-6 py-4">
                 <label className="flex gap-3 items-center cursor-pointer relative justify-center">
-                    <input type="checkbox" checked={selectedData.includes(product?.id!)} onChange={() => handleSelectData(product?.id!)} className="hidden peer" />
+                    <input type="checkbox" checked={selectedData.includes(product.id)} onChange={() => handleSelectData(product.id)} className="hidden peer" />
                     <span className="w-4 h-4 bg-black border border-zinc-600 relative flex items-center justify-center peer-checked:border-[#00f0ff] peer-checked:bg-[#00f0ff]/20 transition-all"></span>
                     <FaCheck size={10} className="absolute hidden peer-checked:inline left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#00f0ff]" />
                 </label>
@@ -58,7 +59,7 @@ const ProductRow: React.FC<ProductRowProps> = ({ product, selectedData, handleSe
             </td>
             <td className="px-6 py-4">
                 <span className="px-2 py-1 bg-black border border-zinc-800 text-[#00f0ff] text-[10px] font-bold tracking-[0.2em] uppercase">
-                    {product?.category?.slug}
+                    {product.category.slug}
                 </span>
             </td>
             <td className="px-6 py-4">

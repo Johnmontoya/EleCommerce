@@ -16,7 +16,7 @@ export const wishService = {
     },
 
     // DELETE - Eliminar item específico
-    removeFromWishlist: async (itemId: string): Promise<void> => {
+    removeFromWishlist: async (itemId: string): Promise<{ message: string }> => {
         const response = await apiClient.delete(endpoints.wishlist.delete(itemId));
         return response.data;
     },

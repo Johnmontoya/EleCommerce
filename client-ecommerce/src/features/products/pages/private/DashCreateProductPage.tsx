@@ -16,6 +16,7 @@ import PublishForm from "../../components/FormCreateProduct/PublishForm";
 import PersonalForm from "../../components/FormCreateProduct/PersonalForm";
 import PriceForm from "../../components/FormCreateProduct/PriceForm";
 import { useAnalyzeTitleMutation, useCreateProductMutation } from "../../hook/mutation/useProductMutation";
+import type { Attribute } from "../../types/product.types";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import DashHeader from "../../../../shared/ui/DashHeader";
@@ -41,6 +42,7 @@ const DashCreateProductPage: React.FC = () => {
     reset,
     setValue,
     watch,
+    getValues,
   } = useForm<ProductSchemaType>({
     resolver: zodResolver(ProductSchema),
     defaultValues: {
@@ -169,7 +171,7 @@ const DashCreateProductPage: React.FC = () => {
   };
 
   const handleAnalyzeTitle = async () => {
-    const name = watch('name');
+    const name = getValues('name');
 
     if (!name || name.trim().length === 0) {
       toast.error('Por favor ingresa un nombre de producto primero');
@@ -206,10 +208,10 @@ const DashCreateProductPage: React.FC = () => {
         setValue('variants', response.data.variants ?? []);
 
         const validAttributes = response.data.attributes
-          ?.filter((attr: any) => attr.name && attr.value)
-          .map((attr: any) => ({
-            name: attr.name as string,
-            value: attr.value as string,
+          ?.filter((attr: Attribute) => attr.name && attr.value)
+          .map((attr: Attribute) => ({
+            name: attr.name,
+            value: attr.value,
           })) ?? [];
         setValue('attributes', validAttributes);
 

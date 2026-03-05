@@ -2,9 +2,9 @@ import { BiFilter } from "react-icons/bi";
 
 interface CategoryFilterProps {
     showFilters: boolean;
-    setShowFilters: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowFilters: (show: boolean) => void;
     isActive: boolean | null;
-    setIsActive: React.Dispatch<React.SetStateAction<boolean | null>>;
+    setIsActive: (active: boolean | null) => void;
 }
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({

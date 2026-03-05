@@ -3,8 +3,11 @@ import { FaBoxOpen, FaShippingFast } from "react-icons/fa";
 import { IoLocationSharp } from "react-icons/io5";
 import { MdLocalShipping, MdOutlineWarehouse } from "react-icons/md";
 
+import type { ApiResponse } from "../../products/types/product.types";
+import type { TrackingDataResponse } from "../types/tracking.types";
+
 interface TrackingTimeLineProps {
-    trackingHistory: any;
+    trackingHistory: ApiResponse<TrackingDataResponse>;
 }
 
 const TrackingTimeLine: React.FC<TrackingTimeLineProps> = ({ trackingHistory }) => {
@@ -41,7 +44,7 @@ const TrackingTimeLine: React.FC<TrackingTimeLineProps> = ({ trackingHistory }) 
                 </h2>
 
                 <div className="space-y-0">
-                    {orderedEvents.map((event: any, index: number) => (
+                    {orderedEvents.map((event, index: number) => (
                         <div key={event.id} className="flex gap-6 relative group">
                             {/* Timeline Icon */}
                             <div className="flex flex-col items-center relative z-10 w-12 shrink-0">

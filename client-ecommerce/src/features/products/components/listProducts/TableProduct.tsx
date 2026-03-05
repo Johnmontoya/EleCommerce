@@ -24,7 +24,7 @@ const TableProduct: React.FC<TableProductProps> = ({ currentData, selectedData, 
         <>
             <TableData theader={theader} Data={currentData} selectedData={selectedData} handleSelectAll={handleSelectAll}>
                 {currentData && currentData.length > 0 ? (
-                    currentData?.map((product: any) => (
+                    currentData?.map((product: Product) => (
                         <ProductRow key={product.id} product={product} selectedData={selectedData} handleSelectData={handleSelectData} />
                     ))
                 ) : (

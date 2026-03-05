@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { BsTrash2 } from "react-icons/bs";
-import type { UseFormWatch, UseFormSetValue, FieldErrors, FieldValues } from "react-hook-form";
-
-interface AttributesFormValues extends FieldValues {
-  attributes: { name: string; value: string }[];
-}
+import type { UseFormWatch, UseFormSetValue, FieldErrors } from "react-hook-form";
+import type { ProductSchemaType } from "../../types/product.schema";
 
 interface AttributesFormProps {
-  watch: UseFormWatch<AttributesFormValues>;
-  setValue: UseFormSetValue<AttributesFormValues>;
-  errors: FieldErrors<AttributesFormValues>;
+  watch: UseFormWatch<ProductSchemaType>;
+  setValue: UseFormSetValue<ProductSchemaType>;
+  errors: FieldErrors<ProductSchemaType>;
 }
 
 const AttributesForm: React.FC<AttributesFormProps> = ({ watch, setValue, errors }) => {

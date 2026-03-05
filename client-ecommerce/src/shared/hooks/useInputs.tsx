@@ -1,18 +1,18 @@
 import { useState } from "react";
 
 type DefaultTypes = {
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 type InputElements = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 
-type ReturnTypes = [
-  any,
+type ReturnTypes<T> = [
+  T,
   (event: React.ChangeEvent<InputElements>) => void,
-  React.Dispatch<React.SetStateAction<any>>
+  React.Dispatch<React.SetStateAction<T>>
 ];
 
-const useInputs = (initialValues: DefaultTypes): ReturnTypes => {
+const useInputs = <T extends DefaultTypes>(initialValues: T): ReturnTypes<T> => {
   const [values, setValues] = useState(initialValues);
 
   const onChange = (event: React.ChangeEvent<InputElements>) => {
@@ -22,8 +22,8 @@ const useInputs = (initialValues: DefaultTypes): ReturnTypes => {
       type === "checkbox"
         ? (event.target as HTMLInputElement).checked
         : type === "number"
-        ? parseFloat(value) || 0
-        : value;
+          ? parseFloat(value) || 0
+          : value;
 
     setValues({
       ...values,

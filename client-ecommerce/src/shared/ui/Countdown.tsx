@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Countdown = ({ targetDate }: any) => {
+const Countdown = ({ targetDate }: { targetDate: string | number | Date }) => {
     const [timeLeft, setTimeLeft] = useState({
         hours: 0, minutes: 0, seconds: 0
     });

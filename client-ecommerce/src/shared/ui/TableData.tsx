@@ -3,8 +3,8 @@ import { FaCheck } from "react-icons/fa";
 interface TableDataProps {
     theader: string[];
     children: React.ReactNode;
-    selectedData: any[];
-    Data: any[];
+    selectedData: string[];
+    Data: unknown[] | undefined; // Changed from any[] to unknown[] for improved type safety
     handleSelectAll: () => void;
 }
 

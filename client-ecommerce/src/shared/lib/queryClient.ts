@@ -19,7 +19,7 @@ export const queryKeys = {
   products: {
     all: ['products'] as const,
     lists: () => [...queryKeys.products.all, 'list'] as const,
-    list: (filters?: Record<string, any>) =>
+    list: (filters?: Record<string, unknown>) =>
       [...queryKeys.products.lists(), filters] as const,
     details: () => [...queryKeys.products.all, 'detail'] as const,
     detail: (id: string) => [...queryKeys.products.details(), id] as const,
@@ -39,13 +39,13 @@ export const queryKeys = {
   },
   categories: {
     all: ['categories'] as const,
-    list: (filters?: Record<string, any>) => [...queryKeys.categories.all, 'list', filters] as const,
+    list: (filters?: Record<string, unknown>) => [...queryKeys.categories.all, 'list', filters] as const,
     detail: (id: string) => [...queryKeys.categories.all, 'detail', id] as const,
     bySlug: (slug: string) => [...queryKeys.categories.all, 'slug', slug] as const,
   },
   user: {
     all: ['users'] as const,
-    list: (filters?: Record<string, any>) => [...queryKeys.user.all, 'list', filters] as const,
+    list: (filters?: Record<string, unknown>) => [...queryKeys.user.all, 'list', filters] as const,
     detail: (id: string) => [...queryKeys.user.all, 'detail', id] as const,
   },
   profile: {
@@ -64,7 +64,7 @@ export const queryKeys = {
   },
   orders: {
     all: ['orders'] as const,
-    getAll: (filters?: Record<string, any>) => [...queryKeys.orders.all, 'get-all', filters] as const,
+    getAll: (filters?: Record<string, unknown>) => [...queryKeys.orders.all, 'get-all', filters] as const,
     getUser: () => [...queryKeys.orders.all, 'get-user'] as const,
     getTrackingNumber: (trackingNumber: string) => [...queryKeys.orders.all, 'get-tracking-number', trackingNumber] as const,
   },

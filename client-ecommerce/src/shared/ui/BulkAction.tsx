@@ -2,7 +2,7 @@ import type React from "react";
 import { BiTrash } from "react-icons/bi";
 
 interface BulkActionProps {
-    selectedData: any[];
+    selectedData: unknown[];
     title: string;
     handleBulkDelete: () => void;
 }

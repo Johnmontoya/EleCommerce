@@ -42,7 +42,7 @@ const DashEditCategoryPage = () => {
                 isActive: category.isActive
             })
         }
-    }, [category]);
+    }, [category, setCreateData]);
 
     const handleSubmit = async (e?: React.MouseEvent<HTMLButtonElement>) => {
         e?.preventDefault();

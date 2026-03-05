@@ -20,7 +20,7 @@ const DashboardPage: React.FC = () => {
   const { data: dataUser, isLoading: isLoadingUser } = useOrderUser();
 
   const [currentPage, setCurrentPage] = useState(1);
-  let itemsPerPage = 10;
+  const itemsPerPage = 10;
 
   const isLoading = isLoadingAll || isLoadingUser || !user;
 

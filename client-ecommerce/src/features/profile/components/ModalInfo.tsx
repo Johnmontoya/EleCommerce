@@ -24,17 +24,17 @@ const ModalInfo: React.FC<ModalInfoProps> = ({ isOpen, onClose, data }) => {
 
     useEffect(() => {
         setEditProfile({
-            firstName: data?.firstName,
-            lastName: data?.lastName,
-            phone: data?.phone
+            firstName: data?.firstName || "",
+            lastName: data?.lastName || "",
+            phone: data?.phone || ""
         })
-    }, [data])
+    }, [data, setEditProfile])
 
     const handleSubmit = async (e?: React.FormEvent<HTMLButtonElement>) => {
         e?.preventDefault();
         setIsSubmitting(true);
         try {
-            await updateUserMutation.mutateAsync({ id: data?.id!, userData: editProfile });
+            await updateUserMutation.mutateAsync({ id: data?.id || "", userData: { ...data, ...editProfile } as User });
 
         } catch (error) {
             if (error instanceof AxiosError && error.response?.data?.errors) {

@@ -4,7 +4,7 @@ interface ButtonProps {
   onClick: () => void;
   children: ReactNode;
   variant: "primary" | "secondary" | "danger";
-  text: String,
+  text: string,
   disabled?: boolean;
 }
 
@@ -12,10 +12,10 @@ const ButtonMd: React.FC<ButtonProps> = ({
   onClick,
   children,
   variant = "primary",
-  text, 
+  text,
   disabled = false,
 }) => {
-    
+
   const variantClasses: Record<ButtonProps['variant'], string> = {
     primary: "bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 shadow-cyan-500/50 shadow-lg",
     secondary: "bg-slate-700 hover:bg-slate-600",
@@ -23,9 +23,9 @@ const ButtonMd: React.FC<ButtonProps> = ({
   };
 
   const colorClasses = variantClasses[variant] || variantClasses.primary;
-  
-  const disabledStyle = disabled 
-    ? "opacity-50 cursor-not-allowed transform-none shadow-none" 
+
+  const disabledStyle = disabled
+    ? "opacity-50 cursor-not-allowed transform-none shadow-none"
     : "";
 
   return (

@@ -1,6 +1,7 @@
 import { useDeleteManyCategoryMutation } from "./mutation/useCategoryMutation";
+import type { Category } from "../type/category.types";
 
-export const useDataActions = (Data: any[] | undefined, selectedData: string[], setSelectedData: React.Dispatch<React.SetStateAction<string[]>>) => {
+export const useDataActions = (Data: Category[] | undefined, selectedData: string[], setSelectedData: React.Dispatch<React.SetStateAction<string[]>>) => {
     const deleteSelectMutation = useDeleteManyCategoryMutation();
 
     const handleSelectAll = () => {
@@ -8,14 +9,14 @@ export const useDataActions = (Data: any[] | undefined, selectedData: string[], 
         if (selectedData.length === Data.length) {
             setSelectedData([]);
         } else {
-            setSelectedData(Data.map((u: any) => u.id));
+            setSelectedData(Data.map((u: Category) => u.id));
         }
     }
 
     const handleSelectData = (id: string) => {
         setSelectedData((prev) =>
             prev.includes(id)
-                ? prev.filter((id) => id !== id)
+                ? prev.filter((prevId) => prevId !== id)
                 : [...prev, id]
         );
     };

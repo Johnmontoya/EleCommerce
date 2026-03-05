@@ -22,9 +22,9 @@ const SecurityInfo = ({ activeTab }: SecurityInfoProps) => {
             return;
         }
 
-        let data = {
-            email: user?.email!,
-            otp: user?.otp!,
+        const data = {
+            email: user?.email ?? "",
+            otp: String(user?.otp ?? ""),
             password: passwords.current,
             newPassword: passwords.new,
         };

@@ -3,18 +3,20 @@ import { productService } from "../../services/productService";
 import { queryKeys } from "../../../../shared/lib/queryClient";
 import { toast } from "sonner";
 import { handleApiError } from "../../../../shared/lib/errorHandler";
+import { AxiosError } from "axios";
+import type { ApiResponse, Product } from "../../types/product.types";
 
 export const useCreateProductMutation = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
         mutationFn: (product: FormData) => productService.create(product),
-        onSuccess: (response: any) => {
+        onSuccess: (response: ApiResponse<Product>) => {
             queryClient.invalidateQueries({ queryKey: ['products'] });
 
             toast.success(response.message || "Producto creado exitosamente");
         },
-        onError: (error: any) => {
+        onError: (error: AxiosError<{ message: string }>) => {
             handleApiError(error, 'Error al crear el producto')
         }
     })
@@ -41,8 +43,8 @@ export const useUpdateProductMutation = () => {
 
             toast.success(response.message || "Producto actualizado exitosamente");
         },
-        onError: (error: any) => {
-            toast.error(error.response?.data.message || "Error al actualizar el producto");
+        onError: (error: AxiosError<{ message: string }>) => {
+            toast.error(error.response?.data?.message || "Error al actualizar el producto");
         }
     })
 }
@@ -68,8 +70,8 @@ export const useUpdatePublishProductMutation = () => {
 
             toast.success(response.message || "Producto actualizado exitosamente");
         },
-        onError: (error: any) => {
-            toast.error(error.response?.data.message || "Error al actualizar el producto");
+        onError: (error: AxiosError<{ message: string }>) => {
+            toast.error(error.response?.data?.message || "Error al actualizar el producto");
         }
     })
 }
@@ -84,8 +86,8 @@ export const useDeleteProductMutation = () => {
 
             toast.success(response.message || "Producto eliminado exitosamente");
         },
-        onError: (error: any) => {
-            toast.error(error.response?.data.message || "Error al eliminar el producto");
+        onError: (error: AxiosError<{ message: string }>) => {
+            toast.error(error.response?.data?.message || "Error al eliminar el producto");
         }
     })
 }
@@ -100,8 +102,8 @@ export const useDeleteManyProductsMutation = () => {
 
             toast.success(response.message || "Productos eliminados exitosamente");
         },
-        onError: (error: any) => {
-            toast.error(error.response?.data.message || "Error al eliminar los productos");
+        onError: (error: AxiosError<{ message: string }>) => {
+            toast.error(error.response?.data?.message || "Error al eliminar los productos");
         }
     })
 }
@@ -116,8 +118,8 @@ export const useAnalyzeTitleMutation = () => {
 
             toast.success(response.message || "Título analizado exitosamente");
         },
-        onError: (error: any) => {
-            toast.error(error.response?.data.message || "Error al analizar el título");
+        onError: (error: AxiosError<{ message: string }>) => {
+            toast.error(error.response?.data?.message || "Error al analizar el título");
         }
     })
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BiPackage } from "react-icons/bi";
 import Sidebar from "../../../dashboard/components/Sidebar";
 import BreadCrumbs from "../../../../shared/ui/BreadCrumbs";
@@ -22,9 +22,15 @@ const DashListOrderPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12;
 
-    useEffect(() => {
+    const handleSearch = (term: string) => {
+        setSearchTerm(term);
         setCurrentPage(1);
-    }, [searchTerm, filterStatus]);
+    }
+
+    const handleFilterStatus = (status: string) => {
+        setFilterStatus(status);
+        setCurrentPage(1);
+    }
 
     const { data: orders, isLoading } = useOrderAll({
         search: searchTerm,
@@ -125,11 +131,11 @@ const DashListOrderPage = () => {
 
                             <OrdersFilter
                                 searchTerm={searchTerm}
-                                setSearchTerm={setSearchTerm}
+                                setSearchTerm={handleSearch}
                                 showFilters={showFilters}
                                 setShowFilters={setShowFilters}
                                 filterStatus={filterStatus}
-                                setFilterStatus={setFilterStatus}
+                                setFilterStatus={handleFilterStatus}
                             />
 
                             <OrderAdmin

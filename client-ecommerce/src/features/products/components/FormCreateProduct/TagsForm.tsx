@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { BiPlus, BiX } from "react-icons/bi";
+import type { FieldErrors, UseFormSetValue, UseFormWatch } from "react-hook-form";
+import type { ProductSchemaType } from "../../types/product.schema";
 
 interface TagsFormProps {
-  watch: any;
-  setValue: any;
-  errors: any;
+  watch: UseFormWatch<ProductSchemaType>;
+  setValue: UseFormSetValue<ProductSchemaType>;
+  errors: FieldErrors<ProductSchemaType>;
 }
 
 const TagsForm: React.FC<TagsFormProps> = ({ watch, setValue, errors }) => {
@@ -19,7 +21,7 @@ const TagsForm: React.FC<TagsFormProps> = ({ watch, setValue, errors }) => {
   };
 
   const removeTag = (index: number) => {
-    setValue('tags', tags.filter((_: any, i: number) => i !== index), { shouldValidate: true });
+    setValue('tags', tags.filter((_: string, i: number) => i !== index), { shouldValidate: true });
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -58,12 +60,12 @@ const TagsForm: React.FC<TagsFormProps> = ({ watch, setValue, errors }) => {
         </div>
 
         {errors.tags && (
-          <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.tags.message}]</p>
+          <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.tags.message as string}]</p>
         )}
 
         {tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-4">
-            {tags.map((tag: any, index: number) => (
+            {tags.map((tag: string, index: number) => (
               <span
                 key={index}
                 className="bg-[#00f0ff]/10 border border-[#00f0ff]/50 text-[#00f0ff] px-3 py-1.5 rounded-none text-[10px] font-bold uppercase tracking-widest flex items-center gap-2"

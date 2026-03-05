@@ -1,8 +1,10 @@
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
+import type { ProductSchemaType } from "../../types/product.schema";
 import React from "react";
 
 interface StatisticsFormProps {
-  register: any;
-  errors: any;
+  register: UseFormRegister<ProductSchemaType>;
+  errors: FieldErrors<ProductSchemaType>;
 }
 
 const StatisticsForm: React.FC<StatisticsFormProps> = ({ register, errors }) => {
@@ -31,7 +33,7 @@ const StatisticsForm: React.FC<StatisticsFormProps> = ({ register, errors }) => 
             placeholder="[4.8]"
           />
           {errors.rating && (
-            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.rating.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.rating.message as string}]</p>
           )}
         </div>
 
@@ -48,7 +50,7 @@ const StatisticsForm: React.FC<StatisticsFormProps> = ({ register, errors }) => 
             placeholder="[112]"
           />
           {errors.reviewsCount && (
-            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.reviewsCount.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.reviewsCount.message as string}]</p>
           )}
         </div>
 
@@ -65,7 +67,7 @@ const StatisticsForm: React.FC<StatisticsFormProps> = ({ register, errors }) => 
             placeholder="[890]"
           />
           {errors.soldCount && (
-            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.soldCount.message}]</p>
+            <p className="text-[#ff0055] text-[10px] mt-1 font-bold tracking-widest uppercase">[{errors.soldCount.message as string}]</p>
           )}
         </div>
       </div>
