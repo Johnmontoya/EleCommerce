@@ -105,7 +105,7 @@ const DashPaymentPage: React.FC = () => {
                     {/* Mobile Menu */}
                     <NavMobile isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
-                    <div className="w-full mx-auto flex-1 px-8 md:px-12 pb-8">
+                    <div className="w-full mx-auto flex-1 px-6 md:px-12 pb-8">
                         <ButtonMobile
                             isMenuOpen={isMenuOpen}
                             setIsMenuOpen={setIsMenuOpen}

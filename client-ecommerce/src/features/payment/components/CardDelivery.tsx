@@ -17,7 +17,7 @@ const CardDelivery: React.FC<CardDeliveryProps> = ({ selectedMethod }) => {
                     <div className="flex items-start gap-4">
                         <BiCheckCircle size={24} className="text-[#e4ff00] shrink-0 mt-1" />
                         <div>
-                            <p className="text-white font-bold uppercase tracking-widest text-sm mb-3">
+                            <p className="text-white font-bold uppercase tracking-widest text-xs mb-3">
                                 [INFORMACION_IMPORTANTE]
                             </p>
                             <ul className="text-zinc-400 font-mono text-xs space-y-2 uppercase">
