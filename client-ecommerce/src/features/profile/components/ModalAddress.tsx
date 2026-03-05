@@ -67,7 +67,7 @@ const ModalAddress: React.FC<ModalAddressProps> = ({ isOpen, onClose, data }) =>
             onClose={onClose}
             title={`> [EDITAR_COORDINADAS]`}
         >
-            <form className="w-full text-left font-mono">
+            <form className="w-full h-[400px] mb-15 overflow-y-scroll text-left font-mono">
                 <div className="mb-8">
                     <h2 className="text-sm font-black text-white uppercase tracking-widest flex items-center gap-2 mb-6">
                         <span className="text-[#00f0ff]">{'>'}</span> [DATOS_DE_UBICACIÓN]

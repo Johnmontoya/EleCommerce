@@ -1,6 +1,7 @@
 import React, { type Dispatch, type SetStateAction } from "react";
 import { MdClose } from "react-icons/md";
-import { navLinksMobile } from "../const/menu.types";
+import { navLinksMobile, navLinksMobileAdmin } from "../const/menu.types";
+import { useAuthStore } from "../../auth/store/useAuthStore";
 
 interface NavMobileProps {
   isMenuOpen: boolean;
@@ -8,17 +9,19 @@ interface NavMobileProps {
 }
 
 const NavMobile: React.FC<NavMobileProps> = ({ isMenuOpen, setIsMenuOpen }) => {
+  const { user } = useAuthStore();
 
+  const menuToRender = user?.role === "ADMIN" ? [...navLinksMobile, ...navLinksMobileAdmin] : navLinksMobile;
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-screen bg-black/95 backdrop-blur-md border-r border-[#00f0ff]/30 text-base flex flex-col lg:hidden items-center justify-center gap-8 font-mono z-50 transition-all duration-500 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
+      className={`pt-20 fixed top-0 left-0 w-full h-screen overflow-y-auto bg-black/95 backdrop-blur-md border-r border-[#00f0ff]/30 text-base flex flex-col lg:hidden items-center justify-center gap-8 font-mono z-50 transition-all duration-500 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
     >
       <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00f0ff] to-transparent opacity-50" />
       <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00f0ff] to-transparent opacity-50" />
 
-      <div className="flex flex-col items-center gap-6 w-full px-8">
-        {navLinksMobile.map((item, i) => (
+      <div className="grid grid-cols-2 items-center gap-6 w-full px-8">
+        {menuToRender.map((item, i) => (
           <a
             key={i}
             href={item.link}

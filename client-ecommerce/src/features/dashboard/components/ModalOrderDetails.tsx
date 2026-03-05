@@ -16,7 +16,7 @@ const ModalOrderDetails = ({ isOpen, onClose, title, data }: Props) => {
             onClose={onClose}
             title={title}
         >
-            <div className="border-t border-zinc-800 p-6 bg-black font-mono">
+            <div className="h-[400px] overflow-y-scroll border-t border-zinc-800 p-6 bg-black font-mono">
 
                 <div key={data?.id} className="grid grid-cols-1 gap-8">
                     {/* Items */}
