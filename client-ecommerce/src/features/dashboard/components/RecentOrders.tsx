@@ -36,9 +36,9 @@ const RecentOrders: React.FC<Props> = ({ data }) => {
         <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff]" />
         <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
 
-        <div className="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-6 pb-4 border-b border-zinc-800">
           <div>
-            <h2 className="text-xl font-black text-white uppercase tracking-widest">
+            <h2 className="text-lg font-black text-white uppercase tracking-widest">
               [TRANSACCIONES_RECENTES]
             </h2>
             <p className="text-zinc-500 text-[10px] tracking-widest uppercase mt-1">

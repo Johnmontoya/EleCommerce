@@ -17,12 +17,12 @@ const PersonalProfile: React.FC<UserProps> = ({ user }) => {
         onClose={() => setIsEditingProfile(false)}
         data={user!}
       />
-      <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono">
+      <div className="md:w-full w-82 bg-[#050505] border border-zinc-800 p-6 relative font-mono">
         <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#e4ff00]" />
 
-        <div className="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-6 pb-4 border-b border-zinc-800">
           <div>
-            <h2 className="text-xl font-black text-white uppercase tracking-widest">
+            <h2 className="text-lg font-black text-white uppercase tracking-widest">
               [PERFIL_DE_USUARIO]
             </h2>
           </div>

@@ -118,6 +118,12 @@
   background: linear-gradient(90deg, #1a1a1a 0%, #333 50%, #1a1a1a 100%);
 }
 
+@media (min-width: 280px) {
+  .embla__container {
+    width: 280px;
+  }
+}
+
 @media (min-width: 378px) {
   .embla__container {
     width: 378px;

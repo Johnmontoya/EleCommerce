@@ -98,7 +98,7 @@ const Banner = (props: PropType) => {
                                                 {slide.name}
                                             </h2>
 
-                                            <p className="text-zinc-400 mb-8 font-mono text-sm leading-relaxed border-l-2 border-zinc-700 pl-4">
+                                            <p className="text-nowrap md:text-wrap text-zinc-400 mb-8 font-mono text-sm leading-relaxed border-l-2 border-zinc-700 pl-4">
                                                 {slide.description}
                                             </p>
 

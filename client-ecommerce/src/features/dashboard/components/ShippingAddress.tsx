@@ -19,12 +19,12 @@ const ShippingAddress: React.FC<UserProps> = ({ user }) => {
         title="Agregar Dirección"
         data={user!}
       />
-      <div className="bg-[#050505] border border-zinc-800 p-6 relative font-mono h-[100%]">
+      <div className="md:w-full w-82 bg-[#050505] border border-zinc-800 p-6 relative font-mono h-[100%]">
         <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#ff0055]" />
 
-        <div className="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-6 pb-4 border-b border-zinc-800">
           <div>
-            <h2 className="text-xl font-black text-white uppercase tracking-widest">
+            <h2 className="text-lg font-black text-white uppercase tracking-widest">
               [DIRECCIÓN_DE_ENTREGA]
             </h2>
           </div>

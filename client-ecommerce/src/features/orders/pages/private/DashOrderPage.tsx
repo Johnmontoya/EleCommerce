@@ -73,9 +73,9 @@ const DashOrderPage = () => {
                 className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"
                 style={{
                     backgroundImage: `
-                    linear-gradient(to right, #ffffff 1px, transparent 1px),
-                    linear-gradient(to bottom, #ffffff 1px, transparent 1px)
-                  `,
+            linear-gradient(to right, #ffffff 1px, transparent 1px),
+            linear-gradient(to bottom, #ffffff 1px, transparent 1px)
+          `,
                     backgroundSize: '40px 40px'
                 }}
             />

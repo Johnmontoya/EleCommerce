@@ -49,7 +49,7 @@ const HomePage = () => {
       <div className="relative z-10 space-y-12">
         <Banner options={OPTIONS} />
         <Category />
-        <motion.div ref={ref} variants={variants} initial="hidden" animate={isInView ? "visible" : "hidden"} className='max-w-7xl mx-auto flex flex-row items-center gap-6 px-4'>
+        <motion.div ref={ref} variants={variants} initial="hidden" animate={isInView ? "visible" : "hidden"} className='max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-6 px-4'>
           <Promotion />
         </motion.div>
         <Trends />
