@@ -120,7 +120,7 @@ const DashPaymentPage: React.FC = () => {
 
                         <div className="grid lg:grid-cols-2 gap-8">
                             {/* Main Payment Section */}
-                            <div className="w-76 lg:col-span-2 space-y-6">
+                            <div className="w-76 sm:w-full lg:col-span-2 space-y-6">
                                 {/* Payment Method Selection */}
                                 <SelectMethod
                                     selectedMethod={selectedMethod}

@@ -4,7 +4,7 @@ export const searchApi = {
   searchProducts: async (query: string): Promise<Product[]> => {
     try {
       const response = await fetch(
-        `${'http://localhost:8000'}/products/products/search?search=${encodeURIComponent(
+        `${import.meta.env.VITE_BACKEND_URL}/products/products/search?search=${encodeURIComponent(
           query
         )}`
       );
@@ -24,7 +24,7 @@ export const searchApi = {
   getPopularSearches: async (): Promise<string[]> => {
     try {
       const response = await fetch(
-        `${'http://localhost:8000'}/products/products`
+        `${import.meta.env.VITE_BACKEND_URL}/products/products`
       );
       const data = await response.json();
       return data.searches || [];
