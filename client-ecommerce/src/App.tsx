@@ -107,7 +107,6 @@ function App() {
             </Route>
           </Routes>
         </ThemeProvider>
-        {/*<ReactQueryDevtools initialIsOpen={false} />*/}
       </QueryClientProvider>
     </>
   );
