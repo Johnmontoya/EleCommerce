@@ -15,7 +15,6 @@ import { useAuthStore } from "./features/auth/store/useAuthStore";
 import { queryClient } from "./shared/lib/queryClient";
 import ProtectedRoute from "./router/ProtectedRoute";
 import "./App.css";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider } from "./shared/ui/ThemeContext";
 
 axiosInterceptor();
