@@ -12,6 +12,7 @@ import { useCartAddMutation } from "../../../cart/hook/mutation/useCartMutation"
 import { BiHeart } from "react-icons/bi";
 import { useWishlistAddMutation } from "../../../wishlist/hook/mutation/useWishlistMutation";
 import type { Product } from "../../types/product.types";
+import SEO from "../../../../shared/components/SEO";
 
 const DetailsPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -87,6 +88,39 @@ const DetailsPage: React.FC = () => {
           backgroundSize: '40px 40px'
         }}
       />
+      <SEO 
+        title={product?.name} 
+        description={product?.name ? `Compra ${product.name} en EleCommerce. Equipos de alta tecnología con despacho inmediato.` : undefined}
+      />
+
+      {product && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "name": product.name,
+            "image": product.images?.map((img: { url: string }) => img.url),
+            "description": product.name,
+            "brand": {
+              "@type": "Brand",
+              "name": "EleCommerce"
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": window.location.href,
+              "priceCurrency": "COP",
+              "price": product.price - (product.price * (product.priceDiscount || 0)) / 100,
+              "availability": product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": product.rating || 5,
+              "reviewCount": product.reviewsCount || 1
+            }
+          })}
+        </script>
+      )}
+      
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto relative z-10">
         <BreadCrumbs />
@@ -113,7 +147,7 @@ const DetailsPage: React.FC = () => {
                 >
                   <img
                     src={image.url}
-                    alt={`Thumbnail ${index + 1}`}
+                    alt={`${product?.name || 'Producto'} - Vista ${index + 1}`}
                     className="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                   />
                   {activeThumbnail === image.url && (
@@ -133,7 +167,7 @@ const DetailsPage: React.FC = () => {
 
               <img
                 src={activeThumbnail}
-                alt="Selected product"
+                alt={product?.name || "Imagen del producto"}
                 className="w-full h-full object-contain relative z-0 transition-transform duration-500 group-hover:scale-105"
               />
             </div>

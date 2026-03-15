@@ -1,10 +1,9 @@
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { BiEnvelope, BiMap, BiPhone } from "react-icons/bi";
 import { CiShoppingBasket } from "react-icons/ci";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const navigate = useNavigate();
   return (
     <footer className="py-16 px-8 bg-[#020202] border-t border-zinc-800 relative overflow-hidden font-mono z-10 w-full mt-auto">
       {/* Decorative Scanlines */}
@@ -19,9 +18,10 @@ const Footer = () => {
             <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#00f0ff]" />
             <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#00f0ff]" />
 
-            <div
-              onClick={() => navigate("/")}
+            <Link
+              to="/"
               className="flex items-center space-x-4 cursor-pointer mb-6 group"
+              aria-label="Ir al inicio"
             >
               <div className="w-10 h-10 bg-black border border-[#00f0ff] flex items-center justify-center relative">
                 <div className="absolute top-0 left-0 w-1 h-1 border-t border-l border-white" />
@@ -30,10 +30,10 @@ const Footer = () => {
                   <CiShoppingBasket size={24} />
                 </span>
               </div>
-              <h2 className="text-xl font-black uppercase tracking-[0.1em] text-white" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+              <span className="text-xl font-black uppercase tracking-[0.1em] text-white" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
                 ELECOMMERCE
-              </h2>
-            </div>
+              </span>
+            </Link>
 
             <p className="text-[10px] uppercase tracking-widest leading-relaxed text-zinc-500 mb-6 border-l border-zinc-700 pl-3">
               TU DEPÓSITO EN LÍNEA VERIFICADO PARA ADQUIRIR EQUIPOS Y MERCANCÍAS AVANZADAS.
@@ -76,16 +76,26 @@ const Footer = () => {
               ENLACES RÁPIDOS //
             </h3>
             <ul className="space-y-4">
-              {['INICIO', 'SOBRE EL PROTOCOLO', 'TIENDA', 'COMMS'].map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    className="text-[10px] text-zinc-500 hover:text-[#00f0ff] uppercase tracking-widest transition-colors flex items-center group"
-                  >
-                    <span className="text-zinc-800 mr-2 group-hover:text-[#00f0ff] transition-colors">{">"}</span> {link}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link to="/" className="text-[10px] text-zinc-500 hover:text-[#00f0ff] uppercase tracking-widest transition-colors flex items-center group">
+                  <span className="text-zinc-800 mr-2 group-hover:text-[#00f0ff] transition-colors">{">"}</span> INICIO
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-[10px] text-zinc-500 hover:text-[#00f0ff] uppercase tracking-widest transition-colors flex items-center group">
+                  <span className="text-zinc-800 mr-2 group-hover:text-[#00f0ff] transition-colors">{">"}</span> SOBRE EL PROTOCOLO
+                </Link>
+              </li>
+              <li>
+                <Link to="/products" className="text-[10px] text-zinc-500 hover:text-[#00f0ff] uppercase tracking-widest transition-colors flex items-center group">
+                  <span className="text-zinc-800 mr-2 group-hover:text-[#00f0ff] transition-colors">{">"}</span> TIENDA
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog" className="text-[10px] text-zinc-500 hover:text-[#00f0ff] uppercase tracking-widest transition-colors flex items-center group">
+                  <span className="text-zinc-800 mr-2 group-hover:text-[#00f0ff] transition-colors">{">"}</span> COMMS
+                </Link>
+              </li>
             </ul>
           </div>
 

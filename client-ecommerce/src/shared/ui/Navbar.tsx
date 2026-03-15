@@ -88,23 +88,25 @@ const Navbar = () => {
 
           <div className="flex items-center justify-between">
             <div className="w-full flex justify-between items-center md:space-x-8 space-x-0">
-              <div
-                onClick={() => navigate("/")}
+              <Link
+                to="/"
                 className="flex items-center space-x-4 cursor-pointer group"
+                aria-label="Ir al inicio"
               >
                 <div className="w-10 h-10 bg-black border border-[#00f0ff] flex items-center justify-center relative">
                   {/* Logo Target */}
                   <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white" />
                   <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white" />
                   <span className="text-xl font-bold text-[#00f0ff] group-hover:scale-110 transition-transform">
-                    <CiShoppingBasket size={24} />
+                    <CiShoppingBasket size={24} title="EleCommerce Logo" />
                   </span>
                 </div>
-                <h2 className="hidden md:flextext-2xl font-black uppercase tracking-[0.2em] text-white" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                {/* SEO-friendly H1 for logo - only visible to search engines/screen readers or as styled text */}
+                <h1 className="hidden md:block text-2xl font-black uppercase tracking-[0.2em] text-white" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
                   ELECOMMERCE
-                </h2>
-              </div>
-              <div className="w-full flex justify-center items-center text-zinc-400 font-bold px-10" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+                </h1>
+              </Link>
+              <nav className="w-full flex justify-center items-center text-zinc-400 font-bold px-10" style={{ fontFamily: "'Rajdhani', sans-serif" }} aria-label="Navegación principal">
                 <div className="relative hidden lg:block">
                   <ul className="flex flex-row gap-8 text-sm tracking-widest">
                     <li className="hover:text-[#00f0ff] transition-colors uppercase border-b-2 border-transparent hover:border-[#00f0ff]">
@@ -124,7 +126,7 @@ const Navbar = () => {
                     </li>
                   </ul>
                 </div>
-              </div>
+              </nav>
             </div>
 
             <div className="flex flex-row items-center gap-4">
@@ -132,6 +134,7 @@ const Navbar = () => {
                 onClick={() => setIsSearchModalOpen(true)}
                 className="p-2 border border-zinc-800 hover:border-[#00f0ff] hover:text-[#00f0ff] text-zinc-400 transition-colors bg-black"
                 type="button"
+                aria-label="Abrir búsqueda"
               >
                 <BiSearch size={20} />
               </button>
@@ -140,6 +143,7 @@ const Navbar = () => {
                 onClick={() => navigate("/wishlist")}
                 className="p-2 border border-zinc-800 hover:border-[#ff0055] hover:text-[#ff0055] text-zinc-400 transition-colors bg-black relative"
                 type="button"
+                aria-label="Ver lista de deseos"
               >
                 <BiHeart size={20} />
                 {(wishCount?.count ?? 0) > 0 && (
@@ -153,6 +157,7 @@ const Navbar = () => {
                 onClick={() => navigate("/cart")}
                 className="p-2 border border-zinc-800 hover:border-[#e4ff00] hover:text-[#e4ff00] text-zinc-400 transition-colors bg-black relative"
                 type="button"
+                aria-label="Ver carrito"
               >
                 <CiShoppingCart size={20} />
                 {(cartCount?.count ?? 0) > 0 && (
@@ -166,6 +171,7 @@ const Navbar = () => {
                 onClick={() => navigate("/tracking")}
                 className="p-2 border border-zinc-800 hover:border-[#00f0ff] hover:text-[#00f0ff] text-zinc-400 transition-colors bg-black"
                 type="button"
+                aria-label="Seguimiento de pedido"
               >
                 <BsTruck size={20} />
               </button>

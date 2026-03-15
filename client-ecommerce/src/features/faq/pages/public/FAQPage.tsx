@@ -1,8 +1,14 @@
 import FaqQuestion from "../../components/FaqQuestion";
+import SEO from "../../../../shared/components/SEO";
 
 const FAQPage = () => {
   return (
     <div className="min-h-screen bg-[#020202] relative font-mono text-white pb-12">
+      <SEO 
+        title="Preguntas Frecuentes" 
+        description="Resuelve tus dudas sobre envíos, pagos y garantías en el centro de soporte de EleCommerce."
+      />
+
       {/* Background Grid Pattern */}
       <div
         className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"

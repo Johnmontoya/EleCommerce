@@ -1,10 +1,16 @@
 import ContactForm from "../../components/ContactForm";
 import ContactInformation from "../../components/ContactInformation";
 import MapLocation from "../../components/MapLocation";
+import SEO from "../../../../shared/components/SEO";
 
 const ContactPage = () => {
   return (
     <div className="min-h-screen bg-[#020202] relative font-mono text-white pb-12">
+      <SEO 
+        title="Contacto" 
+        description="Comunícate con el equipo de EleCommerce. Soporte técnico, canales de comunicación y ubicación física."
+      />
+      
       {/* Background Grid Pattern */}
       <div
         className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"

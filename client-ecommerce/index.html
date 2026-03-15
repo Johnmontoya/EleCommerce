@@ -7,13 +7,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Rajdhani:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <title>EleCommerce</title>
 </head>
 
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
+  <!-- Bot de Chat de Vynce -->
+  <script>
+    (function () {
+      const CODE_ID = '45ff50b1-7320-437f-a2d0-5436f8bc49cf'; // <--- REEMPLAZA ESTO
+      const FRONTEND_URL = 'https://chatbot-bay-omega-36.vercel.app'; // Cambia por tu URL en producción
+
+      // Crear el contenedor del botón flotante
+      const container = document.createElement('div');
+      container.style.position = 'fixed';
+      container.style.bottom = '20px';
+      container.style.right = '20px';
+      container.style.zIndex = '9999';
+      container.style.fontFamily = 'sans-serif';
+
+      // Crear el iframe (oculto inicialmente)
+      const iframe = document.createElement('iframe');
+      iframe.src = `${FRONTEND_URL}/widget/${CODE_ID}`;
+      iframe.style.display = 'none';
+      iframe.style.width = '380px';
+      iframe.style.height = '600px';
+      iframe.style.border = 'none';
+      iframe.style.borderRadius = '24px';
+      iframe.style.boxShadow = '0 20px 50px rgba(0,0,0,0.3)';
+      iframe.style.marginBottom = '15px';
+      iframe.style.transition = 'all 0.3s ease';
+
+      // Crear el botón de apertura
+      const button = document.createElement('button');
+      button.innerHTML = '💬';
+      button.style.width = '60px';
+      button.style.height = '60px';
+      button.style.borderRadius = '30px';
+      button.style.backgroundColor = '#10b981'; // Color verde esmeralda
+      button.style.color = 'white';
+      button.style.border = 'none';
+      button.style.fontSize = '24px';
+      button.style.cursor = 'pointer';
+      button.style.boxShadow = '0 4px 15px rgba(16, 185, 129, 0.4)';
+      button.style.float = 'right';
+
+      // Lógica para abrir/cerrar
+      button.onclick = function () {
+        if (iframe.style.display === 'none') {
+          iframe.style.display = 'block';
+          button.innerHTML = '✕';
+        } else {
+          iframe.style.display = 'none';
+          button.innerHTML = '💬';
+        }
+      };
+
+      container.appendChild(iframe);
+      container.appendChild(button);
+      document.body.appendChild(container);
+    })();
+  </script>
+
 </body>
 
 </html>

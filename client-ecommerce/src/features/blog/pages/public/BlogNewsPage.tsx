@@ -2,6 +2,7 @@ import React from "react";
 import FeaturedPost from "../../components/FeaturedPost";
 import RegularPost from "../../components/RegularPost";
 import SearchPost from "../../components/SearchPost";
+import SEO from "../../../../shared/components/SEO";
 import BlogCategories from "../../components/BlogCategories";
 import PopularTags from "../../components/PopularTags";
 import Subscribe from "../../components/Subscribe";
@@ -103,6 +104,29 @@ const BlogNewsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#020202] relative font-mono text-white pb-12">
+      <SEO 
+        title="Blog & Noticias" 
+        description="Mantente al día con los últimos reportes del sistema, actualizaciones de hardware y noticias de EleCommerce."
+      />
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          "name": "EleCommerce System Logs",
+          "description": "Reportes de tecnología, anuncios de equipos y flujos de datos.",
+          "blogPost": blogPosts.map(post => ({
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "description": post.excerpt,
+            "image": post.image,
+            "author": {
+              "@type": "Person",
+              "name": post.author
+            },
+            "datePublished": post.date
+          }))
+        })}
+      </script>
       {/* Background Grid Pattern */}
       <div
         className="fixed inset-0 pointer-events-none opacity-[0.03] z-0"
@@ -156,7 +180,7 @@ const BlogNewsPage: React.FC = () => {
             {/* Regular Posts Grid */}
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               {regularPosts.map((post) => (
-                <RegularPost post={post} />
+                <RegularPost key={post.id} post={post} />
               ))}
             </div>
 

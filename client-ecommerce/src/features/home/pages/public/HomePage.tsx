@@ -9,6 +9,7 @@ import Products from '../../../products/components/Products';
 import CTA from '../../components/CTA';
 import Features from '../../components/Features';
 import ProductShowCase from '../../components/ProductShowCase';
+import SEO from '../../../../shared/components/SEO';
 
 const OPTIONS: EmblaOptionsType = {
   loop: true,
@@ -45,6 +46,11 @@ const HomePage = () => {
       />
       {/* Scanline overlay */}
       <div className="absolute inset-0 z-0 opacity-5 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,1)_50%)] bg-[length:100%_4px]" />
+
+      <SEO
+        title="Inicio"
+        description="Explora nuestra selección premium de tecnología y equipos avanzados en EleCommerce. Tu depósito de confianza."
+      />
 
       <div className="relative z-10 space-y-12">
         <Banner options={OPTIONS} />

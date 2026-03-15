@@ -9,6 +9,7 @@ import LoadingFallback from "../../../../shared/ui/LoadingFallback";
 import { useProductFilters } from "../../hook/queries/useProductFilters";
 import { useSearchParams } from "react-router-dom";
 import { useCategories } from "../../../categories/hook/queries/useCategory";
+import SEO from "../../../../shared/components/SEO";
 
 const ListProductsPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -163,6 +164,11 @@ const ListProductsPage: React.FC = () => {
           `,
           backgroundSize: '40px 40px'
         }}
+      />
+
+      <SEO 
+        title="Nuestros Productos" 
+        description="Descubre nuestro catálogo completo de tecnología, equipos y mercancías avanzadas en EleCommerce. Calidad verificada."
       />
 
       <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
