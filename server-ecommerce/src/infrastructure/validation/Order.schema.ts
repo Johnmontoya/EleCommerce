@@ -1,14 +1,7 @@
 import z from "zod";
+import { OrderStatus } from "../../domain/repositories/IOrderRepository.js";
 
-export const DisplaySectionEnum = z.enum([
-    'PENDING',
-    'CONFIRMED',
-    'PROCESSING',
-    'SHIPPED',
-    'DELIVERED',
-    'CANCELLED',
-    'REFUNDED'
-]);
+export const DisplaySectionEnum = z.nativeEnum(OrderStatus);
 
 export const DisplayPaymentStatus = z.enum([
     "PENDING",
@@ -44,7 +37,7 @@ export const CreateOrderSchema = z.object({
     shippingCost: z.number().min(0, 'Costo de envío debe ser positivo'),
     discount: z.number().min(0, 'Descuento debe ser positivo'),
     total: z.number().min(0, 'Total debe ser positivo'),
-    status: DisplaySectionEnum.default('PENDING'),
+    status: DisplaySectionEnum.default(OrderStatus.PENDING),
     paymentStatus: DisplayPaymentStatus.default('PENDING'),
     paymentMethod: z.string().min(1, 'Ingresa un Método de pago'),
     addressId: z.string().min(1, 'Agrega una direccion de envio'),

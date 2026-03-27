@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { orderService } from "../../services/orderService";
+import type { OrderResponse } from "../../types/order.types";
 import { toast } from "sonner";
 import { handleApiError } from "../../../../shared/lib/errorHandler";
 
@@ -35,7 +36,7 @@ export const useDeleteOrderMutation = () => {
 
 export const useNotifyQueueSystem = () => {
     return useMutation({
-        mutationFn: (ordersExport: any[]) => orderService.notifyQueueSystem(ordersExport),
+        mutationFn: (ordersExport: OrderResponse[]) => orderService.notifyQueueSystem(ordersExport),
         onSuccess: () => {
             toast.success('Orden enviada al sistema de colas');
         },

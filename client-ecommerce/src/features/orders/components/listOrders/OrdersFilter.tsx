@@ -1,9 +1,10 @@
 import { BiExport, BiFilter, BiSearch } from "react-icons/bi";
 import { useNotifyQueueSystem } from "../../hook/mutation/useOrderMutation";
+import type { OrderResponse } from "../../types/order.types";
 import SweetAlertas from "../../../../shared/ui/SweetAlertas";
 
 interface OrdersProps {
-    ordersExport: any[];
+    ordersExport: OrderResponse[];
     searchTerm: string;
     setSearchTerm: (term: string) => void;
     showFilters: boolean;
