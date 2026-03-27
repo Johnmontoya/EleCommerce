@@ -6,11 +6,26 @@ import type { Prisma } from "@prisma/client";
 import { ProductModel } from "../models/product.model.js";
 
 export class PrismaOrderRepository implements IOrderRepository {
-    async getAllOrdersByUser(userId: string): Promise<OrderEntity[]> {
+    async getAllOrdersByUser(userId: string, filters?: OrderFilters): Promise<OrderEntity[]> {
+        const where: Prisma.OrderWhereInput = {
+            userId: userId
+        };
+
+        if (filters) {
+            if (filters.status) {
+                where.status = filters.status;
+            }
+
+            if (filters.startDate || filters.endDate) {
+                const createdAt: Prisma.DateTimeFilter = {};
+                if (filters.startDate) createdAt.gte = new Date(filters.startDate);
+                if (filters.endDate) createdAt.lte = new Date(`${filters.endDate}T23:59:59.999Z`);
+                where.createdAt = createdAt;
+            }
+        }
+
         return await prisma.order.findMany({
-            where: {
-                userId: userId
-            },
+            where,
             include: {
                 items: true,
                 address: true,
@@ -116,6 +131,13 @@ export class PrismaOrderRepository implements IOrderRepository {
 
             if (filters?.status !== undefined) {
                 where.status = filters.status;
+            }
+
+            if (filters.startDate || filters.endDate) {
+                const createdAt: Prisma.DateTimeFilter = {};
+                if (filters.startDate) createdAt.gte = new Date(filters.startDate);
+                if (filters.endDate) createdAt.lte = new Date(`${filters.endDate}T23:59:59.999Z`);
+                where.createdAt = createdAt;
             }
         }
 

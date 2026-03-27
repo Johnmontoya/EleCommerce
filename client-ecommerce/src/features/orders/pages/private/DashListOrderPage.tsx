@@ -19,6 +19,8 @@ const DashListOrderPage = () => {
     const [showFilters, setShowFilters] = useState<boolean>(false);
     const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
 
+    const [startDate, setStartDate] = useState<string>("");
+    const [endDate, setEndDate] = useState<string>("");
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12;
 
@@ -32,29 +34,32 @@ const DashListOrderPage = () => {
         setCurrentPage(1);
     }
 
+    const handleStartDate = (date: string) => {
+        setStartDate(date);
+        setCurrentPage(1);
+    }
+
+    const handleEndDate = (date: string) => {
+        setEndDate(date);
+        setCurrentPage(1);
+    }
+
     const { data: orders, isLoading } = useOrderAll({
         search: searchTerm,
-        status: filterStatus === "all" ? undefined : filterStatus
+        status: filterStatus === "all" ? undefined : filterStatus,
+        startDate: startDate || undefined,
+        endDate: endDate || undefined
     });
+
+    // Asegurarnos que siempre sea un array
+    const filteredOrders = orders || [];
 
     // Calcular índices para "cortar" la lista
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-    // Estos son los usuarios que vas a mostrar en la tabla (IMPORTANTE)
-    const currentOrders = orders?.slice(indexOfFirstItem, indexOfLastItem) || [];
-
-    // Filtrar pedidos
-    const filteredOrders = orders?.filter((order) => {
-        const matchesSearch =
-            order.trackingNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            order.status.toLowerCase().includes(searchTerm.toLowerCase())
-
-        const matchesStatus =
-            filterStatus === "all" || order.status === filterStatus;
-
-        return matchesSearch && matchesStatus;
-    });
+    // Estos son las órdenes que vas a mostrar en la tabla
+    const currentOrders = filteredOrders.slice(indexOfFirstItem, indexOfLastItem);
 
     if (isLoading) {
         return <LoadingFallback />
@@ -78,6 +83,15 @@ const DashListOrderPage = () => {
     const handleToggleExpand = (orderId: string) => {
         setExpandedOrder(expandedOrder === orderId ? null : orderId);
     };
+
+    const ordersExport = orders?.map(order => ({
+        orderId: order.trackingNumber,
+        customer: order.userId,
+        total: order.total,
+        date: order.createdAt,
+        products: order.items
+    })) || [];
+
 
     return (
         <div className="min-h-screen bg-[#020202] relative font-mono text-white">
@@ -130,12 +144,17 @@ const DashListOrderPage = () => {
                             <StatsInfo stats={stats} isAdmin={true} />
 
                             <OrdersFilter
+                                ordersExport={ordersExport}
                                 searchTerm={searchTerm}
                                 setSearchTerm={handleSearch}
                                 showFilters={showFilters}
                                 setShowFilters={setShowFilters}
                                 filterStatus={filterStatus}
                                 setFilterStatus={handleFilterStatus}
+                                startDate={startDate}
+                                setStartDate={handleStartDate}
+                                endDate={endDate}
+                                setEndDate={handleEndDate}
                             />
 
                             <OrderAdmin
@@ -146,7 +165,7 @@ const DashListOrderPage = () => {
 
                             <Pagination
                                 title="RECORDS"
-                                data={orders}
+                                data={filteredOrders}
                                 currentPage={currentPage}
                                 setCurrentPage={setCurrentPage}
                                 itemsPerPage={itemsPerPage}

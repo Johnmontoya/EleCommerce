@@ -16,6 +16,7 @@ import { queryClient } from "./shared/lib/queryClient";
 import ProtectedRoute from "./router/ProtectedRoute";
 import "./App.css";
 import { ThemeProvider } from "./shared/ui/ThemeContext";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 axiosInterceptor();
 
@@ -106,6 +107,7 @@ function App() {
             </Route>
           </Routes>
         </ThemeProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   );

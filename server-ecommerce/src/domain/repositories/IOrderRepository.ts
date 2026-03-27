@@ -15,6 +15,8 @@ export interface OrderFilters {
     limit?: string | undefined;
     offset?: string | undefined;
     status?: OrderStatus | undefined;
+    startDate?: string | undefined;
+    endDate?: string | undefined;
 }
 
 export enum OrderStatus {

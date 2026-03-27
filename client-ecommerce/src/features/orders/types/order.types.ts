@@ -37,4 +37,6 @@ export interface OrderFilters {
     [key: string]: unknown;
     search?: string;
     status?: string;
+    startDate?: string;
+    endDate?: string;
 }

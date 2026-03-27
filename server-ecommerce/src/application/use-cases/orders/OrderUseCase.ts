@@ -1,5 +1,4 @@
-import type { UsersFilters } from "../../../domain/repositories/IAuthRepository.js";
-import type { IOrderRepository, OrderStatus } from "../../../domain/repositories/IOrderRepository.js";
+import type { IOrderRepository, OrderStatus, OrderFilters } from "../../../domain/repositories/IOrderRepository.js";
 import type { CreateOrderInput, CreateOrderItem } from "../../Dto/order.dto.js";
 
 export class CreateOrderUseCase {
@@ -14,7 +13,7 @@ export class CreateOrderUseCase {
 export class GetOrdersUseCase {
     constructor(private orderRepository: IOrderRepository) { }
 
-    async execute(filters?: UsersFilters) {
+    async execute(filters?: OrderFilters) {
         const data = await this.orderRepository.getAllOrders(filters);
         return data;
     }
@@ -32,7 +31,7 @@ export class CancelOrderUseCase {
 export class GetAllOrdersByUserUseCase {
     constructor(private orderRepository: IOrderRepository) { }
 
-    async execute(userId: string, filters?: UsersFilters) {
+    async execute(userId: string, filters?: OrderFilters) {
         const data = await this.orderRepository.getAllOrdersByUser(userId, filters);
         return data;
     }

@@ -32,3 +32,15 @@ export const useDeleteOrderMutation = () => {
         }
     })
 }
+
+export const useNotifyQueueSystem = () => {
+    return useMutation({
+        mutationFn: (ordersExport: any[]) => orderService.notifyQueueSystem(ordersExport),
+        onSuccess: () => {
+            toast.success('Orden enviada al sistema de colas');
+        },
+        onError: (error) => {
+            handleApiError(error, 'Error al enviar la orden al sistema de colas');
+        }
+    })
+}

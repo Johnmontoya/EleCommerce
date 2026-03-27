@@ -39,8 +39,6 @@ const DashListProductPage = () => {
         category: selectedCategory || undefined,
     });
 
-    console.log(products);
-
     // Calcular índices para "cortar" la lista
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;

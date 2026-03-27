@@ -1,22 +1,35 @@
 import { BiExport, BiFilter, BiSearch } from "react-icons/bi";
+import { useNotifyQueueSystem } from "../../hook/mutation/useOrderMutation";
+import SweetAlertas from "../../../../shared/ui/SweetAlertas";
 
 interface OrdersProps {
+    ordersExport: any[];
     searchTerm: string;
     setSearchTerm: (term: string) => void;
     showFilters: boolean;
     setShowFilters: (show: boolean) => void;
     filterStatus: string;
     setFilterStatus: (status: string) => void;
+    startDate: string;
+    setStartDate: (date: string) => void;
+    endDate: string;
+    setEndDate: (date: string) => void;
 }
 
 const OrdersFilter: React.FC<OrdersProps> = ({
+    ordersExport,
     searchTerm,
     setSearchTerm,
     showFilters,
     setShowFilters,
     filterStatus,
     setFilterStatus,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
 }) => {
+    const { mutateAsync: notifyQueueSystem } = useNotifyQueueSystem();
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         setSearchTerm(e.currentTarget.value);
@@ -31,6 +44,15 @@ const OrdersFilter: React.FC<OrdersProps> = ({
             setFilterStatus(value);
         }
     };
+
+    const handleExport = () => {
+        SweetAlertas.OnDialogExport({
+            message: "¿Estás seguro de que quieres exportar los datos?",
+            onConfirm: () => { notifyQueueSystem(ordersExport) },
+            onCancel: () => { },
+        });
+    };
+
     return (
         <div className="w-72 sm:w-full bg-black border border-zinc-800 p-4 mb-6 relative">
             <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-zinc-600 opacity-50 pointer-events-none" />
@@ -65,7 +87,7 @@ const OrdersFilter: React.FC<OrdersProps> = ({
 
                 {/* Export Button */}
                 <button
-                    onClick={() => { }}
+                    onClick={() => { handleExport() }}
                     className="flex items-center gap-2 bg-black border border-zinc-700 text-zinc-400 hover:text-white hover:border-white hover:bg-zinc-800 px-6 py-3 rounded-none font-mono font-bold uppercase tracking-widest text-[10px] transition-all">
                     <BiExport size={16} />
                     [EXPORTAR_DATOS]
@@ -92,6 +114,31 @@ const OrdersFilter: React.FC<OrdersProps> = ({
                         <option value="CANCELLED">[CANCELADO]</option>
                         <option value="REFUNDED">[REEMBOLSADO]</option>
                     </select>
+
+                    <div className="flex flex-col md:flex-row gap-4 mt-4">
+                        <div className="flex-1">
+                            <label className="block text-zinc-500 text-[10px] font-mono tracking-widest uppercase mb-2">
+                                [FECHA_INICIO]
+                            </label>
+                            <input
+                                type="date"
+                                value={startDate}
+                                onChange={(e) => setStartDate(e.target.value)}
+                                className="w-full bg-black border border-zinc-700 text-[#00f0ff px-4 py-2 rounded-none outline-none focus:border-[#00f0ff] font-mono uppercase tracking-widest text-[10px]"
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <label className="block text-zinc-500 text-[10px] font-mono tracking-widest uppercase mb-2">
+                                [FECHA_FIN]
+                            </label>
+                            <input
+                                type="date"
+                                value={endDate}
+                                onChange={(e) => setEndDate(e.target.value)}
+                                className="w-full bg-black border border-zinc-700 text-[#00f0ff] px-4 py-2 rounded-none outline-none focus:border-[#00f0ff] font-mono uppercase tracking-widest text-[10px]"
+                            />
+                        </div>
+                    </div>
                 </div>
             )}
         </div>

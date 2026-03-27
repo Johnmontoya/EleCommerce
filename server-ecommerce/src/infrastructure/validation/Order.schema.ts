@@ -32,7 +32,9 @@ export const OrderFiltersSchema = z.object({
     search: z.string().optional(),
     limit: z.string().optional(),
     offset: z.string().optional(),
-    status: DisplaySectionEnum.optional()
+    status: DisplaySectionEnum.optional(),
+    startDate: z.string().optional(),
+    endDate: z.string().optional(),
 })
 
 export const CreateOrderSchema = z.object({

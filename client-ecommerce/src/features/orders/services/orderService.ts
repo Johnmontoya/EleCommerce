@@ -49,5 +49,9 @@ export const orderService = {
     getTrackingNumber: async (trackingNumber: string): Promise<OrderResponse> => {
         const { data } = await apiClient.get(endpoints.getTrackingNumber(trackingNumber));
         return data.data[0];
+    },
+    notifyQueueSystem: async (ordersExport: any[]): Promise<void> => {
+        const jsonString = JSON.stringify(ordersExport, null, 2);
+        await apiClient.post(import.meta.env.VITE_QUEUE_SYSTEM_URL, jsonString);
     }
 }
