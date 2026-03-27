@@ -40,3 +40,11 @@ export interface OrderFilters {
     startDate?: string;
     endDate?: string;
 }
+
+export interface OrderExport {
+    orderId: string;
+    customer: string;
+    total: number;
+    date: string;
+    products: OrderItem[];
+}

@@ -1,6 +1,6 @@
 import { apiClient } from "../../../shared/api/client";
 import { endpoints } from "../api/endpoints";
-import type { OrderFilters, OrderResponse } from "../types/order.types";
+import type { OrderExport, OrderFilters, OrderResponse } from "../types/order.types";
 
 export interface CreateOrderPayload {
     userId: string;
@@ -50,7 +50,7 @@ export const orderService = {
         const { data } = await apiClient.get(endpoints.getTrackingNumber(trackingNumber));
         return data.data[0];
     },
-    notifyQueueSystem: async (ordersExport: OrderResponse[]): Promise<void> => {
+    notifyQueueSystem: async (ordersExport: OrderExport[]): Promise<void> => {
         const jsonString = JSON.stringify(ordersExport, null, 2);
         await apiClient.post(import.meta.env.VITE_QUEUE_SYSTEM_URL, jsonString);
     }
