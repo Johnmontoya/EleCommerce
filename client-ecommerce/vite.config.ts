@@ -8,6 +8,7 @@ export default defineConfig({
   server: {
     allowedHosts: [
       "https://elecommerce-production.up.railway.app",
+      "https://report-ele-com.vercel.app",
       //"unstuffed-jodi-invigoratedly.ngrok-free.dev"
     ]
   }
