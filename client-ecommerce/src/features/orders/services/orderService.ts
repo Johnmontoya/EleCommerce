@@ -52,6 +52,6 @@ export const orderService = {
     },
     notifyQueueSystem: async (ordersExport: OrderExport[]): Promise<void> => {
         const jsonString = JSON.stringify(ordersExport, null, 2);
-        await apiReport.post(import.meta.env.VITE_QUEUE_SYSTEM_URL, jsonString);
+        await apiReport.post('/api/orders', jsonString);
     }
 }
