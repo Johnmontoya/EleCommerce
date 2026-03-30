@@ -25,7 +25,7 @@ const Stats: React.FC<Props> = ({ totalOrders, pendingOrders, rewardPoints }) =>
     },
     {
       label: "[TOTAL_INGRESOS]",
-      value: `$${rewardPoints}`,
+      value: `$${Math.trunc(rewardPoints)}`,
       icon: <CiDollar size={24} />,
       color: "border-[#e4ff00] text-[#e4ff00]",
     },
