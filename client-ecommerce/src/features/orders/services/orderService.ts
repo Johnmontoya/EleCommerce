@@ -1,4 +1,3 @@
-import axios from "axios";
 import { apiClient, apiReport } from "../../../shared/api/client";
 import { endpoints } from "../api/endpoints";
 import type { OrderExport, OrderFilters, OrderResponse } from "../types/order.types";
