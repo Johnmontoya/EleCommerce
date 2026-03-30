@@ -1,4 +1,5 @@
-import { apiClient } from "../../../shared/api/client";
+import axios from "axios";
+import { apiClient, apiReport } from "../../../shared/api/client";
 import { endpoints } from "../api/endpoints";
 import type { OrderExport, OrderFilters, OrderResponse } from "../types/order.types";
 
@@ -52,6 +53,6 @@ export const orderService = {
     },
     notifyQueueSystem: async (ordersExport: OrderExport[]): Promise<void> => {
         const jsonString = JSON.stringify(ordersExport, null, 2);
-        await apiClient.post(import.meta.env.VITE_QUEUE_SYSTEM_URL, jsonString);
+        await apiReport.post(import.meta.env.VITE_QUEUE_SYSTEM_URL, jsonString);
     }
 }

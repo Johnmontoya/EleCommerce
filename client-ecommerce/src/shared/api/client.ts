@@ -9,3 +9,11 @@ export const apiClient = axios.create({
     },
     timeout: 60000,
 });
+
+export const apiReport = axios.create({
+    baseURL: import.meta.env.VITE_QUEUE_SYSTEM_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    timeout: 60000,
+})
