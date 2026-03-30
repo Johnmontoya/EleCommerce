@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./server-ecommerce
+      dockerfile: Dockerfile
+    container_name: mern_backend
+    ports:
+      - "8000:8000"
+    # Se obtienen las variables de base de datos, Stripe, JWT de tu .env actual
+    env_file:
+      - ./server-ecommerce/.env
+    restart: always
+    environment:
+      # Sobrescribimos el puerto para asegurar que coincida con el expose
+      - PORT=8000
+
+  frontend:
+    build:
+      context: ./client-ecommerce
+      dockerfile: Dockerfile
+    container_name: mern_frontend
+    ports:
+      # Mapeamos el puerto 5173 de tu máquina al puerto 80 del contenedor Nginx
+      - "5173:80"
+    depends_on:
+      - backend
+    # El archivo .env será copiado al realizar el build en el contenedor, 
+    # por lo que tomará las VITE_* declaradas allí durante la compilación.
+    restart: always
